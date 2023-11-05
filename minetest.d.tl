@@ -274,6 +274,7 @@ global record NodeTable
   name: string
   param1: number
   param2: number
+  
 end
 
 global record PointedThing
@@ -320,12 +321,12 @@ global record NodeDefinition
   liquid_range: number
   drowning: number
   damage_per_second: number
-  node_box: nodebox
+  node_box: NodeBox
   connects_to: {string}
   connect_sides: NodeBoxConnections
   mesh: string
-  selection_box: nodebox
-  collision_box: nodebox
+  selection_box: NodeBox
+  collision_box: NodeBox
   legacy_facedir_simple: boolean
   legacy_wallmounted: boolean
   waving: number
@@ -342,48 +343,17 @@ global record NodeDefinition
   on_punch: function(Vec3, NodeTable, ObjectRef, PointedThing)
   on_rightclick: function(Vec3, NodeTable, ObjectRef, ItemStack, PointedThing)
   on_dig: function(Vec3, NodeTable, ObjectRef)
-
   on_timer: function(Vec3, number)
-
-  on_receive_fields = function(pos, formname, fields, sender),
-  -- fields = {name1 = value1, name2 = value2, ...}
-  -- Called when an UI form (e.g. sign text input) returns data.
-  -- See minetest.register_on_player_receive_fields for more info.
-  -- default: nil
-
-  allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player),
-  -- Called when a player wants to move items inside the inventory.
-  -- Return value: number of items allowed to move.
-
-  allow_metadata_inventory_put = function(pos, listname, index, stack, player),
-  -- Called when a player wants to put something into the inventory.
-  -- Return value: number of items allowed to put.
-  -- Return value -1: Allow and don't modify item count in inventory.
-
-  allow_metadata_inventory_take = function(pos, listname, index, stack, player),
-  -- Called when a player wants to take something out of the inventory.
-  -- Return value: number of items allowed to take.
-  -- Return value -1: Allow and don't modify item count in inventory.
-
-  on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player),
-  on_metadata_inventory_put = function(pos, listname, index, stack, player),
-  on_metadata_inventory_take = function(pos, listname, index, stack, player),
-  -- Called after the actual action has happened, according to what was
-  -- allowed.
-  -- No return value.
-
-  on_blast = function(pos, intensity),
-  -- intensity: 1.0 = mid range of regular TNT.
-  -- If defined, called when an explosion touches the node, instead of
-  -- removing the node.
-
-  mod_origin = "modname",
-  -- stores which mod actually registered a node
-  -- If the source could not be determined it contains "??"
-  -- Useful for getting which mod truly registered something
-  -- example: if a node is registered as ":othermodname:nodename",
-  -- nodename will show "othermodname", but mod_origin will say "modname"
-  end
+  on_receive_fields: function(Vec3, string, {string : any}, ObjectRef)
+  allow_metadata_inventory_move: function(Vec3, string, number, string, number, number, ObjectRef)
+  allow_metadata_inventory_put: function(Vec3, string, number, ItemStack, ObjectRef)
+  allow_metadata_inventory_take: function(Vec3, string, number, ItemStack, ObjectRef)
+  on_metadata_inventory_move: function(Vec3, string, number, string, number, string, ObjectRef)
+  on_metadata_inventory_put: function(Vec3, string, number, ItemStack, ObjectRef)
+  on_metadata_inventory_take: function(Vec3, string, number, ItemStack, ObjectRef)
+  on_blast: function(Vec3, number)
+  mod_origin: string
+end
 
 global record ObjectRef
 
