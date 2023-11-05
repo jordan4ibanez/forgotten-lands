@@ -5,7 +5,31 @@ global record minetest
   registered_nodes: any
   register_globalstep: function(function(number))
   get_item_group: function(string, string): number
-  
+  get_current_modname: function(): string
+  get_modpath: function(string): string
+  get_modnames: function(): {string}
+  get_game_info: function(): GameInfo
+  get_worldpath: function(): string
+  is_singleplayer: function(): boolean
+  features: function(): MinetestFeatures
+  has_feature: function(string): boolean
+  get_player_information: function(string): PlayerInformation
+  get_player_window_information: function(string): WindowInformation
+  mkdir: function(string): boolean
+  rmdir: function(string): boolean
+  cpdir: function(string): boolean
+  mvdir: function(string): boolean
+  get_dir_list: function(string, boolean): {string}
+  safe_file_write: function(string, string): boolean
+  get_version: function(): MinetestInfo
+  sha1: function(any, boolean): string
+  colorspec_to_colorstring: function(DynamicColorSpec): string
+  colorspec_to_bytes: function(DynamicColorSpec): string
+  encode_png: function(number, number, {ColorSpec} | string, number): string
+  urlencode: function(string): string
+  debug: function(string)
+  log: function(LogLevel, string)
+
 end
 
 global record SimpleSoundSpec
@@ -71,7 +95,7 @@ end
 
 
 
-global record nodebox 
+global record NodeBox 
   type: nodeboxtype
   fixed: boxTable
   wall_top: box
@@ -113,9 +137,253 @@ global record ItemStack
   metadata: string
 end
 
+global record GameInfo
+  id: string
+  title: string
+  author: string
+  path: string
+end
+
+global record MinetestFeatures
+  glasslike_framed: boolean
+  nodebox_as_selectionbox: boolean
+  get_all_craft_recipes_works: boolean
+  use_texture_alpha: boolean
+  no_legacy_abms: boolean
+  texture_names_parens: boolean
+  area_store_custom_ids: boolean
+  add_entity_with_staticdata: boolean
+  no_chat_message_prediction: boolean
+  object_use_texture_alpha: boolean
+  object_independent_selectionbox: boolean
+  httpfetch_binary_data: boolean
+  formspec_version_element: boolean
+  area_store_persistent_ids: boolean
+  pathfinder_works: boolean
+  object_step_has_moveresult: boolean
+  direct_velocity_on_players: boolean
+  use_texture_alpha_string_modes: boolean
+  degrotate_240_steps: boolean
+  abm_min_max_y: boolean
+  dynamic_add_media_table: boolean
+  particlespawner_tweenable: boolean
+  get_sky_as_table: boolean
+  get_light_data_buffer: boolean
+  mod_storage_on_disk: boolean
+  compress_zstd: boolean
+end
+
+global record PlayerInformation
+  address: string
+  ip_version: number
+  connection_uptime: number
+  protocol_version: number
+  formspec_version: number
+  lang_code: string
+  min_rtt: number
+  max_rtt: number
+  avg_rtt: number
+  min_jitter: number
+  max_jitter: number
+  avg_jitter: number 
+end
+
+global record WindowInformation
+  size: Vec2
+  max_formspec_size: Vec2
+  real_gui_scaling: number
+  real_hud_scaling: number
+end
+
+global record MinetestInfo
+  project: string
+  string: string
+  proto_min: string
+  proto_max: string
+  hash: string
+  is_dev: boolean
+end
+
+global record ColorSpec
+  a: number
+  r: number
+  g: number
+  b: number
+end
+
+global enum LogLevel
+  "none"
+  "error"
+  "warning"
+  "action"
+  "info"
+  "verbose"
+end
+
+global enum TextureAlpha
+  "opaque"
+  "clip"
+  "blend"
+end
+
+global enum LiquidType
+  "none"
+  "source"
+  "flowing"
+end
+
+global enum NodeBoxConnections
+  "top"
+  "bottom"
+  "front"
+  "left"
+  "back"
+  "right"
+end
+
+global record NodeSoundSpec
+  footstep: SimpleSoundSpec
+  dig: SimpleSoundSpec | string
+  dug: SimpleSoundSpec
+  place: SimpleSoundSpec
+  place_failed: SimpleSoundSpec
+  fall: SimpleSoundSpec
+end
+
+global record ItemDropSpec
+  tools: {string}
+  rarity: number
+  items: {string}
+  inherit_color: boolean
+  tool_groups: string | {string}
+end
+
+global record NodeDropSpec
+  max_items: number
+  items: {ItemDropSpec}
+end
+
+global record MapNode
+  name: string
+  prob: number
+  param2: number
+  force_place: boolean
+end
+
+global record NodeTable
+  name: string
+  param1: number
+  param2: number
+end
+
+global record PointedThing
+  type: string
+  under: Vec3
+  above: Vec3
+  ref: ObjectRef
+end
 
 
+global type DynamicColorSpec = ColorSpec | number | string
 
+global record NodeDefinition
+  drawtype: drawtype
+  visual_scale: number
+  tiles: {string}
+  overlay_tiles: {string}
+  special_tiles: {string}
+  color: DynamicColorSpec
+  use_texture_alpha: TextureAlpha
+  palette: string
+  post_effect_color: DynamicColorSpec
+  post_effect_color_shaded: boolean
+  paramtype: paramtype1
+  paramtype2: paramtype2
+  place_param2: number
+  is_ground_content: boolean
+  sunlight_propagates: boolean
+  walkable: boolean
+  pointable: boolean
+  diggable: boolean
+  climbable: boolean
+  move_resistance: number
+  buildable_to: boolean
+  floodable: boolean
+  liquidtype: LiquidType
+  liquid_alternative_flowing: string
+  liquid_alternative_source: string
+  liquid_viscosity: number
+  liquid_renewable: boolean
+  liquid_move_physics: boolean
+  leveled: number
+  leveled_max: number
+  liquid_range: number
+  drowning: number
+  damage_per_second: number
+  node_box: nodebox
+  connects_to: {string}
+  connect_sides: NodeBoxConnections
+  mesh: string
+  selection_box: nodebox
+  collision_box: nodebox
+  legacy_facedir_simple: boolean
+  legacy_wallmounted: boolean
+  waving: number
+  sounds: NodeSoundSpec
+  drop: NodeDropSpec | string
+  on_construct: function(Vec3)
+  on_destruct: function(Vec3)
+  after_destruct: function(Vec3, MapNode)
+  on_flood: function(Vec3, NodeTable, NodeTable)
+  preserve_metadata: function(Vec3, NodeTable, NodeTable, {ItemStack})
+  after_place_node: function(Vec3, ObjectRef, ItemStack, PointedThing)
+  after_dig_node: function(Vec3, NodeTable, string, ObjectRef)
+  can_dig: function(Vec3, ObjectRef | string) -- Unknown, documentation doesn't say
+  on_punch: function(Vec3, NodeTable, ObjectRef, PointedThing)
+  on_rightclick: function(Vec3, NodeTable, ObjectRef, ItemStack, PointedThing)
+  on_dig: function(Vec3, NodeTable, ObjectRef)
+
+  on_timer: function(Vec3, number)
+
+  on_receive_fields = function(pos, formname, fields, sender),
+  -- fields = {name1 = value1, name2 = value2, ...}
+  -- Called when an UI form (e.g. sign text input) returns data.
+  -- See minetest.register_on_player_receive_fields for more info.
+  -- default: nil
+
+  allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player),
+  -- Called when a player wants to move items inside the inventory.
+  -- Return value: number of items allowed to move.
+
+  allow_metadata_inventory_put = function(pos, listname, index, stack, player),
+  -- Called when a player wants to put something into the inventory.
+  -- Return value: number of items allowed to put.
+  -- Return value -1: Allow and don't modify item count in inventory.
+
+  allow_metadata_inventory_take = function(pos, listname, index, stack, player),
+  -- Called when a player wants to take something out of the inventory.
+  -- Return value: number of items allowed to take.
+  -- Return value -1: Allow and don't modify item count in inventory.
+
+  on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player),
+  on_metadata_inventory_put = function(pos, listname, index, stack, player),
+  on_metadata_inventory_take = function(pos, listname, index, stack, player),
+  -- Called after the actual action has happened, according to what was
+  -- allowed.
+  -- No return value.
+
+  on_blast = function(pos, intensity),
+  -- intensity: 1.0 = mid range of regular TNT.
+  -- If defined, called when an explosion touches the node, instead of
+  -- removing the node.
+
+  mod_origin = "modname",
+  -- stores which mod actually registered a node
+  -- If the source could not be determined it contains "??"
+  -- Useful for getting which mod truly registered something
+  -- example: if a node is registered as ":othermodname:nodename",
+  -- nodename will show "othermodname", but mod_origin will say "modname"
+  end
 
 global record ObjectRef
 
