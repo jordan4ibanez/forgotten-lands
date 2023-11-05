@@ -1,11 +1,11 @@
 default:
-	@echo Transpiling Crafter into lua...
+	@echo Transpiling Forgotten Times into lua...
 	@tl build
-	@echo Successfully built Crafter.
+	@echo Successfully built Forgotten Times.
 
 run: 
-	@echo Transpiling Crafter into lua...
+	@echo Transpiling Forgotten Times into lua...
 	@tl build
-	@echo Successfully built Crafter.
+	@echo Successfully built Forgotten Times.
 	@echo Starting Minetest.
 	@../../bin/minetest.exe
