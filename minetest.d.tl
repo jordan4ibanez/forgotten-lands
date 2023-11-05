@@ -1,7 +1,6 @@
 -- Everything was just dumped in as I looked down the lua_api.md
 global record minetest
   registered_nodes: {NodeDefinition}
-  register_globalstep: function(function(number))
   get_item_group: function(string, string): number
   get_current_modname: function(): string
   get_modpath: function(string): string
@@ -46,6 +45,27 @@ global record minetest
   clear_registered_decorations: function()
   clear_registered_ores: function()
   clear_registered_schematics: function()
+  register_craft: function(CraftRecipeDefinition)
+  clear_craft: function(CraftRecipeDefinition)
+  register_chatcommand: function(string, ChatCommandDefinition)
+  override_chatcommand: function(string, ChatCommandDefinition)
+  unregister_chatcommand: function(string)
+  register_privilege: function(string, PrivilegeDefinition)
+  register_authentication_handler: function(AuthenticationHandlerDefinition)
+  register_globalstep: function(function(number))
+  register_on_mods_loaded: function(function())
+  register_on_shutdown: function(function())
+  register_on_placenode: function(function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStack, PointedThing))
+  register_on_dignode: function(function(Vec3, NodeTable, ObjectRef))
+  register_on_punchnode: function(function(Vec3, NodeTable, ObjectRef, PointedThing))
+  register_on_generated: function(function(Vec3, Vec3, number))
+  register_on_newplayer: function(function(ObjectRef))
+  register_on_punchplayer: function(function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number))
+  register_on_rightclickplayer: function(function(ObjectRef, ObjectRef))
+  register_on_player_hpchange: function(function(ObjectRef, number, HPChangeReasonDefinition), boolean)
+  register_on_dieplayer: function(function(ObjectRef, HPChangeReasonDefinition))
+  register_on_respawnplayer: function(function(ObjectRef))
+  
 end
 
 global record SimpleSoundSpec
@@ -640,6 +660,67 @@ global record DecorationDefinition
   schematic: string | SchematicDefinition
   replacements: {string : string}
   rotation: string
+end
+
+global enum CraftRecipeType
+  "shapless"
+  "toolrepair"
+  "cooking"
+  "fuel"
+end
+
+global record CraftRecipeDefinition
+  type: CraftRecipeType
+  output: string
+  recipe: {string} | string
+  replacements: {string}
+  additional_wear: number
+  cooktime: number
+  burntime: number
+end
+
+global record ChatCommandDefinition
+  params: string
+  description: string
+  privs: {string}
+  func: function(string, string)
+end
+
+global record PrivilegeDefinition
+  description: string
+  give_to_singleplayer: boolean
+  give_to_admin: boolean
+  on_grant: function(string, string)
+  on_revoke: function(string, string)
+end
+
+global record AuthenticationHandlerDefinition
+  get_auth: function(string)
+  create_auth: function(string, string)
+  delete_auth: function(string)
+  set_password: function(string, string)
+  set_privileges: function(string, {string})
+  reload: function()
+  record_login: function(string)
+  iterate: function()
+end
+
+
+global enum HPChangeReasonType
+  "set_hp"
+  "punch"
+  "fall"
+  "node_damage"
+  "drown"
+  "respawn"
+end
+
+global record HPChangeReasonDefinition
+  type: HPChangeReasonType
+  node: string
+  node_pos: Vec3
+  object: ObjectRef
+  from: string
 end
 
 global record ObjectRef
