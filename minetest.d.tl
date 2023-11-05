@@ -1,8 +1,6 @@
+-- Everything was just dumped in as I looked down the lua_api.md
 global record minetest
-  -- Everything was just dumped in as I looked down the lua_api.md
-  register_alias_force: function(string, string)
-  register_alis: function(string, string)
-  registered_nodes: any
+  registered_nodes: {NodeDefinition}
   register_globalstep: function(function(number))
   get_item_group: function(string, string): number
   get_current_modname: function(): string
@@ -29,7 +27,25 @@ global record minetest
   urlencode: function(string): string
   debug: function(string)
   log: function(LogLevel, string)
-
+  register_node: function(string, NodeDefinition)
+  register_craftitem: function(string, ItemDefinition)
+  register_tool: function(string, ItemDefinition)
+  override_item: function(string: {any : any})
+  unregister_item: function(string)
+  register_entity: function(string, EntityDefinition)
+  register_abm: function(ABMDefinition)
+  register_lbm: function(LBMDefinition)
+  register_alias: function(string, string)
+  register_alias_force: function(string, string)
+  register_ore: function(OreDefinition)
+  register_biome: function(BiomeDefinition)
+  unregister_biome: function(string)
+  register_decoration: function(DecorationDefinition)
+  register_schematic: function(SchematicDefinition)
+  clear_registered_biomes: function()
+  clear_registered_decorations: function()
+  clear_registered_ores: function()
+  clear_registered_schematics: function()
 end
 
 global record SimpleSoundSpec
@@ -299,6 +315,31 @@ global record ItemSounds
   punch_use_air: SimpleSoundSpec
 end
 
+global enum EntityVisual
+  "cube"
+  "sprite"
+  "upright_sprite"
+  "mesh"
+  "wielditem"
+  "item"
+end
+
+global record Collision
+  type: string
+  axis: string
+  node_pos: Vec3
+  object: ObjectRef
+  old_velocity: Vec3
+  new_velocity: Vec3
+end
+
+global record MoveResult
+  touching_ground: boolean
+  collides: boolean
+  standing_on_object: boolean
+  collisions: {Collision}
+end
+
 
 global type DynamicColorSpec = ColorSpec | number | string
 
@@ -397,7 +438,215 @@ global record NodeDefinition
   mod_origin: string
 end
 
+global record EntityDefinition
+  hp_max: number
+  breath_max: number
+  zoom_fov: number
+  eye_height: number
+  physical: boolean
+  collide_with_objects: boolean
+  collisionbox: {number}
+  selectionbox: {number}
+  pointable: boolean
+  visual: EntityVisual
+  visual_size: Vec3
+  mesh: string
+  textures: {string}
+  colors: {DynamicColorSpec}
+  use_texture_alpha: boolean
+  spritediv: Vec2
+  initial_sprite_basepos: Vec2
+  is_visible: boolean
+  makes_footstep_sound: boolean
+  automatic_rotate: number
+  stepheight: number
+  automatic_face_movement_dir: number
+  automatic_face_movement_max_rotation_per_sec: number
+  backface_culling: boolean
+  glow: number
+  nametag: string
+  nametag_color: ColorSpec
+  nametag_bgcolor: ColorSpec
+  infotext: string
+  static_save: boolean
+  damage_texture_modifier: string
+  shaded: boolean
+  show_on_minimap: boolean
+  on_activate: function(LuaEntity, string, number)
+  on_deactivate: function(LuaEntity, boolean)
+  on_step: function(LuaEntity, number, MoveResult)
+  on_punch: function(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
+  on_death: function(LuaEntity, ObjectRef)
+  on_rightclick: function(LuaEntity, ObjectRef)
+  on_attach_child: function(LuaEntity, ObjectRef)
+  on_detach_child: function(LuaEntity, ObjectRef)
+  on_detach: function(LuaEntity, ObjectRef)
+  get_staticdata: function(LuaEntity)
+end
+
+global record ABMDefinition
+  label: string
+  nodenames: {string}
+  neighbors: {string}
+  interval: number
+  chance: number
+  min_y: number
+  max_y: number
+  catch_up: number
+  action: function(Vec3, NodeTable, number, number)
+end
+
+global record LBMDefinition
+  label: string
+  name: string
+  nodenames: {string}
+  run_at_every_load: boolean
+  action: function(Vec3, NodeTable, number)
+end
+
+global record SchematicData
+  name: string
+  param1: number
+  param2: number
+end
+global record SchematicProbability
+  ypos: number
+  prob: number
+end
+
+global record SchematicDefinition
+  size: Vec3
+  data: {SchematicData}
+  yslice_prob: {SchematicProbability}
+end
+
+global enum OreType
+  "scatter"
+  "sheet"
+  "puff"
+  "blob"
+  "vein"
+  "stratum"
+end
+
+global enum OreFlags
+  "puff_cliffs"
+  "puff_additive_composition"
+end
+
+global enum NoiseFlags
+  "defaults"
+  "eased"
+  "absvalue"
+end
+
+global record NoiseParams
+  offset: number
+  scale: number
+  spread: Vec3
+  seed: number
+  octaves: number
+  persistence: number
+  lacunarity: number
+  flags: NoiseFlags
+end
+
+global record OreDefinition
+  ore_type: OreType
+  ore: string
+  ore_param2: number
+  wherein: string
+  clust_scarcity: number
+  clust_num_ores: number
+  clust_size: number
+  y_min: number
+  y_max: number
+  flags: OreFlags
+  noise_threshold: number
+  noise_params: NoiseParams
+  biomes: {string}
+  column_height_min: number
+  column_height_max: number
+  column_midpoint_factor: number
+  np_puff_top: NoiseParams
+  np_puff_bottom: NoiseParams
+  random_factor: number
+  np_stratum_thickness: NoiseParams
+  stratum_thickness: number
+end
+
+global record BiomeDefinition
+  name: string
+  node_dust: string
+  node_top: string
+  depth_top: number
+  node_filler: string
+  depth_filler: number
+  node_stone: string
+  node_water_top: string
+  depth_water_top: number
+  node_water: string
+  node_river_water: string
+  node_riverbed: string
+  depth_riverbed: number
+  node_cave_liquid: string | {string}
+  node_dungeon: string
+  node_dungeon_alt: string
+  node_dungeon_stair: string
+  y_max: number
+  y_min: number
+  max_pos: Vec3
+  min_pos: Vec3
+  vertical_blend: number
+  heat_point: number
+  humidity_point: number
+end
+
+
+global enum DecorationType
+  "simple"
+  "schematic"
+end
+
+global enum DecorationFlags
+  "liquid_surface"
+  "force_placement"
+  "all_floors"
+  "all_ceilings"
+  "place_center_x"
+  "place_center_y"
+  "place_center_z"
+end
+
+global record DecorationDefinition
+  deco_type: DecorationType
+  place_on: string
+  sidelen: number
+  fill_ratio: number
+  noise_params: NoiseParams
+  biomes: {string}
+  y_min: number
+  y_max: number
+  spawn_by: string
+  check_offset: number
+  num_spawn_by: number
+  flags: DecorationFlags
+  decoration: string
+  height: number
+  height_max: number
+  param2: number
+  param2_max: number
+  place_offset_y: number
+  schematic: string | SchematicDefinition
+  replacements: {string : string}
+  rotation: string
+end
+
 global record ObjectRef
+
+end
+
+global record LuaEntity
 
 end
 
