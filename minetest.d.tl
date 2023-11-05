@@ -65,7 +65,115 @@ global record minetest
   register_on_player_hpchange: function(function(ObjectRef, number, HPChangeReasonDefinition), boolean)
   register_on_dieplayer: function(function(ObjectRef, HPChangeReasonDefinition))
   register_on_respawnplayer: function(function(ObjectRef))
-  
+  register_on_prejoinplayer: function(function(string, string))
+  register_on_joinplayer: function(function(ObjectRef, string))
+  register_on_leaveplayer: function(function(ObjectRef, boolean))
+  register_on_authplayer: function(function(string, string, boolean))
+  register_on_auth_fail: function(function(string, string))
+  register_on_cheat: function(function(ObjectRef, CheatDefinition))
+  register_on_chat_message: function(function(string, string))
+  register_on_chatcommand: function(function(string, string, string): boolean)
+  register_on_player_receive_fields: function(function(ObjectRef, string, {string : any}))
+  register_on_craft: function(function(ItemStack, ObjectRef, {any}, string))
+  register_craft_predict: function(function(ItemStack, ObjectRef, {any}, string))
+  register_allow_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition))
+  register_on_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition))
+  register_on_protection_violation: function(function(Vec3, string))
+  register_on_item_eat: function(function(number, boolean, ItemStack, ObjectRef, PointedThing))
+  register_on_item_pickup: function(function(ItemStack, ObjectRef, PointedThing, number, ...: any))
+  register_on_priv_grant: function(function(string, string, string))
+  register_on_priv_revoke: function(function(string, string, string))
+  register_can_bypass_userlimit: function(function(string, string))
+  register_on_modchannel_message: function(function(string, string, string))
+  register_on_liquid_transformed: function(function({Vec3}, {string}))
+  register_on_mapblocks_changed: function(function({string}, number))
+  settings: {string : any}
+  setting_get_pos: function(string): Vec3
+  string_to_privs: function(string, string): string
+  privs_to_string: function(string, string): string
+  get_player_privs: function(string): {string}
+  check_player_privs: function(ObjectRef | string, string | {string}): boolean | {boolean}
+  check_password_entry: function(string, string, string): boolean
+  get_password_hash: function(string, string): string
+  get_player_ip: function(string): string
+  get_auth_handler: function(): AuthenticationHandlerDefinition
+  notify_authentication_modified: function(string)
+  set_player_password: function(string, string)
+  set_player_privs: function(string, {string : boolean})
+  auth_reload: function()
+  chat_send_all: function(string)
+  chat_send_player: function(string, string)
+  format_chat_message: function(string, string)
+  set_node: function(Vec3, NodeTable)
+  add_node: function(Vec3, NodeTable)
+  bulk_set_node: function({Vec3}, NodeTable)
+  swap_node: function(Vec3, NodeTable)
+  remove_node: function(Vec3)
+  get_node: function(Vec3): NodeTable
+  get_node_or_nil: function(Vec3): NodeTable | nil
+  get_node_light: function(Vec3, number): number
+  get_natural_light: function(Vec3: number): number
+  get_artificial_light: function(number): number
+  place_node: function(Vec3, NodeTable)
+  dig_node: function(Vec3): boolean
+  punch_node: function(Vec3)
+  spawn_falling_node: function(Vec3): {boolean, ObjectRef} | boolean
+  find_nodes_with_meta: function(Vec3, Vec3): {Vec3}
+  get_meta: function(Vec3): MetaData
+  get_node_timer: function(Vec3): number
+  add_entity: function(Vec3, string, string): ObjectRef | nil
+  add_item: function(Vec3, ItemStack | string): ObjectRef | nil
+  get_player_by_name: function(string): ObjectRef
+  get_objects_inside_radius: function(Vec3, number): {ObjectRef}
+  get_objects_in_area: function(Vec3, Vec3): {ObjectRef}
+  set_timeofday: function(number)
+  get_timeofday: function(): number
+  get_gametime: function(): number
+  get_day_count: function(): number
+  find_node_near: function(Vec3, number, {string}, boolean): Vec3 | nil
+  find_nodes_in_area: function(Vec3, Vec3, {string}, boolean): {any}
+  find_nodes_in_area_under_air: function(Vec3, Vec3, {string}): {Vec3}
+  get_perlin: function(NoiseParams): number
+  get_perlin: function(number, number, number, number): number
+  get_voxel_manip: function(Vec3, Vec3): VoxelManip
+  set_gen_notify: function(GenNotifyFlags, {number})
+  get_gen_notify: function(): {number}
+  get_decoration_id: function(string): number
+  get_mapgen_object: function(string): MapGenObjectDefinition
+  get_heat: function(Vec3): number
+  get_humidity: function(Vec3): number
+  get_biome_data: function(Vec3): BiomeDataDefinition | nil
+  get_biome_id: function(string): number
+  get_biome_name: function(number): string
+  get_mapgen_setting: function(string): MapGenSettingsDefinition
+  set_mapgen_params: function(MapGenSettingsDefinition)
+  get_mapgen_edges: function(number, number)
+  get_mapgen_setting: function(string): MapGenSettingsDefinition
+  get_mapgen_setting_noiseparams: function(string): NoiseParams
+  set_mapgen_setting: function(string, any, boolean)
+  set_noiseparams: function(string, NoiseParams, boolean)
+  get_noiseparams: function(string): NoiseParams
+  generate_ores: function(VoxelManip, Vec3, Vec3)
+  generate_decorations: function(VoxelManip, Vec3, Vec3)
+  clear_objects: function(ClearObjectsOptions)
+  load_area: function(Vec3, Vec3)
+  emerge_area: function(Vec3, Vec3, EmergeAreaCallback, any)
+  delete_area: function(Vec3, Vec3)
+  line_of_sight: function(Vec3, Vec3): {boolean, Vec3}
+  raycast: function(Vec3, Vec3, boolean, boolean): Raycast
+  find_path: function(Vec3, Vec3, number, number, number, SearchAlgorithm)
+  spawn_tree: function(Vec3, TreeDefinition)
+  transforming_liquid_add: function(Vec3)
+  get_node_max_level: function(Vec3): number
+  get_node_level: function(Vec3): number
+  set_node_level: function(Vec3, number): number
+  add_node_level: function(Vec3, number): number
+  fix_light: function(Vec3, Vec3): boolean
+  check_single_for_falling: function(Vec3)
+  check_for_falling: function(Vec3)
+  get_spawn_level: function(number, number)
+  mod_channel_join: function(string)
+  get_inventory: function(Vec3): InvRef
 end
 
 global record SimpleSoundSpec
@@ -722,6 +830,117 @@ global record HPChangeReasonDefinition
   object: ObjectRef
   from: string
 end
+
+global enum CheatType
+  "moved_too_fast"
+  "interacted_too_far"
+  "interacted_with_self"
+  "interacted_while_dead"
+  "finished_unknown_dig"
+  "dug_unbreakable"
+  "dug_too_fast"
+end
+
+global record ActionDefinition
+  from_list: string
+  to_list: string
+  from_index: number
+  to_index: number
+  count: number
+  listname: string
+  index: number
+  stack: ItemStack
+end
+
+
+global record MetaData
+  fields: {string : any}
+  inventory: {string : {number : string}}
+end
+
+global record CheatDefinition
+  type: CheatType
+end
+
+global enum ClearObjectsOptions
+  "full"
+  "quick"
+end
+
+
+global type EmergeAreaCallback = function(Vec3, any, number, any)
+
+global enum GenNotifyFlags
+  "dungeon"
+  "temple"
+  "cave_begin"
+  "cave_end"
+  "large_cave_begin"
+  "large_cave_end"
+  "decoration"
+end
+
+global record BiomeDataDefinition
+  biome: number
+  heat: number
+  humidity: number
+end
+
+global record MapGenSettingsDefinition
+  mgname: string
+  seed: number
+  chnksize: number
+  water_level: number
+  flags: string
+end
+
+global enum SearchAlgorithm
+  "A*_noprefetch"
+  "A*"
+  "Dijkstra"
+end
+
+global record InvRefLocation
+  type: string
+  name: string
+  pos: Vec3
+end
+
+global record InvRef
+  is_empty: function(string): boolean
+  get_size: function(string): number
+  set_size: function(string, number): boolean
+  get_width: function(string): number
+  set_width: function(string, number)
+  get_stack: function(string, number): ItemStack
+  set_stack: function(string, number, ItemStack)
+  get_list: function(string): {ItemStack}
+  set_list: function(string, {ItemStack})
+  get_lists: function(): {string}
+  set_lists: function({ItemStack})
+  add_item: function(string, {ItemStack}): boolean
+  room_for_item: function(string, {ItemStack}): boolean
+  contains_item: function(string, {ItemStack}, boolean): boolean
+  remove_item: function(string, {ItemStack}): {ItemStack}
+  get_location: function(): InvRefLocation
+end
+
+global record TreeDefinition
+
+end
+
+global record MapGenObjectDefinition
+
+end
+
+global record VoxelManip
+
+end
+
+global record Raycast
+
+end
+
 
 global record ObjectRef
 
