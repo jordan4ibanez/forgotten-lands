@@ -284,8 +284,50 @@ global record PointedThing
   ref: ObjectRef
 end
 
+global record ToolCapabilities
+  full_punch_interval: number
+  max_drop_level: number
+  groupcaps: {string : any}
+  damage_groups: {string : number}
+  punch_attack_uses: number
+end
+
+global record ItemSounds
+  breaks: SimpleSoundSpec
+  eat: SimpleSoundSpec
+  punch_use: SimpleSoundSpec
+  punch_use_air: SimpleSoundSpec
+end
+
 
 global type DynamicColorSpec = ColorSpec | number | string
+
+global record ItemDefinition
+  description: string
+  short_description: string
+  groups: {string: number}
+  inventory_image: string
+  inventory_overlay: string
+  wield_image: string
+  wield_overlay: string
+  wield_scale: Vec3
+  palette: string
+  color: string
+  stack_max: number
+  range: number
+  liquids_pointable: boolean
+  light_source: number
+  tool_capabilities: ToolCapabilities
+  node_placement_prediction: string
+  node_dig_prediction: string
+  sound: SimpleSoundSpec
+  on_place: function(ItemStack, ObjectRef, PointedThing)
+  on_secondary_use: function(ItemStack, ObjectRef, PointedThing)
+  on_drop: function(ItemStack, ObjectRef, Vec3)
+  on_pickup: function(ItemStack, ObjectRef, PointedThing, number, ...: any)
+  on_use: function(ItemStack, ObjectRef, PointedThing)
+  after_use: function(ItemStack, ObjectRef, NodeTable, {string : any})
+end
 
 global record NodeDefinition
   drawtype: drawtype
