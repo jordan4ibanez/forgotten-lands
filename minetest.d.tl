@@ -967,7 +967,23 @@ global record InvRef
 end
 
 global record TreeDefinition
-
+  axiom: string
+  rules_a: string
+  rules_b: string
+  rules_c: string
+  rules_d: string
+  trunk: string
+  leaves: string
+  leaves2: string
+  leaves2_chance: number
+  angle: number
+  iterations: number
+  random_level: number
+  trunk_type: string
+  thin_branches: boolean
+  fruit: string
+  fruit_chance: number
+  seed: number
 end
 
 global record MapGenObjectDefinition
