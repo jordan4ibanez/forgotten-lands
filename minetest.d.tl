@@ -1096,6 +1096,15 @@ global record ObjectRef
   respawn: function()
 end
 
+
+global function PcgRandom(_: number, _: {number}): PcgRandomObject end
+
+global record PcgRandomObject
+  next: function(PcgRandomObject): number
+  next: function(PcgRandomObject, number, number): number
+  rand_normal_dist: function(PcgRandomObject, number, number, number): number
+end
+
 global record PhysicsOverride
   speed: number
   jump: number
