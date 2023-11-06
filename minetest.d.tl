@@ -118,7 +118,7 @@ global record minetest
   spawn_falling_node: function(Vec3): {boolean, ObjectRef} | boolean
   find_nodes_with_meta: function(Vec3, Vec3): {Vec3}
   get_meta: function(Vec3): MetaData
-  get_node_timer: function(Vec3): number
+  get_node_timer: function(Vec3): NodeTimerObject
   add_entity: function(Vec3, string, string): ObjectRef | nil
   add_item: function(Vec3, ItemStack | string): ObjectRef | nil
   get_player_by_name: function(string): ObjectRef
@@ -137,7 +137,7 @@ global record minetest
   set_gen_notify: function(GenNotifyFlags, {number})
   get_gen_notify: function(): {number}
   get_decoration_id: function(string): number
-  get_mapgen_object: function(string): MapGenObjectDefinition
+  get_mapgen_object: function(string): GenNotifyObject
   get_heat: function(Vec3): number
   get_humidity: function(Vec3): number
   get_biome_data: function(Vec3): BiomeDataDefinition | nil
@@ -271,7 +271,7 @@ global record minetest
   forceload_block: function(Vec3, boolean, number)
   forceload_free_block: function(Vec3, boolean)
   compare_block_status: function(Vec3, BlockStatusCondition): boolean | nil
-  request_insecure_environment: function(): InsecureEnvironment
+  request_insecure_environment: function(): any
   global_exists: function(string): boolean
 
   registered_items: {string : ItemDefinition}
@@ -286,7 +286,7 @@ global record minetest
   registered_aliases: {string : string}
   registered_ores: {string : OreDefinition}
   registered_biomes: {string : BiomeDefinition}
-  registered_decorations: {string : DecorationDefinition}
+  registered_decorations: {number : DecorationDefinition}
   registered_schematics: {string : SchematicDefinition}
   registered_chatcommands: {string : ChatCommandDefinition}
   registered_privileges: {string : PrivilegeDefinition}
@@ -348,7 +348,7 @@ global enum paramtype2
   "colordegrotate"
 end
 
-global enum DrawType
+global enum drawtype
   "normal"
   "airlike"
   "liquid"
@@ -625,7 +625,7 @@ global record ItemDefinition
 end
 
 global record NodeDefinition
-  drawtype: DrawType
+  drawtype: drawtype
   visual_scale: number
   tiles: {string}
   overlay_tiles: {string}
@@ -902,6 +902,7 @@ global enum DecorationFlags
 end
 
 global record DecorationDefinition
+  name: string
   deco_type: DecorationType
   place_on: string
   sidelen: number
@@ -914,7 +915,7 @@ global record DecorationDefinition
   check_offset: number
   num_spawn_by: number
   flags: DecorationFlags
-  decoration: string
+  decoration: string | {string}
   height: number
   height_max: number
   param2: number
@@ -1165,9 +1166,8 @@ global record TreeDefinition
   seed: number
 end
 
-global record MapGenObjectDefinition
-
-end
+  
+global type GenNotifyObject = {string : {Vec3}}
 
 global function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject end
 global record VoxelManipObject
@@ -1225,10 +1225,6 @@ global record HumidityMapObject
 
 end
 
-global record GenNotifyObject
-
-end
-
 global function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject end
 global record RaycastObject
   metamethod __call: function(RaycastObject): PointedThing | nil
@@ -1239,7 +1235,7 @@ global record SecureRandomObject
   next_bytes: function(SecureRandomObject, number): string
 end
 
-global function Settings(): MinetestSettingsObject end
+global function Settings(_: string): MinetestSettingsObject end
 global record MinetestSettingsObject
   get: function(MinetestSettingsObject, string): any
   get_bool: function(MinetestSettingsObject, string): boolean | nil
@@ -1848,10 +1844,6 @@ global record ParticleSpawnerDefinition
   texpool: ParticleSpawnerTexturePoolDefinition
 end
 
-global record InsecureEnvironment
-
-end
-
 global enum AreaStoreType
   "LibSpatial"
 end
@@ -1961,6 +1953,15 @@ global record HitParamsReturn
   groups: {string}
   tool_capabilities: ToolCapabilities
   time_from_last_punch: number
+end
+
+global record NodeTimerObject
+  set: function(NodeTimerObject, number, number)
+  start: function(NodeTimerObject, number)
+  stop: function(NodeTimerObject)
+  get_timeout: function(NodeTimerObject): number
+  get_elapsed: function(NodeTimerObject): number
+  is_started: function(NodeTimerObject): boolean
 end
 
 global record Translator
