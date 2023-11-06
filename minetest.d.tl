@@ -239,6 +239,8 @@ global record minetest
   place_schematic_on_vmanip: function(VoxelManipObject, Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
   serialize_schematic: function(SchematicDefinition, SchematicFormat, {SchematicSerializationOption})
   read_schematic: function(SchematicDefinition, {SchematicReadOptionYSlice})
+  request_http_api: function(): HTTPApi
+
 end
 
 global record SimpleSoundSpec
@@ -680,7 +682,6 @@ global record SchematicReadOptionYSlice
   write_yslice_prob: SchematicReadOptionYSlice
 end
 
-
 global record SchematicData
   name: string
   prob: number
@@ -703,6 +704,38 @@ global record SchematicDefinition
   size: Vec3
   data: {SchematicData}
   yslice_prob: {{number}}
+end
+
+global enum HTTPRequestMethod
+  "GET"
+  "POST"
+  "PUT"
+  "DELETE"
+end
+
+global record HTTPrequestDefinition
+  url: string
+  timeout: number
+  method: HTTPRequestMethod
+  data: string | {string : string}
+  user_agent: string
+  extra_headers: {string}
+  multipart: boolean
+  post_data: string | {string : string}
+end
+
+global record HTTPRequestResult
+  completed: boolean
+  succeeded: boolean
+  timeout: boolean
+  code: number
+  data: string
+end
+
+global record HTTPApi
+  fetch: function(HTTPrequestDefinition, function(HTTPRequestResult))
+  fetch_async: function(HTTPrequestDefinition): number
+  fetch_async_get: function(number): HTTPRequestResult
 end
 
 global enum OreType
