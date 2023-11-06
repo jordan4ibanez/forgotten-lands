@@ -232,6 +232,9 @@ global record minetest
   kick_player: function(string, string): boolean
   disconnect_player: function(string, string): boolean
   add_particle: function(ParticleDefinition)
+  add_particlespawner: function(ParticleSpawnerDefinition): number
+  delete_particlespawner: function(number, string)
+
 end
 
 global record SimpleSoundSpec
