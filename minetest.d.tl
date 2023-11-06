@@ -240,7 +240,37 @@ global record minetest
   serialize_schematic: function(SchematicDefinition, SchematicFormat, {SchematicSerializationOption})
   read_schematic: function(SchematicDefinition, {SchematicReadOptionYSlice})
   request_http_api: function(): HTTPApi
-
+  get_mod_storage: function(): MetaRef
+  get_connected_players: function(): {ObjectRef}
+  is_player: function(ObjectRef): boolean
+  player_exists: function(string): boolean
+  hud_replace_builtin: function(HudReplaceBuiltinOption, HudDefinition)
+  parse_relative_number: function(ParseRelativeNumberArgument, number): number | nil
+  send_join_message: function(string)
+  send_leave_message: function(string, boolean)
+  hash_node_position: function(Vec3): number
+  get_position_from_hash: function(number): Vec3
+  get_item_group: function(string, string): number
+  raillike_group: function(string): number
+  get_content_id: function(string): number
+  get_name_from_content_id: function(number): string
+  parse_json: function(string, any): {any}
+  write_json: function({any}, boolean): string | nil
+  serialize: function({any}): string
+  deserialize: function(string, boolean): {any} | nil
+  compress: function(string, CompressionMethod, ...: any): string
+  decompress: function(string, CompressionMethod, ...: any): string
+  rgba: function(number, number, number, number): string
+  encode_base64: function(string): string
+  decode_base64: function(string): string
+  is_protected: function(Vec3, string): boolean
+  record_protection_violation: function(Vec3, string)
+  is_creative_enabled: function(string): boolean
+  is_area_protected: function(Vec3, Vec3, string, number): boolean
+  rotate_and_place: function(ItemStack, ObjectRef, PointedThing, boolean,RotateAndPlaceOrientationFlag, boolean): ItemStack
+  rotate_node: function(ItemStack, ObjectRef, PointedThing)
+  calculate_knockback: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number, number)
+  
 end
 
 global record SimpleSoundSpec
@@ -1016,8 +1046,9 @@ global record MetaRef
   get_timeout: function(): number
   get_elapsed: function(): number
   is_started: function(): boolean
-
 end
+
+
 
 global record ItemStack
   name: string
@@ -1564,8 +1595,31 @@ global record HudDefinition
   style: number
 end
 
+global enum HudReplaceBuiltinOption
+  "breath"
+  "health"
+end
+
 global type Formspec = string
 
+global enum ParseRelativeNumberArgument
+  "<number>"
+  "~<number>"
+  "~"
+end
+
+global enum CompressionMethod
+  "deflate"
+  "zstd"
+end
+
+global enum RotateAndPlaceOrientationFlag
+  "invert_wall"
+  "force_wall"
+  "force_ceiling"
+  "force_floor"
+  "force_facedir"
+end
 global enum TileAnimationType
   "vertical_frames"
   "sheed_2d"
