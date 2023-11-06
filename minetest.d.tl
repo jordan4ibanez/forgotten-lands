@@ -1156,21 +1156,21 @@ end
 
 global function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject end
 global record VoxelManipObject
-  read_from_map: function(Vec3, Vec3)
-  write_to_map: function(boolean)
-  get_node_at: function(Vec3): MapNode
-  set_node_at: function(Vec3, MapNode)
-  get_data: function({number}): {number}
-  set_data: function({number})
-  set_lighting: function(number, Vec3, Vec3)
-  get_light_data: function({number}): {number}
-  set_light_data: function({number})
-  get_param2_data: function({number}): {number}
-  set_param2_data: function({number})
-  calc_lighting: function(Vec3, Vec3, boolean)
-  update_liquids: function()
-  was_modified: function(): boolean
-  get_emerged_area: function(): Vec3, Vec3
+  read_from_map: function(VoxelManipObject, Vec3, Vec3)
+  write_to_map: function(VoxelManipObject, boolean)
+  get_node_at: function(VoxelManipObject, Vec3): MapNode
+  set_node_at: function(VoxelManipObject, Vec3, MapNode)
+  get_data: function(VoxelManipObject, {number}): {number}
+  set_data: function(VoxelManipObject, {number})
+  set_lighting: function(VoxelManipObject, number, Vec3, Vec3)
+  get_light_data: function(VoxelManipObject, {number}): {number}
+  set_light_data: function(VoxelManipObject, {number})
+  get_param2_data: function(VoxelManipObject, {number}): {number}
+  set_param2_data: function(VoxelManipObject, {number})
+  calc_lighting: function(VoxelManipObject, Vec3, Vec3, boolean)
+  update_liquids: function(VoxelManipObject)
+  was_modified: function(VoxelManipObject): boolean
+  get_emerged_area: function(VoxelManipObject): Vec3, Vec3
 end
 
 global record VoxelAreaInitializer
@@ -1183,15 +1183,15 @@ global record VoxelAreaObject
   ystride: number
   zstride: number
   new: function(VoxelAreaInitializer): VoxelAreaObject
-  getExtent: function(): Vec3
-  index: function(number, number, number): number
-  indexp: function(Vec3): number
-  position: function(number): Vec3
-  contains: function(number, number, number): boolean
-  containsp: function(Vec3): boolean
-  containsi: function(number): boolean
-  iter: function(number, number, number, number, number, number): function(): number
-  iterp: function(Vec3, Vec3): function(): number
+  getExtent: function(VoxelAreaObject): Vec3
+  index: function(VoxelAreaObject, number, number, number): number
+  indexp: function(VoxelAreaObject, Vec3): number
+  position: function(VoxelAreaObject, number): Vec3
+  contains: function(VoxelAreaObject, number, number, number): boolean
+  containsp: function(VoxelAreaObject, Vec3): boolean
+  containsi: function(VoxelAreaObject, number): boolean
+  iter: function(VoxelAreaObject, number, number, number, number, number, number): function(): number
+  iterp: function(VoxelAreaObject, Vec3, Vec3): function(): number
 end
 
 global record HeightMapObject
