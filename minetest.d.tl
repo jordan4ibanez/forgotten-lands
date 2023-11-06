@@ -1043,29 +1043,29 @@ global record MetaData
 end
 
 global record MetaRef
-  set_tool_capabilities: function(ToolCapabilities)
-  contains: function(string): boolean
-  get: function(string): string
-  set_string: function(string, string)
-  get_string: function(string): string
-  set_int: function(string, number)
-  get_int: function(string): number
-  set_float: function(string, number)
-  get_float: function(string): number
-  get_keys: function(): {string}
-  to_table: function(): MetaData | nil
-  from_table: function(MetaData): boolean
-  equals: function(MetaRef): boolean
+  set_tool_capabilities: function(MetaRef, ToolCapabilities)
+  contains: function(MetaRef, string): boolean
+  get: function(MetaRef, string): string
+  set_string: function(MetaRef, string, string)
+  get_string: function(MetaRef, string): string
+  set_int: function(MetaRef, string, number)
+  get_int: function(MetaRef, string): number
+  set_float: function(MetaRef, string, number)
+  get_float: function(MetaRef, string): number
+  get_keys: function(MetaRef): {string}
+  to_table: function(MetaRef): MetaData | nil
+  from_table: function(MetaRef, MetaData): boolean
+  equals: function(MetaRef, MetaRef): boolean
   -- node
-  get_inventory: function(): InvRef
-  mark_as_private: function(string | {string})
+  get_inventory: function(MetaRef): InvRef
+  mark_as_private: function(MetaRef, string | {string})
   -- timer
-  set: function(number, number)
-  start: function(number)
-  stop: function()
-  get_timeout: function(): number
-  get_elapsed: function(): number
-  is_started: function(): boolean
+  set: function(MetaRef, number, number)
+  start: function(MetaRef, number)
+  stop: function(MetaRef)
+  get_timeout: function(MetaRef): number
+  get_elapsed: function(MetaRef): number
+  is_started: function(MetaRef): boolean
 end
 
 
@@ -1076,32 +1076,32 @@ global record ItemStack
   wear: number
   metadata: string
 
-  is_empty: function(): boolean
-  get_name: function(): string
-  set_name: function(string): boolean
-  get_count: function(): number
-  set_count: function(number): boolean
-  get_wear: function(): number
-  set_wear: function(number): boolean
-  get_meta: function(): MetaRef
-  get_description: function(): string
-  get_short_description: function(): string
-  clear: function()
-  replace: function(ItemStack | string)
-  to_string: function(): string
-  to_table: function(): {any}
-  get_stack_max: function(): number
-  get_free_space: function(): number
-  is_known: function(): boolean
-  get_definition: function(): ItemDefinition
-  get_tool_capabilities: function(): ToolCapabilities
-  add_wear: function(number)
-  add_wear_by_uses: function(number)
-  add_item: function(ItemStack): ItemStack
-  item_fits: function(ItemStack): boolean
-  take_item: function(number): ItemStack
-  peek_item: function(number): ItemStack
-  equals: function(ItemStack): boolean
+  is_empty: function(ItemStack): boolean
+  get_name: function(ItemStack): string
+  set_name: function(ItemStack, string): boolean
+  get_count: function(ItemStack): number
+  set_count: function(ItemStack, number): boolean
+  get_wear: function(ItemStack): number
+  set_wear: function(ItemStack, number): boolean
+  get_meta: function(ItemStack): MetaRef
+  get_description: function(ItemStack): string
+  get_short_description: function(ItemStack): string
+  clear: function(ItemStack)
+  replace: function(ItemStack, ItemStack | string)
+  to_string: function(ItemStack): string
+  to_table: function(ItemStack): {any}
+  get_stack_max: function(ItemStack): number
+  get_free_space: function(ItemStack): number
+  is_known: function(ItemStack): boolean
+  get_definition: function(ItemStack): ItemDefinition
+  get_tool_capabilities: function(ItemStack): ToolCapabilities
+  add_wear: function(ItemStack, number)
+  add_wear_by_uses: function(ItemStack, number)
+  add_item: function(ItemStack, ItemStack): ItemStack
+  item_fits: function(ItemStack, ItemStack): boolean
+  take_item: function(ItemStack, number): ItemStack
+  peek_item: function(ItemStack, number): ItemStack
+  equals: function(ItemStack, ItemStack): boolean
 end
 
 
