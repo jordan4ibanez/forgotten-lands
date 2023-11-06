@@ -299,7 +299,13 @@ global record minetest
   is_yes: function(any): boolean
   is_nan: function(number): boolean
   get_us_time: function(): number
+  pointed_thing_to_face_pos: function(ObjectRef, PointedThing): Vec3
+  get_tool_wear_after_use: function(number, number): number
+  get_dig_params: function({string}, ToolCapabilities, number): DigParamsReturn
+  get_hit_params: function({string}, ToolCapabilities, number, number): HitParamsReturn
 
+  get_translator: function(string): Translator
+  translate: function(string, ...: string): string
 end
 
 global record SimpleSoundSpec
@@ -1941,6 +1947,26 @@ global record RGBA
   a: number
 end
 
+global record DigParamsReturn
+  diggable: boolean
+  time: number
+  wear: number
+  groups: {string}
+  tool_capabilities: ToolCapabilities
+end
+
+global record HitParamsReturn
+  hp: number
+  wear: number
+  groups: {string}
+  tool_capabilities: ToolCapabilities
+  time_from_last_punch: number
+end
+
+global record Translator
+  metamethod __call: function(Translator, ...: string): string
+end
+
 global function dump(_: any, _: string, _: table): string end
 
 global function dump2(_: any, _: table): string end
@@ -1963,3 +1989,12 @@ function t.indexof(_: table, _: number): number end
 function t.insert_all(_: table, _: table): table end
 function t.key_value_swap(_: table): table end
 function t.shuffle(_: table, _: number, _: number, _: function): table end
+
+
+
+
+
+
+
+
+-- This isn't cheating.
