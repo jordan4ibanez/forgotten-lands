@@ -234,7 +234,11 @@ global record minetest
   add_particle: function(ParticleDefinition)
   add_particlespawner: function(ParticleSpawnerDefinition): number
   delete_particlespawner: function(number, string)
-
+  create_schematic: function(Vec3, Vec3, {SchematicProbability}, string, {SchematicSliceProbability})
+  place_schematic: function(Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
+  place_schematic_on_vmanip: function(VoxelManipObject, Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
+  serialize_schematic: function(SchematicDefinition, SchematicFormat, {SchematicSerializationOption})
+  read_schematic: function(SchematicDefinition, {SchematicReadOptionYSlice})
 end
 
 global record SimpleSoundSpec
@@ -641,12 +645,56 @@ global record LBMDefinition
   action: function(Vec3, NodeTable, number)
 end
 
+
+global enum SchematicRotation
+  "0"
+  "90"
+  "180"
+  "270"
+  "random"
+end
+
+global enum SchematicPlacementFlag
+  "place_center_x"
+  "place_center_y"
+  "place_center_z"
+end
+
+global enum SchematicFormat
+  "mts"
+  "lua"
+end
+
+global enum SchematicSerializationOption
+  "lua_use_comments"
+  "lua_num_indent_spaces"
+end
+
+global enum SchematicReadOptionYSlice
+  "none"
+  "low"
+  "all"
+end
+
+global record SchematicReadOptionYSlice
+  write_yslice_prob: SchematicReadOptionYSlice
+end
+
+
 global record SchematicData
   name: string
+  prob: number
   param1: number
   param2: number
+  force_place: boolean
 end
+
 global record SchematicProbability
+  pos: Vec3
+  prob: number
+end
+
+global record SchematicSliceProbability
   ypos: number
   prob: number
 end
@@ -654,7 +702,7 @@ end
 global record SchematicDefinition
   size: Vec3
   data: {SchematicData}
-  yslice_prob: {SchematicProbability}
+  yslice_prob: {{number}}
 end
 
 global enum OreType
