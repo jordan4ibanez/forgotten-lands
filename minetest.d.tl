@@ -1084,6 +1084,24 @@ global record ItemStack
   get_wear: function(): number
   set_wear: function(number): boolean
   get_meta: function(): MetaRef
+  get_description: function(): string
+  get_short_description: function(): string
+  clear: function()
+  replace: function(ItemStack | string)
+  to_string: function(): string
+  to_table: function(): {any}
+  get_stack_max: function(): number
+  get_free_space: function(): number
+  is_known: function(): boolean
+  get_definition: function(): ItemDefinition
+  get_tool_capabilities: function(): ToolCapabilities
+  add_wear: function(number)
+  add_wear_by_uses: function(number)
+  add_item: function(ItemStack): ItemStack
+  item_fits: function(ItemStack): boolean
+  take_item: function(number): ItemStack
+  peek_item: function(number): ItemStack
+  equals: function(ItemStack): boolean
 end
 
 
@@ -1221,8 +1239,6 @@ global record MinetestSettingsObject
   write: function(): boolean
   to_table: function(): {string : any}
 end
-
-
 
 global record NametagAttributes
   text: string
@@ -1820,6 +1836,38 @@ global record ParticleSpawnerDefinition
 end
 
 global record InsecureEnvironment
+
+end
+
+global enum AreaStoreType
+  "LibSpatial"
+end
+
+global record AreaStoreArea
+  min: Vec3
+  max: Vec3
+  data: string
+end
+
+global record AreaStoreCacheDefinition
+  enabled: boolean
+  block_radius: number
+  limit: number
+end
+
+global function AreaStore(_: AreaStoreType): AreaStoreObject end
+global record AreaStoreObject
+  get_area: function(number, boolean, boolean): {AreaStoreArea | boolean | nil}
+  get_areas_for_pos: function(Vec3, boolean, boolean): {AreaStoreArea | boolean | nil}
+  get_areas_in_area: function(Vec3, Vec3, boolean, boolean, boolean): {AreaStoreArea | boolean | nil}
+  insert_area: function(Vec3, Vec3, string, number): number
+  reserve: function(number)
+  remove_area: function(number): boolean
+  set_cache_params: function(AreaStoreCacheDefinition)
+  to_string: function(): string
+  to_file: function(string)
+  from_string: function(string): boolean, string | nil
+  from_file: function(string): boolean, string | nil
 
 end
 
