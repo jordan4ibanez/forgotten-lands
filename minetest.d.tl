@@ -983,6 +983,13 @@ global record RaycastObject
   metamethod __call: function(RaycastObject): PointedThing | nil
 end
 
+global function SecureRandom(): SecureRandomObject end
+global record SecureRandomObject
+  next_bytes: function(number): string
+end
+
+
+
 global record NametagAttributes
   text: string
   color: RGBA
