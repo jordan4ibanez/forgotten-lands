@@ -1991,10 +1991,6 @@ function t.key_value_swap(_: table): table end
 function t.shuffle(_: table, _: number, _: number, _: function): table end
 
 
-
-
-
-
-
-
--- This isn't cheating.
+-- The rest of this is Forgotten Lands global definitions.
+global function println(...: any) print(...) end
+global function switch(input: any, ...: any | function(any): any): any print(input, ...) end
