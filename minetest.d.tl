@@ -1256,103 +1256,103 @@ end
 
 
 global record ObjectRef
-  get_pos: function(): Vec3
-  set_pos: function(Vec3)
-  get_velocity: function(): Vec3
-  add_velocity: function(Vec3)
-  move_to: function(Vec3, boolean)
-  punch: function(ObjectRef, number, ToolCapabilities, Vec3)
-  right_click: function(ObjectRef)
-  get_hp: function(): number
-  set_hp: function(number, HPChangeReasonType)
-  get_inventory: function(): InvRef
-  get_wield_list: function(): string
-  get_wield_index: function(): number
-  get_wielded_item: function(): ItemStack
-  set_wielded_item: function(ItemStack): boolean
-  get_armor_groups: function(): {string : number}
-  set_armor_groups: function({string : number})
-  set_animation: function(Vec2, number, number, boolean)
-  set_animation_frame_speed: function(number)
-  set_attach: function(ObjectRef, string, Vec3, Vec3, boolean)
-  get_attach: function(): AttachRef | nil
-  get_children: function(): {ObjectRef}
-  set_detach: function()
-  set_bone_position: function(string, Vec3, Vec3)
-  set_properties: function({any : any})
-  get_properties: function(): {any : any}
-  is_player: function(): boolean
-  get_nametag_attributes: function(): NametagAttributes
-  set_nametag_attributes: function(NametagAttributes)
-  remove: function()
-  set_velocity: function(Vec3)
-  set_acceleration: function(Vec3)
-  get_acceleration: function(): Vec3
-  set_rotation: function(Vec3)
-  get_rotation: function(): Vec3
-  set_yaw: function(number)
-  get_yaw: function(): number
-  set_texture_mod: function(string)
-  get_texture_mod: function(string)
-  set_sprite: function(Vec2, number, number, boolean)
+  get_pos: function(ObjectRef): Vec3
+  set_pos: function(ObjectRef, Vec3)
+  get_velocity: function(ObjectRef): Vec3
+  add_velocity: function(ObjectRef, Vec3)
+  move_to: function(ObjectRef, Vec3, boolean)
+  punch: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3)
+  right_click: function(ObjectRef, ObjectRef)
+  get_hp: function(ObjectRef): number
+  set_hp: function(ObjectRef, number, HPChangeReasonType)
+  get_inventory: function(ObjectRef): InvRef
+  get_wield_list: function(ObjectRef): string
+  get_wield_index: function(ObjectRef): number
+  get_wielded_item: function(ObjectRef): ItemStack
+  set_wielded_item: function(ObjectRef, ItemStack): boolean
+  get_armor_groups: function(ObjectRef): {string : number}
+  set_armor_groups: function(ObjectRef, {string : number})
+  set_animation: function(ObjectRef, Vec2, number, number, boolean)
+  set_animation_frame_speed: function(ObjectRef, number)
+  set_attach: function(ObjectRef, ObjectRef, string, Vec3, Vec3, boolean)
+  get_attach: function(ObjectRef): AttachRef | nil
+  get_children: function(ObjectRef): {ObjectRef}
+  set_detach: function(ObjectRef)
+  set_bone_position: function(ObjectRef, string, Vec3, Vec3)
+  set_properties: function(ObjectRef, {any : any})
+  get_properties: function(ObjectRef): {any : any}
+  is_player: function(ObjectRef): boolean
+  get_nametag_attributes: function(ObjectRef): NametagAttributes
+  set_nametag_attributes: function(ObjectRef, NametagAttributes)
+  remove: function(ObjectRef)
+  set_velocity: function(ObjectRef, Vec3)
+  set_acceleration: function(ObjectRef, Vec3)
+  get_acceleration: function(ObjectRef): Vec3
+  set_rotation: function(ObjectRef, Vec3)
+  get_rotation: function(ObjectRef): Vec3
+  set_yaw: function(ObjectRef, number)
+  get_yaw: function(ObjectRef): number
+  set_texture_mod: function(ObjectRef, string)
+  get_texture_mod: function(ObjectRef, string)
+  set_sprite: function(ObjectRef, Vec2, number, number, boolean)
   name: string
-  get_luaentity: function(): LuaEntity
-  get_player_name: function(): string
-  get_look_dir: function(): Vec3
-  get_look_vertical: function(): number
-  get_look_horizontal: function(): number
-  set_look_vertical: function(number)
-  set_look_horizontal: function(number)
-  get_look_pitch: function(): number
-  get_look_yaw: function(): number
-  set_look_pitch: function(number)
-  set_look_yaw: function(number)
-  get_breath: function(): number
-  set_breath: function(number)
-  set_fov: function(number, boolean, number)
-  get_fov: function(): number
-  get_meta: function(): MetaRef
-  set_inventory_formspec: function(Formspec)
-  get_inventory_formspec: function(): Formspec
-  set_formspec_prepend: function(Formspec)
-  get_formspec_prepend: function(): Formspec
-  get_player_control: function(): PlayerControl
-  get_player_control_bits: function(): number
-  set_physics_override: function(PhysicsOverride)
-  get_physics_override: function(): PhysicsOverride
-  hud_add: function(HudDefinition): number
-  hud_remove: function(number)
-  hud_change: function(number, HudElementType, any)
-  hud_get: function(number): HudDefinition
-  hud_set_flags: function(HudFlags)
-  hud_get_flags: function(): HudFlags
-  hud_set_hotbar_itemcount: function(number)
-  hud_get_hotbar_itemcount: function(): number
-  hud_set_hotbar_image: function(string)
-  hud_get_hotbar_image: function(): string
-  hud_set_hotbar_selected_image: function(string)
-  hud_get_hotbar_selected_image: function(): string
-  set_minimap_modes: function(MinimapModes, number)
-  set_sky: function(SkyParameters)
-  get_sky: function(boolean): SkyParameters
-  set_sun: function(SunParameters)
-  get_sun: function(): SunParameters
-  set_moon: function(MoonParameters)
-  get_moon: function(): MoonParameters
-  set_stars: function(StarParameters)
-  get_stars: function(): StarParameters
-  set_clouds: function(CloudParameters)
-  get_clouds: function(): CloudParameters
-  override_day_night_ratio: function(number | nil)
-  get_day_night_ratio: function(): number | nil
-  set_local_animation: function(Vec2, Vec2, Vec2, Vec2, number)
-  get_local_animation: function(): {Vec2, Vec2, Vec2, Vec2, number}
-  set_eye_offset: function(Vec3, Vec3, Vec3)
-  get_eye_offset: function(): Vec3, Vec3, Vec3
-  send_mapblock: function(Vec3)
-  set_lighting: function(LightingDefinition)
-  get_lighting: function(): LightingDefinition
-  respawn: function()
+  get_luaentity: function(ObjectRef): LuaEntity
+  get_player_name: function(ObjectRef): string
+  get_look_dir: function(ObjectRef): Vec3
+  get_look_vertical: function(ObjectRef): number
+  get_look_horizontal: function(ObjectRef): number
+  set_look_vertical: function(ObjectRef, number)
+  set_look_horizontal: function(ObjectRef, number)
+  get_look_pitch: function(ObjectRef): number
+  get_look_yaw: function(ObjectRef): number
+  set_look_pitch: function(ObjectRef, number)
+  set_look_yaw: function(ObjectRef, number)
+  get_breath: function(ObjectRef): number
+  set_breath: function(ObjectRef, number)
+  set_fov: function(ObjectRef, number, boolean, number)
+  get_fov: function(ObjectRef): number
+  get_meta: function(ObjectRef): MetaRef
+  set_inventory_formspec: function(ObjectRef, Formspec)
+  get_inventory_formspec: function(ObjectRef): Formspec
+  set_formspec_prepend: function(ObjectRef, Formspec)
+  get_formspec_prepend: function(ObjectRef): Formspec
+  get_player_control: function(ObjectRef): PlayerControl
+  get_player_control_bits: function(ObjectRef): number
+  set_physics_override: function(ObjectRef, PhysicsOverride)
+  get_physics_override: function(ObjectRef): PhysicsOverride
+  hud_add: function(ObjectRef, HudDefinition): number
+  hud_remove: function(ObjectRef, number)
+  hud_change: function(ObjectRef, number, HudElementType, any)
+  hud_get: function(ObjectRef, number): HudDefinition
+  hud_set_flags: function(ObjectRef, HudFlags)
+  hud_get_flags: function(ObjectRef): HudFlags
+  hud_set_hotbar_itemcount: function(ObjectRef, number)
+  hud_get_hotbar_itemcount: function(ObjectRef): number
+  hud_set_hotbar_image: function(ObjectRef, string)
+  hud_get_hotbar_image: function(ObjectRef): string
+  hud_set_hotbar_selected_image: function(ObjectRef, string)
+  hud_get_hotbar_selected_image: function(ObjectRef): string
+  set_minimap_modes: function(ObjectRef, MinimapModes, number)
+  set_sky: function(ObjectRef, SkyParameters)
+  get_sky: function(ObjectRef, boolean): SkyParameters
+  set_sun: function(ObjectRef, SunParameters)
+  get_sun: function(ObjectRef): SunParameters
+  set_moon: function(ObjectRef, MoonParameters)
+  get_moon: function(ObjectRef): MoonParameters
+  set_stars: function(ObjectRef, StarParameters)
+  get_stars: function(ObjectRef): StarParameters
+  set_clouds: function(ObjectRef, CloudParameters)
+  get_clouds: function(ObjectRef): CloudParameters
+  override_day_night_ratio: function(ObjectRef, number | nil)
+  get_day_night_ratio: function(ObjectRef): number | nil
+  set_local_animation: function(ObjectRef, Vec2, Vec2, Vec2, Vec2, number)
+  get_local_animation: function(ObjectRef): {Vec2, Vec2, Vec2, Vec2, number}
+  set_eye_offset: function(ObjectRef, Vec3, Vec3, Vec3)
+  get_eye_offset: function(ObjectRef): Vec3, Vec3, Vec3
+  send_mapblock: function(ObjectRef, Vec3)
+  set_lighting: function(ObjectRef, LightingDefinition)
+  get_lighting: function(ObjectRef): LightingDefinition
+  respawn: function(ObjectRef)
 end
 
 global function dump(...: any): string print(...) end
