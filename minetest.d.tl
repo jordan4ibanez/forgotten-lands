@@ -463,7 +463,7 @@ global record MoveResult
 end
 
 
-global type DynamicColorSpec = ColorSpec | number | string
+global type DynamicColorSpec = (ColorSpec | string)
 
 global record ItemDefinition
   description: string
@@ -1074,6 +1074,26 @@ global record ObjectRef
   hud_set_hotbar_selected_image: function(string)
   hud_get_hotbar_selected_image: function(): string
   set_minimap_modes: function(MinimapModes, number)
+  set_sky: function(SkyParameters)
+  get_sky: function(boolean): SkyParameters
+  set_sun: function(SunParameters)
+  get_sun: function(): SunParameters
+  set_moon: function(MoonParameters)
+  get_moon: function(): MoonParameters
+  set_stars: function(StarParameters)
+  get_stars: function(): StarParameters
+  set_clouds: function(CloudParameters)
+  get_clouds: function(): CloudParameters
+  override_day_night_ratio: function(number | nil)
+  get_day_night_ratio: function(): number | nil
+  set_local_animation: function(Vec2, Vec2, Vec2, Vec2, number)
+  get_local_animation: function(): {Vec2, Vec2, Vec2, Vec2, number}
+  set_eye_offset: function(Vec3, Vec3, Vec3)
+  get_eye_offset: function(): Vec3, Vec3, Vec3
+  send_mapblock: function(Vec3)
+  set_lighting: function(LightingDefinition)
+  get_lighting: function(): LightingDefinition
+  respawn: function()
 end
 
 global record PhysicsOverride
@@ -1106,6 +1126,97 @@ global record PlayerControl
   LMB: boolean
   RMB: boolean
   zoom: boolean
+end
+
+global enum SkyParametersType
+  "regular"
+  "skybox"
+  "plain"
+end
+
+global enum SkyParametersFogTintType
+  "custom"
+  "default"
+end
+
+global record SkyParametersColor
+  day_sky: DynamicColorSpec
+  day_horizon: DynamicColorSpec
+  dawn_sky: DynamicColorSpec
+  dawn_horizon: DynamicColorSpec
+  nigh_sky: DynamicColorSpec
+  night_horizon: DynamicColorSpec
+  indoors: DynamicColorSpec
+  fog_sun_tint: DynamicColorSpec
+  fog_moon_tint: DynamicColorSpec
+  fog_tint_type: SkyParametersFogTintType
+end
+
+global record SkyParametersFog
+  fog_distance: number
+  fog_start: number
+end
+
+global record SkyParameters
+  base_color: DynamicColorSpec
+  body_orbit_tilt: number
+  type: SkyParametersType
+  textures: {string}
+  clouds: boolean
+  sky_color: SkyParametersColor
+  fog: SkyParametersFog
+end
+
+global record SunParameters
+  visible: boolean
+  texture: string
+  tonemap: string
+  sunrise: string
+  sunrise_visible: boolean
+  scale: number
+end
+
+global record MoonParameters
+  visible: boolean
+  texture: string
+  tonemap: string
+  scale: number
+end
+
+global record StarParameters
+  visible: boolean
+  day_opacity: number
+  count: number
+  star_color: DynamicColorSpec
+  scale: number
+end
+
+global record CloudParameters
+  density: number
+  color: DynamicColorSpec
+  ambient: DynamicColorSpec
+  height: number
+  thickness: number
+  speed: Vec2
+end
+
+global record LightShadowsSpec
+  intensity: number
+end
+
+global record LightExposureSpec
+  luminance_min: number
+  luminance_max: number
+  exposure_correction: number
+  speed_dark_bright: number
+  speed_bright_dark: number
+  center_weight_power: number
+end
+
+global record LightingDefinition
+  saturation: number
+  shadows: LightShadowsSpec
+  exposure: LightExposureSpec
 end
 
 global record LuaEntity
