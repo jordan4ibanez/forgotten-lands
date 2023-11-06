@@ -1221,23 +1221,23 @@ end
 
 global function SecureRandom(): SecureRandomObject end
 global record SecureRandomObject
-  next_bytes: function(number): string
+  next_bytes: function(SecureRandomObject, number): string
 end
 
 global function Settings(): MinetestSettingsObject end
 global record MinetestSettingsObject
-  get: function(string): any
-  get_bool: function(string): boolean | nil
-  get_np_group: function(string): NoiseParams
-  get_flags: function(string): {string : boolean}
-  set: function(string, string)
-  set_bool: function(string, boolean)
-  set_np_group: function(string, NoiseParams)
-  remove: function(string): boolean
-  get_names: function(): {string}
-  has: function(string): boolean
-  write: function(): boolean
-  to_table: function(): {string : any}
+  get: function(MinetestSettingsObject, string): any
+  get_bool: function(MinetestSettingsObject, string): boolean | nil
+  get_np_group: function(MinetestSettingsObject, string): NoiseParams
+  get_flags: function(MinetestSettingsObject, string): {string : boolean}
+  set: function(MinetestSettingsObject, string, string)
+  set_bool: function(MinetestSettingsObject, string, boolean)
+  set_np_group: function(MinetestSettingsObject, string, NoiseParams)
+  remove: function(MinetestSettingsObject, string): boolean
+  get_names: function(MinetestSettingsObject): {string}
+  has: function(MinetestSettingsObject, string): boolean
+  write: function(MinetestSettingsObject): boolean
+  to_table: function(MinetestSettingsObject): {string : any}
 end
 
 global record NametagAttributes
