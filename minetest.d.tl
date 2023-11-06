@@ -1100,7 +1100,7 @@ end
 global function dump(...: any): string end
 
 
-global function PcgRandom(_: number, _: {number}): PcgRandomObject end
+global function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject end
 global record PcgRandomObject
   next: function(PcgRandomObject): number
   next: function(PcgRandomObject, number, number): number
@@ -1121,7 +1121,13 @@ global record PerlinNoiseMapObject
   get_3d_map_flat: function(PerlinNoiseMapObject, Vec3, {any}): {number}
   calc_2d_map: function(PerlinNoiseMapObject, Vec2)
   calc_3d_map: function(PerlinNoiseMapObject, Vec3)
-  get_map_slice: function(Vec3, Vec3, {any}): {number}
+  get_map_slice: function(PerlinNoiseMapObject, Vec3, Vec3, {any}): {number}
+end
+
+global function PseudoRandom(_seed: number): PseudoRandomObject end
+global record PseudoRandomObject
+  next: function(PseudoRandomObject): number
+  next: function(PseudoRandomObject, number, number): number
 end
 
 global record PhysicsOverride
