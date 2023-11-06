@@ -160,7 +160,7 @@ global record minetest
   emerge_area: function(Vec3, Vec3, EmergeAreaCallback, any)
   delete_area: function(Vec3, Vec3)
   line_of_sight: function(Vec3, Vec3): {boolean, Vec3}
-  raycast: function(Vec3, Vec3, boolean, boolean): Raycast
+  raycast: function(Vec3, Vec3, boolean, boolean): RaycastObject
   find_path: function(Vec3, Vec3, number, number, number, SearchAlgorithm)
   spawn_tree: function(Vec3, TreeDefinition)
   transforming_liquid_add: function(Vec3)
@@ -978,8 +978,9 @@ global record VoxelManip
 
 end
 
-global record Raycast
-
+global function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject end
+global record RaycastObject
+  next: function(RaycastObject): PointedThing | nil
 end
 
 global record NametagAttributes
@@ -1097,7 +1098,9 @@ global record ObjectRef
   respawn: function()
 end
 
-global function dump(...: any): string end
+-- ... will throw a warning, very annoying
+global function dump(_: any,_: any,_: any,_: any): string end
+
 
 
 global function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject end
