@@ -135,7 +135,7 @@ global record minetest
   find_nodes_in_area_under_air: function(Vec3, Vec3, {string}): {Vec3}
   get_perlin: function(NoiseParams): PerlinNoiseObject
   get_perlin: function(number, number, number, number): PerlinNoiseObject
-  get_voxel_manip: function(Vec3, Vec3): VoxelManip
+  get_voxel_manip: function(Vec3, Vec3): VoxelManipObject
   set_gen_notify: function(GenNotifyFlags, {number})
   get_gen_notify: function(): {number}
   get_decoration_id: function(string): number
@@ -153,8 +153,8 @@ global record minetest
   set_mapgen_setting: function(string, any, boolean)
   set_noiseparams: function(string, NoiseParams, boolean)
   get_noiseparams: function(string): NoiseParams
-  generate_ores: function(VoxelManip, Vec3, Vec3)
-  generate_decorations: function(VoxelManip, Vec3, Vec3)
+  generate_ores: function(VoxelManipObject, Vec3, Vec3)
+  generate_decorations: function(VoxelManipObject, Vec3, Vec3)
   clear_objects: function(ClearObjectsOptions)
   load_area: function(Vec3, Vec3)
   emerge_area: function(Vec3, Vec3, EmergeAreaCallback, any)
@@ -974,8 +974,23 @@ global record MapGenObjectDefinition
 
 end
 
-global record VoxelManip
-
+global function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject end
+global record VoxelManipObject
+  read_from_map: function(Vec3, Vec3)
+  write_to_map: function(boolean)
+  get_node_at: function(Vec3): MapNode
+  set_node_at: function(Vec3, MapNode)
+  get_data: function({number}): {number}
+  set_data: function({number})
+  set_lighting: function(number, Vec3, Vec3)
+  get_light_data: function({number}): {number}
+  set_light_data: function({number})
+  get_param2_data: function({number}): {number}
+  set_param2_data: function({number})
+  calc_lighting: function(Vec3, Vec3, boolean)
+  update_liquids: function()
+  was_modified: function(): boolean
+  get_emerged_area: function(): Vec3, Vec3
 end
 
 global function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject end
