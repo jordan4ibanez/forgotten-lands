@@ -133,8 +133,8 @@ global record minetest
   find_node_near: function(Vec3, number, {string}, boolean): Vec3 | nil
   find_nodes_in_area: function(Vec3, Vec3, {string}, boolean): {any}
   find_nodes_in_area_under_air: function(Vec3, Vec3, {string}): {Vec3}
-  get_perlin: function(NoiseParams): number
-  get_perlin: function(number, number, number, number): number
+  get_perlin: function(NoiseParams): PerlinNoiseObject
+  get_perlin: function(number, number, number, number): PerlinNoiseObject
   get_voxel_manip: function(Vec3, Vec3): VoxelManip
   set_gen_notify: function(GenNotifyFlags, {number})
   get_gen_notify: function(): {number}
@@ -1098,11 +1098,16 @@ end
 
 
 global function PcgRandom(_: number, _: {number}): PcgRandomObject end
-
 global record PcgRandomObject
   next: function(PcgRandomObject): number
   next: function(PcgRandomObject, number, number): number
   rand_normal_dist: function(PcgRandomObject, number, number, number): number
+end
+
+global function PerlinNoise(_params: NoiseParams): PerlinNoiseObject end
+global record PerlinNoiseObject
+  get_2d: function(PerlinNoiseObject, Vec2): number
+  get_3d: function(PerlinNoiseObject, Vec3): number
 end
 
 global record PhysicsOverride
