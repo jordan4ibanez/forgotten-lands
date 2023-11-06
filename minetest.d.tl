@@ -348,7 +348,7 @@ global enum paramtype2
   "colordegrotate"
 end
 
-global enum drawtype
+global enum DrawType
   "normal"
   "airlike"
   "liquid"
@@ -625,7 +625,7 @@ global record ItemDefinition
 end
 
 global record NodeDefinition
-  drawtype: drawtype
+  drawtype: DrawType
   visual_scale: number
   tiles: {string}
   overlay_tiles: {string}
