@@ -175,6 +175,36 @@ global record minetest
   mod_channel_join: function(string)
   get_inventory: function(Vec3): InvRef
   get_perlin_map: function(NoiseParams, Vec3): PerlinNoiseMapObject
+  get_inventory: function(Vec3): InvRef
+  create_detached_inventory: function(string, DetachedInventoryCallbacks, string): InvRef
+  remove_detached_inventory: function(string): boolean
+  do_item_eat: function(number, ItemStack, ItemStack, ObjectRef, PointedThing): ItemStack | nil
+  show_formspec: function(string, string, Formspec)
+  close_formspec: function(string, string)
+  formspec_escape: function(string): string
+  explode_table_event: function(string): {any : any}
+  explode_textlist_event: function(string): {any : any}
+  explode_scrollbar_event: function(string): {any : any}
+  inventorycube: function(string, string, string): string
+  get_pointed_thing_position: function(PointedThing, boolean): Vec3 | nil
+  dir_to_facedir: function(Vec3, boolean): number
+  facedir_to_dir: function(number): Vec3
+  dir_to_fourdir: function(Vec3): number
+  fourdir_to_dir: function(number): Vec3
+  dir_to_wallmounted: function(Vec3): number
+  wallmounted_to_dir: function(number): Vec3
+  dir_to_yaw: function(Vec3): number
+  yaw_to_dir: function(number): Vec3
+  is_colored_paramtype: function(number): boolean
+  strip_param2_color: function(number, paramtype2): number | nil
+  get_node_drops: function(string | NodeTable, string): {string}
+  get_craft_result: function(CraftRecipeDefinition): {ItemStack, ItemStack}
+  get_craft_recipe: function(string | NodeTable): CraftRecipeDefinition | nil
+  get_all_craft_recipes: function(string | NodeTable): {CraftRecipeDefinition} | nil
+  handle_node_drops: function(Vec3, {string}, ObjectRef)
+  itemstring_with_palette: function(ItemStack, number): string
+  itemstring_with_color: function(ItemStack, DynamicColorSpec): string
+  
 end
 
 global record SimpleSoundSpec
@@ -1424,6 +1454,15 @@ global record HudDefinition
 end
 
 global type Formspec = string
+
+global record DetachedInventoryCallbacks
+  allow_move: function(InvRef, string, number, string, number, number, ObjectRef)
+  allow_put: function(InvRef, string, number, ItemStack, ObjectRef)
+  allow_take: function(InvRef, string, number, ItemStack, ObjectRef)
+  on_move: function(InvRef, string, number, string, number, number, ObjectRef)
+  on_put: function(InvRef, string, number, ItemStack, ObjectRef)
+  on_take: function(InvRef, string, number, ItemStack, ObjectRef)
+end
 
 global record Vec2
   x: number
