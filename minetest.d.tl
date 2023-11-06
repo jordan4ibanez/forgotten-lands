@@ -291,6 +291,15 @@ global record minetest
   registered_chatcommands: {string : ChatCommandDefinition}
   registered_privileges: {string : PrivilegeDefinition}
   
+  wrap_text: function(string, number, boolean): string | {string}
+  pos_to_string: function(Vec3, number): string
+  string_to_pos: function(string): Vec3
+  string_to_area: function(string, Vec3): Vec3, Vec3
+  formspec_escape: function(string): string
+  is_yes: function(any): boolean
+  is_nan: function(number): boolean
+  get_us_time: function(): number
+
 end
 
 global record SimpleSoundSpec
@@ -1355,8 +1364,6 @@ global record ObjectRef
   respawn: function(ObjectRef)
 end
 
-global function dump(...: any): string print(...) end
-
 global function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject end
 global record PcgRandomObject
   next: function(PcgRandomObject): number
@@ -1871,12 +1878,51 @@ global record AreaStoreObject
 
 end
 
+global record vector
+  new: function(number, number, number): Vec3
+  zero: function(): Vec3
+  copy: function(Vec3): Vec3
+  from_string: function(string, string): Vec3
+  to_string: function(Vec3): string
+  direction: function(Vec3, Vec3): Vec3
+  distance: function(Vec3, Vec3): number
+  length: function(Vec3): number
+  normalize: function(Vec3): Vec3
+  floor: function(Vec3): Vec3
+  round: function(Vec3): Vec3
+  apply: function(Vec3, function(number): number): Vec3
+  combine: function(Vec3, Vec3, function()): Vec3
+  equals: function(Vec3, Vec3): boolean
+  sort: function(Vec3, Vec3): Vec3, Vec3
+  angle: function(Vec3, Vec3): number
+  dot: function(Vec3, Vec3): number
+  cross: function(Vec3, Vec3): number
+  check: function(Vec3): boolean
+  in_area: function(Vec3, Vec3, Vec3): boolean
+
+  add: function(Vec3, Vec3 | number): Vec3
+  subtract: function(Vec3, Vec3 | number): Vec3
+  multiply: function(Vec3, Vec3 | number): Vec3
+  divide: function(Vec3, Vec3 | number): Vec3
+
+  rotate: function(Vec3, number): Vec3
+  rotate_around_axis: function(Vec3, Vec3, number): Vec3
+  dir_to_rotation: function(Vec3, Vec3): Vec3
+end
+
 global record Vec2
   x: number
   y: number
 end
 
 global record Vec3
+  metamethod __eq: function(Vec3, Vec3): boolean
+  metamethod __unm: function(Vec3): Vec3
+  metamethod __add: function(Vec3, Vec3): Vec3
+  metamethod __sub: function(Vec3, Vec3): Vec3
+  metamethod __mul: function(Vec3, Vec3): Vec3
+  metamethod __div: function(Vec3, Vec3): Vec3
+
   x: number
   y: number
   z: number
@@ -1894,3 +1940,26 @@ global record RGBA
   b: number
   a: number
 end
+
+global function dump(_: any, _: string, _: table): string end
+
+global function dump2(_: any, _: table): string end
+
+
+-- Getting around redecleration warnings with this little trick.
+local m = math
+function m.hypot(_: number, _: number): number end
+function m.sign(_: number, _: number): number end
+function m.factorial(_: number): number end
+function m.round(_: number): number end
+
+local s = string
+function s.split(_: string, _: string, _: box, _: NodeSoundSpec, _: boolean): string end
+function s:trim(): string end
+
+local t = table
+function t.copy(_: table): table end
+function t.indexof(_: table, _: number): number end
+function t.insert_all(_: table, _: table): table end
+function t.key_value_swap(_: table): table end
+function t.shuffle(_: table, _: number, _: number, _: function): table end

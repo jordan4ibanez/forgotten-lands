@@ -23,8 +23,14 @@ minetest.register_globalstep(function(delta: number)
     print(i)
   end
 
-  
+  -- local x: Vec3 = vector.new(1,2,3)
+  -- local y: Vec3 = vector.new(0,0,0)
+  -- print(x + y)
 
+  print(math.hypot(2,3))
+  local x = 5
+
+  
   -- Can't find a better way to make this work
   -- while true do
   --   local gotten: PointedThing | nil = ray:next()

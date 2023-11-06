@@ -1,4 +1,4 @@
-minetest.register_globalstep(function(delta)
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local math = _tl_compat and _tl_compat.math or math; minetest.register_globalstep(function(delta)
    local random = PcgRandom(delta * 1000000)
 
 
@@ -19,13 +19,16 @@ minetest.register_globalstep(function(delta)
    local noiseMappy = PerlinNoiseMap(noiseParameters, { x = 100, y = 100, z = 100 })
 
    local ray = Raycast({ x = 0, y = 0, z = 0 }, { x = 10, y = 10, z = 10 })
-
-   print(dump(getmetatable(ray)))
-   print(dump(ray))
-
    for i in ray do
       print(i)
    end
+
+   local x = vector.new(1, 2, 3)
+   local y = vector.new(0, 0, 0)
+   print(x + y)
+
+   print(math.hypot(2, 3))
+
 
 
 
