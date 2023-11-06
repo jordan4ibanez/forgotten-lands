@@ -174,6 +174,7 @@ global record minetest
   get_spawn_level: function(number, number)
   mod_channel_join: function(string)
   get_inventory: function(Vec3): InvRef
+  get_perlin_map: function(NoiseParams, Vec3): PerlinNoiseMapObject
 end
 
 global record SimpleSoundSpec
@@ -1096,6 +1097,8 @@ global record ObjectRef
   respawn: function()
 end
 
+global function dump(...: any): string end
+
 
 global function PcgRandom(_: number, _: {number}): PcgRandomObject end
 global record PcgRandomObject
@@ -1108,6 +1111,17 @@ global function PerlinNoise(_params: NoiseParams): PerlinNoiseObject end
 global record PerlinNoiseObject
   get_2d: function(PerlinNoiseObject, Vec2): number
   get_3d: function(PerlinNoiseObject, Vec3): number
+end
+
+global function PerlinNoiseMap(_params: NoiseParams, _size: Vec3): PerlinNoiseMapObject end
+global record PerlinNoiseMapObject
+  get_2d_map: function(PerlinNoiseMapObject, Vec2): {{number}}
+  get_3d_map: function(PerlinNoiseMapObject, Vec3): {{{number}}}
+  get_2d_map_flat: function(PerlinNoiseMapObject, Vec2, {any}): {number}
+  get_3d_map_flat: function(PerlinNoiseMapObject, Vec3, {any}): {number}
+  calc_2d_map: function(PerlinNoiseMapObject, Vec2)
+  calc_3d_map: function(PerlinNoiseMapObject, Vec3)
+  get_map_slice: function(Vec3, Vec3, {any}): {number}
 end
 
 global record PhysicsOverride
