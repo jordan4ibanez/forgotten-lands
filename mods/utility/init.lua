@@ -33,17 +33,8 @@ function println(...)
          if (thing:is_player()) then return thing:get_player_name() end
          return thing.name
       end,
-      "else", function(input) print(input); return "" end)
+      "else", function(input) print("failure:", input); return "" end)
 
    end
    print(builder)
 end
-
-
-
-minetest.register_globalstep(function(_delta)
-   local blah = minetest.get_player_by_name("singleplayer")
-   println("hi there\n",
-   "this is a test\n",
-   "of the thing\n", 1234, "\n", blah, "\n", { "test", 123, test = "hi" })
-end)
