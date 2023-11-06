@@ -1112,22 +1112,22 @@ global record InvRefLocation
 end
 
 global record InvRef
-  is_empty: function(string): boolean
-  get_size: function(string): number
-  set_size: function(string, number): boolean
-  get_width: function(string): number
-  set_width: function(string, number)
-  get_stack: function(string, number): ItemStack
-  set_stack: function(string, number, ItemStack)
-  get_list: function(string): {ItemStack}
-  set_list: function(string, {ItemStack})
-  get_lists: function(): {string}
-  set_lists: function({ItemStack})
-  add_item: function(string, {ItemStack}): boolean
-  room_for_item: function(string, {ItemStack}): boolean
-  contains_item: function(string, {ItemStack}, boolean): boolean
-  remove_item: function(string, {ItemStack}): {ItemStack}
-  get_location: function(): InvRefLocation
+  is_empty: function(InvRef, string): boolean
+  get_size: function(InvRef, string): number
+  set_size: function(InvRef, string, number): boolean
+  get_width: function(InvRef, string): number
+  set_width: function(InvRef, string, number)
+  get_stack: function(InvRef, string, number): ItemStack
+  set_stack: function(InvRef, string, number, ItemStack)
+  get_list: function(InvRef, string): {ItemStack}
+  set_list: function(InvRef, string, {ItemStack})
+  get_lists: function(InvRef): {string}
+  set_lists: function(InvRef, {ItemStack})
+  add_item: function(InvRef, string, {ItemStack}): boolean
+  room_for_item: function(InvRef, string, {ItemStack}): boolean
+  contains_item: function(InvRef, string, {ItemStack}, boolean): boolean
+  remove_item: function(InvRef, string, {ItemStack}): {ItemStack}
+  get_location: function(InvRef): InvRefLocation
 end
 
 global record TreeDefinition
