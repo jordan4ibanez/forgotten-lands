@@ -1115,7 +1115,7 @@ global record ObjectRef
   hud_add: function(HudDefinition): number
   hud_remove: function(number)
   hud_change: function(number, HudElementType, any)
-  hud_get: function(number): Hud
+  hud_get: function(number): HudDefinition
   hud_set_flags: function(HudFlags)
   hud_get_flags: function(): HudFlags
   hud_set_hotbar_itemcount: function(number)
@@ -1395,15 +1395,32 @@ global record HudFlags
 end
 
 global enum HudElementType
-  "cool"
+  "image"
+  "text"
+  "statbar"
+  "inventory"
+  "waypoint"
+  "image_waypoint"
+  "compass"
+  "minimap"
 end
 
 global record HudDefinition
-
-end
-
-global record Hud
-
+  hud_elem_type: HudElementType
+  position: Vec2
+  name: string
+  scale: Vec2
+  text: string
+  text2: string
+  number: number
+  item: number
+  direction: number
+  alignment: Vec2
+  offset: Vec2
+  world_pos: Vec3
+  size: Vec2
+  z_index: number
+  style: number
 end
 
 global record Formspec
