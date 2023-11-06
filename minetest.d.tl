@@ -980,7 +980,7 @@ end
 
 global function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject end
 global record RaycastObject
-  next: function(RaycastObject): PointedThing | nil
+  metamethod __call: function(RaycastObject): PointedThing | nil
 end
 
 global record NametagAttributes

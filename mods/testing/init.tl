@@ -19,13 +19,18 @@ minetest.register_globalstep(function(delta: number)
   local noiseMappy: PerlinNoiseMapObject = PerlinNoiseMap(noiseParameters, {x = 100, y = 100, z = 100})
 
   local ray: RaycastObject = Raycast({x=0,y=0,z=0}, {x=10,y=10,z=10})
+  for i in ray do
+    print(i)
+  end
+
+  
 
   -- Can't find a better way to make this work
-  while true do
-    local gotten: PointedThing | nil = ray:next()
-    if (gotten == nil) then break end
-    print(dump(gotten))
-  end
+  -- while true do
+  --   local gotten: PointedThing | nil = ray:next()
+  --   if (gotten == nil) then break end
+  --   print(dump(gotten))
+  -- end
 
   -- for pointed_thing in blah:next() do
   --   print(dump(pointed_thing))

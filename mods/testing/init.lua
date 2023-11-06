@@ -20,12 +20,19 @@ minetest.register_globalstep(function(delta)
 
    local ray = Raycast({ x = 0, y = 0, z = 0 }, { x = 10, y = 10, z = 10 })
 
+   print(dump(getmetatable(ray)))
+   print(dump(ray))
 
-   while true do
-      local gotten = ray:next()
-      if (gotten == nil) then break end
-      print(dump(gotten))
+   for i in ray do
+      print(i)
    end
+
+
+
+
+
+
+
 
 
 
