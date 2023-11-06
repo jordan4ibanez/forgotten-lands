@@ -993,6 +993,47 @@ global record VoxelManipObject
   get_emerged_area: function(): Vec3, Vec3
 end
 
+global record VoxelAreaInitializer
+  MinEdge: Vec3
+  MaxEdge: Vec3
+end
+
+global function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject end
+global record VoxelAreaObject
+  ystride: number
+  zstride: number
+  new: function(VoxelAreaInitializer): VoxelAreaObject
+  getExtent: function(): Vec3
+  index: function(number, number, number): number
+  indexp: function(Vec3): number
+  position: function(number): Vec3
+  contains: function(number, number, number): boolean
+  containsp: function(Vec3): boolean
+  containsi: function(number): boolean
+  iter: function(number, number, number, number, number, number): function(): number
+  iterp: function(Vec3, Vec3): function(): number
+end
+
+global record HeightMapObject
+
+end
+
+global record BiomeMapObject
+
+end
+
+global record HeatMapObject
+
+end
+
+global record HumidityMapObject
+
+end
+
+global record GenNotifyObject
+
+end
+
 global function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject end
 global record RaycastObject
   metamethod __call: function(RaycastObject): PointedThing | nil
