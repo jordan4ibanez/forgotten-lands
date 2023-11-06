@@ -204,7 +204,34 @@ global record minetest
   handle_node_drops: function(Vec3, {string}, ObjectRef)
   itemstring_with_palette: function(ItemStack, number): string
   itemstring_with_color: function(ItemStack, DynamicColorSpec): string
-  
+  rollback_get_node_actions: function(Vec3, number, number, number): {Rollback}
+  rollback_revert_actions_by: function(string, number): {boolean, string}
+  item_place_node: function(ItemStack, ObjectRef, PointedThing, number, boolean): ItemStack, Vec3
+  item_place_object: function(ItemStack, ObjectRef, PointedThing): ItemStack
+  item_place: function(ItemStack, ObjectRef, PointedThing, number)
+  item_pickup: function(ItemStack, ObjectRef, PointedThing, number, ...: any): ItemStack
+  item_drop: function(ItemStack, ObjectRef, Vec3): ItemStack
+  item_eat: function(number, string)
+  node_punch: function(Vec3, NodeTable, ObjectRef, PointedThing)
+  node_dig: function(Vec3, NodeTable, ObjectRef)
+  after: function(number, function, ...: any): Job
+  handle_async: function(function, function, ...: any)
+  register_async_dofile: function(string)
+  request_shutdown: function(string, boolean, number)
+  cancel_shutdown_requests: function()
+  get_server_status: function(string, boolean)
+  get_server_uptime: function(): number
+  get_server_max_lag: function(): number
+  remove_player: function(string): number
+  remove_player_auth: function(string): boolean
+  dynamic_add_media: function(DynamicAddMediaOptions, function(string))
+  get_ban_list: function(): string
+  get_ban_description: function(string): string
+  ban_player: function(string): boolean
+  unban_player_or_ip: function(string)
+  kick_player: function(string, string): boolean
+  disconnect_player: function(string, string): boolean
+  add_particle: function(ParticleDefinition)
 end
 
 global record SimpleSoundSpec
@@ -1455,6 +1482,21 @@ end
 
 global type Formspec = string
 
+global enum TileAnimationType
+  "vertical_frames"
+  "sheed_2d"
+end
+
+global record TileAnimationDefinition
+  type: TileAnimationType
+  aspect_w: number
+  aspect_h: number
+  length: number
+  frames_w: number
+  frames_h: number
+  frame_length: number
+end
+
 global record DetachedInventoryCallbacks
   allow_move: function(InvRef, string, number, string, number, number, ObjectRef)
   allow_put: function(InvRef, string, number, ItemStack, ObjectRef)
@@ -1462,6 +1504,81 @@ global record DetachedInventoryCallbacks
   on_move: function(InvRef, string, number, string, number, number, ObjectRef)
   on_put: function(InvRef, string, number, ItemStack, ObjectRef)
   on_take: function(InvRef, string, number, ItemStack, ObjectRef)
+end
+
+global record Rollback
+  actor: string
+  pos: Vec3
+  time: number
+  oldnode: string
+  newnode: string
+end
+
+global record Job
+  cancel: function()
+end
+
+global record DynamicAddMediaOptions
+  filepath: string
+  to_player: string
+  ephemeral: boolean
+end
+global record ParticleBounceDefinition
+  min: number
+  max: number
+  bias: number
+end
+
+global record ParticleDefinition
+  pos: Vec3
+  velocity: Vec3
+  acceleration: Vec3
+  expirationtime: number
+  size: number
+  collisiondetection: boolean
+  collision_removal: boolean
+  object_collision: boolean
+  vertical: boolean
+  texture: string
+  playername: string
+  animation: TileAnimationDefinition
+  glow: number
+  node: NodeTable
+  node_tile: NodeSoundSpec
+  drag: Vec3
+  bounce: ParticleBounceDefinition
+end
+
+global enum ParticleSpawnerTweenStyle
+  "fwd"
+  "rev"
+  "pulse"
+  "flicker"
+end
+
+global record ParticleSpawnerTweenDefinition
+  {number | ParticleSpawnerRangeDefinition}
+  style: ParticleSpawnerTweenStyle
+  reps: number
+  start: number
+end
+
+global record ParticleSpawnerRangeDefinition
+  min: Vec3
+  max: Vec3
+  bias: number
+  pos_tween: ParticleSpawnerTweenDefinition
+  x: number
+  y: number
+  z: number
+end
+
+
+global record ParticleSpawnerDefinition
+  maxpos: Vec3
+  minpos: Vec3
+  pos: number | ParticleSpawnerRangeDefinition
+  pos_tween: ParticleSpawnerTweenDefinition
 end
 
 global record Vec2
@@ -1473,6 +1590,12 @@ global record Vec3
   x: number
   y: number
   z: number
+end
+
+global record Vec3RangeBias
+  min: Vec3
+  max: Vec3
+  bias: Vec3
 end
 
 global record RGBA
