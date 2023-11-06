@@ -1423,9 +1423,7 @@ global record HudDefinition
   style: number
 end
 
-global record Formspec
-
-end
+global type Formspec = string
 
 global record Vec2
   x: number
