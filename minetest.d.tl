@@ -87,7 +87,7 @@ global record minetest
   register_on_modchannel_message: function(function(string, string, string))
   register_on_liquid_transformed: function(function({Vec3}, {string}))
   register_on_mapblocks_changed: function(function({string}, number))
-  settings: {string : any}
+  settings: MinetestSettingsObject
   setting_get_pos: function(string): Vec3
   string_to_privs: function(string, string): string
   privs_to_string: function(string, string): string
@@ -986,6 +986,22 @@ end
 global function SecureRandom(): SecureRandomObject end
 global record SecureRandomObject
   next_bytes: function(number): string
+end
+
+global function Settings(): MinetestSettingsObject end
+global record MinetestSettingsObject
+  get: function(string): any
+  get_bool: function(string): boolean | nil
+  get_np_group: function(string): NoiseParams
+  get_flags: function(string): {string : boolean}
+  set: function(string, string)
+  set_bool: function(string, boolean)
+  set_np_group: function(string, NoiseParams)
+  remove: function(string): boolean
+  get_names: function(): {string}
+  has: function(string): boolean
+  write: function(): boolean
+  to_table: function(): {string : any}
 end
 
 
