@@ -561,52 +561,6 @@ global record NodeDefinition
   mod_origin: string
 end
 
-global record EntityDefinition
-  hp_max: number
-  breath_max: number
-  zoom_fov: number
-  eye_height: number
-  physical: boolean
-  collide_with_objects: boolean
-  collisionbox: {number}
-  selectionbox: {number}
-  pointable: boolean
-  visual: EntityVisual
-  visual_size: Vec3
-  mesh: string
-  textures: {string}
-  colors: {DynamicColorSpec}
-  use_texture_alpha: boolean
-  spritediv: Vec2
-  initial_sprite_basepos: Vec2
-  is_visible: boolean
-  makes_footstep_sound: boolean
-  automatic_rotate: number
-  stepheight: number
-  automatic_face_movement_dir: number
-  automatic_face_movement_max_rotation_per_sec: number
-  backface_culling: boolean
-  glow: number
-  nametag: string
-  nametag_color: ColorSpec
-  nametag_bgcolor: ColorSpec
-  infotext: string
-  static_save: boolean
-  damage_texture_modifier: string
-  shaded: boolean
-  show_on_minimap: boolean
-  on_activate: function(LuaEntity, string, number)
-  on_deactivate: function(LuaEntity, boolean)
-  on_step: function(LuaEntity, number, MoveResult)
-  on_punch: function(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
-  on_death: function(LuaEntity, ObjectRef)
-  on_rightclick: function(LuaEntity, ObjectRef)
-  on_attach_child: function(LuaEntity, ObjectRef)
-  on_detach_child: function(LuaEntity, ObjectRef)
-  on_detach: function(LuaEntity, ObjectRef)
-  get_staticdata: function(LuaEntity)
-end
-
 global record ABMDefinition
   label: string
   nodenames: {string}
@@ -1348,9 +1302,7 @@ global record LightingDefinition
   exposure: LightExposureSpec
 end
 
-global record LuaEntity
-  name: string
-  object: ObjectRef
+global record ObjectProperties
   hp_max: number
   breath_max: number
   zoom_fov: number
@@ -1384,6 +1336,26 @@ global record LuaEntity
   damage_texture_modifier: string
   shaded: boolean
   show_on_minimap: boolean
+end
+
+global record EntityDefinition
+  initial_properties: ObjectProperties
+  on_activate: function(LuaEntity, string, number)
+  on_deactivate: function(LuaEntity, boolean)
+  on_step: function(LuaEntity, number, MoveResult)
+  on_punch: function(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
+  on_death: function(LuaEntity, ObjectRef)
+  on_rightclick: function(LuaEntity, ObjectRef)
+  on_attach_child: function(LuaEntity, ObjectRef)
+  on_detach_child: function(LuaEntity, ObjectRef)
+  on_detach: function(LuaEntity, ObjectRef)
+  get_staticdata: function(LuaEntity)
+end
+
+global record LuaEntity
+  initial_properties: ObjectProperties
+  name: string
+  object: ObjectRef
   on_activate: function(LuaEntity, string, number)
   on_deactivate: function(LuaEntity, boolean)
   on_step: function(LuaEntity, number, MoveResult)
