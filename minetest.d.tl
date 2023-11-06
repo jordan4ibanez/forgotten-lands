@@ -1573,12 +1573,84 @@ global record ParticleSpawnerRangeDefinition
   z: number
 end
 
+global enum ParticleSpawnerTextureBlend
+  "alpha"
+  "add"
+  "screen"
+  "sub"
+end
+
+global record ParticleSpawnerTextureScaleTween
+  {Vec2}
+end
+
+global record ParticleSpawnerTextureDefinition
+  name: string
+  alpha: number
+  alpha_tween: {number}
+  scale: number | Vec2
+  scale_tween: ParticleSpawnerTextureScaleTween
+  blend: ParticleSpawnerTextureBlend
+  animation: TileAnimationDefinition
+end
+
+global record TexturePoolComponentTweenDefinition
+  {number}
+  style: ParticleSpawnerTweenStyle
+  reps: number
+end
+
+global enum TexturePoolComponentFade
+  "in"
+  "out"
+end
+
+global record TexturePoolComponentDefinition
+  name: string
+  fade: TexturePoolComponentFade
+  alpha: number
+  scale: number
+  animation: TileAnimationDefinition
+  alpha_tween: TexturePoolComponentTweenDefinition
+end
+
+global record ParticleSpawnerTexturePoolDefinition
+  {string | TexturePoolComponentDefinition}
+end
+
+global enum ParticleSpawnerAttractionType
+  "none"
+  "point"
+  "line"
+  "plane"
+end
+
+global record ParticleSpawnerAttractionDefinition
+  kind: ParticleSpawnerAttractionType
+  strength: Vec2
+  origin: Vec3
+  direction: Vec3
+  origin_attached: ObjectRef
+  direction_attached: ObjectRef
+  die_on_contact: boolean
+end
+
 
 global record ParticleSpawnerDefinition
   maxpos: Vec3
   minpos: Vec3
   pos: number | ParticleSpawnerRangeDefinition
+  vel: Vec3RangeBias
+  acc: Vec3RangeBias
+  jitter: Vec3RangeBias
+  drag: Vec3RangeBias
+  bounce: Vec3RangeBias
+  exptime: Vec2
+  attract: ParticleSpawnerAttractionDefinition
+  radius: Vec3RangeBias
   pos_tween: ParticleSpawnerTweenDefinition
+  texture: string | ParticleSpawnerTextureDefinition
+  texpool: ParticleSpawnerTexturePoolDefinition
 end
 
 global record Vec2
