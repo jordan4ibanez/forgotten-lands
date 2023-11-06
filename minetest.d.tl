@@ -1,7 +1,5 @@
 -- Everything was just dumped in as I looked down the lua_api.md
 global record minetest
-  registered_nodes: {NodeDefinition}
-  get_item_group: function(string, string): number
   get_current_modname: function(): string
   get_modpath: function(string): string
   get_modnames: function(): {string}
@@ -270,6 +268,28 @@ global record minetest
   rotate_and_place: function(ItemStack, ObjectRef, PointedThing, boolean,RotateAndPlaceOrientationFlag, boolean): ItemStack
   rotate_node: function(ItemStack, ObjectRef, PointedThing)
   calculate_knockback: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number, number)
+  forceload_block: function(Vec3, boolean, number)
+  forceload_free_block: function(Vec3, boolean)
+  compare_block_status: function(Vec3, BlockStatusCondition): boolean | nil
+  request_insecure_environment: function(): InsecureEnvironment
+  global_exists: function(string): boolean
+
+  registered_items: {string : ItemDefinition}
+  registered_nodes: {string : NodeDefinition}
+  registered_craftitems: {string : ItemDefinition}
+  registered_tools: {string : ItemDefinition}
+  registered_entities: {string : EntityDefinition}
+  object_refs: {string : ObjectRef}
+  luaentities: {string : LuaEntity}
+  registered_abms: {ABMDefinition}
+  registered_lbms: {LBMDefinition}
+  registered_aliases: {string : string}
+  registered_ores: {string : OreDefinition}
+  registered_biomes: {string : BiomeDefinition}
+  registered_decorations: {string : DecorationDefinition}
+  registered_schematics: {string : SchematicDefinition}
+  registered_chatcommands: {string : ChatCommandDefinition}
+  registered_privileges: {string : PrivilegeDefinition}
   
 end
 
@@ -1620,6 +1640,14 @@ global enum RotateAndPlaceOrientationFlag
   "force_floor"
   "force_facedir"
 end
+
+global enum BlockStatusCondition
+  "unknown"
+  "emerging"
+  "loaded"
+  "active"
+end
+
 global enum TileAnimationType
   "vertical_frames"
   "sheed_2d"
@@ -1789,6 +1817,10 @@ global record ParticleSpawnerDefinition
   pos_tween: ParticleSpawnerTweenDefinition
   texture: string | ParticleSpawnerTextureDefinition
   texpool: ParticleSpawnerTexturePoolDefinition
+end
+
+global record InsecureEnvironment
+
 end
 
 global record Vec2
