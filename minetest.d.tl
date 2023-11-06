@@ -1193,10 +1193,7 @@ global record ObjectRef
   respawn: function()
 end
 
--- ... will throw a warning, very annoying
-global function dump(_: any,_: any,_: any,_: any): string end
-
-
+global function dump(...: any): string print(...) end
 
 global function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject end
 global record PcgRandomObject
