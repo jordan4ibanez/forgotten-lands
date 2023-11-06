@@ -18,7 +18,16 @@ minetest.register_globalstep(function(delta)
 
    local noiseMappy = PerlinNoiseMap(noiseParameters, { x = 100, y = 100, z = 100 })
 
-   local result = noiseMappy:calc_2d_map({ x = 1, y = 2 })
+   local ray = Raycast({ x = 0, y = 0, z = 0 }, { x = 10, y = 10, z = 10 })
 
-   print(dump(result))
+
+   while true do
+      local gotten = ray:next()
+      if (gotten == nil) then break end
+      print(dump(gotten))
+   end
+
+
+
+
 end)
