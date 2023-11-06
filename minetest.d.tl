@@ -1857,17 +1857,17 @@ end
 
 global function AreaStore(_: AreaStoreType): AreaStoreObject end
 global record AreaStoreObject
-  get_area: function(number, boolean, boolean): {AreaStoreArea | boolean | nil}
-  get_areas_for_pos: function(Vec3, boolean, boolean): {AreaStoreArea | boolean | nil}
-  get_areas_in_area: function(Vec3, Vec3, boolean, boolean, boolean): {AreaStoreArea | boolean | nil}
-  insert_area: function(Vec3, Vec3, string, number): number
-  reserve: function(number)
-  remove_area: function(number): boolean
-  set_cache_params: function(AreaStoreCacheDefinition)
-  to_string: function(): string
-  to_file: function(string)
-  from_string: function(string): boolean, string | nil
-  from_file: function(string): boolean, string | nil
+  get_area: function(AreaStoreObject, number, boolean, boolean): {AreaStoreArea | boolean | nil}
+  get_areas_for_pos: function(AreaStoreObject, Vec3, boolean, boolean): {AreaStoreArea | boolean | nil}
+  get_areas_in_area: function(AreaStoreObject, Vec3, Vec3, boolean, boolean, boolean): {AreaStoreArea | boolean | nil}
+  insert_area: function(AreaStoreObject, Vec3, Vec3, string, number): number
+  reserve: function(AreaStoreObject, number)
+  remove_area: function(AreaStoreObject, number): boolean
+  set_cache_params: function(AreaStoreObject, AreaStoreCacheDefinition)
+  to_string: function(AreaStoreObject): string
+  to_file: function(AreaStoreObject, string)
+  from_string: function(AreaStoreObject, string): boolean, string | nil
+  from_file: function(AreaStoreObject, string): boolean, string | nil
 
 end
 
