@@ -41,7 +41,7 @@ end
 
 
 
-function generate_schematic(size, keys, data, yslice_prob)
+function generate_schematic(size, keys, force_place, data, yslice_prob)
    local new_schematic = {
       size = size,
       data = {},
@@ -51,7 +51,11 @@ function generate_schematic(size, keys, data, yslice_prob)
    local countdown = length
    for _ = 1, length do
       local databit = data:sub(countdown, countdown)
-      table.insert(new_schematic.data, { name = keys[databit] })
+      local element = { name = keys[databit], force_place = false }
+      if force_place[databit] then
+         element.force_place = true
+      end
+      table.insert(new_schematic.data, element)
       countdown = countdown - 1
    end
    for _, databit in ipairs(yslice_prob) do

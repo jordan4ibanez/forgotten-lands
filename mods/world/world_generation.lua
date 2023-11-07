@@ -39,38 +39,15 @@ do
    })
 end
 
-for _, size in ipairs({ "small", "medium", "large" }) do
-
-
-
-
-
-
-
-
-
-
-
-
-
-   minetest.register_decoration({
-      name = "oak_" .. size,
-      deco_type = "schematic",
-      place_on = "grass",
-      biomes = { "Forgotten Fields" },
-      schematic = "oak_" .. size .. ".mts",
-      fill_ratio = 0.01,
-      height_max = 0,
-      flags = "place_center_x, place_center_z",
-   })
-end
-
 local small_oak = generate_schematic(
 vector.new(5, 5, 5),
 {
    [" "] = "air",
    ["I"] = "oak_tree",
    ["H"] = "oak_leaves",
+},
+{
+   ["I"] = true,
 },
 concat(
 "     ",
@@ -110,3 +87,215 @@ concat(
    253, 254, 254, 254, 253,
    253, 253, 253, 253, 253,
 })
+
+
+local medium_oak = generate_schematic(
+vector.new(7, 7, 7),
+{
+   [" "] = "air",
+   ["I"] = "oak_tree",
+   ["H"] = "oak_leaves",
+},
+{
+   ["I"] = true,
+},
+concat(
+"       ",
+"       ",
+"       ",
+"   H   ",
+"  HHH  ",
+"       ",
+"       ",
+
+"       ",
+"       ",
+"   H   ",
+"  HHH  ",
+" HHHHH ",
+"       ",
+"       ",
+
+"       ",
+"   H   ",
+"  HHH  ",
+" HHHHH ",
+"HHHHHHH",
+"       ",
+"       ",
+
+"   H   ",
+"  HHH  ",
+" HHIHH ",
+"HHHIHHH",
+"HHHIHHH",
+"   I   ",
+"   I   ",
+
+"       ",
+"   H   ",
+"  HHH  ",
+" HHHHH ",
+"HHHHHHH",
+"       ",
+"       ",
+
+"       ",
+"       ",
+"   H   ",
+"  HHH  ",
+" HHHHH ",
+"       ",
+"       ",
+"       ",
+"       ",
+"       ",
+"   H   ",
+"  HHH  ",
+"       ",
+"       "),
+
+{
+   252, 252, 252, 252, 252, 252, 252,
+   252, 253, 253, 253, 253, 253, 252,
+   252, 253, 254, 254, 254, 253, 252,
+   252, 253, 254, 255, 254, 253, 252,
+   252, 253, 254, 254, 254, 253, 252,
+   252, 253, 253, 253, 253, 253, 252,
+   252, 252, 252, 252, 252, 252, 252,
+})
+
+
+
+local large_oak = generate_schematic(
+vector.new(9, 9, 9),
+{
+   [" "] = "air",
+   ["I"] = "oak_tree",
+   ["H"] = "oak_leaves",
+},
+{
+   ["I"] = true,
+},
+concat(
+"         ",
+"         ",
+"         ",
+"         ",
+"    H    ",
+"   HHH   ",
+"   HHH   ",
+"         ",
+"         ",
+
+"         ",
+"         ",
+"         ",
+"    H    ",
+"   HHH   ",
+"  HHHHH  ",
+"  HHHHH  ",
+"         ",
+"         ",
+
+"         ",
+"         ",
+"    H    ",
+"   HHH   ",
+"  HHHHH  ",
+" HHHHHHH ",
+" HHHHHHH ",
+"         ",
+"         ",
+
+"         ",
+"    H    ",
+"   HHH   ",
+"  HHHHH  ",
+" HHHHHHH ",
+"HHHHHHHHH",
+"HHHHHHHHH",
+"         ",
+"         ",
+
+"    H    ",
+"   HHH   ",
+"  HHIHH  ",
+" HHHIHHH ",
+"HHHHIHHHH",
+"HHHHIHHHH",
+"HHHHIHHHH",
+"    I    ",
+"    I    ",
+
+"         ",
+"    H    ",
+"   HHH   ",
+"  HHHHH  ",
+" HHHHHHH ",
+"HHHHHHHHH",
+"HHHHHHHHH",
+"         ",
+"         ",
+
+"         ",
+"         ",
+"    H    ",
+"   HHH   ",
+"  HHHHH  ",
+" HHHHHHH ",
+" HHHHHHH ",
+"         ",
+"         ",
+
+"         ",
+"         ",
+"         ",
+"    H    ",
+"   HHH   ",
+"  HHHHH  ",
+"  HHHHH  ",
+"         ",
+"         ",
+"         ",
+"         ",
+"         ",
+"         ",
+"    H    ",
+"   HHH   ",
+"   HHH   ",
+"         ",
+"         "),
+
+{
+   251, 251, 251, 251, 251, 251, 251, 251, 251,
+   251, 252, 252, 252, 252, 252, 252, 252, 251,
+   251, 252, 253, 253, 253, 253, 253, 252, 251,
+   251, 252, 253, 254, 254, 254, 253, 252, 251,
+   251, 252, 253, 254, 255, 254, 253, 252, 251,
+   251, 252, 253, 254, 254, 254, 253, 252, 251,
+   251, 252, 253, 253, 253, 253, 253, 252, 251,
+   251, 252, 252, 252, 252, 252, 252, 252, 251,
+   251, 251, 251, 251, 251, 251, 251, 251, 251,
+})
+
+
+local small_id = minetest.register_schematic(small_oak)
+local medium_id = minetest.register_schematic(medium_oak)
+local large_id = minetest.register_schematic(large_oak)
+
+
+local oak_size = { "small", "medium", "large" }
+for k, id in ipairs({ small_id, medium_id, large_id }) do
+
+   minetest.register_decoration({
+      name = "oak_" .. oak_size[k],
+      deco_type = "schematic",
+      place_on = "grass",
+      biomes = { "Forgotten Fields" },
+      schematic = id,
+      fill_ratio = 0.01,
+      place_offset_y = 1,
+      flags = "place_center_x, place_center_z",
+   })
+end

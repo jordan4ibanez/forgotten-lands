@@ -38,7 +38,7 @@ global record minetest
   register_biome: function(BiomeDefinition)
   unregister_biome: function(string)
   register_decoration: function(DecorationDefinition)
-  register_schematic: function(SchematicDefinition)
+  register_schematic: function(SchematicDefinition): number
   clear_registered_biomes: function()
   clear_registered_decorations: function()
   clear_registered_ores: function()
@@ -922,7 +922,7 @@ global record DecorationDefinition
   param2: number
   param2_max: number
   place_offset_y: number
-  schematic: string | SchematicDefinition
+  schematic: string | SchematicDefinition | number
   replacements: {string : string}
   rotation: string
 end
@@ -1996,7 +1996,7 @@ function t.shuffle(_: table, _: number, _: number, _: function): table end
 -- The rest of this is Forgotten Lands global definitions.
 global function println(...: any) print(...) end
 global function switch(input: any, ...: any | function(any): any): any print(input, ...) end
-global function generate_schematic(size: Vec3, keys: {string : string}, data: string, yslice_prob: {number}): SchematicDefinition 
-  print(size, keys, data, yslice_prob)
+global function generate_schematic(size: Vec3, keys: {string : string}, force_place: {string: boolean}, data: string, yslice_prob: {number}): SchematicDefinition 
+  print(size, keys, force_place, data, yslice_prob)
 end
 global function concat(...: string): string print(...) end

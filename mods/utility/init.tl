@@ -41,7 +41,7 @@ end
 
 
 -- Create a 3D schematic from ascii art "scans". Note, everything created by this is actually inside out!
-global function generate_schematic(size: Vec3, keys: {string : string}, data: string, yslice_prob: {number}): SchematicDefinition
+global function generate_schematic(size: Vec3, keys: {string : string}, force_place: {string: boolean}, data: string, yslice_prob: {number}): SchematicDefinition
   local new_schematic = {
     size = size,
     data = {},
@@ -51,7 +51,11 @@ global function generate_schematic(size: Vec3, keys: {string : string}, data: st
   local countdown = length
   for _ = 1, length do
     local databit = data:sub(countdown,countdown)
-    table.insert(new_schematic.data, {name = keys[databit]})
+    local element = {name = keys[databit], force_place = false}
+    if force_place[databit] then
+      element.force_place = true
+    end
+    table.insert(new_schematic.data, element)
     countdown = countdown - 1
   end
   for _,databit in ipairs(yslice_prob) do

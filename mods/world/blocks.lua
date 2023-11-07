@@ -32,6 +32,7 @@ minetest.register_node(":grass", {
       "default_dirt.png^default_grass_side.png",
       "default_dirt.png^default_grass_side.png",
    },
+   groups = { break_instant = 1 },
 })
 
 minetest.register_node(":sand", {
@@ -94,5 +95,6 @@ for i = 1, 5 do
       tiles = {
          "default_grass_" .. height .. ".png",
       },
+      groups = { break_instant = 1 },
    })
 end
