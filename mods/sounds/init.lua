@@ -96,6 +96,9 @@ println(
 
 
 
+
+
+
 sounds = {}
 
 function sounds.grass_sounds(spec)
@@ -103,9 +106,9 @@ function sounds.grass_sounds(spec)
       spec = {}
    end
    spec.footstep = spec.footstep or { name = "grass_step", gain = 0.3 }
-   spec.dig = spec.dig or { name = "grass_dig", gain = 0.6 }
-   spec.dug = spec.dug or { name = "", gain = 0 }
-   spec.place = spec.place or { name = "", gain = 1.0 }
+   spec.dig = spec.dig or { name = "grass_dig", gain = 0.7 }
+   spec.dug = spec.dug or { name = "grass_dug", gain = 0.8 }
+   spec.place = spec.place or { name = "grass_dug", gain = 0.8 }
    return spec
 end
 

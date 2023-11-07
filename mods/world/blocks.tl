@@ -39,7 +39,7 @@ minetest.register_node(":grass", {
     "default_dirt.png^default_grass_side.png"
   },
   sounds = sound_dispatcher.grass_sounds(),
-  groups = {break_instant = 1},
+  groups = { soil = 1 },
 })
 
 minetest.register_node(":sand", {
