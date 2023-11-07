@@ -90,7 +90,7 @@ minetest.register_node(":oak_tree", {
     "default_tree.png",
     "default_tree.png"
   },
-  -- sounds = sound_dispatcher.wood_sounds(),
+  sounds = sound_dispatcher.wood_sounds(),
   groups = {
     wooden = 1
   },
@@ -103,7 +103,7 @@ minetest.register_node(":oak_leaves", {
   tiles = {
     "default_leaves.png"
   },
-  -- sounds = sound_dispatcher.grass_sounds()
+  sounds = sound_dispatcher.plant_sounds(),
   groups = {
     leafy = 1
   },
@@ -120,7 +120,7 @@ for i = 1,5 do
     tiles = {
       "default_grass_" .. height .. ".png",
     },
-    -- sounds = sound_dispatcher.grass_sounds({dug = {name = "", gain = 0}}),
+    sounds = sound_dispatcher.plant_sounds(),
     groups = {
       break_instant = 1
     }

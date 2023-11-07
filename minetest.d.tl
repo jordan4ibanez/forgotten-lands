@@ -2009,4 +2009,5 @@ global record GameSoundDispatcher
   gravel_sounds: function (NodeSoundSpec): NodeSoundSpec
   stone_sounds: function (NodeSoundSpec): NodeSoundSpec
   sand_sounds: function (NodeSoundSpec): NodeSoundSpec
+  plant_sounds: function (NodeSoundSpec): NodeSoundSpec
 end

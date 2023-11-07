@@ -47,6 +47,12 @@ println(
 
 
 
+
+
+
+
+
+
 sounds = {}
 
 function sounds.grass_sounds(spec)
@@ -72,16 +78,16 @@ function sounds.dirt_sounds(spec)
 end
 
 
-
-
-
-
-
-
-
-
-
-
+function sounds.wood_sounds(spec)
+   if (spec == nil) then
+      spec = {}
+   end
+   spec.footstep = spec.footstep or { name = "wood_step", gain = 0.5 }
+   spec.dig = spec.dig or { name = "wood_dig", gain = 0.7 }
+   spec.dug = spec.dug or { name = "wood_dug", gain = 1.0 }
+   spec.place = spec.place or { name = "wood_dug", gain = 0.6 }
+   return spec
+end
 
 function sounds.gravel_sounds(spec)
    if (spec == nil) then
@@ -113,6 +119,17 @@ function sounds.sand_sounds(spec)
    spec.dig = spec.dig or { name = "sand_dig", gain = 0.9 }
    spec.dug = spec.dug or { name = "sand_dug", gain = 1.0 }
    spec.place = spec.place or { name = "sand_dug", gain = 0.8 }
+   return spec
+end
+
+function sounds.plant_sounds(spec)
+   if (spec == nil) then
+      spec = {}
+   end
+   spec.footstep = spec.footstep or { name = "dirt_step", gain = 0.5 }
+   spec.dig = spec.dig or { name = "sand_dig", gain = 0.9 }
+   spec.dug = spec.dug or { name = "dirt_dug", gain = 1.0 }
+   spec.place = spec.place or { name = "grass_dug", gain = 0.8 }
    return spec
 end
 
