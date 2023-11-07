@@ -24,26 +24,39 @@ println(
   "BEGIN DIG:",
   "wool_dig_(1-4): https://freesound.org/people/krnash/sounds/389799/ CC0",
   "dirt_dig_(1-6): https://freesound.org/people/monte32/sounds/353799/ CC0",
-  "stone_dig_(1-5): https://freesound.org/people/monte32/sounds/405114/ CC0",
+  "wood_dig_(1-5): https://freesound.org/people/monte32/sounds/405114/ CC0",
   "snow_dig(1-2): https://freesound.org/people/Nox_Sound/sounds/555307/ CC0",
   "snow_dig_3: https://freesound.org/people/OwlStorm/sounds/320144/ CC0",
-  "snow_dig_4: https://freesound.org/people/martian/sounds/19291/ CC0"
+  "snow_dig_4: https://freesound.org/people/martian/sounds/19291/ CC0",
+  "sand_dig_(1-6): https://freesound.org/people/HenKonen/sounds/682127/ CC0",
+  "gravel_dig_(1-6): https://freesound.org/people/PeteBarry/sounds/647395/ CC BY 4.0",
+  "stone_dig_1: https://freesound.org/people/nicholasdaryl/sounds/563468/ CC0",
+  "stone_dig_2: https://freesound.org/people/nicholasdaryl/sounds/563470/ CC0",
+  "stone_dig_3: https://freesound.org/people/nicholasdaryl/sounds/563471/ CC0",
+  "stone_dig_4: https://freesound.org/people/nicholasdaryl/sounds/563473/ CC0",
+  "stone_dig_5: https://freesound.org/people/nicholasdaryl/sounds/563477/ CC0",
+  "stone_dig_6: https://freesound.org/people/nicholasdaryl/sounds/563476/ CC0",
+  "grass_dig_(1-6): https://freesound.org/people/Motion_S/sounds/221756/ CC BY 3.0",
+  "metal_dig_1: https://freesound.org/people/timgormly/sounds/170958/ CC BY 3.0",
+  "metal_dig_2: https://freesound.org/people/timgormly/sounds/170959/ CC BY 3.0"
 )
 
 --[[
 need: break & place
 
+mixing and matching for now
+
+
 -- DIG
-grass  - 
-gravel - 
-sand   - 
+grass  - done
+gravel - done
+sand   - done
 dirt   - done
-soil   -
-wooden -
-leafy  - 
+wooden - done
+leafy  - use grass dig
 stone  - done
-metal  - 
-glass  - 
+metal  - done
+glass  - use stone
 wool   - done
 snow   - done
 
