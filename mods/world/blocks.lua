@@ -26,7 +26,7 @@ minetest.register_node(":dirt", {
       "default_dirt.png",
       "default_dirt.png",
    },
-
+   sounds = sound_dispatcher.dirt_sounds(),
    groups = {
       soil = 1,
    },

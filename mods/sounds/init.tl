@@ -52,6 +52,15 @@ grass
 (1-5) - https://freesound.org/people/Adielees9/sounds/331167/ CC0
 
 
+dirt
+- step
+(1-6) - https://freesound.org/people/Nox_Sound/sounds/543806/ CC0
+- dig
+(1-6) - https://freesound.org/people/Nox_Sound/sounds/564893/ CC0
+- dug
+(1-5) - https://freesound.org/people/Joao_Janz/sounds/571954/ CC0
+
+
 
 
 
@@ -106,22 +115,22 @@ function sounds.grass_sounds(spec: NodeSoundSpec): NodeSoundSpec
     spec = {}
   end
   spec.footstep = spec.footstep or {name = "grass_step", gain = 0.3}
-  spec.dig =      spec.dig      or {name = "grass_dig", gain = 0.7}
+  spec.dig =      spec.dig      or {name = "grass_dig", gain = 0.5}
   spec.dug =      spec.dug      or {name = "grass_dug", gain = 0.8}
   spec.place =    spec.place    or {name = "grass_dug", gain = 0.5}
   return spec
 end
 
--- function sounds.dirt_sounds(spec: NodeSoundSpec): NodeSoundSpec
---   if (spec == nil) then
---     spec = {}
---   end
---   spec.footstep = spec.footstep or {name = "gravel_step", gain = 1.0}
---   spec.dig =      spec.dig      or {name = "dirt_step", gain = 0.6}
---   spec.dug =      spec.dug      or {name = "dirt_dig", gain = 1.25}
---   spec.place =    spec.place    or {name = "dirt_step", gain = 1.0}
---   return spec
--- end
+function sounds.dirt_sounds(spec: NodeSoundSpec): NodeSoundSpec
+  if (spec == nil) then
+    spec = {}
+  end
+  spec.footstep = spec.footstep or {name = "dirt_step", gain = 0.3}
+  spec.dig =      spec.dig      or {name = "dirt_dig", gain = 0.6}
+  spec.dug =      spec.dug      or {name = "dirt_dug", gain = 0.9}
+  spec.place =    spec.place    or {name = "dirt_dug", gain = 0.6}
+  return spec
+end
 
 
 -- function sounds.wood_sounds(spec: NodeSoundSpec): NodeSoundSpec
