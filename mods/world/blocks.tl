@@ -58,7 +58,7 @@ minetest.register_node(":sand", {
     "default_sand.png",
     "default_sand.png"
   },
-  -- sounds = sound_dispatcher.sand_sounds(),
+  sounds = sound_dispatcher.sand_sounds(),
   groups = {
     soil = 1
   }
@@ -74,7 +74,7 @@ minetest.register_node(":gravel", {
     "default_gravel.png",
     "default_gravel.png"
   },
-  -- sounds = sound_dispatcher.gravel_sounds(),
+  sounds = sound_dispatcher.gravel_sounds(),
   groups = {
     soil = 1
   }
