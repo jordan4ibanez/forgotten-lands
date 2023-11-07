@@ -72,73 +72,97 @@ println(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sounds = {}
 
 function sounds.grass_sounds(spec)
    if (spec == nil) then
       spec = {}
    end
-   spec.footstep = spec.footstep or { name = "grass_dig", gain = 1.0 }
+   spec.footstep = spec.footstep or { name = "grass_step", gain = 0.3 }
    spec.dig = spec.dig or { name = "grass_dig", gain = 0.6 }
-   spec.dug = spec.dug or { name = "dirt_dig", gain = 1.25 }
-   spec.place = spec.place or { name = "dirt_step", gain = 1.0 }
-   return spec
-end
-
-function sounds.dirt_sounds(spec)
-   if (spec == nil) then
-      spec = {}
-   end
-   spec.footstep = spec.footstep or { name = "gravel_step", gain = 1.0 }
-   spec.dig = spec.dig or { name = "dirt_step", gain = 0.6 }
-   spec.dug = spec.dug or { name = "dirt_dig", gain = 1.25 }
-   spec.place = spec.place or { name = "dirt_step", gain = 1.0 }
-   return spec
-end
-
-
-function sounds.wood_sounds(spec)
-   if (spec == nil) then
-      spec = {}
-   end
-   spec.footstep = spec.footstep or { name = "wood_step", gain = 1.0 }
-   spec.dig = spec.dig or { name = "wood_dig", gain = 0.6 }
-   spec.dug = spec.dug or { name = "wood_dig", gain = 1.0 }
-   spec.place = spec.place or { name = "wood_dig", gain = 1.5 }
-   return spec
-end
-
-function sounds.gravel_sounds(spec)
-   if (spec == nil) then
-      spec = {}
-   end
-   spec.footstep = spec.footstep or { name = "gravel_step", gain = 1.0 }
-   spec.dig = spec.dig or { name = "gravel_dig", gain = 0.6 }
    spec.dug = spec.dug or { name = "", gain = 0 }
-   spec.place = spec.place or { name = "gravel_dig", gain = 1.5 }
+   spec.place = spec.place or { name = "", gain = 1.0 }
    return spec
 end
 
-function sounds.stone_sounds(spec)
-   if (spec == nil) then
-      spec = {}
-   end
-   spec.footstep = spec.footstep or { name = "stone_step", gain = 1.0 }
-   spec.dig = spec.dig or { name = "stone_dig", gain = 0.6 }
-   spec.dug = spec.dug or { name = "stone_step", gain = 1.25 }
-   spec.place = spec.place or { name = "stone_step", gain = 1.5 }
-   return spec
-end
 
-function sounds.sand_sounds(spec)
-   if (spec == nil) then
-      spec = {}
-   end
-   spec.footstep = spec.footstep or { name = "sand_step", gain = 1.0 }
-   spec.dig = spec.dig or { name = "sand_dig", gain = 0.6 }
-   spec.dug = spec.dug or { name = "", gain = 0 }
-   spec.place = spec.place or { name = "sand_dig", gain = 1.5 }
-   return spec
-end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function get_game_sounds() return sounds end
