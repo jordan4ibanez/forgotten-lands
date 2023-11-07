@@ -10,7 +10,7 @@ minetest.register_node(":stone", {
     "default_stone.png",
     "default_stone.png"
   },
-  -- sounds = sound_dispatcher.stone_sounds(),
+  sounds = sound_dispatcher.stone_sounds(),
   groups = {
     stone = 1
   }

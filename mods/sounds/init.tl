@@ -60,6 +60,12 @@ dirt
 - dug
 (1-5) - https://freesound.org/people/Joao_Janz/sounds/571954/ CC0
 
+stone
+
+- dig
+(1-6) - https://freesound.org/people/Nox_Sound/sounds/558472/ CC0
+
+
 
 
 
@@ -155,16 +161,16 @@ end
 --   return spec
 -- end
 
--- function sounds.stone_sounds(spec: NodeSoundSpec): NodeSoundSpec
---   if (spec == nil) then
---     spec = {}
---   end
---   spec.footstep = spec.footstep or {name = "stone_step", gain = 1.0}
---   spec.dig =      spec.dig      or {name = "stone_dig", gain = 0.6}
---   spec.dug =      spec.dug      or {name = "stone_step", gain = 1.25}
---   spec.place =    spec.place    or {name = "stone_step", gain = 1.5}
---   return spec
--- end
+function sounds.stone_sounds(spec: NodeSoundSpec): NodeSoundSpec
+  if (spec == nil) then
+    spec = {}
+  end
+  spec.footstep = spec.footstep or {name = "stone_step", gain = 0.4}
+  spec.dig =      spec.dig      or {name = "stone_dig", gain = 0.75}
+  spec.dug =      spec.dug      or {name = "stone_dug", gain = 1.0}
+  spec.place =    spec.place    or {name = "stone_dug", gain = 0.8}
+  return spec
+end
 
 -- function sounds.sand_sounds(spec: NodeSoundSpec): NodeSoundSpec
 --   if (spec == nil) then
