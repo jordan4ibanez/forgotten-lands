@@ -60,7 +60,7 @@ function sounds.grass_sounds(spec: NodeSoundSpec): NodeSoundSpec
     spec = {}
   end
   spec.footstep = spec.footstep or {name = "grass_step", gain = 0.5}
-  spec.dig =      spec.dig      or {name = "grass_dig", gain = 0.5}
+  spec.dig =      spec.dig      or {name = "grass_dig", gain = 1.5}
   spec.dug =      spec.dug      or {name = "grass_dug", gain = 0.8}
   spec.place =    spec.place    or {name = "grass_dug", gain = 0.5}
   return spec
@@ -129,7 +129,7 @@ function sounds.plant_sounds(spec: NodeSoundSpec): NodeSoundSpec
   spec.footstep = spec.footstep or {name = "dirt_step", gain = 0.5}
   spec.dig =      spec.dig      or {name = "sand_dig", gain = 0.9}
   spec.dug =      spec.dug      or {name = "dirt_dug", gain = 1.0}
-  spec.place =    spec.place    or {name = "grass_dug", gain = 0.8}
+  spec.place =    spec.place    or {name = "dirt_dug", gain = 0.8}
   return spec
 end
 
