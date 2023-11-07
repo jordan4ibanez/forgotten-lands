@@ -51,6 +51,12 @@ wood
 (1-6) - https://freesound.org/people/ralph.whitehead/sounds/565714/ CC0
 - dig
 (1-6) - https://freesound.org/people/ralph.whitehead/sounds/565714/ CC0
+
+glass
+- dug
+1 - https://freesound.org/people/awholenewlife1/sounds/422240/ CC0
+2 - https://freesound.org/people/RoganMcDougald/sounds/260434/ CC BY 3.0
+3 - https://freesound.org/people/Tomlija/sounds/97669/ CC BY 3.0
 ]]
 
 global sounds: GameSoundDispatcher = {}
@@ -130,6 +136,17 @@ function sounds.plant_sounds(spec: NodeSoundSpec): NodeSoundSpec
   spec.dig =      spec.dig      or {name = "sand_dig", gain = 0.9}
   spec.dug =      spec.dug      or {name = "dirt_dug", gain = 1.0}
   spec.place =    spec.place    or {name = "dirt_dug", gain = 0.8}
+  return spec
+end
+
+function sounds.glass_sounds(spec: NodeSoundSpec): NodeSoundSpec
+  if (spec == nil) then
+    spec = {}
+  end
+  spec.footstep = spec.footstep or {name = "glass_step", gain = 0.4}
+  spec.dig =      spec.dig      or {name = "glass_dig", gain = 0.75}
+  spec.dug =      spec.dug      or {name = "glass_dug", gain = 1.0}
+  spec.place =    spec.place    or {name = "glass_step", gain = 0.8}
   return spec
 end
 
