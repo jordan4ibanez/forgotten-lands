@@ -21,10 +21,10 @@ minetest.override_item("", {
          },
          wooden = {
             times = {
-               0.4,
-               0.8,
-               1.2,
-               1.6,
+               1.5,
+               4.0,
+               8.0,
+               14.0,
             },
             uses = 0,
          },
