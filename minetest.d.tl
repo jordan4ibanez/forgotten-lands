@@ -27,7 +27,7 @@ global record minetest
   register_node: function(string, NodeDefinition)
   register_craftitem: function(string, ItemDefinition)
   register_tool: function(string, ItemDefinition)
-  override_item: function(string: {any : any})
+  override_item: function(string, {any : any})
   unregister_item: function(string)
   register_entity: function(string, EntityDefinition)
   register_abm: function(ABMDefinition)
@@ -233,10 +233,10 @@ global record minetest
   add_particlespawner: function(ParticleSpawnerDefinition): number
   delete_particlespawner: function(number, string)
   create_schematic: function(Vec3, Vec3, {SchematicProbability}, string, {SchematicSliceProbability})
-  place_schematic: function(Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
+  place_schematic: function(Vec3, SchematicDefinition | string, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
   place_schematic_on_vmanip: function(VoxelManipObject, Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
   serialize_schematic: function(SchematicDefinition, SchematicFormat, {SchematicSerializationOption})
-  read_schematic: function(SchematicDefinition, {SchematicReadOptionYSlice})
+  read_schematic: function(SchematicDefinition, {SchematicReadOptionYSlice}): table
   request_http_api: function(): HTTPApi
   get_mod_storage: function(): MetaRef
   get_connected_players: function(): {ObjectRef}
@@ -641,6 +641,7 @@ global record NodeDefinition
   is_ground_content: boolean
   sunlight_propagates: boolean
   walkable: boolean
+  groups: {string : number}
   pointable: boolean
   diggable: boolean
   climbable: boolean
