@@ -108,7 +108,7 @@ function sounds.grass_sounds(spec: NodeSoundSpec): NodeSoundSpec
   spec.footstep = spec.footstep or {name = "grass_step", gain = 0.3}
   spec.dig =      spec.dig      or {name = "grass_dig", gain = 0.7}
   spec.dug =      spec.dug      or {name = "grass_dug", gain = 0.8}
-  spec.place =    spec.place    or {name = "grass_dug", gain = 0.8}
+  spec.place =    spec.place    or {name = "grass_dug", gain = 0.5}
   return spec
 end
 

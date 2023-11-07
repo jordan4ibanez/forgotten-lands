@@ -11,7 +11,9 @@ minetest.register_node(":stone", {
     "default_stone.png"
   },
   -- sounds = sound_dispatcher.stone_sounds(),
-  groups = { stone = 1 }
+  groups = {
+    stone = 1
+  }
 })
 
 minetest.register_node(":dirt", {
@@ -25,7 +27,9 @@ minetest.register_node(":dirt", {
     "default_dirt.png"
   },
   -- sounds = sound_dispatcher.dirt_sounds(),
-  groups = { soil = 1 }
+  groups = {
+    soil = 1
+  }
 })
 
 minetest.register_node(":grass", {
@@ -39,7 +43,9 @@ minetest.register_node(":grass", {
     "default_dirt.png^default_grass_side.png"
   },
   sounds = sound_dispatcher.grass_sounds(),
-  groups = { soil = 1 },
+  groups = {
+    soil = 1
+  },
 })
 
 minetest.register_node(":sand", {
@@ -53,7 +59,9 @@ minetest.register_node(":sand", {
     "default_sand.png"
   },
   -- sounds = sound_dispatcher.sand_sounds(),
-  groups = { soil = 1 }
+  groups = {
+    soil = 1
+  }
 })
 
 minetest.register_node(":gravel", {
@@ -67,7 +75,9 @@ minetest.register_node(":gravel", {
     "default_gravel.png"
   },
   -- sounds = sound_dispatcher.gravel_sounds(),
-  groups = { soil = 1}
+  groups = {
+    soil = 1
+  }
 })
 
 minetest.register_node(":oak_tree", {
@@ -81,21 +91,22 @@ minetest.register_node(":oak_tree", {
     "default_tree.png"
   },
   -- sounds = sound_dispatcher.wood_sounds(),
-  groups = { wooden = 1 },
+  groups = {
+    wooden = 1
+  },
 })
 
 minetest.register_node(":oak_leaves", {
   drawtype = "allfaces_optional",
+  paramtype = "light",
+  waving = 1,
   tiles = {
-    "default_leaves.png",
-    "default_leaves.png",
-    "default_leaves.png",
-    "default_leaves.png",
-    "default_leaves.png",
     "default_leaves.png"
   },
   -- sounds = sound_dispatcher.grass_sounds()
-  groups = { leafy = 1 },
+  groups = {
+    leafy = 1
+  },
 })
 
 for i = 1,5 do
@@ -103,12 +114,15 @@ for i = 1,5 do
   minetest.register_node(":tall_grass_" .. height, {
     drawtype = "plantlike",
     walkable = false,
+    waving = 1,
     paramtype = "light",
     paramtype2 = "degrotate",
     tiles = {
       "default_grass_" .. height .. ".png",
     },
     -- sounds = sound_dispatcher.grass_sounds({dug = {name = "", gain = 0}}),
-    groups = {break_instant = 1}
+    groups = {
+      break_instant = 1
+    }
   })
 end
