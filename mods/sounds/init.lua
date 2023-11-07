@@ -78,9 +78,9 @@ function sounds.grass_sounds(spec)
    if (spec == nil) then
       spec = {}
    end
-   spec.footstep = spec.footstep or { name = "grass_step", gain = 1.0 }
-   spec.dig = spec.dig or { name = "grass_dig", gain = 0.4 }
-   spec.dug = spec.dug or { name = "dirt_step", gain = 0.25 }
+   spec.footstep = spec.footstep or { name = "grass_dig", gain = 1.0 }
+   spec.dig = spec.dig or { name = "grass_step", gain = 1.0 }
+   spec.dug = spec.dug or { name = "dirt_step", gain = 1.25 }
    spec.place = spec.place or { name = "dirt_step", gain = 1.0 }
    return spec
 end
