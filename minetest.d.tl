@@ -236,7 +236,7 @@ global record minetest
   place_schematic: function(Vec3, SchematicDefinition | string, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
   place_schematic_on_vmanip: function(VoxelManipObject, Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
   serialize_schematic: function(SchematicDefinition, SchematicFormat, {SchematicSerializationOption})
-  read_schematic: function(SchematicDefinition, {SchematicReadOptionYSlice}): table
+  read_schematic: function(SchematicDefinition | string, {SchematicReadOptionYSlice}): table
   request_http_api: function(): HTTPApi
   get_mod_storage: function(): MetaRef
   get_connected_players: function(): {ObjectRef}
@@ -915,7 +915,7 @@ global record DecorationDefinition
   spawn_by: string
   check_offset: number
   num_spawn_by: number
-  flags: DecorationFlags
+  flags: string | {string : boolean}
   decoration: string | {string}
   height: number
   height_max: number
@@ -1996,3 +1996,7 @@ function t.shuffle(_: table, _: number, _: number, _: function): table end
 -- The rest of this is Forgotten Lands global definitions.
 global function println(...: any) print(...) end
 global function switch(input: any, ...: any | function(any): any): any print(input, ...) end
+global function generate_schematic(size: Vec3, keys: {string : string}, data: string, yslice_prob: {number}): SchematicDefinition 
+  print(size, keys, data, yslice_prob)
+end
+global function concat(...: string): string print(...) end

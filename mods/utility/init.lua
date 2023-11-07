@@ -1,4 +1,4 @@
-local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local string = _tl_compat and _tl_compat.string or string; local table = _tl_compat and _tl_compat.table or table
 
 function println(...) end
 
@@ -37,4 +37,33 @@ function println(...)
 
    end
    print(builder)
+end
+
+
+
+function generate_schematic(size, keys, data, yslice_prob)
+   local new_schematic = {
+      size = size,
+      data = {},
+      yslice_prob = {},
+   }
+   local length = #data
+   local countdown = length
+   for _ = 1, length do
+      local databit = data:sub(countdown, countdown)
+      table.insert(new_schematic.data, { name = keys[databit] })
+      countdown = countdown - 1
+   end
+   for _, databit in ipairs(yslice_prob) do
+      table.insert(new_schematic.yslice_prob, { prob = databit })
+   end
+   return new_schematic
+end
+
+function concat(...)
+   local accumulator = ""
+   for _, v in ipairs({ ... }) do
+      accumulator = accumulator .. v
+   end
+   return accumulator
 end

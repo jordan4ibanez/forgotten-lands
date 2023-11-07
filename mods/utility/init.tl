@@ -40,15 +40,30 @@ global function println(...: any)
 end
 
 
+-- Create a 3D schematic from ascii art "scans". Note, everything created by this is actually inside out!
+global function generate_schematic(size: Vec3, keys: {string : string}, data: string, yslice_prob: {number}): SchematicDefinition
+  local new_schematic = {
+    size = size,
+    data = {},
+    yslice_prob = {}
+  }
+  local length = #data
+  local countdown = length
+  for _ = 1, length do
+    local databit = data:sub(countdown,countdown)
+    table.insert(new_schematic.data, {name = keys[databit]})
+    countdown = countdown - 1
+  end
+  for _,databit in ipairs(yslice_prob) do
+    table.insert(new_schematic.yslice_prob, {prob = databit})
+  end
+  return new_schematic
+end
 
--- minetest.register_globalstep(function(_delta: number)
---   local blah: ObjectRef = minetest.get_player_by_name("singleplayer")
---   println(
---     "hi there\n",
---     "this is a test\n",
---     "of the thing\n", 
---     1234, "\n", 
---     blah, "\n", 
---     {"test", 123, test = "hi"}
---   )
--- end)
+global function concat(...: string): string
+  local accumulator = ""
+  for _,v in ipairs({...}) do
+    accumulator = accumulator .. v
+  end
+  return accumulator
+end
