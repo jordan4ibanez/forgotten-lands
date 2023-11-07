@@ -61,6 +61,17 @@ println(
 
 ! - fixme: sand's dig texture doesn't match the rest, look into this.
 ! - fixme: wood is too hollow!
+---- old but still usable
+"snow_step(1-6): https://freesound.org/people/crunchymaniac/sounds/696281/ CC0",
+"wool_step(1-6): https://freesound.org/people/Adielees9/sounds/331167/ CC0",
+
+"snow_dig(1-2): https://freesound.org/people/Nox_Sound/sounds/555307/ CC0",
+"snow_dig3: https://freesound.org/people/OwlStorm/sounds/320144/ CC0",
+"snow_dig4: https://freesound.org/people/martian/sounds/19291/ CC0",
+
+"wool_dig(1-4): https://freesound.org/people/krnash/sounds/389799/ CC0",
+"wood_dig(1-5): https://freesound.org/people/monte32/sounds/405114/ CC0",
+----- 
 
 grass
 - step
