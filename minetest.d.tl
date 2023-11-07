@@ -2004,4 +2004,9 @@ global function concat(...: string): string print(...) end
 global function get_game_sounds(): GameSoundDispatcher end
 global record GameSoundDispatcher
   grass_sounds: function (NodeSoundSpec): NodeSoundSpec
+  wood_sounds: function (NodeSoundSpec): NodeSoundSpec
+  dirt_sounds: function (NodeSoundSpec): NodeSoundSpec
+  gravel_sounds: function (NodeSoundSpec): NodeSoundSpec
+  stone_sounds: function (NodeSoundSpec): NodeSoundSpec
+  sand_sounds: function (NodeSoundSpec): NodeSoundSpec
 end

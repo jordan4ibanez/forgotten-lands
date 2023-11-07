@@ -9,7 +9,9 @@ minetest.register_node(":stone", {
     "default_stone.png",
     "default_stone.png",
     "default_stone.png"
-  }
+  },
+  sounds = sound_dispatcher.stone_sounds(),
+  groups = { stone = 1 }
 })
 
 minetest.register_node(":dirt", {
@@ -21,7 +23,9 @@ minetest.register_node(":dirt", {
     "default_dirt.png",
     "default_dirt.png",
     "default_dirt.png"
-  }
+  },
+  sounds = sound_dispatcher.dirt_sounds(),
+  groups = { soil = 1 }
 })
 
 minetest.register_node(":grass", {
@@ -47,7 +51,9 @@ minetest.register_node(":sand", {
     "default_sand.png",
     "default_sand.png",
     "default_sand.png"
-  }
+  },
+  sounds = sound_dispatcher.sand_sounds(),
+  groups = { soil = 1 }
 })
 
 minetest.register_node(":gravel", {
@@ -59,7 +65,9 @@ minetest.register_node(":gravel", {
     "default_gravel.png",
     "default_gravel.png",
     "default_gravel.png"
-  }
+  },
+  sounds = sound_dispatcher.gravel_sounds(),
+  groups = { soil = 1}
 })
 
 minetest.register_node(":oak_tree", {
@@ -72,7 +80,8 @@ minetest.register_node(":oak_tree", {
     "default_tree.png",
     "default_tree.png"
   },
-  groups = { wooden = 1 }
+  groups = { wooden = 1 },
+  sounds = sound_dispatcher.wood_sounds()
 })
 
 minetest.register_node(":oak_leaves", {
@@ -85,7 +94,8 @@ minetest.register_node(":oak_leaves", {
     "default_leaves.png",
     "default_leaves.png"
   },
-  groups = { leafy = 1 }
+  groups = { leafy = 1 },
+  sounds = sound_dispatcher.grass_sounds()
 })
 
 for i = 1,5 do
@@ -98,6 +108,7 @@ for i = 1,5 do
     tiles = {
       "default_grass_" .. height .. ".png",
     },
+    sounds = sound_dispatcher.grass_sounds({dug = {name = "", gain = 0}}),
     groups = {break_instant = 1}
   })
 end
