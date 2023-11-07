@@ -69,9 +69,19 @@ println(
 "snow_dig3: https://freesound.org/people/OwlStorm/sounds/320144/ CC0",
 "snow_dig4: https://freesound.org/people/martian/sounds/19291/ CC0",
 
-"wool_dig(1-4): https://freesound.org/people/krnash/sounds/389799/ CC0",
-"wood_dig(1-5): https://freesound.org/people/monte32/sounds/405114/ CC0",
 ----- 
+
+wool
+- dig
+(1-6) - https://freesound.org/people/DeolandredeJager/sounds/542959/ CC BY 3.0
+- step
+(1-6) - https://freesound.org/people/DeolandredeJager/sounds/542959/ CC BY 3.0
+- dug
+(1-6) - https://freesound.org/people/DeolandredeJager/sounds/542959/ CC BY 3.0
+
+
+
+! ^ -- HAVEN'T BEEN ADDED TO CREDITS YET
 
 grass
 - step
