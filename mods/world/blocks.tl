@@ -126,3 +126,16 @@ for i = 1,5 do
     }
   })
 end
+
+minetest.register_node(":glass", {
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_glass.png", "default_glass_detail.png"},
+	use_texture_alpha = "clip",
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {
+    glass = 1
+  },
+	sounds = sound_dispatcher.glass_sounds()
+})

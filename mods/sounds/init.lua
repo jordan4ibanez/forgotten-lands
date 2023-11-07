@@ -53,6 +53,12 @@ println(
 
 
 
+
+
+
+
+
+
 sounds = {}
 
 function sounds.grass_sounds(spec)
@@ -130,6 +136,17 @@ function sounds.plant_sounds(spec)
    spec.dig = spec.dig or { name = "sand_dig", gain = 0.9 }
    spec.dug = spec.dug or { name = "dirt_dug", gain = 1.0 }
    spec.place = spec.place or { name = "dirt_dug", gain = 0.8 }
+   return spec
+end
+
+function sounds.glass_sounds(spec)
+   if (spec == nil) then
+      spec = {}
+   end
+   spec.footstep = spec.footstep or { name = "glass_step", gain = 0.4 }
+   spec.dig = spec.dig or { name = "glass_dig", gain = 0.75 }
+   spec.dug = spec.dug or { name = "glass_dug", gain = 1.0 }
+   spec.place = spec.place or { name = "glass_step", gain = 0.8 }
    return spec
 end
 
