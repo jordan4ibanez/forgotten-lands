@@ -71,3 +71,18 @@ wool - (step)
 snow - (step)
 
 ]]
+
+global sounds: GameSoundDispatcher = {}
+
+function sounds.grass_sounds(spec: NodeSoundSpec): NodeSoundSpec
+  if (spec == nil) then
+    spec = {}
+  end
+  spec.footstep = spec.footstep or {name = "grass_step", gain = 1.0}
+  spec.dig =      spec.dig      or {name = "grass_dig", gain = 0.4}
+  spec.dug =      spec.dug      or {name = "dirt_step", gain = 0.25}
+  spec.place =    spec.place    or {name = "dirt_step", gain = 1.0}
+  return spec
+end
+
+global function get_game_sounds():GameSoundDispatcher return sounds end 

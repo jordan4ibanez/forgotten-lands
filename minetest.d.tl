@@ -2000,3 +2000,8 @@ global function generate_schematic(size: Vec3, keys: {string : string}, force_pl
   print(size, keys, force_place, data, yslice_prob)
 end
 global function concat(...: string): string print(...) end
+
+global function get_game_sounds(): GameSoundDispatcher end
+global record GameSoundDispatcher
+  grass_sounds: function (NodeSoundSpec): NodeSoundSpec
+end

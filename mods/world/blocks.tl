@@ -1,3 +1,5 @@
+local sound_dispatcher: GameSoundDispatcher = get_game_sounds()
+
 minetest.register_node(":stone", {
   drawtype = "normal",
   tiles = {
@@ -32,7 +34,8 @@ minetest.register_node(":grass", {
     "default_dirt.png^default_grass_side.png",
     "default_dirt.png^default_grass_side.png"
   },
-  groups = {break_instant = 1}
+  groups = {break_instant = 1},
+  sounds = sound_dispatcher.grass_sounds()
 })
 
 minetest.register_node(":sand", {
