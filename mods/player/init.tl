@@ -63,8 +63,16 @@ minetest.override_item("", {
           9.0
         },
         uses = 0
-      }
-
+      },
+      wool = { 
+        times = {
+          0.4,
+          0.7,
+          1.5,
+          4.5
+        }, 
+        uses = 0,
+      },
 		},
 		damage_groups = {
       -- Needs a better group name

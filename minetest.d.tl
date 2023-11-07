@@ -2011,4 +2011,5 @@ global record GameSoundDispatcher
   sand_sounds: function (NodeSoundSpec): NodeSoundSpec
   plant_sounds: function (NodeSoundSpec): NodeSoundSpec
   glass_sounds: function (NodeSoundSpec): NodeSoundSpec
+  wool_sounds: function (NodeSoundSpec): NodeSoundSpec
 end

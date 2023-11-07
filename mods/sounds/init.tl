@@ -223,4 +223,15 @@ function sounds.glass_sounds(spec: NodeSoundSpec): NodeSoundSpec
   return spec
 end
 
+function sounds.wool_sounds(spec: NodeSoundSpec): NodeSoundSpec
+  if (spec == nil) then
+    spec = {}
+  end
+  spec.footstep = spec.footstep or {name = "wool_step", gain = 0.4}
+  spec.dig =      spec.dig      or {name = "wool_dig", gain = 0.75}
+  spec.dug =      spec.dug      or {name = "wool_dug", gain = 1.0}
+  spec.place =    spec.place    or {name = "wool_dug", gain = 0.8}
+  return spec
+end
+
 global function get_game_sounds():GameSoundDispatcher return sounds end 
