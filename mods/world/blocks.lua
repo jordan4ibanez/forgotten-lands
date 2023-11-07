@@ -58,6 +58,32 @@ minetest.register_node(":gravel", {
    },
 })
 
+minetest.register_node(":oak_tree", {
+   drawtype = "normal",
+   tiles = {
+      "default_tree_top.png",
+      "default_tree_top.png",
+      "default_tree.png",
+      "default_tree.png",
+      "default_tree.png",
+      "default_tree.png",
+   },
+   groups = { wooden = 1 },
+})
+
+minetest.register_node(":oak_leaves", {
+   drawtype = "allfaces_optional",
+   tiles = {
+      "default_leaves.png",
+      "default_leaves.png",
+      "default_leaves.png",
+      "default_leaves.png",
+      "default_leaves.png",
+      "default_leaves.png",
+   },
+   groups = { leafy = 1 },
+})
+
 for i = 1, 5 do
    local height = tostring(i)
    minetest.register_node(":tall_grass_" .. height, {
@@ -70,12 +96,3 @@ for i = 1, 5 do
       },
    })
 end
-
-minetest.register_node(":apple_tree_creator", {
-   drawtype = "airlike",
-   walkable = false,
-   paramtype = "light",
-   on_timer = function(pos)
-      print(dump(pos))
-   end,
-})

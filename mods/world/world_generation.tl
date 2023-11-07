@@ -39,49 +39,12 @@ do
   })
 end
 
-
-do
-  minetest.register_decoration({
-    name = "apple_tree_creator",
-    deco_type = "simple",
-    place_on = "grass",
-    biomes = {"Forgotten Fields"},
-    decoration = "apple_tree_creator",
-    fill_ratio = 0.01
-  })
-  local decoration_id: number = minetest.get_decoration_id("apple_tree_creator")
-  print(decoration_id)
-  minetest.set_gen_notify("decoration", {decoration_id})
-  local apple_tree: TreeDefinition = {
-    axiom = "FFFFFFF",
-    trunk = "sand",
-    leaves = "gravel",
-    angle = 30,
-    iterations = 1,
-    random_level = 0,
-    trunk_type = "single",
-    fruit_chance = 10,
-    fruit = "stone"
-  }
-
-  local id: number = minetest.get_content_id("apple_tree_creator")
-
-  minetest.register_on_generated(function()
-    local mapgen: GenNotifyObject = minetest.get_mapgen_object("gennotify")
-    local iteration = mapgen["decoration#1"]
-    if (iteration == nil) then return end
-    for _,pos in ipairs(iteration) do
-      minetest.get_node_timer(pos):start(math.random() * 10)
-    end
-  end)
-  -- minetest.register_lbm({
-  --   label = "apple_tree_creator",
-  --   name = ":apple_tree_creator",
-  --   nodenames = {"apple_tree_creator"},
-  --   run_at_every_load = true,
-  --   action = function(pos: Vec3)
-  --     minetest.remove_node(pos)
-  --     minetest.spawn_tree(pos, apple_tree)
-  --   end
-  -- })
-end
+-- local mod_directory = minetest.get_modpath("world") .. "/"
+-- minetest.register_decoration({
+--   name = "pine_tree",
+--   deco_type = "schematic",
+--   place_on = "grass",
+--   biomes = {"Forgotten Fields"},
+--   schematic = mod_directory .. "schematics/pine_tree.mts",
+--   fill_ratio = 0.01
+-- })
