@@ -1,0 +1,4 @@
+Font used for the menu header is: Lora by Cyreal 
+Font license icense: OFT
+Download: https://fonts.google.com/specimen/Lora
+Text color: #626262
