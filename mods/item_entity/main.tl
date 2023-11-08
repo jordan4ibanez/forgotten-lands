@@ -31,7 +31,6 @@ local record entity
   dropped_by: string
 end
 
-
 entity.initial_properties = {
   hp_max = 1,
   physical = true,
@@ -53,7 +52,7 @@ entity.force_out = nil
 entity.force_out_start = nil
 
 function entity:cool()
-
+  print("cool")
 end
 
 function entity:set_item(item: ItemStackObject | string)
