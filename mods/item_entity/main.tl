@@ -122,12 +122,11 @@ end
 
 
 function entity:enable_physics()
-  if not self.physical_state then
-    self.physical_state = true
-    self.object:set_properties({physical = true})
-    self.object:set_velocity({x=0, y=0, z=0})
-    self.object:set_acceleration({x=0, y=-gravity, z=0})
-  end
+  if self.physical_state then return end
+  self.physical_state = true
+  self.object:set_properties({physical = true})
+  self.object:set_velocity({x=0, y=0, z=0})
+  self.object:set_acceleration({x=0, y=-gravity, z=0})
 end
 
 -- disable_physics = function(self)
