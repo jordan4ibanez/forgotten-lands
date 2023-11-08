@@ -82,6 +82,7 @@ minetest.register_node(":oak_leaves", {
    groups = {
       leafy = 1,
    },
+   drop = "",
 })
 
 for i = 1, 5 do
