@@ -18,8 +18,6 @@ local time_to_live = tonumber(minetest.settings:get("item_entity_ttl")) or 900
 local gravity = tonumber(minetest.settings:get("movement_gravity")) or 9.81
 
 
---! fixme: make the entity not pointable to
-
 local record entity
   object: ObjectRef
   initial_properties: ObjectProperties
@@ -43,6 +41,7 @@ entity.initial_properties = {
   visual_size = {x = 0.4, y = 0.4},
   textures = {""},
   is_visible = false,
+  pointable = false
 }
 entity.itemstring = ""
 entity.moving_state = true
