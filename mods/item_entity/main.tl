@@ -147,9 +147,18 @@ function entity:tick_age(delta: number): boolean
   return false
 end
 
+function entity:check_out_of_bounds(node: NodeTable | nil): boolean
+  -- Delete in 'ignore' nodes
+  if node and (node as NodeTable).name == "ignore" then
+    self.itemstring = ""
+    self.object:remove()
+    return true
+  end
+  return false
+end
+
 function entity:on_step(dtime: number, moveresult: MoveResult)
   if (self:tick_age(dtime)) then return end
-  
 
   local pos = self.object:get_pos()
   local node = minetest.get_node_or_nil({
@@ -157,12 +166,8 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
     y = pos.y + self._collisionbox[2] - 0.05,
     z = pos.z
   })
-  -- Delete in 'ignore' nodes
-  if node and (node as NodeTable).name == "ignore" then
-    self.itemstring = ""
-    self.object:remove()
-    return
-  end
+
+  if (self:check_out_of_bounds(node)) then return end
 
   -- Prevent assert when item_entity is attached
   if moveresult == nil and self.object:get_attach() then
