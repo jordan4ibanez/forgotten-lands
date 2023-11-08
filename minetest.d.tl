@@ -53,7 +53,7 @@ global record minetest
   register_globalstep: function(function(number))
   register_on_mods_loaded: function(function())
   register_on_shutdown: function(function())
-  register_on_placenode: function(function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStack, PointedThing))
+  register_on_placenode: function(function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStackObject, PointedThing))
   register_on_dignode: function(function(Vec3, NodeTable, ObjectRef))
   register_on_punchnode: function(function(Vec3, NodeTable, ObjectRef, PointedThing))
   register_on_generated: function(function(Vec3, Vec3, number))
@@ -72,13 +72,13 @@ global record minetest
   register_on_chat_message: function(function(string, string))
   register_on_chatcommand: function(function(string, string, string): boolean)
   register_on_player_receive_fields: function(function(ObjectRef, string, {string : any}))
-  register_on_craft: function(function(ItemStack, ObjectRef, {any}, string))
-  register_craft_predict: function(function(ItemStack, ObjectRef, {any}, string))
+  register_on_craft: function(function(ItemStackObject, ObjectRef, {any}, string))
+  register_craft_predict: function(function(ItemStackObject, ObjectRef, {any}, string))
   register_allow_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition))
   register_on_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition))
   register_on_protection_violation: function(function(Vec3, string))
-  register_on_item_eat: function(function(number, boolean, ItemStack, ObjectRef, PointedThing))
-  register_on_item_pickup: function(function(ItemStack, ObjectRef, PointedThing, number, ...: any))
+  register_on_item_eat: function(function(number, boolean, ItemStackObject, ObjectRef, PointedThing))
+  register_on_item_pickup: function(function(ItemStackObject, ObjectRef, PointedThing, number, ...: any))
   register_on_priv_grant: function(function(string, string, string))
   register_on_priv_revoke: function(function(string, string, string))
   register_can_bypass_userlimit: function(function(string, string))
@@ -120,7 +120,7 @@ global record minetest
   get_meta: function(Vec3): MetaData
   get_node_timer: function(Vec3): NodeTimerObject
   add_entity: function(Vec3, string, string): ObjectRef | nil
-  add_item: function(Vec3, ItemStack | string): ObjectRef | nil
+  add_item: function(Vec3, ItemStackObject | string): ObjectRef | nil
   get_player_by_name: function(string): ObjectRef
   get_objects_inside_radius: function(Vec3, number): {ObjectRef}
   get_objects_in_area: function(Vec3, Vec3): {ObjectRef}
@@ -176,7 +176,7 @@ global record minetest
   get_inventory: function(Vec3): InvRef
   create_detached_inventory: function(string, DetachedInventoryCallbacks, string): InvRef
   remove_detached_inventory: function(string): boolean
-  do_item_eat: function(number, ItemStack, ItemStack, ObjectRef, PointedThing): ItemStack | nil
+  do_item_eat: function(number, ItemStackObject, ItemStackObject, ObjectRef, PointedThing): ItemStackObject | nil
   show_formspec: function(string, string, Formspec)
   close_formspec: function(string, string)
   formspec_escape: function(string): string
@@ -196,19 +196,19 @@ global record minetest
   is_colored_paramtype: function(number): boolean
   strip_param2_color: function(number, paramtype2): number | nil
   get_node_drops: function(string | NodeTable, string): {string}
-  get_craft_result: function(CraftRecipeDefinition): {ItemStack, ItemStack}
+  get_craft_result: function(CraftRecipeDefinition): {ItemStackObject, ItemStackObject}
   get_craft_recipe: function(string | NodeTable): CraftRecipeDefinition | nil
   get_all_craft_recipes: function(string | NodeTable): {CraftRecipeDefinition} | nil
   handle_node_drops: function(Vec3, {string}, ObjectRef)
-  itemstring_with_palette: function(ItemStack, number): string
-  itemstring_with_color: function(ItemStack, DynamicColorSpec): string
+  itemstring_with_palette: function(ItemStackObject, number): string
+  itemstring_with_color: function(ItemStackObject, DynamicColorSpec): string
   rollback_get_node_actions: function(Vec3, number, number, number): {Rollback}
   rollback_revert_actions_by: function(string, number): {boolean, string}
-  item_place_node: function(ItemStack, ObjectRef, PointedThing, number, boolean): ItemStack, Vec3
-  item_place_object: function(ItemStack, ObjectRef, PointedThing): ItemStack
-  item_place: function(ItemStack, ObjectRef, PointedThing, number)
-  item_pickup: function(ItemStack, ObjectRef, PointedThing, number, ...: any): ItemStack
-  item_drop: function(ItemStack, ObjectRef, Vec3): ItemStack
+  item_place_node: function(ItemStackObject, ObjectRef, PointedThing, number, boolean): ItemStackObject, Vec3
+  item_place_object: function(ItemStackObject, ObjectRef, PointedThing): ItemStackObject
+  item_place: function(ItemStackObject, ObjectRef, PointedThing, number)
+  item_pickup: function(ItemStackObject, ObjectRef, PointedThing, number, ...: any): ItemStackObject
+  item_drop: function(ItemStackObject, ObjectRef, Vec3): ItemStackObject
   item_eat: function(number, string)
   node_punch: function(Vec3, NodeTable, ObjectRef, PointedThing)
   node_dig: function(Vec3, NodeTable, ObjectRef)
@@ -265,8 +265,8 @@ global record minetest
   record_protection_violation: function(Vec3, string)
   is_creative_enabled: function(string): boolean
   is_area_protected: function(Vec3, Vec3, string, number): boolean
-  rotate_and_place: function(ItemStack, ObjectRef, PointedThing, boolean,RotateAndPlaceOrientationFlag, boolean): ItemStack
-  rotate_node: function(ItemStack, ObjectRef, PointedThing)
+  rotate_and_place: function(ItemStackObject, ObjectRef, PointedThing, boolean,RotateAndPlaceOrientationFlag, boolean): ItemStackObject
+  rotate_node: function(ItemStackObject, ObjectRef, PointedThing)
   calculate_knockback: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number, number)
   forceload_block: function(Vec3, boolean, number)
   forceload_free_block: function(Vec3, boolean)
@@ -616,12 +616,12 @@ global record ItemDefinition
   node_placement_prediction: string
   node_dig_prediction: string
   sound: SimpleSoundSpec
-  on_place: function(ItemStack, ObjectRef, PointedThing)
-  on_secondary_use: function(ItemStack, ObjectRef, PointedThing)
-  on_drop: function(ItemStack, ObjectRef, Vec3)
-  on_pickup: function(ItemStack, ObjectRef, PointedThing, number, ...: any)
-  on_use: function(ItemStack, ObjectRef, PointedThing)
-  after_use: function(ItemStack, ObjectRef, NodeTable, {string : any})
+  on_place: function(ItemStackObject, ObjectRef, PointedThing)
+  on_secondary_use: function(ItemStackObject, ObjectRef, PointedThing)
+  on_drop: function(ItemStackObject, ObjectRef, Vec3)
+  on_pickup: function(ItemStackObject, ObjectRef, PointedThing, number, ...: any)
+  on_use: function(ItemStackObject, ObjectRef, PointedThing)
+  after_use: function(ItemStackObject, ObjectRef, NodeTable, {string : any})
 end
 
 global record NodeDefinition
@@ -674,21 +674,21 @@ global record NodeDefinition
   on_destruct: function(Vec3)
   after_destruct: function(Vec3, MapNode)
   on_flood: function(Vec3, NodeTable, NodeTable)
-  preserve_metadata: function(Vec3, NodeTable, NodeTable, {ItemStack})
-  after_place_node: function(Vec3, ObjectRef, ItemStack, PointedThing)
+  preserve_metadata: function(Vec3, NodeTable, NodeTable, {ItemStackObject})
+  after_place_node: function(Vec3, ObjectRef, ItemStackObject, PointedThing)
   after_dig_node: function(Vec3, NodeTable, string, ObjectRef)
   can_dig: function(Vec3, ObjectRef | string) -- Unknown, documentation doesn't say
   on_punch: function(Vec3, NodeTable, ObjectRef, PointedThing)
-  on_rightclick: function(Vec3, NodeTable, ObjectRef, ItemStack, PointedThing)
+  on_rightclick: function(Vec3, NodeTable, ObjectRef, ItemStackObject, PointedThing)
   on_dig: function(Vec3, NodeTable, ObjectRef)
   on_timer: function(Vec3, number)
   on_receive_fields: function(Vec3, string, {string : any}, ObjectRef)
   allow_metadata_inventory_move: function(Vec3, string, number, string, number, number, ObjectRef)
-  allow_metadata_inventory_put: function(Vec3, string, number, ItemStack, ObjectRef)
-  allow_metadata_inventory_take: function(Vec3, string, number, ItemStack, ObjectRef)
+  allow_metadata_inventory_put: function(Vec3, string, number, ItemStackObject, ObjectRef)
+  allow_metadata_inventory_take: function(Vec3, string, number, ItemStackObject, ObjectRef)
   on_metadata_inventory_move: function(Vec3, string, number, string, number, string, ObjectRef)
-  on_metadata_inventory_put: function(Vec3, string, number, ItemStack, ObjectRef)
-  on_metadata_inventory_take: function(Vec3, string, number, ItemStack, ObjectRef)
+  on_metadata_inventory_put: function(Vec3, string, number, ItemStackObject, ObjectRef)
+  on_metadata_inventory_take: function(Vec3, string, number, ItemStackObject, ObjectRef)
   on_blast: function(Vec3, number)
   mod_origin: string
 end
@@ -1006,7 +1006,7 @@ global record ActionDefinition
   count: number
   listname: string
   index: number
-  stack: ItemStack
+  stack: ItemStackObject
 end
 
 
@@ -1086,39 +1086,39 @@ global record MetaRef
 end
 
 
-
-global record ItemStack
+global function ItemStack(_: ItemStackObject | string): ItemStackObject end
+global record ItemStackObject
   name: string
   count: number
   wear: number
   metadata: string
 
-  is_empty: function(ItemStack): boolean
-  get_name: function(ItemStack): string
-  set_name: function(ItemStack, string): boolean
-  get_count: function(ItemStack): number
-  set_count: function(ItemStack, number): boolean
-  get_wear: function(ItemStack): number
-  set_wear: function(ItemStack, number): boolean
-  get_meta: function(ItemStack): MetaRef
-  get_description: function(ItemStack): string
-  get_short_description: function(ItemStack): string
-  clear: function(ItemStack)
-  replace: function(ItemStack, ItemStack | string)
-  to_string: function(ItemStack): string
-  to_table: function(ItemStack): {any}
-  get_stack_max: function(ItemStack): number
-  get_free_space: function(ItemStack): number
-  is_known: function(ItemStack): boolean
-  get_definition: function(ItemStack): ItemDefinition
-  get_tool_capabilities: function(ItemStack): ToolCapabilities
-  add_wear: function(ItemStack, number)
-  add_wear_by_uses: function(ItemStack, number)
-  add_item: function(ItemStack, ItemStack): ItemStack
-  item_fits: function(ItemStack, ItemStack): boolean
-  take_item: function(ItemStack, number): ItemStack
-  peek_item: function(ItemStack, number): ItemStack
-  equals: function(ItemStack, ItemStack): boolean
+  is_empty: function(ItemStackObject): boolean
+  get_name: function(ItemStackObject): string
+  set_name: function(ItemStackObject, string): boolean
+  get_count: function(ItemStackObject): number
+  set_count: function(ItemStackObject, number): boolean
+  get_wear: function(ItemStackObject): number
+  set_wear: function(ItemStackObject, number): boolean
+  get_meta: function(ItemStackObject): MetaRef
+  get_description: function(ItemStackObject): string
+  get_short_description: function(ItemStackObject): string
+  clear: function(ItemStackObject)
+  replace: function(ItemStackObject, ItemStackObject | string)
+  to_string: function(ItemStackObject): string
+  to_table: function(ItemStackObject): {any}
+  get_stack_max: function(ItemStackObject): number
+  get_free_space: function(ItemStackObject): number
+  is_known: function(ItemStackObject): boolean
+  get_definition: function(ItemStackObject): ItemDefinition
+  get_tool_capabilities: function(ItemStackObject): ToolCapabilities
+  add_wear: function(ItemStackObject, number)
+  add_wear_by_uses: function(ItemStackObject, number)
+  add_item: function(ItemStackObject, ItemStackObject): ItemStackObject
+  item_fits: function(ItemStackObject, ItemStackObject): boolean
+  take_item: function(ItemStackObject, number): ItemStackObject
+  peek_item: function(ItemStackObject, number): ItemStackObject
+  equals: function(ItemStackObject, ItemStackObject): boolean
 end
 
 
@@ -1134,16 +1134,16 @@ global record InvRef
   set_size: function(InvRef, string, number): boolean
   get_width: function(InvRef, string): number
   set_width: function(InvRef, string, number)
-  get_stack: function(InvRef, string, number): ItemStack
-  set_stack: function(InvRef, string, number, ItemStack)
-  get_list: function(InvRef, string): {ItemStack}
-  set_list: function(InvRef, string, {ItemStack})
+  get_stack: function(InvRef, string, number): ItemStackObject
+  set_stack: function(InvRef, string, number, ItemStackObject)
+  get_list: function(InvRef, string): {ItemStackObject}
+  set_list: function(InvRef, string, {ItemStackObject})
   get_lists: function(InvRef): {string}
-  set_lists: function(InvRef, {ItemStack})
-  add_item: function(InvRef, string, {ItemStack}): boolean
-  room_for_item: function(InvRef, string, {ItemStack}): boolean
-  contains_item: function(InvRef, string, {ItemStack}, boolean): boolean
-  remove_item: function(InvRef, string, {ItemStack}): {ItemStack}
+  set_lists: function(InvRef, {ItemStackObject})
+  add_item: function(InvRef, string, {ItemStackObject}): boolean
+  room_for_item: function(InvRef, string, {ItemStackObject}): boolean
+  contains_item: function(InvRef, string, {ItemStackObject}, boolean): boolean
+  remove_item: function(InvRef, string, {ItemStackObject}): {ItemStackObject}
   get_location: function(InvRef): InvRefLocation
 end
 
@@ -1280,8 +1280,8 @@ global record ObjectRef
   get_inventory: function(ObjectRef): InvRef
   get_wield_list: function(ObjectRef): string
   get_wield_index: function(ObjectRef): number
-  get_wielded_item: function(ObjectRef): ItemStack
-  set_wielded_item: function(ObjectRef, ItemStack): boolean
+  get_wielded_item: function(ObjectRef): ItemStackObject
+  set_wielded_item: function(ObjectRef, ItemStackObject): boolean
   get_armor_groups: function(ObjectRef): {string : number}
   set_armor_groups: function(ObjectRef, {string : number})
   set_animation: function(ObjectRef, Vec2, number, number, boolean)
@@ -1520,6 +1520,10 @@ global record LightingDefinition
   exposure: LightExposureSpec
 end
 
+global record CollisionBox
+  {number}
+end
+
 global record ObjectProperties
   hp_max: number
   breath_max: number
@@ -1527,7 +1531,7 @@ global record ObjectProperties
   eye_height: number
   physical: boolean
   collide_with_objects: boolean
-  collisionbox: {number}
+  collisionbox: CollisionBox
   selectionbox: {number}
   pointable: boolean
   visual: EntityVisual
@@ -1691,11 +1695,11 @@ end
 
 global record DetachedInventoryCallbacks
   allow_move: function(InvRef, string, number, string, number, number, ObjectRef)
-  allow_put: function(InvRef, string, number, ItemStack, ObjectRef)
-  allow_take: function(InvRef, string, number, ItemStack, ObjectRef)
+  allow_put: function(InvRef, string, number, ItemStackObject, ObjectRef)
+  allow_take: function(InvRef, string, number, ItemStackObject, ObjectRef)
   on_move: function(InvRef, string, number, string, number, number, ObjectRef)
-  on_put: function(InvRef, string, number, ItemStack, ObjectRef)
-  on_take: function(InvRef, string, number, ItemStack, ObjectRef)
+  on_put: function(InvRef, string, number, ItemStackObject, ObjectRef)
+  on_take: function(InvRef, string, number, ItemStackObject, ObjectRef)
 end
 
 global record Rollback
