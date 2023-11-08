@@ -157,6 +157,23 @@ function entity:check_out_of_bounds(node: NodeTable | nil): boolean
   return false
 end
 
+function entity:slip_check(delta: number, def: NodeDefinition, node: NodeTable): boolean
+  if not def then return false end
+  local slippery = minetest.get_item_group(node.name, "slippery")
+  local vel = self.object:get_velocity()
+  if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
+    -- Horizontal deceleration
+    local factor = math.min(4 / (slippery + 4) * delta, 1)
+    self.object:set_velocity({
+      x = vel.x * (1 - factor),
+      y = 0,
+      z = vel.z * (1 - factor)
+    })
+    return true
+  end
+  return false
+end
+
 function entity:force_out_check(pos: Vec3): boolean
   if not self.force_out then return false end
 
@@ -262,8 +279,6 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
     self:unstuck_self()
   end
 
-
-
   node = nil -- ground node we're colliding with
   if moveresult.touching_ground then
     for _, info in ipairs(moveresult.collisions) do
@@ -276,23 +291,9 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
 
   -- Slide on slippery nodes
   local def = node and minetest.registered_nodes[(node as NodeTable).name]
-  local keep_movement = false
+  local keep_movement = self:slip_check(dtime, def, node)
 
-  if def then
-    local slippery = minetest.get_item_group((node as NodeTable).name, "slippery")
-    local vel = self.object:get_velocity()
-    if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
-      -- Horizontal deceleration
-      local factor = math.min(4 / (slippery + 4) * dtime, 1)
-      self.object:set_velocity({
-        x = vel.x * (1 - factor),
-        y = 0,
-        z = vel.z * (1 - factor)
-      })
-      keep_movement = true
-    end
-  end
-
+  
   if not keep_movement then
     self.object:set_velocity({x=0, y=0, z=0})
   end
