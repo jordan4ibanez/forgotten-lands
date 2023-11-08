@@ -180,41 +180,40 @@ function entity:force_out_check(pos: Vec3): boolean
 end
 
 function entity:unstuck_self(pos: Vec3, is_stuck: boolean)
-  if is_stuck then
-    local shootdir: Vec3
-    local order = {
-      {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
-      {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
-    }
+  if not is_stuck then return end
+  local shootdir: Vec3
+  local order = {
+    {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
+    {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
+  }
 
-    -- Check which one of the 4 sides is free
-    for o = 1, #order do
-      local cnode = minetest.get_node(vector.add(pos, order[o])).name
-      local cdef = minetest.registered_nodes[cnode] or {}
-      if cnode ~= "ignore" and cdef.walkable == false then
-        shootdir = order[o]
-        break
-      end
+  -- Check which one of the 4 sides is free
+  for o = 1, #order do
+    local cnode = minetest.get_node(vector.add(pos, order[o])).name
+    local cdef = minetest.registered_nodes[cnode] or {}
+    if cnode ~= "ignore" and cdef.walkable == false then
+      shootdir = order[o]
+      break
     end
-    -- If none of the 4 sides is free, check upwards
-    if not shootdir then
-      shootdir = {x=0, y=1, z=0}
-      local cnode = minetest.get_node(vector.add(pos, shootdir)).name
-      if cnode == "ignore" then
-        shootdir = nil -- Do not push into ignore
-      end
+  end
+  -- If none of the 4 sides is free, check upwards
+  if not shootdir then
+    shootdir = {x=0, y=1, z=0}
+    local cnode = minetest.get_node(vector.add(pos, shootdir)).name
+    if cnode == "ignore" then
+      shootdir = nil -- Do not push into ignore
     end
+  end
 
-    if shootdir then
-      -- Set new item moving speed accordingly
-      local newv = vector.multiply(shootdir, 3)
-      self:disable_physics()
-      self.object:set_velocity(newv)
+  if shootdir then
+    -- Set new item moving speed accordingly
+    local newv = vector.multiply(shootdir, 3)
+    self:disable_physics()
+    self.object:set_velocity(newv)
 
-      self.force_out = newv
-      self.force_out_start = vector.round(pos)
-      return
-    end
+    self.force_out = newv
+    self.force_out_start = vector.round(pos)
+    return
   end
 end
 
