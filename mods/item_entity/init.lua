@@ -31,6 +31,8 @@ local entity = {}
 
 
 
+
+
 entity.initial_properties = {
    hp_max = 1,
    physical = true,
@@ -50,10 +52,7 @@ entity.age = 0
 
 entity.force_out = nil
 entity.force_out_start = nil
-
-function entity:cool()
-   print("cool")
-end
+entity.collected = false
 
 function entity:set_item(item)
    local stack = ItemStack(item or self.itemstring)
@@ -238,10 +237,52 @@ function entity:unstuck_self(pos, is_stuck)
    return
 end
 
+function entity:poll_players(pos)
+   if not self.age then return end
+   if (self.age < 0.55) then return end
+
+
+
+
+
+
+   local solved = false
+   for _, player in ipairs(minetest.get_connected_players()) do
+      if (solved) then goto continue end
+      local player_pos = player:get_pos()
+      if (vector.distance(pos, player_pos) > 1.5) then goto continue end
+      if (player_pos.y - pos.y > 0.05) then goto continue end
+      player_pos.y = player_pos.y + 0.8
+
+
+      self:disable_physics()
+      self.object:set_velocity(vector.multiply(vector.direction(pos, player_pos), 4))
+      self.object:move_to(player_pos, true)
+      solved = true
+      self.age = 0
+      self.collected = true
+      ::continue::
+   end
+end
+
+function entity:collection_cleanup(delta)
+   self.age = self.age + delta
+   if (self.age < 0.2) then return end
+   self.object:remove()
+end
+
 function entity:on_step(dtime, moveresult)
-   if (self:tick_age(dtime)) then return end
+   if (self.collected) then
+      self:collection_cleanup(dtime)
+      return
+   end
 
    local pos = self.object:get_pos()
+
+   self:poll_players(pos)
+
+   if (self:tick_age(dtime)) then return end
+
    local node = minetest.get_node_or_nil({
       x = pos.x,
       y = pos.y + self._collisionbox[2] - 0.05,

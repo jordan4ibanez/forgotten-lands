@@ -29,6 +29,8 @@ local record entity
   force_out_start: Vec3
   _collisionbox: CollisionBox
   dropped_by: string
+  -- magnet components
+  collected: boolean
 end
 
 entity.initial_properties = {
@@ -50,10 +52,7 @@ entity.age = 0
 -- Pushing item out of solid nodes
 entity.force_out = nil
 entity.force_out_start = nil
-
-function entity:cool()
-  print("cool")
-end
+entity.collected = false
 
 function entity:set_item(item: ItemStackObject | string)
   local stack = ItemStack(item or self.itemstring)
@@ -238,10 +237,52 @@ function entity:unstuck_self(pos: Vec3, is_stuck: boolean)
   return
 end
 
+function entity:poll_players(pos: Vec3)
+  if not self.age then return end
+  if (self.age < 0.55) then return end
+
+  --[[
+    ! fixme: needs a cooldown before running this check again if it completely fails.
+    ! fixme: check if the inventory has room for item.
+  ]]
+  
+  local solved = false
+  for _,player in ipairs(minetest.get_connected_players()) do
+    if (solved) then goto continue end
+    local player_pos  = player:get_pos()
+    if (vector.distance(pos, player_pos) > 1.5) then goto continue end
+    if (player_pos.y - pos.y > 0.05) then goto continue end
+    player_pos.y = player_pos.y + 0.8
+
+    -- Move to doesn't work consistently, so we have to combine the packets together into one motion.
+    self:disable_physics()
+    self.object:set_velocity(vector.multiply(vector.direction(pos, player_pos), 4))
+    self.object:move_to(player_pos, true)
+    solved = true
+    self.age = 0
+    self.collected = true
+    ::continue::
+  end
+end
+
+function entity:collection_cleanup(delta: number)
+  self.age = self.age + delta
+  if (self.age < 0.2) then return end
+  self.object:remove()
+end
+
 function entity:on_step(dtime: number, moveresult: MoveResult)
-  if (self:tick_age(dtime)) then return end
+  if (self.collected) then
+    self:collection_cleanup(dtime)
+    return
+  end
 
   local pos = self.object:get_pos()
+
+  self:poll_players(pos)
+
+  if (self:tick_age(dtime)) then return end
+
   local node = minetest.get_node_or_nil({
     x = pos.x,
     y = pos.y + self._collisionbox[2] - 0.05,
