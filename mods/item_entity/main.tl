@@ -130,12 +130,11 @@ function entity:enable_physics()
 end
 
 function entity:disable_physics()
-  if self.physical_state then
-    self.physical_state = false
-    self.object:set_properties({physical = false})
-    self.object:set_velocity({x=0, y=0, z=0})
-    self.object:set_acceleration({x=0, y=0, z=0})
-  end
+  if not self.physical_state then return end
+  self.physical_state = false
+  self.object:set_properties({physical = false})
+  self.object:set_velocity({x=0, y=0, z=0})
+  self.object:set_acceleration({x=0, y=0, z=0})
 end
 
 -- on_step = function(self, dtime, moveresult)
