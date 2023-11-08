@@ -279,28 +279,6 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
     return
   end
   self.moving_state = keep_movement
-
-  -- Only collect items if not moving
-  if self.moving_state then
-    return
-  end
-  -- Collect the items around to merge with
-  local own_stack = ItemStack(self.itemstring)
-  if own_stack:get_free_space() == 0 then
-    return
-  end
-  local objects = minetest.get_objects_inside_radius(pos, 1.0)
-  for k, obj in ipairs(objects) do
-    local entity = obj:get_luaentity()
-    if entity and entity.name == "__builtin:item" then
-      if self:try_merge_with(own_stack, obj, entity) then
-        own_stack = ItemStack(self.itemstring)
-        if own_stack:get_free_space() == 0 then
-          return
-        end
-      end
-    end
-  end
 end
 
 -- on_punch = function(self, hitter, ...)
