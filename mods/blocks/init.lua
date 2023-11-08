@@ -4,11 +4,6 @@ minetest.register_node(":stone", {
    drawtype = "normal",
    tiles = {
       "default_stone.png",
-      "default_stone.png",
-      "default_stone.png",
-      "default_stone.png",
-      "default_stone.png",
-      "default_stone.png",
    },
    sounds = sound_dispatcher.stone_sounds(),
    groups = {
@@ -19,11 +14,6 @@ minetest.register_node(":stone", {
 minetest.register_node(":dirt", {
    drawtype = "normal",
    tiles = {
-      "default_dirt.png",
-      "default_dirt.png",
-      "default_dirt.png",
-      "default_dirt.png",
-      "default_dirt.png",
       "default_dirt.png",
    },
    sounds = sound_dispatcher.dirt_sounds(),
@@ -38,24 +28,17 @@ minetest.register_node(":grass", {
       "default_grass.png",
       "default_dirt.png",
       "default_dirt.png^default_grass_side.png",
-      "default_dirt.png^default_grass_side.png",
-      "default_dirt.png^default_grass_side.png",
-      "default_dirt.png^default_grass_side.png",
    },
    sounds = sound_dispatcher.grass_sounds(),
    groups = {
       soil = 1,
    },
+   drop = "dirt",
 })
 
 minetest.register_node(":sand", {
    drawtype = "normal",
    tiles = {
-      "default_sand.png",
-      "default_sand.png",
-      "default_sand.png",
-      "default_sand.png",
-      "default_sand.png",
       "default_sand.png",
    },
    sounds = sound_dispatcher.sand_sounds(),
@@ -67,11 +50,6 @@ minetest.register_node(":sand", {
 minetest.register_node(":gravel", {
    drawtype = "normal",
    tiles = {
-      "default_gravel.png",
-      "default_gravel.png",
-      "default_gravel.png",
-      "default_gravel.png",
-      "default_gravel.png",
       "default_gravel.png",
    },
    sounds = sound_dispatcher.gravel_sounds(),
@@ -85,9 +63,6 @@ minetest.register_node(":oak_tree", {
    tiles = {
       "default_tree_top.png",
       "default_tree_top.png",
-      "default_tree.png",
-      "default_tree.png",
-      "default_tree.png",
       "default_tree.png",
    },
    sounds = sound_dispatcher.wood_sounds(),
@@ -120,10 +95,12 @@ for i = 1, 5 do
       tiles = {
          "default_grass_" .. height .. ".png",
       },
+      buildable_to = true,
       sounds = sound_dispatcher.plant_sounds(),
       groups = {
          break_instant = 1,
       },
+      drop = "",
    })
 end
 
@@ -141,6 +118,7 @@ minetest.register_node(":glass", {
    groups = {
       glass = 1,
    },
+   drop = "",
 })
 
 minetest.register_node(":wool", {
