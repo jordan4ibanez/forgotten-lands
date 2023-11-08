@@ -157,6 +157,28 @@ function entity:check_out_of_bounds(node: NodeTable | nil): boolean
   return false
 end
 
+function entity:force_out_check(pos: Vec3): boolean
+  if self.force_out then
+    -- This code runs after the entity got a push from the is_stuck code.
+    -- It makes sure the entity is entirely outside the solid node
+    local c = self._collisionbox
+    local s = self.force_out_start
+    local f = self.force_out
+    local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
+      (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
+      (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
+      (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
+      (f.z < 0 and pos.z + c[6] < s.z - 0.5)
+    if ok then
+      -- Item was successfully forced out
+      self.force_out = nil
+      self:enable_physics()
+      return true
+    end
+  end
+  return false
+end
+
 function entity:on_step(dtime: number, moveresult: MoveResult)
   if (self:tick_age(dtime)) then return end
 
@@ -174,24 +196,8 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
     return
   end
 
-  if self.force_out then
-    -- This code runs after the entity got a push from the is_stuck code.
-    -- It makes sure the entity is entirely outside the solid node
-    local c = self._collisionbox
-    local s = self.force_out_start
-    local f = self.force_out
-    local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
-      (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
-      (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
-      (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
-      (f.z < 0 and pos.z + c[6] < s.z - 0.5)
-    if ok then
-      -- Item was successfully forced out
-      self.force_out = nil
-      self:enable_physics()
-      return
-    end
-  end
+  if self:force_out_check(pos) then return end
+  
 
   if not self.physical_state then
     return -- Don't do anything
