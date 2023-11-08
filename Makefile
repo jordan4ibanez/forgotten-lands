@@ -3,9 +3,16 @@ default:
 	@tl build
 	@echo Successfully built Forgotten Times.
 
-run: 
+windows: 
 	@echo Transpiling Forgotten Times into lua...
 	@tl build
 	@echo Successfully built Forgotten Times.
 	@echo Starting Minetest.
 	@../../bin/minetest.exe
+
+linux:
+	@echo Transpiling Forgotten Times into lua...
+	@tl build
+	@echo Successfully built Forgotten Times.
+	@echo Starting Minetest.
+	@minetest
