@@ -67,9 +67,11 @@ function entity:set_item(item: ItemStackObject | string)
   -- to get the type of the item
   local itemname = stack:is_known() and stack:get_name() or "unknown"
 
-  local max_count = stack:get_stack_max()
-  local count = math.min(stack:get_count(), max_count)
-  local size = 0.2 + 0.1 * (count / max_count) ^ (1 / 3)
+  -- local max_count = stack:get_stack_max()
+  -- local count = math.min(stack:get_count(), max_count)
+
+  local size = 1--0.2 + 0.1 * (count / max_count) ^ (1 / 3)
+
   local def = minetest.registered_items[itemname]
   local glow = def and def.light_source and
     math.floor(def.light_source / 2 + 0.5)
