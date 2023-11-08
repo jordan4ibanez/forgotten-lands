@@ -137,13 +137,19 @@ function entity:disable_physics()
   self.object:set_acceleration({x=0, y=0, z=0})
 end
 
-function entity:on_step(dtime: number, moveresult: MoveResult)
-  self.age = self.age + dtime
+function entity:tick_age(delta: number): boolean
+  self.age = self.age + delta
   if time_to_live > 0 and self.age > time_to_live then
     self.itemstring = ""
     self.object:remove()
-    return
+    return true
   end
+  return false
+end
+
+function entity:on_step(dtime: number, moveresult: MoveResult)
+  if (self:tick_age(dtime)) then return end
+  
 
   local pos = self.object:get_pos()
   local node = minetest.get_node_or_nil({
