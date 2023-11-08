@@ -1,4 +1,4 @@
-local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local math = _tl_compat and _tl_compat.math or math; local string = _tl_compat and _tl_compat.string or string
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local math = _tl_compat and _tl_compat.math or math; local string = _tl_compat and _tl_compat.string or string
 
 
 
@@ -31,7 +31,6 @@ local entity = {}
 
 
 
-
 entity.initial_properties = {
    hp_max = 1,
    physical = true,
@@ -41,6 +40,7 @@ entity.initial_properties = {
    visual_size = { x = 0.4, y = 0.4 },
    textures = { "" },
    is_visible = false,
+   pointable = false,
 }
 entity.itemstring = ""
 entity.moving_state = true
@@ -52,7 +52,7 @@ entity.force_out = nil
 entity.force_out_start = nil
 
 function entity:cool()
-
+   print("cool")
 end
 
 function entity:set_item(item)
@@ -67,9 +67,11 @@ function entity:set_item(item)
 
    local itemname = stack:is_known() and stack:get_name() or "unknown"
 
-   local max_count = stack:get_stack_max()
-   local count = math.min(stack:get_count(), max_count)
-   local size = 0.2 + 0.1 * (count / max_count) ^ (1 / 3)
+
+
+
+   local size = 1
+
    local def = minetest.registered_items[itemname]
    local glow = def and def.light_source and
    math.floor(def.light_source / 2 + 0.5)
@@ -119,226 +121,179 @@ function entity:on_activate(staticdata, dtime_s)
 end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function entity:enable_physics()
+   if self.physical_state then return end
+   self.physical_state = true
+   self.object:set_properties({ physical = true })
+   self.object:set_velocity({ x = 0, y = 0, z = 0 })
+   self.object:set_acceleration({ x = 0, y = -gravity, z = 0 })
+end
+
+function entity:disable_physics()
+   if not self.physical_state then return end
+   self.physical_state = false
+   self.object:set_properties({ physical = false })
+   self.object:set_velocity({ x = 0, y = 0, z = 0 })
+   self.object:set_acceleration({ x = 0, y = 0, z = 0 })
+end
+
+function entity:tick_age(delta)
+   self.age = self.age + delta
+   if time_to_live > 0 and self.age > time_to_live then
+      self.itemstring = ""
+      self.object:remove()
+      return true
+   end
+   return false
+end
+
+function entity:check_out_of_bounds(node)
+
+   if node and (node).name == "ignore" then
+      self.itemstring = ""
+      self.object:remove()
+      return true
+   end
+   return false
+end
+
+function entity:force_out_check(pos)
+   if self.force_out then
+
+
+      local c = self._collisionbox
+      local s = self.force_out_start
+      local f = self.force_out
+      local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
+      (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
+      (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
+      (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
+      (f.z < 0 and pos.z + c[6] < s.z - 0.5)
+      if ok then
+
+         self.force_out = nil
+         self:enable_physics()
+         return true
+      end
+   end
+   return false
+end
+
+function entity:on_step(dtime, moveresult)
+   if (self:tick_age(dtime)) then return end
+
+   local pos = self.object:get_pos()
+   local node = minetest.get_node_or_nil({
+      x = pos.x,
+      y = pos.y + self._collisionbox[2] - 0.05,
+      z = pos.z,
+   })
+
+   if (self:check_out_of_bounds(node)) then return end
+
+
+   if moveresult == nil and self.object:get_attach() then
+      return
+   end
+
+   if self:force_out_check(pos) then return end
+
+
+   if not self.physical_state then
+      return
+   end
+
+   if not moveresult.collides then
+
+      return
+   end
+
+
+   local is_stuck = false
+   local snode = minetest.get_node_or_nil(pos)
+   if snode then
+      local sdef = minetest.registered_nodes[(snode).name] or {}
+      is_stuck = (sdef.walkable == nil or sdef.walkable == true) and
+      (sdef.collision_box == nil or sdef.collision_box.type == "regular") and
+      (sdef.node_box == nil or sdef.node_box.type == "regular")
+   end
+
+   if is_stuck then
+      local shootdir
+      local order = {
+         { x = 1, y = 0, z = 0 }, { x = -1, y = 0, z = 0 },
+         { x = 0, y = 0, z = 1 }, { x = 0, y = 0, z = -1 },
+      }
+
+
+      for o = 1, #order do
+         local cnode = minetest.get_node(vector.add(pos, order[o])).name
+         local cdef = minetest.registered_nodes[cnode] or {}
+         if cnode ~= "ignore" and cdef.walkable == false then
+            shootdir = order[o]
+            break
+         end
+      end
+
+      if not shootdir then
+         shootdir = { x = 0, y = 1, z = 0 }
+         local cnode = minetest.get_node(vector.add(pos, shootdir)).name
+         if cnode == "ignore" then
+            shootdir = nil
+         end
+      end
+
+      if shootdir then
+
+         local newv = vector.multiply(shootdir, 3)
+         self:disable_physics()
+         self.object:set_velocity(newv)
+
+         self.force_out = newv
+         self.force_out_start = vector.round(pos)
+         return
+      end
+   end
+
+   node = nil
+   if moveresult.touching_ground then
+      for _, info in ipairs(moveresult.collisions) do
+         if info.axis == "y" then
+            node = minetest.get_node(info.node_pos)
+            break
+         end
+      end
+   end
+
+
+   local def = node and minetest.registered_nodes[(node).name]
+   local keep_movement = false
+
+   if def then
+      local slippery = minetest.get_item_group((node).name, "slippery")
+      local vel = self.object:get_velocity()
+      if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
+
+         local factor = math.min(4 / (slippery + 4) * dtime, 1)
+         self.object:set_velocity({
+            x = vel.x * (1 - factor),
+            y = 0,
+            z = vel.z * (1 - factor),
+         })
+         keep_movement = true
+      end
+   end
+
+   if not keep_movement then
+      self.object:set_velocity({ x = 0, y = 0, z = 0 })
+   end
+
+   if self.moving_state == keep_movement then
+
+      return
+   end
+   self.moving_state = keep_movement
+end
 
 
 

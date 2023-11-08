@@ -198,9 +198,9 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
 
   if self:force_out_check(pos) then return end
   
-
+  -- Don't do anything
   if not self.physical_state then
-    return -- Don't do anything
+    return 
   end
 
   if not moveresult.collides then
