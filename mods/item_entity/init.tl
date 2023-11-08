@@ -305,30 +305,4 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
   self.moving_state = keep_movement
 end
 
--- on_punch = function(self, hitter, ...)
---   if self.itemstring == "" then
---     self.object:remove()
---     return
---   end
-
---   -- Call on_pickup callback in item definition.
---   local itemstack = ItemStack(self.itemstring)
---   local callback = itemstack:get_definition().on_pickup
-
---   local ret = callback(itemstack, hitter, {type = "object", ref = self.object}, ...)
---   if not ret then
---     -- Don't modify (and don't reset rotation)
---     return
---   end
---   itemstack = ItemStack(ret)
-
---   -- Handle the leftover itemstack
---   if itemstack:is_empty() then
---     self.itemstring = ""
---     self.object:remove()
---   else
---     self:set_item(itemstack)
---   end
--- end
-
 minetest.register_entity(":__builtin:item", entity)
