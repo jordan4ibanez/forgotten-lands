@@ -28,6 +28,7 @@ local record entity
   force_out: boolean
   force_out_start: boolean
   _collisionbox: CollisionBox
+  dropped_by: string
 end
 
 
@@ -91,31 +92,31 @@ function entity:set_item(item: ItemStackObject | string)
   self._collisionbox = c
 end
 
--- get_staticdata = function(self)
---   return core.serialize({
---     itemstring = self.itemstring,
---     age = self.age,
---     dropped_by = self.dropped_by
---   })
--- end
+function entity:get_staticdata(): string
+  return minetest.serialize({
+    itemstring = self.itemstring,
+    age = self.age,
+    dropped_by = self.dropped_by
+  })
+end
 
--- on_activate = function(self, staticdata, dtime_s)
---   if string.sub(staticdata, 1, string.len("return")) == "return" then
---     local data = core.deserialize(staticdata)
---     if data and type(data) == "table" then
---       self.itemstring = data.itemstring
---       self.age = (data.age or 0) + dtime_s
---       self.dropped_by = data.dropped_by
---     end
---   else
---     self.itemstring = staticdata
---   end
---   self.object:set_armor_groups({immortal = 1})
---   self.object:set_velocity({x = 0, y = 2, z = 0})
---   self.object:set_acceleration({x = 0, y = -gravity, z = 0})
---   self._collisionbox = self.initial_properties.collisionbox
---   self:set_item()
--- end
+function entity:on_activate(staticdata: string, dtime_s: number)
+  if string.sub(staticdata, 1, string.len("return")) == "return" then
+    local data = minetest.deserialize(staticdata)
+    if data and type(data) == "table" then
+      self.itemstring = data.itemstring as string
+      self.age = (data.age as number or 0) + dtime_s
+      self.dropped_by = data.dropped_by as string
+    end
+  else
+    self.itemstring = staticdata
+  end
+  self.object:set_armor_groups({immortal = 1})
+  self.object:set_velocity({x = 0, y = 2, z = 0})
+  self.object:set_acceleration({x = 0, y = -gravity, z = 0})
+  self._collisionbox = self.initial_properties.collisionbox
+  self:set_item()
+end
 
 -- try_merge_with = function(self, own_stack, object, entity)
 --   if self.age == entity.age then
