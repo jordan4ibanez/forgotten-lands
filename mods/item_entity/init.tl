@@ -181,7 +181,9 @@ end
 
 function entity:unstuck_self(pos: Vec3, is_stuck: boolean)
   if not is_stuck then return end
+
   local shootdir: Vec3
+
   local order = {
     {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
     {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
@@ -196,6 +198,7 @@ function entity:unstuck_self(pos: Vec3, is_stuck: boolean)
       break
     end
   end
+
   -- If none of the 4 sides is free, check upwards
   if not shootdir then
     shootdir = {x=0, y=1, z=0}
@@ -205,16 +208,17 @@ function entity:unstuck_self(pos: Vec3, is_stuck: boolean)
     end
   end
 
-  if shootdir then
-    -- Set new item moving speed accordingly
-    local newv = vector.multiply(shootdir, 3)
-    self:disable_physics()
-    self.object:set_velocity(newv)
+  -- Everything failed, give up
+  if not shootdir then return end
 
-    self.force_out = newv
-    self.force_out_start = vector.round(pos)
-    return
-  end
+  -- Set new item moving speed accordingly
+  local newv = vector.multiply(shootdir, 3)
+  self:disable_physics()
+  self.object:set_velocity(newv)
+
+  self.force_out = newv
+  self.force_out_start = vector.round(pos)
+  return
 end
 
 function entity:on_step(dtime: number, moveresult: MoveResult)
