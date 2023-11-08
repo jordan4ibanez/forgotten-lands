@@ -121,12 +121,30 @@ minetest.register_node(":glass", {
   drop = "",
 })
 
-minetest.register_node(":wool", {
-  tiles = {
-    "wool_white.png"
-  },
-  sounds = sound_dispatcher.wool_sounds(),
-  groups = {
-    wool = 1
-  }
-})
+local dyes = {
+  "black",
+  "blue",
+  "brown",
+  "cyan",
+  "green",
+  "grey",
+  "magenta",
+  "orange",
+  "pink",
+  "purple",
+  "violet",
+  "white",
+  "yellow"
+}
+
+for _,color in ipairs(dyes) do
+  minetest.register_node(":wool_" .. color, {
+    tiles = {
+      "wool_" .. color .. ".png"
+    },
+    sounds = sound_dispatcher.wool_sounds(),
+    groups = {
+      wool = 1
+    }
+  })
+end

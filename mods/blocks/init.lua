@@ -1,4 +1,4 @@
-local sound_dispatcher = get_game_sounds()
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local sound_dispatcher = get_game_sounds()
 
 minetest.register_node(":stone", {
    drawtype = "normal",
@@ -121,12 +121,30 @@ minetest.register_node(":glass", {
    drop = "",
 })
 
-minetest.register_node(":wool", {
-   tiles = {
-      "wool_white.png",
-   },
-   sounds = sound_dispatcher.wool_sounds(),
-   groups = {
-      wool = 1,
-   },
-})
+local dyes = {
+   "black",
+   "blue",
+   "brown",
+   "cyan",
+   "green",
+   "grey",
+   "magenta",
+   "orange",
+   "pink",
+   "purple",
+   "violet",
+   "white",
+   "yellow",
+}
+
+for _, color in ipairs(dyes) do
+   minetest.register_node(":wool_" .. color, {
+      tiles = {
+         "wool_" .. color .. ".png",
+      },
+      sounds = sound_dispatcher.wool_sounds(),
+      groups = {
+         wool = 1,
+      },
+   })
+end
