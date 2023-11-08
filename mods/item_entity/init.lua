@@ -157,26 +157,85 @@ function entity:check_out_of_bounds(node)
    return false
 end
 
-function entity:force_out_check(pos)
-   if self.force_out then
+function entity:slip_check(delta, def, node)
+   if not def then return false end
+   local slippery = minetest.get_item_group(node.name, "slippery")
+   local vel = self.object:get_velocity()
+   if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
 
-
-      local c = self._collisionbox
-      local s = self.force_out_start
-      local f = self.force_out
-      local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
-      (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
-      (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
-      (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
-      (f.z < 0 and pos.z + c[6] < s.z - 0.5)
-      if ok then
-
-         self.force_out = nil
-         self:enable_physics()
-         return true
-      end
+      local factor = math.min(4 / (slippery + 4) * delta, 1)
+      self.object:set_velocity({
+         x = vel.x * (1 - factor),
+         y = 0,
+         z = vel.z * (1 - factor),
+      })
+      return true
    end
    return false
+end
+
+function entity:force_out_check(pos)
+   if not self.force_out then return false end
+
+
+
+   local c = self._collisionbox
+   local s = self.force_out_start
+   local f = self.force_out
+   local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
+   (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
+   (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
+   (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
+   (f.z < 0 and pos.z + c[6] < s.z - 0.5)
+
+   if not ok then return false end
+
+
+   self.force_out = nil
+   self:enable_physics()
+   return true
+end
+
+function entity:unstuck_self(pos, is_stuck)
+   if not is_stuck then return end
+
+   local shootdir
+
+   local order = {
+      { x = 1, y = 0, z = 0 }, { x = -1, y = 0, z = 0 },
+      { x = 0, y = 0, z = 1 }, { x = 0, y = 0, z = -1 },
+   }
+
+
+   for o = 1, #order do
+      local cnode = minetest.get_node(vector.add(pos, order[o])).name
+      local cdef = minetest.registered_nodes[cnode] or {}
+      if cnode ~= "ignore" and cdef.walkable == false then
+         shootdir = order[o]
+         break
+      end
+   end
+
+
+   if not shootdir then
+      shootdir = { x = 0, y = 1, z = 0 }
+      local cnode = minetest.get_node(vector.add(pos, shootdir)).name
+      if cnode == "ignore" then
+         shootdir = nil
+      end
+   end
+
+
+   if not shootdir then return end
+
+
+   local newv = vector.multiply(shootdir, 3)
+   self:disable_physics()
+   self.object:set_velocity(newv)
+
+   self.force_out = newv
+   self.force_out_start = vector.round(pos)
+   return
 end
 
 function entity:on_step(dtime, moveresult)
@@ -216,43 +275,8 @@ function entity:on_step(dtime, moveresult)
       is_stuck = (sdef.walkable == nil or sdef.walkable == true) and
       (sdef.collision_box == nil or sdef.collision_box.type == "regular") and
       (sdef.node_box == nil or sdef.node_box.type == "regular")
-   end
 
-   if is_stuck then
-      local shootdir
-      local order = {
-         { x = 1, y = 0, z = 0 }, { x = -1, y = 0, z = 0 },
-         { x = 0, y = 0, z = 1 }, { x = 0, y = 0, z = -1 },
-      }
-
-
-      for o = 1, #order do
-         local cnode = minetest.get_node(vector.add(pos, order[o])).name
-         local cdef = minetest.registered_nodes[cnode] or {}
-         if cnode ~= "ignore" and cdef.walkable == false then
-            shootdir = order[o]
-            break
-         end
-      end
-
-      if not shootdir then
-         shootdir = { x = 0, y = 1, z = 0 }
-         local cnode = minetest.get_node(vector.add(pos, shootdir)).name
-         if cnode == "ignore" then
-            shootdir = nil
-         end
-      end
-
-      if shootdir then
-
-         local newv = vector.multiply(shootdir, 3)
-         self:disable_physics()
-         self.object:set_velocity(newv)
-
-         self.force_out = newv
-         self.force_out_start = vector.round(pos)
-         return
-      end
+      self:unstuck_self()
    end
 
    node = nil
@@ -267,22 +291,8 @@ function entity:on_step(dtime, moveresult)
 
 
    local def = node and minetest.registered_nodes[(node).name]
-   local keep_movement = false
+   local keep_movement = self:slip_check(dtime, def, node)
 
-   if def then
-      local slippery = minetest.get_item_group((node).name, "slippery")
-      local vel = self.object:get_velocity()
-      if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
-
-         local factor = math.min(4 / (slippery + 4) * dtime, 1)
-         self.object:set_velocity({
-            x = vel.x * (1 - factor),
-            y = 0,
-            z = vel.z * (1 - factor),
-         })
-         keep_movement = true
-      end
-   end
 
    if not keep_movement then
       self.object:set_velocity({ x = 0, y = 0, z = 0 })
@@ -294,31 +304,5 @@ function entity:on_step(dtime, moveresult)
    end
    self.moving_state = keep_movement
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 minetest.register_entity(":__builtin:item", entity)
