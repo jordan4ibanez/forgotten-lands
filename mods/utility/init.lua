@@ -1,9 +1,4 @@
-local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local string = _tl_compat and _tl_compat.string or string; local table = _tl_compat and _tl_compat.table or table
-
-function println(...) end
-
-
-function switch(input, ...)
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local math = _tl_compat and _tl_compat.math or math; local string = _tl_compat and _tl_compat.string or string; local table = _tl_compat and _tl_compat.table or table; function switch(input, ...)
    local tableized = { ... }
    for k, v in ipairs(tableized) do
       if ((k + 1) % 2 == 0) then
@@ -70,4 +65,18 @@ function concat(...)
       accumulator = accumulator .. v
    end
    return accumulator
+end
+
+function random_range(min, max)
+   return (math.random() * (max - min) + min)
+end
+
+local rr = random_range
+
+function vector.random(min_x, max_x, min_y, max_y, min_z, max_z)
+   return vector.new(
+   rr(min_x, max_x),
+   rr(min_y, max_y),
+   rr(min_z, max_z))
+
 end

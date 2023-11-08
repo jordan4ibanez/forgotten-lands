@@ -1,8 +1,3 @@
-
-
-global function println(...: any) end
-
-
 global function switch(input: any, ...: any | function(any): any): any
   local tableized = {...}
   for k,v in ipairs(tableized) do
@@ -70,4 +65,18 @@ global function concat(...: string): string
     accumulator = accumulator .. v
   end
   return accumulator
+end
+
+global function random_range(min: number, max: number): number
+  return (math.random() * (max - min) + min)
+end
+
+local rr = random_range
+
+function vector.random(min_x: number, max_x: number, min_y: number, max_y: number, min_z: number, max_z: number): Vec3
+  return vector.new(
+    rr(min_x, max_x),
+    rr(min_y, max_y),
+    rr(min_z, max_z)
+  )
 end

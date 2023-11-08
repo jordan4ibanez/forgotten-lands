@@ -1907,6 +1907,8 @@ global record vector
   rotate: function(Vec3, number): Vec3
   rotate_around_axis: function(Vec3, Vec3, number): Vec3
   dir_to_rotation: function(Vec3, Vec3): Vec3
+
+  random: function(number, number, number, number, number, number): Vec3
 end
 
 global record Vec2
@@ -2013,3 +2015,5 @@ global record GameSoundDispatcher
   glass_sounds: function (NodeSoundSpec): NodeSoundSpec
   wool_sounds: function (NodeSoundSpec): NodeSoundSpec
 end
+
+global function random_range(min: number, max: number): number print(min,max) end
