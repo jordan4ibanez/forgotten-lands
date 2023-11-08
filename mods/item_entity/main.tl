@@ -18,6 +18,8 @@ local time_to_live = tonumber(minetest.settings:get("item_entity_ttl")) or 900
 local gravity = tonumber(minetest.settings:get("movement_gravity")) or 9.81
 
 
+--! fixme: make the entity not pointable to
+
 local record entity
   object: ObjectRef
   initial_properties: ObjectProperties
