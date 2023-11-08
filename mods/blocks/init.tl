@@ -122,16 +122,19 @@ minetest.register_node(":glass", {
 })
 
 local dyes = {
-  "black",
+  "black", 
   "blue",
   "brown",
   "cyan",
+  "dark_green",
+  "dark_grey",
   "green",
   "grey",
   "magenta",
   "orange",
   "pink",
   "purple",
+  "red",
   "violet",
   "white",
   "yellow"
