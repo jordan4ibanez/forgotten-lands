@@ -254,8 +254,8 @@ global record minetest
   get_name_from_content_id: function(number): string
   parse_json: function(string, any): {any}
   write_json: function({any}, boolean): string | nil
-  serialize: function({any}): string
-  deserialize: function(string, boolean): {any} | nil
+  serialize: function(any): string
+  deserialize: function(string, boolean): {any : any}
   compress: function(string, CompressionMethod, ...: any): string
   decompress: function(string, CompressionMethod, ...: any): string
   rgba: function(number, number, number, number): string
