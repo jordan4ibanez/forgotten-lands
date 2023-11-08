@@ -25,8 +25,8 @@ local record entity
   moving_state: boolean
   physical_state: boolean
   age: number
-  force_out: boolean
-  force_out_start: boolean
+  force_out: Vec3
+  force_out_start: Vec3
   _collisionbox: CollisionBox
   dropped_by: string
 end
@@ -137,171 +137,171 @@ function entity:disable_physics()
   self.object:set_acceleration({x=0, y=0, z=0})
 end
 
--- on_step = function(self, dtime, moveresult)
---   self.age = self.age + dtime
---   if time_to_live > 0 and self.age > time_to_live then
---     self.itemstring = ""
---     self.object:remove()
---     return
---   end
+function entity:on_step(dtime: number, moveresult: MoveResult)
+  self.age = self.age + dtime
+  if time_to_live > 0 and self.age > time_to_live then
+    self.itemstring = ""
+    self.object:remove()
+    return
+  end
 
---   local pos = self.object:get_pos()
---   local node = core.get_node_or_nil({
---     x = pos.x,
---     y = pos.y + self._collisionbox[2] - 0.05,
---     z = pos.z
---   })
---   -- Delete in 'ignore' nodes
---   if node and node.name == "ignore" then
---     self.itemstring = ""
---     self.object:remove()
---     return
---   end
+  local pos = self.object:get_pos()
+  local node = minetest.get_node_or_nil({
+    x = pos.x,
+    y = pos.y + self._collisionbox[2] - 0.05,
+    z = pos.z
+  })
+  -- Delete in 'ignore' nodes
+  if node and (node as NodeTable).name == "ignore" then
+    self.itemstring = ""
+    self.object:remove()
+    return
+  end
 
---   -- Prevent assert when item_entity is attached
---   if moveresult == nil and self.object:get_attach() then
---     return
---   end
+  -- Prevent assert when item_entity is attached
+  if moveresult == nil and self.object:get_attach() then
+    return
+  end
 
---   if self.force_out then
---     -- This code runs after the entity got a push from the is_stuck code.
---     -- It makes sure the entity is entirely outside the solid node
---     local c = self._collisionbox
---     local s = self.force_out_start
---     local f = self.force_out
---     local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
---       (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
---       (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
---       (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
---       (f.z < 0 and pos.z + c[6] < s.z - 0.5)
---     if ok then
---       -- Item was successfully forced out
---       self.force_out = nil
---       self:enable_physics()
---       return
---     end
---   end
+  if self.force_out then
+    -- This code runs after the entity got a push from the is_stuck code.
+    -- It makes sure the entity is entirely outside the solid node
+    local c = self._collisionbox
+    local s = self.force_out_start
+    local f = self.force_out
+    local ok = (f.x > 0 and pos.x + c[1] > s.x + 0.5) or
+      (f.y > 0 and pos.y + c[2] > s.y + 0.5) or
+      (f.z > 0 and pos.z + c[3] > s.z + 0.5) or
+      (f.x < 0 and pos.x + c[4] < s.x - 0.5) or
+      (f.z < 0 and pos.z + c[6] < s.z - 0.5)
+    if ok then
+      -- Item was successfully forced out
+      self.force_out = nil
+      self:enable_physics()
+      return
+    end
+  end
 
---   if not self.physical_state then
---     return -- Don't do anything
---   end
+  if not self.physical_state then
+    return -- Don't do anything
+  end
 
---   assert(moveresult,
---     "Collision info missing, this is caused by an out-of-date/buggy mod or game")
+  assert(moveresult,
+    "Collision info missing, this is caused by an out-of-date/buggy mod or game")
 
---   if not moveresult.collides then
---     -- future TODO: items should probably decelerate in air
---     return
---   end
+  if not moveresult.collides then
+    -- future TODO: items should probably decelerate in air
+    return
+  end
 
---   -- Push item out when stuck inside solid node
---   local is_stuck = false
---   local snode = core.get_node_or_nil(pos)
---   if snode then
---     local sdef = core.registered_nodes[snode.name] or {}
---     is_stuck = (sdef.walkable == nil or sdef.walkable == true)
---       and (sdef.collision_box == nil or sdef.collision_box.type == "regular")
---       and (sdef.node_box == nil or sdef.node_box.type == "regular")
---   end
+  -- Push item out when stuck inside solid node
+  local is_stuck = false
+  local snode = minetest.get_node_or_nil(pos)
+  if snode then
+    local sdef = minetest.registered_nodes[(snode as NodeTable).name] or {}
+    is_stuck = (sdef.walkable == nil or sdef.walkable == true)
+      and (sdef.collision_box == nil or sdef.collision_box.type == "regular")
+      and (sdef.node_box == nil or sdef.node_box.type == "regular")
+  end
 
---   if is_stuck then
---     local shootdir
---     local order = {
---       {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
---       {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
---     }
+  if is_stuck then
+    local shootdir: Vec3
+    local order = {
+      {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
+      {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
+    }
 
---     -- Check which one of the 4 sides is free
---     for o = 1, #order do
---       local cnode = core.get_node(vector.add(pos, order[o])).name
---       local cdef = core.registered_nodes[cnode] or {}
---       if cnode ~= "ignore" and cdef.walkable == false then
---         shootdir = order[o]
---         break
---       end
---     end
---     -- If none of the 4 sides is free, check upwards
---     if not shootdir then
---       shootdir = {x=0, y=1, z=0}
---       local cnode = core.get_node(vector.add(pos, shootdir)).name
---       if cnode == "ignore" then
---         shootdir = nil -- Do not push into ignore
---       end
---     end
+    -- Check which one of the 4 sides is free
+    for o = 1, #order do
+      local cnode = minetest.get_node(vector.add(pos, order[o])).name
+      local cdef = minetest.registered_nodes[cnode] or {}
+      if cnode ~= "ignore" and cdef.walkable == false then
+        shootdir = order[o]
+        break
+      end
+    end
+    -- If none of the 4 sides is free, check upwards
+    if not shootdir then
+      shootdir = {x=0, y=1, z=0}
+      local cnode = minetest.get_node(vector.add(pos, shootdir)).name
+      if cnode == "ignore" then
+        shootdir = nil -- Do not push into ignore
+      end
+    end
 
---     if shootdir then
---       -- Set new item moving speed accordingly
---       local newv = vector.multiply(shootdir, 3)
---       self:disable_physics()
---       self.object:set_velocity(newv)
+    if shootdir then
+      -- Set new item moving speed accordingly
+      local newv = vector.multiply(shootdir, 3)
+      self:disable_physics()
+      self.object:set_velocity(newv)
 
---       self.force_out = newv
---       self.force_out_start = vector.round(pos)
---       return
---     end
---   end
+      self.force_out = newv
+      self.force_out_start = vector.round(pos)
+      return
+    end
+  end
 
---   node = nil -- ground node we're colliding with
---   if moveresult.touching_ground then
---     for _, info in ipairs(moveresult.collisions) do
---       if info.axis == "y" then
---         node = core.get_node(info.node_pos)
---         break
---       end
---     end
---   end
+  node = nil -- ground node we're colliding with
+  if moveresult.touching_ground then
+    for _, info in ipairs(moveresult.collisions) do
+      if info.axis == "y" then
+        node = minetest.get_node(info.node_pos)
+        break
+      end
+    end
+  end
 
---   -- Slide on slippery nodes
---   local def = node and core.registered_nodes[node.name]
---   local keep_movement = false
+  -- Slide on slippery nodes
+  local def = node and minetest.registered_nodes[(node as NodeTable).name]
+  local keep_movement = false
 
---   if def then
---     local slippery = core.get_item_group(node.name, "slippery")
---     local vel = self.object:get_velocity()
---     if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
---       -- Horizontal deceleration
---       local factor = math.min(4 / (slippery + 4) * dtime, 1)
---       self.object:set_velocity({
---         x = vel.x * (1 - factor),
---         y = 0,
---         z = vel.z * (1 - factor)
---       })
---       keep_movement = true
---     end
---   end
+  if def then
+    local slippery = minetest.get_item_group((node as NodeTable).name, "slippery")
+    local vel = self.object:get_velocity()
+    if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z) > 0.1) then
+      -- Horizontal deceleration
+      local factor = math.min(4 / (slippery + 4) * dtime, 1)
+      self.object:set_velocity({
+        x = vel.x * (1 - factor),
+        y = 0,
+        z = vel.z * (1 - factor)
+      })
+      keep_movement = true
+    end
+  end
 
---   if not keep_movement then
---     self.object:set_velocity({x=0, y=0, z=0})
---   end
+  if not keep_movement then
+    self.object:set_velocity({x=0, y=0, z=0})
+  end
 
---   if self.moving_state == keep_movement then
---     -- Do not update anything until the moving state changes
---     return
---   end
---   self.moving_state = keep_movement
+  if self.moving_state == keep_movement then
+    -- Do not update anything until the moving state changes
+    return
+  end
+  self.moving_state = keep_movement
 
---   -- Only collect items if not moving
---   if self.moving_state then
---     return
---   end
---   -- Collect the items around to merge with
---   local own_stack = ItemStack(self.itemstring)
---   if own_stack:get_free_space() == 0 then
---     return
---   end
---   local objects = core.get_objects_inside_radius(pos, 1.0)
---   for k, obj in pairs(objects) do
---     local entity = obj:get_luaentity()
---     if entity and entity.name == "__builtin:item" then
---       if self:try_merge_with(own_stack, obj, entity) then
---         own_stack = ItemStack(self.itemstring)
---         if own_stack:get_free_space() == 0 then
---           return
---         end
---       end
---     end
---   end
--- end
+  -- Only collect items if not moving
+  if self.moving_state then
+    return
+  end
+  -- Collect the items around to merge with
+  local own_stack = ItemStack(self.itemstring)
+  if own_stack:get_free_space() == 0 then
+    return
+  end
+  local objects = minetest.get_objects_inside_radius(pos, 1.0)
+  for k, obj in ipairs(objects) do
+    local entity = obj:get_luaentity()
+    if entity and entity.name == "__builtin:item" then
+      if self:try_merge_with(own_stack, obj, entity) then
+        own_stack = ItemStack(self.itemstring)
+        if own_stack:get_free_space() == 0 then
+          return
+        end
+      end
+    end
+  end
+end
 
 -- on_punch = function(self, hitter, ...)
 --   if self.itemstring == "" then
