@@ -179,6 +179,45 @@ function entity:force_out_check(pos: Vec3): boolean
   return true
 end
 
+function entity:unstuck_self(pos: Vec3, is_stuck: boolean)
+  if is_stuck then
+    local shootdir: Vec3
+    local order = {
+      {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
+      {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
+    }
+
+    -- Check which one of the 4 sides is free
+    for o = 1, #order do
+      local cnode = minetest.get_node(vector.add(pos, order[o])).name
+      local cdef = minetest.registered_nodes[cnode] or {}
+      if cnode ~= "ignore" and cdef.walkable == false then
+        shootdir = order[o]
+        break
+      end
+    end
+    -- If none of the 4 sides is free, check upwards
+    if not shootdir then
+      shootdir = {x=0, y=1, z=0}
+      local cnode = minetest.get_node(vector.add(pos, shootdir)).name
+      if cnode == "ignore" then
+        shootdir = nil -- Do not push into ignore
+      end
+    end
+
+    if shootdir then
+      -- Set new item moving speed accordingly
+      local newv = vector.multiply(shootdir, 3)
+      self:disable_physics()
+      self.object:set_velocity(newv)
+
+      self.force_out = newv
+      self.force_out_start = vector.round(pos)
+      return
+    end
+  end
+end
+
 function entity:on_step(dtime: number, moveresult: MoveResult)
   if (self:tick_age(dtime)) then return end
 
@@ -216,44 +255,11 @@ function entity:on_step(dtime: number, moveresult: MoveResult)
     is_stuck = (sdef.walkable == nil or sdef.walkable == true)
       and (sdef.collision_box == nil or sdef.collision_box.type == "regular")
       and (sdef.node_box == nil or sdef.node_box.type == "regular")
+    
+    self:unstuck_self()
   end
 
-  if is_stuck then
-    local shootdir: Vec3
-    local order = {
-      {x=1, y=0, z=0}, {x=-1, y=0, z= 0},
-      {x=0, y=0, z=1}, {x= 0, y=0, z=-1},
-    }
 
-    -- Check which one of the 4 sides is free
-    for o = 1, #order do
-      local cnode = minetest.get_node(vector.add(pos, order[o])).name
-      local cdef = minetest.registered_nodes[cnode] or {}
-      if cnode ~= "ignore" and cdef.walkable == false then
-        shootdir = order[o]
-        break
-      end
-    end
-    -- If none of the 4 sides is free, check upwards
-    if not shootdir then
-      shootdir = {x=0, y=1, z=0}
-      local cnode = minetest.get_node(vector.add(pos, shootdir)).name
-      if cnode == "ignore" then
-        shootdir = nil -- Do not push into ignore
-      end
-    end
-
-    if shootdir then
-      -- Set new item moving speed accordingly
-      local newv = vector.multiply(shootdir, 3)
-      self:disable_physics()
-      self.object:set_velocity(newv)
-
-      self.force_out = newv
-      self.force_out_start = vector.round(pos)
-      return
-    end
-  end
 
   node = nil -- ground node we're colliding with
   if moveresult.touching_ground then
