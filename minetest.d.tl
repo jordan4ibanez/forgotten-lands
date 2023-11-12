@@ -306,6 +306,10 @@ global record minetest
 
   get_translator: function(string): Translator
   translate: function(string, ...: string): string
+
+  sound_play: function(SimpleSoundSpec, SoundParameterTable, boolean): number
+  sound_stop: function(number)
+  sound_fade: function(number, number, number)
 end
 
 global record SimpleSoundSpec
