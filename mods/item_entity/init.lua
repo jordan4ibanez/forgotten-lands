@@ -237,8 +237,22 @@ function entity:unstuck_self(pos, is_stuck)
    return
 end
 
+
+local pos_a = vector.new()
+local pos_b = vector.new()
+local function distance_2d(vec_1, vec_2)
+   pos_a.x = vec_1.x
+   pos_a.y = 0
+   pos_a.z = vec_1.z
+   pos_b.x = vec_2.x
+   pos_b.y = 0
+   pos_b.z = vec_2.z
+   return vector.distance(pos_a, pos_b)
+end
+
 function entity:poll_players(pos)
-   if not self.age then return end
+   if (self.collected) then return end
+   if (not self.age) then return end
    if (self.age < 0.55) then return end
 
 
@@ -250,17 +264,27 @@ function entity:poll_players(pos)
    for _, player in ipairs(minetest.get_connected_players()) do
       if (solved) then goto continue end
       local player_pos = player:get_pos()
-      if (vector.distance(pos, player_pos) > 1.5) then goto continue end
+      if (vector.distance(pos, player_pos) > 3) then goto continue end
+      if (distance_2d(pos, player_pos) > 1.5) then goto continue end
       if (player_pos.y - pos.y > 0.05) then goto continue end
       player_pos.y = player_pos.y + 0.8
 
 
       self:disable_physics()
-      self.object:set_velocity(vector.multiply(vector.direction(pos, player_pos), 4))
+      self.object:set_velocity(vector.multiply(vector.direction(pos, player_pos), 10))
       self.object:move_to(player_pos, true)
       solved = true
       self.age = 0
       self.collected = true
+
+
+      minetest.sound_play({
+         name = "item_pickup",
+      }, {
+         gain = 0.15,
+         pitch = random_range(0.7, 1.0),
+         object = player,
+      })
       ::continue::
    end
 end
