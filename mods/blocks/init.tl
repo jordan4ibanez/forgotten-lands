@@ -1,4 +1,5 @@
 local sound_dispatcher: GameSoundDispatcher = get_game_sounds()
+local mod_directory = minetest.get_modpath("blocks") .. "/"
 
 for i = 1,5 do
   local height: string = tostring(i)
@@ -20,20 +21,9 @@ for i = 1,5 do
   })
 end
 
-minetest.register_node(":glass", {
-	drawtype = "glasslike_framed_optional",
-	tiles = {
-    "default_glass.png",
-    "default_glass_detail.png"
-  },
-	use_texture_alpha = "clip",
-	paramtype = "light",
-	sunlight_propagates = true,
-	is_ground_content = false,
-  sounds = sound_dispatcher.glass_sounds(),
-	groups = {
-    glass = 1
-  },
-  drop = "",
-})
 
+local files = {"normal"}
+
+for _,file in ipairs(files) do
+  dofile(mod_directory .. file .. ".lua")
+end
