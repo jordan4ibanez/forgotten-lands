@@ -1144,10 +1144,10 @@ global record InvRef
   set_list: function(InvRef, string, {ItemStackObject})
   get_lists: function(InvRef): {string}
   set_lists: function(InvRef, {ItemStackObject})
-  add_item: function(InvRef, string, {ItemStackObject}): boolean
-  room_for_item: function(InvRef, string, {ItemStackObject}): boolean
-  contains_item: function(InvRef, string, {ItemStackObject}, boolean): boolean
-  remove_item: function(InvRef, string, {ItemStackObject}): {ItemStackObject}
+  add_item: function(InvRef, string, ItemStackObject | string): boolean
+  room_for_item: function(InvRef, string, ItemStackObject | string): boolean
+  contains_item: function(InvRef, string, ItemStackObject | string, boolean): boolean
+  remove_item: function(InvRef, string, ItemStackObject | string): {ItemStackObject}
   get_location: function(InvRef): InvRefLocation
 end
 
