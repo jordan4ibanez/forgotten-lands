@@ -1,21 +1,56 @@
-local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local math = _tl_compat and _tl_compat.math or math; local string = _tl_compat and _tl_compat.string or string
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-local time_to_live = tonumber(minetest.settings:get("item_entity_ttl")) or 900
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs; local math = _tl_compat and _tl_compat.math or math; local pairs = _tl_compat and _tl_compat.pairs or pairs; local string = _tl_compat and _tl_compat.string or string; local table = _tl_compat and _tl_compat.table or table; local time_to_live = tonumber(minetest.settings:get("item_entity_ttl")) or 900
 local gravity = tonumber(minetest.settings:get("movement_gravity")) or 9.81
+
+local MagnetQueue = {}
+
+
+
+MagnetQueue.players = {}
+MagnetQueue.deletionQueue = {}
+
+minetest.register_on_joinplayer(function(player)
+   local name = player:get_player_name()
+   MagnetQueue.players[name] = 0
+end)
+minetest.register_on_leaveplayer(function(player)
+   local name = player:get_player_name()
+   MagnetQueue.players[name] = nil
+end)
+local function add_magnet_pop(player)
+   local name = player:get_player_name()
+   MagnetQueue.players[name] = MagnetQueue.players[name] + 1
+end
+
+minetest.register_globalstep(function()
+   for name, remaining in pairs(MagnetQueue.players) do
+      if (remaining <= 0) then goto continue end
+      local player = minetest.get_player_by_name(name)
+      if (not player) then
+         table.insert(MagnetQueue.deletionQueue, name)
+         goto continue
+      end
+
+
+      minetest.sound_play({
+         name = "item_pickup",
+      }, {
+         gain = 0.15,
+         pitch = random_range(0.7, 1.0),
+         object = player,
+      })
+
+      MagnetQueue.players[name] = remaining - 1
+      ::continue::
+   end
+
+   if (#MagnetQueue.deletionQueue > 0) then
+      for _, name in ipairs(MagnetQueue.deletionQueue) do
+         MagnetQueue.players[name] = nil
+      end
+      MagnetQueue.deletionQueue = {}
+   end
+end)
+
 
 
 local entity = {}
@@ -267,6 +302,10 @@ function entity:poll_players(pos)
       if (vector.distance(pos, player_pos) > 3) then goto continue end
       if (distance_2d(pos, player_pos) > 1.5) then goto continue end
       if (player_pos.y - pos.y > 0.05) then goto continue end
+      local inv = player:get_inventory()
+      if (not inv) then goto continue end
+      if (not inv:room_for_item("main", self.itemstring)) then return end
+      inv:add_item("main", self.itemstring)
       player_pos.y = player_pos.y + 0.8
 
 
@@ -276,15 +315,8 @@ function entity:poll_players(pos)
       solved = true
       self.age = 0
       self.collected = true
+      add_magnet_pop(player)
 
-
-      minetest.sound_play({
-         name = "item_pickup",
-      }, {
-         gain = 0.15,
-         pitch = random_range(0.7, 1.0),
-         object = player,
-      })
       ::continue::
    end
 end

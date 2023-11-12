@@ -1,21 +1,56 @@
-
--- ? This could be useful in the future.
--- function core.spawn_item(pos, item)
--- 	-- Take item in any format
--- 	local stack = ItemStack(item)
--- 	local obj = core.add_entity(pos, "__builtin:item")
--- 	-- Don't use obj if it couldn't be added to the map.
--- 	if obj then
--- 		obj:get_luaentity():set_item(stack:to_string())
--- 	end
--- 	return obj
--- end
-
--- If item_entity_ttl is not set, enity will have default life time
--- Setting it to -1 disables the feature
-
 local time_to_live = tonumber(minetest.settings:get("item_entity_ttl")) or 900
 local gravity = tonumber(minetest.settings:get("movement_gravity")) or 9.81
+
+local record MagnetQueue
+  players: {string : integer}
+  deletionQueue: {string}
+end
+MagnetQueue.players = {}
+MagnetQueue.deletionQueue = {}
+
+minetest.register_on_joinplayer(function(player: ObjectRef)
+  local name: string = player:get_player_name()
+  MagnetQueue.players[name] = 0
+end)
+minetest.register_on_leaveplayer(function(player: ObjectRef)
+  local name: string = player:get_player_name()
+  MagnetQueue.players[name] = nil
+end)
+local function add_magnet_pop(player: ObjectRef)
+  local name: string = player:get_player_name()
+  MagnetQueue.players[name] = MagnetQueue.players[name] + 1
+end
+
+minetest.register_globalstep(function()
+  for name,remaining in pairs(MagnetQueue.players) do
+    if (remaining <= 0) then goto continue end
+    local player = minetest.get_player_by_name(name)
+    if (not player) then
+      table.insert(MagnetQueue.deletionQueue, name)
+      goto continue
+    end
+
+    -- Play the pickup sound at a random pitch.
+    minetest.sound_play({
+      name = "item_pickup"
+    },{
+      gain = 0.15,
+      pitch = random_range(0.7, 1.0),
+      object = player
+    })
+    
+    MagnetQueue.players[name] = remaining - 1
+    ::continue::
+  end
+
+  if (#MagnetQueue.deletionQueue > 0) then
+    for _,name in ipairs(MagnetQueue.deletionQueue) do
+      MagnetQueue.players[name] = nil
+    end
+    MagnetQueue.deletionQueue = {}
+  end
+end)
+
 
 
 local record entity
@@ -267,6 +302,10 @@ function entity:poll_players(pos: Vec3)
     if (vector.distance(pos, player_pos) > 3) then goto continue end
     if (distance_2d(pos, player_pos) > 1.5) then goto continue end
     if (player_pos.y - pos.y > 0.05) then goto continue end
+    local inv: InvRef = player:get_inventory()
+    if (not inv) then goto continue end
+    if (not inv:room_for_item("main", self.itemstring)) then return end
+    inv:add_item("main", self.itemstring)
     player_pos.y = player_pos.y + 0.8
 
     -- Move to doesn't work consistently, so we have to combine the packets together into one motion.
@@ -276,15 +315,8 @@ function entity:poll_players(pos: Vec3)
     solved = true
     self.age = 0
     self.collected = true
-
-    -- Play the pickup sound at a random pitch.
-    minetest.sound_play({
-      name = "item_pickup"
-    },{
-      gain = 0.15,
-      pitch = random_range(0.7, 1.0),
-      object = player
-    })
+    add_magnet_pop(player)
+    
     ::continue::
   end
 end
