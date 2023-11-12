@@ -290,11 +290,6 @@ function entity:poll_players(pos: Vec3)
   if (not self.age) then return end
   if (self.age < 0.55) then return end
 
-  --[[
-    ! fixme: needs a cooldown before running this check again if it completely fails.
-    ! fixme: check if the inventory has room for item.
-  ]]
-  
   local solved = false
   for _,player in ipairs(minetest.get_connected_players()) do
     if (solved) then goto continue end
@@ -306,9 +301,9 @@ function entity:poll_players(pos: Vec3)
     if (not inv) then goto continue end
     if (not inv:room_for_item("main", self.itemstring)) then return end
     inv:add_item("main", self.itemstring)
-    player_pos.y = player_pos.y + 0.8
 
     -- Move to doesn't work consistently, so we have to combine the packets together into one motion.
+    player_pos.y = player_pos.y + 0.8
     self:disable_physics()
     self.object:set_velocity(vector.multiply(vector.direction(pos, player_pos), 10))
     self.object:move_to(player_pos, true)
@@ -316,7 +311,7 @@ function entity:poll_players(pos: Vec3)
     self.age = 0
     self.collected = true
     add_magnet_pop(player)
-    
+
     ::continue::
   end
 end
