@@ -115,3 +115,20 @@ for _,color in ipairs(dyes) do
     }
   })
 end
+
+minetest.register_node(":glass", {
+	drawtype = "glasslike_framed_optional",
+	tiles = {
+    "default_glass.png",
+    "default_glass_detail.png"
+  },
+	use_texture_alpha = "clip",
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+  sounds = sound_dispatcher.glass_sounds(),
+	groups = {
+    glass = 1
+  },
+  drop = "",
+})
