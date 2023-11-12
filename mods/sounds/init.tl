@@ -59,6 +59,8 @@ println(
 
 --[[
 
+item_pickup - https://freesound.org/people/MATRIXXX_/sounds/506546/ CC0
+
 ! - fixme: sand's dig texture doesn't match the rest, look into this.
 ! - fixme: wood is too hollow!
 ---- old but still usable
