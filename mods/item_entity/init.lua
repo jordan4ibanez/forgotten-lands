@@ -288,12 +288,7 @@ end
 function entity:poll_players(pos)
    if (self.collected) then return end
    if (not self.age) then return end
-   if (self.age < 0.55) then return end
-
-
-
-
-
+   if (self.age < 1.5) then return end
 
    local solved = false
    for _, player in ipairs(minetest.get_connected_players()) do
@@ -306,9 +301,9 @@ function entity:poll_players(pos)
       if (not inv) then goto continue end
       if (not inv:room_for_item("main", self.itemstring)) then return end
       inv:add_item("main", self.itemstring)
+
+
       player_pos.y = player_pos.y + 0.8
-
-
       self:disable_physics()
       self.object:set_velocity(vector.multiply(vector.direction(pos, player_pos), 10))
       self.object:move_to(player_pos, true)

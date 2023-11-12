@@ -16,13 +16,15 @@ function minetest.handle_node_drops(pos: Vec3, drops: {string}, _digger: ObjectR
   for _,drop in ipairs(drops) do
     local item: ObjectRef = minetest.add_item(pos, drop)
     if item then
-      (item as ObjectRef):add_velocity(
+      item:add_velocity(
         vector.random(
           -1,1,
            1,2,
           -1,1
         )
       )
+      local entity = (item:get_luaentity() as table)
+      entity.age = 1
     end
   end
 end

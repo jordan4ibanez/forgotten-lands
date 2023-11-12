@@ -288,7 +288,7 @@ end
 function entity:poll_players(pos: Vec3)
   if (self.collected) then return end
   if (not self.age) then return end
-  if (self.age < 0.55) then return end
+  if (self.age < 1.5) then return end
 
   local solved = false
   for _,player in ipairs(minetest.get_connected_players()) do

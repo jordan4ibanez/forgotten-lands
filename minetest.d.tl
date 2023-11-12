@@ -120,7 +120,7 @@ global record minetest
   get_meta: function(Vec3): MetaData
   get_node_timer: function(Vec3): NodeTimerObject
   add_entity: function(Vec3, string, string): ObjectRef | nil
-  add_item: function(Vec3, ItemStackObject | string): ObjectRef | nil
+  add_item: function(Vec3, ItemStackObject | string): ObjectRef
   get_player_by_name: function(string): ObjectRef
   get_objects_inside_radius: function(Vec3, number): {ObjectRef}
   get_objects_in_area: function(Vec3, Vec3): {ObjectRef}
