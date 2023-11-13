@@ -64,5 +64,24 @@ module utility {
     return (math.random() * (max - min) + min)
   }
 
+  const rr = randomRange;
 
+  vector.create = function(x: number, y: number, z: number): Vec3 {
+    let temp = vector.zero()
+    temp.x = x
+    temp.y = y
+    temp.z = z
+    return temp
+  };
+
+  const create = vector.create;
+
+  // TS is kinda
+  vector.random = function(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3 {
+    return create(
+      rr(minX, maxX),
+      rr(minY, maxY),
+      rr(minZ, maxZ)
+    )
+  }
 }

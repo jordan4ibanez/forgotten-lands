@@ -77,4 +77,20 @@ do
     function utility.randomRange(min, max)
         return math.random() * (max - min) + min
     end
+    local rr = utility.randomRange
+    vector.create = function(x, y, z)
+        local temp = vector.zero()
+        temp.x = x
+        temp.y = y
+        temp.z = z
+        return temp
+    end
+    local create = vector.create
+    vector.random = function(minX, minY, minZ, maxX, maxY, maxZ)
+        return create(
+            rr(minX, maxX),
+            rr(minY, maxY),
+            rr(minZ, maxZ)
+        )
+    end
 end

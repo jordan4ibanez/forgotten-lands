@@ -1203,6 +1203,7 @@ declare global {
   export function AreaStore(_: AreaStoreType): AreaStoreObject
 
   namespace vector {
+
     export function zero(): Vec3
     export function copy(vec: Vec3): Vec3
     export function from_string(s: string, init: string): Vec3
@@ -1231,8 +1232,12 @@ declare global {
     export function rotate(vec: Vec3, radians: number): Vec3
     export function rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
     export function dir_to_rotation(vec: Vec3, up: Vec3): Vec3
-  
-    // random(number, number, number, number, number, number): Vec3
+
+    // This is created in the utility class because new is a reserved keyword in TS.
+    export function create(x: number, y: number, z: number): Vec3
+
+    // And this is a bolt on created in the utility class.
+    export function random(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3
   }
 
   export interface VoxelManipObject {
