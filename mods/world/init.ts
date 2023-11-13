@@ -282,4 +282,23 @@ minetest.register_biome({
       251,251,251,251,251,251,251,251,251,
     ]
   )
+  {
+    const smallID = minetest.register_schematic(smallOak)
+    const mediumID = minetest.register_schematic(mediumOak)
+    const largeID = minetest.register_schematic(largeOak)
+    const oakSize = ["small", "medium", "large"]
+    const oakIDs = [smallID, mediumID, largeID]
+    oakIDs.forEach((id, key) => {
+      minetest.register_decoration({
+        name:"oak_" + oakSize[key],
+        deco_type: "schematic",
+        place_on: "grass",
+        biomes: ["Forgotten Fields"],
+        schematic: id,
+        fill_ratio: 0.01,
+        place_offset_y: 1,
+        flags: "place_center_x, place_center_z",
+      } as DecorationDefinition)
+    })
+  }
 }
