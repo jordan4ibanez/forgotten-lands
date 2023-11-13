@@ -4,6 +4,65 @@ local function __TS__ArrayForEach(self, callbackFn, thisArg)
         callbackFn(thisArg, self[i], i - 1, self)
     end
 end
+
+local __TS__Symbol, Symbol
+do
+    local symbolMetatable = {__tostring = function(self)
+        return ("Symbol(" .. (self.description or "")) .. ")"
+    end}
+    function __TS__Symbol(description)
+        return setmetatable({description = description}, symbolMetatable)
+    end
+    Symbol = {
+        asyncDispose = __TS__Symbol("Symbol.asyncDispose"),
+        dispose = __TS__Symbol("Symbol.dispose"),
+        iterator = __TS__Symbol("Symbol.iterator"),
+        hasInstance = __TS__Symbol("Symbol.hasInstance"),
+        species = __TS__Symbol("Symbol.species"),
+        toStringTag = __TS__Symbol("Symbol.toStringTag")
+    }
+end
+
+local __TS__Iterator
+do
+    local function iteratorGeneratorStep(self)
+        local co = self.____coroutine
+        local status, value = coroutine.resume(co)
+        if not status then
+            error(value, 0)
+        end
+        if coroutine.status(co) == "dead" then
+            return
+        end
+        return true, value
+    end
+    local function iteratorIteratorStep(self)
+        local result = self:next()
+        if result.done then
+            return
+        end
+        return true, result.value
+    end
+    local function iteratorStringStep(self, index)
+        index = index + 1
+        if index > #self then
+            return
+        end
+        return index, string.sub(self, index, index)
+    end
+    function __TS__Iterator(iterable)
+        if type(iterable) == "string" then
+            return iteratorStringStep, iterable, 0
+        elseif iterable.____coroutine ~= nil then
+            return iteratorGeneratorStep, iterable
+        elseif iterable[Symbol.iterator] then
+            local iterator = iterable[Symbol.iterator](iterable)
+            return iteratorIteratorStep, iterator
+        else
+            return ipairs(iterable)
+        end
+    end
+end
 -- End of Lua Library inline imports
 utility = utility or ({})
 do
@@ -27,7 +86,6 @@ do
             while i <= length do
                 local databit = string.sub(data, countDown, countDown)
                 table.insert(newSchematic.data, {name = keys[databit], force_place = forcePlace[databit] == true})
-                print(forcePlace[databit] == true)
                 countDown = countDown - 1
                 i = i + 1
             end
@@ -40,8 +98,8 @@ do
     function utility.println(...)
         local any = {...}
         local builder = ""
-        for ____, item in ipairs({any}) do
-            builder = builder .. tostring((function()
+        for ____, item in __TS__Iterator(any) do
+            builder = builder .. (function()
                 repeat
                     local ____switch12 = type(item)
                     local thing
@@ -69,8 +127,7 @@ do
                         return "unknown"
                     end
                 until true
-            end)())
-            builder = builder .. ","
+            end)()
         end
         print(builder)
     end

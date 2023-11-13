@@ -36,7 +36,7 @@ module utility {
 
   export function println(...any: any): void {
     let builder = ""
-    for (const item of [any]) {
+    for (const item of any) {
       builder += (function() {
         switch (type(item)) {
           case "string":
@@ -54,8 +54,7 @@ module utility {
           default:
             return "unknown"
         }
-      })();
-      builder += ","
+      })() as string;
     }
     print(builder)
   }
