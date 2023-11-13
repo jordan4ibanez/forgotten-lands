@@ -1205,7 +1205,7 @@ declare global {
   export function PseudoRandom(seed: number): PseudoRandomObject
   export function AreaStore(_: AreaStoreType): AreaStoreObject
 
-  namespace vector {
+  export namespace vector {
 
     export function zero(): Vec3
     export function copy(vec: Vec3): Vec3
@@ -1972,29 +1972,30 @@ declare global {
   export interface Translator {
     __call(...string: string[]): string
   }
+
+
+  // You can just bolt onto namespaces apparently!
+  export namespace math {
+    export function clamp(min: number, max: number, input: number): number
+    export function hypot(x: number, y: number): number
+    export function sign(x: number, tolerence: number): number
+    export function factorial(x: number): number
+    export function round(x: number): number
+  }
+
+  export namespace string {
+    export function split(str: string, separator: string, includeEmpty: box, maxSplits: number, sepIsPattern: boolean): string
+    export function trim(str: string): string
+  }
+  export namespace table {
+    export function copy(table: LuaTable): LuaTable
+    export function indexof(list: LuaTable, val: any): number
+    export function insert_all(table: LuaTable, otherTable: LuaTable): LuaTable
+    export function key_value_swap(t: LuaTable): LuaTable
+    export function shuffle(table: LuaTable, from: number, to: number, randomFunc: () => number): LuaTable
+  }
 }
 
-
-
-
-// Getting around redecleration warnings with this little trick.
-// math.fart = function(): void
-// m.test = () => void
-
-// math.hypot = function(_: number, _: number): number
-// math.sign = function(_: number, _: number): number {}
-// math.factorial = function(_: number): number {}
-// math.round = function(_: number): number {}
-
-// string.split = function(_: string, _: string, _: box, _: NodeSoundSpec, _: boolean): string {}
-// string.trim = function(_: string): string {}
-
-// table.copy = function(_: table): table {}
-// table.indexof = function(_: table, _: number): number {}
-// table.insert_all = function(_: table, _: table): table {}
-// table.key_value_swap = function(_: table): table {}
-// table.shuffle = function(_: table, _: number, _: number, _: function): table {}
 declare global {
   const minetest: minetest
-  // const vector: vector
 }
