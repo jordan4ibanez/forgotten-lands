@@ -1,8 +1,8 @@
-// -- Everything was just dumped in as I looked down the lua_api.md
+// Everything was just dumped in as I looked down the lua_api.md
 interface minetest {
   get_current_modname: function(): string
   get_modpath: function(string): string
-  get_modnames: function(): {string}
+  get_modnames: function(): string[]
   get_game_info: function(): GameInfo
   get_worldpath: function(): string
   is_singleplayer: function(): boolean
@@ -14,103 +14,103 @@ interface minetest {
   rmdir: function(string): boolean
   cpdir: function(string): boolean
   mvdir: function(string): boolean
-  get_dir_list: function(string, boolean): {string}
+  get_dir_list: function(string, boolean): string[]
   safe_file_write: function(string, string): boolean
   get_version: function(): MinetestInfo
   sha1: function(any, boolean): string
   colorspec_to_colorstring: function(DynamicColorSpec): string
   colorspec_to_bytes: function(DynamicColorSpec): string
-  encode_png: function(number, number, {ColorSpec} | string, number): string
+  encode_png: function(number, number, ColorSpec[] | string, number): string
   urlencode: function(string): string
-  debug: function(string)
-  log: function(LogLevel, string)
-  register_node: function(string, NodeDefinition)
-  register_craftitem: function(string, ItemDefinition)
-  register_tool: function(string, ItemDefinition)
-  override_item: function(string, {any : any})
-  unregister_item: function(string)
-  register_entity: function(string, EntityDefinition)
-  register_abm: function(ABMDefinition)
-  register_lbm: function(LBMDefinition)
-  register_alias: function(string, string)
-  register_alias_force: function(string, string)
-  register_ore: function(OreDefinition)
-  register_biome: function(BiomeDefinition)
-  unregister_biome: function(string)
-  register_decoration: function(DecorationDefinition)
+  debug: function(string): void
+  log: function(LogLevel, string): void
+  register_node: function(string, NodeDefinition): void
+  register_craftitem: function(string, ItemDefinition): void
+  register_tool: function(string, ItemDefinition): void
+  override_item: function(string, {any : any}): void
+  unregister_item: function(string): void
+  register_entity: function(string, EntityDefinition): void
+  register_abm: function(ABMDefinition): void
+  register_lbm: function(LBMDefinition): void
+  register_alias: function(string, string): void
+  register_alias_force: function(string, string): void
+  register_ore: function(OreDefinition): void
+  register_biome: function(BiomeDefinition): void
+  unregister_biome: function(string): void
+  register_decoration: function(DecorationDefinition): void
   register_schematic: function(SchematicDefinition): number
-  clear_registered_biomes: function()
-  clear_registered_decorations: function()
-  clear_registered_ores: function()
-  clear_registered_schematics: function()
-  register_craft: function(CraftRecipeDefinition)
-  clear_craft: function(CraftRecipeDefinition)
-  register_chatcommand: function(string, ChatCommandDefinition)
-  override_chatcommand: function(string, ChatCommandDefinition)
-  unregister_chatcommand: function(string)
-  register_privilege: function(string, PrivilegeDefinition)
-  register_authentication_handler: function(AuthenticationHandlerDefinition)
-  register_globalstep: function(function(number))
-  register_on_mods_loaded: function(function())
-  register_on_shutdown: function(function())
-  register_on_placenode: function(function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStackObject, PointedThing))
-  register_on_dignode: function(function(Vec3, NodeTable, ObjectRef))
-  register_on_punchnode: function(function(Vec3, NodeTable, ObjectRef, PointedThing))
-  register_on_generated: function(function(Vec3, Vec3, number))
-  register_on_newplayer: function(function(ObjectRef))
-  register_on_punchplayer: function(function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number))
-  register_on_rightclickplayer: function(function(ObjectRef, ObjectRef))
-  register_on_player_hpchange: function(function(ObjectRef, number, HPChangeReasonDefinition), boolean)
-  register_on_dieplayer: function(function(ObjectRef, HPChangeReasonDefinition))
-  register_on_respawnplayer: function(function(ObjectRef))
-  register_on_prejoinplayer: function(function(string, string))
-  register_on_joinplayer: function(function(ObjectRef, string))
-  register_on_leaveplayer: function(function(ObjectRef, boolean))
-  register_on_authplayer: function(function(string, string, boolean))
-  register_on_auth_fail: function(function(string, string))
-  register_on_cheat: function(function(ObjectRef, CheatDefinition))
-  register_on_chat_message: function(function(string, string))
-  register_on_chatcommand: function(function(string, string, string): boolean)
-  register_on_player_receive_fields: function(function(ObjectRef, string, {string : any}))
-  register_on_craft: function(function(ItemStackObject, ObjectRef, {any}, string))
-  register_craft_predict: function(function(ItemStackObject, ObjectRef, {any}, string))
-  register_allow_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition))
-  register_on_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition))
-  register_on_protection_violation: function(function(Vec3, string))
-  register_on_item_eat: function(function(number, boolean, ItemStackObject, ObjectRef, PointedThing))
-  register_on_item_pickup: function(function(ItemStackObject, ObjectRef, PointedThing, number, ...any))
-  register_on_priv_grant: function(function(string, string, string))
-  register_on_priv_revoke: function(function(string, string, string))
-  register_can_bypass_userlimit: function(function(string, string))
-  register_on_modchannel_message: function(function(string, string, string))
-  register_on_liquid_transformed: function(function({Vec3}, {string}))
-  register_on_mapblocks_changed: function(function({string}, number))
+  clear_registered_biomes: function(): void
+  clear_registered_decorations: function(): void
+  clear_registered_ores: function(): void
+  clear_registered_schematics: function(): void
+  register_craft: function(CraftRecipeDefinition): void
+  clear_craft: function(CraftRecipeDefinition): void
+  register_chatcommand: function(string, ChatCommandDefinition): void
+  override_chatcommand: function(string, ChatCommandDefinition): void
+  unregister_chatcommand: function(string): void
+  register_privilege: function(string, PrivilegeDefinition): void
+  register_authentication_handler: function(AuthenticationHandlerDefinition): void
+  register_globalstep: function(function(number): void): void
+  register_on_mods_loaded: function(function(): void): void
+  register_on_shutdown: function(function(): void): void
+  register_on_placenode: function(function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStackObject, PointedThing): void): void
+  register_on_dignode: function(function(Vec3, NodeTable, ObjectRef): void): void
+  register_on_punchnode: function(function(Vec3, NodeTable, ObjectRef, PointedThing): void): void
+  register_on_generated: function(function(Vec3, Vec3, number): void): void
+  register_on_newplayer: function(function(ObjectRef): void): void
+  register_on_punchplayer: function(function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number): void): void
+  register_on_rightclickplayer: function(function(ObjectRef, ObjectRef): void): void
+  register_on_player_hpchange: function(function(ObjectRef, number, HPChangeReasonDefinition): void, boolean): void
+  register_on_dieplayer: function(function(ObjectRef, HPChangeReasonDefinition): void): void
+  register_on_respawnplayer: function(function(ObjectRef): void): void
+  register_on_prejoinplayer: function(function(string, string): void): void
+  register_on_joinplayer: function(function(ObjectRef, string): void): void
+  register_on_leaveplayer: function(function(ObjectRef, boolean): void): void
+  register_on_authplayer: function(function(string, string, boolean): void): void
+  register_on_auth_fail: function(function(string, string): void): void
+  register_on_cheat: function(function(ObjectRef, CheatDefinition): void): void
+  register_on_chat_message: function(function(string, string): void): void
+  register_on_chatcommand: function(function(string, string, string): boolean): void
+  register_on_player_receive_fields: function(function(ObjectRef, string, {string : any}): void): void
+  register_on_craft: function(function(ItemStackObject, ObjectRef, any[], string): void): void
+  register_craft_predict: function(function(ItemStackObject, ObjectRef, any[], string): void): void
+  register_allow_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition): void): void
+  register_on_player_inventory_action: function(function(ObjectRef, string, string, ActionDefinition): void): void
+  register_on_protection_violation: function(function(Vec3, string): void): void
+  register_on_item_eat: function(function(number, boolean, ItemStackObject, ObjectRef, PointedThing): void): void
+  register_on_item_pickup: function(function(ItemStackObject, ObjectRef, PointedThing, number, ...any): void): void
+  register_on_priv_grant: function(function(string, string, string): void): void
+  register_on_priv_revoke: function(function(string, string, string): void): void
+  register_can_bypass_userlimit: function(function(string, string): void): void
+  register_on_modchannel_message: function(function(string, string, string): void): void
+  register_on_liquid_transformed: function(function(Vec3[], string[]): void): void
+  register_on_mapblocks_changed: function(function(string[], number): void): void
   settings: MinetestSettingsObject
   setting_get_pos: function(string): Vec3
   string_to_privs: function(string, string): string
   privs_to_string: function(string, string): string
-  get_player_privs: function(string): {string}
-  check_player_privs: function(ObjectRef | string, string | {string}): boolean | {boolean}
+  get_player_privs: function(string): string[]
+  check_player_privs: function(ObjectRef | string, string | string[]): boolean | boolean[]
   check_password_entry: function(string, string, string): boolean
   get_password_hash: function(string, string): string
   get_player_ip: function(string): string
   get_auth_handler: function(): AuthenticationHandlerDefinition
-  notify_authentication_modified: function(string)
-  set_player_password: function(string, string)
-  set_player_privs: function(string, {string : boolean})
-  auth_reload: function()
-  chat_send_all: function(string)
-  chat_send_player: function(string, string)
-  format_chat_message: function(string, string)
-  set_node: function(Vec3, NodeTable)
-  add_node: function(Vec3, NodeTable)
-  bulk_set_node: function({Vec3}, NodeTable)
-  swap_node: function(Vec3, NodeTable)
-  remove_node: function(Vec3)
+  notify_authentication_modified: function(string): void
+  set_player_password: function(string, string): void
+  set_player_privs: function(string, {string : boolean}): void
+  auth_reload: function(): void
+  chat_send_all: function(string): void
+  chat_send_player: function(string, string): void
+  format_chat_message: function(string, string): void
+  set_node: function(Vec3, NodeTable): void
+  add_node: function(Vec3, NodeTable): void
+  bulk_set_node: function(Vec3[], NodeTable): void
+  swap_node: function(Vec3, NodeTable): void
+  remove_node: function(Vec3): void
   get_node: function(Vec3): NodeTable
-  get_node_or_nil: function(Vec3): NodeTable | nil
+  get_node_or_nil: function(Vec3): NodeTable | void
   get_node_light: function(Vec3, number): number
-  get_natural_light: function(Vec3: number): number
+  get_natural_light: function(Vec3, number): number
   get_artificial_light: function(number): number
   place_node: function(Vec3, NodeTable)
   dig_node: function(Vec3): boolean
@@ -129,8 +129,8 @@ interface minetest {
   get_gametime: function(): number
   get_day_count: function(): number
   find_node_near: function(Vec3, number, {string}, boolean): Vec3 | nil
-  find_nodes_in_area: function(Vec3, Vec3, {string}, boolean): {any}
-  find_nodes_in_area_under_air: function(Vec3, Vec3, {string}): {Vec3}
+  find_nodes_in_area: function(Vec3, Vec3, {string}, boolean): any[]
+  find_nodes_in_area_under_air: function(Vec3, Vec3, {string}): Vec3[]
   get_perlin: function(NoiseParams): PerlinNoiseObject
   get_perlin: function(number, number, number, number): PerlinNoiseObject
   get_voxel_manip: function(Vec3, Vec3): VoxelManipObject
