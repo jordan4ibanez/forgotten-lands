@@ -63,6 +63,10 @@ module utility {
     return (math.random() * (max - min) + min)
   }
 
+  export function fakeObjectRef(): ObjectRef {
+    return {} as ObjectRef
+  }
+
   const rr = randomRange;
 
   vector.create = function(x: number, y: number, z: number): Vec3 {
@@ -83,5 +87,6 @@ module utility {
       rr(minZ, maxZ)
     )
   }
+
 
 }

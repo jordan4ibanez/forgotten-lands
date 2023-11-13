@@ -1643,7 +1643,7 @@ declare global {
 
 
   export interface LuaEntity extends EntityDefinition {
-    initial_properties: ObjectProperties
+    initial_properties?: ObjectProperties
     name: string
     object: ObjectRef
   }

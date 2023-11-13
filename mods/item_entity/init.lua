@@ -14,6 +14,7 @@ end
 -- End of Lua Library inline imports
 do
     local println = utility.println
+    local fakeObjectRef = utility.fakeObjectRef
     local nextID = 0
     local function idGenerator()
         local gotten = nextID
@@ -23,6 +24,8 @@ do
     local ItemEntity = __TS__Class()
     ItemEntity.name = "ItemEntity"
     function ItemEntity.prototype.____constructor(self)
+        self.name = ""
+        self.object = fakeObjectRef()
         self.timer = 0
         self.cool = 5
         self.id = -1
@@ -38,7 +41,10 @@ do
             print((("id: " .. tostring(self.id)) .. " | cool: ") .. tostring(self.cool))
             self.cool = self.cool + math.random()
             self.timer = 0
+            print(self.name)
+            print("---------")
             if math.random() > 0.7 then
+                self.object:remove()
                 self.on_step = function(self, delta)
                     self.timer = self.timer + delta
                     if self.timer > 2 then

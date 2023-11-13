@@ -134,6 +134,9 @@ do
     function utility.randomRange(min, max)
         return math.random() * (max - min) + min
     end
+    function utility.fakeObjectRef()
+        return {}
+    end
     local rr = utility.randomRange
     vector.create = function(x, y, z)
         local temp = vector.zero()
