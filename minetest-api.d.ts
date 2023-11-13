@@ -330,12 +330,12 @@ interface SoundParameterTable extends SimpleSoundSpec {
   max_hear_distance: number
 }
 
-enum ParamType1 {
+declare enum ParamType1 {
   "light",
   "none"
 }
 
-enum ParamType2 {
+declare enum ParamType2 {
   "flowingliquid",
   "wallmounted",
   "facedir",
@@ -351,7 +351,7 @@ enum ParamType2 {
   "colordegrotate"
 }
 
-enum drawtype {
+declare enum drawtype {
   "normal",
   "airlike",
   "liquid",
@@ -400,7 +400,7 @@ type box = number[]
 
 type boxTable = box[]
 
-enum nodeboxtype {
+declare enum nodeboxtype {
   "regular",
   "fixed",
   "wallmounted",
@@ -484,7 +484,7 @@ interface ColorSpec {
   b: number
 }
 
-enum LogLevel {
+declare enum LogLevel {
   "none",
   "error",
   "warning",
@@ -493,19 +493,19 @@ enum LogLevel {
   "verbose"
 }
 
-enum TextureAlpha {
+declare enum TextureAlpha {
   "opaque",
   "clip",
   "blend"
 }
 
-enum LiquidType {
+declare enum LiquidType {
   "none",
   "source",
   "flowing"
 }
 
-enum NodeBoxConnections {
+declare enum NodeBoxConnections {
   "top",
   "bottom",
   "front",
@@ -571,7 +571,7 @@ interface ItemSounds {
   punch_use_air: SimpleSoundSpec
 }
 
-enum EntityVisual {
+declare enum EntityVisual {
   "cube",
   "sprite",
   "upright_sprite",
@@ -716,7 +716,7 @@ interface LBMDefinition {
 }
 
 
-enum SchematicRotation {
+declare enum SchematicRotation {
   zero = "0",
   ninety = "90",
   oneEighty = "180",
@@ -724,23 +724,23 @@ enum SchematicRotation {
   random = "random"
 }
 
-enum SchematicPlacementFlag {
+declare enum SchematicPlacementFlag {
   "place_center_x",
   "place_center_y",
   "place_center_z"
 }
 
-enum SchematicFormat {
+declare enum SchematicFormat {
   "mts",
   "lua"
 }
 
-const enum SchematicSerializationOption {
+declare enum SchematicSerializationOption {
   "lua_use_comments",
   "lua_num_indent_spaces"
 }
 
-enum SchematicReadOptionYSliceOption {
+declare enum SchematicReadOptionYSliceOption {
   "none",
   "low",
   "all"
@@ -774,7 +774,7 @@ interface SchematicDefinition {
   yslice_prob: number[][]
 }
 
-enum HTTPRequestMethod {
+declare enum HTTPRequestMethod {
   "GET",
   "POST",
   "PUT",
@@ -806,7 +806,7 @@ interface HTTPApi {
   fetch_async_get(handle: number): HTTPRequestResult
 }
 
-enum OreType {
+declare enum OreType {
   "scatter",
   "sheet",
   "puff",
@@ -815,12 +815,12 @@ enum OreType {
   "stratum"
 }
 
-enum OreFlags {
+declare enum OreFlags {
   "puff_cliffs",
   "puff_additive_composition"
 }
 
-enum NoiseFlags {
+declare enum NoiseFlags {
   "defaults",
   "eased",
   "absvalue"
@@ -889,12 +889,12 @@ interface BiomeDefinition {
 }
 
 
-enum DecorationType {
+declare enum DecorationType {
   "simple",
   "schematic"
 }
 
-enum DecorationFlags {
+declare enum DecorationFlags {
   "liquid_surface",
   "force_placement",
   "all_floors",
@@ -929,7 +929,7 @@ interface DecorationDefinition {
   rotation: string
 }
 
-enum CraftRecipeType {
+declare enum CraftRecipeType {
   "shapless",
   "toolrepair",
   "cooking",
@@ -973,7 +973,7 @@ interface AuthenticationHandlerDefinition {
 }
 
 
-enum HPChangeReasonType {
+declare enum HPChangeReasonType {
   "set_hp",
   "punch",
   "fall",
@@ -990,7 +990,7 @@ interface HPChangeReasonDefinition {
   from: string
 }
 
-enum CheatType {
+declare enum CheatType {
   "moved_too_fast",
   "interacted_too_far",
   "interacted_with_self",
@@ -1016,7 +1016,7 @@ interface CheatDefinition {
   type: CheatType
 }
 
-enum ClearObjectsOptions {
+declare enum ClearObjectsOptions {
   "full",
   "quick"
 }
@@ -1024,7 +1024,7 @@ enum ClearObjectsOptions {
 
 type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
 
-enum GenNotifyFlags {
+declare enum GenNotifyFlags {
   "dungeon",
   "temple",
   "cave_begin",
@@ -1048,7 +1048,7 @@ interface MapGenSettingsDefinition {
   flags: string
 }
 
-enum SearchAlgorithm{
+declare enum SearchAlgorithm{
   "A*_noprefetch",
   "A*",
   "Dijkstra"
@@ -1087,7 +1087,7 @@ interface MetaRef {
 }
 
 
-function ItemStack(_: ItemStackObject | string): ItemStackObject
+declare function ItemStack(_: ItemStackObject | string): ItemStackObject
 interface ItemStackObject {
   name: string
   count: number
@@ -1170,7 +1170,7 @@ interface TreeDefinition {
   
 type GenNotifyObject = Map<string, Vec3[]>
 
-function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
+declare function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
 interface VoxelManipObject {
   read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
   write_to_map(light: boolean): void
@@ -1194,7 +1194,7 @@ interface VoxelAreaInitializer {
   MaxEdge: Vec3
 }
 
-function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
+declare function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
 interface VoxelAreaObject {
   ystride: number
   zstride: number
@@ -1226,15 +1226,15 @@ interface HumidityMapObject {
 
 }
 
-function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
+declare function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
 interface RaycastObject extends Iterator<PointedThing>{}
 
-function SecureRandom(): SecureRandomObject
+declare function SecureRandom(): SecureRandomObject
 interface SecureRandomObject {
   next_bytes(count: number): string
 }
 
-function Settings(_: string): MinetestSettingsObject
+declare function Settings(_: string): MinetestSettingsObject
 interface MinetestSettingsObject {
   get(key: string): any
   get_bool(key: string, defaul?: boolean): boolean | null
@@ -1366,20 +1366,20 @@ interface ObjectRef {
   respawn(): void
 }
 
-function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
+declare function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
 interface PcgRandomObject {
   next(): number
   next(min: number, max: number): number
   rand_normal_dist(min: number, max: number, trials: number): number
 }
 
-function PerlinNoise(params: NoiseParams): PerlinNoiseObject
+declare function PerlinNoise(params: NoiseParams): PerlinNoiseObject
 interface PerlinNoiseObject {
   get_2d(position: Vec2): number
   get_3d(position: Vec3): number
 }
 
-function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
+declare function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
 interface PerlinNoiseMapObject {
   get_2d_map(pos: Vec2): number[][]
   get_3d_map(pos: Vec3): number[][][]
@@ -1390,7 +1390,7 @@ interface PerlinNoiseMapObject {
   get_map_slice(sliceOffset: Vec3, sliceSize: Vec3, buffer: number[]): number[]
 }
 
-function PseudoRandom(seed: number): PseudoRandomObject
+declare function PseudoRandom(seed: number): PseudoRandomObject
 interface PseudoRandomObject {
   next(): number
   next(min: number, max: number): number
@@ -1428,13 +1428,13 @@ interface PlayerControl {
   zoom: boolean
 }
 
-enum SkyParametersType {
+declare enum SkyParametersType {
   "regular",
   "skybox",
   "plain"
 }
 
-enum SkyParametersFogTintType {
+declare enum SkyParametersFogTintType {
   "custom",
   "default"
 }
@@ -1577,7 +1577,7 @@ interface LuaEntity extends EntityDefinition {
   object: ObjectRef
 }
 
-enum MinimapType {
+declare enum MinimapType {
   "off",
   "surface",
   "radar",
@@ -1603,7 +1603,7 @@ interface HudFlags {
   basic_debug: boolean
 }
 
-enum HudElementType {
+declare enum HudElementType {
   "image",
   "text",
   "statbar",
@@ -1632,25 +1632,25 @@ interface HudDefinition {
   style: number
 }
 
-enum HudReplaceBuiltinOption {
+declare enum HudReplaceBuiltinOption {
   "breath",
   "health"
 }
 
 type Formspec = string
 
-enum ParseRelativeNumberArgument {
+declare enum ParseRelativeNumberArgument {
   "<number>",
   "~<number>",
   "~"
 }
 
-enum CompressionMethod {
+declare enum CompressionMethod {
   "deflate",
   "zstd"
 }
 
-enum RotateAndPlaceOrientationFlag {
+declare enum RotateAndPlaceOrientationFlag {
   "invert_wall",
   "force_wall",
   "force_ceiling",
@@ -1658,14 +1658,14 @@ enum RotateAndPlaceOrientationFlag {
   "force_facedir"
 }
 
-enum BlockStatusCondition {
+declare enum BlockStatusCondition {
   "unknown",
   "emerging",
   "loaded",
   "active"
 }
 
-enum TileAnimationType {
+declare enum TileAnimationType {
   "vertical_frames",
   "sheed_2d"
 }
@@ -1733,7 +1733,7 @@ interface ParticleDefinition {
   bounce: ParticleBounceDefinition
 }
 
-enum ParticleSpawnerTweenStyle {
+declare enum ParticleSpawnerTweenStyle {
   "fwd",
   "rev",
   "pulse",
@@ -1757,7 +1757,7 @@ interface ParticleSpawnerRangeDefinition {
   z: number
 }
 
-enum ParticleSpawnerTextureBlend {
+declare enum ParticleSpawnerTextureBlend {
   "alpha",
   "add",
   "screen",
@@ -1781,7 +1781,7 @@ interface TexturePoolComponentTweenDefinition extends Array<number> {
   reps: number
 }
 
-enum TexturePoolComponentFade {
+declare enum TexturePoolComponentFade {
   "in",
   "out"
 }
@@ -1797,7 +1797,7 @@ interface TexturePoolComponentDefinition {
 
 type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
 
-enum ParticleSpawnerAttractionType {
+declare enum ParticleSpawnerAttractionType {
   "none",
   "point",
   "line",
@@ -1831,7 +1831,7 @@ interface ParticleSpawnerDefinition {
   texpool: ParticleSpawnerTexturePoolDefinition
 }
 
-enum AreaStoreType{
+declare enum AreaStoreType{
   "LibSpatial"
 }
 
@@ -1847,7 +1847,7 @@ interface AreaStoreCacheDefinition {
   limit: number
 }
 
-function AreaStore(_: AreaStoreType): AreaStoreObject
+declare function AreaStore(_: AreaStoreType): AreaStoreObject
 interface AreaStoreObject {
   get_area(id: number, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
   get_areas_for_pos(pos: Vec3, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
@@ -1954,9 +1954,9 @@ interface Translator {
   __call(...string: string[]): string
 }
 
-function dump(object: any, name: string, dumped: any[]): string
+declare function dump(object: any, name: string, dumped: any[]): string
 
-function dump2(object: any, dumped: any[]): string
+declare function dump2(object: any, dumped: any[]): string
 
 
 // Getting around redecleration warnings with this little trick.
