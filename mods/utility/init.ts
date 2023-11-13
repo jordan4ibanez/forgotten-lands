@@ -98,4 +98,14 @@ module utility {
     minetest.registered_entities[instance.name] = instance
   }
 
+
+  math.clamp = function(min: number, max: number, input: number): number {
+    if (input < min) {
+      return min
+    } else if (input > max) {
+      return max
+    }
+    return input
+  }
+
 }

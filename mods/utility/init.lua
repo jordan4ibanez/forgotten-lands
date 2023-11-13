@@ -283,7 +283,6 @@ do
     end
     minetest.registerTSEntity = function(prototype)
         local instance = __TS__New(prototype)
-        print(dump(instance))
         if instance.name == nil then
             error(
                 __TS__New(Error, "Unable to register entity: Name is null"),
@@ -292,5 +291,13 @@ do
         end
         instance.__index = instance
         minetest.registered_entities[instance.name] = instance
+    end
+    math.clamp = function(min, max, input)
+        if input < min then
+            return min
+        elseif input > max then
+            return max
+        end
+        return input
     end
 end
