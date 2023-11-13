@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/TypeScriptToLua/TypeScriptToLua/master/tsconfig-schema.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "moduleResolution": "Node",
+    "types": ["lua-types/jit", "@repcomm/mt-api"],
+    "strict": true,
+    "outDir": "mods/",
+    "rootDir": "mods/",
+    "sourceMap": false,
+    "downlevelIteration": true
+  },
+  "include": [
+    "mods/**/*.ts"
+  ],
+  "exclude": [
+    "mods/**/*.lua",
+    "mods/**/*.mts",
+  ],
+  "tstl": {
+    "luaTarget": "JIT",
+    "noImplicitGlobalVariables": true,
+    "noHeader": true,
+    // "sourceMapTraceback": true
+  }
+}

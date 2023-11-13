@@ -12,7 +12,7 @@ windows:
 
 linux:
 	@echo Transpiling Forgotten Times into lua...
-	@tl build
+	@npx tstl
 	@echo Successfully built Forgotten Times.
 	@echo Starting Minetest.
 	@minetest
