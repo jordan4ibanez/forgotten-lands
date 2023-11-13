@@ -23,7 +23,7 @@ module utility {
         name: keys[databit],
         force_place: forcePlace[databit] == true
       })
-      print(forcePlace[databit] == true)
+      // print(forcePlace[databit] == true)
       countDown -= 1
     }
 
