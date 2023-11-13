@@ -1,4 +1,4 @@
-println(
+print(
   "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",
   "| Pixel Perfection loaded.        |\n",
   "| Creator: Sofar                  |\n",

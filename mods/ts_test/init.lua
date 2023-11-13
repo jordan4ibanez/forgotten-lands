@@ -1,6 +1,12 @@
-local ____exports = {}
-local x = 5
-_G.ye = function()
+test = test or ({})
+do
+    function test.cool(self)
+        print("cool")
+    end
 end
-print("HELLO, FROM TS!")
-return ____exports
+do
+    local yep = test
+    minetest.register_globalstep(function(delta)
+        print(delta)
+    end)
+end

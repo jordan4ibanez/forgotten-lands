@@ -1,6 +1,6 @@
 
 --! Remember to put in \n
-println(
+print(
 "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",  
 "| Sounds loaded.                                                          |\n",
 "| Credits:                                                                |\n",

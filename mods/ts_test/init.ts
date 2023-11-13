@@ -1,15 +1,12 @@
-
-export {}
-
-let x = 5;
-
-declare global {
-  /** @noSelf **/
-  function ye(): void
+module test {
+  export function cool() {
+    print("cool")
+  }
 }
 
-globalThis.ye = function() {
-
+{
+  let yep = test
+  minetest.register_globalstep((delta: number) => {
+    print(delta)
+  })
 }
-
-print("HELLO, FROM TS!")
