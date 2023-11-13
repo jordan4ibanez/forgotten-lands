@@ -22,8 +22,9 @@
   "tstl": {
     "luaTarget": "JIT",
     "noHeader": true,
-    // "noImplicitSelf": false,
+
+    // "noImplicitGlobalVariables": false,
     // "sourceMapTraceback": true
-    "luaLibImport": "inline"
+    // "luaLibImport": "inline"
   }
 }

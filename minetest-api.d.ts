@@ -1,4 +1,4 @@
-export {}
+export {};
 
 // Everything was just dumped in as I looked down the lua_api.md
 export interface minetest {
@@ -315,868 +315,6 @@ export interface minetest {
   sound_fade(handle: number, step: number, gain: number): void
 }
 
-export interface SimpleSoundSpec {
-  name: string
-  gain: number
-  pitch: number
-  fade: number
-}
-
-export interface SoundParameterTable extends SimpleSoundSpec {
-  start_time: number
-  loop: boolean
-  pos: Vec3
-  object: ObjectRef
-  to_player: string
-  max_hear_distance: number
-}
-
-export enum ParamType1 {
-  "light",
-  "none"
-}
-
-export enum ParamType2 {
-  "flowingliquid",
-  "wallmounted",
-  "facedir",
-  "4dir",
-  "leveled",
-  "degrotate",
-  "meshoptions",
-  "color",
-  "colorfacedir",
-  "color4dir",
-  "colorwallmounted",
-  "glasslikeliquidlevel",
-  "colordegrotate"
-}
-
-export enum drawtype {
-  "normal",
-  "airlike",
-  "liquid",
-  "flowingliquid",
-  "glasslike",
-  "glasslike_framed",
-  "glasslike_framed_optional",
-  "allfaces",
-  "allfaces_optional",
-  "torchlike",
-  "signlike",
-  "plantlike",
-  "firelike",
-  "fencelike",
-  "raillike",
-  "nodebox",
-  "mesh",
-  "plantlike_rooted"
-}
-
-
-
-export interface NodeBox {
-  type: nodeboxtype
-  fixed: boxTable
-  wall_top: box
-  wall_bottom: box
-  wall_side: box
-  connect_top: box
-  connect_bottom: box
-  connect_front: box
-  connect_left: box
-  connect_back: box
-  connect_right: box
-  disconnected_top: box
-  disconnected_bottom: box
-  disconnected_front: box
-  disconnected_left: box
-  disconnected_back: box
-  disconnected_right: box
-  disconnected: box 
-  disconnected_sides: box
-}
-
-export type box = number[]
-
-export type boxTable = box[]
-
-export enum nodeboxtype {
-  "regular",
-  "fixed",
-  "wallmounted",
-  "connected"
-}
-
-export type itemstring = string
-
-
-export interface GameInfo {
-  id: string
-  title: string
-  author: string
-  path: string
-}
-
-export interface MinetestFeatures {
-  glasslike_framed: boolean
-  nodebox_as_selectionbox: boolean
-  get_all_craft_recipes_works: boolean
-  use_texture_alpha: boolean
-  no_legacy_abms: boolean
-  texture_names_parens: boolean
-  area_store_custom_ids: boolean
-  add_entity_with_staticdata: boolean
-  no_chat_message_prediction: boolean
-  object_use_texture_alpha: boolean
-  object_independent_selectionbox: boolean
-  httpfetch_binary_data: boolean
-  formspec_version_element: boolean
-  area_store_persistent_ids: boolean
-  pathfinder_works: boolean
-  object_step_has_moveresult: boolean
-  direct_velocity_on_players: boolean
-  use_texture_alpha_string_modes: boolean
-  degrotate_240_steps: boolean
-  abm_min_max_y: boolean
-  dynamic_add_media_table: boolean
-  particlespawner_tweenable: boolean
-  get_sky_as_table: boolean
-  get_light_data_buffer: boolean
-  mod_storage_on_disk: boolean
-  compress_zstd: boolean
-}
-
-export interface PlayerInformation {
-  address: string
-  ip_version: number
-  connection_uptime: number
-  protocol_version: number
-  formspec_version: number
-  lang_code: string
-  min_rtt: number
-  max_rtt: number
-  avg_rtt: number
-  min_jitter: number
-  max_jitter: number
-  avg_jitter: number 
-}
-
-export interface WindowInformation {
-  size: Vec2
-  max_formspec_size: Vec2
-  real_gui_scaling: number
-  real_hud_scaling: number
-}
-
-export interface MinetestInfo {
-  project: string
-  string: string
-  proto_min: string
-  proto_max: string
-  hash: string
-  is_dev: boolean
-}
-
-export interface ColorSpec {
-  a: number
-  r: number
-  g: number
-  b: number
-}
-
-export enum LogLevel {
-  "none",
-  "error",
-  "warning",
-  "action",
-  "info",
-  "verbose"
-}
-
-export enum TextureAlpha {
-  "opaque",
-  "clip",
-  "blend"
-}
-
-export enum LiquidType {
-  "none",
-  "source",
-  "flowing"
-}
-
-export enum NodeBoxConnections {
-  "top",
-  "bottom",
-  "front",
-  "left",
-  "back",
-  "right"
-}
-
-export interface NodeSoundSpec {
-  footstep: SimpleSoundSpec
-  dig: SimpleSoundSpec | string
-  dug: SimpleSoundSpec
-  place: SimpleSoundSpec
-  place_failed: SimpleSoundSpec
-  fall: SimpleSoundSpec
-}
-
-export interface ItemDropSpec {
-  tools: string[]
-  rarity: number
-  items: string[]
-  inherit_color: boolean
-  tool_groups: string | string[]
-}
-
-export interface NodeDropSpec {
-  max_items: number
-  items: ItemDropSpec[]
-}
-
-export interface MapNode {
-  name: string
-  prob: number
-  param2: number
-  force_place: boolean
-}
-
-export interface NodeTable {
-  name: string
-  param1: number
-  param2: number
-}
-
-export interface PointedThing {
-  type: string
-  under: Vec3
-  above: Vec3
-  ref: ObjectRef
-}
-
-export interface ToolCapabilities {
-  full_punch_interval: number
-  max_drop_level: number
-  groupcaps: {string : any}
-  damage_groups: {string : number}
-  punch_attack_uses: number
-}
-
-export interface ItemSounds {
-  breaks: SimpleSoundSpec
-  eat: SimpleSoundSpec
-  punch_use: SimpleSoundSpec
-  punch_use_air: SimpleSoundSpec
-}
-
-export enum EntityVisual {
-  "cube",
-  "sprite",
-  "upright_sprite",
-  "mesh",
-  "wielditem",
-  "item"
-}
-
-export interface Collision {
-  type: string
-  axis: string
-  node_pos: Vec3
-  object: ObjectRef
-  old_velocity: Vec3
-  new_velocity: Vec3
-}
-
-export interface MoveResult {
-  touching_ground: boolean
-  collides: boolean
-  standing_on_object: boolean
-  collisions: Collision[]
-}
-
-
-export type DynamicColorSpec = (ColorSpec | string)
-
-export interface ItemDefinition {
-  description: string
-  short_description: string
-  groups: {string: number}
-  inventory_image: string
-  inventory_overlay: string
-  wield_image: string
-  wield_overlay: string
-  wield_scale: Vec3
-  palette: string
-  color: string
-  stack_max: number
-  range: number
-  liquids_pointable: boolean
-  light_source: number
-  tool_capabilities: ToolCapabilities
-  node_placement_prediction: string
-  node_dig_prediction: string
-  sound: SimpleSoundSpec
-  on_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
-  on_secondary_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
-  on_drop(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
-  on_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
-  on_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
-  after_use(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
-}
-
-export interface NodeDefinition {
-  drawtype: drawtype
-  visual_scale: number
-  tiles: string[]
-  overlay_tiles: string[]
-  special_tiles: string[]
-  color: DynamicColorSpec
-  use_texture_alpha: TextureAlpha
-  palette: string
-  post_effect_color: DynamicColorSpec
-  post_effect_color_shaded: boolean
-  paramtype: ParamType1
-  paramtype2: ParamType2
-  place_param2: number
-  is_ground_content: boolean
-  sunlight_propagates: boolean
-  walkable: boolean
-  groups: {string : number}
-  pointable: boolean
-  diggable: boolean
-  climbable: boolean
-  move_resistance: number
-  buildable_to: boolean
-  floodable: boolean
-  liquidtype: LiquidType
-  liquid_alternative_flowing: string
-  liquid_alternative_source: string
-  liquid_viscosity: number
-  liquid_renewable: boolean
-  liquid_move_physics: boolean
-  leveled: number
-  leveled_max: number
-  liquid_range: number
-  drowning: number
-  damage_per_second: number
-  node_box: NodeBox
-  connects_to: string[]
-  connect_sides: NodeBoxConnections
-  mesh: string
-  selection_box: NodeBox
-  collision_box: NodeBox
-  legacy_facedir_simple: boolean
-  legacy_wallmounted: boolean
-  waving: number
-  sounds: NodeSoundSpec
-  drop: NodeDropSpec | string
-  on_construct(position: Vec3): void
-  on_destruct(position: Vec3): void
-  after_destruct(position: Vec3, oldNode: MapNode): void
-  on_flood(position: Vec3, oldNode: NodeTable, newNode: NodeTable): void
-  preserve_metadata(position: Vec3, oldNode: NodeTable, oldMeta: NodeTable, drops: ItemStackObject[]): void
-  after_place_node(position: Vec3, placer: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
-  after_dig_node(position: Vec3, oldNode: NodeTable, oldMeta: string, digger: ObjectRef): void
-  can_dig(position: Vec3, canDig: ObjectRef): boolean
-  on_punch(position: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
-  on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
-  on_dig(position: Vec3, node: NodeTable, digger: ObjectRef): void
-  on_timer(position: Vec3, elapsed: number): void
-  on_receive_fields(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
-  allow_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
-  allow_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-  allow_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-  on_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
-  on_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-  on_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-  on_blast(position: Vec3, intensity: number): void
-  mod_origin: string
-}
-
-export interface ABMDefinition {
-  label: string
-  nodenames: string[]
-  neighbors: string[]
-  interval: number
-  chance: number
-  min_y: number
-  max_y: number
-  catch_up: number
-  action(pos: Vec3, node: NodeTable, activeObjectCount: number, activeObjectCountWider: number): void
-}
-
-export interface LBMDefinition {
-  label: string
-  name: string
-  nodenames: string[]
-  run_at_every_load: boolean
-  action(pos: Vec3, node: NodeTable, delta: number): void
-}
-
-
-export enum SchematicRotation {
-  zero = "0",
-  ninety = "90",
-  oneEighty = "180",
-  twoSeventy = "270",
-  random = "random"
-}
-
-export enum SchematicPlacementFlag {
-  "place_center_x",
-  "place_center_y",
-  "place_center_z"
-}
-
-export enum SchematicFormat {
-  "mts",
-  "lua"
-}
-
-export enum SchematicSerializationOption {
-  "lua_use_comments",
-  "lua_num_indent_spaces"
-}
-
-export enum SchematicReadOptionYSliceOption {
-  "none",
-  "low",
-  "all"
-}
-
-export interface SchematicReadOptionYSlice {
-  write_yslice_prob: SchematicReadOptionYSliceOption
-}
-
-export interface SchematicData {
-  name: string
-  prob: number
-  param1: number
-  param2: number
-  force_place: boolean
-}
-
-export interface SchematicProbability {
-  pos: Vec3
-  prob: number
-}
-
-export interface SchematicSliceProbability {
-  ypos: number
-  prob: number
-}
-
-export interface SchematicDefinition {
-  size: Vec3
-  data: SchematicData[]
-  yslice_prob: number[][]
-}
-
-export enum HTTPRequestMethod {
-  "GET",
-  "POST",
-  "PUT",
-  "DELETE"
-}
-
-export interface HTTPrequestDefinition {
-  url: string
-  timeout: number
-  method: HTTPRequestMethod
-  data: string | {string : string}
-  user_agent: string
-  extra_headers: string[]
-  multipart: boolean
-  post_data: string | {string : string}
-}
-
-export interface HTTPRequestResult {
-  completed: boolean
-  succeeded: boolean
-  timeout: boolean
-  code: number
-  data: string
-}
-
-export interface HTTPApi {
-  fetch(req: HTTPrequestDefinition, callback: (res: HTTPRequestResult) => void): void
-  fetch_async(req: HTTPrequestDefinition): number
-  fetch_async_get(handle: number): HTTPRequestResult
-}
-
-export enum OreType {
-  "scatter",
-  "sheet",
-  "puff",
-  "blob",
-  "vein",
-  "stratum"
-}
-
-export enum OreFlags {
-  "puff_cliffs",
-  "puff_additive_composition"
-}
-
-export enum NoiseFlags {
-  "defaults",
-  "eased",
-  "absvalue"
-}
-
-export interface NoiseParams {
-  offset: number
-  scale: number
-  spread: Vec3
-  seed: number
-  octaves: number
-  persistence: number
-  lacunarity: number
-  flags: NoiseFlags
-}
-
-export interface OreDefinition {
-  ore_type: OreType
-  ore: string
-  ore_param2: number
-  wherein: string
-  clust_scarcity: number
-  clust_num_ores: number
-  clust_size: number
-  y_min: number
-  y_max: number
-  flags: OreFlags
-  noise_threshold: number
-  noise_params: NoiseParams
-  biomes: string[]
-  column_height_min: number
-  column_height_max: number
-  column_midpoint_factor: number
-  np_puff_top: NoiseParams
-  np_puff_bottom: NoiseParams
-  random_factor: number
-  np_stratum_thickness: NoiseParams
-  stratum_thickness: number
-}
-
-export interface BiomeDefinition {
-  name: string
-  node_dust: string
-  node_top: string
-  depth_top: number
-  node_filler: string
-  depth_filler: number
-  node_stone: string
-  node_water_top: string
-  depth_water_top: number
-  node_water: string
-  node_river_water: string
-  node_riverbed: string
-  depth_riverbed: number
-  node_cave_liquid: string | string[]
-  node_dungeon: string
-  node_dungeon_alt: string
-  node_dungeon_stair: string
-  y_max: number
-  y_min: number
-  max_pos: Vec3
-  min_pos: Vec3
-  vertical_blend: number
-  heat_point: number
-  humidity_point: number
-}
-
-
-export enum DecorationType {
-  "simple",
-  "schematic"
-}
-
-export enum DecorationFlags {
-  "liquid_surface",
-  "force_placement",
-  "all_floors",
-  "all_ceilings",
-  "place_center_x",
-  "place_center_y",
-  "place_center_z"
-}
-
-export interface DecorationDefinition {
-  name: string
-  deco_type: DecorationType
-  place_on: string
-  sidelen: number
-  fill_ratio: number
-  noise_params: NoiseParams
-  biomes: string[]
-  y_min: number
-  y_max: number
-  spawn_by: string
-  check_offset: number
-  num_spawn_by: number
-  flags: string | {string : boolean}
-  decoration: string | string[]
-  height: number
-  height_max: number
-  param2: number
-  param2_max: number
-  place_offset_y: number
-  schematic: string | SchematicDefinition | number
-  replacements: {string : string}
-  rotation: string
-}
-
-export enum CraftRecipeType {
-  "shapless",
-  "toolrepair",
-  "cooking",
-  "fuel"
-}
-
-export interface CraftRecipeDefinition {
-  type: CraftRecipeType
-  output: string
-  recipe: string[] | string
-  replacements: string[]
-  additional_wear: number
-  cooktime: number
-  burntime: number
-}
-
-export interface ChatCommandDefinition {
-  params: string
-  description: string
-  privs: string[]
-  func(name: string, param: string): [boolean, string]
-}
-
-export interface PrivilegeDefinition {
-  description: string
-  give_to_singleplayer: boolean
-  give_to_admin: boolean
-  on_grant(name: string, granterName: string): void
-  on_revoke(name: string, revokerName: string): void
-}
-
-export interface AuthenticationHandlerDefinition {
-  get_auth(name: string): void
-  create_auth(name: string, password: string): void
-  delete_auth(name: string): void
-  set_password(name: string, password: string): void
-  set_privileges(name: string, privileges: Map<any,any>): void // ! fixme: this needs to be checked.
-  reload(): void
-  record_login(name: string): void
-  iterate(): void
-}
-
-
-export enum HPChangeReasonType {
-  "set_hp",
-  "punch",
-  "fall",
-  "node_damage",
-  "drown",
-  "respawn"
-}
-
-export interface HPChangeReasonDefinition {
-  type: HPChangeReasonType
-  node: string
-  node_pos: Vec3
-  object: ObjectRef
-  from: string
-}
-
-export enum CheatType {
-  "moved_too_fast",
-  "interacted_too_far",
-  "interacted_with_self",
-  "interacted_while_dead",
-  "finished_unknown_dig",
-  "dug_unbreakable",
-  "dug_too_fast"
-}
-
-export interface ActionDefinition {
-  from_list: string
-  to_list: string
-  from_index: number
-  to_index: number
-  count: number
-  listname: string
-  index: number
-  stack: ItemStackObject
-}
-
-
-export interface CheatDefinition {
-  type: CheatType
-}
-
-export enum ClearObjectsOptions {
-  "full",
-  "quick"
-}
-
-
-export type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
-
-export enum GenNotifyFlags {
-  "dungeon",
-  "temple",
-  "cave_begin",
-  "cave_end",
-  "large_cave_begin",
-  "large_cave_end",
-  "decoration"
-}
-
-export interface BiomeDataDefinition {
-  biome: number
-  heat: number
-  humidity: number
-}
-
-export interface MapGenSettingsDefinition {
-  mgname: string
-  seed: number
-  chnksize: number
-  water_level: number
-  flags: string
-}
-
-export enum SearchAlgorithm{
-  "A*_noprefetch",
-  "A*",
-  "Dijkstra"
-}
-
-export interface MetaData {
-  fields: {string : any}
-  inventory: {string : {number : string}}
-}
-
-export interface MetaRef {
-  set_tool_capabilities(toolCapabilities: ToolCapabilities): void
-  contains(key: string): boolean
-  get(key: string): string
-  set_string(key: string, value: string): void
-  get_string(key: string): string
-  set_int(key: string, value: number): void
-  get_int(key: string): number
-  set_float(key: string, value: number): void
-  get_float(key: string): number
-  get_keys(): string[]
-  to_table(): MetaData | void
-  from_table(data: MetaData): boolean
-  equals(other: MetaRef): boolean
-  //! FIXME: USE INHERITENCE!
-  // node
-  get_inventory(): InvRef
-  mark_as_private(nameOrArray: string | string[]): void
-  // timer
-  set(timeOut: number, elapsed: number): void
-  start(timeOut: number): void
-  stop(): void
-  get_timeout(): number
-  get_elapsed(): number
-  is_started(): boolean
-}
-
-
-export function ItemStack(_: ItemStackObject | string): ItemStackObject
-interface ItemStackObject {
-  name: string
-  count: number
-  wear: number
-  metadata: string
-
-  is_empty(): boolean
-  get_name(): string
-  set_name(name: string): boolean
-  get_count(): number
-  set_count(count: number): boolean
-  get_wear(): number
-  set_wear(wear: number): boolean
-  get_meta(): MetaRef
-  get_description(): string
-  get_short_description(): string
-  clear(): void
-  replace(item: ItemStackObject | string): void
-  to_string(): string
-  to_table(): any[]
-  get_stack_max(): number
-  get_free_space(): number
-  is_known(): boolean
-  get_definition(): ItemDefinition
-  get_tool_capabilities(): ToolCapabilities
-  add_wear(wear: number): void
-  add_wear_by_uses(maxUses: number): void
-  add_item(item: ItemStackObject): ItemStackObject
-  item_fits(item: ItemStackObject): boolean
-  take_item(n: number): ItemStackObject
-  peek_item(n: number): ItemStackObject
-  equals(other: ItemStackObject): boolean
-}
-
-
-export interface InvRefLocation {
-  type: string
-  name: string
-  pos: Vec3
-}
-
-export interface InvRef {
-  is_empty(listName: string): boolean
-  get_size(listName: string): number
-  set_size(listName: string, size: number): boolean
-  get_width(listName: string): number
-  set_width(listName: string, size: number): void
-  get_stack(listName: string, i: number): ItemStackObject
-  set_stack(listName: string, i: number, stack: ItemStackObject): void
-  get_list(listName: string): ItemStackObject[]
-  set_list(listName: string, list: ItemStackObject[]): void
-  get_lists(): string[]
-  set_lists(lists: ItemStackObject[]): void
-  add_item(listName: string, stack: ItemStackObject | string): ItemStackObject
-  room_for_item(listName: string, stack: ItemStackObject | string): boolean
-  contains_item(listName: string, stack: ItemStackObject | string, matchMeta: boolean): boolean
-  remove_item(listName: string, stack: ItemStackObject | string): ItemStackObject[]
-  get_location(): InvRefLocation
-}
-
-export interface TreeDefinition {
-  axiom: string
-  rules_a: string
-  rules_b: string
-  rules_c: string
-  rules_d: string
-  trunk: string
-  leaves: string
-  leaves2: string
-  leaves2_chance: number
-  angle: number
-  iterations: number
-  random_level: number
-  trunk_type: string
-  thin_branches: boolean
-  fruit: string
-  fruit_chance: number
-  seed: number
-}
-  
-export type GenNotifyObject = Map<string, Vec3[]>
-
-export function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
-
-
-
-export function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
-
 
 // export interface HeightMapObject {
 
@@ -1194,50 +332,908 @@ export function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
 
 // }
 
-export function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
-export function SecureRandom(): SecureRandomObject
-export function Settings(_: string): MinetestSettingsObject
-export function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
-export function PerlinNoise(params: NoiseParams): PerlinNoiseObject
-export function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
-export function PseudoRandom(seed: number): PseudoRandomObject
-export function AreaStore(_: AreaStoreType): AreaStoreObject
-
-export interface vector {
-  new(x: number, y: number, z: number): Vec3
-  zero(): Vec3
-  copy(vec: Vec3): Vec3
-  from_string(s: string, init: string): Vec3
-  to_string(vec: Vec3): string
-  direction(vec1: Vec3, vec2: Vec3): Vec3
-  distance(vec1: Vec3, vec2: Vec3): number
-  length(vec: Vec3): number
-  normalize(vec: Vec3): Vec3
-  floor(vec: Vec3): Vec3
-  round(vec: Vec3): Vec3
-  apply(vec: Vec3, fun: (input: number) => number): Vec3
-  combine(vec1: Vec3, vec2: Vec3, fun: (...any: any) => void): Vec3 //! fixme: test this
-  equals(vec1: Vec3, vec2: Vec3): boolean
-  sort(vec1: Vec3, vec2: Vec3): [Vec3, Vec3]
-  angle(vec1: Vec3, vec2: Vec3): number
-  dot(vec1: Vec3, vec2: Vec3): number
-  cross(vec1: Vec3, vec2: Vec3): number
-  check(vec: Vec3): boolean
-  in_area(vec: Vec3, min: Vec3, max: Vec3): boolean
-
-  add(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-  subtract(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-  multiply(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-  divide(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-
-  rotate(vec: Vec3, radians: number): Vec3
-  rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
-  dir_to_rotation(vec: Vec3, up: Vec3): Vec3
-
-  // random(number, number, number, number, number, number): Vec3
-}
-
 declare global {
+
+  interface ItemStackObject {
+    name: string
+    count: number
+    wear: number
+    metadata: string
+  
+    is_empty(): boolean
+    get_name(): string
+    set_name(name: string): boolean
+    get_count(): number
+    set_count(count: number): boolean
+    get_wear(): number
+    set_wear(wear: number): boolean
+    get_meta(): MetaRef
+    get_description(): string
+    get_short_description(): string
+    clear(): void
+    replace(item: ItemStackObject | string): void
+    to_string(): string
+    to_table(): any[]
+    get_stack_max(): number
+    get_free_space(): number
+    is_known(): boolean
+    get_definition(): ItemDefinition
+    get_tool_capabilities(): ToolCapabilities
+    add_wear(wear: number): void
+    add_wear_by_uses(maxUses: number): void
+    add_item(item: ItemStackObject): ItemStackObject
+    item_fits(item: ItemStackObject): boolean
+    take_item(n: number): ItemStackObject
+    peek_item(n: number): ItemStackObject
+    equals(other: ItemStackObject): boolean
+  }
+  
+  
+  export interface InvRefLocation {
+    type: string
+    name: string
+    pos: Vec3
+  }
+  
+  export interface InvRef {
+    is_empty(listName: string): boolean
+    get_size(listName: string): number
+    set_size(listName: string, size: number): boolean
+    get_width(listName: string): number
+    set_width(listName: string, size: number): void
+    get_stack(listName: string, i: number): ItemStackObject
+    set_stack(listName: string, i: number, stack: ItemStackObject): void
+    get_list(listName: string): ItemStackObject[]
+    set_list(listName: string, list: ItemStackObject[]): void
+    get_lists(): string[]
+    set_lists(lists: ItemStackObject[]): void
+    add_item(listName: string, stack: ItemStackObject | string): ItemStackObject
+    room_for_item(listName: string, stack: ItemStackObject | string): boolean
+    contains_item(listName: string, stack: ItemStackObject | string, matchMeta: boolean): boolean
+    remove_item(listName: string, stack: ItemStackObject | string): ItemStackObject[]
+    get_location(): InvRefLocation
+  }
+  
+  export interface TreeDefinition {
+    axiom: string
+    rules_a: string
+    rules_b: string
+    rules_c: string
+    rules_d: string
+    trunk: string
+    leaves: string
+    leaves2: string
+    leaves2_chance: number
+    angle: number
+    iterations: number
+    random_level: number
+    trunk_type: string
+    thin_branches: boolean
+    fruit: string
+    fruit_chance: number
+    seed: number
+  }
+
+  export type GenNotifyObject = Map<string, Vec3[]>
+
+  export interface SimpleSoundSpec {
+    name: string
+    gain: number
+    pitch: number
+    fade: number
+  }
+  
+  export interface SoundParameterTable extends SimpleSoundSpec {
+    start_time: number
+    loop: boolean
+    pos: Vec3
+    object: ObjectRef
+    to_player: string
+    max_hear_distance: number
+  }
+  
+  export enum ParamType1 {
+    "light",
+    "none"
+  }
+  
+  export enum ParamType2 {
+    "flowingliquid",
+    "wallmounted",
+    "facedir",
+    "4dir",
+    "leveled",
+    "degrotate",
+    "meshoptions",
+    "color",
+    "colorfacedir",
+    "color4dir",
+    "colorwallmounted",
+    "glasslikeliquidlevel",
+    "colordegrotate"
+  }
+  
+  export enum drawtype {
+    "normal",
+    "airlike",
+    "liquid",
+    "flowingliquid",
+    "glasslike",
+    "glasslike_framed",
+    "glasslike_framed_optional",
+    "allfaces",
+    "allfaces_optional",
+    "torchlike",
+    "signlike",
+    "plantlike",
+    "firelike",
+    "fencelike",
+    "raillike",
+    "nodebox",
+    "mesh",
+    "plantlike_rooted"
+  }
+  
+  
+  
+  export interface NodeBox {
+    type: nodeboxtype
+    fixed: boxTable
+    wall_top: box
+    wall_bottom: box
+    wall_side: box
+    connect_top: box
+    connect_bottom: box
+    connect_front: box
+    connect_left: box
+    connect_back: box
+    connect_right: box
+    disconnected_top: box
+    disconnected_bottom: box
+    disconnected_front: box
+    disconnected_left: box
+    disconnected_back: box
+    disconnected_right: box
+    disconnected: box 
+    disconnected_sides: box
+  }
+  
+  export type box = number[]
+  
+  export type boxTable = box[]
+  
+  export enum nodeboxtype {
+    "regular",
+    "fixed",
+    "wallmounted",
+    "connected"
+  }
+  
+  export type itemstring = string
+  
+  
+  export interface GameInfo {
+    id: string
+    title: string
+    author: string
+    path: string
+  }
+  
+  export interface MinetestFeatures {
+    glasslike_framed: boolean
+    nodebox_as_selectionbox: boolean
+    get_all_craft_recipes_works: boolean
+    use_texture_alpha: boolean
+    no_legacy_abms: boolean
+    texture_names_parens: boolean
+    area_store_custom_ids: boolean
+    add_entity_with_staticdata: boolean
+    no_chat_message_prediction: boolean
+    object_use_texture_alpha: boolean
+    object_independent_selectionbox: boolean
+    httpfetch_binary_data: boolean
+    formspec_version_element: boolean
+    area_store_persistent_ids: boolean
+    pathfinder_works: boolean
+    object_step_has_moveresult: boolean
+    direct_velocity_on_players: boolean
+    use_texture_alpha_string_modes: boolean
+    degrotate_240_steps: boolean
+    abm_min_max_y: boolean
+    dynamic_add_media_table: boolean
+    particlespawner_tweenable: boolean
+    get_sky_as_table: boolean
+    get_light_data_buffer: boolean
+    mod_storage_on_disk: boolean
+    compress_zstd: boolean
+  }
+  
+  export interface PlayerInformation {
+    address: string
+    ip_version: number
+    connection_uptime: number
+    protocol_version: number
+    formspec_version: number
+    lang_code: string
+    min_rtt: number
+    max_rtt: number
+    avg_rtt: number
+    min_jitter: number
+    max_jitter: number
+    avg_jitter: number 
+  }
+  
+  export interface WindowInformation {
+    size: Vec2
+    max_formspec_size: Vec2
+    real_gui_scaling: number
+    real_hud_scaling: number
+  }
+  
+  export interface MinetestInfo {
+    project: string
+    string: string
+    proto_min: string
+    proto_max: string
+    hash: string
+    is_dev: boolean
+  }
+  
+  export interface ColorSpec {
+    a: number
+    r: number
+    g: number
+    b: number
+  }
+  
+  export enum LogLevel {
+    "none",
+    "error",
+    "warning",
+    "action",
+    "info",
+    "verbose"
+  }
+  
+  export enum TextureAlpha {
+    "opaque",
+    "clip",
+    "blend"
+  }
+  
+  export enum LiquidType {
+    "none",
+    "source",
+    "flowing"
+  }
+  
+  export enum NodeBoxConnections {
+    "top",
+    "bottom",
+    "front",
+    "left",
+    "back",
+    "right"
+  }
+  
+  export interface NodeSoundSpec {
+    footstep: SimpleSoundSpec
+    dig: SimpleSoundSpec | string
+    dug: SimpleSoundSpec
+    place: SimpleSoundSpec
+    place_failed: SimpleSoundSpec
+    fall: SimpleSoundSpec
+  }
+  
+  export interface ItemDropSpec {
+    tools: string[]
+    rarity: number
+    items: string[]
+    inherit_color: boolean
+    tool_groups: string | string[]
+  }
+  
+  export interface NodeDropSpec {
+    max_items: number
+    items: ItemDropSpec[]
+  }
+  
+  export interface MapNode {
+    name: string
+    prob: number
+    param2: number
+    force_place: boolean
+  }
+  
+  export interface NodeTable {
+    name: string
+    param1: number
+    param2: number
+  }
+  
+  export interface PointedThing {
+    type: string
+    under: Vec3
+    above: Vec3
+    ref: ObjectRef
+  }
+  
+  export interface ToolCapabilities {
+    full_punch_interval: number
+    max_drop_level: number
+    groupcaps: {string : any}
+    damage_groups: {string : number}
+    punch_attack_uses: number
+  }
+  
+  export interface ItemSounds {
+    breaks: SimpleSoundSpec
+    eat: SimpleSoundSpec
+    punch_use: SimpleSoundSpec
+    punch_use_air: SimpleSoundSpec
+  }
+  
+  export enum EntityVisual {
+    "cube",
+    "sprite",
+    "upright_sprite",
+    "mesh",
+    "wielditem",
+    "item"
+  }
+  
+  export interface Collision {
+    type: string
+    axis: string
+    node_pos: Vec3
+    object: ObjectRef
+    old_velocity: Vec3
+    new_velocity: Vec3
+  }
+  
+  export interface MoveResult {
+    touching_ground: boolean
+    collides: boolean
+    standing_on_object: boolean
+    collisions: Collision[]
+  }
+  
+  
+  export type DynamicColorSpec = (ColorSpec | string)
+  
+  export interface ItemDefinition {
+    description: string
+    short_description: string
+    groups: {string: number}
+    inventory_image: string
+    inventory_overlay: string
+    wield_image: string
+    wield_overlay: string
+    wield_scale: Vec3
+    palette: string
+    color: string
+    stack_max: number
+    range: number
+    liquids_pointable: boolean
+    light_source: number
+    tool_capabilities: ToolCapabilities
+    node_placement_prediction: string
+    node_dig_prediction: string
+    sound: SimpleSoundSpec
+    on_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
+    on_secondary_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
+    on_drop(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
+    on_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
+    on_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
+    after_use(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
+  }
+  
+  export interface NodeDefinition {
+    drawtype: drawtype
+    visual_scale: number
+    tiles: string[]
+    overlay_tiles: string[]
+    special_tiles: string[]
+    color: DynamicColorSpec
+    use_texture_alpha: TextureAlpha
+    palette: string
+    post_effect_color: DynamicColorSpec
+    post_effect_color_shaded: boolean
+    paramtype: ParamType1
+    paramtype2: ParamType2
+    place_param2: number
+    is_ground_content: boolean
+    sunlight_propagates: boolean
+    walkable: boolean
+    groups: {string : number}
+    pointable: boolean
+    diggable: boolean
+    climbable: boolean
+    move_resistance: number
+    buildable_to: boolean
+    floodable: boolean
+    liquidtype: LiquidType
+    liquid_alternative_flowing: string
+    liquid_alternative_source: string
+    liquid_viscosity: number
+    liquid_renewable: boolean
+    liquid_move_physics: boolean
+    leveled: number
+    leveled_max: number
+    liquid_range: number
+    drowning: number
+    damage_per_second: number
+    node_box: NodeBox
+    connects_to: string[]
+    connect_sides: NodeBoxConnections
+    mesh: string
+    selection_box: NodeBox
+    collision_box: NodeBox
+    legacy_facedir_simple: boolean
+    legacy_wallmounted: boolean
+    waving: number
+    sounds: NodeSoundSpec
+    drop: NodeDropSpec | string
+    on_construct(position: Vec3): void
+    on_destruct(position: Vec3): void
+    after_destruct(position: Vec3, oldNode: MapNode): void
+    on_flood(position: Vec3, oldNode: NodeTable, newNode: NodeTable): void
+    preserve_metadata(position: Vec3, oldNode: NodeTable, oldMeta: NodeTable, drops: ItemStackObject[]): void
+    after_place_node(position: Vec3, placer: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
+    after_dig_node(position: Vec3, oldNode: NodeTable, oldMeta: string, digger: ObjectRef): void
+    can_dig(position: Vec3, canDig: ObjectRef): boolean
+    on_punch(position: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
+    on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
+    on_dig(position: Vec3, node: NodeTable, digger: ObjectRef): void
+    on_timer(position: Vec3, elapsed: number): void
+    on_receive_fields(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
+    allow_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+    allow_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    allow_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+    on_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_blast(position: Vec3, intensity: number): void
+    mod_origin: string
+  }
+  
+  
+  
+  export interface MetaRef {
+    set_tool_capabilities(toolCapabilities: ToolCapabilities): void
+    contains(key: string): boolean
+    get(key: string): string
+    set_string(key: string, value: string): void
+    get_string(key: string): string
+    set_int(key: string, value: number): void
+    get_int(key: string): number
+    set_float(key: string, value: number): void
+    get_float(key: string): number
+    get_keys(): string[]
+    to_table(): MetaData | void
+    from_table(data: MetaData): boolean
+    equals(other: MetaRef): boolean
+    //! FIXME: USE INHERITENCE!
+    // node
+    get_inventory(): InvRef
+    mark_as_private(nameOrArray: string | string[]): void
+    // timer
+    set(timeOut: number, elapsed: number): void
+    start(timeOut: number): void
+    stop(): void
+    get_timeout(): number
+    get_elapsed(): number
+    is_started(): boolean
+  }
+
+  export interface ABMDefinition {
+    label: string
+    nodenames: string[]
+    neighbors: string[]
+    interval: number
+    chance: number
+    min_y: number
+    max_y: number
+    catch_up: number
+    action(pos: Vec3, node: NodeTable, activeObjectCount: number, activeObjectCountWider: number): void
+  }
+  
+  export interface LBMDefinition {
+    label: string
+    name: string
+    nodenames: string[]
+    run_at_every_load: boolean
+    action(pos: Vec3, node: NodeTable, delta: number): void
+  }
+  
+  
+  export enum SchematicRotation {
+    zero = "0",
+    ninety = "90",
+    oneEighty = "180",
+    twoSeventy = "270",
+    random = "random"
+  }
+  
+  export enum SchematicPlacementFlag {
+    "place_center_x",
+    "place_center_y",
+    "place_center_z"
+  }
+  
+  export enum SchematicFormat {
+    "mts",
+    "lua"
+  }
+  
+  export enum SchematicSerializationOption {
+    "lua_use_comments",
+    "lua_num_indent_spaces"
+  }
+  
+  export enum SchematicReadOptionYSliceOption {
+    "none",
+    "low",
+    "all"
+  }
+  
+  export interface SchematicReadOptionYSlice {
+    write_yslice_prob: SchematicReadOptionYSliceOption
+  }
+  
+  export interface SchematicData {
+    name: string
+    prob: number
+    param1: number
+    param2: number
+    force_place: boolean
+  }
+  
+  export interface SchematicProbability {
+    pos: Vec3
+    prob: number
+  }
+  
+  export interface SchematicSliceProbability {
+    ypos: number
+    prob: number
+  }
+  
+  export interface SchematicDefinition {
+    size: Vec3
+    data: SchematicData[]
+    yslice_prob: number[][]
+  }
+  
+  export enum HTTPRequestMethod {
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE"
+  }
+  
+  export interface HTTPrequestDefinition {
+    url: string
+    timeout: number
+    method: HTTPRequestMethod
+    data: string | {string : string}
+    user_agent: string
+    extra_headers: string[]
+    multipart: boolean
+    post_data: string | {string : string}
+  }
+  
+  export interface HTTPRequestResult {
+    completed: boolean
+    succeeded: boolean
+    timeout: boolean
+    code: number
+    data: string
+  }
+  
+  export interface HTTPApi {
+    fetch(req: HTTPrequestDefinition, callback: (res: HTTPRequestResult) => void): void
+    fetch_async(req: HTTPrequestDefinition): number
+    fetch_async_get(handle: number): HTTPRequestResult
+  }
+  
+  export enum OreType {
+    "scatter",
+    "sheet",
+    "puff",
+    "blob",
+    "vein",
+    "stratum"
+  }
+  
+  export enum OreFlags {
+    "puff_cliffs",
+    "puff_additive_composition"
+  }
+  
+  export enum NoiseFlags {
+    "defaults",
+    "eased",
+    "absvalue"
+  }
+  
+  export interface NoiseParams {
+    offset: number
+    scale: number
+    spread: Vec3
+    seed: number
+    octaves: number
+    persistence: number
+    lacunarity: number
+    flags: NoiseFlags
+  }
+  
+  export interface OreDefinition {
+    ore_type: OreType
+    ore: string
+    ore_param2: number
+    wherein: string
+    clust_scarcity: number
+    clust_num_ores: number
+    clust_size: number
+    y_min: number
+    y_max: number
+    flags: OreFlags
+    noise_threshold: number
+    noise_params: NoiseParams
+    biomes: string[]
+    column_height_min: number
+    column_height_max: number
+    column_midpoint_factor: number
+    np_puff_top: NoiseParams
+    np_puff_bottom: NoiseParams
+    random_factor: number
+    np_stratum_thickness: NoiseParams
+    stratum_thickness: number
+  }
+  
+  export interface BiomeDefinition {
+    name: string
+    node_dust: string
+    node_top: string
+    depth_top: number
+    node_filler: string
+    depth_filler: number
+    node_stone: string
+    node_water_top: string
+    depth_water_top: number
+    node_water: string
+    node_river_water: string
+    node_riverbed: string
+    depth_riverbed: number
+    node_cave_liquid: string | string[]
+    node_dungeon: string
+    node_dungeon_alt: string
+    node_dungeon_stair: string
+    y_max: number
+    y_min: number
+    max_pos: Vec3
+    min_pos: Vec3
+    vertical_blend: number
+    heat_point: number
+    humidity_point: number
+  }
+  
+  
+  export enum DecorationType {
+    "simple",
+    "schematic"
+  }
+  
+  export enum DecorationFlags {
+    "liquid_surface",
+    "force_placement",
+    "all_floors",
+    "all_ceilings",
+    "place_center_x",
+    "place_center_y",
+    "place_center_z"
+  }
+  
+  export interface DecorationDefinition {
+    name: string
+    deco_type: DecorationType
+    place_on: string
+    sidelen: number
+    fill_ratio: number
+    noise_params: NoiseParams
+    biomes: string[]
+    y_min: number
+    y_max: number
+    spawn_by: string
+    check_offset: number
+    num_spawn_by: number
+    flags: string | {string : boolean}
+    decoration: string | string[]
+    height: number
+    height_max: number
+    param2: number
+    param2_max: number
+    place_offset_y: number
+    schematic: string | SchematicDefinition | number
+    replacements: {string : string}
+    rotation: string
+  }
+  
+  export enum CraftRecipeType {
+    "shapless",
+    "toolrepair",
+    "cooking",
+    "fuel"
+  }
+  
+  export interface CraftRecipeDefinition {
+    type: CraftRecipeType
+    output: string
+    recipe: string[] | string
+    replacements: string[]
+    additional_wear: number
+    cooktime: number
+    burntime: number
+  }
+  
+  export interface ChatCommandDefinition {
+    params: string
+    description: string
+    privs: string[]
+    func(name: string, param: string): [boolean, string]
+  }
+  
+  export interface PrivilegeDefinition {
+    description: string
+    give_to_singleplayer: boolean
+    give_to_admin: boolean
+    on_grant(name: string, granterName: string): void
+    on_revoke(name: string, revokerName: string): void
+  }
+  
+  export interface AuthenticationHandlerDefinition {
+    get_auth(name: string): void
+    create_auth(name: string, password: string): void
+    delete_auth(name: string): void
+    set_password(name: string, password: string): void
+    set_privileges(name: string, privileges: Map<any,any>): void // ! fixme: this needs to be checked.
+    reload(): void
+    record_login(name: string): void
+    iterate(): void
+  }
+  
+  
+  export enum HPChangeReasonType {
+    "set_hp",
+    "punch",
+    "fall",
+    "node_damage",
+    "drown",
+    "respawn"
+  }
+  
+  export interface HPChangeReasonDefinition {
+    type: HPChangeReasonType
+    node: string
+    node_pos: Vec3
+    object: ObjectRef
+    from: string
+  }
+  
+  export enum CheatType {
+    "moved_too_fast",
+    "interacted_too_far",
+    "interacted_with_self",
+    "interacted_while_dead",
+    "finished_unknown_dig",
+    "dug_unbreakable",
+    "dug_too_fast"
+  }
+  
+  export interface ActionDefinition {
+    from_list: string
+    to_list: string
+    from_index: number
+    to_index: number
+    count: number
+    listname: string
+    index: number
+    stack: ItemStackObject
+  }
+  
+  
+  export interface CheatDefinition {
+    type: CheatType
+  }
+  
+  export enum ClearObjectsOptions {
+    "full",
+    "quick"
+  }
+  
+  
+  export type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
+  
+  export enum GenNotifyFlags {
+    "dungeon",
+    "temple",
+    "cave_begin",
+    "cave_end",
+    "large_cave_begin",
+    "large_cave_end",
+    "decoration"
+  }
+  
+  export interface BiomeDataDefinition {
+    biome: number
+    heat: number
+    humidity: number
+  }
+  
+  export interface MapGenSettingsDefinition {
+    mgname: string
+    seed: number
+    chnksize: number
+    water_level: number
+    flags: string
+  }
+  
+  export enum SearchAlgorithm{
+    "A*_noprefetch",
+    "A*",
+    "Dijkstra"
+  }
+  
+  export interface MetaData {
+    fields: {string : any}
+    inventory: {string : {number : string}}
+  }
+
+  export function ItemStack(_: ItemStackObject | string): ItemStackObject
+  export function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
+  export function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
+  export function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
+  export function SecureRandom(): SecureRandomObject
+  export function Settings(_: string): MinetestSettingsObject
+  export function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
+  export function PerlinNoise(params: NoiseParams): PerlinNoiseObject
+  export function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
+  export function PseudoRandom(seed: number): PseudoRandomObject
+  export function AreaStore(_: AreaStoreType): AreaStoreObject
+
+  namespace vector {
+    export function zero(): Vec3
+    export function copy(vec: Vec3): Vec3
+    export function from_string(s: string, init: string): Vec3
+    export function to_string(vec: Vec3): string
+    export function direction(vec1: Vec3, vec2: Vec3): Vec3
+    export function distance(vec1: Vec3, vec2: Vec3): number
+    export function length(vec: Vec3): number
+    export function normalize(vec: Vec3): Vec3
+    export function floor(vec: Vec3): Vec3
+    export function round(vec: Vec3): Vec3
+    export function apply(vec: Vec3, fun: (input: number) => number): Vec3
+    export function combine(vec1: Vec3, vec2: Vec3, fun: (...any: any) => void): Vec3 //! fixme: test this
+    export function equals(vec1: Vec3, vec2: Vec3): boolean
+    export function sort(vec1: Vec3, vec2: Vec3): [Vec3, Vec3]
+    export function angle(vec1: Vec3, vec2: Vec3): number
+    export function dot(vec1: Vec3, vec2: Vec3): number
+    export function cross(vec1: Vec3, vec2: Vec3): number
+    export function check(vec: Vec3): boolean
+    export function in_area(vec: Vec3, min: Vec3, max: Vec3): boolean
+  
+    export function add(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+    export function subtract(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+    export function multiply(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+    export function divide(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+  
+    export function rotate(vec: Vec3, radians: number): Vec3
+    export function rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
+    export function dir_to_rotation(vec: Vec3, up: Vec3): Vec3
+  
+    // random(number, number, number, number, number, number): Vec3
+  }
 
   export interface VoxelManipObject {
     read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
@@ -1962,15 +1958,17 @@ declare global {
     get_elapsed(): number
     is_started(): boolean
   }
+
+  export function dump(object: any, name?: string, dumped?: any[]): string
+
+  export function dump2(object: any, dumped?: any[]): string
+
+  export interface Translator {
+    __call(...string: string[]): string
+  }
 }
 
-export interface Translator {
-  __call(...string: string[]): string
-}
 
-export function dump(object: any, name: string, dumped: any[]): string
-
-export function dump2(object: any, dumped: any[]): string
 
 
 // Getting around redecleration warnings with this little trick.
@@ -1992,5 +1990,5 @@ export function dump2(object: any, dumped: any[]): string
 // table.shuffle = function(_: table, _: number, _: number, _: function): table {}
 declare global {
   const minetest: minetest
-  const vector: vector
+  // const vector: vector
 }
