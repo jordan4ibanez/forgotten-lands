@@ -3,8 +3,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext"],
+    "module": "System",
     "moduleResolution": "Node",
-    "types": ["lua-types/jit", "@repcomm/mt-api"],
+    "types": ["lua-types/jit", "@repcomm/mt-api", "./minetest-api"],
     "strict": true,
     "outDir": "mods/",
     "rootDir": "mods/",
@@ -20,7 +21,6 @@
   ],
   "tstl": {
     "luaTarget": "JIT",
-    "noImplicitGlobalVariables": true,
     "noHeader": true,
     // "sourceMapTraceback": true
   }

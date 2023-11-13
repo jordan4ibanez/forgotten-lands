@@ -1,21 +1,3 @@
-global function switch(input: any, ...: any | function(any): any): any
-  local tableized = {...}
-  for k,v in ipairs(tableized) do
-    if ((k + 1) % 2 == 0) then
-      if (input == v or v == "else") then
-        local foundType = type(tableized[k + 1])
-        if (foundType == "function") then
-          return (tableized[k + 1] as function)(input)
-        else
-          return tableized[k + 1]
-        end
-      end
-    end
-  end
-end
-
-local switch = switch
-
 global function println(...: any)
   local builder: string = ""
   for _,val in ipairs({...}) do
