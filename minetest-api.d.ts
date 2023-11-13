@@ -1227,9 +1227,7 @@ interface HumidityMapObject {
 }
 
 function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
-interface RaycastObject {
-   __call(): Iterator<PointedThing>
-}
+interface RaycastObject extends Iterator<PointedThing>{}
 
 function SecureRandom(): SecureRandomObject
 interface SecureRandomObject {
