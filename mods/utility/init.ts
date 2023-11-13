@@ -1,7 +1,11 @@
-import { MtVec3 } from "@repcomm/mt-api";
+function concat(...input: string[]): string {
+  let accumulator = ""
+  input.forEach((val: string) => {
+    accumulator += val 
+  })
+  return accumulator
+}
 
-function generateSchematic(size: MtVec3, keys: Map<String, String>, forcePlace: Map<String, Boolean>, ySliceProb: Array<number>) {
-  // var newSchematic = {
-  //   size = size
-  // }
+function generateSchematic(size: Vec3) {
+  
 }
