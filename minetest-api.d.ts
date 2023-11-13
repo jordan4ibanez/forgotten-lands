@@ -1976,11 +1976,12 @@ declare global {
 
   // You can just bolt onto namespaces apparently!
   export namespace math {
-    export function clamp(min: number, max: number, input: number): number
     export function hypot(x: number, y: number): number
     export function sign(x: number, tolerence: number): number
     export function factorial(x: number): number
     export function round(x: number): number
+    // Clamp is a bolt on created in utility.
+    export function clamp(min: number, max: number, input: number): number
   }
 
   export namespace string {
