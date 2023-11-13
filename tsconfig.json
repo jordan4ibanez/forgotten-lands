@@ -5,7 +5,7 @@
     "lib": ["ESNext"],
     "module": "System",
     "moduleResolution": "Node",
-    "types": ["lua-types/jit", "@repcomm/mt-api", "./minetest-api"],
+    "types": ["lua-types/jit", "./minetest-api"],
     "strict": true,
     "outDir": "mods/",
     "rootDir": "mods/",
