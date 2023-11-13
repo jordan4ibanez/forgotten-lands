@@ -1286,17 +1286,17 @@ declare global {
   }
 
   export interface EntityDefinition {
-    initial_properties: ObjectProperties
-    on_activate(staticData: string, delta: number): void 
-    on_deactivate(removal: boolean): void 
-    on_step(delta: number, moveResult: MoveResult): void 
-    on_punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
-    on_death(killer: ObjectRef): void
-    on_rightclick(clicker: ObjectRef): void 
-    on_attach_child(child: ObjectRef): void
-    on_detach_child(child: ObjectRef): void
-    on_detach(parent: ObjectRef): void
-    get_staticdata(): void
+    initial_properties?: ObjectProperties
+    on_activate?(staticData: string, delta: number): void 
+    on_deactivate?(removal: boolean): void 
+    on_step?(delta: number, moveResult: MoveResult): void 
+    on_punch?(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
+    on_death?(killer: ObjectRef): void
+    on_rightclick?(clicker: ObjectRef): void 
+    on_attach_child?(child: ObjectRef): void
+    on_detach_child?(child: ObjectRef): void
+    on_detach?(parent: ObjectRef): void
+    get_staticdata?(): void
   }
   
   export interface DetachedInventoryCallbacks {
@@ -1606,39 +1606,39 @@ declare global {
   export type CollisionBox = Array<number>
 
   export interface ObjectProperties {
-    hp_max: number
-    breath_max: number
-    zoom_fov: number
-    eye_height: number
-    physical: boolean
-    collide_with_objects: boolean
-    collisionbox: CollisionBox
-    selectionbox: number[]
-    pointable: boolean
-    visual: EntityVisual
-    visual_size: Vec3
-    mesh: string
-    textures: string[]
-    colors: DynamicColorSpec[]
-    use_texture_alpha: boolean
-    spritediv: Vec2
-    initial_sprite_basepos: Vec2
-    is_visible: boolean
-    makes_footstep_sound: boolean
-    automatic_rotate: number
-    stepheight: number
-    automatic_face_movement_dir: number
-    automatic_face_movement_max_rotation_per_sec: number
-    backface_culling: boolean
-    glow: number
-    nametag: string
-    nametag_color: ColorSpec
-    nametag_bgcolor: ColorSpec
-    infotext: string
-    static_save: boolean
-    damage_texture_modifier: string
-    shaded: boolean
-    show_on_minimap: boolean
+    hp_max?: number
+    breath_max?: number
+    zoom_fov?: number
+    eye_height?: number
+    physical?: boolean
+    collide_with_objects?: boolean
+    collisionbox?: CollisionBox
+    selectionbox?: number[]
+    pointable?: boolean
+    visual?: EntityVisual
+    visual_size?: Vec3
+    mesh?: string
+    textures?: string[]
+    colors?: DynamicColorSpec[]
+    use_texture_alpha?: boolean
+    spritediv?: Vec2
+    initial_sprite_basepos?: Vec2
+    is_visible?: boolean
+    makes_footstep_sound?: boolean
+    automatic_rotate?: number
+    stepheight?: number
+    automatic_face_movement_dir?: number
+    automatic_face_movement_max_rotation_per_sec?: number
+    backface_culling?: boolean
+    glow?: number
+    nametag?: string
+    nametag_color?: ColorSpec
+    nametag_bgcolor?: ColorSpec
+    infotext?: string
+    static_save?: boolean
+    damage_texture_modifier?: string
+    shaded?: boolean
+    show_on_minimap?: boolean
   }
 
 
