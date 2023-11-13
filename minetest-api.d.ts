@@ -675,53 +675,53 @@ interface NodeDefinition {
   on_construct(position: Vec3): void
   on_destruct(position: Vec3): void
   after_destruct(position: Vec3, oldNode: MapNode): void
-  on_flood(Vec3, NodeTable, NodeTable)
-  preserve_metadata(Vec3, NodeTable, NodeTable, {ItemStackObject})
-  after_place_node(Vec3, ObjectRef, ItemStackObject, PointedThing)
-  after_dig_node(Vec3, NodeTable, string, ObjectRef)
-  can_dig(Vec3, ObjectRef | string) //Unknown, documentation doesn't say
-  on_punch(Vec3, NodeTable, ObjectRef, PointedThing)
-  on_rightclick(Vec3, NodeTable, ObjectRef, ItemStackObject, PointedThing)
-  on_dig(Vec3, NodeTable, ObjectRef)
-  on_timer(Vec3, number)
-  on_receive_fields(Vec3, string, {string : any}, ObjectRef)
-  allow_metadata_inventory_move(Vec3, string, number, string, number, number, ObjectRef)
-  allow_metadata_inventory_put(Vec3, string, number, ItemStackObject, ObjectRef)
-  allow_metadata_inventory_take(Vec3, string, number, ItemStackObject, ObjectRef)
-  on_metadata_inventory_move(Vec3, string, number, string, number, string, ObjectRef)
-  on_metadata_inventory_put(Vec3, string, number, ItemStackObject, ObjectRef)
-  on_metadata_inventory_take(Vec3, string, number, ItemStackObject, ObjectRef)
-  on_blast(Vec3, number)
+  on_flood(position: Vec3, oldNode: NodeTable, newNode: NodeTable): void
+  preserve_metadata(position: Vec3, oldNode: NodeTable, oldMeta: NodeTable, drops: ItemStackObject[]): void
+  after_place_node(position: Vec3, placer: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
+  after_dig_node(position: Vec3, oldNode: NodeTable, oldMeta: string, digger: ObjectRef): void
+  can_dig(position: Vec3, canDig: ObjectRef): boolean
+  on_punch(position: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
+  on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
+  on_dig(position: Vec3, node: NodeTable, digger: ObjectRef): void
+  on_timer(position: Vec3, elapsed: number): void
+  on_receive_fields(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
+  allow_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+  allow_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+  allow_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+  on_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+  on_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+  on_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+  on_blast(position: Vec3, intensity: number): void
   mod_origin: string
 }
 
 interface ABMDefinition {
   label: string
-  nodenames: {string}
-  neighbors: {string}
+  nodenames: string[]
+  neighbors: string[]
   interval: number
   chance: number
   min_y: number
   max_y: number
   catch_up: number
-  action: function(Vec3, NodeTable, number, number)
+  action(pos: Vec3, node: NodeTable, activeObjectCount: number, activeObjectCountWider: number): void
 }
 
 interface LBMDefinition {
   label: string
   name: string
-  nodenames: {string}
+  nodenames: string[]
   run_at_every_load: boolean
-  action: function(Vec3, NodeTable, number)
+  action(pos: Vec3, node: NodeTable, delta: number): void
 }
 
 
 enum SchematicRotation {
-  "0",
-  "90",
-  "180",
-  "270",
-  "random"
+  zero = "0",
+  ninety = "90",
+  oneEighty = "180",
+  twoSeventy = "270",
+  random = "random"
 }
 
 enum SchematicPlacementFlag {
@@ -735,19 +735,19 @@ enum SchematicFormat {
   "lua"
 }
 
-enum SchematicSerializationOption {
+const enum SchematicSerializationOption {
   "lua_use_comments",
   "lua_num_indent_spaces"
 }
 
-enum SchematicReadOptionYSlice {
+enum SchematicReadOptionYSliceOption {
   "none",
   "low",
   "all"
 }
 
 interface SchematicReadOptionYSlice {
-  write_yslice_prob: SchematicReadOptionYSlice
+  write_yslice_prob: SchematicReadOptionYSliceOption
 }
 
 interface SchematicData {
@@ -787,7 +787,7 @@ interface HTTPrequestDefinition {
   method: HTTPRequestMethod
   data: string | {string : string}
   user_agent: string
-  extra_headers: {string}
+  extra_headers: string[]
   multipart: boolean
   post_data: string | {string : string}
 }
@@ -801,9 +801,9 @@ interface HTTPRequestResult {
 }
 
 interface HTTPApi {
-  fetch: function(HTTPrequestDefinition, function(HTTPRequestResult))
-  fetch_async: function(HTTPrequestDefinition): number
-  fetch_async_get: function(number): HTTPRequestResult
+  fetch(req: HTTPrequestDefinition, callback: (res: HTTPRequestResult) => void): void
+  fetch_async(req: HTTPrequestDefinition): number
+  fetch_async_get(handle: number): HTTPRequestResult
 }
 
 enum OreType {
@@ -850,7 +850,7 @@ interface OreDefinition {
   flags: OreFlags
   noise_threshold: number
   noise_params: NoiseParams
-  biomes: {string}
+  biomes: string[]
   column_height_min: number
   column_height_max: number
   column_midpoint_factor: number
@@ -875,7 +875,7 @@ interface BiomeDefinition {
   node_river_water: string
   node_riverbed: string
   depth_riverbed: number
-  node_cave_liquid: string | {string}
+  node_cave_liquid: string | string[]
   node_dungeon: string
   node_dungeon_alt: string
   node_dungeon_stair: string
@@ -911,14 +911,14 @@ interface DecorationDefinition {
   sidelen: number
   fill_ratio: number
   noise_params: NoiseParams
-  biomes: {string}
+  biomes: string[]
   y_min: number
   y_max: number
   spawn_by: string
   check_offset: number
   num_spawn_by: number
   flags: string | {string : boolean}
-  decoration: string | {string}
+  decoration: string | string[]
   height: number
   height_max: number
   param2: number
@@ -939,8 +939,8 @@ enum CraftRecipeType {
 interface CraftRecipeDefinition {
   type: CraftRecipeType
   output: string
-  recipe: {string} | string
-  replacements: {string}
+  recipe: string[] | string
+  replacements: string[]
   additional_wear: number
   cooktime: number
   burntime: number
@@ -949,27 +949,27 @@ interface CraftRecipeDefinition {
 interface ChatCommandDefinition {
   params: string
   description: string
-  privs: {string}
-  func: function(string, string)
+  privs: string[]
+  func(name: string, param: string): [boolean, string]
 }
 
 interface PrivilegeDefinition {
   description: string
   give_to_singleplayer: boolean
   give_to_admin: boolean
-  on_grant: function(string, string)
-  on_revoke: function(string, string)
+  on_grant(name: string, granterName: string): void
+  on_revoke(name: string, revokerName: string): void
 }
 
 interface AuthenticationHandlerDefinition {
-  get_auth: function(string)
-  create_auth: function(string, string)
-  delete_auth: function(string)
-  set_password: function(string, string)
-  set_privileges: function(string, {string})
-  reload: function()
-  record_login: function(string)
-  iterate: function()
+  get_auth(name: string): void
+  create_auth(name: string, password: string): void
+  delete_auth(name: string): void
+  set_password(name: string, password: string): void
+  set_privileges(name: string, privileges: Map<any,any>): void // ! fixme: this needs to be checked.
+  reload(): void
+  record_login(name: string): void
+  iterate(): void
 }
 
 
@@ -1022,7 +1022,7 @@ enum ClearObjectsOptions {
 }
 
 
-type EmergeAreaCallback = function(Vec3, any, number, any)
+type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
 
 enum GenNotifyFlags {
   "dungeon",
@@ -1060,66 +1060,66 @@ interface MetaData {
 }
 
 interface MetaRef {
-  set_tool_capabilities: function(MetaRef, ToolCapabilities)
-  contains: function(MetaRef, string): boolean
-  get: function(MetaRef, string): string
-  set_string: function(MetaRef, string, string)
-  get_string: function(MetaRef, string): string
-  set_int: function(MetaRef, string, number)
-  get_int: function(MetaRef, string): number
-  set_float: function(MetaRef, string, number)
-  get_float: function(MetaRef, string): number
-  get_keys: function(MetaRef): {string}
-  to_table: function(MetaRef): MetaData | nil
-  from_table: function(MetaRef, MetaData): boolean
-  equals: function(MetaRef, MetaRef): boolean
+  set_tool_capabilities(toolCapabilities: ToolCapabilities): void
+  contains(key: string): boolean
+  get(key: string): string
+  set_string(key: string, value: string): void
+  get_string(key: string): string
+  set_int(key: string, value: number): void
+  get_int(key: string): number
+  set_float(key: string, value: number): void
+  get_float(key: string): number
+  get_keys(): string[]
+  to_table(): MetaData | void
+  from_table(data: MetaData): boolean
+  equals(other: MetaRef): boolean
   //! FIXME: USE INHERITENCE!
   // node
-  get_inventory: function(MetaRef): InvRef
-  mark_as_private: function(MetaRef, string | {string})
+  get_inventory(): InvRef
+  mark_as_private(nameOrArray: string | string[]): void
   // timer
-  set: function(MetaRef, number, number)
-  start: function(MetaRef, number)
-  stop: function(MetaRef)
-  get_timeout: function(MetaRef): number
-  get_elapsed: function(MetaRef): number
-  is_started: function(MetaRef): boolean
+  set(timeOut: number, elapsed: number): void
+  start(timeOut: number): void
+  stop(): void
+  get_timeout(): number
+  get_elapsed(): number
+  is_started(): boolean
 }
 
 
-function ItemStack(_: ItemStackObject | string): ItemStackObject {}
+function ItemStack(_: ItemStackObject | string): ItemStackObject
 interface ItemStackObject {
   name: string
   count: number
   wear: number
   metadata: string
 
-  is_empty: function(ItemStackObject): boolean
-  get_name: function(ItemStackObject): string
-  set_name: function(ItemStackObject, string): boolean
-  get_count: function(ItemStackObject): number
-  set_count: function(ItemStackObject, number): boolean
-  get_wear: function(ItemStackObject): number
-  set_wear: function(ItemStackObject, number): boolean
-  get_meta: function(ItemStackObject): MetaRef
-  get_description: function(ItemStackObject): string
-  get_short_description: function(ItemStackObject): string
-  clear: function(ItemStackObject)
-  replace: function(ItemStackObject, ItemStackObject | string)
-  to_string: function(ItemStackObject): string
-  to_table: function(ItemStackObject): {any}
-  get_stack_max: function(ItemStackObject): number
-  get_free_space: function(ItemStackObject): number
-  is_known: function(ItemStackObject): boolean
-  get_definition: function(ItemStackObject): ItemDefinition
-  get_tool_capabilities: function(ItemStackObject): ToolCapabilities
-  add_wear: function(ItemStackObject, number)
-  add_wear_by_uses: function(ItemStackObject, number)
-  add_item: function(ItemStackObject, ItemStackObject): ItemStackObject
-  item_fits: function(ItemStackObject, ItemStackObject): boolean
-  take_item: function(ItemStackObject, number): ItemStackObject
-  peek_item: function(ItemStackObject, number): ItemStackObject
-  equals: function(ItemStackObject, ItemStackObject): boolean
+  is_empty(): boolean
+  get_name(): string
+  set_name(name: string): boolean
+  get_count(): number
+  set_count(count: number): boolean
+  get_wear(): number
+  set_wear(wear: number): boolean
+  get_meta(): MetaRef
+  get_description(): string
+  get_short_description(): string
+  clear(): void
+  replace(item: ItemStackObject | string): void
+  to_string(): string
+  to_table(): any[]
+  get_stack_max(): number
+  get_free_space(): number
+  is_known(): boolean
+  get_definition(): ItemDefinition
+  get_tool_capabilities(): ToolCapabilities
+  add_wear(wear: number): void
+  add_wear_by_uses(maxUses: number): void
+  add_item(item: ItemStackObject): ItemStackObject
+  item_fits(item: ItemStackObject): boolean
+  take_item(n: number): ItemStackObject
+  peek_item(n: number): ItemStackObject
+  equals(other: ItemStackObject): boolean
 }
 
 
@@ -1130,22 +1130,22 @@ interface InvRefLocation {
 }
 
 interface InvRef {
-  is_empty: function(InvRef, string): boolean
-  get_size: function(InvRef, string): number
-  set_size: function(InvRef, string, number): boolean
-  get_width: function(InvRef, string): number
-  set_width: function(InvRef, string, number)
-  get_stack: function(InvRef, string, number): ItemStackObject
-  set_stack: function(InvRef, string, number, ItemStackObject)
-  get_list: function(InvRef, string): {ItemStackObject}
-  set_list: function(InvRef, string, {ItemStackObject})
-  get_lists: function(InvRef): {string}
-  set_lists: function(InvRef, {ItemStackObject})
-  add_item: function(InvRef, string, ItemStackObject | string): boolean
-  room_for_item: function(InvRef, string, ItemStackObject | string): boolean
-  contains_item: function(InvRef, string, ItemStackObject | string, boolean): boolean
-  remove_item: function(InvRef, string, ItemStackObject | string): {ItemStackObject}
-  get_location: function(InvRef): InvRefLocation
+  is_empty(listName: string): boolean
+  get_size(listName: string): number
+  set_size(listName: string, size: number): boolean
+  get_width(listName: string): number
+  set_width(listName: string, size: number): void
+  get_stack(listName: string, i: number): ItemStackObject
+  set_stack(listName: string, i: number, stack: ItemStackObject): void
+  get_list(listName: string): ItemStackObject[]
+  set_list(listName: string, list: ItemStackObject[]): void
+  get_lists(): string[]
+  set_lists(lists: ItemStackObject[]): void
+  add_item(listName: string, stack: ItemStackObject | string): ItemStackObject
+  room_for_item(listName: string, stack: ItemStackObject | string): boolean
+  contains_item(listName: string, stack: ItemStackObject | string, matchMeta: boolean): boolean
+  remove_item(listName: string, stack: ItemStackObject | string): ItemStackObject[]
+  get_location(): InvRefLocation
 }
 
 interface TreeDefinition {
@@ -1168,25 +1168,25 @@ interface TreeDefinition {
   seed: number
 }
   
-type GenNotifyObject = {string : {Vec3}}
+type GenNotifyObject = Map<string, Vec3[]>
 
-function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject {}
+function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
 interface VoxelManipObject {
-  read_from_map: function(VoxelManipObject, Vec3, Vec3)
-  write_to_map: function(VoxelManipObject, boolean)
-  get_node_at: function(VoxelManipObject, Vec3): MapNode
-  set_node_at: function(VoxelManipObject, Vec3, MapNode)
-  get_data: function(VoxelManipObject, {number}): {number}
-  set_data: function(VoxelManipObject, {number})
-  set_lighting: function(VoxelManipObject, number, Vec3, Vec3)
-  get_light_data: function(VoxelManipObject, {number}): {number}
-  set_light_data: function(VoxelManipObject, {number})
-  get_param2_data: function(VoxelManipObject, {number}): {number}
-  set_param2_data: function(VoxelManipObject, {number})
-  calc_lighting: function(VoxelManipObject, Vec3, Vec3, boolean)
-  update_liquids: function(VoxelManipObject)
-  was_modified: function(VoxelManipObject): boolean
-  get_emerged_area: function(VoxelManipObject): Vec3, Vec3
+  read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
+  write_to_map(light: boolean): void
+  get_node_at(position: Vec3): MapNode
+  set_node_at(position: Vec3, node: MapNode): void
+  get_data(buffer?: number[]): number[]
+  set_data(buffer?: number[]): number[]
+  set_lighting(light: number, p1: Vec3, p2: Vec3): void
+  get_light_data(buffer: number[]): number[]
+  set_light_data(lightData: number[]): void
+  get_param2_data(buffer: number[]): number[]
+  set_param2_data(param2Data: number[]): void
+  calc_lighting(p1: Vec3, p2: Vec3, propagateShadows: boolean): void
+  update_liquids(): void
+  was_modified(): boolean
+  get_emerged_area(): [Vec3, Vec3]
 }
 
 interface VoxelAreaInitializer {
@@ -1194,20 +1194,20 @@ interface VoxelAreaInitializer {
   MaxEdge: Vec3
 }
 
-function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject {}
+function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
 interface VoxelAreaObject {
   ystride: number
   zstride: number
-  new: function(VoxelAreaInitializer): VoxelAreaObject
-  getExtent: function(VoxelAreaObject): Vec3
-  index: function(VoxelAreaObject, number, number, number): number
-  indexp: function(VoxelAreaObject, Vec3): number
-  position: function(VoxelAreaObject, number): Vec3
-  contains: function(VoxelAreaObject, number, number, number): boolean
-  containsp: function(VoxelAreaObject, Vec3): boolean
-  containsi: function(VoxelAreaObject, number): boolean
-  iter: function(VoxelAreaObject, number, number, number, number, number, number): function(): number
-  iterp: function(VoxelAreaObject, Vec3, Vec3): function(): number
+  new(init: VoxelAreaInitializer): VoxelAreaObject
+  getExtent(): Vec3
+  index(x: number, y: number, z: number): number
+  indexp(p: Vec3): number
+  position(i: number): Vec3
+  contains(x: number, y: number, z: number): boolean
+  containsp(p: Vec3): boolean
+  containsi(i: number): boolean
+  iter(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Iterator<number>
+  iterp(minp: Vec3, maxp: Vec3): Iterator<number>
 }
 
 interface HeightMapObject {
@@ -1226,30 +1226,30 @@ interface HumidityMapObject {
 
 }
 
-function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject {}
+function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
 interface RaycastObject {
-   __call: function(RaycastObject): PointedThing | nil
+   __call(): Iterator<PointedThing>
 }
 
-function SecureRandom(): SecureRandomObject {}
+function SecureRandom(): SecureRandomObject
 interface SecureRandomObject {
-  next_bytes: function(SecureRandomObject, number): string
+  next_bytes(count: number): string
 }
 
-function Settings(_: string): MinetestSettingsObject {}
+function Settings(_: string): MinetestSettingsObject
 interface MinetestSettingsObject {
-  get: function(MinetestSettingsObject, string): any
-  get_bool: function(MinetestSettingsObject, string): boolean | nil
-  get_np_group: function(MinetestSettingsObject, string): NoiseParams
-  get_flags: function(MinetestSettingsObject, string): {string : boolean}
-  set: function(MinetestSettingsObject, string, string)
-  set_bool: function(MinetestSettingsObject, string, boolean)
-  set_np_group: function(MinetestSettingsObject, string, NoiseParams)
-  remove: function(MinetestSettingsObject, string): boolean
-  get_names: function(MinetestSettingsObject): {string}
-  has: function(MinetestSettingsObject, string): boolean
-  write: function(MinetestSettingsObject): boolean
-  to_table: function(MinetestSettingsObject): {string : any}
+  get(key: string): any
+  get_bool(key: string, defaul?: boolean): boolean | null
+  get_np_group(key: string): NoiseParams
+  get_flags(key: string): {string : boolean}
+  set(key: string, value: string): void
+  set_bool(key: string, value: boolean): void
+  set_np_group(key: string, value: NoiseParams): void
+  remove(key: string): boolean
+  get_names(): string[]
+  has(key: string): boolean
+  write(): boolean
+  to_table(): Map<string, any>
 }
 
 interface NametagAttributes {
@@ -1268,133 +1268,134 @@ interface AttachRef {
 
 
 interface ObjectRef {
-  get_pos: function(ObjectRef): Vec3
-  set_pos: function(ObjectRef, Vec3)
-  get_velocity: function(ObjectRef): Vec3
-  add_velocity: function(ObjectRef, Vec3)
-  move_to: function(ObjectRef, Vec3, boolean)
-  punch: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3)
-  right_click: function(ObjectRef, ObjectRef)
-  get_hp: function(ObjectRef): number
-  set_hp: function(ObjectRef, number, HPChangeReasonType)
-  get_inventory: function(ObjectRef): InvRef
-  get_wield_list: function(ObjectRef): string
-  get_wield_index: function(ObjectRef): number
-  get_wielded_item: function(ObjectRef): ItemStackObject
-  set_wielded_item: function(ObjectRef, ItemStackObject): boolean
-  get_armor_groups: function(ObjectRef): {string : number}
-  set_armor_groups: function(ObjectRef, {string : number})
-  set_animation: function(ObjectRef, Vec2, number, number, boolean)
-  set_animation_frame_speed: function(ObjectRef, number)
-  set_attach: function(ObjectRef, ObjectRef, string, Vec3, Vec3, boolean)
-  get_attach: function(ObjectRef): AttachRef | nil
-  get_children: function(ObjectRef): {ObjectRef}
-  set_detach: function(ObjectRef)
-  set_bone_position: function(ObjectRef, string, Vec3, Vec3)
-  set_properties: function(ObjectRef, {any : any})
-  get_properties: function(ObjectRef): {any : any}
-  is_player: function(ObjectRef): boolean
-  get_nametag_attributes: function(ObjectRef): NametagAttributes
-  set_nametag_attributes: function(ObjectRef, NametagAttributes)
-  remove: function(ObjectRef)
-  set_velocity: function(ObjectRef, Vec3)
-  set_acceleration: function(ObjectRef, Vec3)
-  get_acceleration: function(ObjectRef): Vec3
-  set_rotation: function(ObjectRef, Vec3)
-  get_rotation: function(ObjectRef): Vec3
-  set_yaw: function(ObjectRef, number)
-  get_yaw: function(ObjectRef): number
-  set_texture_mod: function(ObjectRef, string)
-  get_texture_mod: function(ObjectRef, string)
-  set_sprite: function(ObjectRef, Vec2, number, number, boolean)
+  get_pos(): Vec3
+  set_pos(position: Vec3): void
+  get_velocity(): Vec3
+  add_velocity(velocity: Vec3): void
+  move_to(newPos: Vec3, continuous: boolean): void
+  punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3): void
+  right_click(clicker: ObjectRef): void
+  get_hp(): number
+  set_hp(hp: number, reason: HPChangeReasonType): void
+  get_inventory(): InvRef
+  get_wield_list(): string
+  get_wield_index(): number
+  get_wielded_item(): ItemStackObject
+  set_wielded_item(item: ItemStackObject): boolean
+  get_armor_groups(): {string : number}
+  set_armor_groups(groups: {string : number}): void
+  get_animation(): Array<Vec2 | number>
+  set_animation(frameRange: Vec2, frameSpeed: number, frameBlend: number, loop: boolean): void
+  set_animation_frame_speed(speed: number): void
+  set_attach(parent: ObjectRef, bone: string, position: Vec3, rotation: Vec3, forcedVisible: boolean): void
+  get_attach(): AttachRef | void
+  get_children(): ObjectRef[]
+  set_detach(): void
+  set_bone_position(bone: string, position: Vec3, rotation: Vec3): void
+  set_properties(objectPropertiesTable: {any : any}): void
+  get_properties(): {any : any}
+  is_player(): boolean
+  get_nametag_attributes(): NametagAttributes
+  set_nametag_attributes(attributes: NametagAttributes): void
+  remove(): void
+  set_velocity(velocity: Vec3): void
+  set_acceleration(acceleration: Vec3): void
+  get_acceleration(): Vec3
+  set_rotation(rotation: Vec3): void
+  get_rotation(): Vec3
+  set_yaw(yaw: number): void
+  get_yaw(): number
+  set_texture_mod(mod: string): void
+  get_texture_mod(): string
+  set_sprite(startFrame: Vec2, numberOfFrames: number, frameLength: number, selectXByCamera: boolean): void
   name: string
-  get_luaentity: function(ObjectRef): LuaEntity
-  get_player_name: function(ObjectRef): string
-  get_look_dir: function(ObjectRef): Vec3
-  get_look_vertical: function(ObjectRef): number
-  get_look_horizontal: function(ObjectRef): number
-  set_look_vertical: function(ObjectRef, number)
-  set_look_horizontal: function(ObjectRef, number)
-  get_look_pitch: function(ObjectRef): number
-  get_look_yaw: function(ObjectRef): number
-  set_look_pitch: function(ObjectRef, number)
-  set_look_yaw: function(ObjectRef, number)
-  get_breath: function(ObjectRef): number
-  set_breath: function(ObjectRef, number)
-  set_fov: function(ObjectRef, number, boolean, number)
-  get_fov: function(ObjectRef): number
-  get_meta: function(ObjectRef): MetaRef
-  set_inventory_formspec: function(ObjectRef, Formspec)
-  get_inventory_formspec: function(ObjectRef): Formspec
-  set_formspec_prepend: function(ObjectRef, Formspec)
-  get_formspec_prepend: function(ObjectRef): Formspec
-  get_player_control: function(ObjectRef): PlayerControl
-  get_player_control_bits: function(ObjectRef): number
-  set_physics_override: function(ObjectRef, PhysicsOverride)
-  get_physics_override: function(ObjectRef): PhysicsOverride
-  hud_add: function(ObjectRef, HudDefinition): number
-  hud_remove: function(ObjectRef, number)
-  hud_change: function(ObjectRef, number, HudElementType, any)
-  hud_get: function(ObjectRef, number): HudDefinition
-  hud_set_flags: function(ObjectRef, HudFlags)
-  hud_get_flags: function(ObjectRef): HudFlags
-  hud_set_hotbar_itemcount: function(ObjectRef, number)
-  hud_get_hotbar_itemcount: function(ObjectRef): number
-  hud_set_hotbar_image: function(ObjectRef, string)
-  hud_get_hotbar_image: function(ObjectRef): string
-  hud_set_hotbar_selected_image: function(ObjectRef, string)
-  hud_get_hotbar_selected_image: function(ObjectRef): string
-  set_minimap_modes: function(ObjectRef, MinimapModes, number)
-  set_sky: function(ObjectRef, SkyParameters)
-  get_sky: function(ObjectRef, boolean): SkyParameters
-  set_sun: function(ObjectRef, SunParameters)
-  get_sun: function(ObjectRef): SunParameters
-  set_moon: function(ObjectRef, MoonParameters)
-  get_moon: function(ObjectRef): MoonParameters
-  set_stars: function(ObjectRef, StarParameters)
-  get_stars: function(ObjectRef): StarParameters
-  set_clouds: function(ObjectRef, CloudParameters)
-  get_clouds: function(ObjectRef): CloudParameters
-  override_day_night_ratio: function(ObjectRef, number | nil)
-  get_day_night_ratio: function(ObjectRef): number | nil
-  set_local_animation: function(ObjectRef, Vec2, Vec2, Vec2, Vec2, number)
-  get_local_animation: function(ObjectRef): {Vec2, Vec2, Vec2, Vec2, number}
-  set_eye_offset: function(ObjectRef, Vec3, Vec3, Vec3)
-  get_eye_offset: function(ObjectRef): Vec3, Vec3, Vec3
-  send_mapblock: function(ObjectRef, Vec3)
-  set_lighting: function(ObjectRef, LightingDefinition)
-  get_lighting: function(ObjectRef): LightingDefinition
-  respawn: function(ObjectRef)
+  get_luaentity(): LuaEntity
+  get_player_name(): string
+  get_look_dir(): Vec3
+  get_look_vertical(): number
+  get_look_horizontal(): number
+  set_look_vertical(radians: number): void
+  set_look_horizontal(radians: number): void
+  get_look_pitch(): number
+  get_look_yaw(): number
+  set_look_pitch(radians: number): void
+  set_look_yaw(radians: number): void
+  get_breath(): number
+  set_breath(value: number): void
+  set_fov(fov: number, isMultiplier: boolean, transitionTime: number): void
+  get_fov(): number
+  get_meta(): MetaRef
+  set_inventory_formspec(formSpec: Formspec): void
+  get_inventory_formspec(): Formspec
+  set_formspec_prepend(formSpec: Formspec): void
+  get_formspec_prepend(): Formspec
+  get_player_control(): PlayerControl
+  get_player_control_bits(): number
+  set_physics_override(override: PhysicsOverride): void
+  get_physics_override(): PhysicsOverride
+  hud_add(definition: HudDefinition): number
+  hud_remove(id: number): void
+  hud_change(id: number, stat: HudElementType, value: any): void
+  hud_get(id: number): HudDefinition
+  hud_set_flags(flags: HudFlags): void
+  hud_get_flags(): HudFlags
+  hud_set_hotbar_itemcount(count: number): void
+  hud_get_hotbar_itemcount(): number
+  hud_set_hotbar_image(textureName: string): void
+  hud_get_hotbar_image(): string
+  hud_set_hotbar_selected_image(textureName: string): void
+  hud_get_hotbar_selected_image(): string
+  set_minimap_modes(mode: MinimapModes, selectedMode: number): void
+  set_sky(parameters: SkyParameters): void
+  get_sky(asTable: true): SkyParameters
+  set_sun(parameters: SunParameters): void
+  get_sun(): SunParameters
+  set_moon(parameters: MoonParameters): void
+  get_moon(): MoonParameters
+  set_stars(parameters: StarParameters): void
+  get_stars(): StarParameters
+  set_clouds(parameters: CloudParameters): void
+  get_clouds(): CloudParameters
+  override_day_night_ratio(ratio: number | void): void
+  get_day_night_ratio(): number | void
+  set_local_animation(idle: Vec2, walk: Vec2, dig: Vec2, walkWhileDig: Vec2, frameSpeed: number): void
+  get_local_animation(): [Vec2, Vec2, Vec2, Vec2, number]
+  set_eye_offset(firstPerson: Vec3, thirdPersonBack: Vec3, thirdPersonFront: Vec3): void
+  get_eye_offset(): [Vec3, Vec3, Vec3]
+  send_mapblock(blockPos: Vec3): boolean
+  set_lighting(definition: LightingDefinition): void
+  get_lighting(): LightingDefinition
+  respawn(): void
 }
 
-function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject {}
+function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
 interface PcgRandomObject {
-  next: function(PcgRandomObject): number
-  next: function(PcgRandomObject, number, number): number
-  rand_normal_dist: function(PcgRandomObject, number, number, number): number
+  next(): number
+  next(min: number, max: number): number
+  rand_normal_dist(min: number, max: number, trials: number): number
 }
 
-function PerlinNoise(_params: NoiseParams): PerlinNoiseObject {}
+function PerlinNoise(params: NoiseParams): PerlinNoiseObject
 interface PerlinNoiseObject {
-  get_2d: function(PerlinNoiseObject, Vec2): number
-  get_3d: function(PerlinNoiseObject, Vec3): number
+  get_2d(position: Vec2): number
+  get_3d(position: Vec3): number
 }
 
-function PerlinNoiseMap(_params: NoiseParams, _size: Vec3): PerlinNoiseMapObject {}
+function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
 interface PerlinNoiseMapObject {
-  get_2d_map: function(PerlinNoiseMapObject, Vec2): number[][]
-  get_3d_map: function(PerlinNoiseMapObject, Vec3): number[][][]
-  get_2d_map_flat: function(PerlinNoiseMapObject, Vec2, {any}): {number}
-  get_3d_map_flat: function(PerlinNoiseMapObject, Vec3, {any}): {number}
-  calc_2d_map: function(PerlinNoiseMapObject, Vec2)
-  calc_3d_map: function(PerlinNoiseMapObject, Vec3)
-  get_map_slice: function(PerlinNoiseMapObject, Vec3, Vec3, {any}): {number}
+  get_2d_map(pos: Vec2): number[][]
+  get_3d_map(pos: Vec3): number[][][]
+  get_2d_map_flat(pos: Vec2, buffer: number[]): number[]
+  get_3d_map_flat(pos: Vec3, buffer: number[]): number[]
+  calc_2d_map(pos: Vec2): void
+  calc_3d_map(pos: Vec3): void
+  get_map_slice(sliceOffset: Vec3, sliceSize: Vec3, buffer: number[]): number[]
 }
 
-function PseudoRandom(_seed: number): PseudoRandomObject {}
+function PseudoRandom(seed: number): PseudoRandomObject
 interface PseudoRandomObject {
-  next: function(PseudoRandomObject): number
-  next: function(PseudoRandomObject, number, number): number
+  next(): number
+  next(min: number, max: number): number
 }
 
 interface PhysicsOverride {
@@ -1462,7 +1463,7 @@ interface SkyParameters {
   base_color: DynamicColorSpec
   body_orbit_tilt: number
   type: SkyParametersType
-  textures: {string}
+  textures: string[]
   clouds: boolean
   sky_color: SkyParametersColor
   fog: SkyParametersFog
@@ -1530,13 +1531,13 @@ interface ObjectProperties {
   physical: boolean
   collide_with_objects: boolean
   collisionbox: CollisionBox
-  selectionbox: {number}
+  selectionbox: number[]
   pointable: boolean
   visual: EntityVisual
   visual_size: Vec3
   mesh: string
-  textures: {string}
-  colors: {DynamicColorSpec}
+  textures: string[]
+  colors: DynamicColorSpec[]
   use_texture_alpha: boolean
   spritediv: Vec2
   initial_sprite_basepos: Vec2
@@ -1560,32 +1561,32 @@ interface ObjectProperties {
 
 interface EntityDefinition {
   initial_properties: ObjectProperties
-  on_activate: function(LuaEntity, string, number)
-  on_deactivate: function(LuaEntity, boolean)
-  on_step: function(LuaEntity, number, MoveResult)
-  on_punch: function(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
-  on_death: function(LuaEntity, ObjectRef)
-  on_rightclick: function(LuaEntity, ObjectRef)
-  on_attach_child: function(LuaEntity, ObjectRef)
-  on_detach_child: function(LuaEntity, ObjectRef)
-  on_detach: function(LuaEntity, ObjectRef)
-  get_staticdata: function(LuaEntity)
+  on_activate(LuaEntity, string, number)
+  on_deactivate(LuaEntity, boolean)
+  on_step(LuaEntity, number, MoveResult)
+  on_punch(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
+  on_death(LuaEntity, ObjectRef)
+  on_rightclick(LuaEntity, ObjectRef)
+  on_attach_child(LuaEntity, ObjectRef)
+  on_detach_child(LuaEntity, ObjectRef)
+  on_detach(LuaEntity, ObjectRef)
+  get_staticdata(LuaEntity)
 }
 
 interface LuaEntity {
   initial_properties: ObjectProperties
   name: string
   object: ObjectRef
-  on_activate: function(LuaEntity, string, number)
-  on_deactivate: function(LuaEntity, boolean)
-  on_step: function(LuaEntity, number, MoveResult)
-  on_punch: function(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
-  on_death: function(LuaEntity, ObjectRef)
-  on_rightclick: function(LuaEntity, ObjectRef)
-  on_attach_child: function(LuaEntity, ObjectRef)
-  on_detach_child: function(LuaEntity, ObjectRef)
-  on_detach: function(LuaEntity, ObjectRef)
-  get_staticdata: function(LuaEntity)
+  on_activate(LuaEntity, string, number)
+  on_deactivate(LuaEntity, boolean)
+  on_step(LuaEntity, number, MoveResult)
+  on_punch(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
+  on_death(LuaEntity, ObjectRef)
+  on_rightclick(LuaEntity, ObjectRef)
+  on_attach_child(LuaEntity, ObjectRef)
+  on_detach_child(LuaEntity, ObjectRef)
+  on_detach(LuaEntity, ObjectRef)
+  get_staticdata(LuaEntity)
 }
 
 enum MinimapType {
