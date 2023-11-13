@@ -88,5 +88,30 @@ module utility {
     )
   }
 
+  // function core.register_entity(name, prototype)
+  //   -- Check name
+  //   if name == nil then
+  //     error("Unable to register entity: Name is nil")
+  //   end
+  //   name = check_modname_prefix(tostring(name))
+
+  //   prototype.name = name
+  //   prototype.__index = prototype  -- so that it can be used as a metatable
+
+  //   -- Add to core.registered_entities
+  //   core.registered_entities[name] = prototype
+  //   prototype.mod_origin = core.get_current_modname() or "??"
+  // end
+
+  minetest.registerTSEntity = function(prototype: { new(): LuaEntity }) {
+    let instance: LuaEntity = new prototype()
+    // print(dump(instance))
+    if (instance.name == null) {
+      throw new Error("Unable to register entity: Name is null")
+    }
+    instance.__index = instance
+    minetest.registered_entities[instance.name] = instance
+  }
+
 
 }

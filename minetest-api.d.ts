@@ -32,7 +32,7 @@ export interface minetest {
   register_tool(toolName: string, definition: ItemDefinition): void
   override_item(itemName: string, {any : any}): void
   unregister_item(itemName: string): void
-  register_entity(entityName: string, definition: EntityDefinition): void
+  register_entity(entityName: string, definition: LuaEntity): void
   register_abm(abm: ABMDefinition): void
   register_lbm(lbm: LBMDefinition): void
   register_alias(alias: string, originalName: string): void
@@ -282,7 +282,7 @@ export interface minetest {
   registered_nodes: {string : NodeDefinition}
   registered_craftitems: {string : ItemDefinition}
   registered_tools: {string : ItemDefinition}
-  registered_entities: {string : EntityDefinition}
+  registered_entities: {[id: string] : LuaEntity}
   object_refs: {string : ObjectRef}
   luaentities: {string : LuaEntity}
   registered_abms: ABMDefinition[]
@@ -314,6 +314,8 @@ export interface minetest {
   sound_play(spec: SimpleSoundSpec, parameters: SoundParameterTable, ephemeral: boolean): number
   sound_stop(handle: number): void
   sound_fade(handle: number, step: number, gain: number): void
+
+  registerTSEntity(clazz: { new(): LuaEntity }): void
 }
 
 
@@ -1285,19 +1287,7 @@ declare global {
     next_bytes(count: number): string
   }
 
-  export interface EntityDefinition {
-    initial_properties?: ObjectProperties
-    on_activate?(staticData: string, delta: number): void 
-    on_deactivate?(removal: boolean): void 
-    on_step?(delta: number, moveResult: MoveResult): void 
-    on_punch?(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
-    on_death?(killer: ObjectRef): void
-    on_rightclick?(clicker: ObjectRef): void 
-    on_attach_child?(child: ObjectRef): void
-    on_detach_child?(child: ObjectRef): void
-    on_detach?(parent: ObjectRef): void
-    get_staticdata?(): void
-  }
+
   
   export interface DetachedInventoryCallbacks {
     allow_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number
@@ -1641,11 +1631,21 @@ declare global {
     show_on_minimap?: boolean
   }
 
-
-  export interface LuaEntity extends EntityDefinition {
+  export interface LuaEntity {
+    __index?: LuaEntity
     initial_properties?: ObjectProperties
     name: string
     object: ObjectRef
+    on_activate?(staticData: string, delta: number): void 
+    on_deactivate?(removal: boolean): void 
+    on_step?(delta: number, moveResult: MoveResult): void 
+    on_punch?(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
+    on_death?(killer: ObjectRef): void
+    on_rightclick?(clicker: ObjectRef): void 
+    on_attach_child?(child: ObjectRef): void
+    on_detach_child?(child: ObjectRef): void
+    on_detach?(parent: ObjectRef): void
+    get_staticdata?(): void
   }
   
   export enum MinimapType {
