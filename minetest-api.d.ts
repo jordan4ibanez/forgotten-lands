@@ -1,6 +1,7 @@
 export {};
 
 // Everything was just dumped in as I looked down the lua_api.md
+/** @noSelf **/
 export interface minetest {
   get_current_modname(): string
   get_modpath(modName: string): string
