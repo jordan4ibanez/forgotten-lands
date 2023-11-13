@@ -51,41 +51,41 @@ interface minetest {
   unregister_chatcommand(commandName: string): void
   register_privilege(privilegeName: string, definition: PrivilegeDefinition): void
   register_authentication_handler(authHandler: AuthenticationHandlerDefinition): void
-  register_globalstep(fun: function(number): void): void
-  register_on_mods_loaded(fun: function(): void): void
-  register_on_shutdown(fun: function(): void): void
-  register_on_placenode(fun: function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStackObject, PointedThing): void): void
-  register_on_dignode(fun: function(Vec3, NodeTable, ObjectRef): void): void
-  register_on_punchnode(fun: function(Vec3, NodeTable, ObjectRef, PointedThing): void): void
-  register_on_generated(fun: function(Vec3, Vec3, number): void): void
-  register_on_newplayer(fun: function(ObjectRef): void): void
-  register_on_punchplayer(fun: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number): void): void
-  register_on_rightclickplayer(fun: function(ObjectRef, ObjectRef): void): void
-  register_on_player_hpchange(fun: function(ObjectRef, number, HPChangeReasonDefinition): void, modifier: boolean): void
-  register_on_dieplayer(fun: function(ObjectRef, HPChangeReasonDefinition): void): void
-  register_on_respawnplayer(fun: function(ObjectRef): void): void
-  register_on_prejoinplayer(fun: function(string, string): void): void
-  register_on_joinplayer(fun: function(ObjectRef, string): void): void
-  register_on_leaveplayer(fun: function(ObjectRef, boolean): void): void
-  register_on_authplayer(fun: function(string, string, boolean): void): void
-  register_on_auth_fail(fun: function(string, string): void): void
-  register_on_cheat(fun: function(ObjectRef, CheatDefinition): void): void
-  register_on_chat_message(fun: function(string, string): void): void
-  register_on_chatcommand(fun: function(string, string, string): boolean): void
-  register_on_player_receive_fields(fun: function(ObjectRef, string, {string : any}): void): void
-  register_on_craft(fun: function(ItemStackObject, ObjectRef, any[], string): void): void
-  register_craft_predict(fun: function(ItemStackObject, ObjectRef, any[], string): void): void
-  register_allow_player_inventory_action(fun: function(ObjectRef, string, string, ActionDefinition): void): void
-  register_on_player_inventory_action(fun: function(ObjectRef, string, string, ActionDefinition): void): void
-  register_on_protection_violation(fun: function(Vec3, string): void): void
-  register_on_item_eat(fun: function(number, boolean, ItemStackObject, ObjectRef, PointedThing): void): void
-  register_on_item_pickup(fun: function(ItemStackObject, ObjectRef, PointedThing, number, ...any): void): void
-  register_on_priv_grant(fun: function(string, string, string): void): void
-  register_on_priv_revoke(fun: function(string, string, string): void): void
-  register_can_bypass_userlimit(fun: function(string, string): void): void
-  register_on_modchannel_message(fun: function(string, string, string): void): void
-  register_on_liquid_transformed(fun: function(Vec3[], string[]): void): void
-  register_on_mapblocks_changed(fun: function(string[], number): void): void
+  register_globalstep(fun: (delta: number) => void): void
+  register_on_mods_loaded(fun: () => void): void
+  register_on_shutdown(fun: () => void): void
+  register_on_placenode(fun: (pos: Vec3, node: NodeTable, placer: ObjectRef, oldNode: NodeTable, itemStack: ItemStackObject, pointedThing: PointedThing) => void): void
+  register_on_dignode(fun: (pos: Vec3, oldNode: NodeTable, digger: ObjectRef) =>  void): void
+  register_on_punchnode(fun: (pos: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing) => void): void
+  register_on_generated(fun: (minp: Vec3, maxp: Vec3, blockSeed: number) => void): void
+  register_on_newplayer(fun: (player: ObjectRef) => void): void
+  register_on_punchplayer(fun: (player: ObjectRef, hitter: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number) => void): void
+  register_on_rightclickplayer(fun: (player: ObjectRef, clicker: ObjectRef) => void): void
+  register_on_player_hpchange(fun: (player: ObjectRef, hpChange: number, reason: HPChangeReasonDefinition) => void, modifier: boolean): void
+  register_on_dieplayer(fun: (player: ObjectRef, reason: HPChangeReasonDefinition) => void): void
+  register_on_respawnplayer(fun: (player: ObjectRef) => void): void
+  register_on_prejoinplayer(fun: (name: string, ip: string) => void): void
+  register_on_joinplayer(fun: (player: ObjectRef, lastLogin: string) => void): void
+  register_on_leaveplayer(fun: (player: ObjectRef, timedOut: boolean) => void): void
+  register_on_authplayer(fun: (name: string, ip: string, isSuccess: boolean) => void): void
+  register_on_auth_fail(fun: (name: string, ip: string) => void): void
+  register_on_cheat(fun: (player: ObjectRef, cheat: CheatDefinition) => void): void
+  register_on_chat_message(fun: (name: string, message: string) => void): void
+  register_on_chatcommand(fun: (name: string, command: string, params: string) => boolean): void
+  register_on_player_receive_fields(fun: (player: ObjectRef, formName: string, fields: {string : any}) => void): void
+  register_on_craft(fun: (itemStack: ItemStackObject, player: ObjectRef, oldCraftGrid: any[], craftInv: string) => void): void
+  register_craft_predict(fun: (itemStack: ItemStackObject, player: ObjectRef, oldCraftGrid: any[], craftInv: string) => void): void
+  register_allow_player_inventory_action(fun: (player: ObjectRef, action: string, inventory: string, inventoryInfo: ActionDefinition) => void): void
+  register_on_player_inventory_action(fun: (player: ObjectRef, action: string, inventory: string, inventoryInfo: ActionDefinition) => void): void
+  register_on_protection_violation(fun: (position: Vec3, name: string) => void): void
+  register_on_item_eat(fun: (hpChange: number, replaceWithItem: boolean, itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing) => void): void
+  register_on_item_pickup(fun: (itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any) => void): void
+  register_on_priv_grant(fun: (name: string, granter: string, priv: string) => void): void
+  register_on_priv_revoke(fun: (name: string, revoker: string, priv: string) => void): void
+  register_can_bypass_userlimit(fun: (name: string, ip: string) => void): void
+  register_on_modchannel_message(fun: (channelName: string, sender: string, message: string) => void): void
+  register_on_liquid_transformed(fun: (posList: Vec3[], nodeList: string[]) => void): void
+  register_on_mapblocks_changed(fun: (modifiedBlocks: string[], nodeList: any[]) => void): void
   settings: MinetestSettingsObject
   setting_get_pos(name: string): Vec3
   string_to_privs(str: string, delim: string): string
@@ -214,8 +214,8 @@ interface minetest {
   item_eat(hpChange: number, replaceWithItem: string): void
   node_punch(position: Vec3, nodeTable: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
   node_dig(position: Vec3, nodeTable: NodeTable, digger: ObjectRef): void
-  after(seconds: number, fun: function(...any): void, ...any: any): Job
-  handle_async(fun: function(...any): any, callback: function(...any): any, ...any: any): any // any any any any
+  after(seconds: number, fun: (...any: any) => void, ...any: any): Job
+  handle_async(fun: (...any: any) => any, callback: (...any: any) => any, ...any: any): any // any any any any
   register_async_dofile(path: string): void
   request_shutdown(message: string, reconnect: boolean, delay: number): void
   cancel_shutdown_requests(): void
@@ -224,7 +224,7 @@ interface minetest {
   get_server_max_lag(): number
   remove_player(playerName: string): number
   remove_player_auth(playerName: string): boolean
-  dynamic_add_media(options: DynamicAddMediaOptions, fun: function(string): void): void
+  dynamic_add_media(options: DynamicAddMediaOptions, fun: (name: string) => void): void
   get_ban_list(): string
   get_ban_description(ipOrName: string): string
   ban_player(playerName: string): boolean
@@ -1559,32 +1559,22 @@ interface ObjectProperties {
 
 interface EntityDefinition {
   initial_properties: ObjectProperties
-  on_activate(LuaEntity, string, number)
-  on_deactivate(LuaEntity, boolean)
-  on_step(LuaEntity, number, MoveResult)
-  on_punch(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
-  on_death(LuaEntity, ObjectRef)
-  on_rightclick(LuaEntity, ObjectRef)
-  on_attach_child(LuaEntity, ObjectRef)
-  on_detach_child(LuaEntity, ObjectRef)
-  on_detach(LuaEntity, ObjectRef)
-  get_staticdata(LuaEntity)
+  on_activate(staticData: string, delta: number): void 
+  on_deactivate(removal: boolean): void 
+  on_step(delta: number, moveResult: MoveResult): void 
+  on_punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
+  on_death(killer: ObjectRef): void
+  on_rightclick(clicker: ObjectRef): void 
+  on_attach_child(child: ObjectRef): void
+  on_detach_child(child: ObjectRef): void
+  on_detach(parent: ObjectRef): void
+  get_staticdata(): void
 }
 
-interface LuaEntity {
+interface LuaEntity extends EntityDefinition {
   initial_properties: ObjectProperties
   name: string
   object: ObjectRef
-  on_activate(LuaEntity, string, number)
-  on_deactivate(LuaEntity, boolean)
-  on_step(LuaEntity, number, MoveResult)
-  on_punch(LuaEntity, ObjectRef, number, ToolCapabilities, Vec3, number)
-  on_death(LuaEntity, ObjectRef)
-  on_rightclick(LuaEntity, ObjectRef)
-  on_attach_child(LuaEntity, ObjectRef)
-  on_detach_child(LuaEntity, ObjectRef)
-  on_detach(LuaEntity, ObjectRef)
-  get_staticdata(LuaEntity)
 }
 
 enum MinimapType {
@@ -1691,12 +1681,12 @@ interface TileAnimationDefinition {
 }
 
 interface DetachedInventoryCallbacks {
-  allow_move: function(InvRef, string, number, string, number, number, ObjectRef)
-  allow_put: function(InvRef, string, number, ItemStackObject, ObjectRef)
-  allow_take: function(InvRef, string, number, ItemStackObject, ObjectRef)
-  on_move: function(InvRef, string, number, string, number, number, ObjectRef)
-  on_put: function(InvRef, string, number, ItemStackObject, ObjectRef)
-  on_take: function(InvRef, string, number, ItemStackObject, ObjectRef)
+  allow_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number
+  allow_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
+  allow_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
+  on_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+  on_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+  on_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
 }
 
 interface Rollback {
@@ -1708,7 +1698,7 @@ interface Rollback {
 }
 
 interface Job {
-  cancel: function()
+  cancel(): void
 }
 
 interface DynamicAddMediaOptions {
@@ -1779,7 +1769,7 @@ type ParticleSpawnerTextureScaleTween = Array<Vec2>
 interface ParticleSpawnerTextureDefinition {
   name: string
   alpha: number
-  alpha_tween: {number}
+  alpha_tween: number[]
   scale: number | Vec2
   scale_tween: ParticleSpawnerTextureScaleTween
   blend: ParticleSpawnerTextureBlend
@@ -1857,53 +1847,53 @@ interface AreaStoreCacheDefinition {
   limit: number
 }
 
-function AreaStore(_: AreaStoreType): AreaStoreObject {}
+function AreaStore(_: AreaStoreType): AreaStoreObject
 interface AreaStoreObject {
-  get_area: function(AreaStoreObject, number, boolean, boolean): AreaStoreArea[] | boolean[] | nil
-  get_areas_for_pos: function(AreaStoreObject, Vec3, boolean, boolean): AreaStoreArea[] | boolean[] | nil
-  get_areas_in_area: function(AreaStoreObject, Vec3, Vec3, boolean, boolean, boolean): AreaStoreArea[] | boolean[] | nil
-  insert_area: function(AreaStoreObject, Vec3, Vec3, string, number): number
-  reserve: function(AreaStoreObject, number)
-  remove_area: function(AreaStoreObject, number): boolean
-  set_cache_params: function(AreaStoreObject, AreaStoreCacheDefinition)
-  to_string: function(AreaStoreObject): string
-  to_file: function(AreaStoreObject, string)
-  from_string: function(AreaStoreObject, string): [boolean, string] | nil
-  from_file: function(AreaStoreObject, string): [boolean, string] | nil
+  get_area(id: number, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
+  get_areas_for_pos(pos: Vec3, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
+  get_areas_in_area(corner1: Vec3, corner2: Vec3, acceptOverlap: boolean, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
+  insert_area(corner1: Vec3, corner2: Vec3, data: string, id: number): number
+  reserve(count: number): void
+  remove_area(id: number): boolean
+  set_cache_params(params: AreaStoreCacheDefinition): void
+  to_string(): string
+  to_file(fileName: string): void
+  from_string(str: string): [boolean, string] | void
+  from_file(fileName: string): [boolean, string] | void
 }
 
 interface vector {
-  new: function(number, number, number): Vec3
-  zero: function(): Vec3
-  copy: function(Vec3): Vec3
-  from_string: function(string, string): Vec3
-  to_string: function(Vec3): string
-  direction: function(Vec3, Vec3): Vec3
-  distance: function(Vec3, Vec3): number
-  length: function(Vec3): number
-  normalize: function(Vec3): Vec3
-  floor: function(Vec3): Vec3
-  round: function(Vec3): Vec3
-  apply: function(Vec3, function(number): number): Vec3
-  combine: function(Vec3, Vec3, function()): Vec3
-  equals: function(Vec3, Vec3): boolean
-  sort: function(Vec3, Vec3): Vec3, Vec3
-  angle: function(Vec3, Vec3): number
-  dot: function(Vec3, Vec3): number
-  cross: function(Vec3, Vec3): number
-  check: function(Vec3): boolean
-  in_area: function(Vec3, Vec3, Vec3): boolean
+  new(x: number, y: number, z: number): Vec3
+  zero(): Vec3
+  copy(vec: Vec3): Vec3
+  from_string(s: string, init: string): Vec3
+  to_string(vec: Vec3): string
+  direction(vec1: Vec3, vec2: Vec3): Vec3
+  distance(vec1: Vec3, vec2: Vec3): number
+  length(vec: Vec3): number
+  normalize(vec: Vec3): Vec3
+  floor(vec: Vec3): Vec3
+  round(vec: Vec3): Vec3
+  apply(vec: Vec3, fun: (input: number) => number): Vec3
+  combine(vec1: Vec3, vec2: Vec3, fun: (...any: any) => void): Vec3 //! fixme: test this
+  equals(vec1: Vec3, vec2: Vec3): boolean
+  sort(vec1: Vec3, vec2: Vec3): [Vec3, Vec3]
+  angle(vec1: Vec3, vec2: Vec3): number
+  dot(vec1: Vec3, vec2: Vec3): number
+  cross(vec1: Vec3, vec2: Vec3): number
+  check(vec: Vec3): boolean
+  in_area(vec: Vec3, min: Vec3, max: Vec3): boolean
 
-  add: function(Vec3, Vec3 | number): Vec3
-  subtract: function(Vec3, Vec3 | number): Vec3
-  multiply: function(Vec3, Vec3 | number): Vec3
-  divide: function(Vec3, Vec3 | number): Vec3
+  add(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+  subtract(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+  multiply(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+  divide(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
 
-  rotate: function(Vec3, number): Vec3
-  rotate_around_axis: function(Vec3, Vec3, number): Vec3
-  dir_to_rotation: function(Vec3, Vec3): Vec3
+  rotate(vec: Vec3, radians: number): Vec3
+  rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
+  dir_to_rotation(vec: Vec3, up: Vec3): Vec3
 
-  random: function(number, number, number, number, number, number): Vec3
+  // random(number, number, number, number, number, number): Vec3
 }
 
 interface Vec2 {
@@ -1912,12 +1902,12 @@ interface Vec2 {
 }
 
 interface Vec3 extends Vec2 {
-  __eq: function(Vec3, Vec3): boolean
-  __unm: function(Vec3): Vec3
-  __add: function(Vec3, Vec3): Vec3
-  __sub: function(Vec3, Vec3): Vec3
-  __mul: function(Vec3, Vec3): Vec3
-  __div: function(Vec3, Vec3): Vec3
+  __eq(other: Vec3): boolean
+  __unm(): Vec3
+  __add(other: Vec3): Vec3
+  __sub(other: Vec3): Vec3
+  __mul(other: Vec3): Vec3
+  __div(other: Vec3): Vec3
 
   z: number
 }
@@ -1939,47 +1929,50 @@ interface DigParamsReturn {
   diggable: boolean
   time: number
   wear: number
-  groups: {string}
+  groups: string[]
   tool_capabilities: ToolCapabilities
 }
 
 interface HitParamsReturn {
   hp: number
   wear: number
-  groups: {string}
+  groups: string[]
   tool_capabilities: ToolCapabilities
   time_from_last_punch: number
 }
 
 interface NodeTimerObject {
-  set: function(NodeTimerObject, number, number)
-  start: function(NodeTimerObject, number)
-  stop: function(NodeTimerObject)
-  get_timeout: function(NodeTimerObject): number
-  get_elapsed: function(NodeTimerObject): number
-  is_started: function(NodeTimerObject): boolean
+  set(timeOut: number, elapsed: number): void
+  start(timeOut: number): void
+  stop(): void
+  get_timeout(): number
+  get_elapsed(): number
+  is_started(): boolean
 }
 
 interface Translator {
-  __call: function(Translator, ...string): string
+  __call(...string: string[]): string
 }
 
-function dump(_: any, _: string, _: table): string {}
+function dump(object: any, name: string, dumped: any[]): string
 
-function dump2(_: any, _: table): string {}
+function dump2(object: any, dumped: any[]): string
 
 
 // Getting around redecleration warnings with this little trick.
-math.hypot = function(_: number, _: number): number {}
-math.sign = function(_: number, _: number): number {}
-math.factorial = function(_: number): number {}
-math.round = function(_: number): number {}
+// math.fart = function(): void
+// m.test = () => void
 
-string.split = function(_: string, _: string, _: box, _: NodeSoundSpec, _: boolean): string {}
-string.trim = function(_: string): string {}
+// math.hypot = function(_: number, _: number): number
+// math.sign = function(_: number, _: number): number {}
+// math.factorial = function(_: number): number {}
+// math.round = function(_: number): number {}
 
-table.copy = function(_: table): table {}
-table.indexof = function(_: table, _: number): number {}
-table.insert_all = function(_: table, _: table): table {}
-table.key_value_swap = function(_: table): table {}
-table.shuffle = function(_: table, _: number, _: number, _: function): table {}
+// string.split = function(_: string, _: string, _: box, _: NodeSoundSpec, _: boolean): string {}
+// string.trim = function(_: string): string {}
+
+// table.copy = function(_: table): table {}
+// table.indexof = function(_: table, _: number): number {}
+// table.insert_all = function(_: table, _: table): table {}
+// table.key_value_swap = function(_: table): table {}
+// table.shuffle = function(_: table, _: number, _: number, _: function): table {}
