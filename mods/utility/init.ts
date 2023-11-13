@@ -69,11 +69,11 @@ module utility {
 
   const rr = randomRange;
 
-  vector.create = function(x: number, y: number, z: number): Vec3 {
+  vector.create = function(x?: number, y?: number, z?: number): Vec3 {
     let temp = vector.zero()
-    temp.x = x
-    temp.y = y
-    temp.z = z
+    temp.x = x || 0
+    temp.y = y || 0
+    temp.z = z || 0
     return temp
   };
 

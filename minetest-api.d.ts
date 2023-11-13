@@ -1237,7 +1237,7 @@ declare global {
     export function dir_to_rotation(vec: Vec3, up: Vec3): Vec3
 
     // This is created in the utility class because new is a reserved keyword in TS.
-    export function create(x: number, y: number, z: number): Vec3
+    export function create(x?: number, y?: number, z?: number): Vec3
 
     // And this is a bolt on created in the utility class.
     export function random(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3
