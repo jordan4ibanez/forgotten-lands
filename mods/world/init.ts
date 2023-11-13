@@ -40,9 +40,10 @@ minetest.register_biome({
 
   const concat = utility.concat;
   const generateSchematic = utility.generateSchematic;
+  const create = vector.create;
 
-  const small_oak = generateSchematic(
-    vector.create(5,5,5),
+  const smallOak = generateSchematic(
+    create(5,5,5),
     {
       " ": "air",
       "I": "oak_tree",
@@ -88,6 +89,197 @@ minetest.register_biome({
       253,254,255,254,253,
       253,254,254,254,253,
       253,253,253,253,253
+    ]
+  )
+
+  const mediumOak = generateSchematic(
+    create(7,7,7),
+    {
+      " ": "air",
+      "I": "oak_tree",
+      "H": "oak_leaves"
+    },
+    {
+      "I": true
+    },
+    concat(
+      "       ",
+      "       ",
+      "       ",
+      "   H   ",
+      "  HHH  ",
+      "       ",
+      "       ",
+      /////////
+      "       ",
+      "       ",
+      "   H   ",
+      "  HHH  ",
+      " HHHHH ",
+      "       ",
+      "       ",
+      /////////
+      "       ",
+      "   H   ",
+      "  HHH  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "       ",
+      "       ",
+      /////////
+      "   H   ",
+      "  HHH  ",
+      " HHIHH ",
+      "HHHIHHH",
+      "HHHIHHH",
+      "   I   ",
+      "   I   ",
+      /////////
+      "       ",
+      "   H   ",
+      "  HHH  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "       ",
+      "       ",
+      /////////
+      "       ",
+      "       ",
+      "   H   ",
+      "  HHH  ",
+      " HHHHH ",
+      "       ",
+      "       ",
+      "       ",
+      /////////
+      "       ",
+      "       ",
+      "   H   ",
+      "  HHH  ",
+      "       ",
+      "       "
+    ),
+    [
+      252,252,252,252,252,252,252,
+      252,253,253,253,253,253,252,
+      252,253,254,254,254,253,252,
+      252,253,254,255,254,253,252,
+      252,253,254,254,254,253,252,
+      252,253,253,253,253,253,252,
+      252,252,252,252,252,252,252,
+    ]
+  )
+
+  const largeOak = generateSchematic(
+    create(9,9,9),
+    {
+      " ": "air",
+      "I": "oak_tree",
+      "H": "oak_leaves"
+    },
+    {
+      "I": true
+    },
+    concat(
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "   HHH   ",
+      "         ",
+      "         ",
+      ////////////
+      "         ",
+      "         ",
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "  HHHHH  ",
+      "  HHHHH  ",
+      "         ",
+      "         ",
+      ////////////
+      "         ",
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "  HHHHH  ",
+      " HHHHHHH ",
+      " HHHHHHH ",
+      "         ",
+      "         ",
+      ////////////
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "  HHHHH  ",
+      " HHHHHHH ",
+      "HHHHHHHHH",
+      "HHHHHHHHH",
+      "         ",
+      "         ",
+      ////////////
+      "    H    ",
+      "   HHH   ",
+      "  HHIHH  ",
+      " HHHIHHH ",
+      "HHHHIHHHH",
+      "HHHHIHHHH",
+      "HHHHIHHHH",
+      "    I    ",
+      "    I    ",
+      ////////////
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "  HHHHH  ",
+      " HHHHHHH ",
+      "HHHHHHHHH",
+      "HHHHHHHHH",
+      "         ",
+      "         ",
+      ////////////
+      "         ",
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "  HHHHH  ",
+      " HHHHHHH ",
+      " HHHHHHH ",
+      "         ",
+      "         ",
+      ////////////
+      "         ",
+      "         ",
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "  HHHHH  ",
+      "  HHHHH  ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "    H    ",
+      "   HHH   ",
+      "   HHH   ",
+      "         ",
+      "         "
+    ),
+    [
+      251,251,251,251,251,251,251,251,251,
+      251,252,252,252,252,252,252,252,251,
+      251,252,253,253,253,253,253,252,251,
+      251,252,253,254,254,254,253,252,251,
+      251,252,253,254,255,254,253,252,251,
+      251,252,253,254,254,254,253,252,251,
+      251,252,253,253,253,253,253,252,251,
+      251,252,252,252,252,252,252,252,251,
+      251,251,251,251,251,251,251,251,251,
     ]
   )
 }
