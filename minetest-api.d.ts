@@ -1022,8 +1022,8 @@ declare global {
   
   
   export enum DecorationType {
-    "simple",
-    "schematic"
+    simple = "simple",
+    schematic = "schematic"
   }
   
   export enum DecorationFlags {
