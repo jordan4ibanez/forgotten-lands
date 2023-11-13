@@ -1,278 +1,280 @@
 // Everything was just dumped in as I looked down the lua_api.md
+
 interface minetest {
   get_current_modname(): string
-  get_modpath(string): string
+  get_modpath(modName: string): string
   get_modnames(): string[]
   get_game_info(): GameInfo
   get_worldpath(): string
   is_singleplayer(): boolean
   features(): MinetestFeatures
-  has_feature(string): boolean
-  get_player_information(string): PlayerInformation
-  get_player_window_information(string): WindowInformation
-  mkdir(string): boolean
-  rmdir(string): boolean
-  cpdir(string): boolean
-  mvdir(string): boolean
-  get_dir_list(string, boolean): string[]
-  safe_file_write(string, string): boolean
+  has_feature(featureName: string): boolean
+  get_player_information(playerName: string): PlayerInformation
+  get_player_window_information(playerName: string): WindowInformation
+  mkdir(dir: string): boolean
+  rmdir(dir: string): boolean
+  cpdir(dir: string, dst: string): boolean
+  mvdir(dir: string): boolean
+  get_dir_list(dir: string, isDir: boolean): string[]
+  safe_file_write(path: string, content: string): boolean
   get_version(): MinetestInfo
-  sha1(any, boolean): string
-  colorspec_to_colorstring(DynamicColorSpec): string
-  colorspec_to_bytes(DynamicColorSpec): string
-  encode_png(number, number, ColorSpec[] | string, number): string
-  urlencode(string): string
-  debug(string): void
-  log(LogLevel, string): void
-  register_node(string, NodeDefinition): void
-  register_craftitem(string, ItemDefinition): void
-  register_tool(string, ItemDefinition): void
-  override_item(string, {any : any}): void
-  unregister_item(string): void
-  register_entity(string, EntityDefinition): void
-  register_abm(ABMDefinition): void
-  register_lbm(LBMDefinition): void
-  register_alias(string, string): void
-  register_alias_force(string, string): void
-  register_ore(OreDefinition): void
-  register_biome(BiomeDefinition): void
-  unregister_biome(string): void
-  register_decoration(DecorationDefinition): void
-  register_schematic(SchematicDefinition): number
+  sha1(data: any, raw: boolean): string
+  colorspec_to_colorstring(colorSpec: ColorSpec): string
+  colorspec_to_bytes(colorSpec: ColorSpec): string
+  encode_png(width: number, height: number, data: ColorSpec[] | string, compression: number): string
+  urlencode(url: string): string
+  debug(anything: string): void
+  log(level: LogLevel, text: string): void
+  register_node(nodeName: string, definition: NodeDefinition): void
+  register_craftitem(craftItemName: string, definition: ItemDefinition): void
+  register_tool(toolName: string, definition: ItemDefinition): void
+  override_item(itemName: string, {any : any}): void
+  unregister_item(itemName: string): void
+  register_entity(entityName: string, definition: EntityDefinition): void
+  register_abm(abm: ABMDefinition): void
+  register_lbm(lbm: LBMDefinition): void
+  register_alias(alias: string, originalName: string): void
+  register_alias_force(alias: string, originalName: string): void
+  register_ore(ore: OreDefinition): void
+  register_biome(biome: BiomeDefinition): void
+  unregister_biome(biomeName: string): void
+  register_decoration(decoration: DecorationDefinition): void
+  register_schematic(schematic: SchematicDefinition): number
   clear_registered_biomes(): void
   clear_registered_decorations(): void
   clear_registered_ores(): void
   clear_registered_schematics(): void
-  register_craft(CraftRecipeDefinition): void
-  clear_craft(CraftRecipeDefinition): void
-  register_chatcommand(string, ChatCommandDefinition): void
-  override_chatcommand(string, ChatCommandDefinition): void
-  unregister_chatcommand(string): void
-  register_privilege(string, PrivilegeDefinition): void
-  register_authentication_handler(AuthenticationHandlerDefinition): void
-  register_globalstep(function(number): void): void
-  register_on_mods_loaded(function(): void): void
-  register_on_shutdown(function(): void): void
-  register_on_placenode(function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStackObject, PointedThing): void): void
-  register_on_dignode(function(Vec3, NodeTable, ObjectRef): void): void
-  register_on_punchnode(function(Vec3, NodeTable, ObjectRef, PointedThing): void): void
-  register_on_generated(function(Vec3, Vec3, number): void): void
-  register_on_newplayer(function(ObjectRef): void): void
-  register_on_punchplayer(function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number): void): void
-  register_on_rightclickplayer(function(ObjectRef, ObjectRef): void): void
-  register_on_player_hpchange(function(ObjectRef, number, HPChangeReasonDefinition): void, boolean): void
-  register_on_dieplayer(function(ObjectRef, HPChangeReasonDefinition): void): void
-  register_on_respawnplayer(function(ObjectRef): void): void
-  register_on_prejoinplayer(function(string, string): void): void
-  register_on_joinplayer(function(ObjectRef, string): void): void
-  register_on_leaveplayer(function(ObjectRef, boolean): void): void
-  register_on_authplayer(function(string, string, boolean): void): void
-  register_on_auth_fail(function(string, string): void): void
-  register_on_cheat(function(ObjectRef, CheatDefinition): void): void
-  register_on_chat_message(function(string, string): void): void
-  register_on_chatcommand(function(string, string, string): boolean): void
-  register_on_player_receive_fields(function(ObjectRef, string, {string : any}): void): void
-  register_on_craft(function(ItemStackObject, ObjectRef, any[], string): void): void
-  register_craft_predict(function(ItemStackObject, ObjectRef, any[], string): void): void
-  register_allow_player_inventory_action(function(ObjectRef, string, string, ActionDefinition): void): void
-  register_on_player_inventory_action(function(ObjectRef, string, string, ActionDefinition): void): void
-  register_on_protection_violation(function(Vec3, string): void): void
-  register_on_item_eat(function(number, boolean, ItemStackObject, ObjectRef, PointedThing): void): void
-  register_on_item_pickup(function(ItemStackObject, ObjectRef, PointedThing, number, ...any): void): void
-  register_on_priv_grant(function(string, string, string): void): void
-  register_on_priv_revoke(function(string, string, string): void): void
-  register_can_bypass_userlimit(function(string, string): void): void
-  register_on_modchannel_message(function(string, string, string): void): void
-  register_on_liquid_transformed(function(Vec3[], string[]): void): void
-  register_on_mapblocks_changed(function(string[], number): void): void
+  register_craft(craftRecipe: CraftRecipeDefinition): void
+  clear_craft(craftRecipe: CraftRecipeDefinition): void
+  register_chatcommand(commandName: string, definition: ChatCommandDefinition): void
+  override_chatcommand(commandName: string, definition: ChatCommandDefinition): void
+  unregister_chatcommand(commandName: string): void
+  register_privilege(privilegeName: string, definition: PrivilegeDefinition): void
+  register_authentication_handler(authHandler: AuthenticationHandlerDefinition): void
+  register_globalstep(fun: function(number): void): void
+  register_on_mods_loaded(fun: function(): void): void
+  register_on_shutdown(fun: function(): void): void
+  register_on_placenode(fun: function(Vec3, NodeTable, ObjectRef, NodeTable, ItemStackObject, PointedThing): void): void
+  register_on_dignode(fun: function(Vec3, NodeTable, ObjectRef): void): void
+  register_on_punchnode(fun: function(Vec3, NodeTable, ObjectRef, PointedThing): void): void
+  register_on_generated(fun: function(Vec3, Vec3, number): void): void
+  register_on_newplayer(fun: function(ObjectRef): void): void
+  register_on_punchplayer(fun: function(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number): void): void
+  register_on_rightclickplayer(fun: function(ObjectRef, ObjectRef): void): void
+  register_on_player_hpchange(fun: function(ObjectRef, number, HPChangeReasonDefinition): void, modifier: boolean): void
+  register_on_dieplayer(fun: function(ObjectRef, HPChangeReasonDefinition): void): void
+  register_on_respawnplayer(fun: function(ObjectRef): void): void
+  register_on_prejoinplayer(fun: function(string, string): void): void
+  register_on_joinplayer(fun: function(ObjectRef, string): void): void
+  register_on_leaveplayer(fun: function(ObjectRef, boolean): void): void
+  register_on_authplayer(fun: function(string, string, boolean): void): void
+  register_on_auth_fail(fun: function(string, string): void): void
+  register_on_cheat(fun: function(ObjectRef, CheatDefinition): void): void
+  register_on_chat_message(fun: function(string, string): void): void
+  register_on_chatcommand(fun: function(string, string, string): boolean): void
+  register_on_player_receive_fields(fun: function(ObjectRef, string, {string : any}): void): void
+  register_on_craft(fun: function(ItemStackObject, ObjectRef, any[], string): void): void
+  register_craft_predict(fun: function(ItemStackObject, ObjectRef, any[], string): void): void
+  register_allow_player_inventory_action(fun: function(ObjectRef, string, string, ActionDefinition): void): void
+  register_on_player_inventory_action(fun: function(ObjectRef, string, string, ActionDefinition): void): void
+  register_on_protection_violation(fun: function(Vec3, string): void): void
+  register_on_item_eat(fun: function(number, boolean, ItemStackObject, ObjectRef, PointedThing): void): void
+  register_on_item_pickup(fun: function(ItemStackObject, ObjectRef, PointedThing, number, ...any): void): void
+  register_on_priv_grant(fun: function(string, string, string): void): void
+  register_on_priv_revoke(fun: function(string, string, string): void): void
+  register_can_bypass_userlimit(fun: function(string, string): void): void
+  register_on_modchannel_message(fun: function(string, string, string): void): void
+  register_on_liquid_transformed(fun: function(Vec3[], string[]): void): void
+  register_on_mapblocks_changed(fun: function(string[], number): void): void
   settings: MinetestSettingsObject
-  setting_get_pos(string): Vec3
-  string_to_privs(string, string): string
-  privs_to_string(string, string): string
-  get_player_privs(string): string[]
-  check_player_privs(ObjectRef | string, string | string[]): boolean | boolean[]
-  check_password_entry(string, string, string): boolean
-  get_password_hash(string, string): string
-  get_player_ip(string): string
+  setting_get_pos(name: string): Vec3
+  string_to_privs(str: string, delim: string): string
+  privs_to_string(privs: string, delim: string): string
+  get_player_privs(playerName: string): string[]
+  check_player_privs(playerOrName: ObjectRef | string, stringListOrMap: string | Map<string, boolean>): boolean | boolean[]
+  check_password_entry(playerName: string, entry: string, password: string): boolean
+  get_password_hash(playerName: string, rawPassword: string): string
+  get_player_ip(playerName: string): string
   get_auth_handler(): AuthenticationHandlerDefinition
-  notify_authentication_modified(string): void
-  set_player_password(string, string): void
-  set_player_privs(string, {string : boolean}): void
+  notify_authentication_modified(playerName: string): void
+  set_player_password(playerName: string, passwordHash: string): void
+  set_player_privs(playerName: string, {string : boolean}): void
   auth_reload(): void
-  chat_send_all(string): void
-  chat_send_player(string, string): void
-  format_chat_message(string, string): void
-  set_node(Vec3, NodeTable): void
-  add_node(Vec3, NodeTable): void
-  bulk_set_node(Vec3[], NodeTable): void
-  swap_node(Vec3, NodeTable): void
-  remove_node(Vec3): void
-  get_node(Vec3): NodeTable
-  get_node_or_nil(Vec3): NodeTable | void
-  get_node_light(Vec3, number): number
-  get_natural_light(Vec3, number): number
-  get_artificial_light(number): number
-  place_node(Vec3, NodeTable)
-  dig_node(Vec3): boolean
-  punch_node(Vec3)
-  spawn_falling_node(Vec3): {boolean, ObjectRef} | boolean
-  find_nodes_with_meta(Vec3, Vec3): {Vec3}
-  get_meta(Vec3): MetaData
-  get_node_timer(Vec3): NodeTimerObject
-  add_entity(Vec3, string, string): ObjectRef | nil
-  add_item(Vec3, ItemStackObject | string): ObjectRef
-  get_player_by_name(string): ObjectRef
-  get_objects_inside_radius(Vec3, number): {ObjectRef}
-  get_objects_in_area(Vec3, Vec3): {ObjectRef}
-  set_timeofday(number)
+  chat_send_all(message: string): void
+  chat_send_player(playerName: string, message: string): void
+  format_chat_message(playerName: string, message: string): void
+  set_node(position: Vec3, nodeTable: NodeTable): void
+  add_node(position: Vec3, nodeTable: NodeTable): void
+  bulk_set_node(positions: Vec3[], nodeTable: NodeTable): void
+  swap_node(position: Vec3, nodeTable: NodeTable): void
+  remove_node(position: Vec3): void
+  get_node(position: Vec3): NodeTable
+  get_node_or_nil(position: Vec3): NodeTable | void
+  get_node_light(position: Vec3, timeOfDay: number): number
+  get_natural_light(position: Vec3, timeOfDay: number): number
+  get_artificial_light(param1: number): number
+  place_node(position: Vec3, nodeTable: NodeTable): void
+  dig_node(position: Vec3): boolean
+  punch_node(position: Vec3): void
+  spawn_falling_node(position: Vec3): [boolean, ObjectRef] | boolean
+  find_nodes_with_meta(pos1: Vec3, pos2: Vec3): Vec3[]
+  get_meta(position: Vec3): MetaData
+  get_node_timer(position: Vec3): NodeTimerObject
+  add_entity(position: Vec3, entityName: string, staticData: string): ObjectRef | void
+  add_item(position: Vec3, item: ItemStackObject | string): ObjectRef
+  get_player_by_name(playerName: string): ObjectRef
+  get_objects_inside_radius(position: Vec3, radius: number): ObjectRef[]
+  get_objects_in_area(pos1: Vec3, pos2: Vec3): ObjectRef[]
+  set_timeofday(newTimeOfDay: number): void
   get_timeofday(): number
   get_gametime(): number
   get_day_count(): number
-  find_node_near(Vec3, number, {string}, boolean): Vec3 | nil
-  find_nodes_in_area(Vec3, Vec3, {string}, boolean): any[]
-  find_nodes_in_area_under_air(Vec3, Vec3, {string}): Vec3[]
-  get_perlin(NoiseParams): PerlinNoiseObject
-  get_perlin(number, number, number, number): PerlinNoiseObject
-  get_voxel_manip(Vec3, Vec3): VoxelManipObject
-  set_gen_notify(GenNotifyFlags, {number})
-  get_gen_notify(): {number}
-  get_decoration_id(string): number
-  get_mapgen_object(string): GenNotifyObject
-  get_heat(Vec3): number
-  get_humidity(Vec3): number
-  get_biome_data(Vec3): BiomeDataDefinition | nil
-  get_biome_id(string): number
-  get_biome_name(number): string
-  get_mapgen_setting(string): MapGenSettingsDefinition
-  set_mapgen_params(MapGenSettingsDefinition)
-  get_mapgen_edges(number, number)
-  get_mapgen_setting(string): MapGenSettingsDefinition
-  get_mapgen_setting_noiseparams(string): NoiseParams
-  set_mapgen_setting(string, any, boolean)
-  set_noiseparams(string, NoiseParams, boolean)
-  get_noiseparams(string): NoiseParams
-  generate_ores(VoxelManipObject, Vec3, Vec3)
-  generate_decorations(VoxelManipObject, Vec3, Vec3)
-  clear_objects(ClearObjectsOptions)
-  load_area(Vec3, Vec3)
-  emerge_area(Vec3, Vec3, EmergeAreaCallback, any)
-  delete_area(Vec3, Vec3)
-  line_of_sight(Vec3, Vec3): {boolean, Vec3}
-  raycast(Vec3, Vec3, boolean, boolean): RaycastObject
-  find_path(Vec3, Vec3, number, number, number, SearchAlgorithm)
-  spawn_tree(Vec3, TreeDefinition)
-  transforming_liquid_add(Vec3)
-  get_node_max_level(Vec3): number
-  get_node_level(Vec3): number
-  set_node_level(Vec3, number): number
-  add_node_level(Vec3, number): number
-  fix_light(Vec3, Vec3): boolean
-  check_single_for_falling(Vec3)
-  check_for_falling(Vec3)
-  get_spawn_level(number, number)
-  mod_channel_join(string)
-  get_inventory(Vec3): InvRef
-  get_perlin_map(NoiseParams, Vec3): PerlinNoiseMapObject
-  get_inventory(Vec3): InvRef
-  create_detached_inventory(string, DetachedInventoryCallbacks, string): InvRef
-  remove_detached_inventory(string): boolean
-  do_item_eat(number, ItemStackObject, ItemStackObject, ObjectRef, PointedThing): ItemStackObject | nil
-  show_formspec(string, string, Formspec)
-  close_formspec(string, string)
-  formspec_escape(string): string
-  explode_table_event(string): {any : any}
-  explode_textlist_event(string): {any : any}
-  explode_scrollbar_event(string): {any : any}
-  inventorycube(string, string, string): string
-  get_pointed_thing_position(PointedThing, boolean): Vec3 | nil
-  dir_to_facedir(Vec3, boolean): number
-  facedir_to_dir(number): Vec3
-  dir_to_fourdir(Vec3): number
-  fourdir_to_dir(number): Vec3
-  dir_to_wallmounted(Vec3): number
-  wallmounted_to_dir(number): Vec3
-  dir_to_yaw(Vec3): number
-  yaw_to_dir(number): Vec3
-  is_colored_paramtype(number): boolean
-  strip_param2_color(number, paramtype2): number | nil
-  get_node_drops(string | NodeTable, string): {string}
-  get_craft_result(CraftRecipeDefinition): {ItemStackObject, ItemStackObject}
-  get_craft_recipe(string | NodeTable): CraftRecipeDefinition | nil
-  get_all_craft_recipes(string | NodeTable): {CraftRecipeDefinition} | nil
-  handle_node_drops(Vec3, {string}, ObjectRef)
-  itemstring_with_palette(ItemStackObject, number): string
-  itemstring_with_color(ItemStackObject, DynamicColorSpec): string
-  rollback_get_node_actions(Vec3, number, number, number): {Rollback}
-  rollback_revert_actions_by(string, number): {boolean, string}
-  item_place_node(ItemStackObject, ObjectRef, PointedThing, number, boolean): ItemStackObject, Vec3
-  item_place_object(ItemStackObject, ObjectRef, PointedThing): ItemStackObject
-  item_place(ItemStackObject, ObjectRef, PointedThing, number)
-  item_pickup(ItemStackObject, ObjectRef, PointedThing, number, ...any): ItemStackObject
-  item_drop(ItemStackObject, ObjectRef, Vec3): ItemStackObject
-  item_eat(number, string)
-  node_punch(Vec3, NodeTable, ObjectRef, PointedThing)
-  node_dig(Vec3, NodeTable, ObjectRef)
-  after(number, function, ...any): Job
-  handle_async(function, function, ...any)
-  register_async_dofile(string)
-  request_shutdown(string, boolean, number)
-  cancel_shutdown_requests()
-  get_server_status(string, boolean)
+  find_node_near(position: Vec3, radius: number, nodeNames: string[], searchCenter: boolean): Vec3 | void
+  find_nodes_in_area(pos1: Vec3, pos2: Vec3, nodeNames: string[], grouped: boolean): any[] //! FIXME: returns a very specific thing, turn it into an interface
+  find_nodes_in_area_under_air(pos1: Vec3, pos2: Vec3, nodeNames: string[]): Vec3[]
+  get_perlin(nodeParams: NoiseParams): PerlinNoiseObject
+  get_perlin(seedDiff: number, octaves: number, persistence: number, spread: number): PerlinNoiseObject
+  get_voxel_manip(pos1: Vec3, pos2: Vec3): VoxelManipObject
+  set_gen_notify(flags: GenNotifyFlags, decorationIDs: number[]): void
+  get_gen_notify(): number[]
+  get_decoration_id(decorationName: string): number
+  get_mapgen_object(objectName: string): GenNotifyObject
+  get_heat(position: Vec3): number
+  get_humidity(position: Vec3): number
+  get_biome_data(position: Vec3): BiomeDataDefinition | void
+  get_biome_id(biomeName: string): number
+  get_biome_name(biomeID: number): string
+  get_mapgen_setting(settingName: string): MapGenSettingsDefinition
+  set_mapgen_params(mapgenParams: MapGenSettingsDefinition): void
+  get_mapgen_edges(mapgenLimit: number, chunkSize: number): void
+  get_mapgen_setting(settingName: string): MapGenSettingsDefinition
+  get_mapgen_setting_noiseparams(settingName: string): NoiseParams
+  set_mapgen_setting(name: string, value: any, overrideMeta: boolean): void
+  set_noiseparams(name: string, noiseParams: NoiseParams, overrideMeta: boolean): void
+  get_noiseparams(name: string): NoiseParams
+  generate_ores(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void
+  generate_decorations(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void
+  clear_objects(options: ClearObjectsOptions): void
+  load_area(pos1: Vec3, pos2: Vec3): void
+  emerge_area(pos1: Vec3, pos2: Vec3, fun: EmergeAreaCallback, param: any): void
+  delete_area(pos1: Vec3, pos2: Vec3): void
+  line_of_sight(pos1: Vec3, pos2: Vec3): [boolean, Vec3]
+  raycast(pos1: Vec3, pos2: Vec3, hitObjects: boolean, hitLiquids: boolean): RaycastObject
+  find_path(pos1: Vec3, pos2: Vec3, searchDistance: number, maxJump: number, maxDrop: number, algorithm: SearchAlgorithm): Vec3[]
+  spawn_tree(position: Vec3, definition: TreeDefinition): void
+  transforming_liquid_add(position: Vec3): void
+  get_node_max_level(position: Vec3): number
+  get_node_level(position: Vec3): number
+  set_node_level(position: Vec3, level: number): number
+  add_node_level(position: Vec3, level: number): number
+  fix_light(pos1: Vec3, pos2: Vec3): boolean
+  check_single_for_falling(position: Vec3): void
+  check_for_falling(position: Vec3): void
+  get_spawn_level(x: number, z: number): number | void
+  mod_channel_join(channelName: string): void
+  get_inventory(position: Vec3): InvRef
+  get_perlin_map(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
+  get_inventory(position: Vec3): InvRef
+  create_detached_inventory(name: string, callbacks: DetachedInventoryCallbacks, playerName: string): InvRef
+  remove_detached_inventory(name: string): boolean
+  do_item_eat(hpChange: number, replaceWithItem: ItemStackObject, itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): ItemStackObject | void
+  show_formspec(playerName: string, formName: string, formSpec: Formspec): void
+  close_formspec(playerName: string, formName: string): void
+  formspec_escape(escape: string): string
+  explode_table_event(string: string): Map<any,any>
+  explode_textlist_event(string: string): Map<any,any>
+  explode_scrollbar_event(string: string): Map<any,any>
+  inventorycube(img1: string, img2: string, img3: string): string
+  get_pointed_thing_position(pointedThing: PointedThing, above: boolean): Vec3 | void
+  dir_to_facedir(direction: Vec3, is6d: boolean): number
+  facedir_to_dir(faceDir: number): Vec3
+  dir_to_fourdir(direction: Vec3): number
+  fourdir_to_dir(faceDir: number): Vec3
+  dir_to_wallmounted(direction: Vec3): number
+  wallmounted_to_dir(faceDir: number): Vec3
+  dir_to_yaw(direction: Vec3): number
+  yaw_to_dir(yaw: number): Vec3
+  is_colored_paramtype(pType: number): boolean
+  strip_param2_color(param2: number, paramType2: ParamType2): number | void
+  get_node_drops(node: string | NodeTable, toolName: string): string[]
+  get_craft_result(input: CraftRecipeDefinition): [ItemStackObject, ItemStackObject] //! TESTME: This documentation is confusing!
+  get_craft_recipe(output: string | NodeTable): CraftRecipeDefinition | void
+  get_all_craft_recipes(queryItem: string | NodeTable): CraftRecipeDefinition[] | void
+  handle_node_drops(position: Vec3, drops: string[], digger: ObjectRef): void
+  itemstring_with_palette(item: ItemStackObject, paletteIndex: number): string
+  itemstring_with_color(item: ItemStackObject, colorString: DynamicColorSpec): string
+  rollback_get_node_actions(position: Vec3, range: number, seconds: number, limit: number): Rollback[]
+  rollback_revert_actions_by(actor: string, seconds: number): [boolean, string]
+  item_place_node(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, param2: number, preventAfterPlace: boolean): [ItemStackObject, Vec3 | void]
+  //? Deprectated.
+  // item_place_object(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): ItemStackObject 
+  item_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, param2: number): [ItemStackObject, Vec3 | void]
+  item_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): ItemStackObject
+  item_drop(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): ItemStackObject
+  item_eat(hpChange: number, replaceWithItem: string): void
+  node_punch(position: Vec3, nodeTable: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
+  node_dig(position: Vec3, nodeTable: NodeTable, digger: ObjectRef): void
+  after(seconds: number, fun: function(...any): void, ...any: any): Job
+  handle_async(fun: function(...any): any, callback: function(...any): any, ...any: any): any // any any any any
+  register_async_dofile(path: string): void
+  request_shutdown(message: string, reconnect: boolean, delay: number): void
+  cancel_shutdown_requests(): void
+  get_server_status(name: string, joined: boolean): void
   get_server_uptime(): number
   get_server_max_lag(): number
-  remove_player(string): number
-  remove_player_auth(string): boolean
-  dynamic_add_media(DynamicAddMediaOptions, function(string))
+  remove_player(playerName: string): number
+  remove_player_auth(playerName: string): boolean
+  dynamic_add_media(options: DynamicAddMediaOptions, fun: function(string): void): void
   get_ban_list(): string
-  get_ban_description(string): string
-  ban_player(string): boolean
-  unban_player_or_ip(string)
-  kick_player(string, string): boolean
-  disconnect_player(string, string): boolean
-  add_particle(ParticleDefinition)
-  add_particlespawner(ParticleSpawnerDefinition): number
-  delete_particlespawner(number, string)
-  create_schematic(Vec3, Vec3, {SchematicProbability}, string, {SchematicSliceProbability})
-  place_schematic(Vec3, SchematicDefinition | string, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
-  place_schematic_on_vmanip(VoxelManipObject, Vec3, SchematicDefinition, SchematicRotation, {string : string}, boolean, {SchematicPlacementFlag})
-  serialize_schematic(SchematicDefinition, SchematicFormat, {SchematicSerializationOption})
-  read_schematic(SchematicDefinition | string, {SchematicReadOptionYSlice}): table
+  get_ban_description(ipOrName: string): string
+  ban_player(playerName: string): boolean
+  unban_player_or_ip(ipOrName: string): void
+  kick_player(playerName: string, reason: string): boolean
+  disconnect_player(name: string, reason: string): boolean
+  add_particle(definition: ParticleDefinition): void
+  add_particlespawner(definition: ParticleSpawnerDefinition): number
+  delete_particlespawner(id: number, playerName: string): void
+  create_schematic(pos1: Vec3, pos2: Vec3, probabilityList: SchematicProbability[], fileName: string, sliceProbList: SchematicSliceProbability[]): void
+  place_schematic(position: Vec3, schematic: SchematicDefinition | string, rotation: SchematicRotation, replacements: Map<string, string>, forcePlacement: boolean, flags: SchematicPlacementFlag[]): void
+  place_schematic_on_vmanip(voxelManip: VoxelManipObject, position: Vec3, schematic: SchematicDefinition, rotation: SchematicRotation, replacement: Map<string, string>, forcePlacement: boolean, flags: SchematicPlacementFlag[]): void
+  serialize_schematic(schematic: SchematicDefinition, format: SchematicFormat, options: SchematicSerializationOption[]): void
+  read_schematic(schematic: SchematicDefinition | string, options: SchematicReadOptionYSlice[]): Array<any>
   request_http_api(): HTTPApi
   get_mod_storage(): MetaRef
-  get_connected_players(): {ObjectRef}
-  is_player(ObjectRef): boolean
-  player_exists(string): boolean
-  hud_replace_builtin(HudReplaceBuiltinOption, HudDefinition)
-  parse_relative_number(ParseRelativeNumberArgument, number): number | nil
-  send_join_message(string)
-  send_leave_message(string, boolean)
-  hash_node_position(Vec3): number
-  get_position_from_hash(number): Vec3
-  get_item_group(string, string): number
-  raillike_group(string): number
-  get_content_id(string): number
-  get_name_from_content_id(number): string
-  parse_json(string, any): {any}
-  write_json({any}, boolean): string | nil
-  serialize(any): string
-  deserialize(string, boolean): {any : any}
-  compress(string, CompressionMethod, ...any): string
-  decompress(string, CompressionMethod, ...any): string
-  rgba(number, number, number, number): string
-  encode_base64(string): string
-  decode_base64(string): string
-  is_protected(Vec3, string): boolean
-  record_protection_violation(Vec3, string)
-  is_creative_enabled(string): boolean
-  is_area_protected(Vec3, Vec3, string, number): boolean
-  rotate_and_place(ItemStackObject, ObjectRef, PointedThing, boolean,RotateAndPlaceOrientationFlag, boolean): ItemStackObject
-  rotate_node(ItemStackObject, ObjectRef, PointedThing)
-  calculate_knockback(ObjectRef, ObjectRef, number, ToolCapabilities, Vec3, number, number)
-  forceload_block(Vec3, boolean, number)
-  forceload_free_block(Vec3, boolean)
-  compare_block_status(Vec3, BlockStatusCondition): boolean | nil
+  get_connected_players(): ObjectRef[]
+  is_player(thing: ObjectRef): boolean
+  player_exists(playerName: string): boolean
+  hud_replace_builtin(name: HudReplaceBuiltinOption, definition: HudDefinition): void
+  parse_relative_number(arg: ParseRelativeNumberArgument, relativeTo: number): number | void
+  send_join_message(playerName: string): void
+  send_leave_message(playerName: string, timedOut: boolean): void
+  hash_node_position(position: Vec3): number
+  get_position_from_hash(hash: number): Vec3
+  get_item_group(name: string, group: string): number
+  raillike_group(name: string): number
+  get_content_id(name: string): number
+  get_name_from_content_id(id: number): string
+  parse_json(string: string, nullValue: any): Array<any>
+  write_json(data: any[], styled: boolean): string | void
+  serialize(any: any): string
+  deserialize(string: string, safe: boolean): Map<any, any>
+  compress(data: string, method: CompressionMethod, ...any: any): string
+  decompress(data: string, method: CompressionMethod, ...any: any): string
+  rgba(red: number, green: number, blue: number, alpha: number): string
+  encode_base64(string: string): string
+  decode_base64(string: string): string
+  is_protected(position: Vec3, name: string): boolean
+  record_protection_violation(position: Vec3, name: string): void
+  is_creative_enabled(name: string): boolean
+  is_area_protected(pos1: Vec3, pos2: Vec3, playerName: string, interval: number): boolean
+  rotate_and_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, infiniteStacks: boolean, orientFlags: RotateAndPlaceOrientationFlag, preventAfterPlace: boolean): ItemStackObject
+  rotate_node(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
+  calculate_knockback(player: ObjectRef, hitter: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, distance: number, damage: number): number
+  forceload_block(position: Vec3, transient: boolean, limit: number): boolean
+  forceload_free_block(position: Vec3, transient: boolean): void
+  compare_block_status(position: Vec3, condition: BlockStatusCondition): boolean | void
   request_insecure_environment(): any
-  global_exists(string): boolean
+  global_exists(name: string): boolean
 
   registered_items: {string : ItemDefinition}
   registered_nodes: {string : NodeDefinition}
@@ -281,8 +283,8 @@ interface minetest {
   registered_entities: {string : EntityDefinition}
   object_refs: {string : ObjectRef}
   luaentities: {string : LuaEntity}
-  registered_abms: {ABMDefinition}
-  registered_lbms: {LBMDefinition}
+  registered_abms: ABMDefinition[]
+  registered_lbms: LBMDefinition[]
   registered_aliases: {string : string}
   registered_ores: {string : OreDefinition}
   registered_biomes: {string : BiomeDefinition}
@@ -291,25 +293,25 @@ interface minetest {
   registered_chatcommands: {string : ChatCommandDefinition}
   registered_privileges: {string : PrivilegeDefinition}
   
-  wrap_text(string, number, boolean): string | {string}
-  pos_to_string(Vec3, number): string
-  string_to_pos(string): Vec3
-  string_to_area(string, Vec3): Vec3, Vec3
-  formspec_escape(string): string
-  is_yes(any): boolean
-  is_nan(number): boolean
+  wrap_text(str: string, limit: number, asTable: boolean): string | string[]
+  pos_to_string(position: Vec3, decimalPlaces: number): string
+  string_to_pos(string: string): Vec3
+  string_to_area(positions: string, relativeTo: Vec3): [Vec3, Vec3]
+  formspec_escape(string: string): string
+  is_yes(arg: any): boolean
+  is_nan(arg: number): boolean
   get_us_time(): number
-  pointed_thing_to_face_pos(ObjectRef, PointedThing): Vec3
-  get_tool_wear_after_use(number, number): number
-  get_dig_params({string}, ToolCapabilities, number): DigParamsReturn
-  get_hit_params({string}, ToolCapabilities, number, number): HitParamsReturn
+  pointed_thing_to_face_pos(placer: ObjectRef, pointedThing: PointedThing): Vec3
+  get_tool_wear_after_use(uses: number, initialWear: number): number
+  get_dig_params(groups: string[], toolCapabilities: ToolCapabilities, wear: number): DigParamsReturn
+  get_hit_params(groups: string[], toolCapabilities: ToolCapabilities, timeFromLastPunch: number, wear: number): HitParamsReturn
 
-  get_translator(string): Translator
-  translate(string, ...string): string
+  get_translator(textDomain: string): Translator
+  translate(textDomain: string, ...string: string[]): string
 
-  sound_play(SimpleSoundSpec, SoundParameterTable, boolean): number
-  sound_stop(number)
-  sound_fade(number, number, number)
+  sound_play(spec: SimpleSoundSpec, parameters: SoundParameterTable, ephemeral: boolean): number
+  sound_stop(handle: number): void
+  sound_fade(handle: number, step: number, gain: number): void
 }
 
 interface SimpleSoundSpec {
@@ -328,12 +330,12 @@ interface SoundParameterTable extends SimpleSoundSpec {
   max_hear_distance: number
 }
 
-enum paramtype1 {
+enum ParamType1 {
   "light",
   "none"
 }
 
-enum paramtype2 {
+enum ParamType2 {
   "flowingliquid",
   "wallmounted",
   "facedir",
@@ -394,9 +396,9 @@ interface NodeBox {
   disconnected_sides: box
 }
 
-type box = {number}
+type box = number[]
 
-type boxTable = {box}
+type boxTable = box[]
 
 enum nodeboxtype {
   "regular",
@@ -522,16 +524,16 @@ interface NodeSoundSpec {
 }
 
 interface ItemDropSpec {
-  tools: {string}
+  tools: string[]
   rarity: number
-  items: {string}
+  items: string[]
   inherit_color: boolean
-  tool_groups: string | {string}
+  tool_groups: string | string[]
 }
 
 interface NodeDropSpec {
   max_items: number
-  items: {ItemDropSpec}
+  items: ItemDropSpec[]
 }
 
 interface MapNode {
@@ -591,7 +593,7 @@ interface MoveResult {
   touching_ground: boolean
   collides: boolean
   standing_on_object: boolean
-  collisions: {Collision}
+  collisions: Collision[]
 }
 
 
@@ -616,27 +618,27 @@ interface ItemDefinition {
   node_placement_prediction: string
   node_dig_prediction: string
   sound: SimpleSoundSpec
-  on_place(ItemStackObject, ObjectRef, PointedThing)
-  on_secondary_use(ItemStackObject, ObjectRef, PointedThing)
-  on_drop(ItemStackObject, ObjectRef, Vec3)
-  on_pickup(ItemStackObject, ObjectRef, PointedThing, number, ...any)
-  on_use(ItemStackObject, ObjectRef, PointedThing)
-  after_use(ItemStackObject, ObjectRef, NodeTable, {string : any})
+  on_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
+  on_secondary_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
+  on_drop(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
+  on_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
+  on_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
+  after_use(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
 }
 
 interface NodeDefinition {
   drawtype: drawtype
   visual_scale: number
-  tiles: {string}
-  overlay_tiles: {string}
-  special_tiles: {string}
+  tiles: string[]
+  overlay_tiles: string[]
+  special_tiles: string[]
   color: DynamicColorSpec
   use_texture_alpha: TextureAlpha
   palette: string
   post_effect_color: DynamicColorSpec
   post_effect_color_shaded: boolean
-  paramtype: paramtype1
-  paramtype2: paramtype2
+  paramtype: ParamType1
+  paramtype2: ParamType2
   place_param2: number
   is_ground_content: boolean
   sunlight_propagates: boolean
@@ -660,7 +662,7 @@ interface NodeDefinition {
   drowning: number
   damage_per_second: number
   node_box: NodeBox
-  connects_to: {string}
+  connects_to: string[]
   connect_sides: NodeBoxConnections
   mesh: string
   selection_box: NodeBox
@@ -670,9 +672,9 @@ interface NodeDefinition {
   waving: number
   sounds: NodeSoundSpec
   drop: NodeDropSpec | string
-  on_construct(Vec3)
-  on_destruct(Vec3)
-  after_destruct(Vec3, MapNode)
+  on_construct(position: Vec3): void
+  on_destruct(position: Vec3): void
+  after_destruct(position: Vec3, oldNode: MapNode): void
   on_flood(Vec3, NodeTable, NodeTable)
   preserve_metadata(Vec3, NodeTable, NodeTable, {ItemStackObject})
   after_place_node(Vec3, ObjectRef, ItemStackObject, PointedThing)
