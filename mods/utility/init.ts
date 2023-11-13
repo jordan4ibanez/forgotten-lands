@@ -79,7 +79,7 @@ module utility {
 
   const create = vector.create;
 
-  // TS is kinda
+  // TS is kinda cool
   vector.random = function(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3 {
     return create(
       rr(minX, maxX),
@@ -87,21 +87,6 @@ module utility {
       rr(minZ, maxZ)
     )
   }
-
-  // function core.register_entity(name, prototype)
-  //   -- Check name
-  //   if name == nil then
-  //     error("Unable to register entity: Name is nil")
-  //   end
-  //   name = check_modname_prefix(tostring(name))
-
-  //   prototype.name = name
-  //   prototype.__index = prototype  -- so that it can be used as a metatable
-
-  //   -- Add to core.registered_entities
-  //   core.registered_entities[name] = prototype
-  //   prototype.mod_origin = core.get_current_modname() or "??"
-  // end
 
   minetest.registerTSEntity = function(prototype: { new(): LuaEntity }) {
     let instance: LuaEntity = new prototype()
@@ -112,6 +97,5 @@ module utility {
     instance.__index = instance
     minetest.registered_entities[instance.name] = instance
   }
-
 
 }
