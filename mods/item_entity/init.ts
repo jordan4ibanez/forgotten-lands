@@ -1,10 +1,10 @@
 {
   const println = utility.println;
-  const fakeObjectRef = utility.fakeObjectRef;
+  const fakeRef = utility.fakeRef;
 
   class ItemEntity implements LuaEntity {
     name = "__builtin:item"
-    object = fakeObjectRef()
+    object = fakeRef()
     on_activate(staticData: string, delta: number): void {
     }
     on_step(delta: number, moveResult: MoveResult): void {

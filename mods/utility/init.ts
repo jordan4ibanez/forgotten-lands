@@ -63,7 +63,7 @@ module utility {
     return (math.random() * (max - min) + min)
   }
 
-  export function fakeObjectRef(): ObjectRef {
+  export function fakeRef(): ObjectRef {
     return {} as ObjectRef
   }
 
