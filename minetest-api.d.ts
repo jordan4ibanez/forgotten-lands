@@ -1,5 +1,6 @@
+export {}
+declare global {
 // Everything was just dumped in as I looked down the lua_api.md
-
 interface minetest {
   get_current_modname(): string
   get_modpath(modName: string): string
@@ -330,12 +331,12 @@ interface SoundParameterTable extends SimpleSoundSpec {
   max_hear_distance: number
 }
 
-declare enum ParamType1 {
+enum ParamType1 {
   "light",
   "none"
 }
 
-declare enum ParamType2 {
+enum ParamType2 {
   "flowingliquid",
   "wallmounted",
   "facedir",
@@ -351,7 +352,7 @@ declare enum ParamType2 {
   "colordegrotate"
 }
 
-declare enum drawtype {
+enum drawtype {
   "normal",
   "airlike",
   "liquid",
@@ -400,7 +401,7 @@ type box = number[]
 
 type boxTable = box[]
 
-declare enum nodeboxtype {
+enum nodeboxtype {
   "regular",
   "fixed",
   "wallmounted",
@@ -484,7 +485,7 @@ interface ColorSpec {
   b: number
 }
 
-declare enum LogLevel {
+enum LogLevel {
   "none",
   "error",
   "warning",
@@ -493,19 +494,19 @@ declare enum LogLevel {
   "verbose"
 }
 
-declare enum TextureAlpha {
+enum TextureAlpha {
   "opaque",
   "clip",
   "blend"
 }
 
-declare enum LiquidType {
+enum LiquidType {
   "none",
   "source",
   "flowing"
 }
 
-declare enum NodeBoxConnections {
+enum NodeBoxConnections {
   "top",
   "bottom",
   "front",
@@ -571,7 +572,7 @@ interface ItemSounds {
   punch_use_air: SimpleSoundSpec
 }
 
-declare enum EntityVisual {
+enum EntityVisual {
   "cube",
   "sprite",
   "upright_sprite",
@@ -716,7 +717,7 @@ interface LBMDefinition {
 }
 
 
-declare enum SchematicRotation {
+enum SchematicRotation {
   zero = "0",
   ninety = "90",
   oneEighty = "180",
@@ -724,23 +725,23 @@ declare enum SchematicRotation {
   random = "random"
 }
 
-declare enum SchematicPlacementFlag {
+enum SchematicPlacementFlag {
   "place_center_x",
   "place_center_y",
   "place_center_z"
 }
 
-declare enum SchematicFormat {
+enum SchematicFormat {
   "mts",
   "lua"
 }
 
-declare enum SchematicSerializationOption {
+enum SchematicSerializationOption {
   "lua_use_comments",
   "lua_num_indent_spaces"
 }
 
-declare enum SchematicReadOptionYSliceOption {
+enum SchematicReadOptionYSliceOption {
   "none",
   "low",
   "all"
@@ -774,7 +775,7 @@ interface SchematicDefinition {
   yslice_prob: number[][]
 }
 
-declare enum HTTPRequestMethod {
+enum HTTPRequestMethod {
   "GET",
   "POST",
   "PUT",
@@ -806,7 +807,7 @@ interface HTTPApi {
   fetch_async_get(handle: number): HTTPRequestResult
 }
 
-declare enum OreType {
+enum OreType {
   "scatter",
   "sheet",
   "puff",
@@ -815,12 +816,12 @@ declare enum OreType {
   "stratum"
 }
 
-declare enum OreFlags {
+enum OreFlags {
   "puff_cliffs",
   "puff_additive_composition"
 }
 
-declare enum NoiseFlags {
+enum NoiseFlags {
   "defaults",
   "eased",
   "absvalue"
@@ -889,12 +890,12 @@ interface BiomeDefinition {
 }
 
 
-declare enum DecorationType {
+enum DecorationType {
   "simple",
   "schematic"
 }
 
-declare enum DecorationFlags {
+enum DecorationFlags {
   "liquid_surface",
   "force_placement",
   "all_floors",
@@ -929,7 +930,7 @@ interface DecorationDefinition {
   rotation: string
 }
 
-declare enum CraftRecipeType {
+enum CraftRecipeType {
   "shapless",
   "toolrepair",
   "cooking",
@@ -973,7 +974,7 @@ interface AuthenticationHandlerDefinition {
 }
 
 
-declare enum HPChangeReasonType {
+enum HPChangeReasonType {
   "set_hp",
   "punch",
   "fall",
@@ -990,7 +991,7 @@ interface HPChangeReasonDefinition {
   from: string
 }
 
-declare enum CheatType {
+enum CheatType {
   "moved_too_fast",
   "interacted_too_far",
   "interacted_with_self",
@@ -1016,7 +1017,7 @@ interface CheatDefinition {
   type: CheatType
 }
 
-declare enum ClearObjectsOptions {
+enum ClearObjectsOptions {
   "full",
   "quick"
 }
@@ -1024,7 +1025,7 @@ declare enum ClearObjectsOptions {
 
 type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
 
-declare enum GenNotifyFlags {
+enum GenNotifyFlags {
   "dungeon",
   "temple",
   "cave_begin",
@@ -1048,7 +1049,7 @@ interface MapGenSettingsDefinition {
   flags: string
 }
 
-declare enum SearchAlgorithm{
+enum SearchAlgorithm{
   "A*_noprefetch",
   "A*",
   "Dijkstra"
@@ -1087,7 +1088,7 @@ interface MetaRef {
 }
 
 
-declare function ItemStack(_: ItemStackObject | string): ItemStackObject
+function ItemStack(_: ItemStackObject | string): ItemStackObject
 interface ItemStackObject {
   name: string
   count: number
@@ -1170,7 +1171,7 @@ interface TreeDefinition {
   
 type GenNotifyObject = Map<string, Vec3[]>
 
-declare function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
+function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
 interface VoxelManipObject {
   read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
   write_to_map(light: boolean): void
@@ -1194,7 +1195,7 @@ interface VoxelAreaInitializer {
   MaxEdge: Vec3
 }
 
-declare function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
+function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
 interface VoxelAreaObject {
   ystride: number
   zstride: number
@@ -1226,15 +1227,15 @@ interface HumidityMapObject {
 
 }
 
-declare function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
+function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
 interface RaycastObject extends Iterator<PointedThing>{}
 
-declare function SecureRandom(): SecureRandomObject
+function SecureRandom(): SecureRandomObject
 interface SecureRandomObject {
   next_bytes(count: number): string
 }
 
-declare function Settings(_: string): MinetestSettingsObject
+function Settings(_: string): MinetestSettingsObject
 interface MinetestSettingsObject {
   get(key: string): any
   get_bool(key: string, defaul?: boolean): boolean | null
@@ -1366,20 +1367,20 @@ interface ObjectRef {
   respawn(): void
 }
 
-declare function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
+function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
 interface PcgRandomObject {
   next(): number
   next(min: number, max: number): number
   rand_normal_dist(min: number, max: number, trials: number): number
 }
 
-declare function PerlinNoise(params: NoiseParams): PerlinNoiseObject
+function PerlinNoise(params: NoiseParams): PerlinNoiseObject
 interface PerlinNoiseObject {
   get_2d(position: Vec2): number
   get_3d(position: Vec3): number
 }
 
-declare function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
+function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
 interface PerlinNoiseMapObject {
   get_2d_map(pos: Vec2): number[][]
   get_3d_map(pos: Vec3): number[][][]
@@ -1390,7 +1391,7 @@ interface PerlinNoiseMapObject {
   get_map_slice(sliceOffset: Vec3, sliceSize: Vec3, buffer: number[]): number[]
 }
 
-declare function PseudoRandom(seed: number): PseudoRandomObject
+function PseudoRandom(seed: number): PseudoRandomObject
 interface PseudoRandomObject {
   next(): number
   next(min: number, max: number): number
@@ -1428,13 +1429,13 @@ interface PlayerControl {
   zoom: boolean
 }
 
-declare enum SkyParametersType {
+enum SkyParametersType {
   "regular",
   "skybox",
   "plain"
 }
 
-declare enum SkyParametersFogTintType {
+enum SkyParametersFogTintType {
   "custom",
   "default"
 }
@@ -1577,7 +1578,7 @@ interface LuaEntity extends EntityDefinition {
   object: ObjectRef
 }
 
-declare enum MinimapType {
+enum MinimapType {
   "off",
   "surface",
   "radar",
@@ -1603,7 +1604,7 @@ interface HudFlags {
   basic_debug: boolean
 }
 
-declare enum HudElementType {
+enum HudElementType {
   "image",
   "text",
   "statbar",
@@ -1632,25 +1633,25 @@ interface HudDefinition {
   style: number
 }
 
-declare enum HudReplaceBuiltinOption {
+enum HudReplaceBuiltinOption {
   "breath",
   "health"
 }
 
 type Formspec = string
 
-declare enum ParseRelativeNumberArgument {
+enum ParseRelativeNumberArgument {
   "<number>",
   "~<number>",
   "~"
 }
 
-declare enum CompressionMethod {
+enum CompressionMethod {
   "deflate",
   "zstd"
 }
 
-declare enum RotateAndPlaceOrientationFlag {
+enum RotateAndPlaceOrientationFlag {
   "invert_wall",
   "force_wall",
   "force_ceiling",
@@ -1658,14 +1659,14 @@ declare enum RotateAndPlaceOrientationFlag {
   "force_facedir"
 }
 
-declare enum BlockStatusCondition {
+enum BlockStatusCondition {
   "unknown",
   "emerging",
   "loaded",
   "active"
 }
 
-declare enum TileAnimationType {
+enum TileAnimationType {
   "vertical_frames",
   "sheed_2d"
 }
@@ -1733,7 +1734,7 @@ interface ParticleDefinition {
   bounce: ParticleBounceDefinition
 }
 
-declare enum ParticleSpawnerTweenStyle {
+enum ParticleSpawnerTweenStyle {
   "fwd",
   "rev",
   "pulse",
@@ -1757,7 +1758,7 @@ interface ParticleSpawnerRangeDefinition {
   z: number
 }
 
-declare enum ParticleSpawnerTextureBlend {
+enum ParticleSpawnerTextureBlend {
   "alpha",
   "add",
   "screen",
@@ -1781,7 +1782,7 @@ interface TexturePoolComponentTweenDefinition extends Array<number> {
   reps: number
 }
 
-declare enum TexturePoolComponentFade {
+enum TexturePoolComponentFade {
   "in",
   "out"
 }
@@ -1797,7 +1798,7 @@ interface TexturePoolComponentDefinition {
 
 type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
 
-declare enum ParticleSpawnerAttractionType {
+enum ParticleSpawnerAttractionType {
   "none",
   "point",
   "line",
@@ -1831,7 +1832,7 @@ interface ParticleSpawnerDefinition {
   texpool: ParticleSpawnerTexturePoolDefinition
 }
 
-declare enum AreaStoreType{
+enum AreaStoreType{
   "LibSpatial"
 }
 
@@ -1847,7 +1848,7 @@ interface AreaStoreCacheDefinition {
   limit: number
 }
 
-declare function AreaStore(_: AreaStoreType): AreaStoreObject
+function AreaStore(_: AreaStoreType): AreaStoreObject
 interface AreaStoreObject {
   get_area(id: number, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
   get_areas_for_pos(pos: Vec3, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
@@ -1862,7 +1863,7 @@ interface AreaStoreObject {
   from_file(fileName: string): [boolean, string] | void
 }
 
-interface vector {
+class vector {
   new(x: number, y: number, z: number): Vec3
   zero(): Vec3
   copy(vec: Vec3): Vec3
@@ -1896,6 +1897,7 @@ interface vector {
   // random(number, number, number, number, number, number): Vec3
 }
 
+
 interface Vec2 {
   x: number
   y: number
@@ -1911,6 +1913,7 @@ interface Vec3 extends Vec2 {
 
   z: number
 }
+
 
 interface Vec3RangeBias {
   min: Vec3
@@ -1954,9 +1957,9 @@ interface Translator {
   __call(...string: string[]): string
 }
 
-declare function dump(object: any, name: string, dumped: any[]): string
+function dump(object: any, name: string, dumped: any[]): string
 
-declare function dump2(object: any, dumped: any[]): string
+function dump2(object: any, dumped: any[]): string
 
 
 // Getting around redecleration warnings with this little trick.
@@ -1976,3 +1979,5 @@ declare function dump2(object: any, dumped: any[]): string
 // table.insert_all = function(_: table, _: table): table {}
 // table.key_value_swap = function(_: table): table {}
 // table.shuffle = function(_: table, _: number, _: number, _: function): table {}
+
+}
