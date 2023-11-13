@@ -328,51 +328,51 @@ interface SoundParameterTable extends SimpleSoundSpec {
   max_hear_distance: number
 }
 
-global enum paramtype1
-  "light"
+enum paramtype1 {
+  "light",
   "none"
-end
+}
 
-global enum paramtype2
-  "flowingliquid"
-  "wallmounted"
-  "facedir"
-  "4dir"
-  "leveled"
-  "degrotate"
-  "meshoptions"
-  "color"
-  "colorfacedir"
-  "color4dir"
-  "colorwallmounted"
-  "glasslikeliquidlevel"
+enum paramtype2 {
+  "flowingliquid",
+  "wallmounted",
+  "facedir",
+  "4dir",
+  "leveled",
+  "degrotate",
+  "meshoptions",
+  "color",
+  "colorfacedir",
+  "color4dir",
+  "colorwallmounted",
+  "glasslikeliquidlevel",
   "colordegrotate"
-end
+}
 
-global enum drawtype
-  "normal"
-  "airlike"
-  "liquid"
-  "flowingliquid"
-  "glasslike"
-  "glasslike_framed"
-  "glasslike_framed_optional"
-  "allfaces"
-  "allfaces_optional"
-  "torchlike"
-  "signlike"
-  "plantlike"
-  "firelike"
-  "fencelike"
-  "raillike"
-  "nodebox"
-  "mesh"
+enum drawtype {
+  "normal",
+  "airlike",
+  "liquid",
+  "flowingliquid",
+  "glasslike",
+  "glasslike_framed",
+  "glasslike_framed_optional",
+  "allfaces",
+  "allfaces_optional",
+  "torchlike",
+  "signlike",
+  "plantlike",
+  "firelike",
+  "fencelike",
+  "raillike",
+  "nodebox",
+  "mesh",
   "plantlike_rooted"
-end
+}
 
 
 
-global record NodeBox 
+interface NodeBox {
   type: nodeboxtype
   fixed: boxTable
   wall_top: box
@@ -392,30 +392,30 @@ global record NodeBox
   disconnected_right: box
   disconnected: box 
   disconnected_sides: box
-end
+}
 
-global type box = {number}
+type box = {number}
 
-global type boxTable = {box}
+type boxTable = {box}
 
-global enum nodeboxtype
-  "regular"
-  "fixed"
-  "wallmounted"
+enum nodeboxtype {
+  "regular",
+  "fixed",
+  "wallmounted",
   "connected"
-end
+}
 
-global type itemstring = string
+type itemstring = string
 
 
-global record GameInfo
+interface GameInfo {
   id: string
   title: string
   author: string
   path: string
-end
+}
 
-global record MinetestFeatures
+interface MinetestFeatures {
   glasslike_framed: boolean
   nodebox_as_selectionbox: boolean
   get_all_craft_recipes_works: boolean
@@ -442,9 +442,9 @@ global record MinetestFeatures
   get_light_data_buffer: boolean
   mod_storage_on_disk: boolean
   compress_zstd: boolean
-end
+}
 
-global record PlayerInformation
+interface PlayerInformation {
   address: string
   ip_version: number
   connection_uptime: number
@@ -457,148 +457,147 @@ global record PlayerInformation
   min_jitter: number
   max_jitter: number
   avg_jitter: number 
-end
+}
 
-global record WindowInformation
+interface WindowInformation {
   size: Vec2
   max_formspec_size: Vec2
   real_gui_scaling: number
   real_hud_scaling: number
-end
+}
 
-global record MinetestInfo
+interface MinetestInfo {
   project: string
   string: string
   proto_min: string
   proto_max: string
   hash: string
   is_dev: boolean
-end
+}
 
-global record ColorSpec
+interface ColorSpec {
   a: number
   r: number
   g: number
   b: number
-end
+}
 
-global enum LogLevel
-  "none"
-  "error"
-  "warning"
-  "action"
-  "info"
+enum LogLevel {
+  "none",
+  "error",
+  "warning",
+  "action",
+  "info",
   "verbose"
-end
+}
 
-global enum TextureAlpha
-  "opaque"
-  "clip"
+enum TextureAlpha {
+  "opaque",
+  "clip",
   "blend"
-end
+}
 
-global enum LiquidType
-  "none"
-  "source"
+enum LiquidType {
+  "none",
+  "source",
   "flowing"
-end
+}
 
-global enum NodeBoxConnections
-  "top"
-  "bottom"
-  "front"
-  "left"
-  "back"
+enum NodeBoxConnections {
+  "top",
+  "bottom",
+  "front",
+  "left",
+  "back",
   "right"
-end
+}
 
-global record NodeSoundSpec
+interface NodeSoundSpec {
   footstep: SimpleSoundSpec
   dig: SimpleSoundSpec | string
   dug: SimpleSoundSpec
   place: SimpleSoundSpec
   place_failed: SimpleSoundSpec
   fall: SimpleSoundSpec
-end
+}
 
-global record ItemDropSpec
+interface ItemDropSpec {
   tools: {string}
   rarity: number
   items: {string}
   inherit_color: boolean
   tool_groups: string | {string}
-end
+}
 
-global record NodeDropSpec
+interface NodeDropSpec {
   max_items: number
   items: {ItemDropSpec}
-end
+}
 
-global record MapNode
+interface MapNode {
   name: string
   prob: number
   param2: number
   force_place: boolean
-end
+}
 
-global record NodeTable
+interface NodeTable {
   name: string
   param1: number
   param2: number
-  
-end
+}
 
-global record PointedThing
+interface PointedThing {
   type: string
   under: Vec3
   above: Vec3
   ref: ObjectRef
-end
+}
 
-global record ToolCapabilities
+interface ToolCapabilities {
   full_punch_interval: number
   max_drop_level: number
   groupcaps: {string : any}
   damage_groups: {string : number}
   punch_attack_uses: number
-end
+}
 
-global record ItemSounds
+interface ItemSounds {
   breaks: SimpleSoundSpec
   eat: SimpleSoundSpec
   punch_use: SimpleSoundSpec
   punch_use_air: SimpleSoundSpec
-end
+}
 
-global enum EntityVisual
-  "cube"
-  "sprite"
-  "upright_sprite"
-  "mesh"
-  "wielditem"
+enum EntityVisual {
+  "cube",
+  "sprite",
+  "upright_sprite",
+  "mesh",
+  "wielditem",
   "item"
-end
+}
 
-global record Collision
+interface Collision {
   type: string
   axis: string
   node_pos: Vec3
   object: ObjectRef
   old_velocity: Vec3
   new_velocity: Vec3
-end
+}
 
-global record MoveResult
+interface MoveResult {
   touching_ground: boolean
   collides: boolean
   standing_on_object: boolean
   collisions: {Collision}
-end
+}
 
 
-global type DynamicColorSpec = (ColorSpec | string)
+type DynamicColorSpec = (ColorSpec | string)
 
-global record ItemDefinition
+interface ItemDefinition {
   description: string
   short_description: string
   groups: {string: number}
@@ -623,9 +622,9 @@ global record ItemDefinition
   on_pickup: function(ItemStackObject, ObjectRef, PointedThing, number, ...any)
   on_use: function(ItemStackObject, ObjectRef, PointedThing)
   after_use: function(ItemStackObject, ObjectRef, NodeTable, {string : any})
-end
+}
 
-global record NodeDefinition
+interface NodeDefinition {
   drawtype: drawtype
   visual_scale: number
   tiles: {string}
@@ -678,7 +677,7 @@ global record NodeDefinition
   preserve_metadata: function(Vec3, NodeTable, NodeTable, {ItemStackObject})
   after_place_node: function(Vec3, ObjectRef, ItemStackObject, PointedThing)
   after_dig_node: function(Vec3, NodeTable, string, ObjectRef)
-  can_dig: function(Vec3, ObjectRef | string) -- Unknown, documentation doesn't say
+  can_dig: function(Vec3, ObjectRef | string) //Unknown, documentation doesn't say
   on_punch: function(Vec3, NodeTable, ObjectRef, PointedThing)
   on_rightclick: function(Vec3, NodeTable, ObjectRef, ItemStackObject, PointedThing)
   on_dig: function(Vec3, NodeTable, ObjectRef)
@@ -692,9 +691,9 @@ global record NodeDefinition
   on_metadata_inventory_take: function(Vec3, string, number, ItemStackObject, ObjectRef)
   on_blast: function(Vec3, number)
   mod_origin: string
-end
+}
 
-global record ABMDefinition
+interface ABMDefinition {
   label: string
   nodenames: {string}
   neighbors: {string}
@@ -704,83 +703,83 @@ global record ABMDefinition
   max_y: number
   catch_up: number
   action: function(Vec3, NodeTable, number, number)
-end
+}
 
-global record LBMDefinition
+interface LBMDefinition {
   label: string
   name: string
   nodenames: {string}
   run_at_every_load: boolean
   action: function(Vec3, NodeTable, number)
-end
+}
 
 
-global enum SchematicRotation
-  "0"
-  "90"
-  "180"
-  "270"
+enum SchematicRotation {
+  "0",
+  "90",
+  "180",
+  "270",
   "random"
-end
+}
 
-global enum SchematicPlacementFlag
-  "place_center_x"
-  "place_center_y"
+enum SchematicPlacementFlag {
+  "place_center_x",
+  "place_center_y",
   "place_center_z"
-end
+}
 
-global enum SchematicFormat
-  "mts"
+enum SchematicFormat {
+  "mts",
   "lua"
-end
+}
 
-global enum SchematicSerializationOption
-  "lua_use_comments"
+enum SchematicSerializationOption {
+  "lua_use_comments",
   "lua_num_indent_spaces"
-end
+}
 
-global enum SchematicReadOptionYSlice
-  "none"
-  "low"
+enum SchematicReadOptionYSlice {
+  "none",
+  "low",
   "all"
-end
+}
 
-global record SchematicReadOptionYSlice
+interface SchematicReadOptionYSlice {
   write_yslice_prob: SchematicReadOptionYSlice
-end
+}
 
-global record SchematicData
+interface SchematicData {
   name: string
   prob: number
   param1: number
   param2: number
   force_place: boolean
-end
+}
 
-global record SchematicProbability
+interface SchematicProbability {
   pos: Vec3
   prob: number
-end
+}
 
-global record SchematicSliceProbability
+interface SchematicSliceProbability {
   ypos: number
   prob: number
-end
+}
 
-global record SchematicDefinition
+interface SchematicDefinition {
   size: Vec3
-  data: {SchematicData}
-  yslice_prob: {{number}}
-end
+  data: SchematicData[]
+  yslice_prob: number[][]
+}
 
-global enum HTTPRequestMethod
-  "GET"
-  "POST"
-  "PUT"
+enum HTTPRequestMethod {
+  "GET",
+  "POST",
+  "PUT",
   "DELETE"
-end
+}
 
-global record HTTPrequestDefinition
+interface HTTPrequestDefinition {
   url: string
   timeout: number
   method: HTTPRequestMethod
@@ -789,43 +788,43 @@ global record HTTPrequestDefinition
   extra_headers: {string}
   multipart: boolean
   post_data: string | {string : string}
-end
+}
 
-global record HTTPRequestResult
+interface HTTPRequestResult {
   completed: boolean
   succeeded: boolean
   timeout: boolean
   code: number
   data: string
-end
+}
 
-global record HTTPApi
+interface HTTPApi {
   fetch: function(HTTPrequestDefinition, function(HTTPRequestResult))
   fetch_async: function(HTTPrequestDefinition): number
   fetch_async_get: function(number): HTTPRequestResult
-end
+}
 
-global enum OreType
-  "scatter"
-  "sheet"
-  "puff"
-  "blob"
-  "vein"
+enum OreType {
+  "scatter",
+  "sheet",
+  "puff",
+  "blob",
+  "vein",
   "stratum"
-end
+}
 
-global enum OreFlags
-  "puff_cliffs"
+enum OreFlags {
+  "puff_cliffs",
   "puff_additive_composition"
-end
+}
 
-global enum NoiseFlags
-  "defaults"
-  "eased"
+enum NoiseFlags {
+  "defaults",
+  "eased",
   "absvalue"
-end
+}
 
-global record NoiseParams
+interface NoiseParams {
   offset: number
   scale: number
   spread: Vec3
@@ -834,9 +833,9 @@ global record NoiseParams
   persistence: number
   lacunarity: number
   flags: NoiseFlags
-end
+}
 
-global record OreDefinition
+interface OreDefinition {
   ore_type: OreType
   ore: string
   ore_param2: number
@@ -858,9 +857,9 @@ global record OreDefinition
   random_factor: number
   np_stratum_thickness: NoiseParams
   stratum_thickness: number
-end
+}
 
-global record BiomeDefinition
+interface BiomeDefinition {
   name: string
   node_dust: string
   node_top: string
@@ -885,25 +884,25 @@ global record BiomeDefinition
   vertical_blend: number
   heat_point: number
   humidity_point: number
-end
+}
 
 
-global enum DecorationType
-  "simple"
+enum DecorationType {
+  "simple",
   "schematic"
-end
+}
 
-global enum DecorationFlags
-  "liquid_surface"
-  "force_placement"
-  "all_floors"
-  "all_ceilings"
-  "place_center_x"
-  "place_center_y"
+enum DecorationFlags {
+  "liquid_surface",
+  "force_placement",
+  "all_floors",
+  "all_ceilings",
+  "place_center_x",
+  "place_center_y",
   "place_center_z"
-end
+}
 
-global record DecorationDefinition
+interface DecorationDefinition {
   name: string
   deco_type: DecorationType
   place_on: string
@@ -926,16 +925,16 @@ global record DecorationDefinition
   schematic: string | SchematicDefinition | number
   replacements: {string : string}
   rotation: string
-end
+}
 
-global enum CraftRecipeType
-  "shapless"
-  "toolrepair"
-  "cooking"
+enum CraftRecipeType {
+  "shapless",
+  "toolrepair",
+  "cooking",
   "fuel"
-end
+}
 
-global record CraftRecipeDefinition
+interface CraftRecipeDefinition {
   type: CraftRecipeType
   output: string
   recipe: {string} | string
@@ -943,24 +942,24 @@ global record CraftRecipeDefinition
   additional_wear: number
   cooktime: number
   burntime: number
-end
+}
 
-global record ChatCommandDefinition
+interface ChatCommandDefinition {
   params: string
   description: string
   privs: {string}
   func: function(string, string)
-end
+}
 
-global record PrivilegeDefinition
+interface PrivilegeDefinition {
   description: string
   give_to_singleplayer: boolean
   give_to_admin: boolean
   on_grant: function(string, string)
   on_revoke: function(string, string)
-end
+}
 
-global record AuthenticationHandlerDefinition
+interface AuthenticationHandlerDefinition {
   get_auth: function(string)
   create_auth: function(string, string)
   delete_auth: function(string)
@@ -969,37 +968,37 @@ global record AuthenticationHandlerDefinition
   reload: function()
   record_login: function(string)
   iterate: function()
-end
+}
 
 
-global enum HPChangeReasonType
-  "set_hp"
-  "punch"
-  "fall"
-  "node_damage"
-  "drown"
+enum HPChangeReasonType {
+  "set_hp",
+  "punch",
+  "fall",
+  "node_damage",
+  "drown",
   "respawn"
-end
+}
 
-global record HPChangeReasonDefinition
+interface HPChangeReasonDefinition {
   type: HPChangeReasonType
   node: string
   node_pos: Vec3
   object: ObjectRef
   from: string
-end
+}
 
-global enum CheatType
-  "moved_too_fast"
-  "interacted_too_far"
-  "interacted_with_self"
-  "interacted_while_dead"
-  "finished_unknown_dig"
-  "dug_unbreakable"
+enum CheatType {
+  "moved_too_fast",
+  "interacted_too_far",
+  "interacted_with_self",
+  "interacted_while_dead",
+  "finished_unknown_dig",
+  "dug_unbreakable",
   "dug_too_fast"
-end
+}
 
-global record ActionDefinition
+interface ActionDefinition {
   from_list: string
   to_list: string
   from_index: number
@@ -1008,59 +1007,57 @@ global record ActionDefinition
   listname: string
   index: number
   stack: ItemStackObject
-end
+}
 
 
-
-
-global record CheatDefinition
+interface CheatDefinition {
   type: CheatType
-end
+}
 
-global enum ClearObjectsOptions
-  "full"
+enum ClearObjectsOptions {
+  "full",
   "quick"
-end
+}
 
 
-global type EmergeAreaCallback = function(Vec3, any, number, any)
+type EmergeAreaCallback = function(Vec3, any, number, any)
 
-global enum GenNotifyFlags
-  "dungeon"
-  "temple"
-  "cave_begin"
-  "cave_end"
-  "large_cave_begin"
-  "large_cave_end"
+enum GenNotifyFlags {
+  "dungeon",
+  "temple",
+  "cave_begin",
+  "cave_end",
+  "large_cave_begin",
+  "large_cave_end",
   "decoration"
-end
+}
 
-global record BiomeDataDefinition
+interface BiomeDataDefinition {
   biome: number
   heat: number
   humidity: number
-end
+}
 
-global record MapGenSettingsDefinition
+interface MapGenSettingsDefinition {
   mgname: string
   seed: number
   chnksize: number
   water_level: number
   flags: string
-end
+}
 
-global enum SearchAlgorithm
-  "A*_noprefetch"
-  "A*"
+enum SearchAlgorithm{
+  "A*_noprefetch",
+  "A*",
   "Dijkstra"
-end
+}
 
-global record MetaData
+interface MetaData {
   fields: {string : any}
   inventory: {string : {number : string}}
-end
+}
 
-global record MetaRef
+interface MetaRef {
   set_tool_capabilities: function(MetaRef, ToolCapabilities)
   contains: function(MetaRef, string): boolean
   get: function(MetaRef, string): string
@@ -1074,21 +1071,22 @@ global record MetaRef
   to_table: function(MetaRef): MetaData | nil
   from_table: function(MetaRef, MetaData): boolean
   equals: function(MetaRef, MetaRef): boolean
-  -- node
+  //! FIXME: USE INHERITENCE!
+  // node
   get_inventory: function(MetaRef): InvRef
   mark_as_private: function(MetaRef, string | {string})
-  -- timer
+  // timer
   set: function(MetaRef, number, number)
   start: function(MetaRef, number)
   stop: function(MetaRef)
   get_timeout: function(MetaRef): number
   get_elapsed: function(MetaRef): number
   is_started: function(MetaRef): boolean
-end
+}
 
 
-global function ItemStack(_: ItemStackObject | string): ItemStackObject end
-global record ItemStackObject
+function ItemStack(_: ItemStackObject | string): ItemStackObject {}
+interface ItemStackObject {
   name: string
   count: number
   wear: number
@@ -1120,16 +1118,16 @@ global record ItemStackObject
   take_item: function(ItemStackObject, number): ItemStackObject
   peek_item: function(ItemStackObject, number): ItemStackObject
   equals: function(ItemStackObject, ItemStackObject): boolean
-end
+}
 
 
-global record InvRefLocation
+interface InvRefLocation {
   type: string
   name: string
   pos: Vec3
-end
+}
 
-global record InvRef
+interface InvRef {
   is_empty: function(InvRef, string): boolean
   get_size: function(InvRef, string): number
   set_size: function(InvRef, string, number): boolean
@@ -1146,9 +1144,9 @@ global record InvRef
   contains_item: function(InvRef, string, ItemStackObject | string, boolean): boolean
   remove_item: function(InvRef, string, ItemStackObject | string): {ItemStackObject}
   get_location: function(InvRef): InvRefLocation
-end
+}
 
-global record TreeDefinition
+interface TreeDefinition {
   axiom: string
   rules_a: string
   rules_b: string
@@ -1166,13 +1164,12 @@ global record TreeDefinition
   fruit: string
   fruit_chance: number
   seed: number
-end
-
+}
   
-global type GenNotifyObject = {string : {Vec3}}
+type GenNotifyObject = {string : {Vec3}}
 
-global function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject end
-global record VoxelManipObject
+function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject {}
+interface VoxelManipObject {
   read_from_map: function(VoxelManipObject, Vec3, Vec3)
   write_to_map: function(VoxelManipObject, boolean)
   get_node_at: function(VoxelManipObject, Vec3): MapNode
@@ -1188,15 +1185,15 @@ global record VoxelManipObject
   update_liquids: function(VoxelManipObject)
   was_modified: function(VoxelManipObject): boolean
   get_emerged_area: function(VoxelManipObject): Vec3, Vec3
-end
+}
 
-global record VoxelAreaInitializer
+interface VoxelAreaInitializer {
   MinEdge: Vec3
   MaxEdge: Vec3
-end
+}
 
-global function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject end
-global record VoxelAreaObject
+function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject {}
+interface VoxelAreaObject {
   ystride: number
   zstride: number
   new: function(VoxelAreaInitializer): VoxelAreaObject
@@ -1209,36 +1206,36 @@ global record VoxelAreaObject
   containsi: function(VoxelAreaObject, number): boolean
   iter: function(VoxelAreaObject, number, number, number, number, number, number): function(): number
   iterp: function(VoxelAreaObject, Vec3, Vec3): function(): number
-end
+}
 
-global record HeightMapObject
+interface HeightMapObject {
 
-end
+}
 
-global record BiomeMapObject
+interface BiomeMapObject {
 
-end
+}
 
-global record HeatMapObject
+interface HeatMapObject {
 
-end
+}
 
-global record HumidityMapObject
+interface HumidityMapObject {
 
-end
+}
 
-global function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject end
-global record RaycastObject
-  metamethod __call: function(RaycastObject): PointedThing | nil
-end
+function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject {}
+interface RaycastObject {
+   __call: function(RaycastObject): PointedThing | nil
+}
 
-global function SecureRandom(): SecureRandomObject end
-global record SecureRandomObject
+function SecureRandom(): SecureRandomObject {}
+interface SecureRandomObject {
   next_bytes: function(SecureRandomObject, number): string
-end
+}
 
-global function Settings(_: string): MinetestSettingsObject end
-global record MinetestSettingsObject
+function Settings(_: string): MinetestSettingsObject {}
+interface MinetestSettingsObject {
   get: function(MinetestSettingsObject, string): any
   get_bool: function(MinetestSettingsObject, string): boolean | nil
   get_np_group: function(MinetestSettingsObject, string): NoiseParams
@@ -1251,24 +1248,24 @@ global record MinetestSettingsObject
   has: function(MinetestSettingsObject, string): boolean
   write: function(MinetestSettingsObject): boolean
   to_table: function(MinetestSettingsObject): {string : any}
-end
+}
 
-global record NametagAttributes
+interface NametagAttributes {
   text: string
   color: RGBA
   bgcolor: RGBA
-end
+}
 
-global record AttachRef
+interface AttachRef {
   parent: ObjectRef
   bone: string
   position: Vec3
   rotation: Vec3
   forced_visible: boolean
-end
+}
 
 
-global record ObjectRef
+interface ObjectRef {
   get_pos: function(ObjectRef): Vec3
   set_pos: function(ObjectRef, Vec3)
   get_velocity: function(ObjectRef): Vec3
@@ -1366,39 +1363,39 @@ global record ObjectRef
   set_lighting: function(ObjectRef, LightingDefinition)
   get_lighting: function(ObjectRef): LightingDefinition
   respawn: function(ObjectRef)
-end
+}
 
-global function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject end
-global record PcgRandomObject
+function PcgRandom(_seed: number, _sequence: {number}): PcgRandomObject {}
+interface PcgRandomObject {
   next: function(PcgRandomObject): number
   next: function(PcgRandomObject, number, number): number
   rand_normal_dist: function(PcgRandomObject, number, number, number): number
-end
+}
 
-global function PerlinNoise(_params: NoiseParams): PerlinNoiseObject end
-global record PerlinNoiseObject
+function PerlinNoise(_params: NoiseParams): PerlinNoiseObject {}
+interface PerlinNoiseObject {
   get_2d: function(PerlinNoiseObject, Vec2): number
   get_3d: function(PerlinNoiseObject, Vec3): number
-end
+}
 
-global function PerlinNoiseMap(_params: NoiseParams, _size: Vec3): PerlinNoiseMapObject end
-global record PerlinNoiseMapObject
-  get_2d_map: function(PerlinNoiseMapObject, Vec2): {{number}}
-  get_3d_map: function(PerlinNoiseMapObject, Vec3): {{{number}}}
+function PerlinNoiseMap(_params: NoiseParams, _size: Vec3): PerlinNoiseMapObject {}
+interface PerlinNoiseMapObject {
+  get_2d_map: function(PerlinNoiseMapObject, Vec2): number[][]
+  get_3d_map: function(PerlinNoiseMapObject, Vec3): number[][][]
   get_2d_map_flat: function(PerlinNoiseMapObject, Vec2, {any}): {number}
   get_3d_map_flat: function(PerlinNoiseMapObject, Vec3, {any}): {number}
   calc_2d_map: function(PerlinNoiseMapObject, Vec2)
   calc_3d_map: function(PerlinNoiseMapObject, Vec3)
   get_map_slice: function(PerlinNoiseMapObject, Vec3, Vec3, {any}): {number}
-end
+}
 
-global function PseudoRandom(_seed: number): PseudoRandomObject end
-global record PseudoRandomObject
+function PseudoRandom(_seed: number): PseudoRandomObject {}
+interface PseudoRandomObject {
   next: function(PseudoRandomObject): number
   next: function(PseudoRandomObject, number, number): number
-end
+}
 
-global record PhysicsOverride
+interface PhysicsOverride {
   speed: number
   jump: number
   gravity: number
@@ -1412,10 +1409,10 @@ global record PhysicsOverride
   sneak: boolean
   sneak_glitch: boolean
   new_move: boolean
-end
+}
 
 
-global record PlayerControl
+interface PlayerControl {
   up: boolean
   down: boolean
   left: boolean
@@ -1428,20 +1425,20 @@ global record PlayerControl
   LMB: boolean
   RMB: boolean
   zoom: boolean
-end
+}
 
-global enum SkyParametersType
-  "regular"
-  "skybox"
+enum SkyParametersType {
+  "regular",
+  "skybox",
   "plain"
-end
+}
 
-global enum SkyParametersFogTintType
-  "custom"
+enum SkyParametersFogTintType {
+  "custom",
   "default"
-end
+}
 
-global record SkyParametersColor
+interface SkyParametersColor {
   day_sky: DynamicColorSpec
   day_horizon: DynamicColorSpec
   dawn_sky: DynamicColorSpec
@@ -1452,14 +1449,14 @@ global record SkyParametersColor
   fog_sun_tint: DynamicColorSpec
   fog_moon_tint: DynamicColorSpec
   fog_tint_type: SkyParametersFogTintType
-end
+}
 
-global record SkyParametersFog
+interface SkyParametersFog {
   fog_distance: number
   fog_start: number
-end
+}
 
-global record SkyParameters
+interface SkyParameters {
   base_color: DynamicColorSpec
   body_orbit_tilt: number
   type: SkyParametersType
@@ -1467,65 +1464,63 @@ global record SkyParameters
   clouds: boolean
   sky_color: SkyParametersColor
   fog: SkyParametersFog
-end
+}
 
-global record SunParameters
+interface SunParameters {
   visible: boolean
   texture: string
   tonemap: string
   sunrise: string
   sunrise_visible: boolean
   scale: number
-end
+}
 
-global record MoonParameters
+interface MoonParameters {
   visible: boolean
   texture: string
   tonemap: string
   scale: number
-end
+}
 
-global record StarParameters
+interface StarParameters {
   visible: boolean
   day_opacity: number
   count: number
   star_color: DynamicColorSpec
   scale: number
-end
+}
 
-global record CloudParameters
+interface CloudParameters {
   density: number
   color: DynamicColorSpec
   ambient: DynamicColorSpec
   height: number
   thickness: number
   speed: Vec2
-end
+}
 
-global record LightShadowsSpec
+interface LightShadowsSpec {
   intensity: number
-end
+}
 
-global record LightExposureSpec
+interface LightExposureSpec {
   luminance_min: number
   luminance_max: number
   exposure_correction: number
   speed_dark_bright: number
   speed_bright_dark: number
   center_weight_power: number
-end
+}
 
-global record LightingDefinition
+interface LightingDefinition {
   saturation: number
   shadows: LightShadowsSpec
   exposure: LightExposureSpec
-end
+}
 
-global record CollisionBox
-  {number}
-end
+type CollisionBox = Array<number>
 
-global record ObjectProperties
+interface ObjectProperties {
   hp_max: number
   breath_max: number
   zoom_fov: number
@@ -1559,9 +1554,9 @@ global record ObjectProperties
   damage_texture_modifier: string
   shaded: boolean
   show_on_minimap: boolean
-end
+}
 
-global record EntityDefinition
+interface EntityDefinition {
   initial_properties: ObjectProperties
   on_activate: function(LuaEntity, string, number)
   on_deactivate: function(LuaEntity, boolean)
@@ -1573,9 +1568,9 @@ global record EntityDefinition
   on_detach_child: function(LuaEntity, ObjectRef)
   on_detach: function(LuaEntity, ObjectRef)
   get_staticdata: function(LuaEntity)
-end
+}
 
-global record LuaEntity
+interface LuaEntity {
   initial_properties: ObjectProperties
   name: string
   object: ObjectRef
@@ -1589,24 +1584,24 @@ global record LuaEntity
   on_detach_child: function(LuaEntity, ObjectRef)
   on_detach: function(LuaEntity, ObjectRef)
   get_staticdata: function(LuaEntity)
-end
+}
 
-global enum MinimapType
-  "off"
-  "surface"
-  "radar"
+enum MinimapType {
+  "off",
+  "surface",
+  "radar",
   "texture"
-end
+}
 
-global record MinimapModes
+interface MinimapModes {
   type: MinimapType
   label: string
   size: number
   texture: string
   scale: number
-end
+}
 
-global record HudFlags
+interface HudFlags {
   hotbar: boolean
   healthbar: boolean
   crosshair: boolean
@@ -1615,20 +1610,20 @@ global record HudFlags
   minimap: boolean
   minimap_radar: boolean
   basic_debug: boolean
-end
+}
 
-global enum HudElementType
-  "image"
-  "text"
-  "statbar"
-  "inventory"
-  "waypoint"
-  "image_waypoint"
-  "compass"
+enum HudElementType {
+  "image",
+  "text",
+  "statbar",
+  "inventory",
+  "waypoint",
+  "image_waypoint",
+  "compass",
   "minimap"
-end
+}
 
-global record HudDefinition
+interface HudDefinition {
   hud_elem_type: HudElementType
   position: Vec2
   name: string
@@ -1644,47 +1639,47 @@ global record HudDefinition
   size: Vec2
   z_index: number
   style: number
-end
+}
 
-global enum HudReplaceBuiltinOption
-  "breath"
+enum HudReplaceBuiltinOption {
+  "breath",
   "health"
-end
+}
 
-global type Formspec = string
+type Formspec = string
 
-global enum ParseRelativeNumberArgument
-  "<number>"
-  "~<number>"
+enum ParseRelativeNumberArgument {
+  "<number>",
+  "~<number>",
   "~"
-end
+}
 
-global enum CompressionMethod
-  "deflate"
+enum CompressionMethod {
+  "deflate",
   "zstd"
-end
+}
 
-global enum RotateAndPlaceOrientationFlag
-  "invert_wall"
-  "force_wall"
-  "force_ceiling"
-  "force_floor"
+enum RotateAndPlaceOrientationFlag {
+  "invert_wall",
+  "force_wall",
+  "force_ceiling",
+  "force_floor",
   "force_facedir"
-end
+}
 
-global enum BlockStatusCondition
-  "unknown"
-  "emerging"
-  "loaded"
+enum BlockStatusCondition {
+  "unknown",
+  "emerging",
+  "loaded",
   "active"
-end
+}
 
-global enum TileAnimationType
-  "vertical_frames"
+enum TileAnimationType {
+  "vertical_frames",
   "sheed_2d"
-end
+}
 
-global record TileAnimationDefinition
+interface TileAnimationDefinition {
   type: TileAnimationType
   aspect_w: number
   aspect_h: number
@@ -1692,41 +1687,42 @@ global record TileAnimationDefinition
   frames_w: number
   frames_h: number
   frame_length: number
-end
+}
 
-global record DetachedInventoryCallbacks
+interface DetachedInventoryCallbacks {
   allow_move: function(InvRef, string, number, string, number, number, ObjectRef)
   allow_put: function(InvRef, string, number, ItemStackObject, ObjectRef)
   allow_take: function(InvRef, string, number, ItemStackObject, ObjectRef)
   on_move: function(InvRef, string, number, string, number, number, ObjectRef)
   on_put: function(InvRef, string, number, ItemStackObject, ObjectRef)
   on_take: function(InvRef, string, number, ItemStackObject, ObjectRef)
-end
+}
 
-global record Rollback
+interface Rollback {
   actor: string
   pos: Vec3
   time: number
   oldnode: string
   newnode: string
-end
+}
 
-global record Job
+interface Job {
   cancel: function()
-end
+}
 
-global record DynamicAddMediaOptions
+interface DynamicAddMediaOptions {
   filepath: string
   to_player: string
   ephemeral: boolean
-end
-global record ParticleBounceDefinition
+}
+
+interface ParticleBounceDefinition {
   min: number
   max: number
   bias: number
-end
+}
 
-global record ParticleDefinition
+interface ParticleDefinition {
   pos: Vec3
   velocity: Vec3
   acceleration: Vec3
@@ -1744,23 +1740,23 @@ global record ParticleDefinition
   node_tile: NodeSoundSpec
   drag: Vec3
   bounce: ParticleBounceDefinition
-end
+}
 
-global enum ParticleSpawnerTweenStyle
-  "fwd"
-  "rev"
-  "pulse"
+enum ParticleSpawnerTweenStyle {
+  "fwd",
+  "rev",
+  "pulse",
   "flicker"
-end
+}
 
-global record ParticleSpawnerTweenDefinition
-  {number | ParticleSpawnerRangeDefinition}
+interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
+  // {number | ParticleSpawnerRangeDefinition}
   style: ParticleSpawnerTweenStyle
   reps: number
   start: number
-end
+}
 
-global record ParticleSpawnerRangeDefinition
+interface ParticleSpawnerRangeDefinition {
   min: Vec3
   max: Vec3
   bias: number
@@ -1768,20 +1764,18 @@ global record ParticleSpawnerRangeDefinition
   x: number
   y: number
   z: number
-end
+}
 
-global enum ParticleSpawnerTextureBlend
-  "alpha"
-  "add"
-  "screen"
+enum ParticleSpawnerTextureBlend {
+  "alpha",
+  "add",
+  "screen",
   "sub"
-end
+}
 
-global record ParticleSpawnerTextureScaleTween
-  {Vec2}
-end
+type ParticleSpawnerTextureScaleTween = Array<Vec2>
 
-global record ParticleSpawnerTextureDefinition
+interface ParticleSpawnerTextureDefinition {
   name: string
   alpha: number
   alpha_tween: {number}
@@ -1789,40 +1783,37 @@ global record ParticleSpawnerTextureDefinition
   scale_tween: ParticleSpawnerTextureScaleTween
   blend: ParticleSpawnerTextureBlend
   animation: TileAnimationDefinition
-end
+}
 
-global record TexturePoolComponentTweenDefinition
-  {number}
+interface TexturePoolComponentTweenDefinition extends Array<number> {
   style: ParticleSpawnerTweenStyle
   reps: number
-end
+}
 
-global enum TexturePoolComponentFade
-  "in"
+enum TexturePoolComponentFade {
+  "in",
   "out"
-end
+}
 
-global record TexturePoolComponentDefinition
+interface TexturePoolComponentDefinition {
   name: string
   fade: TexturePoolComponentFade
   alpha: number
   scale: number
   animation: TileAnimationDefinition
   alpha_tween: TexturePoolComponentTweenDefinition
-end
+}
 
-global record ParticleSpawnerTexturePoolDefinition
-  {string | TexturePoolComponentDefinition}
-end
+type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
 
-global enum ParticleSpawnerAttractionType
-  "none"
-  "point"
-  "line"
+enum ParticleSpawnerAttractionType {
+  "none",
+  "point",
+  "line",
   "plane"
-end
+}
 
-global record ParticleSpawnerAttractionDefinition
+interface ParticleSpawnerAttractionDefinition {
   kind: ParticleSpawnerAttractionType
   strength: Vec2
   origin: Vec3
@@ -1830,10 +1821,9 @@ global record ParticleSpawnerAttractionDefinition
   origin_attached: ObjectRef
   direction_attached: ObjectRef
   die_on_contact: boolean
-end
+}
 
-
-global record ParticleSpawnerDefinition
+interface ParticleSpawnerDefinition {
   maxpos: Vec3
   minpos: Vec3
   pos: number | ParticleSpawnerRangeDefinition
@@ -1848,41 +1838,40 @@ global record ParticleSpawnerDefinition
   pos_tween: ParticleSpawnerTweenDefinition
   texture: string | ParticleSpawnerTextureDefinition
   texpool: ParticleSpawnerTexturePoolDefinition
-end
+}
 
-global enum AreaStoreType
+enum AreaStoreType{
   "LibSpatial"
-end
+}
 
-global record AreaStoreArea
+interface AreaStoreArea {
   min: Vec3
   max: Vec3
   data: string
-end
+}
 
-global record AreaStoreCacheDefinition
+interface AreaStoreCacheDefinition {
   enabled: boolean
   block_radius: number
   limit: number
-end
+}
 
-global function AreaStore(_: AreaStoreType): AreaStoreObject end
-global record AreaStoreObject
-  get_area: function(AreaStoreObject, number, boolean, boolean): {AreaStoreArea | boolean | nil}
-  get_areas_for_pos: function(AreaStoreObject, Vec3, boolean, boolean): {AreaStoreArea | boolean | nil}
-  get_areas_in_area: function(AreaStoreObject, Vec3, Vec3, boolean, boolean, boolean): {AreaStoreArea | boolean | nil}
+function AreaStore(_: AreaStoreType): AreaStoreObject {}
+interface AreaStoreObject {
+  get_area: function(AreaStoreObject, number, boolean, boolean): AreaStoreArea[] | boolean[] | nil
+  get_areas_for_pos: function(AreaStoreObject, Vec3, boolean, boolean): AreaStoreArea[] | boolean[] | nil
+  get_areas_in_area: function(AreaStoreObject, Vec3, Vec3, boolean, boolean, boolean): AreaStoreArea[] | boolean[] | nil
   insert_area: function(AreaStoreObject, Vec3, Vec3, string, number): number
   reserve: function(AreaStoreObject, number)
   remove_area: function(AreaStoreObject, number): boolean
   set_cache_params: function(AreaStoreObject, AreaStoreCacheDefinition)
   to_string: function(AreaStoreObject): string
   to_file: function(AreaStoreObject, string)
-  from_string: function(AreaStoreObject, string): boolean, string | nil
-  from_file: function(AreaStoreObject, string): boolean, string | nil
+  from_string: function(AreaStoreObject, string): [boolean, string] | nil
+  from_file: function(AreaStoreObject, string): [boolean, string] | nil
+}
 
-end
-
-global record vector
+interface vector {
   new: function(number, number, number): Vec3
   zero: function(): Vec3
   copy: function(Vec3): Vec3
@@ -1914,87 +1903,82 @@ global record vector
   dir_to_rotation: function(Vec3, Vec3): Vec3
 
   random: function(number, number, number, number, number, number): Vec3
-end
+}
 
-global record Vec2
+interface Vec2 {
   x: number
   y: number
-end
+}
 
-global record Vec3
-  metamethod __eq: function(Vec3, Vec3): boolean
-  metamethod __unm: function(Vec3): Vec3
-  metamethod __add: function(Vec3, Vec3): Vec3
-  metamethod __sub: function(Vec3, Vec3): Vec3
-  metamethod __mul: function(Vec3, Vec3): Vec3
-  metamethod __div: function(Vec3, Vec3): Vec3
+interface Vec3 extends Vec2 {
+  __eq: function(Vec3, Vec3): boolean
+  __unm: function(Vec3): Vec3
+  __add: function(Vec3, Vec3): Vec3
+  __sub: function(Vec3, Vec3): Vec3
+  __mul: function(Vec3, Vec3): Vec3
+  __div: function(Vec3, Vec3): Vec3
 
-  x: number
-  y: number
   z: number
-end
+}
 
-global record Vec3RangeBias
+interface Vec3RangeBias {
   min: Vec3
   max: Vec3
   bias: Vec3
-end
+}
 
-global record RGBA
+interface RGBA {
   r: number
   g: number
   b: number
   a: number
-end
+}
 
-global record DigParamsReturn
+interface DigParamsReturn {
   diggable: boolean
   time: number
   wear: number
   groups: {string}
   tool_capabilities: ToolCapabilities
-end
+}
 
-global record HitParamsReturn
+interface HitParamsReturn {
   hp: number
   wear: number
   groups: {string}
   tool_capabilities: ToolCapabilities
   time_from_last_punch: number
-end
+}
 
-global record NodeTimerObject
+interface NodeTimerObject {
   set: function(NodeTimerObject, number, number)
   start: function(NodeTimerObject, number)
   stop: function(NodeTimerObject)
   get_timeout: function(NodeTimerObject): number
   get_elapsed: function(NodeTimerObject): number
   is_started: function(NodeTimerObject): boolean
-end
+}
 
-global record Translator
-  metamethod __call: function(Translator, ...string): string
-end
+interface Translator {
+  __call: function(Translator, ...string): string
+}
 
-global function dump(_: any, _: string, _: table): string end
+function dump(_: any, _: string, _: table): string {}
 
-global function dump2(_: any, _: table): string end
+function dump2(_: any, _: table): string {}
 
 
--- Getting around redecleration warnings with this little trick.
-local m = math
-function m.hypot(_: number, _: number): number end
-function m.sign(_: number, _: number): number end
-function m.factorial(_: number): number end
-function m.round(_: number): number end
+// Getting around redecleration warnings with this little trick.
+math.hypot = function(_: number, _: number): number {}
+math.sign = function(_: number, _: number): number {}
+math.factorial = function(_: number): number {}
+math.round = function(_: number): number {}
 
-local s = string
-function s.split(_: string, _: string, _: box, _: NodeSoundSpec, _: boolean): string end
-function s:trim(): string end
+string.split = function(_: string, _: string, _: box, _: NodeSoundSpec, _: boolean): string {}
+string.trim = function(_: string): string {}
 
-local t = table
-function t.copy(_: table): table end
-function t.indexof(_: table, _: number): number end
-function t.insert_all(_: table, _: table): table end
-function t.key_value_swap(_: table): table end
-function t.shuffle(_: table, _: number, _: number, _: function): table end
+table.copy = function(_: table): table {}
+table.indexof = function(_: table, _: number): number {}
+table.insert_all = function(_: table, _: table): table {}
+table.key_value_swap = function(_: table): table {}
+table.shuffle = function(_: table, _: number, _: number, _: function): table {}
