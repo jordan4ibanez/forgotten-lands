@@ -21,6 +21,15 @@ do
         nextID = nextID + 1
         return gotten
     end
+    local velocityWorker = vector.create(0, 0, 0)
+    local function clamp(min, max, input)
+        if input < min then
+            return min
+        elseif input > max then
+            return max
+        end
+        return input
+    end
     local ItemEntity = __TS__Class()
     ItemEntity.name = "ItemEntity"
     function ItemEntity.prototype.____constructor(self)
@@ -36,22 +45,26 @@ do
         self.cool = self.cool + 1
     end
     function ItemEntity.prototype.on_step(self, delta, moveResult)
-        self.timer = self.timer + delta
-        if self.timer > 2 then
-            print((("id: " .. tostring(self.id)) .. " | cool: ") .. tostring(self.cool))
-            self.cool = self.cool + math.random()
-            self.timer = 0
-            print(self.name)
-            print("---------")
-            if math.random() > 0.7 then
+        for ____, player in ipairs(minetest.get_connected_players()) do
+            print(player:get_player_name())
+            local playerPos = player:get_pos()
+            local pos = self.object:get_pos()
+            local normalized = vector.direction(playerPos, pos)
+            local maxSpeed = 100
+            local goalDistance = 10
+            local snappiness = 1000
+            local distance = clamp(
+                0,
+                maxSpeed,
+                (goalDistance - vector.distance(pos, playerPos)) * snappiness
+            )
+            local velocity = vector.multiply(normalized, distance)
+            self.object:set_velocity(velocity)
+            if math.random() > 0.995 then
+                print("see ya")
                 self.object:remove()
-                self.on_step = function(self, delta)
-                    self.timer = self.timer + delta
-                    if self.timer > 2 then
-                        print("I don't feel like it anymore | id:" .. tostring(self.id))
-                        self.timer = 0
-                    end
-                end
+            else
+                print("not this time! " .. tostring(math.random()))
             end
         end
     end
