@@ -5,7 +5,7 @@ local function __TS__ArrayForEach(self, callbackFn, thisArg)
     end
 end
 -- End of Lua Library inline imports
-function concat(...)
+function concat(self, ...)
     local input = {...}
     local accumulator = ""
     __TS__ArrayForEach(
@@ -16,4 +16,6 @@ function concat(...)
     )
     return accumulator
 end
-x = vector:new(1, 2, 3)
+function generateSchematic(self, size)
+end
+x = vector:zero()

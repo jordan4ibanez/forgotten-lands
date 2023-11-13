@@ -1,3 +1,4 @@
+
 function concat(...input: string[]): string {
   let accumulator = ""
   input.forEach((val: string) => {
@@ -7,5 +8,7 @@ function concat(...input: string[]): string {
 }
 
 function generateSchematic(size: Vec3) {
-  
+
 }
+
+let x = vector.zero()

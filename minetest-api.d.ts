@@ -1,7 +1,7 @@
 export {}
-declare global {
+
 // Everything was just dumped in as I looked down the lua_api.md
-interface minetest {
+export interface minetest {
   get_current_modname(): string
   get_modpath(modName: string): string
   get_modnames(): string[]
@@ -315,14 +315,14 @@ interface minetest {
   sound_fade(handle: number, step: number, gain: number): void
 }
 
-interface SimpleSoundSpec {
+export interface SimpleSoundSpec {
   name: string
   gain: number
   pitch: number
   fade: number
 }
 
-interface SoundParameterTable extends SimpleSoundSpec {
+export interface SoundParameterTable extends SimpleSoundSpec {
   start_time: number
   loop: boolean
   pos: Vec3
@@ -331,12 +331,12 @@ interface SoundParameterTable extends SimpleSoundSpec {
   max_hear_distance: number
 }
 
-enum ParamType1 {
+export enum ParamType1 {
   "light",
   "none"
 }
 
-enum ParamType2 {
+export enum ParamType2 {
   "flowingliquid",
   "wallmounted",
   "facedir",
@@ -352,7 +352,7 @@ enum ParamType2 {
   "colordegrotate"
 }
 
-enum drawtype {
+export enum drawtype {
   "normal",
   "airlike",
   "liquid",
@@ -375,7 +375,7 @@ enum drawtype {
 
 
 
-interface NodeBox {
+export interface NodeBox {
   type: nodeboxtype
   fixed: boxTable
   wall_top: box
@@ -397,28 +397,28 @@ interface NodeBox {
   disconnected_sides: box
 }
 
-type box = number[]
+export type box = number[]
 
-type boxTable = box[]
+export type boxTable = box[]
 
-enum nodeboxtype {
+export enum nodeboxtype {
   "regular",
   "fixed",
   "wallmounted",
   "connected"
 }
 
-type itemstring = string
+export type itemstring = string
 
 
-interface GameInfo {
+export interface GameInfo {
   id: string
   title: string
   author: string
   path: string
 }
 
-interface MinetestFeatures {
+export interface MinetestFeatures {
   glasslike_framed: boolean
   nodebox_as_selectionbox: boolean
   get_all_craft_recipes_works: boolean
@@ -447,7 +447,7 @@ interface MinetestFeatures {
   compress_zstd: boolean
 }
 
-interface PlayerInformation {
+export interface PlayerInformation {
   address: string
   ip_version: number
   connection_uptime: number
@@ -462,14 +462,14 @@ interface PlayerInformation {
   avg_jitter: number 
 }
 
-interface WindowInformation {
+export interface WindowInformation {
   size: Vec2
   max_formspec_size: Vec2
   real_gui_scaling: number
   real_hud_scaling: number
 }
 
-interface MinetestInfo {
+export interface MinetestInfo {
   project: string
   string: string
   proto_min: string
@@ -478,14 +478,14 @@ interface MinetestInfo {
   is_dev: boolean
 }
 
-interface ColorSpec {
+export interface ColorSpec {
   a: number
   r: number
   g: number
   b: number
 }
 
-enum LogLevel {
+export enum LogLevel {
   "none",
   "error",
   "warning",
@@ -494,19 +494,19 @@ enum LogLevel {
   "verbose"
 }
 
-enum TextureAlpha {
+export enum TextureAlpha {
   "opaque",
   "clip",
   "blend"
 }
 
-enum LiquidType {
+export enum LiquidType {
   "none",
   "source",
   "flowing"
 }
 
-enum NodeBoxConnections {
+export enum NodeBoxConnections {
   "top",
   "bottom",
   "front",
@@ -515,7 +515,7 @@ enum NodeBoxConnections {
   "right"
 }
 
-interface NodeSoundSpec {
+export interface NodeSoundSpec {
   footstep: SimpleSoundSpec
   dig: SimpleSoundSpec | string
   dug: SimpleSoundSpec
@@ -524,7 +524,7 @@ interface NodeSoundSpec {
   fall: SimpleSoundSpec
 }
 
-interface ItemDropSpec {
+export interface ItemDropSpec {
   tools: string[]
   rarity: number
   items: string[]
@@ -532,32 +532,32 @@ interface ItemDropSpec {
   tool_groups: string | string[]
 }
 
-interface NodeDropSpec {
+export interface NodeDropSpec {
   max_items: number
   items: ItemDropSpec[]
 }
 
-interface MapNode {
+export interface MapNode {
   name: string
   prob: number
   param2: number
   force_place: boolean
 }
 
-interface NodeTable {
+export interface NodeTable {
   name: string
   param1: number
   param2: number
 }
 
-interface PointedThing {
+export interface PointedThing {
   type: string
   under: Vec3
   above: Vec3
   ref: ObjectRef
 }
 
-interface ToolCapabilities {
+export interface ToolCapabilities {
   full_punch_interval: number
   max_drop_level: number
   groupcaps: {string : any}
@@ -565,14 +565,14 @@ interface ToolCapabilities {
   punch_attack_uses: number
 }
 
-interface ItemSounds {
+export interface ItemSounds {
   breaks: SimpleSoundSpec
   eat: SimpleSoundSpec
   punch_use: SimpleSoundSpec
   punch_use_air: SimpleSoundSpec
 }
 
-enum EntityVisual {
+export enum EntityVisual {
   "cube",
   "sprite",
   "upright_sprite",
@@ -581,7 +581,7 @@ enum EntityVisual {
   "item"
 }
 
-interface Collision {
+export interface Collision {
   type: string
   axis: string
   node_pos: Vec3
@@ -590,7 +590,7 @@ interface Collision {
   new_velocity: Vec3
 }
 
-interface MoveResult {
+export interface MoveResult {
   touching_ground: boolean
   collides: boolean
   standing_on_object: boolean
@@ -598,9 +598,9 @@ interface MoveResult {
 }
 
 
-type DynamicColorSpec = (ColorSpec | string)
+export type DynamicColorSpec = (ColorSpec | string)
 
-interface ItemDefinition {
+export interface ItemDefinition {
   description: string
   short_description: string
   groups: {string: number}
@@ -627,7 +627,7 @@ interface ItemDefinition {
   after_use(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
 }
 
-interface NodeDefinition {
+export interface NodeDefinition {
   drawtype: drawtype
   visual_scale: number
   tiles: string[]
@@ -696,7 +696,7 @@ interface NodeDefinition {
   mod_origin: string
 }
 
-interface ABMDefinition {
+export interface ABMDefinition {
   label: string
   nodenames: string[]
   neighbors: string[]
@@ -708,7 +708,7 @@ interface ABMDefinition {
   action(pos: Vec3, node: NodeTable, activeObjectCount: number, activeObjectCountWider: number): void
 }
 
-interface LBMDefinition {
+export interface LBMDefinition {
   label: string
   name: string
   nodenames: string[]
@@ -717,7 +717,7 @@ interface LBMDefinition {
 }
 
 
-enum SchematicRotation {
+export enum SchematicRotation {
   zero = "0",
   ninety = "90",
   oneEighty = "180",
@@ -725,33 +725,33 @@ enum SchematicRotation {
   random = "random"
 }
 
-enum SchematicPlacementFlag {
+export enum SchematicPlacementFlag {
   "place_center_x",
   "place_center_y",
   "place_center_z"
 }
 
-enum SchematicFormat {
+export enum SchematicFormat {
   "mts",
   "lua"
 }
 
-enum SchematicSerializationOption {
+export enum SchematicSerializationOption {
   "lua_use_comments",
   "lua_num_indent_spaces"
 }
 
-enum SchematicReadOptionYSliceOption {
+export enum SchematicReadOptionYSliceOption {
   "none",
   "low",
   "all"
 }
 
-interface SchematicReadOptionYSlice {
+export interface SchematicReadOptionYSlice {
   write_yslice_prob: SchematicReadOptionYSliceOption
 }
 
-interface SchematicData {
+export interface SchematicData {
   name: string
   prob: number
   param1: number
@@ -759,30 +759,30 @@ interface SchematicData {
   force_place: boolean
 }
 
-interface SchematicProbability {
+export interface SchematicProbability {
   pos: Vec3
   prob: number
 }
 
-interface SchematicSliceProbability {
+export interface SchematicSliceProbability {
   ypos: number
   prob: number
 }
 
-interface SchematicDefinition {
+export interface SchematicDefinition {
   size: Vec3
   data: SchematicData[]
   yslice_prob: number[][]
 }
 
-enum HTTPRequestMethod {
+export enum HTTPRequestMethod {
   "GET",
   "POST",
   "PUT",
   "DELETE"
 }
 
-interface HTTPrequestDefinition {
+export interface HTTPrequestDefinition {
   url: string
   timeout: number
   method: HTTPRequestMethod
@@ -793,7 +793,7 @@ interface HTTPrequestDefinition {
   post_data: string | {string : string}
 }
 
-interface HTTPRequestResult {
+export interface HTTPRequestResult {
   completed: boolean
   succeeded: boolean
   timeout: boolean
@@ -801,13 +801,13 @@ interface HTTPRequestResult {
   data: string
 }
 
-interface HTTPApi {
+export interface HTTPApi {
   fetch(req: HTTPrequestDefinition, callback: (res: HTTPRequestResult) => void): void
   fetch_async(req: HTTPrequestDefinition): number
   fetch_async_get(handle: number): HTTPRequestResult
 }
 
-enum OreType {
+export enum OreType {
   "scatter",
   "sheet",
   "puff",
@@ -816,18 +816,18 @@ enum OreType {
   "stratum"
 }
 
-enum OreFlags {
+export enum OreFlags {
   "puff_cliffs",
   "puff_additive_composition"
 }
 
-enum NoiseFlags {
+export enum NoiseFlags {
   "defaults",
   "eased",
   "absvalue"
 }
 
-interface NoiseParams {
+export interface NoiseParams {
   offset: number
   scale: number
   spread: Vec3
@@ -838,7 +838,7 @@ interface NoiseParams {
   flags: NoiseFlags
 }
 
-interface OreDefinition {
+export interface OreDefinition {
   ore_type: OreType
   ore: string
   ore_param2: number
@@ -862,7 +862,7 @@ interface OreDefinition {
   stratum_thickness: number
 }
 
-interface BiomeDefinition {
+export interface BiomeDefinition {
   name: string
   node_dust: string
   node_top: string
@@ -890,12 +890,12 @@ interface BiomeDefinition {
 }
 
 
-enum DecorationType {
+export enum DecorationType {
   "simple",
   "schematic"
 }
 
-enum DecorationFlags {
+export enum DecorationFlags {
   "liquid_surface",
   "force_placement",
   "all_floors",
@@ -905,7 +905,7 @@ enum DecorationFlags {
   "place_center_z"
 }
 
-interface DecorationDefinition {
+export interface DecorationDefinition {
   name: string
   deco_type: DecorationType
   place_on: string
@@ -930,14 +930,14 @@ interface DecorationDefinition {
   rotation: string
 }
 
-enum CraftRecipeType {
+export enum CraftRecipeType {
   "shapless",
   "toolrepair",
   "cooking",
   "fuel"
 }
 
-interface CraftRecipeDefinition {
+export interface CraftRecipeDefinition {
   type: CraftRecipeType
   output: string
   recipe: string[] | string
@@ -947,14 +947,14 @@ interface CraftRecipeDefinition {
   burntime: number
 }
 
-interface ChatCommandDefinition {
+export interface ChatCommandDefinition {
   params: string
   description: string
   privs: string[]
   func(name: string, param: string): [boolean, string]
 }
 
-interface PrivilegeDefinition {
+export interface PrivilegeDefinition {
   description: string
   give_to_singleplayer: boolean
   give_to_admin: boolean
@@ -962,7 +962,7 @@ interface PrivilegeDefinition {
   on_revoke(name: string, revokerName: string): void
 }
 
-interface AuthenticationHandlerDefinition {
+export interface AuthenticationHandlerDefinition {
   get_auth(name: string): void
   create_auth(name: string, password: string): void
   delete_auth(name: string): void
@@ -974,7 +974,7 @@ interface AuthenticationHandlerDefinition {
 }
 
 
-enum HPChangeReasonType {
+export enum HPChangeReasonType {
   "set_hp",
   "punch",
   "fall",
@@ -983,7 +983,7 @@ enum HPChangeReasonType {
   "respawn"
 }
 
-interface HPChangeReasonDefinition {
+export interface HPChangeReasonDefinition {
   type: HPChangeReasonType
   node: string
   node_pos: Vec3
@@ -991,7 +991,7 @@ interface HPChangeReasonDefinition {
   from: string
 }
 
-enum CheatType {
+export enum CheatType {
   "moved_too_fast",
   "interacted_too_far",
   "interacted_with_self",
@@ -1001,7 +1001,7 @@ enum CheatType {
   "dug_too_fast"
 }
 
-interface ActionDefinition {
+export interface ActionDefinition {
   from_list: string
   to_list: string
   from_index: number
@@ -1013,19 +1013,19 @@ interface ActionDefinition {
 }
 
 
-interface CheatDefinition {
+export interface CheatDefinition {
   type: CheatType
 }
 
-enum ClearObjectsOptions {
+export enum ClearObjectsOptions {
   "full",
   "quick"
 }
 
 
-type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
+export type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
 
-enum GenNotifyFlags {
+export enum GenNotifyFlags {
   "dungeon",
   "temple",
   "cave_begin",
@@ -1035,13 +1035,13 @@ enum GenNotifyFlags {
   "decoration"
 }
 
-interface BiomeDataDefinition {
+export interface BiomeDataDefinition {
   biome: number
   heat: number
   humidity: number
 }
 
-interface MapGenSettingsDefinition {
+export interface MapGenSettingsDefinition {
   mgname: string
   seed: number
   chnksize: number
@@ -1049,18 +1049,18 @@ interface MapGenSettingsDefinition {
   flags: string
 }
 
-enum SearchAlgorithm{
+export enum SearchAlgorithm{
   "A*_noprefetch",
   "A*",
   "Dijkstra"
 }
 
-interface MetaData {
+export interface MetaData {
   fields: {string : any}
   inventory: {string : {number : string}}
 }
 
-interface MetaRef {
+export interface MetaRef {
   set_tool_capabilities(toolCapabilities: ToolCapabilities): void
   contains(key: string): boolean
   get(key: string): string
@@ -1088,7 +1088,7 @@ interface MetaRef {
 }
 
 
-function ItemStack(_: ItemStackObject | string): ItemStackObject
+export function ItemStack(_: ItemStackObject | string): ItemStackObject
 interface ItemStackObject {
   name: string
   count: number
@@ -1124,13 +1124,13 @@ interface ItemStackObject {
 }
 
 
-interface InvRefLocation {
+export interface InvRefLocation {
   type: string
   name: string
   pos: Vec3
 }
 
-interface InvRef {
+export interface InvRef {
   is_empty(listName: string): boolean
   get_size(listName: string): number
   set_size(listName: string, size: number): boolean
@@ -1149,7 +1149,7 @@ interface InvRef {
   get_location(): InvRefLocation
 }
 
-interface TreeDefinition {
+export interface TreeDefinition {
   axiom: string
   rules_a: string
   rules_b: string
@@ -1169,701 +1169,41 @@ interface TreeDefinition {
   seed: number
 }
   
-type GenNotifyObject = Map<string, Vec3[]>
+export type GenNotifyObject = Map<string, Vec3[]>
 
-function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
-interface VoxelManipObject {
-  read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
-  write_to_map(light: boolean): void
-  get_node_at(position: Vec3): MapNode
-  set_node_at(position: Vec3, node: MapNode): void
-  get_data(buffer?: number[]): number[]
-  set_data(buffer?: number[]): number[]
-  set_lighting(light: number, p1: Vec3, p2: Vec3): void
-  get_light_data(buffer: number[]): number[]
-  set_light_data(lightData: number[]): void
-  get_param2_data(buffer: number[]): number[]
-  set_param2_data(param2Data: number[]): void
-  calc_lighting(p1: Vec3, p2: Vec3, propagateShadows: boolean): void
-  update_liquids(): void
-  was_modified(): boolean
-  get_emerged_area(): [Vec3, Vec3]
-}
+export function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
 
-interface VoxelAreaInitializer {
-  MinEdge: Vec3
-  MaxEdge: Vec3
-}
 
-function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
-interface VoxelAreaObject {
-  ystride: number
-  zstride: number
-  new(init: VoxelAreaInitializer): VoxelAreaObject
-  getExtent(): Vec3
-  index(x: number, y: number, z: number): number
-  indexp(p: Vec3): number
-  position(i: number): Vec3
-  contains(x: number, y: number, z: number): boolean
-  containsp(p: Vec3): boolean
-  containsi(i: number): boolean
-  iter(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Iterator<number>
-  iterp(minp: Vec3, maxp: Vec3): Iterator<number>
-}
 
-interface HeightMapObject {
+export function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
 
-}
 
-interface BiomeMapObject {
+// export interface HeightMapObject {
 
-}
+// }
 
-interface HeatMapObject {
+// export interface BiomeMapObject {
 
-}
+// }
 
-interface HumidityMapObject {
+// export interface HeatMapObject {
 
-}
+// }
 
-function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
-interface RaycastObject extends Iterator<PointedThing>{}
+// export interface HumidityMapObject {
 
-function SecureRandom(): SecureRandomObject
-interface SecureRandomObject {
-  next_bytes(count: number): string
-}
+// }
 
-function Settings(_: string): MinetestSettingsObject
-interface MinetestSettingsObject {
-  get(key: string): any
-  get_bool(key: string, defaul?: boolean): boolean | null
-  get_np_group(key: string): NoiseParams
-  get_flags(key: string): {string : boolean}
-  set(key: string, value: string): void
-  set_bool(key: string, value: boolean): void
-  set_np_group(key: string, value: NoiseParams): void
-  remove(key: string): boolean
-  get_names(): string[]
-  has(key: string): boolean
-  write(): boolean
-  to_table(): Map<string, any>
-}
+export function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
+export function SecureRandom(): SecureRandomObject
+export function Settings(_: string): MinetestSettingsObject
+export function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
+export function PerlinNoise(params: NoiseParams): PerlinNoiseObject
+export function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
+export function PseudoRandom(seed: number): PseudoRandomObject
+export function AreaStore(_: AreaStoreType): AreaStoreObject
 
-interface NametagAttributes {
-  text: string
-  color: RGBA
-  bgcolor: RGBA
-}
-
-interface AttachRef {
-  parent: ObjectRef
-  bone: string
-  position: Vec3
-  rotation: Vec3
-  forced_visible: boolean
-}
-
-
-interface ObjectRef {
-  get_pos(): Vec3
-  set_pos(position: Vec3): void
-  get_velocity(): Vec3
-  add_velocity(velocity: Vec3): void
-  move_to(newPos: Vec3, continuous: boolean): void
-  punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3): void
-  right_click(clicker: ObjectRef): void
-  get_hp(): number
-  set_hp(hp: number, reason: HPChangeReasonType): void
-  get_inventory(): InvRef
-  get_wield_list(): string
-  get_wield_index(): number
-  get_wielded_item(): ItemStackObject
-  set_wielded_item(item: ItemStackObject): boolean
-  get_armor_groups(): {string : number}
-  set_armor_groups(groups: {string : number}): void
-  get_animation(): Array<Vec2 | number>
-  set_animation(frameRange: Vec2, frameSpeed: number, frameBlend: number, loop: boolean): void
-  set_animation_frame_speed(speed: number): void
-  set_attach(parent: ObjectRef, bone: string, position: Vec3, rotation: Vec3, forcedVisible: boolean): void
-  get_attach(): AttachRef | void
-  get_children(): ObjectRef[]
-  set_detach(): void
-  set_bone_position(bone: string, position: Vec3, rotation: Vec3): void
-  set_properties(objectPropertiesTable: {any : any}): void
-  get_properties(): {any : any}
-  is_player(): boolean
-  get_nametag_attributes(): NametagAttributes
-  set_nametag_attributes(attributes: NametagAttributes): void
-  remove(): void
-  set_velocity(velocity: Vec3): void
-  set_acceleration(acceleration: Vec3): void
-  get_acceleration(): Vec3
-  set_rotation(rotation: Vec3): void
-  get_rotation(): Vec3
-  set_yaw(yaw: number): void
-  get_yaw(): number
-  set_texture_mod(mod: string): void
-  get_texture_mod(): string
-  set_sprite(startFrame: Vec2, numberOfFrames: number, frameLength: number, selectXByCamera: boolean): void
-  name: string
-  get_luaentity(): LuaEntity
-  get_player_name(): string
-  get_look_dir(): Vec3
-  get_look_vertical(): number
-  get_look_horizontal(): number
-  set_look_vertical(radians: number): void
-  set_look_horizontal(radians: number): void
-  get_look_pitch(): number
-  get_look_yaw(): number
-  set_look_pitch(radians: number): void
-  set_look_yaw(radians: number): void
-  get_breath(): number
-  set_breath(value: number): void
-  set_fov(fov: number, isMultiplier: boolean, transitionTime: number): void
-  get_fov(): number
-  get_meta(): MetaRef
-  set_inventory_formspec(formSpec: Formspec): void
-  get_inventory_formspec(): Formspec
-  set_formspec_prepend(formSpec: Formspec): void
-  get_formspec_prepend(): Formspec
-  get_player_control(): PlayerControl
-  get_player_control_bits(): number
-  set_physics_override(override: PhysicsOverride): void
-  get_physics_override(): PhysicsOverride
-  hud_add(definition: HudDefinition): number
-  hud_remove(id: number): void
-  hud_change(id: number, stat: HudElementType, value: any): void
-  hud_get(id: number): HudDefinition
-  hud_set_flags(flags: HudFlags): void
-  hud_get_flags(): HudFlags
-  hud_set_hotbar_itemcount(count: number): void
-  hud_get_hotbar_itemcount(): number
-  hud_set_hotbar_image(textureName: string): void
-  hud_get_hotbar_image(): string
-  hud_set_hotbar_selected_image(textureName: string): void
-  hud_get_hotbar_selected_image(): string
-  set_minimap_modes(mode: MinimapModes, selectedMode: number): void
-  set_sky(parameters: SkyParameters): void
-  get_sky(asTable: true): SkyParameters
-  set_sun(parameters: SunParameters): void
-  get_sun(): SunParameters
-  set_moon(parameters: MoonParameters): void
-  get_moon(): MoonParameters
-  set_stars(parameters: StarParameters): void
-  get_stars(): StarParameters
-  set_clouds(parameters: CloudParameters): void
-  get_clouds(): CloudParameters
-  override_day_night_ratio(ratio: number | void): void
-  get_day_night_ratio(): number | void
-  set_local_animation(idle: Vec2, walk: Vec2, dig: Vec2, walkWhileDig: Vec2, frameSpeed: number): void
-  get_local_animation(): [Vec2, Vec2, Vec2, Vec2, number]
-  set_eye_offset(firstPerson: Vec3, thirdPersonBack: Vec3, thirdPersonFront: Vec3): void
-  get_eye_offset(): [Vec3, Vec3, Vec3]
-  send_mapblock(blockPos: Vec3): boolean
-  set_lighting(definition: LightingDefinition): void
-  get_lighting(): LightingDefinition
-  respawn(): void
-}
-
-function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
-interface PcgRandomObject {
-  next(): number
-  next(min: number, max: number): number
-  rand_normal_dist(min: number, max: number, trials: number): number
-}
-
-function PerlinNoise(params: NoiseParams): PerlinNoiseObject
-interface PerlinNoiseObject {
-  get_2d(position: Vec2): number
-  get_3d(position: Vec3): number
-}
-
-function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
-interface PerlinNoiseMapObject {
-  get_2d_map(pos: Vec2): number[][]
-  get_3d_map(pos: Vec3): number[][][]
-  get_2d_map_flat(pos: Vec2, buffer: number[]): number[]
-  get_3d_map_flat(pos: Vec3, buffer: number[]): number[]
-  calc_2d_map(pos: Vec2): void
-  calc_3d_map(pos: Vec3): void
-  get_map_slice(sliceOffset: Vec3, sliceSize: Vec3, buffer: number[]): number[]
-}
-
-function PseudoRandom(seed: number): PseudoRandomObject
-interface PseudoRandomObject {
-  next(): number
-  next(min: number, max: number): number
-}
-
-interface PhysicsOverride {
-  speed: number
-  jump: number
-  gravity: number
-  speed_climb: number
-  speed_crouch: number
-  liquid_fluidity: number
-  liquid_fluidity_smooth: number
-  liquid_sink: number
-  acceleration_default: number
-  acceleration_air: number
-  sneak: boolean
-  sneak_glitch: boolean
-  new_move: boolean
-}
-
-
-interface PlayerControl {
-  up: boolean
-  down: boolean
-  left: boolean
-  right: boolean
-  jump: boolean
-  aux1: boolean
-  sneak: boolean
-  dig: boolean
-  place: boolean
-  LMB: boolean
-  RMB: boolean
-  zoom: boolean
-}
-
-enum SkyParametersType {
-  "regular",
-  "skybox",
-  "plain"
-}
-
-enum SkyParametersFogTintType {
-  "custom",
-  "default"
-}
-
-interface SkyParametersColor {
-  day_sky: DynamicColorSpec
-  day_horizon: DynamicColorSpec
-  dawn_sky: DynamicColorSpec
-  dawn_horizon: DynamicColorSpec
-  nigh_sky: DynamicColorSpec
-  night_horizon: DynamicColorSpec
-  indoors: DynamicColorSpec
-  fog_sun_tint: DynamicColorSpec
-  fog_moon_tint: DynamicColorSpec
-  fog_tint_type: SkyParametersFogTintType
-}
-
-interface SkyParametersFog {
-  fog_distance: number
-  fog_start: number
-}
-
-interface SkyParameters {
-  base_color: DynamicColorSpec
-  body_orbit_tilt: number
-  type: SkyParametersType
-  textures: string[]
-  clouds: boolean
-  sky_color: SkyParametersColor
-  fog: SkyParametersFog
-}
-
-interface SunParameters {
-  visible: boolean
-  texture: string
-  tonemap: string
-  sunrise: string
-  sunrise_visible: boolean
-  scale: number
-}
-
-interface MoonParameters {
-  visible: boolean
-  texture: string
-  tonemap: string
-  scale: number
-}
-
-interface StarParameters {
-  visible: boolean
-  day_opacity: number
-  count: number
-  star_color: DynamicColorSpec
-  scale: number
-}
-
-interface CloudParameters {
-  density: number
-  color: DynamicColorSpec
-  ambient: DynamicColorSpec
-  height: number
-  thickness: number
-  speed: Vec2
-}
-
-interface LightShadowsSpec {
-  intensity: number
-}
-
-interface LightExposureSpec {
-  luminance_min: number
-  luminance_max: number
-  exposure_correction: number
-  speed_dark_bright: number
-  speed_bright_dark: number
-  center_weight_power: number
-}
-
-interface LightingDefinition {
-  saturation: number
-  shadows: LightShadowsSpec
-  exposure: LightExposureSpec
-}
-
-type CollisionBox = Array<number>
-
-interface ObjectProperties {
-  hp_max: number
-  breath_max: number
-  zoom_fov: number
-  eye_height: number
-  physical: boolean
-  collide_with_objects: boolean
-  collisionbox: CollisionBox
-  selectionbox: number[]
-  pointable: boolean
-  visual: EntityVisual
-  visual_size: Vec3
-  mesh: string
-  textures: string[]
-  colors: DynamicColorSpec[]
-  use_texture_alpha: boolean
-  spritediv: Vec2
-  initial_sprite_basepos: Vec2
-  is_visible: boolean
-  makes_footstep_sound: boolean
-  automatic_rotate: number
-  stepheight: number
-  automatic_face_movement_dir: number
-  automatic_face_movement_max_rotation_per_sec: number
-  backface_culling: boolean
-  glow: number
-  nametag: string
-  nametag_color: ColorSpec
-  nametag_bgcolor: ColorSpec
-  infotext: string
-  static_save: boolean
-  damage_texture_modifier: string
-  shaded: boolean
-  show_on_minimap: boolean
-}
-
-interface EntityDefinition {
-  initial_properties: ObjectProperties
-  on_activate(staticData: string, delta: number): void 
-  on_deactivate(removal: boolean): void 
-  on_step(delta: number, moveResult: MoveResult): void 
-  on_punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
-  on_death(killer: ObjectRef): void
-  on_rightclick(clicker: ObjectRef): void 
-  on_attach_child(child: ObjectRef): void
-  on_detach_child(child: ObjectRef): void
-  on_detach(parent: ObjectRef): void
-  get_staticdata(): void
-}
-
-interface LuaEntity extends EntityDefinition {
-  initial_properties: ObjectProperties
-  name: string
-  object: ObjectRef
-}
-
-enum MinimapType {
-  "off",
-  "surface",
-  "radar",
-  "texture"
-}
-
-interface MinimapModes {
-  type: MinimapType
-  label: string
-  size: number
-  texture: string
-  scale: number
-}
-
-interface HudFlags {
-  hotbar: boolean
-  healthbar: boolean
-  crosshair: boolean
-  wielditem: boolean
-  breathbar: boolean
-  minimap: boolean
-  minimap_radar: boolean
-  basic_debug: boolean
-}
-
-enum HudElementType {
-  "image",
-  "text",
-  "statbar",
-  "inventory",
-  "waypoint",
-  "image_waypoint",
-  "compass",
-  "minimap"
-}
-
-interface HudDefinition {
-  hud_elem_type: HudElementType
-  position: Vec2
-  name: string
-  scale: Vec2
-  text: string
-  text2: string
-  number: number
-  item: number
-  direction: number
-  alignment: Vec2
-  offset: Vec2
-  world_pos: Vec3
-  size: Vec2
-  z_index: number
-  style: number
-}
-
-enum HudReplaceBuiltinOption {
-  "breath",
-  "health"
-}
-
-type Formspec = string
-
-enum ParseRelativeNumberArgument {
-  "<number>",
-  "~<number>",
-  "~"
-}
-
-enum CompressionMethod {
-  "deflate",
-  "zstd"
-}
-
-enum RotateAndPlaceOrientationFlag {
-  "invert_wall",
-  "force_wall",
-  "force_ceiling",
-  "force_floor",
-  "force_facedir"
-}
-
-enum BlockStatusCondition {
-  "unknown",
-  "emerging",
-  "loaded",
-  "active"
-}
-
-enum TileAnimationType {
-  "vertical_frames",
-  "sheed_2d"
-}
-
-interface TileAnimationDefinition {
-  type: TileAnimationType
-  aspect_w: number
-  aspect_h: number
-  length: number
-  frames_w: number
-  frames_h: number
-  frame_length: number
-}
-
-interface DetachedInventoryCallbacks {
-  allow_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number
-  allow_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
-  allow_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
-  on_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
-  on_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-  on_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-}
-
-interface Rollback {
-  actor: string
-  pos: Vec3
-  time: number
-  oldnode: string
-  newnode: string
-}
-
-interface Job {
-  cancel(): void
-}
-
-interface DynamicAddMediaOptions {
-  filepath: string
-  to_player: string
-  ephemeral: boolean
-}
-
-interface ParticleBounceDefinition {
-  min: number
-  max: number
-  bias: number
-}
-
-interface ParticleDefinition {
-  pos: Vec3
-  velocity: Vec3
-  acceleration: Vec3
-  expirationtime: number
-  size: number
-  collisiondetection: boolean
-  collision_removal: boolean
-  object_collision: boolean
-  vertical: boolean
-  texture: string
-  playername: string
-  animation: TileAnimationDefinition
-  glow: number
-  node: NodeTable
-  node_tile: NodeSoundSpec
-  drag: Vec3
-  bounce: ParticleBounceDefinition
-}
-
-enum ParticleSpawnerTweenStyle {
-  "fwd",
-  "rev",
-  "pulse",
-  "flicker"
-}
-
-interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
-  // {number | ParticleSpawnerRangeDefinition}
-  style: ParticleSpawnerTweenStyle
-  reps: number
-  start: number
-}
-
-interface ParticleSpawnerRangeDefinition {
-  min: Vec3
-  max: Vec3
-  bias: number
-  pos_tween: ParticleSpawnerTweenDefinition
-  x: number
-  y: number
-  z: number
-}
-
-enum ParticleSpawnerTextureBlend {
-  "alpha",
-  "add",
-  "screen",
-  "sub"
-}
-
-type ParticleSpawnerTextureScaleTween = Array<Vec2>
-
-interface ParticleSpawnerTextureDefinition {
-  name: string
-  alpha: number
-  alpha_tween: number[]
-  scale: number | Vec2
-  scale_tween: ParticleSpawnerTextureScaleTween
-  blend: ParticleSpawnerTextureBlend
-  animation: TileAnimationDefinition
-}
-
-interface TexturePoolComponentTweenDefinition extends Array<number> {
-  style: ParticleSpawnerTweenStyle
-  reps: number
-}
-
-enum TexturePoolComponentFade {
-  "in",
-  "out"
-}
-
-interface TexturePoolComponentDefinition {
-  name: string
-  fade: TexturePoolComponentFade
-  alpha: number
-  scale: number
-  animation: TileAnimationDefinition
-  alpha_tween: TexturePoolComponentTweenDefinition
-}
-
-type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
-
-enum ParticleSpawnerAttractionType {
-  "none",
-  "point",
-  "line",
-  "plane"
-}
-
-interface ParticleSpawnerAttractionDefinition {
-  kind: ParticleSpawnerAttractionType
-  strength: Vec2
-  origin: Vec3
-  direction: Vec3
-  origin_attached: ObjectRef
-  direction_attached: ObjectRef
-  die_on_contact: boolean
-}
-
-interface ParticleSpawnerDefinition {
-  maxpos: Vec3
-  minpos: Vec3
-  pos: number | ParticleSpawnerRangeDefinition
-  vel: Vec3RangeBias
-  acc: Vec3RangeBias
-  jitter: Vec3RangeBias
-  drag: Vec3RangeBias
-  bounce: Vec3RangeBias
-  exptime: Vec2
-  attract: ParticleSpawnerAttractionDefinition
-  radius: Vec3RangeBias
-  pos_tween: ParticleSpawnerTweenDefinition
-  texture: string | ParticleSpawnerTextureDefinition
-  texpool: ParticleSpawnerTexturePoolDefinition
-}
-
-enum AreaStoreType{
-  "LibSpatial"
-}
-
-interface AreaStoreArea {
-  min: Vec3
-  max: Vec3
-  data: string
-}
-
-interface AreaStoreCacheDefinition {
-  enabled: boolean
-  block_radius: number
-  limit: number
-}
-
-function AreaStore(_: AreaStoreType): AreaStoreObject
-interface AreaStoreObject {
-  get_area(id: number, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
-  get_areas_for_pos(pos: Vec3, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
-  get_areas_in_area(corner1: Vec3, corner2: Vec3, acceptOverlap: boolean, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
-  insert_area(corner1: Vec3, corner2: Vec3, data: string, id: number): number
-  reserve(count: number): void
-  remove_area(id: number): boolean
-  set_cache_params(params: AreaStoreCacheDefinition): void
-  to_string(): string
-  to_file(fileName: string): void
-  from_string(str: string): [boolean, string] | void
-  from_file(fileName: string): [boolean, string] | void
-}
-
-class vector {
+export interface vector {
   new(x: number, y: number, z: number): Vec3
   zero(): Vec3
   copy(vec: Vec3): Vec3
@@ -1897,69 +1237,740 @@ class vector {
   // random(number, number, number, number, number, number): Vec3
 }
 
+declare global {
 
-interface Vec2 {
-  x: number
-  y: number
+  export interface VoxelManipObject {
+    read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
+    write_to_map(light: boolean): void
+    get_node_at(position: Vec3): MapNode
+    set_node_at(position: Vec3, node: MapNode): void
+    get_data(buffer?: number[]): number[]
+    set_data(buffer?: number[]): number[]
+    set_lighting(light: number, p1: Vec3, p2: Vec3): void
+    get_light_data(buffer: number[]): number[]
+    set_light_data(lightData: number[]): void
+    get_param2_data(buffer: number[]): number[]
+    set_param2_data(param2Data: number[]): void
+    calc_lighting(p1: Vec3, p2: Vec3, propagateShadows: boolean): void
+    update_liquids(): void
+    was_modified(): boolean
+    get_emerged_area(): [Vec3, Vec3]
+  }
+
+  export interface VoxelAreaInitializer {
+    MinEdge: Vec3
+    MaxEdge: Vec3
+  }
+  
+  export interface VoxelAreaObject {
+    ystride: number
+    zstride: number
+    new(init: VoxelAreaInitializer): VoxelAreaObject
+    getExtent(): Vec3
+    index(x: number, y: number, z: number): number
+    indexp(p: Vec3): number
+    position(i: number): Vec3
+    contains(x: number, y: number, z: number): boolean
+    containsp(p: Vec3): boolean
+    containsi(i: number): boolean
+    iter(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Iterator<number>
+    iterp(minp: Vec3, maxp: Vec3): Iterator<number>
+  }
+
+  export interface RaycastObject extends Iterator<PointedThing>{}
+
+  export interface SecureRandomObject {
+    next_bytes(count: number): string
+  }
+
+  export interface EntityDefinition {
+    initial_properties: ObjectProperties
+    on_activate(staticData: string, delta: number): void 
+    on_deactivate(removal: boolean): void 
+    on_step(delta: number, moveResult: MoveResult): void 
+    on_punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
+    on_death(killer: ObjectRef): void
+    on_rightclick(clicker: ObjectRef): void 
+    on_attach_child(child: ObjectRef): void
+    on_detach_child(child: ObjectRef): void
+    on_detach(parent: ObjectRef): void
+    get_staticdata(): void
+  }
+  
+  export interface DetachedInventoryCallbacks {
+    allow_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number
+    allow_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
+    allow_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
+    on_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+    on_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+  }
+
+  export interface AreaStoreObject {
+    get_area(id: number, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
+    get_areas_for_pos(pos: Vec3, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
+    get_areas_in_area(corner1: Vec3, corner2: Vec3, acceptOverlap: boolean, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
+    insert_area(corner1: Vec3, corner2: Vec3, data: string, id: number): number
+    reserve(count: number): void
+    remove_area(id: number): boolean
+    set_cache_params(params: AreaStoreCacheDefinition): void
+    to_string(): string
+    to_file(fileName: string): void
+    from_string(str: string): [boolean, string] | void
+    from_file(fileName: string): [boolean, string] | void
+  }
+  
+
+  export interface MinetestSettingsObject {
+    get(key: string): any
+    get_bool(key: string, defaul?: boolean): boolean | null
+    get_np_group(key: string): NoiseParams
+    get_flags(key: string): {string : boolean}
+    set(key: string, value: string): void
+    set_bool(key: string, value: boolean): void
+    set_np_group(key: string, value: NoiseParams): void
+    remove(key: string): boolean
+    get_names(): string[]
+    has(key: string): boolean
+    write(): boolean
+    to_table(): Map<string, any>
+  }
+  
+  export interface NametagAttributes {
+    text: string
+    color: RGBA
+    bgcolor: RGBA
+  }
+  
+  export interface AttachRef {
+    parent: ObjectRef
+    bone: string
+    position: Vec3
+    rotation: Vec3
+    forced_visible: boolean
+  }
+  
+  
+  export interface ObjectRef {
+    get_pos(): Vec3
+    set_pos(position: Vec3): void
+    get_velocity(): Vec3
+    add_velocity(velocity: Vec3): void
+    move_to(newPos: Vec3, continuous: boolean): void
+    punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3): void
+    right_click(clicker: ObjectRef): void
+    get_hp(): number
+    set_hp(hp: number, reason: HPChangeReasonType): void
+    get_inventory(): InvRef
+    get_wield_list(): string
+    get_wield_index(): number
+    get_wielded_item(): ItemStackObject
+    set_wielded_item(item: ItemStackObject): boolean
+    get_armor_groups(): {string : number}
+    set_armor_groups(groups: {string : number}): void
+    get_animation(): Array<Vec2 | number>
+    set_animation(frameRange: Vec2, frameSpeed: number, frameBlend: number, loop: boolean): void
+    set_animation_frame_speed(speed: number): void
+    set_attach(parent: ObjectRef, bone: string, position: Vec3, rotation: Vec3, forcedVisible: boolean): void
+    get_attach(): AttachRef | void
+    get_children(): ObjectRef[]
+    set_detach(): void
+    set_bone_position(bone: string, position: Vec3, rotation: Vec3): void
+    set_properties(objectPropertiesTable: {any : any}): void
+    get_properties(): {any : any}
+    is_player(): boolean
+    get_nametag_attributes(): NametagAttributes
+    set_nametag_attributes(attributes: NametagAttributes): void
+    remove(): void
+    set_velocity(velocity: Vec3): void
+    set_acceleration(acceleration: Vec3): void
+    get_acceleration(): Vec3
+    set_rotation(rotation: Vec3): void
+    get_rotation(): Vec3
+    set_yaw(yaw: number): void
+    get_yaw(): number
+    set_texture_mod(mod: string): void
+    get_texture_mod(): string
+    set_sprite(startFrame: Vec2, numberOfFrames: number, frameLength: number, selectXByCamera: boolean): void
+    name: string
+    get_luaentity(): LuaEntity
+    get_player_name(): string
+    get_look_dir(): Vec3
+    get_look_vertical(): number
+    get_look_horizontal(): number
+    set_look_vertical(radians: number): void
+    set_look_horizontal(radians: number): void
+    get_look_pitch(): number
+    get_look_yaw(): number
+    set_look_pitch(radians: number): void
+    set_look_yaw(radians: number): void
+    get_breath(): number
+    set_breath(value: number): void
+    set_fov(fov: number, isMultiplier: boolean, transitionTime: number): void
+    get_fov(): number
+    get_meta(): MetaRef
+    set_inventory_formspec(formSpec: Formspec): void
+    get_inventory_formspec(): Formspec
+    set_formspec_prepend(formSpec: Formspec): void
+    get_formspec_prepend(): Formspec
+    get_player_control(): PlayerControl
+    get_player_control_bits(): number
+    set_physics_override(override: PhysicsOverride): void
+    get_physics_override(): PhysicsOverride
+    hud_add(definition: HudDefinition): number
+    hud_remove(id: number): void
+    hud_change(id: number, stat: HudElementType, value: any): void
+    hud_get(id: number): HudDefinition
+    hud_set_flags(flags: HudFlags): void
+    hud_get_flags(): HudFlags
+    hud_set_hotbar_itemcount(count: number): void
+    hud_get_hotbar_itemcount(): number
+    hud_set_hotbar_image(textureName: string): void
+    hud_get_hotbar_image(): string
+    hud_set_hotbar_selected_image(textureName: string): void
+    hud_get_hotbar_selected_image(): string
+    set_minimap_modes(mode: MinimapModes, selectedMode: number): void
+    set_sky(parameters: SkyParameters): void
+    get_sky(asTable: true): SkyParameters
+    set_sun(parameters: SunParameters): void
+    get_sun(): SunParameters
+    set_moon(parameters: MoonParameters): void
+    get_moon(): MoonParameters
+    set_stars(parameters: StarParameters): void
+    get_stars(): StarParameters
+    set_clouds(parameters: CloudParameters): void
+    get_clouds(): CloudParameters
+    override_day_night_ratio(ratio: number | void): void
+    get_day_night_ratio(): number | void
+    set_local_animation(idle: Vec2, walk: Vec2, dig: Vec2, walkWhileDig: Vec2, frameSpeed: number): void
+    get_local_animation(): [Vec2, Vec2, Vec2, Vec2, number]
+    set_eye_offset(firstPerson: Vec3, thirdPersonBack: Vec3, thirdPersonFront: Vec3): void
+    get_eye_offset(): [Vec3, Vec3, Vec3]
+    send_mapblock(blockPos: Vec3): boolean
+    set_lighting(definition: LightingDefinition): void
+    get_lighting(): LightingDefinition
+    respawn(): void
+  }
+
+  export interface PcgRandomObject {
+    next(): number
+    next(min: number, max: number): number
+    rand_normal_dist(min: number, max: number, trials: number): number
+  }
+
+  export interface PerlinNoiseObject {
+    get_2d(position: Vec2): number
+    get_3d(position: Vec3): number
+  }
+
+  export interface PerlinNoiseMapObject {
+    get_2d_map(pos: Vec2): number[][]
+    get_3d_map(pos: Vec3): number[][][]
+    get_2d_map_flat(pos: Vec2, buffer: number[]): number[]
+    get_3d_map_flat(pos: Vec3, buffer: number[]): number[]
+    calc_2d_map(pos: Vec2): void
+    calc_3d_map(pos: Vec3): void
+    get_map_slice(sliceOffset: Vec3, sliceSize: Vec3, buffer: number[]): number[]
+  }
+
+  export interface PseudoRandomObject {
+    next(): number
+    next(min: number, max: number): number
+  }
+
+  export interface PhysicsOverride {
+    speed: number
+    jump: number
+    gravity: number
+    speed_climb: number
+    speed_crouch: number
+    liquid_fluidity: number
+    liquid_fluidity_smooth: number
+    liquid_sink: number
+    acceleration_default: number
+    acceleration_air: number
+    sneak: boolean
+    sneak_glitch: boolean
+    new_move: boolean
+  }
+
+
+  export interface PlayerControl {
+    up: boolean
+    down: boolean
+    left: boolean
+    right: boolean
+    jump: boolean
+    aux1: boolean
+    sneak: boolean
+    dig: boolean
+    place: boolean
+    LMB: boolean
+    RMB: boolean
+    zoom: boolean
+  }
+
+  export enum SkyParametersType {
+    "regular",
+    "skybox",
+    "plain"
+  }
+
+  export enum SkyParametersFogTintType {
+    "custom",
+    "default"
+  }
+
+  export interface SkyParametersColor {
+    day_sky: DynamicColorSpec
+    day_horizon: DynamicColorSpec
+    dawn_sky: DynamicColorSpec
+    dawn_horizon: DynamicColorSpec
+    nigh_sky: DynamicColorSpec
+    night_horizon: DynamicColorSpec
+    indoors: DynamicColorSpec
+    fog_sun_tint: DynamicColorSpec
+    fog_moon_tint: DynamicColorSpec
+    fog_tint_type: SkyParametersFogTintType
+  }
+
+  export interface SkyParametersFog {
+    fog_distance: number
+    fog_start: number
+  }
+
+  export interface SkyParameters {
+    base_color: DynamicColorSpec
+    body_orbit_tilt: number
+    type: SkyParametersType
+    textures: string[]
+    clouds: boolean
+    sky_color: SkyParametersColor
+    fog: SkyParametersFog
+  }
+
+  export interface SunParameters {
+    visible: boolean
+    texture: string
+    tonemap: string
+    sunrise: string
+    sunrise_visible: boolean
+    scale: number
+  }
+
+  export interface MoonParameters {
+    visible: boolean
+    texture: string
+    tonemap: string
+    scale: number
+  }
+
+  export interface StarParameters {
+    visible: boolean
+    day_opacity: number
+    count: number
+    star_color: DynamicColorSpec
+    scale: number
+  }
+
+  export interface CloudParameters {
+    density: number
+    color: DynamicColorSpec
+    ambient: DynamicColorSpec
+    height: number
+    thickness: number
+    speed: Vec2
+  }
+
+  export interface LightShadowsSpec {
+    intensity: number
+  }
+
+  export interface LightExposureSpec {
+    luminance_min: number
+    luminance_max: number
+    exposure_correction: number
+    speed_dark_bright: number
+    speed_bright_dark: number
+    center_weight_power: number
+  }
+
+  export interface LightingDefinition {
+    saturation: number
+    shadows: LightShadowsSpec
+    exposure: LightExposureSpec
+  }
+
+  export type CollisionBox = Array<number>
+
+  export interface ObjectProperties {
+    hp_max: number
+    breath_max: number
+    zoom_fov: number
+    eye_height: number
+    physical: boolean
+    collide_with_objects: boolean
+    collisionbox: CollisionBox
+    selectionbox: number[]
+    pointable: boolean
+    visual: EntityVisual
+    visual_size: Vec3
+    mesh: string
+    textures: string[]
+    colors: DynamicColorSpec[]
+    use_texture_alpha: boolean
+    spritediv: Vec2
+    initial_sprite_basepos: Vec2
+    is_visible: boolean
+    makes_footstep_sound: boolean
+    automatic_rotate: number
+    stepheight: number
+    automatic_face_movement_dir: number
+    automatic_face_movement_max_rotation_per_sec: number
+    backface_culling: boolean
+    glow: number
+    nametag: string
+    nametag_color: ColorSpec
+    nametag_bgcolor: ColorSpec
+    infotext: string
+    static_save: boolean
+    damage_texture_modifier: string
+    shaded: boolean
+    show_on_minimap: boolean
+  }
+
+
+  export interface LuaEntity extends EntityDefinition {
+    initial_properties: ObjectProperties
+    name: string
+    object: ObjectRef
+  }
+  
+  export enum MinimapType {
+    "off",
+    "surface",
+    "radar",
+    "texture"
+  }
+  
+  export interface MinimapModes {
+    type: MinimapType
+    label: string
+    size: number
+    texture: string
+    scale: number
+  }
+  
+  export interface HudFlags {
+    hotbar: boolean
+    healthbar: boolean
+    crosshair: boolean
+    wielditem: boolean
+    breathbar: boolean
+    minimap: boolean
+    minimap_radar: boolean
+    basic_debug: boolean
+  }
+  
+  export enum HudElementType {
+    "image",
+    "text",
+    "statbar",
+    "inventory",
+    "waypoint",
+    "image_waypoint",
+    "compass",
+    "minimap"
+  }
+  
+  export interface HudDefinition {
+    hud_elem_type: HudElementType
+    position: Vec2
+    name: string
+    scale: Vec2
+    text: string
+    text2: string
+    number: number
+    item: number
+    direction: number
+    alignment: Vec2
+    offset: Vec2
+    world_pos: Vec3
+    size: Vec2
+    z_index: number
+    style: number
+  }
+  
+  export enum HudReplaceBuiltinOption {
+    "breath",
+    "health"
+  }
+  
+  export type Formspec = string
+  
+  export enum ParseRelativeNumberArgument {
+    "<number>",
+    "~<number>",
+    "~"
+  }
+  
+  export enum CompressionMethod {
+    "deflate",
+    "zstd"
+  }
+  
+  export enum RotateAndPlaceOrientationFlag {
+    "invert_wall",
+    "force_wall",
+    "force_ceiling",
+    "force_floor",
+    "force_facedir"
+  }
+  
+  export enum BlockStatusCondition {
+    "unknown",
+    "emerging",
+    "loaded",
+    "active"
+  }
+  
+  export enum TileAnimationType {
+    "vertical_frames",
+    "sheed_2d"
+  }
+  
+  export interface TileAnimationDefinition {
+    type: TileAnimationType
+    aspect_w: number
+    aspect_h: number
+    length: number
+    frames_w: number
+    frames_h: number
+    frame_length: number
+  }
+
+  export interface Rollback {
+    actor: string
+    pos: Vec3
+    time: number
+    oldnode: string
+    newnode: string
+  }
+  
+  export interface Job {
+    cancel(): void
+  }
+  
+  export interface DynamicAddMediaOptions {
+    filepath: string
+    to_player: string
+    ephemeral: boolean
+  }
+  
+  export interface ParticleBounceDefinition {
+    min: number
+    max: number
+    bias: number
+  }
+  
+  export interface ParticleDefinition {
+    pos: Vec3
+    velocity: Vec3
+    acceleration: Vec3
+    expirationtime: number
+    size: number
+    collisiondetection: boolean
+    collision_removal: boolean
+    object_collision: boolean
+    vertical: boolean
+    texture: string
+    playername: string
+    animation: TileAnimationDefinition
+    glow: number
+    node: NodeTable
+    node_tile: NodeSoundSpec
+    drag: Vec3
+    bounce: ParticleBounceDefinition
+  }
+  
+  export enum ParticleSpawnerTweenStyle {
+    "fwd",
+    "rev",
+    "pulse",
+    "flicker"
+  }
+  
+  export interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
+    // {number | ParticleSpawnerRangeDefinition}
+    style: ParticleSpawnerTweenStyle
+    reps: number
+    start: number
+  }
+  
+  export interface ParticleSpawnerRangeDefinition {
+    min: Vec3
+    max: Vec3
+    bias: number
+    pos_tween: ParticleSpawnerTweenDefinition
+    x: number
+    y: number
+    z: number
+  }
+  
+  export enum ParticleSpawnerTextureBlend {
+    "alpha",
+    "add",
+    "screen",
+    "sub"
+  }
+  
+  export type ParticleSpawnerTextureScaleTween = Array<Vec2>
+  
+  export interface ParticleSpawnerTextureDefinition {
+    name: string
+    alpha: number
+    alpha_tween: number[]
+    scale: number | Vec2
+    scale_tween: ParticleSpawnerTextureScaleTween
+    blend: ParticleSpawnerTextureBlend
+    animation: TileAnimationDefinition
+  }
+  
+  export interface TexturePoolComponentTweenDefinition extends Array<number> {
+    style: ParticleSpawnerTweenStyle
+    reps: number
+  }
+  
+  export enum TexturePoolComponentFade {
+    "in",
+    "out"
+  }
+  
+  export interface TexturePoolComponentDefinition {
+    name: string
+    fade: TexturePoolComponentFade
+    alpha: number
+    scale: number
+    animation: TileAnimationDefinition
+    alpha_tween: TexturePoolComponentTweenDefinition
+  }
+  
+  export type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
+  
+  export enum ParticleSpawnerAttractionType {
+    "none",
+    "point",
+    "line",
+    "plane"
+  }
+
+  export interface ParticleSpawnerAttractionDefinition {
+    kind: ParticleSpawnerAttractionType
+    strength: Vec2
+    origin: Vec3
+    direction: Vec3
+    origin_attached: ObjectRef
+    direction_attached: ObjectRef
+    die_on_contact: boolean
+  }
+  
+  export interface ParticleSpawnerDefinition {
+    maxpos: Vec3
+    minpos: Vec3
+    pos: number | ParticleSpawnerRangeDefinition
+    vel: Vec3RangeBias
+    acc: Vec3RangeBias
+    jitter: Vec3RangeBias
+    drag: Vec3RangeBias
+    bounce: Vec3RangeBias
+    exptime: Vec2
+    attract: ParticleSpawnerAttractionDefinition
+    radius: Vec3RangeBias
+    pos_tween: ParticleSpawnerTweenDefinition
+    texture: string | ParticleSpawnerTextureDefinition
+    texpool: ParticleSpawnerTexturePoolDefinition
+  }
+
+  export enum AreaStoreType{
+    "LibSpatial"
+  }
+  
+  export interface AreaStoreArea {
+    min: Vec3
+    max: Vec3
+    data: string
+  }
+  
+  export interface AreaStoreCacheDefinition {
+    enabled: boolean
+    block_radius: number
+    limit: number
+  }
+
+  export interface Vec2 {
+    x: number
+    y: number
+  }
+
+  export interface Vec3 extends Vec2 {
+    __eq(other: Vec3): boolean
+    __unm(): Vec3
+    __add(other: Vec3): Vec3
+    __sub(other: Vec3): Vec3
+    __mul(other: Vec3): Vec3
+    __div(other: Vec3): Vec3
+
+    z: number
+  }
+
+
+  export interface Vec3RangeBias {
+    min: Vec3
+    max: Vec3
+    bias: Vec3
+  }
+
+  export interface RGBA {
+    r: number
+    g: number
+    b: number
+    a: number
+  }
+
+
+  export interface DigParamsReturn {
+    diggable: boolean
+    time: number
+    wear: number
+    groups: string[]
+    tool_capabilities: ToolCapabilities
+  }
+
+  export interface HitParamsReturn {
+    hp: number
+    wear: number
+    groups: string[]
+    tool_capabilities: ToolCapabilities
+    time_from_last_punch: number
+  }
+
+  export interface NodeTimerObject {
+    set(timeOut: number, elapsed: number): void
+    start(timeOut: number): void
+    stop(): void
+    get_timeout(): number
+    get_elapsed(): number
+    is_started(): boolean
+  }
 }
 
-interface Vec3 extends Vec2 {
-  __eq(other: Vec3): boolean
-  __unm(): Vec3
-  __add(other: Vec3): Vec3
-  __sub(other: Vec3): Vec3
-  __mul(other: Vec3): Vec3
-  __div(other: Vec3): Vec3
-
-  z: number
-}
-
-
-interface Vec3RangeBias {
-  min: Vec3
-  max: Vec3
-  bias: Vec3
-}
-
-interface RGBA {
-  r: number
-  g: number
-  b: number
-  a: number
-}
-
-interface DigParamsReturn {
-  diggable: boolean
-  time: number
-  wear: number
-  groups: string[]
-  tool_capabilities: ToolCapabilities
-}
-
-interface HitParamsReturn {
-  hp: number
-  wear: number
-  groups: string[]
-  tool_capabilities: ToolCapabilities
-  time_from_last_punch: number
-}
-
-interface NodeTimerObject {
-  set(timeOut: number, elapsed: number): void
-  start(timeOut: number): void
-  stop(): void
-  get_timeout(): number
-  get_elapsed(): number
-  is_started(): boolean
-}
-
-interface Translator {
+export interface Translator {
   __call(...string: string[]): string
 }
 
-function dump(object: any, name: string, dumped: any[]): string
+export function dump(object: any, name: string, dumped: any[]): string
 
-function dump2(object: any, dumped: any[]): string
+export function dump2(object: any, dumped: any[]): string
 
 
 // Getting around redecleration warnings with this little trick.
@@ -1979,5 +1990,7 @@ function dump2(object: any, dumped: any[]): string
 // table.insert_all = function(_: table, _: table): table {}
 // table.key_value_swap = function(_: table): table {}
 // table.shuffle = function(_: table, _: number, _: number, _: function): table {}
-
+declare global {
+  const minetest: minetest
+  const vector: vector
 }

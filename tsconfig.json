@@ -22,7 +22,7 @@
   "tstl": {
     "luaTarget": "JIT",
     "noHeader": true,
-    "noImplicitSelf": true,
+    // "noImplicitSelf": false,
     // "sourceMapTraceback": true
     "luaLibImport": "inline"
   }
