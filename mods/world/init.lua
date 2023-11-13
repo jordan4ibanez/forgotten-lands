@@ -39,7 +39,7 @@ do
    })
 end
 
-local small_oak = generate_schematic(
+local small_oak = generateSchematic(
 vector.new(5, 5, 5),
 {
    [" "] = "air",
@@ -89,7 +89,7 @@ concat(
 })
 
 
-local medium_oak = generate_schematic(
+local medium_oak = generateSchematic(
 vector.new(7, 7, 7),
 {
    [" "] = "air",
@@ -167,7 +167,7 @@ concat(
 
 
 
-local large_oak = generate_schematic(
+local large_oak = generateSchematic(
 vector.new(9, 9, 9),
 {
    [" "] = "air",

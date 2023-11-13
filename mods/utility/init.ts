@@ -1,4 +1,4 @@
-module utility {
+// module utility {
   function concat(...input: string[]): string {
     let accumulator = ""
     input.forEach((val: string) => {
@@ -7,7 +7,7 @@ module utility {
     return accumulator
   }
 
-  function generateSchematic(size: Vec3, keys: Map<string, string>, forcePlace: Map<string, boolean>, data: string, ySliceProb: number[]): SchematicDefinition {
+  function generateSchematic(size: Vec3, keys: {[id: string] : string}, forcePlace: {[id: string] : boolean}, data: string, ySliceProb: number[]): SchematicDefinition {
 
     let newSchematic = {
       size: size,
@@ -20,18 +20,17 @@ module utility {
     for (let i = 1; i <= length; i++ ) {
       const databit = string.sub(data, countDown, countDown)
       table.insert(newSchematic.data, {
-        name: keys.get(databit),
-        forcePlace: forcePlace.get(databit)
+        name: keys[databit],
+        force_place: forcePlace[databit] == true
       })
+      print(forcePlace[databit] == true)
       countDown -= 1
     }
 
-    for (const databit in ipairs(ySliceProb)) {
+    for (const databit of ySliceProb) {
       table.insert(newSchematic.yslice_prob, {prob: databit})
     }
 
-    ItemStack
-
     return newSchematic
   }
-}
+// }

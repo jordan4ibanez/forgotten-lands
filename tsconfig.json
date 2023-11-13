@@ -23,8 +23,9 @@
     "luaTarget": "JIT",
     "noHeader": true,
 
+    "noImplicitSelf": true,
     // "noImplicitGlobalVariables": false,
     // "sourceMapTraceback": true
-    // "luaLibImport": "inline"
+    "luaLibImport": "inline"
   }
 }
