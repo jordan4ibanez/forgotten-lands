@@ -153,7 +153,7 @@ namespace BuiltinEntity {
     disablePhysics(): void {
       if (!this.physicalState) return
       this.physicalState = false
-      this.object.set_properties({physical: true})
+      this.object.set_properties({physical: false})
       this.object.set_velocity(vector.create())
       this.object.set_acceleration(vector.create())
     }
