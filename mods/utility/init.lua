@@ -280,7 +280,7 @@ do
         return temp
     end
     local create = vector.create
-    vector.random = function(minX, minY, minZ, maxX, maxY, maxZ)
+    vector.random = function(minX, maxX, minY, maxY, minZ, maxZ)
         return create(
             rr(minX, maxX),
             rr(minY, maxY),
