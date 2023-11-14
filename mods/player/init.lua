@@ -1,82 +1,19 @@
-minetest.override_item("", {
-   wield_scale = { x = 1, y = 1, z = 2.5 },
-   tool_capabilities = {
-      full_punch_interval = 0.9,
-      max_drop_level = 1,
-      groupcaps = {
-         break_instant = {
-            times = {
-               0.1,
-            },
-            uses = 0,
-         },
-         soil = {
-            times = {
-               0.4,
-               0.7,
-               1.5,
-               4.5,
-            },
-            uses = 0,
-         },
-         wooden = {
-            times = {
-               1.5,
-               4.0,
-               8.0,
-               14.0,
-            },
-            uses = 0,
-         },
-         leafy = {
-            times = {
-               0.3,
-               0.6,
-               0.9,
-               1.2,
-            },
-            uses = 0,
-         },
-         stone = {
-            times = {
-               0.7,
-               2.0,
-               3.5,
-               8.0,
-            },
-            uses = 0,
-         },
-         metal = {
-            times = {
-               1.5,
-               4.0,
-               8.0,
-               14.0,
-            },
-            uses = 0,
-         },
-         glass = {
-            times = {
-               1.0,
-               3.0,
-               6.0,
-               9.0,
-            },
-            uses = 0,
-         },
-         wool = {
-            times = {
-               0.4,
-               0.7,
-               1.5,
-               4.5,
-            },
-            uses = 0,
-         },
-      },
-      damage_groups = {
-
-         fleshy = 1,
-      },
-   },
-})
+Player = Player or ({})
+do
+    minetest.override_item(
+        "",
+        {
+            wield_scale = vector.create(1, 1, 2.5),
+            tool_capabilities = {full_punch_interval = 0.9, max_drop_level = 1, groupcaps = {
+                break_instant = {times = {[1] = 0.1}, uses = 0},
+                soil = {times = {[1] = 0.4, [2] = 0.7, [3] = 1.5, [4] = 4.5}, uses = 0},
+                wooden = {times = {[1] = 1.5, [2] = 4, [3] = 8, [4] = 14}, uses = 0},
+                leafy = {times = {[1] = 0.3, [2] = 0.6, [3] = 0.9, [4] = 1.2}, uses = 0},
+                stone = {maxlevel = 0, times = {[1] = 0.7, [2] = 2, [3] = 3.5, [4] = 8}, uses = 0},
+                metal = {maxlevel = 0, times = {[1] = 1.5, [2] = 4, [3] = 8, [4] = 14}, uses = 0},
+                glass = {maxlevel = 0, times = {[1] = 1, [2] = 3, [3] = 6, [4] = 9}, uses = 0},
+                wool = {times = {[1] = 0.4, [2] = 0.7, [3] = 1.5, [4] = 4.5}, uses = 0}
+            }, damage_groups = {fleshy = 1}}
+        }
+    )
+end
