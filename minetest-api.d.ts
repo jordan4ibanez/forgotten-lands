@@ -598,7 +598,7 @@ declare global {
     full_punch_interval?: number
     max_drop_level?: number
     groupcaps?: {[id: string] : GroupCap}
-    damage_groups?: {string : number}
+    damage_groups?: {[id: string] : number}
     punch_attack_uses?: number
   }
   
