@@ -590,11 +590,11 @@ declare global {
   }
   
   export interface ToolCapabilities {
-    full_punch_interval: number
-    max_drop_level: number
-    groupcaps: {string : any}
-    damage_groups: {string : number}
-    punch_attack_uses: number
+    full_punch_interval?: number
+    max_drop_level?: number
+    groupcaps?: {string : any}
+    damage_groups?: {string : number}
+    punch_attack_uses?: number
   }
   
   export interface ItemSounds {
