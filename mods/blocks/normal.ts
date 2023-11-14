@@ -7,6 +7,16 @@ namespace Blocks {
     sounds: sounds.stone(),
     groups: {
       stone: 1
+    },
+    drop: "cobblestone"
+  })
+
+  minetest.register_node(":cobblestone", {
+    drawtype: Drawtype.normal,
+    tiles: ["default_cobble.png"],
+    sounds: sounds.stone(),
+    groups: {
+      stone: 1
     }
   })
 
