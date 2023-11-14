@@ -20,7 +20,7 @@ do
         spec.place = spec.place or ({name = "dirt_dug", gain = 0.6})
         return spec
     end
-    function Sounds.wood_sounds(spec)
+    function Sounds.wood(spec)
         if spec == nil then
             spec = {}
         end
@@ -30,7 +30,7 @@ do
         spec.place = spec.place or ({name = "wood_dug", gain = 0.6})
         return spec
     end
-    function Sounds.gravel_sounds(spec)
+    function Sounds.gravel(spec)
         if spec == nil then
             spec = {}
         end
@@ -40,7 +40,7 @@ do
         spec.place = spec.place or ({name = "dirt_dug", gain = 0.6})
         return spec
     end
-    function Sounds.stone_sounds(spec)
+    function Sounds.stone(spec)
         if spec == nil then
             spec = {}
         end
@@ -50,7 +50,7 @@ do
         spec.place = spec.place or ({name = "stone_dug", gain = 0.8})
         return spec
     end
-    function Sounds.sand_sounds(spec)
+    function Sounds.sand(spec)
         if spec == nil then
             spec = {}
         end
@@ -60,7 +60,7 @@ do
         spec.place = spec.place or ({name = "sand_dug", gain = 0.8})
         return spec
     end
-    function Sounds.plant_sounds(spec)
+    function Sounds.plant(spec)
         if spec == nil then
             spec = {}
         end
@@ -70,7 +70,7 @@ do
         spec.place = spec.place or ({name = "dirt_dug", gain = 0.8})
         return spec
     end
-    function Sounds.glass_sounds(spec)
+    function Sounds.glass(spec)
         if spec == nil then
             spec = {}
         end
@@ -80,7 +80,7 @@ do
         spec.place = spec.place or ({name = "glass_step", gain = 0.8})
         return spec
     end
-    function Sounds.wool_sounds(spec)
+    function Sounds.wool(spec)
         if spec == nil then
             spec = {}
         end

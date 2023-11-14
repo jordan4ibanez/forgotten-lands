@@ -11,7 +11,7 @@ namespace Sounds {
     return spec
   }
 
-  export function dirt(spec: NodeSoundSpec): NodeSoundSpec {
+  export function dirt(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -22,7 +22,7 @@ namespace Sounds {
     return spec
   }
 
-  export function wood(spec: NodeSoundSpec): NodeSoundSpec {
+  export function wood(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -33,7 +33,7 @@ namespace Sounds {
     return spec
   }
 
-  export function gravel(spec: NodeSoundSpec): NodeSoundSpec {
+  export function gravel(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -44,7 +44,7 @@ namespace Sounds {
     return spec
   }
 
-  export function stone(spec: NodeSoundSpec): NodeSoundSpec {
+  export function stone(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -55,7 +55,7 @@ namespace Sounds {
     return spec
   }
 
-  export function sand(spec: NodeSoundSpec): NodeSoundSpec {
+  export function sand(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -66,7 +66,7 @@ namespace Sounds {
     return spec
   }
 
-  export function plant(spec: NodeSoundSpec): NodeSoundSpec {
+  export function plant(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -77,7 +77,7 @@ namespace Sounds {
     return spec
   }
 
-  export function glass(spec: NodeSoundSpec): NodeSoundSpec {
+  export function glass(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
@@ -88,7 +88,7 @@ namespace Sounds {
     return spec
   }
 
-  export function wool(spec: NodeSoundSpec): NodeSoundSpec {
+  export function wool(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {}
     }
