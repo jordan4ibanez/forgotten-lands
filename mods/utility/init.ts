@@ -91,7 +91,7 @@ module utility {
   const create = vector.create;
 
   // TS is kinda cool
-  vector.random = function(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3 {
+  vector.random = function(minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3 {
     return create(
       rr(minX, maxX),
       rr(minY, maxY),

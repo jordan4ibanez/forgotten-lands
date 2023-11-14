@@ -1041,7 +1041,7 @@ declare global {
     export function create(x?: number, y?: number, z?: number): Vec3
     // Everything else is a bolt on created in the utility module.
     export function create2d(x?: number, y?: number): Vec2
-    export function random(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3
+    export function random(minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3
     export function distance2d(vec1: Vec3, vec2: Vec3): number
   }
 
