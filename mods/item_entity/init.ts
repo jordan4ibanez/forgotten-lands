@@ -160,7 +160,7 @@
       return false
     }
 
-    checkOutOfBounds(node: NodeTable): boolean {
+    checkOutOfBounds(node: NodeTable | null): boolean {
       // Delete if in an ignore node.
       if (node && node.name == "ignore") {
         this.itemString = ""
@@ -170,8 +170,9 @@
       return false
     }
 
-    slipCheck(delta: number, def: NodeDefinition, node: NodeTable): boolean {
+    slipCheck(delta: number, def: NodeDefinition | null, node: NodeTable | null): boolean {
       if (!def) return false
+      if (!node) return false
       const slippery = minetest.get_item_group(node.name, "slippery")
       const vel = this.object.get_velocity()
       // todo: check this with math.sign(vel.x) etc
@@ -280,7 +281,66 @@
     }
 
     on_step(delta: number, moveResult: MoveResult): void {
+      if (this.collected) {
+        this.collectionCleanup(delta)
+        return
+      }
+      const pos = this.object.get_pos()
 
+      this.pollPlayers(pos)
+
+      if (this.tickAge(delta)) return
+
+      let node = minetest.get_node_or_nil(vector.create(
+        pos.x,
+        pos.y + this._collisionBox[2] - 0.05,
+        pos.z
+      ))
+
+      if (this.checkOutOfBounds(node)) return
+
+      if (moveResult == null && this.object.get_attach()) return
+
+      if (this.forceOutCheck(pos)) return
+
+      if (!this.physicalState) return
+
+      // todo: items should probably decelerate in air.
+      if (!moveResult.collides) return
+
+      let isStuck = false
+      const sNode = minetest.get_node_or_nil(pos)
+
+      if (sNode) {
+        const sDef = minetest.registered_nodes[sNode.name] || {}
+        isStuck = (sDef.walkable == null || sDef.walkable == true) &&
+          (sDef.collision_box == null || sDef.collision_box.type == "regular") &&
+          (sDef.node_box == null || sDef.node_box.type == "regular")
+        this.unstuckSelf(pos, isStuck)
+      }
+
+      node = null
+      if (moveResult.touching_ground) {
+        for (const collision of moveResult.collisions) {
+          if (collision.axis == "y") {
+            node = minetest.get_node(collision.node_pos)
+            break
+          }
+        }
+      }
+
+      // Slide on slippery nodes.
+      const def = node && minetest.registered_nodes[node.name]
+      const keepMovement = this.slipCheck(delta, def, node)
+
+      if (!keepMovement) {
+        this.object.set_velocity(vector.create())
+      }
+
+      // Do not update anything until the moving state changes.
+      if (this.movingState == keepMovement) return
+
+      this.movingState = keepMovement
     }
   }
 

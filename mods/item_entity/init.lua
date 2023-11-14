@@ -350,6 +350,9 @@ do
         if not def then
             return false
         end
+        if not node then
+            return false
+        end
         local slippery = minetest.get_item_group(node.name, "slippery")
         local vel = self.object:get_velocity()
         if slippery ~= 0 and (math.abs(vel.x) > 0.1 or math.abs(vel.z)) then
@@ -385,20 +388,20 @@ do
             do
                 local playerPos = player:get_pos()
                 if vector.distance(pos, playerPos) > 3 then
-                    goto __continue39
+                    goto __continue40
                 end
                 if vector.distance2d(pos, playerPos) > 1.5 then
-                    goto __continue39
+                    goto __continue40
                 end
                 if playerPos.y - pos.y > 0.05 then
-                    goto __continue39
+                    goto __continue40
                 end
                 local inv = player:get_inventory()
                 if not inv then
-                    goto __continue39
+                    goto __continue40
                 end
                 if not inv:room_for_item("main", self.itemString) then
-                    goto __continue39
+                    goto __continue40
                 end
                 inv:add_item("main", self.itemString)
                 self:disablePhysics()
@@ -407,7 +410,7 @@ do
                 self.collected = true
                 addCollectionSound(player)
             end
-            ::__continue39::
+            ::__continue40::
         end
     end
     function ItemEntity.prototype.collectionCleanup(self, delta)
@@ -453,6 +456,56 @@ do
         self.beingForcedOut = true
     end
     function ItemEntity.prototype.on_step(self, delta, moveResult)
+        if self.collected then
+            self:collectionCleanup(delta)
+            return
+        end
+        local pos = self.object:get_pos()
+        self:pollPlayers(pos)
+        if self:tickAge(delta) then
+            return
+        end
+        local node = minetest.get_node_or_nil(vector.create(pos.x, pos.y + self._collisionBox[3] - 0.05, pos.z))
+        if self:checkOutOfBounds(node) then
+            return
+        end
+        if moveResult == nil and self.object:get_attach() then
+            return
+        end
+        if self:forceOutCheck(pos) then
+            return
+        end
+        if not self.physicalState then
+            return
+        end
+        if not moveResult.collides then
+            return
+        end
+        local isStuck = false
+        local sNode = minetest.get_node_or_nil(pos)
+        if sNode then
+            local sDef = minetest.registered_nodes[sNode.name] or ({})
+            isStuck = (sDef.walkable == nil or sDef.walkable == true) and (sDef.collision_box == nil or sDef.collision_box.type == "regular") and (sDef.node_box == nil or sDef.node_box.type == "regular")
+            self:unstuckSelf(pos, isStuck)
+        end
+        node = nil
+        if moveResult.touching_ground then
+            for ____, collision in ipairs(moveResult.collisions) do
+                if collision.axis == "y" then
+                    node = minetest.get_node(collision.node_pos)
+                    break
+                end
+            end
+        end
+        local def = node and minetest.registered_nodes[node.name]
+        local keepMovement = self:slipCheck(delta, def, node)
+        if not keepMovement then
+            self.object:set_velocity(vector.create())
+        end
+        if self.movingState == keepMovement then
+            return
+        end
+        self.movingState = keepMovement
     end
     minetest.registerTSEntity(ItemEntity)
 end
