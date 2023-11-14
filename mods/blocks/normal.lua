@@ -48,7 +48,7 @@ do
         }
     )
     minetest.register_node(
-        ":oakTree",
+        ":oak_tree",
         {
             drawtype = Drawtype.normal,
             tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
@@ -57,7 +57,7 @@ do
         }
     )
     minetest.register_node(
-        ":oakLeaves",
+        ":oak_leaves",
         {
             drawtype = Drawtype.allfaces_optional,
             paramtype = ParamType1.light,
@@ -88,7 +88,7 @@ do
     }
     for ____, color in ipairs(dyes) do
         minetest.register_node(
-            (":" .. color) .. "Wool",
+            (":" .. color) .. "_wool",
             {
                 tiles = {("wool_" .. color) .. ".png"},
                 sounds = sounds.wool(),

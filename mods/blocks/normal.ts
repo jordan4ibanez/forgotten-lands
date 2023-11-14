@@ -51,7 +51,7 @@ namespace Blocks {
     }
   })
 
-  minetest.register_node(":oakTree", {
+  minetest.register_node(":oak_tree", {
     drawtype: Drawtype.normal,
     tiles: [
       "default_tree_top.png",
@@ -64,7 +64,7 @@ namespace Blocks {
     }
   })
 
-  minetest.register_node(":oakLeaves", {
+  minetest.register_node(":oak_leaves", {
     drawtype: Drawtype.allfaces_optional,
     paramtype: ParamType1.light,
     waving: 1,
@@ -95,7 +95,7 @@ namespace Blocks {
     "yellow"
   ]
   for (const color of dyes) {
-    minetest.register_node(":" + color + "Wool", {
+    minetest.register_node(":" + color + "_wool", {
       tiles: ["wool_" + color + ".png"],
       sounds: sounds.wool(),
       groups: {
