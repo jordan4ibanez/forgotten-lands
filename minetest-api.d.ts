@@ -624,99 +624,99 @@ declare global {
   export type DynamicColorSpec = (ColorSpec | string)
   
   export interface ItemDefinition {
-    description: string
-    short_description: string
-    groups: {string: number}
-    inventory_image: string
-    inventory_overlay: string
-    wield_image: string
-    wield_overlay: string
-    wield_scale: Vec3
-    palette: string
-    color: string
-    stack_max: number
-    range: number
-    liquids_pointable: boolean
-    light_source: number
-    tool_capabilities: ToolCapabilities
-    node_placement_prediction: string
-    node_dig_prediction: string
-    sound: SimpleSoundSpec
-    on_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
-    on_secondary_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
-    on_drop(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
-    on_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
-    on_use(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
-    after_use(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
+    description?: string
+    short_description?: string
+    groups?: {[id: string]: number}
+    inventory_image?: string
+    inventory_overlay?: string
+    wield_image?: string
+    wield_overlay?: string
+    wield_scale?: Vec3
+    palette?: string
+    color?: string
+    stack_max?: number
+    range?: number
+    liquids_pointable?: boolean
+    light_source?: number
+    tool_capabilities?: ToolCapabilities
+    node_placement_prediction?: string
+    node_dig_prediction?: string
+    sound?: SimpleSoundSpec
+    on_place?(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
+    on_secondary_use?(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
+    on_drop?(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
+    on_pickup?(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
+    on_use?(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
+    after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
   }
   
   export interface NodeDefinition {
-    drawtype: drawtype
-    visual_scale: number
-    tiles: string[]
-    overlay_tiles: string[]
-    special_tiles: string[]
-    color: DynamicColorSpec
-    use_texture_alpha: TextureAlpha
-    palette: string
-    post_effect_color: DynamicColorSpec
-    post_effect_color_shaded: boolean
-    paramtype: ParamType1
-    paramtype2: ParamType2
-    place_param2: number
-    is_ground_content: boolean
-    sunlight_propagates: boolean
-    walkable: boolean
-    groups: {string : number}
-    pointable: boolean
-    diggable: boolean
-    climbable: boolean
-    move_resistance: number
-    buildable_to: boolean
-    floodable: boolean
-    liquidtype: LiquidType
-    liquid_alternative_flowing: string
-    liquid_alternative_source: string
-    liquid_viscosity: number
-    liquid_renewable: boolean
-    liquid_move_physics: boolean
-    leveled: number
-    leveled_max: number
-    liquid_range: number
-    drowning: number
-    damage_per_second: number
-    node_box: NodeBox
-    connects_to: string[]
-    connect_sides: NodeBoxConnections
-    mesh: string
-    selection_box: NodeBox
-    collision_box: NodeBox
-    legacy_facedir_simple: boolean
-    legacy_wallmounted: boolean
-    waving: number
-    sounds: NodeSoundSpec
-    drop: NodeDropSpec | string
-    on_construct(position: Vec3): void
-    on_destruct(position: Vec3): void
-    after_destruct(position: Vec3, oldNode: MapNode): void
-    on_flood(position: Vec3, oldNode: NodeTable, newNode: NodeTable): void
-    preserve_metadata(position: Vec3, oldNode: NodeTable, oldMeta: NodeTable, drops: ItemStackObject[]): void
-    after_place_node(position: Vec3, placer: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
-    after_dig_node(position: Vec3, oldNode: NodeTable, oldMeta: string, digger: ObjectRef): void
-    can_dig(position: Vec3, canDig: ObjectRef): boolean
-    on_punch(position: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
-    on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
-    on_dig(position: Vec3, node: NodeTable, digger: ObjectRef): void
-    on_timer(position: Vec3, elapsed: number): void
-    on_receive_fields(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
-    allow_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
-    allow_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-    allow_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-    on_metadata_inventory_move(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
-    on_metadata_inventory_put(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-    on_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-    on_blast(position: Vec3, intensity: number): void
-    mod_origin: string
+    drawtype?: drawtype
+    visual_scale?: number
+    tiles?: string[]
+    overlay_tiles?: string[]
+    special_tiles?: string[]
+    color?: DynamicColorSpec
+    use_texture_alpha?: TextureAlpha
+    palette?: string
+    post_effect_color?: DynamicColorSpec
+    post_effect_color_shaded?: boolean
+    paramtype?: ParamType1
+    paramtype2?: ParamType2
+    place_param2?: number
+    is_ground_content?: boolean
+    sunlight_propagates?: boolean
+    walkable?: boolean
+    groups?: {[id: string] : number}
+    pointable?: boolean
+    diggable?: boolean
+    climbable?: boolean
+    move_resistance?: number
+    buildable_to?: boolean
+    floodable?: boolean
+    liquidtype?: LiquidType
+    liquid_alternative_flowing?: string
+    liquid_alternative_source?: string
+    liquid_viscosity?: number
+    liquid_renewable?: boolean
+    liquid_move_physics?: boolean
+    leveled?: number
+    leveled_max?: number
+    liquid_range?: number
+    drowning?: number
+    damage_per_second?: number
+    node_box?: NodeBox
+    connects_to?: string[]
+    connect_sides?: NodeBoxConnections
+    mesh?: string
+    selection_box?: NodeBox
+    collision_box?: NodeBox
+    legacy_facedir_simple?: boolean
+    legacy_wallmounted?: boolean
+    waving?: number
+    sounds?: NodeSoundSpec
+    drop?: NodeDropSpec | string
+    on_construct?(position: Vec3): void
+    on_destruct?(position: Vec3): void
+    after_destruct?(position: Vec3, oldNode: MapNode): void
+    on_flood?(position: Vec3, oldNode: NodeTable, newNode: NodeTable): void
+    preserve_metadata?(position: Vec3, oldNode: NodeTable, oldMeta: NodeTable, drops: ItemStackObject[]): void
+    after_place_node?(position: Vec3, placer: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
+    after_dig_node?(position: Vec3, oldNode: NodeTable, oldMeta: string, digger: ObjectRef): void
+    can_dig?(position: Vec3, canDig: ObjectRef): boolean
+    on_punch?(position: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
+    on_rightclick?(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
+    on_dig?(position: Vec3, node: NodeTable, digger: ObjectRef): void
+    on_timer?(position: Vec3, elapsed: number): void
+    on_receive_fields?(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
+    allow_metadata_inventory_move?(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+    allow_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    allow_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_metadata_inventory_move?(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
+    on_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    on_blast?(position: Vec3, intensity: number): void
+    mod_origin?: string
   }
   
   
