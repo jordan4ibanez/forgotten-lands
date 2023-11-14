@@ -988,7 +988,7 @@ declare global {
     inventory: {string : {number : string}}
   }
 
-  export function ItemStack(_: ItemStackObject | string): ItemStackObject
+  export function ItemStack(stringOrObject: ItemStackObject | string): ItemStackObject
   export function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
   export function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
   export function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
