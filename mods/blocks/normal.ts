@@ -1,6 +1,6 @@
 namespace Blocks {
   const sounds = Sounds;
-  const pickaxe = Tools.Pickaxe;
+  // const pickaxe = Tools.Pickaxe;
 
   minetest.register_node(":stone", {
     drawtype: Drawtype.normal,
@@ -14,11 +14,7 @@ namespace Blocks {
       items: [
         {
           tool_groups: [
-            pickaxe.A,
-            pickaxe.B,
-            pickaxe.C,
-            pickaxe.D,
-            pickaxe.E
+            [""],
           ],
           items: ["stone"]
         }

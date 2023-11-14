@@ -1,12 +1,33 @@
 namespace Tools {
-  // Alphabetical ordering, A = 1, B = 2, etc
-  export enum Pickaxe {
-    A = "pickaxe_1",
-    B = "pickaxe_2",
-    C = "pickaxe_3",
-    D = "pickaxe_4",
-    E = "pickaxe_5"
+
+  // The max level that groups can go up to at the moment.
+  export const CURRENT_MAX_LEVEL = 5
+
+  export enum ToolType {
+    Pickaxe = "pickaxe",
+    Shovel = "shovel",
+    Axe = "axe",
+    Hoe = "hoe",
+    Shears = "shears"
   }
+
+  /**
+   * Generates a node tool_groups array.
+   * @param table Holds the ToolType and min tool level to drop an item.
+   */
+  export function generateDropRequirements(table: {[id: string] : number}) {
+    let temp: string[] = []
+    for (const [toolType, minLevel] of Object.entries(table)) {
+      for (let i = minLevel; i <= CURRENT_MAX_LEVEL; i++) {
+        temp.push(toolType + "_" + i)
+      }
+    }
+    print(dump(temp))
+  }
+
+  generateDropRequirements({
+    [ToolType.Axe]: 3
+  })
 
   minetest.register_tool(":pickaxe", {
     inventory_image: "default_tool_stonepick.png",
@@ -24,7 +45,7 @@ namespace Tools {
       }
     },
     groups: {
-      [Pickaxe.A]: 1
+      [""]: 1
     }
   })
 }
