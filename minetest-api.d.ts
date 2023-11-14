@@ -262,7 +262,7 @@ export interface minetest {
   parse_json(string: string, nullValue: any): Array<any>
   write_json(data: any[], styled: boolean): string | void
   serialize(any: any): string
-  deserialize(string: string, safe: boolean): Map<any, any>
+  deserialize(string: string, safe?: boolean): Map<any, any>
   compress(data: string, method: CompressionMethod, ...any: any): string
   decompress(data: string, method: CompressionMethod, ...any: any): string
   rgba(red: number, green: number, blue: number, alpha: number): string
