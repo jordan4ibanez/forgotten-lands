@@ -1,30 +1,24 @@
-local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local ipairs = _tl_compat and _tl_compat.ipairs or ipairs
-
-function minetest.handle_node_drops(pos, drops, _digger)
-
-
-
-
-
-
-
-
-
-
-
-
-   for _, drop in ipairs(drops) do
-      local item = minetest.add_item(pos, drop)
-      if item then
-         item:add_velocity(
-         vector.random(
-         -1, 1,
-         1, 2,
-         -1, 1))
-
-
-         local entity = (item:get_luaentity())
-         entity.age = 1
-      end
-   end
+do
+    minetest.handle_node_drops = function(position, drops, digger)
+        for ____, drop in ipairs(drops) do
+            do
+                local item = minetest.add_item(position, drop)
+                if not item then
+                    print("ERROR! Failed to add item via handle_node_drops!")
+                    goto __continue4
+                end
+                item:add_velocity(vector.random(
+                    -1,
+                    1,
+                    1,
+                    2,
+                    -1,
+                    1
+                ))
+                local itemEntity = item:get_luaentity()
+                itemEntity.age = 1
+            end
+            ::__continue4::
+        end
+    end
 end

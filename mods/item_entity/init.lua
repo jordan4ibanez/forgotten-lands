@@ -165,8 +165,8 @@ local function __TS__ObjectEntries(obj)
     return result
 end
 -- End of Lua Library inline imports
+BuiltinEntity = BuiltinEntity or ({})
 do
-    local println = utility.println
     local fakeRef = utility.fakeRef
     local timeToLive = tonumber(minetest.settings:get("item_entity_ttl")) or 900
     local gravity = tonumber(minetest.settings:get("movement_gravity")) or -9.81
@@ -220,7 +220,8 @@ do
             playerSoundBuffer[name] = playerSoundBuffer[name] + 1
         end
     end)()
-    local ItemEntity = __TS__Class()
+    BuiltinEntity.ItemEntity = __TS__Class()
+    local ItemEntity = BuiltinEntity.ItemEntity
     ItemEntity.name = "ItemEntity"
     function ItemEntity.prototype.____constructor(self)
         self.name = "__builtin:item"
@@ -507,5 +508,5 @@ do
         end
         self.movingState = keepMovement
     end
-    minetest.registerTSEntity(ItemEntity)
+    minetest.registerTSEntity(BuiltinEntity.ItemEntity)
 end
