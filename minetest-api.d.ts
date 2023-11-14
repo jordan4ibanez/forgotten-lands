@@ -651,7 +651,7 @@ declare global {
   }
   
   export interface NodeDefinition {
-    drawtype?: drawtype
+    drawtype?: Drawtype
     visual_scale?: number
     tiles?: string[]
     overlay_tiles?: string[]
