@@ -18,7 +18,7 @@ minetest.register_biome({
   node_filler: "dirt",
   depth_filler: 6,
   node_stone: "stone"
-} as BiomeDefinition)
+})
 
 {
   let grass: string[] = []
@@ -29,14 +29,15 @@ minetest.register_biome({
   }
 
   minetest.register_decoration({
-    deco_type: "simple",
+    name: "grassOnFields",
+    deco_type: DecorationType.simple,
     place_on: "grass",
     biomes: ["Forgotten Fields"],
     decoration: grass,
     param2: 0,
     param2_max: 239,
     fill_ratio: 0.98
-  } as DecorationDefinition)
+  })
 
   const concat = utility.concat;
   const generateSchematic = utility.generateSchematic;
@@ -291,14 +292,14 @@ minetest.register_biome({
     oakIDs.forEach((id, key) => {
       minetest.register_decoration({
         name:"oak_" + oakSize[key],
-        deco_type: "schematic",
+        deco_type: DecorationType.schematic,
         place_on: "grass",
         biomes: ["Forgotten Fields"],
         schematic: id,
         fill_ratio: 0.01,
         place_offset_y: 1,
         flags: "place_center_x, place_center_z",
-      } as DecorationDefinition)
+      })
     })
   }
 }
