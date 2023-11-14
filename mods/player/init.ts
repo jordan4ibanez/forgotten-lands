@@ -39,33 +39,37 @@ namespace Player {
           uses: 0
         },
         stone: {
-          maxlevel: 0,
           times: {
-            1: 0.7,
-            2: 2.0,
-            3: 3.5,
-            4: 8.0
+            0: 5.0,
+            1: 10.0,
+            2: 20.0,
+            3: 30.0,
+            4: 40.0
           },
+          maxlevel: 0,
+          maxdrop: 0,
           uses: 0
         },
         metal: {
-          maxlevel: 0,
           times: {
-            1: 1.5,
-            2: 4.0,
-            3: 8.0,
-            4: 14.0
+            0: 5.0,
+            1: 10.0,
+            2: 20.0,
+            3: 30.0,
+            4: 40.0
           },
+          maxlevel: 0,
+          maxdrop: 0,
           uses: 0
         },
         glass: {
-          maxlevel: 0,
           times: {
             1: 1.0,
             2: 3.0,
             3: 6.0,
             4: 9.0
           },
+          maxlevel: 0,
           uses: 0
         },
         wool: {
