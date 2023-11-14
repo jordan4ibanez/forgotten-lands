@@ -319,6 +319,12 @@ export interface minetest {
   sound_fade(handle: number, step: number, gain: number): void
 
   registerTSEntity(clazz: { new(): LuaEntity }): void
+
+  /**
+   * WARNING! THIS IS NOT MEANT TO BE USED IN PRODUCTION!
+   * This is only exposed to allow extension!
+   */
+  spawn_item(pos: Vec3, item: ItemStackObject | string): ObjectRef
 }
 
 
