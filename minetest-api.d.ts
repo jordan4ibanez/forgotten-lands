@@ -1161,7 +1161,7 @@ declare global {
     get_wielded_item(): ItemStackObject
     set_wielded_item(item: ItemStackObject): boolean
     get_armor_groups(): {string : number}
-    set_armor_groups(groups: {string : number}): void
+    set_armor_groups(groups: {[id: string] : number}): void
     get_animation(): Array<Vec2 | number>
     set_animation(frameRange: Vec2, frameSpeed: number, frameBlend: number, loop: boolean): void
     set_animation_frame_speed(speed: number): void
