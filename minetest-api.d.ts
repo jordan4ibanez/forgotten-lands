@@ -1431,7 +1431,7 @@ declare global {
     on_attach_child?(child: ObjectRef): void
     on_detach_child?(child: ObjectRef): void
     on_detach?(parent: ObjectRef): void
-    get_staticdata?(): void
+    get_staticdata?(): string
   }
   
 
