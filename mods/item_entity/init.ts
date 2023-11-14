@@ -67,6 +67,7 @@ namespace BuiltinEntity {
     _collisionBox = [0,0,0,0,0,0]
     // Magnet components.
     collected = false
+    collector: ObjectRef | null = null
 
     initial_properties = {
       hp_max: 1,
@@ -237,7 +238,8 @@ namespace BuiltinEntity {
 
         //! fixme: Have a function specifically made to magnetize towards the player because move_to is awful
         this.disablePhysics()
-        this.object.move_to(playerPos, true)
+        this.collector = player
+        // this.object.move_to(playerPos, true)
         this.age = 0
         this.collected = true
         addCollectionSound(player)
