@@ -324,7 +324,7 @@ export interface minetest {
    * WARNING! THIS IS NOT MEANT TO BE USED IN PRODUCTION!
    * This is only exposed to allow extension!
    */
-  spawn_item(pos: Vec3, item: ItemStackObject | string): ObjectRef
+  spawn_item(pos: Vec3, item: ItemStackObject | string): ObjectRef | null
 }
 
 
