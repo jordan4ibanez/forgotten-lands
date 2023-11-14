@@ -50,7 +50,17 @@ do
         local itemName = stack:is_known() and stack:get_name() or "unknown"
         local size = 0.21
         local def = minetest.registered_items[itemName]
+        local glow = def and def.light_source and math.floor(def.light_source / 2 + 0.5)
         local sizeBias = 0.001 * math.random()
+        local c = {
+            -size,
+            -size,
+            -size,
+            size,
+            size,
+            size
+        }
+        self.object:set_properties({is_visible = true})
     end
     function ItemEntity.prototype.on_activate(self, staticData, delta)
     end

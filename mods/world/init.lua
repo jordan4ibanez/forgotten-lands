@@ -29,7 +29,8 @@ do
         end
     end
     minetest.register_decoration({
-        deco_type = "simple",
+        name = "grassOnFields",
+        deco_type = DecorationType.simple,
         place_on = "grass",
         biomes = {"Forgotten Fields"},
         decoration = grass,
@@ -388,7 +389,7 @@ do
             function(____, id, key)
                 minetest.register_decoration({
                     name = "oak_" .. oakSize[key + 1],
-                    deco_type = "schematic",
+                    deco_type = DecorationType.schematic,
                     place_on = "grass",
                     biomes = {"Forgotten Fields"},
                     schematic = id,
