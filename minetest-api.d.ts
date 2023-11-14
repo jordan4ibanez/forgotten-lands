@@ -1031,12 +1031,12 @@ declare global {
     export function rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
     export function dir_to_rotation(vec: Vec3, up: Vec3): Vec3
 
-    // This is created in the utility class because new is a reserved keyword in TS.
+    // This is created in the utility module because new is a reserved keyword in TS.
     export function create(x?: number, y?: number, z?: number): Vec3
+    // Everything else is a bolt on created in the utility module.
     export function create2d(x?: number, y?: number): Vec2
-
-    // And this is a bolt on created in the utility class.
     export function random(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3
+    export function distance2d(vec1: Vec3, vec2: Vec3): number
   }
 
   export interface VoxelManipObject {
