@@ -590,8 +590,10 @@ declare global {
   }
 
   export interface GroupCap {
-    times: number[],
-    uses?: number
+    // Allow the end programmer to do it their way.
+    times: number[] | {[id: number] : number},
+    uses?: number,
+    maxlevel?: number
   }
   
   export interface ToolCapabilities {
