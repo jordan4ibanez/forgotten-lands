@@ -2,7 +2,37 @@ namespace ItemDrop {
   // Namespace magic.
   type ItemEntity = BuiltinEntity.ItemEntity;
 
+  function extractNodeGroups(position: Vec3): {[id: string] : number} | null {
+    // If you dig a node, it should never be ignore. But it might be.
+    const node = minetest.get_node_or_nil(position)
+    if (!node) return null
+    if (node.name == "ignore") return null
+    const def = minetest.registered_nodes[node.name]
+    // Something has gone seriously wrong, we'll role with it.
+    if (!def) {
+      // But we're going going to notify.
+      minetest.log(LogLevel.warning, `Tried to get an UNKNOWN node! ${node.name} does not exist!`)
+      return null
+    }
+    const groups = def.groups
+    if (!groups) {
+      // Again, this is an error. If no groups are defined there's a problem with the node definition.
+      minetest.log(LogLevel.warning, `Node ${node.name} has no defined groups!`)
+      return null
+    }
+    return groups
+  }
+
+
   minetest.handle_node_drops = function(position: Vec3, drops: string[], digger: ObjectRef) {
+
+    const groups = extractNodeGroups(position)
+    
+    print(dump(groups))
+
+    // Group extraction has failed, abort.
+    if (!groups) return
+
     for (const drop of drops) {
       const item = minetest.add_item(position, drop)
       if (!item) {
