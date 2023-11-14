@@ -3,6 +3,55 @@
   const fakeRef = utility.fakeRef;
   const timeToLive = tonumber(minetest.settings.get("item_entity_ttl")) || 900
   const gravity = tonumber(minetest.settings.get("movement_gravity")) || -9.81
+  const randomRange = utility.randomRange;
+
+  const addCollectionSound = (() => {
+    const playerSoundBuffer: {[id: string] : number} = {}
+    const deletionQueue: string[] = []
+
+    minetest.register_on_joinplayer((player: ObjectRef) => {
+      const name = player.get_player_name()
+      playerSoundBuffer[name] = 0
+    })
+
+    minetest.register_on_leaveplayer((player: ObjectRef) => {
+      const name = player.get_player_name()
+      delete playerSoundBuffer[name]
+    })
+
+    minetest.register_globalstep((delta: number) => {
+      for (const [name, remaining] of Object.entries(playerSoundBuffer)) {
+        if (remaining <= 0) continue
+        const player = minetest.get_player_by_name(name)
+        if (!player) {
+          table.insert(deletionQueue, name)
+          continue
+        }
+
+        minetest.sound_play({
+          name: "item_pickup"
+        },
+        {
+          gain: 0.15,
+          pitch: randomRange(0.7, 1.0),
+          object: player
+        })
+
+        playerSoundBuffer[name] -= 1
+      }
+
+      while (deletionQueue.length > 0) {
+        const name = deletionQueue.pop()
+        if (name == null) break
+        delete playerSoundBuffer[name]
+      }
+    })
+
+    return function(player: ObjectRef) {
+      const name = player.get_player_name()
+      playerSoundBuffer[name] += 1
+    }
+  })();
 
   class ItemEntity implements LuaEntity {
     name = "__builtin:item"
@@ -183,7 +232,7 @@
         this.object.move_to(playerPos, true)
         this.age = 0
         this.collected = true
-        addMagnetPop(player)
+        addCollectionSound(player)
       }
     }
 

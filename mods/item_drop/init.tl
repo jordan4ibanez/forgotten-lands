@@ -1,6 +1,6 @@
 
 
-function minetest.handle_node_drops(pos: Vec3, drops: {string}, _digger: ObjectRef)
+minetest.handle_node_drops = function(pos: Vec3, drops: {string}, _digger: ObjectRef)
   -- print("test", pos.x, pos.y, pos.z)
   -- minetest.add_particle({
   --   pos = pos,
