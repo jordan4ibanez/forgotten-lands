@@ -257,6 +257,7 @@ do
             },
             visual = EntityVisual.cube,
             visual_size = vector.create2d(),
+            automatic_rotate = 1,
             textures = {""},
             is_visible = false,
             pointable = false
@@ -288,6 +289,7 @@ do
             visual_size = vector.create2d(size + bias, size + bias),
             collisionbox = c,
             wield_item = self.itemString,
+            automatic_rotate = 1,
             glow = glow,
             infotext = stack:get_description()
         })

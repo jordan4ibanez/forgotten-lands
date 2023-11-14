@@ -75,6 +75,7 @@ namespace BuiltinEntity {
       collisionbox:  [-0.3, -0.3, -0.3, 0.3, 0.3, 0.3],
       visual: EntityVisual.cube,
       visual_size: vector.create2d(),
+      automatic_rotate: 1,
       textures:  [""],
       is_visible:  false,
       pointable:  false
@@ -105,6 +106,7 @@ namespace BuiltinEntity {
         visual_size: vector.create2d(size + bias, size + bias),
         collisionbox: c,
         wield_item: this.itemString,
+        automatic_rotate: 1,
         glow: glow,
         infotext: stack.get_description()
       })
