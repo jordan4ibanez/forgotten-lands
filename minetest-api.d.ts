@@ -633,6 +633,7 @@ declare global {
   export type DynamicColorSpec = (ColorSpec | string)
   
   export interface ItemDefinition {
+    type?: string
     description?: string
     short_description?: string
     groups?: {[id: string]: number}

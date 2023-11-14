@@ -23,15 +23,57 @@ namespace ItemDrop {
     return groups
   }
 
+  function extractWieldGroups(digger: ObjectRef) {
+
+    // A mod made the server dig or someone is hacking.
+    if (!digger.is_player()) return
+
+    const wieldedItem = digger.get_wielded_item()
+
+    // Something wild happened. If this is hit, there is an engine problem.
+    if (!wieldedItem) {
+      const name = digger.get_player_name()
+      minetest.log(LogLevel.warning, `Attempt to get wield item from player ${name} gave a null value!`)
+      return
+    }
+
+    const itemName = wieldedItem.get_name()
+
+    const def = minetest.registered_items[itemName]
+    // Something has gone seriously wrong, we'll role with it.
+    if (!def) {
+      // But we're going going to notify.
+      minetest.log(LogLevel.warning, `Tried to get an UNKNOWN item! ${itemName} does not exist!`)
+      return
+    }
+
+    // Make sure this is an actual tool.
+    const itemType = def.type
+
+    print(`type of ${itemName} is ${itemType}`)
+
+
+    const groups = def.groups
+    if (!groups) {
+      // Again, this is an error. If no groups are defined there's a problem with the item definition.
+     minetest.log(LogLevel.warning, `Item ${itemName} has no defined groups!`) 
+    }
+
+    // print(dump(def))
+    // print(dump(wieldedItem))
+  }
 
   minetest.handle_node_drops = function(position: Vec3, drops: string[], digger: ObjectRef) {
 
     const groups = extractNodeGroups(position)
-    
-    print(dump(groups))
+
+    extractWieldGroups(digger)
 
     // Group extraction has failed, abort.
     if (!groups) return
+    
+    
+  
 
     for (const drop of drops) {
       const item = minetest.add_item(position, drop)

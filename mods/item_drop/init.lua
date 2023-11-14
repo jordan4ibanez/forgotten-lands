@@ -1,30 +1,60 @@
 ItemDrop = ItemDrop or ({})
 do
-    minetest.handle_node_drops = function(position, drops, digger)
+    local function extractNodeGroups(position)
         local node = minetest.get_node_or_nil(position)
         if not node then
-            return
+            return nil
         end
         if node.name == "ignore" then
-            return
+            return nil
         end
         local def = minetest.registered_nodes[node.name]
         if not def then
             minetest.log(LogLevel.warning, ("Tried to get an UNKNOWN node! " .. node.name) .. " does not exist!")
-            return
+            return nil
         end
         local groups = def.groups
         if not groups then
             minetest.log(LogLevel.warning, ("Node " .. node.name) .. " has no defined groups!")
+            return nil
+        end
+        return groups
+    end
+    local function extractWieldGroups(digger)
+        if not digger:is_player() then
             return
         end
-        print(dump(groups))
+        local wieldedItem = digger:get_wielded_item()
+        if not wieldedItem then
+            local name = digger:get_player_name()
+            minetest.log(LogLevel.warning, ("Attempt to get wield item from player " .. name) .. " gave a null value!")
+            return
+        end
+        local itemName = wieldedItem:get_name()
+        local def = minetest.registered_items[itemName]
+        if not def then
+            minetest.log(LogLevel.warning, ("Tried to get an UNKNOWN item! " .. itemName) .. " does not exist!")
+            return
+        end
+        local itemType = def.type
+        print((("type of " .. itemName) .. " is ") .. tostring(itemType))
+        local groups = def.groups
+        if not groups then
+            minetest.log(LogLevel.warning, ("Item " .. itemName) .. " has no defined groups!")
+        end
+    end
+    minetest.handle_node_drops = function(position, drops, digger)
+        local groups = extractNodeGroups(position)
+        extractWieldGroups(digger)
+        if not groups then
+            return
+        end
         for ____, drop in ipairs(drops) do
             do
                 local item = minetest.add_item(position, drop)
                 if not item then
                     print("ERROR! Failed to add item via handle_node_drops!")
-                    goto __continue8
+                    goto __continue15
                 end
                 item:add_velocity(vector.random(
                     -1,
@@ -37,7 +67,7 @@ do
                 local itemEntity = item:get_luaentity()
                 itemEntity.age = 1
             end
-            ::__continue8::
+            ::__continue15::
         end
     end
     minetest.spawn_item = function(pos, item)
