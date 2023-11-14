@@ -1,6 +1,9 @@
 export {};
 
-// Everything was just dumped in as I looked down the lua_api.md
+//* note: All enums were moved to mods/utility/enums.ts
+
+//? Everything was just dumped in as I looked down the lua_api.md
+
 /** @noSelf **/
 export interface minetest {
   get_current_modname(): string
