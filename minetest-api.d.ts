@@ -588,11 +588,16 @@ declare global {
     above: Vec3
     ref: ObjectRef
   }
+
+  export interface GroupCap {
+    times: number[],
+    uses?: number
+  }
   
   export interface ToolCapabilities {
     full_punch_interval?: number
     max_drop_level?: number
-    groupcaps?: {string : any}
+    groupcaps?: {[id: string] : GroupCap}
     damage_groups?: {string : number}
     punch_attack_uses?: number
   }
