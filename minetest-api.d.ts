@@ -314,7 +314,7 @@ export interface minetest {
   get_translator(textDomain: string): Translator
   translate(textDomain: string, ...string: string[]): string
 
-  sound_play(spec: SimpleSoundSpec, parameters: SoundParameterTable, ephemeral: boolean): number
+  sound_play(spec: SimpleSoundSpec, parameters: SoundParameterTable, ephemeral?: boolean): number
   sound_stop(handle: number): void
   sound_fade(handle: number, step: number, gain: number): void
 
@@ -423,19 +423,19 @@ declare global {
   export type GenNotifyObject = Map<string, Vec3[]>
 
   export interface SimpleSoundSpec {
-    name: string
-    gain: number
-    pitch: number
-    fade: number
+    name?: string
+    gain?: number
+    pitch?: number
+    fade?: number
   }
   
   export interface SoundParameterTable extends SimpleSoundSpec {
-    start_time: number
-    loop: boolean
-    pos: Vec3
-    object: ObjectRef
-    to_player: string
-    max_hear_distance: number
+    start_time?: number
+    loop?: boolean
+    pos?: Vec3
+    object?: ObjectRef
+    to_player?: string
+    max_hear_distance?: number
   }
   
   export interface NodeBox {
