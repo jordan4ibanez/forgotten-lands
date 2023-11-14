@@ -1386,6 +1386,7 @@ declare global {
     zoom_fov?: number
     eye_height?: number
     physical?: boolean
+    wield_item?: string
     collide_with_objects?: boolean
     collisionbox?: CollisionBox
     selectionbox?: number[]
