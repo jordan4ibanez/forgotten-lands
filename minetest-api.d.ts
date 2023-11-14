@@ -854,29 +854,29 @@ declare global {
   
   export interface BiomeDefinition {
     name: string
-    node_dust: string
-    node_top: string
-    depth_top: number
-    node_filler: string
-    depth_filler: number
-    node_stone: string
-    node_water_top: string
-    depth_water_top: number
-    node_water: string
-    node_river_water: string
-    node_riverbed: string
-    depth_riverbed: number
-    node_cave_liquid: string | string[]
-    node_dungeon: string
-    node_dungeon_alt: string
-    node_dungeon_stair: string
-    y_max: number
-    y_min: number
-    max_pos: Vec3
-    min_pos: Vec3
-    vertical_blend: number
-    heat_point: number
-    humidity_point: number
+    node_dust?: string
+    node_top?: string
+    depth_top?: number
+    node_filler?: string
+    depth_filler?: number
+    node_stone?: string
+    node_water_top?: string
+    depth_water_top?: number
+    node_water?: string
+    node_river_water?: string
+    node_riverbed?: string
+    depth_riverbed?: number
+    node_cave_liquid?: string
+    node_dungeon?: string
+    node_dungeon_alt?: string
+    node_dungeon_stair?: string
+    y_max?: number
+    y_min?: number
+    max_pos?: Vec3
+    min_pos?: Vec3
+    vertical_blend?: number
+    heat_point?: number
+    humidity_point?: number
   }
   
   export interface DecorationDefinition {
@@ -1164,8 +1164,8 @@ declare global {
     get_children(): ObjectRef[]
     set_detach(): void
     set_bone_position(bone: string, position: Vec3, rotation: Vec3): void
-    set_properties(objectPropertiesTable: {any : any}): void
-    get_properties(): {any : any}
+    set_properties(objectPropertiesTable: ObjectProperties): void
+    get_properties(): ObjectProperties
     is_player(): boolean
     get_nametag_attributes(): NametagAttributes
     set_nametag_attributes(attributes: NametagAttributes): void
