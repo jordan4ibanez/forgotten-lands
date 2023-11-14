@@ -21,4 +21,13 @@ do
             ::__continue4::
         end
     end
+    minetest.spawn_item = function(pos, item)
+        local stack = ItemStack(item)
+        local object = minetest.add_entity(pos, "__builtin:item")
+        if object then
+            local luaEntity = object:get_luaentity()
+            luaEntity:setItem(stack:to_string())
+        end
+        return object
+    end
 end

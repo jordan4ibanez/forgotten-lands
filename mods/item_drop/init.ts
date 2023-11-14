@@ -1,6 +1,6 @@
 {
   // Namespace magic.
-  type Entity = BuiltinEntity.ItemEntity;
+  type ItemEntity = BuiltinEntity.ItemEntity;
 
   minetest.handle_node_drops = function(position: Vec3, drops: string[], digger: ObjectRef) {
     for (const drop of drops) {
@@ -14,9 +14,31 @@
         1,2,
         -1,1
       ))
-      const itemEntity = item.get_luaentity() as Entity
+      const itemEntity = item.get_luaentity() as ItemEntity
       itemEntity.age = 1
-
     }
+  }
+
+  // function core.spawn_item(pos, item)
+  //   -- Take item in any format
+  //   local stack = ItemStack(item)
+  //   local obj = core.add_entity(pos, "__builtin:item")
+  //   -- Don't use obj if it couldn't be added to the map.
+  //   if obj then
+  //     obj:get_luaentity():set_item(stack:to_string())
+  //   end
+  //   return obj
+  // end
+
+  minetest.spawn_item = function(pos: Vec3, item: string | ItemStackObject): ObjectRef | null {
+    // Take item in any format.
+    const stack = ItemStack(item)
+    const object = minetest.add_entity(pos, "__builtin:item")
+    // Don't use object if it couldn't be added to the map.
+    if (object) {
+      const luaEntity = object.get_luaentity() as ItemEntity
+      luaEntity.setItem(stack.to_string())
+    }
+    return object
   }
 }
