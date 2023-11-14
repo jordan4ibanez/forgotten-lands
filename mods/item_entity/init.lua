@@ -243,6 +243,7 @@ do
             0
         }
         self.collected = false
+        self.collector = nil
         self.initial_properties = {
             hp_max = 1,
             physical = true,
@@ -332,7 +333,7 @@ do
             return
         end
         self.physicalState = false
-        self.object:set_properties({physical = true})
+        self.object:set_properties({physical = false})
         self.object:set_velocity(vector.create())
         self.object:set_acceleration(vector.create())
     end
@@ -412,7 +413,7 @@ do
                 end
                 inv:add_item("main", self.itemString)
                 self:disablePhysics()
-                self.object:move_to(playerPos, true)
+                self.collector = player
                 self.age = 0
                 self.collected = true
                 addCollectionSound(player)
@@ -420,9 +421,41 @@ do
             ::__continue40::
         end
     end
-    function ItemEntity.prototype.collectionCleanup(self, delta)
+    function ItemEntity.prototype.collectionCleanup(self, delta, pos)
         self.age = self.age + delta
-        if self.age < 0.2 then
+        if not self.collector then
+            self.object:remove()
+            return
+        end
+        if not minetest.is_player(self.collector) then
+            self.object:remove()
+            return
+        end
+        local goal = self.collector:get_pos()
+        if not goal then
+            self.object:remove()
+            return
+        end
+        local assistedVelocity = self.collector:get_velocity()
+        if not assistedVelocity then
+            self.object:remove()
+            return
+        end
+        goal.y = goal.y + 0.8
+        local distance = vector.distance(pos, goal)
+        if distance <= 0.1 then
+            self.object:remove()
+            return
+        end
+        local snappiness = 15
+        local speed = distance * snappiness
+        local normalized = vector.multiply(
+            vector.direction(pos, goal),
+            speed
+        )
+        local finalized = vector.add(normalized, assistedVelocity)
+        self.object:set_velocity(finalized)
+        if self.age < 0.3 then
             return
         end
         self.object:remove()
@@ -463,11 +496,11 @@ do
         self.beingForcedOut = true
     end
     function ItemEntity.prototype.on_step(self, delta, moveResult)
+        local pos = self.object:get_pos()
         if self.collected then
-            self:collectionCleanup(delta)
+            self:collectionCleanup(delta, pos)
             return
         end
-        local pos = self.object:get_pos()
         self:pollPlayers(pos)
         if self:tickAge(delta) then
             return
