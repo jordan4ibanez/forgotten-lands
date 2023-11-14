@@ -435,50 +435,6 @@ declare global {
     max_hear_distance: number
   }
   
-  export enum ParamType1 {
-    "light",
-    "none"
-  }
-  
-  export enum ParamType2 {
-    "flowingliquid",
-    "wallmounted",
-    "facedir",
-    "4dir",
-    "leveled",
-    "degrotate",
-    "meshoptions",
-    "color",
-    "colorfacedir",
-    "color4dir",
-    "colorwallmounted",
-    "glasslikeliquidlevel",
-    "colordegrotate"
-  }
-  
-  export enum drawtype {
-    "normal",
-    "airlike",
-    "liquid",
-    "flowingliquid",
-    "glasslike",
-    "glasslike_framed",
-    "glasslike_framed_optional",
-    "allfaces",
-    "allfaces_optional",
-    "torchlike",
-    "signlike",
-    "plantlike",
-    "firelike",
-    "fencelike",
-    "raillike",
-    "nodebox",
-    "mesh",
-    "plantlike_rooted"
-  }
-  
-  
-  
   export interface NodeBox {
     type: nodeboxtype
     fixed: boxTable
@@ -504,13 +460,6 @@ declare global {
   export type box = number[]
   
   export type boxTable = box[]
-  
-  export enum nodeboxtype {
-    "regular",
-    "fixed",
-    "wallmounted",
-    "connected"
-  }
   
   export type itemstring = string
   
@@ -589,36 +538,6 @@ declare global {
     b: number
   }
   
-  export enum LogLevel {
-    "none",
-    "error",
-    "warning",
-    "action",
-    "info",
-    "verbose"
-  }
-  
-  export enum TextureAlpha {
-    "opaque",
-    "clip",
-    "blend"
-  }
-  
-  export enum LiquidType {
-    "none",
-    "source",
-    "flowing"
-  }
-  
-  export enum NodeBoxConnections {
-    "top",
-    "bottom",
-    "front",
-    "left",
-    "back",
-    "right"
-  }
-  
   export interface NodeSoundSpec {
     footstep: SimpleSoundSpec
     dig: SimpleSoundSpec | string
@@ -674,15 +593,6 @@ declare global {
     eat: SimpleSoundSpec
     punch_use: SimpleSoundSpec
     punch_use_air: SimpleSoundSpec
-  }
-  
-  export enum EntityVisual {
-    cube = "cube",
-    sprite = "sprite",
-    upright_sprite = "upright_sprite",
-    mesh = "mesh",
-    wielditem = "wielditem",
-    item = "item"
   }
   
   export interface Collision {
@@ -849,37 +759,6 @@ declare global {
     action(pos: Vec3, node: NodeTable, delta: number): void
   }
   
-  
-  export enum SchematicRotation {
-    zero = "0",
-    ninety = "90",
-    oneEighty = "180",
-    twoSeventy = "270",
-    random = "random"
-  }
-  
-  export enum SchematicPlacementFlag {
-    "place_center_x",
-    "place_center_y",
-    "place_center_z"
-  }
-  
-  export enum SchematicFormat {
-    "mts",
-    "lua"
-  }
-  
-  export enum SchematicSerializationOption {
-    "lua_use_comments",
-    "lua_num_indent_spaces"
-  }
-  
-  export enum SchematicReadOptionYSliceOption {
-    "none",
-    "low",
-    "all"
-  }
-  
   export interface SchematicReadOptionYSlice {
     write_yslice_prob: SchematicReadOptionYSliceOption
   }
@@ -908,12 +787,7 @@ declare global {
     yslice_prob: number[][]
   }
   
-  export enum HTTPRequestMethod {
-    "GET",
-    "POST",
-    "PUT",
-    "DELETE"
-  }
+  
   
   export interface HTTPrequestDefinition {
     url: string
@@ -938,26 +812,6 @@ declare global {
     fetch(req: HTTPrequestDefinition, callback: (res: HTTPRequestResult) => void): void
     fetch_async(req: HTTPrequestDefinition): number
     fetch_async_get(handle: number): HTTPRequestResult
-  }
-  
-  export enum OreType {
-    "scatter",
-    "sheet",
-    "puff",
-    "blob",
-    "vein",
-    "stratum"
-  }
-  
-  export enum OreFlags {
-    "puff_cliffs",
-    "puff_additive_composition"
-  }
-  
-  export enum NoiseFlags {
-    "defaults",
-    "eased",
-    "absvalue"
   }
   
   export interface NoiseParams {
@@ -1022,22 +876,6 @@ declare global {
     humidity_point: number
   }
   
-  
-  export enum DecorationType {
-    simple = "simple",
-    schematic = "schematic"
-  }
-  
-  export enum DecorationFlags {
-    "liquid_surface",
-    "force_placement",
-    "all_floors",
-    "all_ceilings",
-    "place_center_x",
-    "place_center_y",
-    "place_center_z"
-  }
-  
   export interface DecorationDefinition {
     name: string
     deco_type: DecorationType
@@ -1063,13 +901,7 @@ declare global {
     rotation: string
   }
   
-  export enum CraftRecipeType {
-    "shapless",
-    "toolrepair",
-    "cooking",
-    "fuel"
-  }
-  
+
   export interface CraftRecipeDefinition {
     type: CraftRecipeType
     output: string
@@ -1106,32 +938,12 @@ declare global {
     iterate(): void
   }
   
-  
-  export enum HPChangeReasonType {
-    "set_hp",
-    "punch",
-    "fall",
-    "node_damage",
-    "drown",
-    "respawn"
-  }
-  
   export interface HPChangeReasonDefinition {
     type: HPChangeReasonType
     node: string
     node_pos: Vec3
     object: ObjectRef
     from: string
-  }
-  
-  export enum CheatType {
-    "moved_too_fast",
-    "interacted_too_far",
-    "interacted_with_self",
-    "interacted_while_dead",
-    "finished_unknown_dig",
-    "dug_unbreakable",
-    "dug_too_fast"
   }
   
   export interface ActionDefinition {
@@ -1150,23 +962,8 @@ declare global {
     type: CheatType
   }
   
-  export enum ClearObjectsOptions {
-    "full",
-    "quick"
-  }
-  
   
   export type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
-  
-  export enum GenNotifyFlags {
-    "dungeon",
-    "temple",
-    "cave_begin",
-    "cave_end",
-    "large_cave_begin",
-    "large_cave_end",
-    "decoration"
-  }
   
   export interface BiomeDataDefinition {
     biome: number
@@ -1182,12 +979,7 @@ declare global {
     flags: string
   }
   
-  export enum SearchAlgorithm{
-    "A*_noprefetch",
-    "A*",
-    "Dijkstra"
-  }
-  
+
   export interface MetaData {
     fields: {string : any}
     inventory: {string : {number : string}}
@@ -1503,17 +1295,6 @@ declare global {
     zoom: boolean
   }
 
-  export enum SkyParametersType {
-    "regular",
-    "skybox",
-    "plain"
-  }
-
-  export enum SkyParametersFogTintType {
-    "custom",
-    "default"
-  }
-
   export interface SkyParametersColor {
     day_sky: DynamicColorSpec
     day_horizon: DynamicColorSpec
@@ -1649,12 +1430,7 @@ declare global {
     get_staticdata?(): void
   }
   
-  export enum MinimapType {
-    "off",
-    "surface",
-    "radar",
-    "texture"
-  }
+
   
   export interface MinimapModes {
     type: MinimapType
@@ -1675,17 +1451,6 @@ declare global {
     basic_debug: boolean
   }
   
-  export enum HudElementType {
-    "image",
-    "text",
-    "statbar",
-    "inventory",
-    "waypoint",
-    "image_waypoint",
-    "compass",
-    "minimap"
-  }
-  
   export interface HudDefinition {
     hud_elem_type: HudElementType
     position: Vec2
@@ -1704,43 +1469,7 @@ declare global {
     style: number
   }
   
-  export enum HudReplaceBuiltinOption {
-    "breath",
-    "health"
-  }
-  
   export type Formspec = string
-  
-  export enum ParseRelativeNumberArgument {
-    "<number>",
-    "~<number>",
-    "~"
-  }
-  
-  export enum CompressionMethod {
-    "deflate",
-    "zstd"
-  }
-  
-  export enum RotateAndPlaceOrientationFlag {
-    "invert_wall",
-    "force_wall",
-    "force_ceiling",
-    "force_floor",
-    "force_facedir"
-  }
-  
-  export enum BlockStatusCondition {
-    "unknown",
-    "emerging",
-    "loaded",
-    "active"
-  }
-  
-  export enum TileAnimationType {
-    "vertical_frames",
-    "sheed_2d"
-  }
   
   export interface TileAnimationDefinition {
     type: TileAnimationType
@@ -1796,13 +1525,6 @@ declare global {
     bounce: ParticleBounceDefinition
   }
   
-  export enum ParticleSpawnerTweenStyle {
-    "fwd",
-    "rev",
-    "pulse",
-    "flicker"
-  }
-  
   export interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
     // {number | ParticleSpawnerRangeDefinition}
     style: ParticleSpawnerTweenStyle
@@ -1818,13 +1540,6 @@ declare global {
     x: number
     y: number
     z: number
-  }
-  
-  export enum ParticleSpawnerTextureBlend {
-    "alpha",
-    "add",
-    "screen",
-    "sub"
   }
   
   export type ParticleSpawnerTextureScaleTween = Array<Vec2>
@@ -1844,11 +1559,6 @@ declare global {
     reps: number
   }
   
-  export enum TexturePoolComponentFade {
-    "in",
-    "out"
-  }
-  
   export interface TexturePoolComponentDefinition {
     name: string
     fade: TexturePoolComponentFade
@@ -1860,13 +1570,6 @@ declare global {
   
   export type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
   
-  export enum ParticleSpawnerAttractionType {
-    "none",
-    "point",
-    "line",
-    "plane"
-  }
-
   export interface ParticleSpawnerAttractionDefinition {
     kind: ParticleSpawnerAttractionType
     strength: Vec2
@@ -1894,10 +1597,6 @@ declare global {
     texpool: ParticleSpawnerTexturePoolDefinition
   }
 
-  export enum AreaStoreType{
-    "LibSpatial"
-  }
-  
   export interface AreaStoreArea {
     min: Vec3
     max: Vec3
