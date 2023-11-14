@@ -337,6 +337,13 @@ do
         self.object:set_velocity(vector.create())
         self.object:set_acceleration(vector.create())
     end
+    function ItemEntity.prototype.disablePhysicsSilent(self)
+        if not self.physicalState then
+            return
+        end
+        self.physicalState = false
+        self.object:set_properties({physical = false})
+    end
     function ItemEntity.prototype.tickAge(self, delta)
         self.age = self.age + delta
         if timeToLive > 0 and self.age > timeToLive then
@@ -396,29 +403,29 @@ do
             do
                 local playerPos = player:get_pos()
                 if vector.distance(pos, playerPos) > 3 then
-                    goto __continue40
+                    goto __continue42
                 end
                 if vector.distance2d(pos, playerPos) > 1.5 then
-                    goto __continue40
+                    goto __continue42
                 end
                 if playerPos.y - pos.y > 0.05 then
-                    goto __continue40
+                    goto __continue42
                 end
                 local inv = player:get_inventory()
                 if not inv then
-                    goto __continue40
+                    goto __continue42
                 end
                 if not inv:room_for_item("main", self.itemString) then
-                    goto __continue40
+                    goto __continue42
                 end
                 inv:add_item("main", self.itemString)
-                self:disablePhysics()
+                self:disablePhysicsSilent()
                 self.collector = player
                 self.age = 0
                 self.collected = true
                 addCollectionSound(player)
             end
-            ::__continue40::
+            ::__continue42::
         end
     end
     function ItemEntity.prototype.collectionCleanup(self, delta, pos)

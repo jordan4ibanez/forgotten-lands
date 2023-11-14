@@ -158,6 +158,12 @@ namespace BuiltinEntity {
       this.object.set_acceleration(vector.create())
     }
 
+    disablePhysicsSilent(): void {
+      if (!this.physicalState) return
+      this.physicalState = false
+      this.object.set_properties({physical: false})
+    }
+
     tickAge(delta: number): boolean {
       this.age += delta
       if (timeToLive > 0 && this.age > timeToLive) {
@@ -237,7 +243,7 @@ namespace BuiltinEntity {
         inv.add_item("main", this.itemString)
 
         //! fixme: Have a function specifically made to magnetize towards the player because move_to is awful
-        this.disablePhysics()
+        this.disablePhysicsSilent()
         this.collector = player
         this.age = 0
         this.collected = true
