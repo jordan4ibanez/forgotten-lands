@@ -881,27 +881,27 @@ declare global {
   
   export interface DecorationDefinition {
     name: string
-    deco_type: DecorationType
-    place_on: string
-    sidelen: number
-    fill_ratio: number
-    noise_params: NoiseParams
-    biomes: string[]
-    y_min: number
-    y_max: number
-    spawn_by: string
-    check_offset: number
-    num_spawn_by: number
-    flags: string | {string : boolean}
-    decoration: string | string[]
-    height: number
-    height_max: number
-    param2: number
-    param2_max: number
-    place_offset_y: number
-    schematic: string | SchematicDefinition | number
-    replacements: {string : string}
-    rotation: string
+    deco_type?: DecorationType
+    place_on?: string
+    sidelen?: number
+    fill_ratio?: number
+    noise_params?: NoiseParams
+    biomes?: string[]
+    y_min?: number
+    y_max?: number
+    spawn_by?: string
+    check_offset?: number
+    num_spawn_by?: number
+    flags?: string | {string : boolean}
+    decoration?: string | string[]
+    height?: number
+    height_max?: number
+    param2?: number
+    param2_max?: number
+    place_offset_y?: number
+    schematic?: string | SchematicDefinition | number
+    replacements?: {string : string}
+    rotation?: string
   }
   
 
