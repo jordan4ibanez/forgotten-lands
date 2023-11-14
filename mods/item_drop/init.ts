@@ -1,4 +1,4 @@
-{
+namespace ItemDrop {
   // Namespace magic.
   type ItemEntity = BuiltinEntity.ItemEntity;
 
