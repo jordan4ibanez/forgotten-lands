@@ -102,7 +102,7 @@ enum ParamType2 {
   colordegrotate = "colordegrotate"
 }
 
-enum drawtype {
+enum Drawtype {
   normal = "normal",
   airlike = "airlike",
   liquid = "liquid",
