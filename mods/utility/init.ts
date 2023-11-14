@@ -58,7 +58,7 @@ module utility {
           default:
             return "unknown"
         }
-      })() as string;
+      })();
     }
     print(builder)
   }

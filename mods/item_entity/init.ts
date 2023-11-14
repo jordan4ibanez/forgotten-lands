@@ -38,8 +38,17 @@
       const itemName: string = (stack.is_known() && stack.get_name()) || "unknown"
       const size = 0.21
       const def = minetest.registered_items[itemName]
+      const glow = def && def.light_source && math.floor(def.light_source / 2 + 0.5)
+      
       // Small random bias to counter Z-fighting.
       const sizeBias = 1e-3 * math.random()
+
+      const c = [-size, -size, -size, size, size, size]
+
+      this.object.set_properties({
+        is_visible: true
+      })
+
 
 
 
