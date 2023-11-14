@@ -278,22 +278,22 @@ export interface minetest {
   request_insecure_environment(): any
   global_exists(name: string): boolean
 
-  registered_items: {string : ItemDefinition}
-  registered_nodes: {string : NodeDefinition}
-  registered_craftitems: {string : ItemDefinition}
-  registered_tools: {string : ItemDefinition}
+  registered_items: {[id: string] : ItemDefinition}
+  registered_nodes: {[id: string] : NodeDefinition}
+  registered_craftitems: {[id: string] : ItemDefinition}
+  registered_tools: {[id: string] : ItemDefinition}
   registered_entities: {[id: string] : LuaEntity}
-  object_refs: {string : ObjectRef}
-  luaentities: {string : LuaEntity}
+  object_refs: {[id: string] : ObjectRef}
+  luaentities: {[id: string] : LuaEntity}
   registered_abms: ABMDefinition[]
   registered_lbms: LBMDefinition[]
-  registered_aliases: {string : string}
-  registered_ores: {string : OreDefinition}
-  registered_biomes: {string : BiomeDefinition}
-  registered_decorations: {number : DecorationDefinition}
-  registered_schematics: {string : SchematicDefinition}
-  registered_chatcommands: {string : ChatCommandDefinition}
-  registered_privileges: {string : PrivilegeDefinition}
+  registered_aliases: {[id: string] : string}
+  registered_ores: {[id: string] : OreDefinition}
+  registered_biomes: {[id: string] : BiomeDefinition}
+  registered_decorations: {[id: string] : DecorationDefinition}
+  registered_schematics: {[id: string] : SchematicDefinition}
+  registered_chatcommands: {[id: string] : ChatCommandDefinition}
+  registered_privileges: {[id: string] : PrivilegeDefinition}
   
   wrap_text(str: string, limit: number, asTable: boolean): string | string[]
   pos_to_string(position: Vec3, decimalPlaces: number): string
@@ -676,14 +676,14 @@ declare global {
     punch_use_air: SimpleSoundSpec
   }
   
-  export enum EntityVisual {
-    "cube",
-    "sprite",
-    "upright_sprite",
-    "mesh",
-    "wielditem",
-    "item"
-  }
+  // export enum EntityVisual {
+  //   cube,
+  //   sprite,
+  //   upright_sprite,
+  //   mesh,
+  //   wielditem,
+  //   item
+  // }
   
   export interface Collision {
     type: string
@@ -1238,6 +1238,7 @@ declare global {
 
     // This is created in the utility class because new is a reserved keyword in TS.
     export function create(x?: number, y?: number, z?: number): Vec3
+    export function create2d(x?: number, y?: number): Vec2
 
     // And this is a bolt on created in the utility class.
     export function random(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): Vec3
@@ -1605,8 +1606,8 @@ declare global {
     collisionbox?: CollisionBox
     selectionbox?: number[]
     pointable?: boolean
-    visual?: EntityVisual
-    visual_size?: Vec3
+    visual?: string
+    visual_size?: Vec3 | Vec2
     mesh?: string
     textures?: string[]
     colors?: DynamicColorSpec[]
