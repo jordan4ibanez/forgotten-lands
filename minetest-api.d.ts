@@ -594,6 +594,8 @@ declare global {
     times: number[] | {[id: number] : number},
     uses?: number,
     maxlevel?: number
+    // This is a bolt on specifically for Forgotten Lands. You can still use it though, but it won't do anything without implementation.
+    maxdrop?: number
   }
   
   export interface ToolCapabilities {
