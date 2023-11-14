@@ -1,6 +1,7 @@
 Blocks = Blocks or ({})
 do
     local sounds = Sounds
+    local pickaxe = Tools.Pickaxe
     minetest.register_node(
         ":stone",
         {
@@ -8,7 +9,13 @@ do
             tiles = {"default_stone.png"},
             sounds = sounds.stone(),
             groups = {stone = 1},
-            drop = "cobblestone"
+            drop = {items = {{tool_groups = {
+                pickaxe.A,
+                pickaxe.B,
+                pickaxe.C,
+                pickaxe.D,
+                pickaxe.E
+            }, items = {"stone"}}}}
         }
     )
     minetest.register_node(

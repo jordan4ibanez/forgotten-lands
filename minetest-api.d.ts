@@ -557,15 +557,15 @@ declare global {
   }
   
   export interface ItemDropSpec {
-    tools: string[]
-    rarity: number
-    items: string[]
-    inherit_color: boolean
-    tool_groups: string | string[]
+    tools?: string[]
+    rarity?: number
+    items?: string[]
+    inherit_color?: boolean
+    tool_groups?: string[] | string[][]
   }
   
   export interface NodeDropSpec {
-    max_items: number
+    max_items?: number
     items: ItemDropSpec[]
   }
   
