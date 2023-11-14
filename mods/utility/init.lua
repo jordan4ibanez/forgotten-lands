@@ -194,6 +194,8 @@ end
 -- End of Lua Library inline imports
 utility = utility or ({})
 do
+    local modDir = minetest.get_modpath("utility")
+    dofile(modDir .. "/enums.lua")
     function utility.concat(...)
         local input = {...}
         local accumulator = ""
@@ -262,15 +264,19 @@ do
     function utility.randomRange(min, max)
         return math.random() * (max - min) + min
     end
-    function utility.fakeObjectRef()
+    function utility.fakeRef()
         return {}
     end
     local rr = utility.randomRange
     vector.create = function(x, y, z)
         local temp = vector.zero()
-        temp.x = x
-        temp.y = y
-        temp.z = z
+        temp.x = x or 0
+        temp.y = y or 0
+        temp.z = z or 0
+        return temp
+    end
+    vector.create2d = function(x, y)
+        local temp = {x = x or 0, y = y or 0}
         return temp
     end
     local create = vector.create

@@ -676,14 +676,14 @@ declare global {
     punch_use_air: SimpleSoundSpec
   }
   
-  // export enum EntityVisual {
-  //   cube,
-  //   sprite,
-  //   upright_sprite,
-  //   mesh,
-  //   wielditem,
-  //   item
-  // }
+  export enum EntityVisual {
+    cube = "cube",
+    sprite = "sprite",
+    upright_sprite = "upright_sprite",
+    mesh = "mesh",
+    wielditem = "wielditem",
+    item = "item"
+  }
   
   export interface Collision {
     type: string
@@ -1606,7 +1606,7 @@ declare global {
     collisionbox?: CollisionBox
     selectionbox?: number[]
     pointable?: boolean
-    visual?: string
+    visual?: EntityVisual
     visual_size?: Vec3 | Vec2
     mesh?: string
     textures?: string[]

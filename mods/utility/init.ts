@@ -1,4 +1,8 @@
 module utility {
+
+  const modDir = minetest.get_modpath("utility")
+  dofile(modDir + "/enums.lua")
+
   export function concat(...input: string[]): string {
     let accumulator = ""
     input.forEach((val: string) => {
@@ -76,6 +80,13 @@ module utility {
     temp.z = z || 0
     return temp
   };
+  vector.create2d = function(x?: number, y?: number): Vec2 {
+    let temp = {
+      x: x || 0,
+      y: y || 0
+    }
+    return temp
+  }
 
   const create = vector.create;
 
