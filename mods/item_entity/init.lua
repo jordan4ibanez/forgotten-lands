@@ -311,6 +311,10 @@ do
         else
             self.itemString = staticData
         end
+        self.object:set_armor_groups({immortal = 1})
+        self.object:set_acceleration(vector.create(0, -gravity, 0))
+        self._collisionBox = self.initial_properties.collisionbox
+        self:setItem("")
     end
     function ItemEntity.prototype.enablePhysics(self)
         if self.physicalState then
@@ -328,7 +332,7 @@ do
         self.physicalState = false
         self.object:set_properties({physical = true})
         self.object:set_velocity(vector.create())
-        local ____ = self.object.set_acceleration
+        self.object:set_acceleration(vector.create())
     end
     function ItemEntity.prototype.tickAge(self, delta)
         self.age = self.age + delta

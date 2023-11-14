@@ -132,6 +132,11 @@ namespace BuiltinEntity {
       } else {
         this.itemString = staticData
       }
+      this.object.set_armor_groups({immortal: 1})
+      // this.object.set_velocity(vector.create(0,2,0))
+      this.object.set_acceleration(vector.create(0,-gravity,0))
+      this._collisionBox = this.initial_properties.collisionbox
+      this.setItem("")
     }
 
     enablePhysics(): void {
@@ -147,7 +152,7 @@ namespace BuiltinEntity {
       this.physicalState = false
       this.object.set_properties({physical: true})
       this.object.set_velocity(vector.create())
-      this.object.set_acceleration
+      this.object.set_acceleration(vector.create())
     }
 
     tickAge(delta: number): boolean {
