@@ -125,7 +125,7 @@ export interface minetest {
   find_nodes_with_meta(pos1: Vec3, pos2: Vec3): Vec3[]
   get_meta(position: Vec3): MetaData
   get_node_timer(position: Vec3): NodeTimerObject
-  add_entity(position: Vec3, entityName: string, staticData: string): ObjectRef | void
+  add_entity(position: Vec3, entityName: string, staticData?: string): ObjectRef | null
   add_item(position: Vec3, item: ItemStackObject | string): ObjectRef
   get_player_by_name(playerName: string): ObjectRef
   get_objects_inside_radius(position: Vec3, radius: number): ObjectRef[]
