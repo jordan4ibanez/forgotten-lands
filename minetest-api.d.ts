@@ -548,12 +548,12 @@ declare global {
   }
   
   export interface NodeSoundSpec {
-    footstep: SimpleSoundSpec
-    dig: SimpleSoundSpec | string
-    dug: SimpleSoundSpec
-    place: SimpleSoundSpec
-    place_failed: SimpleSoundSpec
-    fall: SimpleSoundSpec
+    footstep?: SimpleSoundSpec
+    dig?: SimpleSoundSpec | string
+    dug?: SimpleSoundSpec
+    place?: SimpleSoundSpec
+    place_failed?: SimpleSoundSpec
+    fall?: SimpleSoundSpec
   }
   
   export interface ItemDropSpec {
