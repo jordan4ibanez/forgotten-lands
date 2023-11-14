@@ -99,6 +99,21 @@ module utility {
     )
   }
 
+  vector.distance2d = (() => {
+    // Hidden localized variables.
+    const vecA = vector.create()
+    const vecB = vector.create()
+    return function(vec1: Vec3, vec2: Vec3): number {
+      vecA.x = vec1.x
+      vecA.y = 0
+      vecA.z = vec1.z
+      vecB.x = vec2.x
+      vecB.y = 0
+      vecB.z = vec2.z
+      return vector.distance(vecA, vecB)
+    }
+  })();
+
   minetest.registerTSEntity = function(prototype: { new(): LuaEntity }) {
     let instance: LuaEntity = new prototype()
     // print(dump(instance))

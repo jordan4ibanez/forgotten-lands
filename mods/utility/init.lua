@@ -229,7 +229,7 @@ do
         local any = {...}
         local builder = ""
         for ____, item in __TS__Iterator(any) do
-            builder = builder .. (function()
+            builder = builder .. tostring((function()
                 repeat
                     local ____switch12 = type(item)
                     local thing
@@ -257,7 +257,7 @@ do
                         return "unknown"
                     end
                 until true
-            end)()
+            end)())
         end
         print(builder)
     end
@@ -287,6 +287,19 @@ do
             rr(minZ, maxZ)
         )
     end
+    vector.distance2d = (function()
+        local vecA = vector.create()
+        local vecB = vector.create()
+        return function(vec1, vec2)
+            vecA.x = vec1.x
+            vecA.y = 0
+            vecA.z = vec1.z
+            vecB.x = vec2.x
+            vecB.y = 0
+            vecB.z = vec2.z
+            return vector.distance(vecA, vecB)
+        end
+    end)()
     minetest.registerTSEntity = function(prototype)
         local instance = __TS__New(prototype)
         if instance.name == nil then
