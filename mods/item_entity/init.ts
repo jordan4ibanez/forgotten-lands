@@ -239,16 +239,59 @@ namespace BuiltinEntity {
         //! fixme: Have a function specifically made to magnetize towards the player because move_to is awful
         this.disablePhysics()
         this.collector = player
-        // this.object.move_to(playerPos, true)
         this.age = 0
         this.collected = true
         addCollectionSound(player)
       }
     }
 
-    collectionCleanup(delta: number): void {
+    collectionCleanup(delta: number, pos: Vec3): void {
+      
+      //? Collection animation.
+
       this.age += delta
-      if (this.age < 0.2) return
+
+      // A glitch occured. Extreme safety, had problems with this in previous iterations.
+      if (!this.collector) {
+        this.object.remove()
+        return
+      }
+      if (!minetest.is_player(this.collector)) {
+        this.object.remove()
+        return
+      }
+
+      const goal = this.collector.get_pos()
+      if (!goal) {
+        this.object.remove()
+        return
+      }
+
+      const assistedVelocity = this.collector.get_velocity()
+      if (!assistedVelocity) {
+        this.object.remove()
+        return
+      }
+
+      goal.y += 0.8
+
+      // Overcomplicated, but smooth.
+      
+      const distance = vector.distance(pos, goal)
+
+      if (distance <= 0.1) {
+        this.object.remove()
+        return
+      }
+
+      const snappiness = 15
+      const speed = distance * snappiness
+      const normalized = vector.multiply(vector.direction(pos, goal), speed)
+      const finalized = vector.add(normalized, assistedVelocity)
+
+      this.object.set_velocity(finalized)
+
+      if (this.age < 0.3) return
       this.object.remove()
     }
 
@@ -290,11 +333,12 @@ namespace BuiltinEntity {
     }
 
     on_step(delta: number, moveResult: MoveResult): void {
+      const pos = this.object.get_pos()
+
       if (this.collected) {
-        this.collectionCleanup(delta)
+        this.collectionCleanup(delta, pos)
         return
       }
-      const pos = this.object.get_pos()
 
       this.pollPlayers(pos)
 
