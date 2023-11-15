@@ -25,9 +25,23 @@ namespace Tools {
     return temp
   }
 
-  function generateToolLevels(table: {[id: string] : number}) {
-        
+  /**
+   * Generates a tool group dictionary.
+   * @param table The ToolType max level in which it can drop items from the tool group.
+   */
+  function generateToolDropGroups(table: {[id: string] : number}): {[id: string] : number} {
+    let temp: {[id: string] : number} = {}
+    for (const [toolType, maxLevel] of Object.entries(table)) {
+      for (let i = 1; i <= maxLevel; i++) {
+        temp[toolType + "_" + i] = 1
+      }
+    }
+    return temp
   }
+
+  generateToolDropGroups({
+    [ToolType.Pickaxe]: 3
+  })
 
   minetest.register_tool(":pickaxe", {
     inventory_image: "default_tool_stonepick.png",
@@ -44,8 +58,8 @@ namespace Tools {
         }
       }
     },
-    groups: {
-      pickaxe_1: 1
-    }
+    groups: generateToolDropGroups({
+      [ToolType.Pickaxe]: 2
+    })
   })
 }
