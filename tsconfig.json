@@ -25,7 +25,5 @@
     "noImplicitSelf": true,
     // "sourceMapTraceback": true,
     "luaLibImport": "inline"
-    // "luaBundleEntry": "mods/",
-    // "luaBundle": "mods/"
   }
 }
