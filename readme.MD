@@ -5,9 +5,14 @@
  
 First you need node, if you're on ubuntu it's super outdated so get it here https://github.com/nodesource/distributions#ubuntu-versions
 
-(might need sudo)
+Next you need TypeScriptToLua
  ```
- npm install --save-dev typescript-to-lua typescript
+ sudo npm install --save-dev typescript-to-lua typescript
+ ```
+
+Next you need Lua types for TS or else the compiler doesn't know what's going on.
+ ```
+ sudo npm install --save-dev lua-types
  ```
 
 (if you want my minetest helper thing)
