@@ -29,7 +29,7 @@ namespace Tools {
    * Generates a tool group dictionary.
    * @param table The ToolType max level in which it can drop items from the tool group.
    */
-  function generateToolDropGroups(table: {[id: string] : number}): {[id: string] : number} {
+  export function generateToolDropGroups(table: {[id: string] : number}): {[id: string] : number} {
     let temp: {[id: string] : number} = {}
     for (const [toolType, maxLevel] of Object.entries(table)) {
       for (let i = 1; i <= maxLevel; i++) {
@@ -39,27 +39,9 @@ namespace Tools {
     return temp
   }
 
-  generateToolDropGroups({
-    [ToolType.Pickaxe]: 3
-  })
+  const modPath = minetest.get_modpath("tools")
 
-  minetest.register_tool(":pickaxe", {
-    inventory_image: "default_tool_stonepick.png",
-    tool_capabilities: {
-      full_punch_interval: 0.5,
-      max_drop_level: 1,
-      groupcaps: {
-        stone: {
-          times: {
-            1: 1.0
-          },
-          maxlevel: 1,
-          maxdrop: 0
-        }
-      }
-    },
-    groups: generateToolDropGroups({
-      [ToolType.Pickaxe]: 2
-    })
-  })
+  dofile(modPath + "/pickaxe.lua")
+
+
 }

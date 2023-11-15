@@ -39,7 +39,7 @@ do
     --- Generates a tool group dictionary.
     -- 
     -- @param table The ToolType max level in which it can drop items from the tool group.
-    local function generateToolDropGroups(____table)
+    function Tools.generateToolDropGroups(____table)
         local temp = {}
         for ____, ____value in ipairs(__TS__ObjectEntries(____table)) do
             local toolType = ____value[1]
@@ -54,13 +54,6 @@ do
         end
         return temp
     end
-    generateToolDropGroups({[Tools.ToolType.Pickaxe] = 3})
-    minetest.register_tool(
-        ":pickaxe",
-        {
-            inventory_image = "default_tool_stonepick.png",
-            tool_capabilities = {full_punch_interval = 0.5, max_drop_level = 1, groupcaps = {stone = {times = {[1] = 1}, maxlevel = 1, maxdrop = 0}}},
-            groups = generateToolDropGroups({[Tools.ToolType.Pickaxe] = 2})
-        }
-    )
+    local modPath = minetest.get_modpath("tools")
+    dofile(modPath .. "/pickaxe.lua")
 end
