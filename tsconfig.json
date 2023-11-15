@@ -25,7 +25,7 @@
 
     "noImplicitSelf": true,
     // "noImplicitGlobalVariables": false,
-    // "sourceMapTraceback": true
+    "sourceMapTraceback": true,
     "luaLibImport": "inline"
   }
 }
