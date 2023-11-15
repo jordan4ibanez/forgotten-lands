@@ -15,14 +15,14 @@ namespace Tools {
    * Generates a node tool_groups array.
    * @param table Holds the ToolType and min tool level to drop an item.
    */
-  export function generateDropRequirements(table: {[id: string] : number}) {
+  export function generateDropRequirements(table: {[id: string] : number}): string[] {
     let temp: string[] = []
     for (const [toolType, minLevel] of Object.entries(table)) {
       for (let i = minLevel; i <= CURRENT_MAX_LEVEL; i++) {
         temp.push(toolType + "_" + i)
       }
     }
-    print(dump(temp))
+    return temp
   }
 
   generateDropRequirements({
@@ -45,7 +45,7 @@ namespace Tools {
       }
     },
     groups: {
-      [""]: 1
+      pickaxe_1: 1
     }
   })
 }

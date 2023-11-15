@@ -1,6 +1,8 @@
 Blocks = Blocks or ({})
 do
     local sounds = Sounds
+    local generateDropRequirements = Tools.generateDropRequirements
+    local ToolType = Tools.ToolType
     minetest.register_node(
         ":stone",
         {
@@ -8,7 +10,10 @@ do
             tiles = {"default_stone.png"},
             sounds = sounds.stone(),
             groups = {stone = 1},
-            drop = {items = {{tool_groups = {{""}}, items = {"stone"}}}}
+            drop = {items = {{
+                tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 1}),
+                items = {"stone"}
+            }}}
         }
     )
     minetest.register_node(

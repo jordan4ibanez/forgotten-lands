@@ -1,6 +1,7 @@
 namespace Blocks {
   const sounds = Sounds;
-  // const pickaxe = Tools.Pickaxe;
+  const generateDropRequirements = Tools.generateDropRequirements;
+  const ToolType = Tools.ToolType;
 
   minetest.register_node(":stone", {
     drawtype: Drawtype.normal,
@@ -13,9 +14,9 @@ namespace Blocks {
     drop: {
       items: [
         {
-          tool_groups: [
-            [""],
-          ],
+          tool_groups: generateDropRequirements({
+            [ToolType.Pickaxe]: 1
+          }),
           items: ["stone"]
         }
       ]
