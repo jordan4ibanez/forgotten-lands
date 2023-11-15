@@ -23,10 +23,6 @@ namespace Blocks {
     }
   })
 
-  if (true) {
-    throw Error("cool")
-  }
-
   minetest.register_node(":cobblestone", {
     drawtype: Drawtype.normal,
     tiles: ["default_cobble.png"],

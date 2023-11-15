@@ -191,67 +191,7 @@ do
     TypeError = createErrorClass(nil, "TypeError")
     URIError = createErrorClass(nil, "URIError")
 end
-
-local __TS__Match = string.match
-
-local function __TS__SourceMapTraceBack(fileName, sourceMap)
-    _G.__TS__sourcemap = _G.__TS__sourcemap or ({})
-    _G.__TS__sourcemap[fileName] = sourceMap
-    if _G.__TS__originalTraceback == nil then
-        local originalTraceback = debug.traceback
-        _G.__TS__originalTraceback = originalTraceback
-        debug.traceback = function(thread, message, level)
-            local trace
-            if thread == nil and message == nil and level == nil then
-                trace = originalTraceback()
-            elseif __TS__StringIncludes(_VERSION, "Lua 5.0") then
-                trace = originalTraceback((("[Level " .. tostring(level)) .. "] ") .. tostring(message))
-            else
-                trace = originalTraceback(thread, message, level)
-            end
-            if type(trace) ~= "string" then
-                return trace
-            end
-            local function replacer(____, file, srcFile, line)
-                local fileSourceMap = _G.__TS__sourcemap[file]
-                if fileSourceMap ~= nil and fileSourceMap[line] ~= nil then
-                    local data = fileSourceMap[line]
-                    if type(data) == "number" then
-                        return (srcFile .. ":") .. tostring(data)
-                    end
-                    return (data.file .. ":") .. tostring(data.line)
-                end
-                return (file .. ":") .. line
-            end
-            local result = string.gsub(
-                trace,
-                "(%S+)%.lua:(%d+)",
-                function(file, line) return replacer(nil, file .. ".lua", file .. ".ts", line) end
-            )
-            local function stringReplacer(____, file, line)
-                local fileSourceMap = _G.__TS__sourcemap[file]
-                if fileSourceMap ~= nil and fileSourceMap[line] ~= nil then
-                    local chunkName = (__TS__Match(file, "%[string \"([^\"]+)\"%]"))
-                    local sourceName = string.gsub(chunkName, ".lua$", ".ts")
-                    local data = fileSourceMap[line]
-                    if type(data) == "number" then
-                        return (sourceName .. ":") .. tostring(data)
-                    end
-                    return (data.file .. ":") .. tostring(data.line)
-                end
-                return (file .. ":") .. line
-            end
-            result = string.gsub(
-                result,
-                "(%[string \"[^\"]+\"%]):(%d+)",
-                function(file, line) return stringReplacer(nil, file, line) end
-            )
-            return result
-        end
-    end
-end
 -- End of Lua Library inline imports
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["255"] = 1,["257"] = 3,["258"] = 4,["259"] = 1,["260"] = 6,["261"] = 7,["262"] = 8,["263"] = 8,["264"] = 8,["265"] = 9,["266"] = 8,["267"] = 8,["268"] = 11,["269"] = 6,["270"] = 1,["271"] = 16,["272"] = 22,["273"] = 23,["275"] = 24,["276"] = 24,["277"] = 25,["278"] = 26,["279"] = 31,["280"] = 24,["283"] = 34,["284"] = 35,["286"] = 38,["287"] = 14,["288"] = 1,["289"] = 41,["290"] = 42,["291"] = 43,["292"] = 44,["294"] = 45,["295"] = 53,["296"] = 46,["298"] = 47,["300"] = 48,["302"] = 49,["304"] = 50,["306"] = 51,["308"] = 52,["310"] = 53,["311"] = 54,["312"] = 55,["314"] = 57,["317"] = 59,["320"] = 44,["322"] = 63,["323"] = 41,["324"] = 1,["325"] = 67,["326"] = 66,["327"] = 1,["328"] = 71,["329"] = 70,["330"] = 1,["331"] = 76,["332"] = 77,["333"] = 78,["334"] = 79,["335"] = 80,["336"] = 81,["337"] = 76,["338"] = 83,["339"] = 84,["340"] = 88,["341"] = 83,["342"] = 91,["343"] = 94,["344"] = 95,["345"] = 95,["346"] = 95,["347"] = 95,["348"] = 95,["349"] = 94,["350"] = 102,["351"] = 104,["352"] = 105,["353"] = 106,["354"] = 107,["355"] = 108,["356"] = 109,["357"] = 110,["358"] = 111,["359"] = 112,["360"] = 113,["361"] = 106,["362"] = 102,["363"] = 117,["364"] = 118,["365"] = 120,["367"] = 121,["371"] = 123,["372"] = 124,["373"] = 117,["374"] = 128,["375"] = 129,["376"] = 130,["377"] = 131,["378"] = 132,["380"] = 134,["381"] = 128});
 utility = utility or ({})
 do
     local modDir = minetest.get_modpath("utility")
