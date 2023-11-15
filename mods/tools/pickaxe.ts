@@ -7,13 +7,14 @@ namespace Tools {
   minetest.register_tool(":wooden_pickaxe", {
     inventory_image: "default_tool_woodpick.png",
     tool_capabilities: {
-      full_punch_interval: 0.5,
+      full_punch_interval: 0.3,
       max_drop_level: 1,
       groupcaps: {
         stone: {
           times: {
             1: 2
           },
+          uses: 10,
           maxlevel: 1,
           maxdrop: 1
         }
@@ -27,7 +28,7 @@ namespace Tools {
   minetest.register_tool(":stone_pickaxe", {
     inventory_image: "default_tool_stonepick.png",
     tool_capabilities: {
-      full_punch_interval: 0.5,
+      full_punch_interval: 0.3,
       max_drop_level: 2,
       groupcaps: {
         stone: {
@@ -35,6 +36,7 @@ namespace Tools {
             1: 2,
             2: 4
           },
+          uses: 15,
           maxlevel: 2,
           maxdrop: 2
         }
@@ -48,7 +50,7 @@ namespace Tools {
   minetest.register_tool(":iron_pickaxe", {
     inventory_image: "default_tool_steelpick.png",
     tool_capabilities: {
-      full_punch_interval: 0.5,
+      full_punch_interval: 0.3,
       max_drop_level: 3,
       groupcaps: {
         stone: {
@@ -57,6 +59,7 @@ namespace Tools {
             2: 4,
             3: 6
           },
+          uses: 20,
           maxlevel: 3,
           maxdrop: 3
         }
@@ -70,7 +73,7 @@ namespace Tools {
   minetest.register_tool(":diamond_pickaxe", {
     inventory_image: "default_tool_diamondpick.png",
     tool_capabilities: {
-      full_punch_interval: 0.5,
+      full_punch_interval: 0.3,
       max_drop_level: 4,
       groupcaps: {
         stone: {
@@ -80,6 +83,7 @@ namespace Tools {
             3: 6,
             4: 8
           },
+          uses: 25,
           maxlevel: 4,
           maxdrop: 4
         }
@@ -87,6 +91,31 @@ namespace Tools {
     },
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 4
+    })
+  })
+
+  minetest.register_tool(":mese_pickaxe", {
+    inventory_image: "default_tool_mesepick.png",
+    tool_capabilities: {
+      full_punch_interval: 0.3,
+      max_drop_level: 5,
+      groupcaps: {
+        stone: {
+          times: {
+            1: 2,
+            2: 4,
+            3: 6,
+            4: 8,
+            5: 10
+          },
+          uses: 30,
+          maxlevel: 5,
+          maxdrop: 5
+        }
+      }
+    },
+    groups: generateToolDropGroups({
+      [toolType.Pickaxe]: 5
     })
   })
 }
