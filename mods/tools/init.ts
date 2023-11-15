@@ -25,9 +25,9 @@ namespace Tools {
     return temp
   }
 
-  generateDropRequirements({
-    [ToolType.Axe]: 3
-  })
+  function generateToolLevels(table: {[id: string] : number}) {
+        
+  }
 
   minetest.register_tool(":pickaxe", {
     inventory_image: "default_tool_stonepick.png",
