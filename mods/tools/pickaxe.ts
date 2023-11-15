@@ -12,7 +12,7 @@ namespace Tools {
       groupcaps: {
         stone: {
           times: {
-            1: 1
+            1: 1.25
           },
           uses: 10,
           maxlevel: 1,
@@ -33,8 +33,8 @@ namespace Tools {
       groupcaps: {
         stone: {
           times: {
-            1: 1,
-            2: 2,
+            1: 1.25,
+            2: 2.5,
           },
           uses: 15,
           maxlevel: 2,

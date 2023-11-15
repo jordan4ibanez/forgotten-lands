@@ -6,7 +6,7 @@ do
         ":wooden_pickaxe",
         {
             inventory_image = "default_tool_woodpick.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 1, groupcaps = {stone = {times = {[1] = 1}, uses = 10, maxlevel = 1, maxdrop = 1}}},
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 1, groupcaps = {stone = {times = {[1] = 1.25}, uses = 10, maxlevel = 1, maxdrop = 1}}},
             groups = generateToolDropGroups({[toolType.Pickaxe] = 1})
         }
     )
@@ -14,7 +14,7 @@ do
         ":stone_pickaxe",
         {
             inventory_image = "default_tool_stonepick.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 2, groupcaps = {stone = {times = {[1] = 1, [2] = 2}, uses = 15, maxlevel = 2, maxdrop = 2}}},
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 2, groupcaps = {stone = {times = {[1] = 1.25, [2] = 2.5}, uses = 15, maxlevel = 2, maxdrop = 2}}},
             groups = generateToolDropGroups({[toolType.Pickaxe] = 2})
         }
     )
