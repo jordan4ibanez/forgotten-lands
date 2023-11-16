@@ -42,7 +42,6 @@ namespace Tools {
   }
 
   const modPath = minetest.get_modpath("tools")
-
   for (const modName of ["hand", "pickaxe", "shovel"]) {
     dofile(modPath + "/" + modName + ".lua")
   }
