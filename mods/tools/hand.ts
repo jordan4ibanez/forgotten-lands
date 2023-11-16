@@ -22,7 +22,11 @@ namespace Tools {
         },
         [blockType.wood]: {
           times: {
-            1: 2,
+            0: 2.0,
+            1: 4.0,
+            2: 6.0,
+            3: 8.0,
+            4: 10.0
           },
           uses: 0
         },

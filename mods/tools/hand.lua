@@ -8,7 +8,13 @@ do
             tool_capabilities = {full_punch_interval = 0.9, max_drop_level = 1, groupcaps = {
                 [blockType.break_instant] = {times = {[1] = 0.1}, uses = 0},
                 [blockType.soil] = {times = {[1] = 2}, uses = 0},
-                [blockType.wood] = {times = {[1] = 2}, uses = 0},
+                [blockType.wood] = {times = {
+                    [0] = 2,
+                    [1] = 4,
+                    [2] = 6,
+                    [3] = 8,
+                    [4] = 10
+                }, uses = 0},
                 [blockType.leaf] = {times = {[1] = 1}, uses = 0},
                 [blockType.stone] = {times = {
                     [0] = 5,
