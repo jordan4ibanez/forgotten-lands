@@ -1,6 +1,15 @@
 Blocks = Blocks or ({})
 do
     local sounds = Sounds
+    Blocks.BlockType = BlockType or ({})
+    Blocks.BlockType.break_instant = "break_instant"
+    Blocks.BlockType.soil = "soil"
+    Blocks.BlockType.wood = "wood"
+    Blocks.BlockType.leaf = "leaf"
+    Blocks.BlockType.stone = "stone"
+    Blocks.BlockType.metal = "metal"
+    Blocks.BlockType.glass = "glass"
+    Blocks.BlockType.wool = "wool"
     do
         local i = 1
         while i <= 5 do

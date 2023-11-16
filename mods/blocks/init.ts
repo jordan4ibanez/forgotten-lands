@@ -1,6 +1,19 @@
 namespace Blocks {
   const sounds = Sounds;
 
+
+  export enum BlockType {
+    break_instant = "break_instant",
+    soil = "soil",
+    wood = "wood",
+    leaf = "leaf",
+    stone = "stone",
+    metal = "metal",
+    glass = "glass",
+    wool = "wool"
+  }
+
+
   for (let i = 1; i <= 5; i++) {
     minetest.register_node(":tall_grass_" + i, {
       drawtype: Drawtype.plantlike,

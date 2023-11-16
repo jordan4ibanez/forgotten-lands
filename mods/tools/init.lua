@@ -55,7 +55,7 @@ do
         return temp
     end
     local modPath = minetest.get_modpath("tools")
-    for ____, modName in ipairs({"pickaxe", "hand"}) do
+    for ____, modName in ipairs({"hand", "pickaxe", "shovel"}) do
         dofile(((modPath .. "/") .. modName) .. ".lua")
     end
 end

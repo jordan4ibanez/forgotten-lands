@@ -11,6 +11,8 @@ namespace Tools {
     Shears = "shears"
   }
 
+
+
   /**
    * Generates a node tool_groups array.
    * @param table Holds the ToolType and min tool level to drop an item.
@@ -41,7 +43,7 @@ namespace Tools {
 
   const modPath = minetest.get_modpath("tools")
 
-  for (const modName of ["pickaxe", "hand"]) {
+  for (const modName of ["hand", "pickaxe", "shovel"]) {
     dofile(modPath + "/" + modName + ".lua")
   }
 

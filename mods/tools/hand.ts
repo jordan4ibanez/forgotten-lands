@@ -1,35 +1,38 @@
 namespace Tools {
+
+  const blockType = Blocks.BlockType;
+
   minetest.override_item("", {
     wield_scale: vector.create(1,1,2.5),
     tool_capabilities: {
       full_punch_interval: 0.9,
       max_drop_level: 1,
       groupcaps: {
-        break_instant: {
+        [blockType.break_instant]: {
           times: {
             1: 0.1
           },
           uses: 0
         },
-        soil: {
+        [blockType.soil]: {
           times: {
             1: 2,
           },
           uses: 0
         },
-        wooden: {
+        [blockType.wood]: {
           times: {
             1: 2,
           },
           uses: 0
         },
-        leafy: {
+        [blockType.leaf]: {
           times: {
             1: 1,
           },
           uses: 0
         },
-        stone: {
+        [blockType.stone]: {
           times: {
             0: 5.0,
             1: 10.0,
@@ -41,7 +44,7 @@ namespace Tools {
           maxdrop: 0,
           uses: 0
         },
-        metal: {
+        [blockType.metal]: {
           times: {
             0: 5.0,
             1: 10.0,
@@ -53,7 +56,7 @@ namespace Tools {
           maxdrop: 0,
           uses: 0
         },
-        glass: {
+        [blockType.glass]: {
           times: {
             0: 5.0,
             1: 10.0,
@@ -64,7 +67,7 @@ namespace Tools {
           maxlevel: 0,
           uses: 0
         },
-        wool: {
+        [blockType.wool]: {
           times: {
             1: 0.4,
             2: 0.7,
