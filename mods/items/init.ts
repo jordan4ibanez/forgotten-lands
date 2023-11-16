@@ -27,7 +27,9 @@ namespace Items {
     return input + "^[transformFX"
   }
 
+  //! important fixmes
   print("Diamond needs a better texture! It's a sad lump at the moment.")
+  print("Make mese look like a yellow diamond so gold can be added in.")
 
   const craftItems: {[id: string] : ItemDefinition} = {
     ":stick": {
@@ -41,6 +43,10 @@ namespace Items {
     ":diamond": {
       wield_scale: wieldScale,
       inventory_image: "default_diamond.png"
+    },
+    ":mese": {
+      wield_scale: wieldScale,
+      inventory_image: "default_mese_crystal.png"
     }
   }
   

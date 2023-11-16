@@ -35,13 +35,16 @@ do
     local function flipIt(input)
         return input .. "^[transformFX"
     end
+    print("Diamond needs a better texture! It's a sad lump at the moment.")
+    print("Make mese look like a yellow diamond so gold can be added in.")
     local craftItems = {
         [":stick"] = {wield_scale = wieldScale, inventory_image = "default_stick.png"},
         [":iron"] = {
             wield_scale = wieldScale,
             inventory_image = flipIt("default_steel_ingot.png")
         },
-        [":diamond"] = {wield_scale = wieldScale, inventory_image = "default_diamond.png"}
+        [":diamond"] = {wield_scale = wieldScale, inventory_image = "default_diamond.png"},
+        [":mese"] = {wield_scale = wieldScale, inventory_image = "default_mese_crystal.png"}
     }
     Items.processCraftItemArray(craftItems)
 end
