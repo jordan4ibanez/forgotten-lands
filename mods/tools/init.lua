@@ -54,6 +54,7 @@ do
         "pickaxe",
         "shovel",
         "axe",
-        "sword"
+        "sword",
+        "shears"
     })
 end
