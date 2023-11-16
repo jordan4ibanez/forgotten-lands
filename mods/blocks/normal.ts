@@ -2,13 +2,14 @@ namespace Blocks {
   const sounds = Sounds;
   const generateDropRequirements = Tools.generateDropRequirements;
   const ToolType = Types.ToolType;
+  const blockType = Types.BlockType;
 
   minetest.register_node(":stone", {
     drawtype: Drawtype.normal,
     tiles: ["default_stone.png"],
     sounds: sounds.stone(),
     groups: {
-      stone: 1
+      [blockType.stone]: 1
     },
 
     drop: {
@@ -28,7 +29,7 @@ namespace Blocks {
     tiles: ["default_cobble.png"],
     sounds: sounds.stone(),
     groups: {
-      stone: 1
+      [blockType.stone]: 1
     }
   })
 
@@ -37,7 +38,7 @@ namespace Blocks {
     tiles: ["default_dirt.png"],
     sounds: sounds.dirt(),
     groups: {
-      soil: 1
+      [blockType.soil]: 1
     }
   })
 
@@ -50,7 +51,7 @@ namespace Blocks {
     ],
     sounds: sounds.grass(),
     groups: {
-      soil: 1
+      [blockType.soil]: 1
     },
     drop: "dirt"
   })
@@ -60,7 +61,7 @@ namespace Blocks {
     tiles: ["default_sand.png"],
     sounds: sounds.sand(),
     groups: {
-      soil: 1
+      [blockType.soil]: 1
     }
   })
 
@@ -69,7 +70,7 @@ namespace Blocks {
     tiles: ["default_gravel.png"],
     sounds: sounds.gravel(),
     groups: {
-      soil: 1
+      [blockType.soil]: 1
     }
   })
 
@@ -82,7 +83,7 @@ namespace Blocks {
     ],
     sounds: sounds.wood(),
     groups: {
-      wooden: 1
+      [blockType.wood]: 1
     }
   })
 
@@ -93,7 +94,7 @@ namespace Blocks {
     tiles: ["default_leaves.png"],
     sounds: sounds.plant(),
     groups: {
-      leafy: 1
+      [blockType.leaf]: 1
     },
     drop: ""
   })
@@ -121,7 +122,7 @@ namespace Blocks {
       tiles: ["wool_" + color + ".png"],
       sounds: sounds.wool(),
       groups: {
-        wool: 1
+        [blockType.wool]: 1
       }
     })
   }
@@ -138,7 +139,7 @@ namespace Blocks {
     is_ground_content: false,
     sounds: sounds.glass(),
     groups: {
-      glass: 1
+      [blockType.glass]: 1
     },
     drop: ""
   })
