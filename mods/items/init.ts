@@ -27,6 +27,8 @@ namespace Items {
     return input + "^[transformFX"
   }
 
+  print("Diamond needs a better texture! It's a sad lump at the moment.")
+
   const craftItems: {[id: string] : ItemDefinition} = {
     ":stick": {
       wield_scale: wieldScale,
@@ -35,6 +37,10 @@ namespace Items {
     ":iron": {
       wield_scale: wieldScale,
       inventory_image: flipIt("default_steel_ingot.png")
+    },
+    ":diamond": {
+      wield_scale: wieldScale,
+      inventory_image: "default_diamond.png"
     }
   }
   

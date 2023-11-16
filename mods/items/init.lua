@@ -40,7 +40,8 @@ do
         [":iron"] = {
             wield_scale = wieldScale,
             inventory_image = flipIt("default_steel_ingot.png")
-        }
+        },
+        [":diamond"] = {wield_scale = wieldScale, inventory_image = "default_diamond.png"}
     }
     Items.processCraftItemArray(craftItems)
 end
