@@ -84,6 +84,13 @@ namespace Recipes {
       ]
     })
   }
+  toolRegistrationArray.push({
+    output: "shears",
+    recipe: [
+      ["",     "iron"],
+      ["iron", ""]
+    ]
+  })
   processRecipeArray(toolRegistrationArray)
 
   
