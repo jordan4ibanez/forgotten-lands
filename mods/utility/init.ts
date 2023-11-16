@@ -1,5 +1,15 @@
 module utility {
 
+  export function loadFiles(filesToLoad: string[]): void {
+    const currentMod = minetest.get_current_modname()
+    const currentDirectory = minetest.get_modpath(currentMod)
+    for (const file of filesToLoad) {
+      dofile(currentDirectory + "/" + file + ".lua")
+    }
+  }
+
+  loadFiles(["enums"])
+
   export function concat(...input: string[]): string {
     let accumulator = ""
     input.forEach((val: string) => {
@@ -131,13 +141,5 @@ module utility {
     return input
   }
 
-  export function loadFiles(filesToLoad: string[]): void {
-    const currentMod = minetest.get_current_modname()
-    const currentDirectory = minetest.get_modpath(currentMod)
-    for (const file of filesToLoad) {
-      dofile(currentDirectory + "/" + file + ".lua")
-    }
-  }
 
-  loadFiles(["enums"])
 }

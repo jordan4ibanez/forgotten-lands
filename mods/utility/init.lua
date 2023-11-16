@@ -194,6 +194,14 @@ end
 -- End of Lua Library inline imports
 utility = utility or ({})
 do
+    function utility.loadFiles(filesToLoad)
+        local currentMod = minetest.get_current_modname()
+        local currentDirectory = minetest.get_modpath(currentMod)
+        for ____, file in ipairs(filesToLoad) do
+            dofile(((currentDirectory .. "/") .. file) .. ".lua")
+        end
+    end
+    utility.loadFiles({"enums"})
     function utility.concat(...)
         local input = {...}
         local accumulator = ""
@@ -229,22 +237,22 @@ do
         for ____, item in __TS__Iterator(any) do
             builder = builder .. tostring((function()
                 repeat
-                    local ____switch12 = type(item)
+                    local ____switch15 = type(item)
                     local thing
-                    local ____cond12 = ____switch12 == "string"
-                    if ____cond12 then
+                    local ____cond15 = ____switch15 == "string"
+                    if ____cond15 then
                         return item
                     end
-                    ____cond12 = ____cond12 or ____switch12 == "number"
-                    if ____cond12 then
+                    ____cond15 = ____cond15 or ____switch15 == "number"
+                    if ____cond15 then
                         return tostring(item)
                     end
-                    ____cond12 = ____cond12 or ____switch12 == "table"
-                    if ____cond12 then
+                    ____cond15 = ____cond15 or ____switch15 == "table"
+                    if ____cond15 then
                         return dump(item)
                     end
-                    ____cond12 = ____cond12 or ____switch12 == "userdata"
-                    if ____cond12 then
+                    ____cond15 = ____cond15 or ____switch15 == "userdata"
+                    if ____cond15 then
                         thing = item
                         if thing:is_player() then
                             return thing:get_player_name()
@@ -317,12 +325,4 @@ do
         end
         return input
     end
-    function utility.loadFiles(filesToLoad)
-        local currentMod = minetest.get_current_modname()
-        local currentDirectory = minetest.get_modpath(currentMod)
-        for ____, file in ipairs(filesToLoad) do
-            dofile(((currentDirectory .. "/") .. file) .. ".lua")
-        end
-    end
-    utility.loadFiles({"enums"})
 end
