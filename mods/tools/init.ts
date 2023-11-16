@@ -3,7 +3,7 @@ namespace Tools {
   // The max level that groups can go up to at the moment.
   export const CURRENT_MAX_LEVEL = 5
 
-  // Yoinked from MineClone2.
+  // Yoinked from MineClone2. But smallerized.
   export const wieldScale = vector.create(1.5, 1.5, 1)
 
   /**
