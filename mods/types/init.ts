@@ -18,4 +18,15 @@ namespace Types {
     glass = "glass",
     wool = "wool",
   }
+
+  // This one is quite useful for crafting recipes.
+  export enum CraftingBlockType {
+    soil = "group:soil",
+    wood = "group:wood",
+    leaf = "group:leaf",
+    stone = "group:stone",
+    metal = "group:metal",
+    glass = "group:glass",
+    wool = "group:wool",
+  }
 }
