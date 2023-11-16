@@ -319,4 +319,11 @@ do
         end
         return input
     end
+    function utility.loadFiles(filesToLoad)
+        local currentMod = minetest.get_current_modname()
+        local currentDirectory = minetest.get_modpath(currentMod)
+        print(currentMod, currentDirectory)
+        for ____, file in ipairs(filesToLoad) do
+        end
+    end
 end

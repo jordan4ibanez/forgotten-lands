@@ -134,4 +134,12 @@ module utility {
     return input
   }
 
+  export function loadFiles(filesToLoad: string[]): void {
+    const currentMod = minetest.get_current_modname()
+    const currentDirectory = minetest.get_modpath(currentMod)
+    print(currentMod, currentDirectory)
+    for (const file of filesToLoad) {
+    }
+  }
+
 }
