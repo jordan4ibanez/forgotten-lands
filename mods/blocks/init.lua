@@ -1,6 +1,7 @@
 Blocks = Blocks or ({})
 do
     local sounds = Sounds
+    local blockType = Types.BlockType
     do
         local i = 1
         while i <= 5 do
@@ -15,7 +16,7 @@ do
                     tiles = {("default_grass_" .. tostring(i)) .. ".png"},
                     buildable_to = true,
                     sounds = sounds.plant(),
-                    groups = {break_instant = 1},
+                    groups = {[blockType.break_instant] = 1},
                     drop = ""
                 }
             )

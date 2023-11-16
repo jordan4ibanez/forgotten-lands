@@ -2,11 +2,12 @@ Tools = Tools or ({})
 do
     local generateToolDropGroups = Tools.generateToolDropGroups
     local toolType = Types.ToolType
+    local blockType = Types.BlockType
     minetest.register_tool(
         ":wooden_shovel",
         {
             inventory_image = "default_tool_woodshovel.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 1, groupcaps = {stone = {times = {[1] = 1.25}, uses = 10, maxlevel = 1, maxdrop = 1}}},
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 1, groupcaps = {[blockType.soil] = {times = {[1] = 1.25}, uses = 10, maxlevel = 1, maxdrop = 1}}},
             groups = generateToolDropGroups({[toolType.Shovel] = 1})
         }
     )
@@ -14,7 +15,7 @@ do
         ":stone_shovel",
         {
             inventory_image = "default_tool_stoneshovel.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 2, groupcaps = {stone = {times = {[1] = 1.25, [2] = 2.5}, uses = 15, maxlevel = 2, maxdrop = 2}}},
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 2, groupcaps = {[blockType.soil] = {times = {[1] = 1.25, [2] = 2.5}, uses = 15, maxlevel = 2, maxdrop = 2}}},
             groups = generateToolDropGroups({[toolType.Shovel] = 2})
         }
     )
@@ -22,7 +23,7 @@ do
         ":iron_shovel",
         {
             inventory_image = "default_tool_steelshovel.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 3, groupcaps = {stone = {times = {[1] = 1.25, [2] = 2.5, [3] = 3.75}, uses = 20, maxlevel = 3, maxdrop = 3}}},
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 3, groupcaps = {[blockType.soil] = {times = {[1] = 1.25, [2] = 2.5, [3] = 3.75}, uses = 20, maxlevel = 3, maxdrop = 3}}},
             groups = generateToolDropGroups({[toolType.Shovel] = 3})
         }
     )
@@ -30,7 +31,7 @@ do
         ":diamond_shovel",
         {
             inventory_image = "default_tool_diamondshovel.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 4, groupcaps = {stone = {times = {[1] = 1.25, [2] = 2.5, [3] = 3.75, [4] = 5}, uses = 25, maxlevel = 4, maxdrop = 4}}},
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 4, groupcaps = {[blockType.soil] = {times = {[1] = 1.25, [2] = 2.5, [3] = 3.75, [4] = 5}, uses = 25, maxlevel = 4, maxdrop = 4}}},
             groups = generateToolDropGroups({[toolType.Shovel] = 4})
         }
     )
@@ -38,7 +39,7 @@ do
         ":mese_shovel",
         {
             inventory_image = "default_tool_meseshovel.png",
-            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 5, groupcaps = {stone = {times = {
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 5, groupcaps = {[blockType.soil] = {times = {
                 [1] = 1.25,
                 [2] = 2.5,
                 [3] = 3.75,

@@ -3,13 +3,14 @@ do
     local sounds = Sounds
     local generateDropRequirements = Tools.generateDropRequirements
     local ToolType = Types.ToolType
+    local blockType = Types.BlockType
     minetest.register_node(
         ":stone",
         {
             drawtype = Drawtype.normal,
             tiles = {"default_stone.png"},
             sounds = sounds.stone(),
-            groups = {stone = 1},
+            groups = {[blockType.stone] = 1},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 1}),
                 items = {"cobblestone"}
@@ -22,7 +23,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_cobble.png"},
             sounds = sounds.stone(),
-            groups = {stone = 1}
+            groups = {[blockType.stone] = 1}
         }
     )
     minetest.register_node(
@@ -31,7 +32,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_dirt.png"},
             sounds = sounds.dirt(),
-            groups = {soil = 1}
+            groups = {[blockType.soil] = 1}
         }
     )
     minetest.register_node(
@@ -40,7 +41,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
             sounds = sounds.grass(),
-            groups = {soil = 1},
+            groups = {[blockType.soil] = 1},
             drop = "dirt"
         }
     )
@@ -50,7 +51,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_sand.png"},
             sounds = sounds.sand(),
-            groups = {soil = 1}
+            groups = {[blockType.soil] = 1}
         }
     )
     minetest.register_node(
@@ -59,7 +60,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_gravel.png"},
             sounds = sounds.gravel(),
-            groups = {soil = 1}
+            groups = {[blockType.soil] = 1}
         }
     )
     minetest.register_node(
@@ -68,7 +69,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
             sounds = sounds.wood(),
-            groups = {wooden = 1}
+            groups = {[blockType.wood] = 1}
         }
     )
     minetest.register_node(
@@ -79,7 +80,7 @@ do
             waving = 1,
             tiles = {"default_leaves.png"},
             sounds = sounds.plant(),
-            groups = {leafy = 1},
+            groups = {[blockType.leaf] = 1},
             drop = ""
         }
     )
@@ -107,7 +108,7 @@ do
             {
                 tiles = {("wool_" .. color) .. ".png"},
                 sounds = sounds.wool(),
-                groups = {wool = 1}
+                groups = {[blockType.wool] = 1}
             }
         )
     end
@@ -121,7 +122,7 @@ do
             sunlight_propagates = true,
             is_ground_content = false,
             sounds = sounds.glass(),
-            groups = {glass = 1},
+            groups = {[blockType.glass] = 1},
             drop = ""
         }
     )
