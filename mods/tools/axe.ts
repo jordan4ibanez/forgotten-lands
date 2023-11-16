@@ -4,7 +4,7 @@ namespace Tools {
   const blockType = Types.BlockType;
   const wieldScale = Tools.wieldScale;
 
-  minetest.register_tool(":wooden_axe", {
+  minetest.register_tool(":wood_axe", {
     inventory_image: "default_tool_woodaxe.png",
     wield_scale: wieldScale,
     tool_capabilities: {
