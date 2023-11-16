@@ -121,8 +121,12 @@ module utility {
     }
   })();
 
-  minetest.registerTSEntity = function(prototype: { new(): LuaEntity }) {
-    let instance: LuaEntity = new prototype()
+  /**
+   * A bolt on to allow you to directly register MT lua entities as TS classes.
+   * @param clazz Class definition.
+   */
+  minetest.registerTSEntity = function(clazz: { new(): LuaEntity }) {
+    let instance: LuaEntity = new clazz()
     // print(dump(instance))
     if (instance.name == null) {
       throw new Error("Unable to register entity: Name is null")

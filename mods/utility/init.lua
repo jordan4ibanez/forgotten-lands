@@ -306,8 +306,8 @@ do
             return vector.distance(vecA, vecB)
         end
     end)()
-    minetest.registerTSEntity = function(prototype)
-        local instance = __TS__New(prototype)
+    minetest.registerTSEntity = function(clazz)
+        local instance = __TS__New(clazz)
         if instance.name == nil then
             error(
                 __TS__New(Error, "Unable to register entity: Name is null"),
