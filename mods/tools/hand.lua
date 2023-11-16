@@ -1,6 +1,6 @@
 Tools = Tools or ({})
 do
-    local blockType = Blocks.BlockType
+    local blockType = Types.BlockType
     minetest.override_item(
         "",
         {

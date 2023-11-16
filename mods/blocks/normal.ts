@@ -1,7 +1,7 @@
 namespace Blocks {
   const sounds = Sounds;
   const generateDropRequirements = Tools.generateDropRequirements;
-  const ToolType = Tools.ToolType;
+  const ToolType = Types.ToolType;
 
   minetest.register_node(":stone", {
     drawtype: Drawtype.normal,

@@ -1,7 +1,7 @@
 Tools = Tools or ({})
 do
     local generateToolDropGroups = Tools.generateToolDropGroups
-    local toolType = Tools.ToolType
+    local toolType = Types.ToolType
     minetest.register_tool(
         ":wooden_pickaxe",
         {

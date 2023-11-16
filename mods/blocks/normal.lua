@@ -2,7 +2,7 @@ Blocks = Blocks or ({})
 do
     local sounds = Sounds
     local generateDropRequirements = Tools.generateDropRequirements
-    local ToolType = Tools.ToolType
+    local ToolType = Types.ToolType
     minetest.register_node(
         ":stone",
         {
