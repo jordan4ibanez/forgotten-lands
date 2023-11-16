@@ -31,11 +31,5 @@ namespace Tools {
     return temp
   }
 
-  const modPath = minetest.get_modpath("tools")
-
-  for (const modName of ["hand", "pickaxe", "shovel"]) {
-    dofile(modPath + "/" + modName + ".lua")
-  }
-
-
+  utility.loadFiles(["hand", "pickaxe", "shovel"])
 }

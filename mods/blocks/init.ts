@@ -19,6 +19,5 @@ namespace Blocks {
     })
   }
 
-  // print("THIS IS A TEST")
   utility.loadFiles(["normal"])
 }
