@@ -3,6 +3,7 @@ namespace Tools {
 
   const generateToolDropGroups = Tools.generateToolDropGroups;
   const toolType = Types.ToolType;
+  const blockType = Types.BlockType;
 
   minetest.register_tool(":wooden_shovel", {
     inventory_image: "default_tool_woodshovel.png",
@@ -10,14 +11,14 @@ namespace Tools {
       full_punch_interval: 0.3,
       max_drop_level: 1,
       groupcaps: {
-        stone: {
+        [blockType.soil]: {
           times: {
             1: 1.25
           },
           uses: 10,
           maxlevel: 1,
           maxdrop: 1
-        }
+        },
       }
     },
     groups: generateToolDropGroups({
@@ -31,7 +32,7 @@ namespace Tools {
       full_punch_interval: 0.3,
       max_drop_level: 2,
       groupcaps: {
-        stone: {
+        [blockType.soil]: {
           times: {
             1: 1.25,
             2: 2.5,
@@ -53,7 +54,7 @@ namespace Tools {
       full_punch_interval: 0.3,
       max_drop_level: 3,
       groupcaps: {
-        stone: {
+        [blockType.soil]: {
           times: {
             1: 1.25,
             2: 2.5,
@@ -76,7 +77,7 @@ namespace Tools {
       full_punch_interval: 0.3,
       max_drop_level: 4,
       groupcaps: {
-        stone: {
+        [blockType.soil]: {
           times: {
             1: 1.25,
             2: 2.5,
@@ -100,7 +101,7 @@ namespace Tools {
       full_punch_interval: 0.3,
       max_drop_level: 5,
       groupcaps: {
-        stone: {
+        [blockType.soil]: {
           times: {
             1: 1.25,
             2: 2.5,
