@@ -132,6 +132,13 @@ module utility {
   }
 
 
+  /**
+   * Clamp a number between two number. (inclusive)
+   * @param min Min value.
+   * @param max Max value.
+   * @param input Value to be clamped.
+   * @returns Clamped value.
+   */
   math.clamp = function(min: number, max: number, input: number): number {
     if (input < min) {
       return min
