@@ -1,0 +1,2 @@
+default_tool_shears: https://github.com/MineClone2/MineClone2/blob/master/textures/default_tool_shears.png
+CC BY 3.0
