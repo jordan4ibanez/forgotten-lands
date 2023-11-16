@@ -17,18 +17,74 @@ namespace Recipes {
 
   // Fire up the recipe cannon.
   const toolMaterialLinkages = {
-    wood: "oak_wood",
+    wood: craftBlockType.wood,
     stone: "cobblestone",
     iron: "iron",
     diamond: "diamond",
     mese: "mese"
   }
-  for (const [_,toolName] of Object.entries(Types.ToolType)) {
-    if (toolName == Types.ToolType.Shears) continue
-    for (const [material, requirement] of Object.entries(toolMaterialLinkages)) {
-      print()
-    }
+  let toolRegistrationArray: CraftRecipeDefinition[] = []
+  for (const [material, requirement] of Object.entries(toolMaterialLinkages)) {
+    toolRegistrationArray.push({
+      output: material + "_pickaxe",
+      recipe: [
+        [requirement, requirement, requirement],
+        ["",          "stick",     ""],
+        ["",          "stick",     ""]
+      ]
+    })
+    toolRegistrationArray.push({
+      output: material + "_shovel",
+      recipe: [
+        [requirement],
+        ["stick"],
+        ["stick"]
+      ]
+    })
+    // Axe can be crafted in both directions.
+    toolRegistrationArray.push({
+      output: material + "_axe",
+      recipe: [
+        [requirement, requirement, ""],
+        [requirement, "stick",     ""],
+        ["",          "stick",     ""]
+      ]
+    })
+    toolRegistrationArray.push({
+      output: material + "_axe",
+      recipe: [
+        ["", requirement, requirement],
+        ["", "stick",     requirement],
+        ["", "stick",     ""]
+      ]
+    })
+    // Hoe can be crafted in both directions.
+    toolRegistrationArray.push({
+      output: material + "_hoe",
+      recipe: [
+        [requirement, requirement],
+        ["",          "stick"],
+        ["",          "stick"]
+      ]
+    })
+    toolRegistrationArray.push({
+      output: material + "_hoe",
+      recipe: [
+        [requirement, requirement],
+        ["stick",     ""],
+        ["stick",     ""]
+      ]
+    })
+    toolRegistrationArray.push({
+      output: material + "_sword",
+      recipe: [
+        [requirement],
+        [requirement],
+        ["stick"]
+      ]
+    })
   }
+  processRecipeArray(toolRegistrationArray)
 
   
 

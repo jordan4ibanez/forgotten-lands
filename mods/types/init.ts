@@ -4,8 +4,8 @@ namespace Types {
     Shovel = "shovel",
     Axe = "axe",
     Hoe = "hoe",
-    Shears = "shears",
-    Sword = "sword"
+    Sword = "sword",
+    Shears = "shears"
   }
 
   export enum BlockType {

@@ -5,8 +5,8 @@ do
     Types.ToolType.Shovel = "shovel"
     Types.ToolType.Axe = "axe"
     Types.ToolType.Hoe = "hoe"
-    Types.ToolType.Shears = "shears"
     Types.ToolType.Sword = "sword"
+    Types.ToolType.Shears = "shears"
     Types.BlockType = BlockType or ({})
     Types.BlockType.break_instant = "break_instant"
     Types.BlockType.soil = "soil"

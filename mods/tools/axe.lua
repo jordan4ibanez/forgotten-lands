@@ -5,7 +5,7 @@ do
     local blockType = Types.BlockType
     local wieldScale = Tools.wieldScale
     minetest.register_tool(
-        ":wooden_axe",
+        ":wood_axe",
         {
             inventory_image = "default_tool_woodaxe.png",
             wield_scale = wieldScale,

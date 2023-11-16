@@ -23,23 +23,25 @@ do
         end
     end
     local toolMaterialLinkages = {
-        wood = "oak_wood",
+        wood = craftBlockType.wood,
         stone = "cobblestone",
         iron = "iron",
         diamond = "diamond",
         mese = "mese"
     }
-    for ____, ____value in ipairs(__TS__ObjectEntries(Types.ToolType)) do
-        local enumerator = ____value[1]
-        local toolName = ____value[2]
-        do
-            if toolName == Types.ToolType.Shears then
-                goto __continue6
-            end
-            print(toolName)
-        end
-        ::__continue6::
+    local toolRegistrationArray = {}
+    for ____, ____value in ipairs(__TS__ObjectEntries(toolMaterialLinkages)) do
+        local material = ____value[1]
+        local requirement = ____value[2]
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_pickaxe", recipe = {{requirement, requirement, requirement}, {"", "stick", ""}, {"", "stick", ""}}}
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_shovel", recipe = {{requirement}, {"stick"}, {"stick"}}}
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_axe", recipe = {{requirement, requirement, ""}, {requirement, "stick", ""}, {"", "stick", ""}}}
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_axe", recipe = {{"", requirement, requirement}, {"", "stick", requirement}, {"", "stick", ""}}}
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_hoe", recipe = {{requirement, requirement}, {"", "stick"}, {"", "stick"}}}
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_hoe", recipe = {{requirement, requirement}, {"stick", ""}, {"stick", ""}}}
+        toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_sword", recipe = {{requirement}, {requirement}, {"stick"}}}
     end
+    Recipes.processRecipeArray(toolRegistrationArray)
     local craftables = {{type = recipeType.shapeless, output = "oak_wood 4", recipe = {"oak_tree"}}, {output = "stick 4", recipe = {{craftBlockType.wood}, {craftBlockType.wood}}}}
     Recipes.processRecipeArray(craftables)
 end
