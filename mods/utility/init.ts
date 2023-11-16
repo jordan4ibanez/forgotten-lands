@@ -1,8 +1,5 @@
 module utility {
 
-  const modDir = minetest.get_modpath("utility")
-  dofile(modDir + "/enums.lua")
-
   export function concat(...input: string[]): string {
     let accumulator = ""
     input.forEach((val: string) => {
@@ -141,4 +138,6 @@ module utility {
       dofile(currentDirectory + "/" + file + ".lua")
     }
   }
+
+  loadFiles(["enums"])
 }

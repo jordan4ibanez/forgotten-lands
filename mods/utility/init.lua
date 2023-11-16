@@ -194,8 +194,6 @@ end
 -- End of Lua Library inline imports
 utility = utility or ({})
 do
-    local modDir = minetest.get_modpath("utility")
-    dofile(modDir .. "/enums.lua")
     function utility.concat(...)
         local input = {...}
         local accumulator = ""
@@ -326,4 +324,5 @@ do
             dofile(((currentDirectory .. "/") .. file) .. ".lua")
         end
     end
+    utility.loadFiles({"enums"})
 end
