@@ -41,6 +41,7 @@ do
         toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_hoe", recipe = {{requirement, requirement}, {"stick", ""}, {"stick", ""}}}
         toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_sword", recipe = {{requirement}, {requirement}, {"stick"}}}
     end
+    toolRegistrationArray[#toolRegistrationArray + 1] = {output = "shears", recipe = {{"", "iron"}, {"iron", ""}}}
     Recipes.processRecipeArray(toolRegistrationArray)
     local craftables = {{type = recipeType.shapeless, output = "oak_wood 4", recipe = {"oak_tree"}}, {output = "stick 4", recipe = {{craftBlockType.wood}, {craftBlockType.wood}}}}
     Recipes.processRecipeArray(craftables)

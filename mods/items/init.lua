@@ -23,6 +23,24 @@ do
             craftRegister(name, definition)
         end
     end
-    local craftItems = {[":stick"] = {wield_scale = wieldScale, inventory_image = "default_stick.png"}}
+    local function turnIt(input)
+        return input .. "^[transformR90"
+    end
+    local function turnItMore(input)
+        return input .. "^[transformR180"
+    end
+    local function turnItMost(input)
+        return input .. "^[transformR270"
+    end
+    local function flipIt(input)
+        return input .. "^[transformFX"
+    end
+    local craftItems = {
+        [":stick"] = {wield_scale = wieldScale, inventory_image = "default_stick.png"},
+        [":iron"] = {
+            wield_scale = wieldScale,
+            inventory_image = flipIt("default_steel_ingot.png")
+        }
+    }
     Items.processCraftItemArray(craftItems)
 end

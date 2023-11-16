@@ -13,10 +13,28 @@ namespace Items {
     }
   }
 
+  // Silly helper functions, might make these global soon.
+  function turnIt(input: string): string {
+    return input + "^[transformR90"
+  }
+  function turnItMore(input: string): string {
+    return input + "^[transformR180"
+  }
+  function turnItMost(input: string): string {
+    return input + "^[transformR270"
+  }
+  function flipIt(input: string): string {
+    return input + "^[transformFX"
+  }
+
   const craftItems: {[id: string] : ItemDefinition} = {
     ":stick": {
       wield_scale: wieldScale,
       inventory_image: "default_stick.png",
+    },
+    ":iron": {
+      wield_scale: wieldScale,
+      inventory_image: flipIt("default_steel_ingot.png")
     }
   }
   
