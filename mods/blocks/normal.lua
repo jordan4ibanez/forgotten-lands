@@ -12,7 +12,7 @@ do
             groups = {stone = 1},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 1}),
-                items = {"stone"}
+                items = {"cobblestone"}
             }}}
         }
     )

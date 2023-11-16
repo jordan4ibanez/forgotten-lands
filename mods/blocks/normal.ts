@@ -17,7 +17,7 @@ namespace Blocks {
           tool_groups: generateDropRequirements({
             [ToolType.Pickaxe]: 1
           }),
-          items: ["stone"]
+          items: ["cobblestone"]
         }
       ]
     }
