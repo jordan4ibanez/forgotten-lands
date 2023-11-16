@@ -3,8 +3,11 @@ namespace Tools {
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
 
+  const wieldScale = Tools.wieldScale;
+
   minetest.register_tool(":wooden_axe", {
     inventory_image: "default_tool_woodaxe.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 1,
@@ -26,6 +29,7 @@ namespace Tools {
 
   minetest.register_tool(":stone_axe", {
     inventory_image: "default_tool_stoneaxe.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 2,
@@ -48,6 +52,7 @@ namespace Tools {
 
   minetest.register_tool(":iron_axe", {
     inventory_image: "default_tool_steelaxe.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 3,
@@ -71,6 +76,7 @@ namespace Tools {
 
   minetest.register_tool(":diamond_axe", {
     inventory_image: "default_tool_diamondaxe.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 4,
@@ -95,6 +101,7 @@ namespace Tools {
 
   minetest.register_tool(":mese_axe", {
     inventory_image: "default_tool_meseaxe.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 5,
