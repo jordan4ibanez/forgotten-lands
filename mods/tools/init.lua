@@ -12,7 +12,7 @@ end
 Tools = Tools or ({})
 do
     Tools.CURRENT_MAX_LEVEL = 5
-    Tools.wieldScale = vector.create(1.8, 1.8, 1)
+    Tools.wieldScale = vector.create(1.5, 1.5, 1)
     --- Generates a node tool_groups array.
     -- 
     -- @param table Holds the ToolType and min tool level to drop an item.
