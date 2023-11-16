@@ -1,6 +1,6 @@
 namespace Tools {
 
-  const blockType = Blocks.BlockType;
+  const blockType = Types.BlockType
 
   minetest.override_item("", {
     wield_scale: vector.create(1,1,2.5),

@@ -3,16 +3,6 @@ namespace Tools {
   // The max level that groups can go up to at the moment.
   export const CURRENT_MAX_LEVEL = 5
 
-  export enum ToolType {
-    Pickaxe = "pickaxe",
-    Shovel = "shovel",
-    Axe = "axe",
-    Hoe = "hoe",
-    Shears = "shears"
-  }
-
-
-
   /**
    * Generates a node tool_groups array.
    * @param table Holds the ToolType and min tool level to drop an item.
@@ -42,6 +32,7 @@ namespace Tools {
   }
 
   const modPath = minetest.get_modpath("tools")
+
   for (const modName of ["hand", "pickaxe", "shovel"]) {
     dofile(modPath + "/" + modName + ".lua")
   }

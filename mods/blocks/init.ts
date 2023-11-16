@@ -1,7 +1,6 @@
 namespace Blocks {
   const sounds = Sounds;
 
-
   for (let i = 1; i <= 5; i++) {
     minetest.register_node(":tall_grass_" + i, {
       drawtype: Drawtype.plantlike,
