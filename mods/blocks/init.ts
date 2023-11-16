@@ -1,5 +1,6 @@
 namespace Blocks {
   const sounds = Sounds;
+  const blockType = Types.BlockType;
 
   for (let i = 1; i <= 5; i++) {
     minetest.register_node(":tall_grass_" + i, {
@@ -12,7 +13,7 @@ namespace Blocks {
       buildable_to: true,
       sounds: sounds.plant(),
       groups: {
-        break_instant: 1
+        [blockType.break_instant]: 1
       },
       drop: ""
     })
