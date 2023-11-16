@@ -1,5 +1,4 @@
 namespace Tools {
-  //! fixme: Please find a way to auto generate this.
 
   const generateToolDropGroups = Tools.generateToolDropGroups;
   const toolType = Types.ToolType;
