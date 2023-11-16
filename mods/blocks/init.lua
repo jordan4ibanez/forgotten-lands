@@ -16,7 +16,7 @@ do
                     tiles = {("default_grass_" .. tostring(i)) .. ".png"},
                     buildable_to = true,
                     sounds = sounds.plant(),
-                    groups = {[blockType.break_instant] = 1},
+                    groups = {[blockType.break_instant] = 1, attached_node = 1},
                     drop = ""
                 }
             )

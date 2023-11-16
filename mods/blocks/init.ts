@@ -13,7 +13,8 @@ namespace Blocks {
       buildable_to: true,
       sounds: sounds.plant(),
       groups: {
-        [blockType.break_instant]: 1
+        [blockType.break_instant]: 1,
+        attached_node: 1
       },
       drop: ""
     })
