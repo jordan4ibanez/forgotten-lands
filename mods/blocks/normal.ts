@@ -96,7 +96,16 @@ namespace Blocks {
     groups: {
       [blockType.leaf]: 1
     },
-    drop: ""
+    drop: {
+      items: [
+        {
+          tool_groups: generateDropRequirements({
+            [ToolType.Shears]: 1
+          }),
+          items: ["oak_leaves"]
+        }
+      ]
+    }
   })
 
   minetest.register_node(":oak_wood", {

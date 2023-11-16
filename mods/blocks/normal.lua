@@ -81,7 +81,10 @@ do
             tiles = {"default_leaves.png"},
             sounds = sounds.plant(),
             groups = {[blockType.leaf] = 1},
-            drop = ""
+            drop = {items = {{
+                tool_groups = generateDropRequirements({[ToolType.Shears] = 1}),
+                items = {"oak_leaves"}
+            }}}
         }
     )
     minetest.register_node(
