@@ -4,9 +4,11 @@ namespace Tools {
   const generateToolDropGroups = Tools.generateToolDropGroups;
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
+  const wieldScale = Tools.wieldScale;
 
   minetest.register_tool(":wooden_shovel", {
     inventory_image: "default_tool_woodshovel.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 1,
@@ -28,6 +30,7 @@ namespace Tools {
 
   minetest.register_tool(":stone_shovel", {
     inventory_image: "default_tool_stoneshovel.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 2,
@@ -50,6 +53,7 @@ namespace Tools {
 
   minetest.register_tool(":iron_shovel", {
     inventory_image: "default_tool_steelshovel.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 3,
@@ -73,6 +77,7 @@ namespace Tools {
 
   minetest.register_tool(":diamond_shovel", {
     inventory_image: "default_tool_diamondshovel.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 4,
@@ -97,6 +102,7 @@ namespace Tools {
 
   minetest.register_tool(":mese_shovel", {
     inventory_image: "default_tool_meseshovel.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 5,
