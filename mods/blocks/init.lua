@@ -23,9 +23,5 @@ do
             i = i + 1
         end
     end
-    utility.loadFiles({""})
-    local modDirectory = minetest.get_modpath("blocks")
-    for ____, file in ipairs({"normal"}) do
-        dofile(((modDirectory .. "/") .. file) .. ".lua")
-    end
+    utility.loadFiles({"normal"})
 end

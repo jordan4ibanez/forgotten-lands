@@ -19,10 +19,6 @@ namespace Blocks {
     })
   }
 
-  utility.loadFiles([""])
-
-  const modDirectory = minetest.get_modpath("blocks")
-  for (const file of ["normal"]) {
-    dofile(modDirectory + "/" + file + ".lua")
-  }
+  // print("THIS IS A TEST")
+  utility.loadFiles(["normal"])
 }
