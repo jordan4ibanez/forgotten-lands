@@ -3,6 +3,9 @@ namespace Tools {
   // The max level that groups can go up to at the moment.
   export const CURRENT_MAX_LEVEL = 5
 
+  // Yoinked from MineClone2.
+  export const wieldScale = vector.create(1.8, 1.8, 1)
+
   /**
    * Generates a node tool_groups array.
    * @param table Holds the ToolType and min tool level to drop an item.
