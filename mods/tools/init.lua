@@ -49,5 +49,11 @@ do
         end
         return temp
     end
-    utility.loadFiles({"hand", "pickaxe", "shovel", "axe"})
+    utility.loadFiles({
+        "hand",
+        "pickaxe",
+        "shovel",
+        "axe",
+        "sword"
+    })
 end
