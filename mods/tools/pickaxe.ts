@@ -4,9 +4,11 @@ namespace Tools {
   const generateToolDropGroups = Tools.generateToolDropGroups;
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
+  const wieldScale = Tools.wieldScale;
 
   minetest.register_tool(":wooden_pickaxe", {
     inventory_image: "default_tool_woodpick.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 1,
@@ -28,6 +30,7 @@ namespace Tools {
 
   minetest.register_tool(":stone_pickaxe", {
     inventory_image: "default_tool_stonepick.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 2,
@@ -50,6 +53,7 @@ namespace Tools {
 
   minetest.register_tool(":iron_pickaxe", {
     inventory_image: "default_tool_steelpick.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 3,
@@ -73,6 +77,7 @@ namespace Tools {
 
   minetest.register_tool(":diamond_pickaxe", {
     inventory_image: "default_tool_diamondpick.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 4,
@@ -97,6 +102,7 @@ namespace Tools {
 
   minetest.register_tool(":mese_pickaxe", {
     inventory_image: "default_tool_mesepick.png",
+    wield_scale: wieldScale,
     tool_capabilities: {
       full_punch_interval: 0.3,
       max_drop_level: 5,

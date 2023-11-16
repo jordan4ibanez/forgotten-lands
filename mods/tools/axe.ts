@@ -2,7 +2,6 @@ namespace Tools {
   const generateToolDropGroups = Tools.generateToolDropGroups;
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
-
   const wieldScale = Tools.wieldScale;
 
   minetest.register_tool(":wooden_axe", {
