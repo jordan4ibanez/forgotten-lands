@@ -1,5 +1,5 @@
 do
-    local println = utility.println
+    local println = Utility.println
     println(
         "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",
         "| Pixel Perfection loaded.        |\n",

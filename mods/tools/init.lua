@@ -49,7 +49,7 @@ do
         end
         return temp
     end
-    utility.loadFiles({
+    Utility.loadFiles({
         "hand",
         "pickaxe",
         "shovel",

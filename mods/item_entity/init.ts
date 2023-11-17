@@ -1,9 +1,9 @@
 namespace BuiltinEntity {
   // const println = utility.println;
-  const fakeRef = utility.fakeRef;
+  const fakeRef = Utility.fakeRef;
   const timeToLive = tonumber(minetest.settings.get("item_entity_ttl")) || 900
   const gravity = tonumber(minetest.settings.get("movement_gravity")) || -9.81
-  const randomRange = utility.randomRange;
+  const randomRange = Utility.randomRange;
 
   const addCollectionSound = (() => {
     const playerSoundBuffer: {[id: string] : number} = {}

@@ -20,5 +20,5 @@ namespace Blocks {
     })
   }
 
-  utility.loadFiles(["normal", "ores", "furnace"])
+  Utility.loadFiles(["normal", "ores", "furnace"])
 }

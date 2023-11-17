@@ -167,10 +167,10 @@ end
 -- End of Lua Library inline imports
 BuiltinEntity = BuiltinEntity or ({})
 do
-    local fakeRef = utility.fakeRef
+    local fakeRef = Utility.fakeRef
     local timeToLive = tonumber(minetest.settings:get("item_entity_ttl")) or 900
     local gravity = tonumber(minetest.settings:get("movement_gravity")) or -9.81
-    local randomRange = utility.randomRange
+    local randomRange = Utility.randomRange
     local addCollectionSound = (function()
         local playerSoundBuffer = {}
         local deletionQueue = {}

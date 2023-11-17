@@ -1,5 +1,5 @@
 {
-  const println = utility.println;
+  const println = Utility.println;
   println(
     "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",
     "| Pixel Perfection loaded.        |\n",

@@ -75,4 +75,5 @@ namespace Blocks {
       "default_furnace_front_active.png"
     ]
   })
+
 }

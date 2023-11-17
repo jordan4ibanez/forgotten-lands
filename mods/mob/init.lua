@@ -33,7 +33,7 @@ end
 -- End of Lua Library inline imports
 Mob = Mob or ({})
 do
-    local fakeRef = utility.fakeRef
+    local fakeRef = Utility.fakeRef
     local MobBase = __TS__Class()
     MobBase.name = "MobBase"
     function MobBase.prototype.____constructor(self)

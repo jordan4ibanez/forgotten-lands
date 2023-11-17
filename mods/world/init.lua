@@ -38,8 +38,8 @@ do
         param2_max = 239,
         fill_ratio = 0.98
     })
-    local concat = utility.concat
-    local generateSchematic = utility.generateSchematic
+    local concat = Utility.concat
+    local generateSchematic = Utility.generateSchematic
     local create = vector.create
     local smallOak = generateSchematic(
         create(5, 5, 5),
