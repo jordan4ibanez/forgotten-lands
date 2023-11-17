@@ -36,6 +36,10 @@ namespace Items {
       wield_scale: wieldScale,
       inventory_image: "default_stick.png",
     },
+    ":coal": {
+      wield_scale: wieldScale,
+      inventory_image: "default_coal_lump.png"
+    },
     ":iron": {
       wield_scale: wieldScale,
       inventory_image: flipIt("default_steel_ingot.png")

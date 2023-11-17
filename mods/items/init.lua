@@ -39,6 +39,7 @@ do
     print("Make mese look like a yellow diamond so gold can be added in.")
     local craftItems = {
         [":stick"] = {wield_scale = wieldScale, inventory_image = "default_stick.png"},
+        [":coal"] = {wield_scale = wieldScale, inventory_image = "default_coal_lump.png"},
         [":iron"] = {
             wield_scale = wieldScale,
             inventory_image = flipIt("default_steel_ingot.png")
