@@ -19,3 +19,6 @@ sudo npm install --save-dev lua-types
 ```
 sudo npm install --save-dev minetesthelper 
 ```
+
+Join my discord to see me ramble like a maniac:
+https://discord.gg/7DhNQFP3fv
