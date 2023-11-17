@@ -1,8 +1,8 @@
 namespace tools {
 
   const generateToolDropGroups = tools.generateToolDropGroups;
-  const toolType = Types.ToolType;
-  const blockType = Types.BlockType;
+  const toolType = types.ToolType;
+  const blockType = types.BlockType;
   const wieldScale = tools.wieldScale;
 
   minetest.register_tool(":wood_shovel", {

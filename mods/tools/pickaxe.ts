@@ -2,8 +2,8 @@ namespace tools {
   //! fixme: Please find a way to auto generate this.
 
   const generateToolDropGroups = tools.generateToolDropGroups;
-  const toolType = Types.ToolType;
-  const blockType = Types.BlockType;
+  const toolType = types.ToolType;
+  const blockType = types.BlockType;
   const wieldScale = tools.wieldScale;
 
   minetest.register_tool(":wood_pickaxe", {

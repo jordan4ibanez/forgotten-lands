@@ -1,4 +1,4 @@
-namespace Types {
+namespace types {
   export enum ToolType {
     Pickaxe = "pickaxe",
     Shovel = "shovel",

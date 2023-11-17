@@ -1,6 +1,6 @@
 namespace tools {
 
-  const blockType = Types.BlockType
+  const blockType = types.BlockType
 
 
   //! NOTE: Do not ever add element 0 to times!

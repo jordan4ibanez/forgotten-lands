@@ -1,5 +1,5 @@
 namespace blocks {
-  const blockType = Types.BlockType;
+  const blockType = types.BlockType;
 
   for (let i = 1; i <= 5; i++) {
     minetest.register_node(":tall_grass_" + i, {
