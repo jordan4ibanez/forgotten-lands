@@ -2,6 +2,9 @@ namespace Tools {
 
   const blockType = Types.BlockType
 
+
+  //! NOTE: Do not ever add element 0 to times!
+
   minetest.override_item("", {
     wield_scale: vector.create(1,1,2.5),
     tool_capabilities: {
@@ -22,7 +25,6 @@ namespace Tools {
         },
         [blockType.wood]: {
           times: {
-            0: 2.0,
             1: 4.0,
             2: 6.0,
             3: 8.0,
@@ -38,7 +40,6 @@ namespace Tools {
         },
         [blockType.stone]: {
           times: {
-            0: 5.0,
             1: 10.0,
             2: 20.0,
             3: 30.0,
@@ -50,7 +51,6 @@ namespace Tools {
         },
         [blockType.metal]: {
           times: {
-            0: 5.0,
             1: 10.0,
             2: 20.0,
             3: 30.0,
@@ -62,7 +62,6 @@ namespace Tools {
         },
         [blockType.glass]: {
           times: {
-            0: 5.0,
             1: 10.0,
             2: 20.0,
             3: 30.0,
