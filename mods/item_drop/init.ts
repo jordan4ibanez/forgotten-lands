@@ -1,6 +1,6 @@
 namespace itemDrop {
   // Namespace magic.
-  type ItemEntity = BuiltinEntity.ItemEntity;
+  type ItemEntity = builtinEntity.ItemEntity;
 
   minetest.handle_node_drops = function(position: Vec3, drops: string[], digger: ObjectRef) {
     for (const drop of drops) {

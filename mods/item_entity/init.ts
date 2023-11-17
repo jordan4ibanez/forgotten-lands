@@ -1,4 +1,4 @@
-namespace BuiltinEntity {
+namespace builtinEntity {
   // const println = utility.println;
   const fakeRef = Utility.fakeRef;
   const timeToLive = tonumber(minetest.settings.get("item_entity_ttl")) || 900
