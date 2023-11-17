@@ -26,6 +26,7 @@ do
         wood = craftBlockType.wood,
         stone = "cobblestone",
         iron = "iron",
+        gold = "gold",
         diamond = "diamond",
         mese = "mese"
     }
