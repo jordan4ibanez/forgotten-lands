@@ -1,4 +1,4 @@
-namespace Mob {
+namespace mob {
 
   const fakeRef = Utility.fakeRef;
 
