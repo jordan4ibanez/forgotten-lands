@@ -1,6 +1,6 @@
 namespace items {
   const craftRegister = minetest.register_craftitem;
-  const wieldScale = Tools.wieldScale;
+  const wieldScale = tools.wieldScale;
 
 
   /**

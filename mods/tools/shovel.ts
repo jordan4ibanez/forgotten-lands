@@ -1,9 +1,9 @@
-namespace Tools {
+namespace tools {
 
-  const generateToolDropGroups = Tools.generateToolDropGroups;
+  const generateToolDropGroups = tools.generateToolDropGroups;
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
-  const wieldScale = Tools.wieldScale;
+  const wieldScale = tools.wieldScale;
 
   minetest.register_tool(":wood_shovel", {
     inventory_image: "default_tool_woodshovel.png",

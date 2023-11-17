@@ -1,5 +1,5 @@
 namespace blocks {
-  const generateDropRequirements = Tools.generateDropRequirements;
+  const generateDropRequirements = tools.generateDropRequirements;
   const ToolType = Types.ToolType;
   const blockType = Types.BlockType;
 

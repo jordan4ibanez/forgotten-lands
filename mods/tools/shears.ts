@@ -1,8 +1,8 @@
-namespace Tools {
-  const generateToolDropGroups = Tools.generateToolDropGroups;
+namespace tools {
+  const generateToolDropGroups = tools.generateToolDropGroups;
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
-  const wieldScale = Tools.wieldScale;
+  const wieldScale = tools.wieldScale;
 
   minetest.register_tool(":shears", {
     inventory_image: "default_tool_shears.png",

@@ -1,4 +1,4 @@
-namespace Tools {
+namespace tools {
 
   // The max level that groups can go up to at the moment.
   export const CURRENT_MAX_LEVEL = 5

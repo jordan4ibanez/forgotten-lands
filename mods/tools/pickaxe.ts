@@ -1,10 +1,10 @@
-namespace Tools {
+namespace tools {
   //! fixme: Please find a way to auto generate this.
 
-  const generateToolDropGroups = Tools.generateToolDropGroups;
+  const generateToolDropGroups = tools.generateToolDropGroups;
   const toolType = Types.ToolType;
   const blockType = Types.BlockType;
-  const wieldScale = Tools.wieldScale;
+  const wieldScale = tools.wieldScale;
 
   minetest.register_tool(":wood_pickaxe", {
     inventory_image: "default_tool_woodpick.png",

@@ -1,4 +1,4 @@
-namespace Tools {
+namespace tools {
 
   const blockType = Types.BlockType
 
