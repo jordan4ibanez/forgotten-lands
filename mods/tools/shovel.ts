@@ -74,6 +74,30 @@ namespace Tools {
     })
   })
 
+  minetest.register_tool(":gold_shovel", {
+    inventory_image: "default_tool_goldshovel.png",
+    wield_scale: wieldScale,
+    tool_capabilities: {
+      full_punch_interval: 0.3,
+      max_drop_level: 3,
+      groupcaps: {
+        [blockType.soil]: {
+          times: {
+            1: 0.25,
+            2: 0.5,
+            3: 0.75,
+          },
+          uses: 4,
+          maxlevel: 3,
+          maxdrop: 3
+        }
+      }
+    },
+    groups: generateToolDropGroups({
+      [toolType.Shovel]: 3
+    })
+  })
+
   minetest.register_tool(":diamond_shovel", {
     inventory_image: "default_tool_diamondshovel.png",
     wield_scale: wieldScale,
