@@ -32,6 +32,15 @@ do
         }
     )
     minetest.register_tool(
+        ":gold_axe",
+        {
+            inventory_image = "default_tool_goldaxe.png",
+            wield_scale = wieldScale,
+            tool_capabilities = {full_punch_interval = 0.3, max_drop_level = 3, groupcaps = {[blockType.wood] = {times = {[1] = 0.5, [2] = 1, [3] = 1.5}, uses = 2, maxlevel = 3, maxdrop = 3}}},
+            groups = generateToolDropGroups({[toolType.Axe] = 3})
+        }
+    )
+    minetest.register_tool(
         ":diamond_axe",
         {
             inventory_image = "default_tool_diamondaxe.png",
