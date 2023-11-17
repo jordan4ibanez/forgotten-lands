@@ -445,25 +445,25 @@ declare global {
   }
   
   export interface NodeBox {
-    type: nodeboxtype
-    fixed: boxTable
-    wall_top: box
-    wall_bottom: box
-    wall_side: box
-    connect_top: box
-    connect_bottom: box
-    connect_front: box
-    connect_left: box
-    connect_back: box
-    connect_right: box
-    disconnected_top: box
-    disconnected_bottom: box
-    disconnected_front: box
-    disconnected_left: box
-    disconnected_back: box
-    disconnected_right: box
-    disconnected: box 
-    disconnected_sides: box
+    type: Nodeboxtype
+    fixed?: boxTable
+    wall_top?: box
+    wall_bottom?: box
+    wall_side?: box
+    connect_top?: box
+    connect_bottom?: box
+    connect_front?: box
+    connect_left?: box
+    connect_back?: box
+    connect_right?: box
+    disconnected_top?: box
+    disconnected_bottom?: box
+    disconnected_front?: box
+    disconnected_left?: box
+    disconnected_back?: box
+    disconnected_right?: box
+    disconnected?: box 
+    disconnected_sides?: box
   }
   
   export type box = number[]
