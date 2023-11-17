@@ -23,5 +23,5 @@ do
             i = i + 1
         end
     end
-    utility.loadFiles({"normal"})
+    utility.loadFiles({"normal", "ores"})
 end
