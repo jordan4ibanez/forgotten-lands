@@ -26,6 +26,9 @@ namespace Items {
   function flipIt(input: string): string {
     return input + "^[transformFX"
   }
+  function bopIt(): void {
+    
+  }
 
   const craftItems: {[id: string] : ItemDefinition} = {
     ":stick": {
@@ -40,6 +43,7 @@ namespace Items {
       wield_scale: wieldScale,
       inventory_image: flipIt("default_steel_ingot.png")
     },
+    //! fixme: where is gold?
     ":diamond": {
       wield_scale: wieldScale,
       inventory_image: "default_diamond.png"
