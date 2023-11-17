@@ -1,4 +1,4 @@
-namespace Blocks {
+namespace blocks {
   const sounds = Sounds;
   const generateDropRequirements = Tools.generateDropRequirements;
   const ToolType = Types.ToolType;

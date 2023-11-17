@@ -1,4 +1,4 @@
-Blocks = Blocks or ({})
+blocks = blocks or ({})
 do
     local sounds = Sounds
     local blockType = Types.BlockType

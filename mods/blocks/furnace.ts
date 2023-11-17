@@ -1,4 +1,4 @@
-namespace Blocks {
+namespace blocks {
 
   const textureSize = 16
   //! This should probably be a utility function.

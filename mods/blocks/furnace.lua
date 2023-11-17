@@ -1,4 +1,4 @@
-Blocks = Blocks or ({})
+blocks = blocks or ({})
 do
     local textureSize = 16
     local function pixel(inputPixel)

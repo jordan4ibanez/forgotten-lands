@@ -1,4 +1,4 @@
-namespace Blocks {
+namespace blocks {
   const sounds = Sounds;
   const blockType = Types.BlockType;
 
