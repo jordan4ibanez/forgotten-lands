@@ -1,1 +1,1 @@
-Testing = Testing or ({})
+testing = testing or ({})

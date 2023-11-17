@@ -1,7 +1,5 @@
 blocks = blocks or ({})
 do
-    local sounds
-    sounds = sounds
     local blockType = Types.BlockType
     do
         local i = 1
@@ -16,7 +14,7 @@ do
                     paramtype2 = ParamType2.degrotate,
                     tiles = {("default_grass_" .. tostring(i)) .. ".png"},
                     buildable_to = true,
-                    sounds = sounds:plant(),
+                    sounds = sounds.plant(),
                     groups = {[blockType.break_instant] = 1, attached_node = 1},
                     drop = ""
                 }

@@ -1,7 +1,5 @@
 blocks = blocks or ({})
 do
-    local sounds
-    sounds = sounds
     local generateDropRequirements = Tools.generateDropRequirements
     local ToolType = Types.ToolType
     local blockType = Types.BlockType
@@ -13,7 +11,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = oreIt("default_mineral_coal.png"),
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 1},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 1}),
@@ -26,7 +24,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = oreIt("default_mineral_iron.png"),
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 2},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 2}),
@@ -39,7 +37,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = oreIt("default_mineral_gold.png"),
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 2},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 2}),
@@ -52,7 +50,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = oreIt("default_mineral_diamond.png"),
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 3},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 3}),
@@ -65,7 +63,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = oreIt("default_mineral_mese.png"),
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 4},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 4}),

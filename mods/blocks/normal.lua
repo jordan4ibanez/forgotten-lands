@@ -1,7 +1,5 @@
 blocks = blocks or ({})
 do
-    local sounds
-    sounds = sounds
     local generateDropRequirements = Tools.generateDropRequirements
     local ToolType = Types.ToolType
     local blockType = Types.BlockType
@@ -10,7 +8,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_stone.png"},
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 1},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Pickaxe] = 1}),
@@ -23,7 +21,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_cobble.png"},
-            sounds = sounds:stone(),
+            sounds = sounds.stone(),
             groups = {[blockType.stone] = 1}
         }
     )
@@ -32,7 +30,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_dirt.png"},
-            sounds = sounds:dirt(),
+            sounds = sounds.dirt(),
             groups = {[blockType.soil] = 1}
         }
     )
@@ -41,7 +39,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
-            sounds = sounds:grass(),
+            sounds = sounds.grass(),
             groups = {[blockType.soil] = 1},
             drop = "dirt"
         }
@@ -51,7 +49,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_sand.png"},
-            sounds = sounds:sand(),
+            sounds = sounds.sand(),
             groups = {[blockType.soil] = 1}
         }
     )
@@ -60,7 +58,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_gravel.png"},
-            sounds = sounds:gravel(),
+            sounds = sounds.gravel(),
             groups = {[blockType.soil] = 1}
         }
     )
@@ -69,7 +67,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
-            sounds = sounds:wood(),
+            sounds = sounds.wood(),
             groups = {[blockType.wood] = 1}
         }
     )
@@ -80,7 +78,7 @@ do
             paramtype = ParamType1.light,
             waving = 1,
             tiles = {"default_leaves.png"},
-            sounds = sounds:plant(),
+            sounds = sounds.plant(),
             groups = {[blockType.leaf] = 1},
             drop = {items = {{
                 tool_groups = generateDropRequirements({[ToolType.Shears] = 1}),
@@ -93,7 +91,7 @@ do
         {
             drawtype = Drawtype.normal,
             tiles = {"default_wood.png"},
-            sounds = sounds:wood(),
+            sounds = sounds.wood(),
             groups = {[blockType.wood] = 1}
         }
     )
@@ -120,7 +118,7 @@ do
             (":" .. color) .. "_wool",
             {
                 tiles = {("wool_" .. color) .. ".png"},
-                sounds = sounds:wool(),
+                sounds = sounds.wool(),
                 groups = {[blockType.wool] = 1}
             }
         )
@@ -134,7 +132,7 @@ do
             paramtype = ParamType1.light,
             sunlight_propagates = true,
             is_ground_content = false,
-            sounds = sounds:glass(),
+            sounds = sounds.glass(),
             groups = {[blockType.glass] = 1},
             drop = ""
         }

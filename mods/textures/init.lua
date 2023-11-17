@@ -1,3 +1,4 @@
+textures = textures or ({})
 do
     local println = Utility.println
     println(
