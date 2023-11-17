@@ -9,7 +9,7 @@ local function __TS__ObjectEntries(obj)
     return result
 end
 -- End of Lua Library inline imports
-Recipes = Recipes or ({})
+recipes = recipes or ({})
 do
     local r = minetest.register_craft
     local recipeType = CraftRecipeType
@@ -17,7 +17,7 @@ do
     --- Easily process a bulk array of craft recipes.
     -- 
     -- @param inputArray Array of craft recipe definitions to be processed.
-    function Recipes.processRecipeArray(inputArray)
+    function recipes.processRecipeArray(inputArray)
         for ____, recipe in ipairs(inputArray) do
             r(recipe)
         end
@@ -43,7 +43,7 @@ do
         toolRegistrationArray[#toolRegistrationArray + 1] = {output = material .. "_sword", recipe = {{requirement}, {requirement}, {"stick"}}}
     end
     toolRegistrationArray[#toolRegistrationArray + 1] = {output = "shears", recipe = {{"", "iron"}, {"iron", ""}}}
-    Recipes.processRecipeArray(toolRegistrationArray)
+    recipes.processRecipeArray(toolRegistrationArray)
     local craftables = {{type = recipeType.shapeless, output = "oak_wood 4", recipe = {"oak_tree"}}, {output = "stick 4", recipe = {{craftBlockType.wood}, {craftBlockType.wood}}}}
-    Recipes.processRecipeArray(craftables)
+    recipes.processRecipeArray(craftables)
 end

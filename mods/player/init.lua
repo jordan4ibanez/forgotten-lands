@@ -1,1 +1,1 @@
-Player = Player or ({})
+player = player or ({})

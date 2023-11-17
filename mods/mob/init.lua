@@ -31,7 +31,7 @@ local function __TS__ClassExtends(target, base)
     end
 end
 -- End of Lua Library inline imports
-Mob = Mob or ({})
+mob = mob or ({})
 do
     local fakeRef = Utility.fakeRef
     local MobBase = __TS__Class()

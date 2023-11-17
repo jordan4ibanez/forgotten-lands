@@ -1,6 +1,6 @@
-Sounds = Sounds or ({})
+sounds = sounds or ({})
 do
-    function Sounds.grass(spec)
+    function sounds.grass(spec)
         if spec == nil then
             spec = {}
         end
@@ -10,7 +10,7 @@ do
         spec.place = spec.place or ({name = "grass_dug", gain = 0.5})
         return spec
     end
-    function Sounds.dirt(spec)
+    function sounds.dirt(spec)
         if spec == nil then
             spec = {}
         end
@@ -20,7 +20,7 @@ do
         spec.place = spec.place or ({name = "dirt_dug", gain = 0.6})
         return spec
     end
-    function Sounds.wood(spec)
+    function sounds.wood(spec)
         if spec == nil then
             spec = {}
         end
@@ -30,7 +30,7 @@ do
         spec.place = spec.place or ({name = "wood_dug", gain = 0.6})
         return spec
     end
-    function Sounds.gravel(spec)
+    function sounds.gravel(spec)
         if spec == nil then
             spec = {}
         end
@@ -40,7 +40,7 @@ do
         spec.place = spec.place or ({name = "dirt_dug", gain = 0.6})
         return spec
     end
-    function Sounds.stone(spec)
+    function sounds.stone(spec)
         if spec == nil then
             spec = {}
         end
@@ -50,7 +50,7 @@ do
         spec.place = spec.place or ({name = "stone_dug", gain = 0.8})
         return spec
     end
-    function Sounds.sand(spec)
+    function sounds.sand(spec)
         if spec == nil then
             spec = {}
         end
@@ -60,7 +60,7 @@ do
         spec.place = spec.place or ({name = "sand_dug", gain = 0.8})
         return spec
     end
-    function Sounds.plant(spec)
+    function sounds.plant(spec)
         if spec == nil then
             spec = {}
         end
@@ -70,7 +70,7 @@ do
         spec.place = spec.place or ({name = "dirt_dug", gain = 0.8})
         return spec
     end
-    function Sounds.glass(spec)
+    function sounds.glass(spec)
         if spec == nil then
             spec = {}
         end
@@ -80,7 +80,7 @@ do
         spec.place = spec.place or ({name = "glass_step", gain = 0.8})
         return spec
     end
-    function Sounds.wool(spec)
+    function sounds.wool(spec)
         if spec == nil then
             spec = {}
         end

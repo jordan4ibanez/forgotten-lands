@@ -1,4 +1,4 @@
-ItemDrop = ItemDrop or ({})
+itemDrop = itemDrop or ({})
 do
     minetest.handle_node_drops = function(position, drops, digger)
         for ____, drop in ipairs(drops) do

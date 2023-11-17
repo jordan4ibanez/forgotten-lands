@@ -9,14 +9,14 @@ local function __TS__ObjectEntries(obj)
     return result
 end
 -- End of Lua Library inline imports
-Items = Items or ({})
+items = items or ({})
 do
     local craftRegister = minetest.register_craftitem
     local wieldScale = Tools.wieldScale
     --- Easily register a dictionary of craft items.
     -- 
     -- @param inputArray Key value assignment of craftitems to be registered.
-    function Items.processCraftItemArray(inputArray)
+    function items.processCraftItemArray(inputArray)
         for ____, ____value in ipairs(__TS__ObjectEntries(inputArray)) do
             local name = ____value[1]
             local definition = ____value[2]
@@ -51,5 +51,5 @@ do
         [":diamond"] = {wield_scale = wieldScale, inventory_image = "default_diamond.png"},
         [":mese"] = {wield_scale = wieldScale, inventory_image = "default_mese_crystal.png"}
     }
-    Items.processCraftItemArray(craftItems)
+    items.processCraftItemArray(craftItems)
 end

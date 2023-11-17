@@ -1,5 +1,4 @@
 namespace blocks {
-  const sounds = Sounds;
   const blockType = Types.BlockType;
 
   for (let i = 1; i <= 5; i++) {

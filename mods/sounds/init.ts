@@ -1,4 +1,4 @@
-namespace Sounds {
+namespace sounds {
 
   export function grass(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {

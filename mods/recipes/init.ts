@@ -1,4 +1,4 @@
-namespace Recipes {
+namespace recipes {
   const r = minetest.register_craft;
   const recipeType = CraftRecipeType;
   const craftBlockType = Types.CraftingBlockType;
