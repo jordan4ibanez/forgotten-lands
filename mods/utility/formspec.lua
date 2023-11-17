@@ -1,1 +1,0 @@
-Utility = Utility or ({})
