@@ -1,6 +1,6 @@
 namespace mob {
 
-  const fakeRef = Utility.fakeRef;
+  const fakeRef = utility.fakeRef;
 
   class MobBase implements LuaEntity {
     name: string = "mob_base"

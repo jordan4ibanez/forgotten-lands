@@ -39,8 +39,8 @@ minetest.register_biome({
     fill_ratio: 0.98
   })
 
-  const concat = Utility.concat;
-  const generateSchematic = Utility.generateSchematic;
+  const concat = utility.concat;
+  const generateSchematic = utility.generateSchematic;
   const create = vector.create;
 
   const smallOak = generateSchematic(

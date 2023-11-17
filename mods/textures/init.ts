@@ -1,5 +1,5 @@
 namespace textures {
-  const println = Utility.println;
+  const println = utility.println;
   println(
     "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",
     "| Pixel Perfection loaded.        |\n",

@@ -34,5 +34,5 @@ namespace tools {
     return temp
   }
 
-  Utility.loadFiles(["hand", "pickaxe", "shovel", "axe", "sword", "shears"])
+  utility.loadFiles(["hand", "pickaxe", "shovel", "axe", "sword", "shears"])
 }

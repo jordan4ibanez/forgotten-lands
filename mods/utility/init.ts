@@ -1,4 +1,4 @@
-namespace Utility {
+namespace utility {
 
   export function loadFiles(filesToLoad: string[]): void {
     const currentMod = minetest.get_current_modname()
