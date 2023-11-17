@@ -1,4 +1,4 @@
-{
+namespace textures {
   const println = Utility.println;
   println(
     "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",
