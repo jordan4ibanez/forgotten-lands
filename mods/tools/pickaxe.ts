@@ -75,6 +75,30 @@ namespace Tools {
     })
   })
 
+  minetest.register_tool(":gold_pickaxe", {
+    inventory_image: "default_tool_goldpick.png",
+    wield_scale: wieldScale,
+    tool_capabilities: {
+      full_punch_interval: 0.3,
+      max_drop_level: 3,
+      groupcaps: {
+        [blockType.stone]: {
+          times: {
+            1: 0.5,
+            2: 1.0,
+            3: 1.5,
+          },
+          uses: 4,
+          maxlevel: 3,
+          maxdrop: 3
+        }
+      }
+    },
+    groups: generateToolDropGroups({
+      [toolType.Pickaxe]: 3
+    })
+  })
+
   minetest.register_tool(":diamond_pickaxe", {
     inventory_image: "default_tool_diamondpick.png",
     wield_scale: wieldScale,
