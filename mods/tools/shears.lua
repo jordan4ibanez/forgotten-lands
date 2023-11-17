@@ -1,9 +1,9 @@
-Tools = Tools or ({})
+tools = tools or ({})
 do
-    local generateToolDropGroups = Tools.generateToolDropGroups
-    local toolType = Types.ToolType
-    local blockType = Types.BlockType
-    local wieldScale = Tools.wieldScale
+    local generateToolDropGroups = tools.generateToolDropGroups
+    local toolType = types.ToolType
+    local blockType = types.BlockType
+    local wieldScale = tools.wieldScale
     minetest.register_tool(
         ":shears",
         {

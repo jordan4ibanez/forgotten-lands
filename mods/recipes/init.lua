@@ -13,7 +13,7 @@ recipes = recipes or ({})
 do
     local r = minetest.register_craft
     local recipeType = CraftRecipeType
-    local craftBlockType = Types.CraftingBlockType
+    local craftBlockType = types.CraftingBlockType
     --- Easily process a bulk array of craft recipes.
     -- 
     -- @param inputArray Array of craft recipe definitions to be processed.

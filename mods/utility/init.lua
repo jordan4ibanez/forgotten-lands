@@ -192,17 +192,17 @@ do
     URIError = createErrorClass(nil, "URIError")
 end
 -- End of Lua Library inline imports
-Utility = Utility or ({})
+utility = utility or ({})
 do
-    function Utility.loadFiles(filesToLoad)
+    function utility.loadFiles(filesToLoad)
         local currentMod = minetest.get_current_modname()
         local currentDirectory = minetest.get_modpath(currentMod)
         for ____, file in ipairs(filesToLoad) do
             dofile(((currentDirectory .. "/") .. file) .. ".lua")
         end
     end
-    Utility.loadFiles({"enums"})
-    function Utility.concat(...)
+    utility.loadFiles({"enums"})
+    function utility.concat(...)
         local input = {...}
         local accumulator = ""
         __TS__ArrayForEach(
@@ -213,7 +213,7 @@ do
         )
         return accumulator
     end
-    function Utility.generateSchematic(size, keys, forcePlace, data, ySliceProb)
+    function utility.generateSchematic(size, keys, forcePlace, data, ySliceProb)
         local newSchematic = {size = size, data = {}, yslice_prob = {}}
         local length = #data
         local countDown = length
@@ -231,7 +231,7 @@ do
         end
         return newSchematic
     end
-    function Utility.println(...)
+    function utility.println(...)
         local any = {...}
         local builder = ""
         for ____, item in __TS__Iterator(any) do
@@ -267,13 +267,13 @@ do
         end
         print(builder)
     end
-    function Utility.randomRange(min, max)
+    function utility.randomRange(min, max)
         return math.random() * (max - min) + min
     end
-    function Utility.fakeRef()
+    function utility.fakeRef()
         return {}
     end
-    local rr = Utility.randomRange
+    local rr = utility.randomRange
     vector.create = function(x, y, z)
         local temp = vector.zero()
         temp.x = x or 0

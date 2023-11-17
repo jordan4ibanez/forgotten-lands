@@ -1,8 +1,8 @@
 blocks = blocks or ({})
 do
-    local generateDropRequirements = Tools.generateDropRequirements
-    local ToolType = Types.ToolType
-    local blockType = Types.BlockType
+    local generateDropRequirements = tools.generateDropRequirements
+    local ToolType = types.ToolType
+    local blockType = types.BlockType
     local function oreIt(oreTexture)
         return {"default_stone.png^" .. oreTexture}
     end

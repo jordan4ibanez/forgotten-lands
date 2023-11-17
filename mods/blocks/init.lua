@@ -1,6 +1,6 @@
 blocks = blocks or ({})
 do
-    local blockType = Types.BlockType
+    local blockType = types.BlockType
     do
         local i = 1
         while i <= 5 do
@@ -22,5 +22,5 @@ do
             i = i + 1
         end
     end
-    Utility.loadFiles({"normal", "ores", "furnace"})
+    utility.loadFiles({"normal", "ores", "furnace"})
 end

@@ -12,7 +12,7 @@ end
 items = items or ({})
 do
     local craftRegister = minetest.register_craftitem
-    local wieldScale = Tools.wieldScale
+    local wieldScale = tools.wieldScale
     --- Easily register a dictionary of craft items.
     -- 
     -- @param inputArray Key value assignment of craftitems to be registered.
