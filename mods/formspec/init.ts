@@ -40,6 +40,10 @@ namespace formSpec {
       const size = d.size
       accumulator += "size[" + size.x + "," + size.y + "," + fixed + "]\n"
     }
+    if (d.position) {
+      const pos = d.position
+      accumulator += "position[" + pos.x + "," + pos.y + "]\n"
+    }
     print(accumulator)
   }
 
