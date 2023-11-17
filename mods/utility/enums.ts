@@ -124,7 +124,7 @@ enum Drawtype {
 }
 
 
-enum nodeboxtype {
+enum Nodeboxtype {
   regular = "regular",
   fixed = "fixed",
   wallmounted = "wallmounted",
