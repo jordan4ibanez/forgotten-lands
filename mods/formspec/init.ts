@@ -69,6 +69,9 @@ namespace formSpec {
       this.position = definition.position,
       this.elements = definition.elements
     }
+    attachElement(newElement: Element): Container {
+      this.elements.push(newElement)
+      return this
   }
 
   //? Scroll container
