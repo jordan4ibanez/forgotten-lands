@@ -25,7 +25,7 @@ namespace formSpec {
     position?: Vec2
     anchor?: Vec2
     padding?: Vec2
-    canPrepend?: boolean
+    disablePrepend?: boolean
     container?: Vec2
   }
 
@@ -43,6 +43,17 @@ namespace formSpec {
     if (d.position) {
       const pos = d.position
       accumulator += "position[" + pos.x + "," + pos.y + "]\n"
+    }
+    if (d.anchor) {
+      const anchor = d.anchor
+      accumulator += "anchor[" + anchor.x + "," + anchor.y + "]\n"
+    }
+    if (d.padding) {
+      const p = d.padding
+      accumulator += "padding[" + p.x + "," + p.y + "]\n"
+    }
+    if (d.disablePrepend) {
+      accumulator += "no_prepend[]\n"
     }
     print(accumulator)
   }
