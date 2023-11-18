@@ -73,6 +73,7 @@ namespace formSpec {
     attachElement(newElement: Element): Container {
       this.elements.push(newElement)
       return this
+    }
   }
 
   //? Scroll container
