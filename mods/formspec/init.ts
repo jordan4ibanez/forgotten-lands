@@ -530,7 +530,7 @@ namespace formSpec {
       if (element instanceof Container) {
 
         const pos = element.position
-        accumulator += "container[" +  pos.x + "," + pos.y + "]\n"
+        accumulator += "container[" +  sVec(pos) + "]\n"
         
         //* todo: recurse here.
         // accumulator = processElements(accumulator, element.elements)
@@ -541,7 +541,7 @@ namespace formSpec {
 
         const pos = element.position
         const size = element.size
-        accumulator += "scroll_container[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        accumulator += "scroll_container[" + sVec(pos) + ";" + sVec(size) + ";" +
         element.name + ";" + element.orientation + ";" + element.factor + "]\n"
 
         //* todo: recurse here
@@ -557,7 +557,7 @@ namespace formSpec {
         const size = element.size
         const startingIndex = element.startingIndex
 
-        accumulator += "list[" + location + ";" + listName + ";" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + startingIndex + "]\n"
+        accumulator += "list[" + location + ";" + listName + ";" + sVec(pos) + ";" + sVec(size) + ";" + startingIndex + "]\n"
 
       } else if (element instanceof ListRing) {
 
@@ -608,7 +608,7 @@ namespace formSpec {
         const bgcolor = element.bgColor
         const fontcolor = element.fontColor
 
-        accumulator += "tooltip[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + text + ";" + bgcolor + ";" + fontcolor + "]\n"
+        accumulator += "tooltip[" + sVec(pos) + ";" + sVec(size) + ";" + text + ";" + bgcolor + ";" + fontcolor + "]\n"
 
       } else if (element instanceof Image) {
 
@@ -617,7 +617,7 @@ namespace formSpec {
         const texture = element.texture
         const middle = element.middle
 
-        accumulator += "image[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + texture
+        accumulator += "image[" + sVec(pos) + ";" + sVec(size) + ";" + texture
 
         if (middle) {
           accumulator += ";" + middle
@@ -626,8 +626,6 @@ namespace formSpec {
         accumulator += "]\n"
 
       } else if (element instanceof AnimatedImage) {
-
-        //animated_image[<X>,<Y>;<W>,<H>;<name>;<texture name>;<frame count>;<frame duration>;<frame start>;<middle>]
 
         const pos = element.position
         const size = element.size
@@ -638,7 +636,7 @@ namespace formSpec {
         const frameStart = element.frameStart
         const middle = element.middle
 
-        accumulator += "animated_image[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + 
+        accumulator += "animated_image[" + sVec(pos) + ";" + sVec(size) + ";" + 
         name + ";" + texture + ";" + frameCount + ";" + frameDuration + ";" + frameStart
 
         if (middle) {
@@ -660,9 +658,9 @@ namespace formSpec {
         const frameLoopRange = element.frameLoopRange
         const animationSpeed = element.animationSpeed
         
-        accumulator += "model[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
-        name + ";" + mesh + ";" + textures + ";" + rotation.x + "," + rotation.y + ";" +
-        continuous + ";" + mouseControl + ";" + frameLoopRange.x + "," + frameLoopRange.y + ";" +
+        accumulator += "model[" + sVec(pos) + ";" + sVec(size) + ";" +
+        name + ";" + mesh + ";" + textures + ";" + sVec(rotation) + ";" +
+        continuous + ";" + mouseControl + ";" + sVec(frameLoopRange) + ";" +
         animationSpeed + "]\n"
 
       } else if (element instanceof BGColor) {
@@ -687,8 +685,7 @@ namespace formSpec {
           accumulator += "background["
         }
 
-        accumulator += pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
-        texture + ";" + autoClip
+        accumulator += sVec(pos) + ";" + sVec(size) + ";" + texture + ";" + autoClip
 
         if (middle) {
           accumulator += ";" + middle
@@ -703,8 +700,7 @@ namespace formSpec {
         const name = element.name
         const label = element.label
 
-        accumulator += "pwdfield[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
-        name + ";" + label + "]\n"
+        accumulator += "pwdfield[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + label + "]\n"
 
       } else if (element instanceof Field) {
 
@@ -714,7 +710,7 @@ namespace formSpec {
         accumulator += "field["
 
         if (pos && size) {
-          accumulator += pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";"
+          accumulator += sVec(pos) + ";" + sVec(size) + ";"
         }
 
         const name = element.name
@@ -741,7 +737,7 @@ namespace formSpec {
         const label = element.label
         const def = element.default
 
-        accumulator += "textarea[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        accumulator += "textarea[" + sVec(pos) + ";" + sVec(size) + ";" +
         name + ";" + label + ";" + def + "]\n"
 
       } else if (element instanceof Label) {
@@ -749,7 +745,7 @@ namespace formSpec {
         const pos = element.position
         const label = element.label
 
-        accumulator += "label[" + pos.x + "," + pos.y + ";" + label + "]\n"
+        accumulator += "label[" + sVec(pos) + ";" + label + "]\n"
 
       } else if (element instanceof HyperText) {
 
@@ -758,7 +754,7 @@ namespace formSpec {
         const name = element.name
         const text = element.text
 
-        accumulator += "hypertext[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        accumulator += "hypertext[" + sVec(pos) + ";" + sVec(size) + ";" +
         name + ";" + text + "]\n"
 
       } else if (element instanceof VertLabel) {
@@ -766,7 +762,7 @@ namespace formSpec {
         const pos = element.position
         const label = element.label
 
-        accumulator += "vertlabel[" + pos.x + "," + pos.y + ";" + label + "]\n"
+        accumulator += "vertlabel[" + sVec(pos) + ";" + label + "]\n"
 
       } else if (element instanceof Button) {
 
@@ -795,19 +791,19 @@ namespace formSpec {
     if (d.size) {
       const fixed = (d.fixedSize) ? true : false
       const size = d.size
-      accumulator += "size[" + size.x + "," + size.y + "," + fixed + "]\n"
+      accumulator += "size[" + sVec(size) + "," + fixed + "]\n"
     }
     if (d.position) {
       const pos = d.position
-      accumulator += "position[" + pos.x + "," + pos.y + "]\n"
+      accumulator += "position[" + sVec(pos) + "]\n"
     }
     if (d.anchor) {
       const anchor = d.anchor
-      accumulator += "anchor[" + anchor.x + "," + anchor.y + "]\n"
+      accumulator += "anchor[" + sVec(anchor) + "]\n"
     }
     if (d.padding) {
       const p = d.padding
-      accumulator += "padding[" + p.x + "," + p.y + "]\n"
+      accumulator += "padding[" + sVec(p) + "]\n"
     }
     if (d.disablePrepend) {
       accumulator += "no_prepend[]\n"
