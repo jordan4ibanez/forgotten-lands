@@ -143,6 +143,26 @@ namespace formSpec {
     }
   }
 
+  //? ListColors
+
+  export interface ListColorsDefinition {
+    slotBGNormal: string
+    slotBGHover: string
+    slotBorder?: string
+    toolTipBGColor?: string
+    toolTipFontColor?: string
+  }
+
+  export class ListColors implements Element {
+    slotBGNormal: string = ""
+    slotBGHover: string = ""
+    slotBorder?: string
+    toolTipBGColor?: string
+    toolTipFontColor?: string
+  }
+
+
+
   // ? Functional impelementation
 
   //* This function will recurse.
@@ -189,6 +209,30 @@ namespace formSpec {
         const listName = element.listName
 
         accumulator += "listring[" + location + ";" + listName + "]\n"
+
+      } else if (element instanceof ListColors) {
+
+        //* This is 3 different API implementations in one, so it's using an assembly pattern.
+        const slotBGNormal = element.slotBGNormal
+        const slotBGHover = element.slotBGHover
+        accumulator += "listcolors[" + slotBGNormal + ";" + slotBGHover
+        
+        // Next definition
+        const slotBorder = element.slotBorder
+        if (slotBorder) {
+          accumulator += ";" + slotBorder
+
+          // Next definition
+          const toolTipBGColor = element.toolTipBGColor
+          const toolTipFontColor = element.toolTipFontColor
+
+          if (toolTipBGColor && toolTipFontColor) {
+            accumulator += ";" + toolTipBGColor + ";" + toolTipFontColor
+          }
+        }
+
+        // Now finish the sandwich.
+        accumulator += "]\n"
 
       }
 
