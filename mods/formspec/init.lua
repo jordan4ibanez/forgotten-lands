@@ -71,6 +71,9 @@ end
 formSpec = formSpec or ({})
 do
     local create = vector.create2d
+    local function sVec(input)
+        return (tostring(input.x) .. ",") .. tostring(input.y)
+    end
     formSpec.FormSpec = __TS__Class()
     local FormSpec = formSpec.FormSpec
     FormSpec.name = "FormSpec"
@@ -182,16 +185,180 @@ do
         self.bgColor = definition.bgColor
         self.fontColor = definition.fontColor
     end
+    formSpec.Image = __TS__Class()
+    local Image = formSpec.Image
+    Image.name = "Image"
+    function Image.prototype.____constructor(self, definition)
+        self.position = create(0, 0)
+        self.size = create(0, 0)
+        self.texture = ""
+        self.position = definition.position
+        self.size = definition.size
+        self.texture = definition.texture
+        self.middle = definition.middle
+    end
+    formSpec.AnimatedImage = __TS__Class()
+    local AnimatedImage = formSpec.AnimatedImage
+    AnimatedImage.name = "AnimatedImage"
+    __TS__ClassExtends(AnimatedImage, formSpec.Image)
+    function AnimatedImage.prototype.____constructor(self, definition)
+        AnimatedImage.____super.prototype.____constructor(self, definition)
+        self.name = ""
+        self.frameCount = 0
+        self.frameDuration = 0
+        self.frameStart = 0
+        self.name = definition.name
+        self.frameCount = definition.frameCount
+        self.frameDuration = definition.frameDuration
+        self.frameStart = definition.frameStart
+    end
+    formSpec.Model = __TS__Class()
+    local Model = formSpec.Model
+    Model.name = "Model"
+    function Model.prototype.____constructor(self, definition)
+        self.position = create(0, 0)
+        self.size = create(0, 0)
+        self.name = ""
+        self.mesh = ""
+        self.textures = ""
+        self.rotation = create(0, 0)
+        self.continuous = true
+        self.mouseControl = true
+        self.frameLoopRange = create(0, 0)
+        self.animationSpeed = 1
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.mesh = definition.mesh
+        self.textures = definition.textures
+        self.rotation = definition.rotation
+        self.continuous = definition.continuous
+        self.mouseControl = definition.mouseControl
+        self.frameLoopRange = definition.frameLoopRange
+        self.animationSpeed = definition.animationSpeed
+    end
+    formSpec.BGColor = __TS__Class()
+    local BGColor = formSpec.BGColor
+    BGColor.name = "BGColor"
+    function BGColor.prototype.____constructor(self, definition)
+        self.bgColor = ""
+        self.fullScreen = true
+        self.fullScreenbgColor = ""
+        self.bgColor = definition.bgColor
+        self.fullScreen = definition.fullScreen
+        self.fullScreenbgColor = definition.fullScreenbgColor
+    end
+    formSpec.Background = __TS__Class()
+    local Background = formSpec.Background
+    Background.name = "Background"
+    function Background.prototype.____constructor(self, definition)
+        self.position = create(0, 0)
+        self.size = create(0, 0)
+        self.texture = ""
+        self.position = definition.position
+        self.size = definition.size
+        self.texture = definition.texture
+        self.autoclip = definition.autoClip
+        self.middle = definition.middle
+    end
+    formSpec.PasswordField = __TS__Class()
+    local PasswordField = formSpec.PasswordField
+    PasswordField.name = "PasswordField"
+    function PasswordField.prototype.____constructor(self, definition)
+        self.position = create(0, 0)
+        self.size = create(0, 0)
+        self.name = ""
+        self.label = ""
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.label = definition.label
+    end
+    formSpec.Field = __TS__Class()
+    local Field = formSpec.Field
+    Field.name = "Field"
+    function Field.prototype.____constructor(self, definition)
+        self.name = ""
+        self.label = ""
+        self.default = ""
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.label = definition.label
+        self.default = definition.default
+    end
+    formSpec.FieldEnterAfterEdit = __TS__Class()
+    local FieldEnterAfterEdit = formSpec.FieldEnterAfterEdit
+    FieldEnterAfterEdit.name = "FieldEnterAfterEdit"
+    function FieldEnterAfterEdit.prototype.____constructor(self, name)
+        self.name = name
+    end
+    formSpec.FieldCloseOnEnter = __TS__Class()
+    local FieldCloseOnEnter = formSpec.FieldCloseOnEnter
+    FieldCloseOnEnter.name = "FieldCloseOnEnter"
+    function FieldCloseOnEnter.prototype.____constructor(self, name)
+        self.name = name
+    end
+    formSpec.TextArea = __TS__Class()
+    local TextArea = formSpec.TextArea
+    TextArea.name = "TextArea"
+    function TextArea.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.label = definition.label
+        self.default = definition.default
+    end
+    formSpec.Label = __TS__Class()
+    local Label = formSpec.Label
+    Label.name = "Label"
+    function Label.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.label = definition.label
+    end
+    formSpec.HyperText = __TS__Class()
+    local HyperText = formSpec.HyperText
+    HyperText.name = "HyperText"
+    function HyperText.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.text = definition.text
+    end
+    formSpec.VertLabel = __TS__Class()
+    local VertLabel = formSpec.VertLabel
+    VertLabel.name = "VertLabel"
+    function VertLabel.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.label = definition.label
+    end
+    formSpec.Button = __TS__Class()
+    local Button = formSpec.Button
+    Button.name = "Button"
+    function Button.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.label = definition.label
+    end
+    formSpec.ImageButton = __TS__Class()
+    local ImageButton = formSpec.ImageButton
+    ImageButton.name = "ImageButton"
+    __TS__ClassExtends(ImageButton, formSpec.Button)
+    function ImageButton.prototype.____constructor(self, definition)
+        ImageButton.____super.prototype.____constructor(self, definition)
+        self.texture = definition.texture
+    end
     local function processElements(accumulator, elementArray)
         for ____, element in ipairs(elementArray) do
             if __TS__InstanceOf(element, formSpec.Container) then
                 local pos = element.position
-                accumulator = accumulator .. ((("container[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. "]\n"
+                accumulator = accumulator .. ("container[" .. sVec(pos)) .. "]\n"
                 accumulator = accumulator .. "container_end[]\n"
             elseif __TS__InstanceOf(element, formSpec.ScrollContainer) then
                 local pos = element.position
                 local size = element.size
-                accumulator = accumulator .. ((((((((((((("scroll_container[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. element.name) .. ";") .. element.orientation) .. ";") .. tostring(element.factor)) .. "]\n"
+                accumulator = accumulator .. ((((((((("scroll_container[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. element.name) .. ";") .. element.orientation) .. ";") .. tostring(element.factor)) .. "]\n"
                 accumulator = accumulator .. "scroll_container_end[]\n"
             elseif __TS__InstanceOf(element, formSpec.List) then
                 local location = element.location
@@ -199,7 +366,7 @@ do
                 local pos = element.position
                 local size = element.size
                 local startingIndex = element.startingIndex
-                accumulator = accumulator .. ((((((((((((("list[" .. location) .. ";") .. listName) .. ";") .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. tostring(startingIndex)) .. "]\n"
+                accumulator = accumulator .. ((((((((("list[" .. location) .. ";") .. listName) .. ";") .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. tostring(startingIndex)) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.ListRing) then
                 local location = element.location
                 local listName = element.listName
@@ -230,7 +397,127 @@ do
                 local text = element.text
                 local bgcolor = element.bgColor
                 local fontcolor = element.fontColor
-                accumulator = accumulator .. ((((((((((((("tooltip[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. text) .. ";") .. bgcolor) .. ";") .. fontcolor) .. "]\n"
+                accumulator = accumulator .. ((((((((("tooltip[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. text) .. ";") .. bgcolor) .. ";") .. fontcolor) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Image) then
+                local pos = element.position
+                local size = element.size
+                local texture = element.texture
+                local middle = element.middle
+                accumulator = accumulator .. (((("image[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. texture
+                if middle then
+                    accumulator = accumulator .. ";" .. middle
+                end
+                accumulator = accumulator .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.AnimatedImage) then
+                local pos = element.position
+                local size = element.size
+                local texture = element.texture
+                local name = element.name
+                local frameCount = element.frameCount
+                local frameDuration = element.frameDuration
+                local frameStart = element.frameStart
+                local middle = element.middle
+                accumulator = accumulator .. (((((((((((("animated_image[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. texture) .. ";") .. tostring(frameCount)) .. ";") .. tostring(frameDuration)) .. ";") .. tostring(frameStart)
+                if middle then
+                    accumulator = accumulator .. ";" .. middle
+                end
+                accumulator = accumulator .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Model) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local mesh = element.mesh
+                local textures = element.textures
+                local rotation = element.rotation
+                local continuous = element.continuous
+                local mouseControl = element.mouseControl
+                local frameLoopRange = element.frameLoopRange
+                local animationSpeed = element.animationSpeed
+                accumulator = accumulator .. ((((((((((((((((((("model[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. mesh) .. ";") .. textures) .. ";") .. sVec(rotation)) .. ";") .. tostring(continuous)) .. ";") .. tostring(mouseControl)) .. ";") .. sVec(frameLoopRange)) .. ";") .. tostring(animationSpeed)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.BGColor) then
+                local bgcolor = element.bgColor
+                local fullScreen = element.fullScreen
+                local fullScreenbgColor = element.fullScreenbgColor
+                accumulator = accumulator .. ((((("bgcolor[" .. bgcolor) .. ";") .. tostring(fullScreen)) .. ";") .. fullScreenbgColor) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Background) then
+                local pos = element.position
+                local size = element.size
+                local texture = element.texture
+                local ____temp_2
+                if element.autoclip then
+                    ____temp_2 = true
+                else
+                    ____temp_2 = false
+                end
+                local autoClip = ____temp_2
+                local middle = element.middle
+                if middle then
+                    accumulator = accumulator .. "background9["
+                else
+                    accumulator = accumulator .. "background["
+                end
+                accumulator = accumulator .. (((((sVec(pos) .. ";") .. sVec(size)) .. ";") .. texture) .. ";") .. tostring(autoClip)
+                if middle then
+                    accumulator = accumulator .. ";" .. middle
+                end
+                accumulator = accumulator .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.PasswordField) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local label = element.label
+                accumulator = accumulator .. ((((((("pwdfield[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Field) then
+                local pos = element.position
+                local size = element.size
+                accumulator = accumulator .. "field["
+                if pos and size then
+                    accumulator = accumulator .. ((sVec(pos) .. ";") .. sVec(size)) .. ";"
+                end
+                local name = element.name
+                local label = element.label
+                local def = element.default
+                accumulator = accumulator .. ((((name .. ";") .. label) .. ";") .. def) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.FieldEnterAfterEdit) then
+                local name = element.name
+                accumulator = accumulator .. ((("field_enter_after_edit[" .. name) .. ";") .. tostring(true)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.FieldCloseOnEnter) then
+                local name = element.name
+                accumulator = accumulator .. ((("field_close_on_enter[" .. name) .. ";") .. tostring(true)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.TextArea) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local label = element.label
+                local def = element.default
+                accumulator = accumulator .. ((((((((("textarea[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. label) .. ";") .. def) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Label) then
+                local pos = element.position
+                local label = element.label
+                accumulator = accumulator .. ((("label[" .. sVec(pos)) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.HyperText) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local text = element.text
+                accumulator = accumulator .. ((((((("hypertext[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. text) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.VertLabel) then
+                local pos = element.position
+                local label = element.label
+                accumulator = accumulator .. ((("vertlabel[" .. sVec(pos)) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Button) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local label = element.label
+                accumulator = accumulator .. ((((((("button[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ImageButton) then
+                local pos = element.position
+                local size = element.size
+                local texture = element.texture
+                local name = element.name
+                local label = element.label
+                accumulator = accumulator .. ((((((((("button[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. texture) .. ";") .. name) .. ";") .. label) .. "]\n"
             end
         end
         return accumulator
@@ -238,27 +525,27 @@ do
     function formSpec.generate(d)
         local accumulator = "formspec_version[7]\n"
         if d.size then
-            local ____temp_2
+            local ____temp_3
             if d.fixedSize then
-                ____temp_2 = true
+                ____temp_3 = true
             else
-                ____temp_2 = false
+                ____temp_3 = false
             end
-            local fixed = ____temp_2
+            local fixed = ____temp_3
             local size = d.size
-            accumulator = accumulator .. ((((("size[" .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ",") .. tostring(fixed)) .. "]\n"
+            accumulator = accumulator .. ((("size[" .. sVec(size)) .. ",") .. tostring(fixed)) .. "]\n"
         end
         if d.position then
             local pos = d.position
-            accumulator = accumulator .. ((("position[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. "]\n"
+            accumulator = accumulator .. ("position[" .. sVec(pos)) .. "]\n"
         end
         if d.anchor then
             local anchor = d.anchor
-            accumulator = accumulator .. ((("anchor[" .. tostring(anchor.x)) .. ",") .. tostring(anchor.y)) .. "]\n"
+            accumulator = accumulator .. ("anchor[" .. sVec(anchor)) .. "]\n"
         end
         if d.padding then
             local p = d.padding
-            accumulator = accumulator .. ((("padding[" .. tostring(p.x)) .. ",") .. tostring(p.y)) .. "]\n"
+            accumulator = accumulator .. ("padding[" .. sVec(p)) .. "]\n"
         end
         if d.disablePrepend then
             accumulator = accumulator .. "no_prepend[]\n"
