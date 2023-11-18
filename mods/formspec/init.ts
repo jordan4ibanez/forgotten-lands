@@ -311,7 +311,7 @@ namespace formSpec {
     fullScreenbgColor: string
   }
 
-  export class BGColor {
+  export class BGColor implements Element{
     //! This one is quite confusing in docs
     bgColor: string = ""
     fullScreen: boolean | string = true
@@ -333,7 +333,7 @@ namespace formSpec {
     middle?: string
   }
 
-  export class Background {
+  export class Background  implements Element {
     position: Vec2 = create(0,0)
     size: Vec2 = create(0,0)
     texture: string = ""
@@ -357,7 +357,7 @@ namespace formSpec {
     label: string
   }
 
-  export class PasswordField {
+  export class PasswordField implements Element {
     position: Vec2 = create(0,0)
     size: Vec2 = create(0,0)
     name: string = ""
@@ -370,8 +370,94 @@ namespace formSpec {
     }
   }
 
+  //? Field
 
-  // ? Functional impelementation
+  export interface FieldDefinition {
+    position?: Vec2
+    size?: Vec2
+    name: string
+    label: string
+    default: string
+  }
+
+  export class Field implements Element{
+    position?: Vec2
+    size?: Vec2
+    name: string = ""
+    label: string = ""
+    default: string = ""
+    constructor(definition: FieldDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.label = definition.label
+      this.default = definition.default
+    }
+  }
+
+  //? FieldEnterAfterEdit
+
+  export class FieldEnterAfterEdit {
+    name: string
+    constructor(name: string) {
+      this.name = name
+    }
+  }
+
+  //? FieldCloseOnEnter
+
+  export class FieldCloseOnEnter {
+    name: string
+    constructor(name: string) {
+      this.name = name
+    }
+  }
+
+  //? TextArea
+
+  export interface TextAreaDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    label: string
+    default: string
+  }
+
+  export class TextArea {
+    position: Vec2
+    size: Vec2
+    name: string
+    label: string
+    default: string
+    constructor(definition: TextAreaDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.label = definition.label
+      this.default = definition.default
+    }
+  }
+
+  //? Label
+
+  export interface LabelDefinition {
+    position: Vec2
+    label: string
+  }
+
+  export class Label {
+    position: Vec2
+    label: string
+    constructor(definition: LabelDefinition) {
+      this.position = definition.position
+      this.label = definition.label
+    }
+  }
+
+
+
+
+  // ? Functional implementation
 
   //* This function will recurse.
   function processElements(accumulator: string, elementArray: Element[]): string {
@@ -557,6 +643,50 @@ namespace formSpec {
         accumulator += "pwdfield[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
         name + ";" + label + "]\n"
 
+      } else if (element instanceof Field) {
+
+        const pos = element.position
+        const size = element.size
+
+        accumulator += "field["
+
+        if (pos && size) {
+          accumulator += pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";"
+        }
+
+        const name = element.name
+        const label = element.label
+        const def = element.default
+
+        accumulator += name + ";" + label + ";" + def + "]\n"
+        
+      } else if (element instanceof FieldEnterAfterEdit) {
+
+        const name = element.name
+        accumulator += "field_enter_after_edit[" + name + ";" + true + "]\n"
+
+      } else if (element instanceof FieldCloseOnEnter) {
+
+        const name = element.name
+        accumulator += "field_close_on_enter[" + name + ";" + true + "]\n"
+
+      } else if (element instanceof TextArea) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const label = element.label
+        const def = element.default
+
+        accumulator += "textarea[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        name + ";" + label + ";" + def + "]\n"
+
+      } else if (element instanceof Label) {
+        const pos = element.position
+        const label = element.label
+
+        accumulator += "label[" + pos.x + "," + pos.y + ";" + label + "]\n"
+        
       }
 
 
