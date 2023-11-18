@@ -44,8 +44,9 @@ namespace formSpec {
       this.elements = definition.elements
     }
 
-    attachElement(newElement: Element): void {
+    attachElement(newElement: Element): FormSpec {
       this.elements.push(newElement)
+      return this
     }
   }
 
