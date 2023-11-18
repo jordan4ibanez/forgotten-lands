@@ -518,6 +518,20 @@ namespace formSpec {
     }
   }
 
+  //? ImageButton
+
+  export interface ImageButtonDefinition extends ButtonDefinition{
+    texture: string
+  }
+
+  export class ImageButton extends Button {
+    texture: string
+    constructor(definition: ImageButtonDefinition) {
+      super(definition)
+      this.texture = definition.texture
+    }
+  }
+
 
 
   // ? Functional implementation
@@ -772,6 +786,16 @@ namespace formSpec {
         const label = element.label
 
         accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + label + "]\n"
+
+      } else if (element instanceof ImageButton) {
+
+        const pos = element.position
+        const size = element.size
+        const texture = element.texture
+        const name = element.name
+        const label = element.label
+
+        accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + texture + ";" + name + ";" + label + "]\n"
 
       }
 
