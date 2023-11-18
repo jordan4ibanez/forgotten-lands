@@ -87,6 +87,7 @@ do
     function FormSpec.prototype.attachElement(self, newElement)
         local ____self_elements_0 = self.elements
         ____self_elements_0[#____self_elements_0 + 1] = newElement
+        return self
     end
     formSpec.Container = __TS__Class()
     local Container = formSpec.Container
@@ -98,6 +99,11 @@ do
             self.position = definition.position
             self.elements = definition.elements
         end
+    end
+    function Container.prototype.attachElement(self, newElement)
+        local ____self_elements_1 = self.elements
+        ____self_elements_1[#____self_elements_1 + 1] = newElement
+        return self
     end
     formSpec.ScrollOrientation = ScrollOrientation or ({})
     formSpec.ScrollOrientation.vertical = "vertical"
@@ -141,6 +147,13 @@ do
         self.location = definition.location
         self.listName = definition.listName
     end
+    formSpec.ListColors = __TS__Class()
+    local ListColors = formSpec.ListColors
+    ListColors.name = "ListColors"
+    function ListColors.prototype.____constructor(self)
+        self.slotBGNormal = ""
+        self.slotBGHover = ""
+    end
     local function processElements(accumulator, elementArray)
         for ____, element in ipairs(elementArray) do
             if __TS__InstanceOf(element, formSpec.Container) then
@@ -163,6 +176,20 @@ do
                 local location = element.location
                 local listName = element.listName
                 accumulator = accumulator .. ((("listring[" .. location) .. ";") .. listName) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ListColors) then
+                local slotBGNormal = element.slotBGNormal
+                local slotBGHover = element.slotBGHover
+                accumulator = accumulator .. (("listcolors[" .. slotBGNormal) .. ";") .. slotBGHover
+                local slotBorder = element.slotBorder
+                if slotBorder then
+                    accumulator = accumulator .. ";" .. slotBorder
+                    local toolTipBGColor = element.toolTipBGColor
+                    local toolTipFontColor = element.toolTipFontColor
+                    if toolTipBGColor and toolTipFontColor then
+                        accumulator = accumulator .. ((";" .. toolTipBGColor) .. ";") .. toolTipFontColor
+                    end
+                end
+                accumulator = accumulator .. "]\n"
             end
         end
         return accumulator
@@ -170,13 +197,13 @@ do
     function formSpec.generate(d)
         local accumulator = "formspec_version[7]\n"
         if d.size then
-            local ____temp_1
+            local ____temp_2
             if d.fixedSize then
-                ____temp_1 = true
+                ____temp_2 = true
             else
-                ____temp_1 = false
+                ____temp_2 = false
             end
-            local fixed = ____temp_1
+            local fixed = ____temp_2
             local size = d.size
             accumulator = accumulator .. ((((("size[" .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ",") .. tostring(fixed)) .. "]\n"
         end
