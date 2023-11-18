@@ -49,12 +49,6 @@ namespace formSpec {
     }
   }
 
-  // export function newDefinition(definition: FormsSpecDefinition): FormSpec {
-  //   const temp: FormSpec = {
-  //   }
-  //   return temp
-  // }
-
   //? Element prototype.
 
   interface FormSpecElement {
@@ -63,22 +57,50 @@ namespace formSpec {
 
   //? Container
 
-  export class FormSpecContainer implements FormSpecElement {
-    position: Vec2 = create(0,0)
-    elements: FormSpecElement[] = []
-  }
   export interface FormSpecContainerDefinition {
     position: Vec2
     elements: FormSpecElement[]
   }
-  export function newContainer(definition: FormSpecContainerDefinition): FormSpecContainer {
-    const temp: FormSpecContainer = {
-      position: definition.position,
-      elements: definition.elements
+
+  export class FormSpecContainer implements FormSpecElement {
+    position: Vec2 = create(0,0)
+    elements: FormSpecElement[] = []
+    constructor(definition: FormSpecContainerDefinition) {
+      this.position = definition.position,
+      this.elements = definition.elements
     }
-    return temp
   }
 
+  //? Scroll container
+
+  export enum ScrollOrientation {
+    vertical = "vertical",
+    horizontal = "horizontal"
+  }
+
+  export interface FormSpecScrollContainerDefinition extends FormSpecContainerDefinition {
+    size: Vec2
+    orientation: ScrollOrientation
+    factor?: number
+    name: string
+  }
+
+  export class FormSpecScollContainer extends FormSpecContainer {
+    size: Vec2 = create(0,0)
+    orientation: ScrollOrientation = ScrollOrientation.vertical
+    factor: number = 0.1
+    name: string = "placeHolder"
+    constructor(definition: FormSpecScrollContainerDefinition) {
+      super({
+        position: definition.position,
+        elements: definition.elements
+      })
+      this.size = definition.size
+      this.orientation = definition.orientation
+      this.factor = definition.factor || 0.1
+      this.name = definition.name
+    }
+  }
 
   //? List
 
@@ -90,11 +112,32 @@ namespace formSpec {
     startingIndex: number
   }
 
-  function processElements(elementArray: FormSpecElement[]) {
-    print(dump(elementArray))
+  //? This function will recurse.
+  function processElements(accumulator: string, elementArray: FormSpecElement[]): string {
+    // print(dump(elementArray))
     for (const element of elementArray) {
-      print(element instanceof FormSpecContainer)
+      if (element instanceof FormSpecContainer) {
+        const pos = element.position
+        accumulator += "container[" +  pos.x + "," + pos.y + "]\n"
+        
+        //* todo: recurse here.
+        // accumulator = processElements(accumulator, element.elements)
+
+        accumulator += "container_end[]\n"
+
+      } else if (element instanceof FormSpecScollContainer) {
+        const pos = element.position
+        const size = element.size
+        accumulator += "scroll_container[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        element.name + ";" + element.orientation + ";" + element.factor + "]\n"
+
+        //* todo: recurse here
+        // accumulator = processElements(accumulator, element.elements)
+
+        accumulator += "scroll_container_end[]\n"
+      }
     }
+    return accumulator
   }
 
   function generate(d: FormSpec) {
@@ -103,6 +146,7 @@ namespace formSpec {
     //* so this turns into a bunch of if-then checks in order.
     
     let accumulator = "formspec_version[7]\n"
+    print("running")
     if (d.size) {
       const fixed = (d.fixedSize) ? true : false
       const size = d.size
@@ -124,14 +168,19 @@ namespace formSpec {
       accumulator += "no_prepend[]\n"
     }
     // Now recurse all elements in the array.
-    processElements(d.elements)
-    // print(accumulator)
+    accumulator = processElements(accumulator, d.elements)
+    print(accumulator)
   }
 
   generate(new FormSpec({
     size: create(8,9),
     elements: [
-      
+      // new FormSpecContainer({
+      //   position: create(0,0),
+      //   elements: [
+
+      //   ]
+      // })
     ]
   }))
 

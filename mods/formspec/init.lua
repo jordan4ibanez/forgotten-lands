@@ -6,6 +6,31 @@ local function __TS__Class(self)
     return c
 end
 
+local function __TS__ClassExtends(target, base)
+    target.____super = base
+    local staticMetatable = setmetatable({__index = base}, base)
+    setmetatable(target, staticMetatable)
+    local baseMetatable = getmetatable(base)
+    if baseMetatable then
+        if type(baseMetatable.__index) == "function" then
+            staticMetatable.__index = baseMetatable.__index
+        end
+        if type(baseMetatable.__newindex) == "function" then
+            staticMetatable.__newindex = baseMetatable.__newindex
+        end
+    end
+    setmetatable(target.prototype, base.prototype)
+    if type(base.prototype.__index) == "function" then
+        target.prototype.__index = base.prototype.__index
+    end
+    if type(base.prototype.__newindex) == "function" then
+        target.prototype.__newindex = base.prototype.__newindex
+    end
+    if type(base.prototype.__tostring) == "function" then
+        target.prototype.__tostring = base.prototype.__tostring
+    end
+end
+
 local __TS__Symbol, Symbol
 do
     local symbolMetatable = {__tostring = function(self)
@@ -72,22 +97,50 @@ do
     formSpec.FormSpecContainer = __TS__Class()
     local FormSpecContainer = formSpec.FormSpecContainer
     FormSpecContainer.name = "FormSpecContainer"
-    function FormSpecContainer.prototype.____constructor(self)
+    function FormSpecContainer.prototype.____constructor(self, definition)
         self.position = create(0, 0)
         self.elements = {}
-    end
-    function formSpec.newContainer(definition)
-        local temp = {position = definition.position, elements = definition.elements}
-        return temp
-    end
-    local function processElements(elementArray)
-        print(dump(elementArray))
-        for ____, element in ipairs(elementArray) do
-            print(__TS__InstanceOf(element, formSpec.FormSpecContainer))
+        do
+            self.position = definition.position
+            self.elements = definition.elements
         end
+    end
+    formSpec.ScrollOrientation = ScrollOrientation or ({})
+    formSpec.ScrollOrientation.vertical = "vertical"
+    formSpec.ScrollOrientation.horizontal = "horizontal"
+    formSpec.FormSpecScollContainer = __TS__Class()
+    local FormSpecScollContainer = formSpec.FormSpecScollContainer
+    FormSpecScollContainer.name = "FormSpecScollContainer"
+    __TS__ClassExtends(FormSpecScollContainer, formSpec.FormSpecContainer)
+    function FormSpecScollContainer.prototype.____constructor(self, definition)
+        FormSpecScollContainer.____super.prototype.____constructor(self, {position = definition.position, elements = definition.elements})
+        self.size = create(0, 0)
+        self.orientation = formSpec.ScrollOrientation.vertical
+        self.factor = 0.1
+        self.name = "placeHolder"
+        self.size = definition.size
+        self.orientation = definition.orientation
+        self.factor = definition.factor or 0.1
+        self.name = definition.name
+    end
+    local function processElements(accumulator, elementArray)
+        for ____, element in ipairs(elementArray) do
+            if __TS__InstanceOf(element, formSpec.FormSpecContainer) then
+                local pos = element.position
+                accumulator = accumulator .. ((("container[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. "]\n"
+                accumulator = accumulator .. "container_end[]\n"
+            elseif __TS__InstanceOf(element, formSpec.FormSpecScollContainer) then
+                local pos = element.position
+                local size = element.size
+                accumulator = accumulator .. ((((((((((((("scroll_container[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. element.name) .. ";") .. element.orientation) .. ";") .. tostring(element.factor)) .. "]\n"
+                accumulator = accumulator .. "scroll_container_end[]\n"
+            end
+        end
+        return accumulator
     end
     local function generate(d)
         local accumulator = "formspec_version[7]\n"
+        print("running")
         if d.size then
             local ____temp_1
             if d.fixedSize then
@@ -114,7 +167,8 @@ do
         if d.disablePrepend then
             accumulator = accumulator .. "no_prepend[]\n"
         end
-        processElements(d.elements)
+        accumulator = processElements(accumulator, d.elements)
+        print(accumulator)
     end
     generate(__TS__New(
         formSpec.FormSpec,
