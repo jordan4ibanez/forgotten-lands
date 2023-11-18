@@ -154,6 +154,34 @@ do
         self.slotBGNormal = ""
         self.slotBGHover = ""
     end
+    formSpec.ElementToolTip = __TS__Class()
+    local ElementToolTip = formSpec.ElementToolTip
+    ElementToolTip.name = "ElementToolTip"
+    function ElementToolTip.prototype.____constructor(self, definition)
+        self.guiElementName = ""
+        self.text = ""
+        self.bgColor = ""
+        self.fontColor = ""
+        self.guiElementName = definition.guiElementName
+        self.text = definition.text
+        self.bgColor = definition.bgColor
+        self.fontColor = definition.fontColor
+    end
+    formSpec.AreaToolTip = __TS__Class()
+    local AreaToolTip = formSpec.AreaToolTip
+    AreaToolTip.name = "AreaToolTip"
+    function AreaToolTip.prototype.____constructor(self, definition)
+        self.position = create(0, 0)
+        self.size = create(0, 0)
+        self.text = ""
+        self.bgColor = ""
+        self.fontColor = ""
+        self.position = definition.position
+        self.size = definition.size
+        self.text = definition.text
+        self.bgColor = definition.bgColor
+        self.fontColor = definition.fontColor
+    end
     local function processElements(accumulator, elementArray)
         for ____, element in ipairs(elementArray) do
             if __TS__InstanceOf(element, formSpec.Container) then
@@ -190,6 +218,19 @@ do
                     end
                 end
                 accumulator = accumulator .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ElementToolTip) then
+                local guiElementName = element.guiElementName
+                local text = element.text
+                local bgColor = element.bgColor
+                local fontColor = element.fontColor
+                accumulator = accumulator .. ((((((("tooltip[" .. guiElementName) .. ";") .. text) .. ";") .. bgColor) .. ";") .. fontColor) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.AreaToolTip) then
+                local pos = element.position
+                local size = element.size
+                local text = element.text
+                local bgcolor = element.bgColor
+                local fontcolor = element.fontColor
+                accumulator = accumulator .. ((((((((((((("tooltip[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. text) .. ";") .. bgcolor) .. ";") .. fontcolor) .. "]\n"
             end
         end
         return accumulator
