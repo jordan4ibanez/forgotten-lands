@@ -166,6 +166,54 @@ namespace formSpec {
     toolTipFontColor?: string
   }
 
+  //? ElementToolTip
+
+  export interface ElementToolTipDefinition {
+    guiElementName: string
+    text: string
+    //! Note: This is optional in spec but I don't feel like it at the moment.
+    bgColor: string
+    fontColor: string
+  }
+
+  export class ElementToolTip implements Element {
+    guiElementName: string = ""
+    text: string = ""
+    //! Note: This is optional in spec but I don't feel like it at the moment.
+    bgColor: string = ""
+    fontColor: string = ""
+    constructor(definition: ElementToolTipDefinition) {
+      this.guiElementName = definition.guiElementName
+      this.text = definition.text
+      this.bgColor = definition.bgColor
+      this.fontColor = definition.fontColor
+    }
+  }
+
+  //? AreaToolTip
+
+  export interface AreaToolTipDefinition {
+    position: Vec2
+    size: Vec2
+    text: string
+    bgColor: string
+    fontColor: string
+  }
+
+  export class AreaToolTip implements Element {
+    position: Vec2 = create(0,0)
+    size: Vec2 = create(0,0)
+    text: string = ""
+    bgColor: string = ""
+    fontColor: string = ""
+    constructor(definition: AreaToolTipDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.text = definition.text
+      this.bgColor = definition.bgColor
+      this.fontColor = definition.fontColor
+    }
+  }
 
 
   // ? Functional impelementation
@@ -238,6 +286,25 @@ namespace formSpec {
 
         // Now finish the sandwich.
         accumulator += "]\n"
+
+      } else if (element instanceof ElementToolTip) {
+
+        const guiElementName = element.guiElementName
+        const text = element.text
+        const bgColor = element.bgColor
+        const fontColor = element.fontColor
+
+        accumulator += "tooltip[" + guiElementName + ";" + text + ";" + bgColor + ";" + fontColor + "]\n"
+
+      } else if (element instanceof AreaToolTip) {
+        
+        const pos = element.position
+        const size = element.size
+        const text = element.text
+        const bgcolor = element.bgColor
+        const fontcolor = element.fontColor
+
+        accumulator += "tooltip[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + text + ";" + bgcolor + ";" + fontcolor + "]\n"
 
       }
 
