@@ -267,7 +267,27 @@ namespace formSpec {
     size: Vec2
     name: string
     mesh: string
-    
+    //! fixme: Make this an array!
+    textures: string
+    rotation: Vec2
+    continuous: boolean
+    mouseControl: boolean
+    frameLoopRange: Vec2
+    animationSpeed: number
+  }
+
+  export class Model implements Element {
+    position: Vec2 = create(0,0)
+    size: Vec2 = create(0,0)
+    name: string = ""
+    mesh: string = ""
+    //! fixme: Make this an array!
+    textures: string = ""
+    rotation: Vec2 = create(0,0)
+    continuous: boolean = true
+    mouseControl: boolean = true
+    frameLoopRange: Vec2 = create(0,0)
+    animationSpeed: number = 1
   }
 
 
