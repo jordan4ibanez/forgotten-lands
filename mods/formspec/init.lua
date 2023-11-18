@@ -67,12 +67,6 @@ local function __TS__InstanceOf(obj, classTbl)
     end
     return false
 end
-
-local function __TS__New(target, ...)
-    local instance = setmetatable({}, target.prototype)
-    instance:____constructor(...)
-    return instance
-end
 -- End of Lua Library inline imports
 formSpec = formSpec or ({})
 do
@@ -173,9 +167,8 @@ do
         end
         return accumulator
     end
-    local function generate(d)
+    function formSpec.generate(d)
         local accumulator = "formspec_version[7]\n"
-        print("running")
         if d.size then
             local ____temp_1
             if d.fixedSize then
@@ -203,44 +196,6 @@ do
             accumulator = accumulator .. "no_prepend[]\n"
         end
         accumulator = processElements(accumulator, d.elements)
-        print(accumulator)
+        return accumulator
     end
-    generate(__TS__New(
-        formSpec.FormSpec,
-        {
-            size = create(8, 7.5),
-            elements = {
-                __TS__New(
-                    formSpec.List,
-                    {
-                        location = "current_player",
-                        listName = "craft",
-                        position = create(3, 0),
-                        size = create(3, 3),
-                        startingIndex = 1
-                    }
-                ),
-                __TS__New(
-                    formSpec.List,
-                    {
-                        location = "current_player",
-                        listName = "craftpreview",
-                        position = create(7, 1),
-                        size = create(1, 1),
-                        startingIndex = 1
-                    }
-                ),
-                __TS__New(
-                    formSpec.List,
-                    {
-                        location = "current_player",
-                        listName = "main",
-                        position = create(0, 3.5),
-                        size = create(8, 4),
-                        startingIndex = 1
-                    }
-                )
-            }
-        }
-    ))
 end

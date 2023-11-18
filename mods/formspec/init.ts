@@ -199,7 +199,7 @@ namespace formSpec {
     return accumulator
   }
 
-  function generate(d: FormSpec) {
+  export function generate(d: FormSpec): string {
     //? figure out if newlines are necessary.
     //* note: components of formspecs are context sensitive.
     //* so this turns into a bunch of if-then checks in order.
@@ -227,56 +227,10 @@ namespace formSpec {
     }
     // Now recurse all elements in the array.
     accumulator = processElements(accumulator, d.elements)
-    print(accumulator)
+    
+    return accumulator
   }
 
-  generate(new FormSpec({
-    size: create(8,7.5),
-    elements: [
-      //! Craft area.
-      new List({
-        location: "current_player",
-        listName: "craft",
-        position: create(
-          3,
-          0
-        ),
-        size: create(
-          3,
-          3
-        ),
-        startingIndex: 1
-      }),
-      //! Craft output
-      new List({
-        location: "current_player",
-        listName: "craftpreview",
-        position: create(
-          7,
-          1
-        ),
-        size: create(
-          1,
-          1
-        ),
-        startingIndex: 1
-      }),
-      //! Main inventory.
-      new List({
-        location: "current_player",
-        listName: "main",
-        position: create(
-          0,
-          3.5
-        ),
-        size: create(
-          8,
-          4
-        ),
-        startingIndex: 1
-      }),
-    ]
-  }))
 
   
 }
