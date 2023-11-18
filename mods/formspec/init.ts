@@ -288,6 +288,18 @@ namespace formSpec {
     mouseControl: boolean = true
     frameLoopRange: Vec2 = create(0,0)
     animationSpeed: number = 1
+    constructor(definition: ModelDefinition) {
+      this.position = definition.position
+      this.size = definition. size
+      this.name = definition.name
+      this.mesh = definition.mesh
+      this.textures = definition.textures
+      this.rotation = definition.rotation
+      this.continuous = definition.continuous
+      this.mouseControl = definition.mouseControl
+      this.frameLoopRange = definition.frameLoopRange
+      this.animationSpeed = definition.animationSpeed
+    }
   }
 
 
@@ -418,6 +430,22 @@ namespace formSpec {
 
         accumulator += "]\n"
 
+      } else if (element instanceof Model) {
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const mesh = element.mesh
+        const textures = element.textures
+        const rotation = element.rotation
+        const continuous = element.continuous
+        const mouseControl = element.mouseControl
+        const frameLoopRange = element.frameLoopRange
+        const animationSpeed = element.animationSpeed
+        
+        accumulator += "model[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        name + ";" + mesh + ";" + textures + ";" + rotation.x + "," + rotation.y + ";" +
+        continuous + ";" + mouseControl + ";" + frameLoopRange.x + "," + frameLoopRange.y + ";" +
+        animationSpeed + "]\n"
       }
 
 
