@@ -496,6 +496,27 @@ namespace formSpec {
     }
   }
 
+  //? Button
+
+  export interface ButtonDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    label: string
+  }
+
+  export class Button implements Element {
+    position: Vec2
+    size: Vec2
+    name: string
+    label: string
+    constructor(definition: ButtonDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.label = definition.label
+    }
+  }
 
 
 
@@ -746,6 +767,15 @@ namespace formSpec {
         const label = element.label
 
         accumulator += "vertlabel[" + pos.x + "," + pos.y + ";" + label + "]\n"
+
+      } else if (element instanceof Button) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const label = element.label
+
+        accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + label + "]\n"
 
       }
 
