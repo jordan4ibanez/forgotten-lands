@@ -532,6 +532,7 @@ namespace formSpec {
     }
   }
 
+  //! note: was on image_button[<X>,<Y>;<W>,<H>;<texture name>;<name>;<label>;<noclip>;<drawborder>;<pressed texture name>]
 
 
   // ? Functional implementation
