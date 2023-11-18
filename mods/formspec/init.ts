@@ -323,6 +323,31 @@ namespace formSpec {
     }
   }
 
+  //? Background
+
+  export interface BackgroundDefinition {
+    position: Vec2
+    size: Vec2
+    texture: string
+    autoClip?: boolean
+    middle?: string
+  }
+
+  export class Background {
+    position: Vec2 = create(0,0)
+    size: Vec2 = create(0,0)
+    texture: string = ""
+    autoclip?: boolean
+    middle?: string
+    constructor(definition: BackgroundDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.texture = definition.texture
+      this.autoclip = definition.autoClip
+      this.middle = definition.middle
+    }
+  }
+
 
   // ? Functional impelementation
 
@@ -452,6 +477,7 @@ namespace formSpec {
         accumulator += "]\n"
 
       } else if (element instanceof Model) {
+
         const pos = element.position
         const size = element.size
         const name = element.name
@@ -469,12 +495,35 @@ namespace formSpec {
         animationSpeed + "]\n"
 
       } else if (element instanceof BGColor) {
+
         const bgcolor = element.bgColor
         const fullScreen = element.fullScreen
         const fullScreenbgColor = element.fullScreenbgColor
 
         accumulator += "bgcolor[" + bgcolor + ";" + fullScreen + ";" + fullScreenbgColor + "]\n"
 
+      } else if (element instanceof Background) {
+
+        const pos = element.position
+        const size = element.size
+        const texture = element.texture
+        const autoClip = (element.autoclip) ? true : false
+        const middle = element.middle
+
+        if (middle) {
+          "background9["
+        } else {
+          "background["
+        }
+
+        accumulator += pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        texture + ";" + autoClip
+
+        if (middle) {
+          accumulator += ";" + middle
+        }
+
+        accumulator += "]\n"
       }
 
 
