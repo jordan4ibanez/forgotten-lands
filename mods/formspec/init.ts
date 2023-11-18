@@ -260,7 +260,15 @@ namespace formSpec {
     }
   }
   
-  
+  //? Model
+
+  export interface ModelDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    mesh: string
+    
+  }
 
 
   // ? Functional impelementation
