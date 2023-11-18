@@ -183,7 +183,7 @@ export interface minetest {
   create_detached_inventory(name: string, callbacks: DetachedInventoryCallbacks, playerName: string): InvRef
   remove_detached_inventory(name: string): boolean
   do_item_eat(hpChange: number, replaceWithItem: ItemStackObject, itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): ItemStackObject | void
-  show_formspec(playerName: string, formName: string, formSpec: Formspec): void
+  show_formspec(playerName: string, formName: string, formSpec: string): void
   close_formspec(playerName: string, formName: string): void
   formspec_escape(escape: string): string
   explode_table_event(string: string): Map<any,any>
@@ -1213,10 +1213,10 @@ declare global {
     set_fov(fov: number, isMultiplier: boolean, transitionTime: number): void
     get_fov(): number
     get_meta(): MetaRef
-    set_inventory_formspec(formSpec: Formspec): void
-    get_inventory_formspec(): Formspec
-    set_formspec_prepend(formSpec: Formspec): void
-    get_formspec_prepend(): Formspec
+    set_inventory_formspec(formSpec: string): void
+    get_inventory_formspec(): string
+    set_formspec_prepend(formSpec: string): void
+    get_formspec_prepend(): string
     get_player_control(): PlayerControl
     get_player_control_bits(): number
     set_physics_override(override: PhysicsOverride): void
@@ -1488,8 +1488,6 @@ declare global {
     z_index: number
     style: number
   }
-  
-  export type Formspec = string
   
   export interface TileAnimationDefinition {
     type: TileAnimationType
