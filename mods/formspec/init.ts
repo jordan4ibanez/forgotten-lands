@@ -215,6 +215,31 @@ namespace formSpec {
     }
   }
 
+  //? Image
+
+  export interface ImageDefinition {
+    position: Vec2
+    size: Vec2
+    texture: string
+    middle?: string
+  }
+
+  export class Image implements Element {
+    position: Vec2 = create(0,0)
+    size: Vec2 = create(0,0)
+    texture: string = ""
+    middle?: string
+    constructor(definition: ImageDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.texture = definition.texture
+      this.middle = definition.middle
+    }
+  }
+
+
+
+
 
   // ? Functional impelementation
 
@@ -305,6 +330,21 @@ namespace formSpec {
         const fontcolor = element.fontColor
 
         accumulator += "tooltip[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + text + ";" + bgcolor + ";" + fontcolor + "]\n"
+
+      } else if (element instanceof Image) {
+
+        const pos = element.position
+        const size = element.size
+        const texture = element.texture
+        const middle = element.middle
+
+        accumulator += "image[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + texture
+
+        if (middle) {
+          accumulator += ";" + middle
+        }
+
+        accumulator += "]\n"
 
       }
 
