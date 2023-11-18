@@ -348,6 +348,28 @@ namespace formSpec {
     }
   }
 
+  //? PasswordField
+
+  export interface PasswordFieldDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    label: string
+  }
+
+  export class PasswordField {
+    position: Vec2 = create(0,0)
+    size: Vec2 = create(0,0)
+    name: string = ""
+    label: string = ""
+    constructor(definition: PasswordFieldDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.label = definition.label
+    }
+  }
+
 
   // ? Functional impelementation
 
@@ -524,6 +546,17 @@ namespace formSpec {
         }
 
         accumulator += "]\n"
+
+      } else if (element instanceof PasswordField) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const label = element.label
+
+        accumulator += "pwdfield[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        name + ";" + label + "]\n"
+
       }
 
 
