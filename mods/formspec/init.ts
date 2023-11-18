@@ -267,7 +267,7 @@ namespace formSpec {
     size: Vec2
     name: string
     mesh: string
-    //! fixme: Make this an array!
+    //! fixme: Make this an array! Or maybe it can be both string | string[]
     textures: string
     rotation: Vec2
     continuous: boolean
@@ -281,7 +281,7 @@ namespace formSpec {
     size: Vec2 = create(0,0)
     name: string = ""
     mesh: string = ""
-    //! fixme: Make this an array!
+    //! fixme: Make this an array! Or maybe it can be both string | string[]
     textures: string = ""
     rotation: Vec2 = create(0,0)
     continuous: boolean = true
