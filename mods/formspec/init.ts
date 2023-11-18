@@ -302,6 +302,27 @@ namespace formSpec {
     }
   }
 
+  //? BGColor
+
+  export interface BGColorDefinition {
+    //! This one is quite confusing in docs
+    bgColor: string
+    fullScreen: boolean | string
+    fullScreenbgColor: string
+  }
+
+  export class BGColor {
+    //! This one is quite confusing in docs
+    bgColor: string = ""
+    fullScreen: boolean | string = true
+    fullScreenbgColor: string = ""
+    constructor(definition: BGColorDefinition) {
+      this.bgColor = definition.bgColor
+      this.fullScreen = definition.fullScreen
+      this.fullScreenbgColor = definition.fullScreenbgColor
+    }
+  }
+
 
   // ? Functional impelementation
 
@@ -446,6 +467,14 @@ namespace formSpec {
         name + ";" + mesh + ";" + textures + ";" + rotation.x + "," + rotation.y + ";" +
         continuous + ";" + mouseControl + ";" + frameLoopRange.x + "," + frameLoopRange.y + ";" +
         animationSpeed + "]\n"
+
+      } else if (element instanceof BGColor) {
+        const bgcolor = element.bgColor
+        const fullScreen = element.fullScreen
+        const fullScreenbgColor = element.fullScreenbgColor
+
+        accumulator += "bgcolor[" + bgcolor + ";" + fullScreen + ";" + fullScreenbgColor + "]\n"
+
       }
 
 
