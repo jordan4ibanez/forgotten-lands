@@ -94,10 +94,10 @@ do
         local ____self_elements_0 = self.elements
         ____self_elements_0[#____self_elements_0 + 1] = newElement
     end
-    formSpec.FormSpecContainer = __TS__Class()
-    local FormSpecContainer = formSpec.FormSpecContainer
-    FormSpecContainer.name = "FormSpecContainer"
-    function FormSpecContainer.prototype.____constructor(self, definition)
+    formSpec.Container = __TS__Class()
+    local Container = formSpec.Container
+    Container.name = "Container"
+    function Container.prototype.____constructor(self, definition)
         self.position = create(0, 0)
         self.elements = {}
         do
@@ -108,12 +108,12 @@ do
     formSpec.ScrollOrientation = ScrollOrientation or ({})
     formSpec.ScrollOrientation.vertical = "vertical"
     formSpec.ScrollOrientation.horizontal = "horizontal"
-    formSpec.FormSpecScollContainer = __TS__Class()
-    local FormSpecScollContainer = formSpec.FormSpecScollContainer
-    FormSpecScollContainer.name = "FormSpecScollContainer"
-    __TS__ClassExtends(FormSpecScollContainer, formSpec.FormSpecContainer)
-    function FormSpecScollContainer.prototype.____constructor(self, definition)
-        FormSpecScollContainer.____super.prototype.____constructor(self, {position = definition.position, elements = definition.elements})
+    formSpec.ScrollContainer = __TS__Class()
+    local ScrollContainer = formSpec.ScrollContainer
+    ScrollContainer.name = "ScrollContainer"
+    __TS__ClassExtends(ScrollContainer, formSpec.Container)
+    function ScrollContainer.prototype.____constructor(self, definition)
+        ScrollContainer.____super.prototype.____constructor(self, {position = definition.position, elements = definition.elements})
         self.size = create(0, 0)
         self.orientation = formSpec.ScrollOrientation.vertical
         self.factor = 0.1
@@ -123,17 +123,52 @@ do
         self.factor = definition.factor or 0.1
         self.name = definition.name
     end
+    formSpec.List = __TS__Class()
+    local List = formSpec.List
+    List.name = "List"
+    function List.prototype.____constructor(self, definition)
+        self.location = ""
+        self.listName = ""
+        self.position = create(0, 0)
+        self.size = create(0, 0)
+        self.startingIndex = 0
+        self.location = definition.location
+        self.listName = definition.listName
+        self.position = definition.position
+        self.size = definition.size
+        self.startingIndex = definition.startingIndex
+    end
+    formSpec.ListRing = __TS__Class()
+    local ListRing = formSpec.ListRing
+    ListRing.name = "ListRing"
+    function ListRing.prototype.____constructor(self, definition)
+        self.location = ""
+        self.listName = ""
+        self.location = definition.location
+        self.listName = definition.listName
+    end
     local function processElements(accumulator, elementArray)
         for ____, element in ipairs(elementArray) do
-            if __TS__InstanceOf(element, formSpec.FormSpecContainer) then
+            if __TS__InstanceOf(element, formSpec.Container) then
                 local pos = element.position
                 accumulator = accumulator .. ((("container[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. "]\n"
                 accumulator = accumulator .. "container_end[]\n"
-            elseif __TS__InstanceOf(element, formSpec.FormSpecScollContainer) then
+            elseif __TS__InstanceOf(element, formSpec.ScrollContainer) then
                 local pos = element.position
                 local size = element.size
                 accumulator = accumulator .. ((((((((((((("scroll_container[" .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. element.name) .. ";") .. element.orientation) .. ";") .. tostring(element.factor)) .. "]\n"
                 accumulator = accumulator .. "scroll_container_end[]\n"
+            elseif __TS__InstanceOf(element, formSpec.List) then
+                local location = element.location
+                local listName = element.listName
+                local pos = element.position
+                local size = element.size
+                local startingIndex = element.startingIndex
+                accumulator = accumulator .. ((((((((((((("list[" .. location) .. ";") .. listName) .. ";") .. tostring(pos.x)) .. ",") .. tostring(pos.y)) .. ";") .. tostring(size.x)) .. ",") .. tostring(size.y)) .. ";") .. tostring(startingIndex)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ListRing) then
+                local location = element.location
+                local listName = element.listName
+                accumulator = accumulator .. ((("listring[" .. location) .. ";") .. listName) .. "]\n"
             end
         end
         return accumulator
@@ -173,8 +208,39 @@ do
     generate(__TS__New(
         formSpec.FormSpec,
         {
-            size = create(8, 9),
-            elements = {}
+            size = create(8, 7.5),
+            elements = {
+                __TS__New(
+                    formSpec.List,
+                    {
+                        location = "current_player",
+                        listName = "craft",
+                        position = create(3, 0),
+                        size = create(3, 3),
+                        startingIndex = 1
+                    }
+                ),
+                __TS__New(
+                    formSpec.List,
+                    {
+                        location = "current_player",
+                        listName = "craftpreview",
+                        position = create(7, 1),
+                        size = create(1, 1),
+                        startingIndex = 1
+                    }
+                ),
+                __TS__New(
+                    formSpec.List,
+                    {
+                        location = "current_player",
+                        listName = "main",
+                        position = create(0, 3.5),
+                        size = create(8, 4),
+                        startingIndex = 1
+                    }
+                )
+            }
         }
     ))
 end

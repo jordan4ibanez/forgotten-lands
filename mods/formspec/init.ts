@@ -107,6 +107,7 @@ namespace formSpec {
   export interface ListDefinition {
     location: string,
     listName: string,
+    position: Vec2
     size: Vec2,
     startingIndex: number
   }
@@ -120,16 +121,37 @@ namespace formSpec {
     constructor(definition: ListDefinition) {
       this.location = definition.location
       this.listName = definition.listName
+      this.position = definition.position
       this.size = definition.size
       this.startingIndex = definition.startingIndex
     }
   }
 
-  //? This function will recurse.
+  //? ListRing
+
+  export interface ListRingDefinition {
+    location: string
+    listName: string
+  }
+
+  export class ListRing implements Element {
+    location: string = ""
+    listName: string = ""
+    constructor(definition: ListRingDefinition) {
+      this.location = definition.location
+      this.listName = definition.listName
+    }
+  }
+
+  // ? Functional impelementation
+
+  //* This function will recurse.
   function processElements(accumulator: string, elementArray: Element[]): string {
     // print(dump(elementArray))
     for (const element of elementArray) {
+
       if (element instanceof Container) {
+
         const pos = element.position
         accumulator += "container[" +  pos.x + "," + pos.y + "]\n"
         
@@ -139,6 +161,7 @@ namespace formSpec {
         accumulator += "container_end[]\n"
 
       } else if (element instanceof ScrollContainer) {
+
         const pos = element.position
         const size = element.size
         accumulator += "scroll_container[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
@@ -148,8 +171,31 @@ namespace formSpec {
         // accumulator = processElements(accumulator, element.elements)
 
         accumulator += "scroll_container_end[]\n"
+
+      } else if (element instanceof List) {
+
+        const location = element.location
+        const listName = element.listName
+        const pos = element.position
+        const size = element.size
+        const startingIndex = element.startingIndex
+
+        accumulator += "list[" + location + ";" + listName + ";" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + startingIndex + "]\n"
+
+      } else if (element instanceof ListRing) {
+
+        // listring[<inventory location>;<list name>]
+        const location = element.location
+        const listName = element.listName
+
+        accumulator += "listring[" + location + ";" + listName + "]\n"
+
       }
+
+
     }
+
+    
     return accumulator
   }
 
@@ -159,7 +205,6 @@ namespace formSpec {
     //* so this turns into a bunch of if-then checks in order.
     
     let accumulator = "formspec_version[7]\n"
-    print("running")
     if (d.size) {
       const fixed = (d.fixedSize) ? true : false
       const size = d.size
@@ -186,14 +231,50 @@ namespace formSpec {
   }
 
   generate(new FormSpec({
-    size: create(8,9),
+    size: create(8,7.5),
     elements: [
-      // new FormSpecContainer({
-      //   position: create(0,0),
-      //   elements: [
-
-      //   ]
-      // })
+      //! Craft area.
+      new List({
+        location: "current_player",
+        listName: "craft",
+        position: create(
+          3,
+          0
+        ),
+        size: create(
+          3,
+          3
+        ),
+        startingIndex: 1
+      }),
+      //! Craft output
+      new List({
+        location: "current_player",
+        listName: "craftpreview",
+        position: create(
+          7,
+          1
+        ),
+        size: create(
+          1,
+          1
+        ),
+        startingIndex: 1
+      }),
+      //! Main inventory.
+      new List({
+        location: "current_player",
+        listName: "main",
+        position: create(
+          0,
+          3.5
+        ),
+        size: create(
+          8,
+          4
+        ),
+        startingIndex: 1
+      }),
     ]
   }))
 
