@@ -105,9 +105,7 @@ namespace formSpec {
   //? List
 
 
-
-
-  export class FormSpecList implements Element {
+  export class List implements Element {
     location: string = ""
     listName: string = ""
     position: Vec2 = create(0,0)
