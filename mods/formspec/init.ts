@@ -511,9 +511,9 @@ namespace formSpec {
         const middle = element.middle
 
         if (middle) {
-          "background9["
+          accumulator += "background9["
         } else {
-          "background["
+          accumulator += "background["
         }
 
         accumulator += pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
