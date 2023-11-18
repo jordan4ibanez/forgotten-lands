@@ -13,6 +13,10 @@ namespace formSpec {
 
   const create = vector.create2d;
 
+  function sVec(input: Vec2): string {
+    return input.x + "," + input.y
+  }
+
   //? Definition root.
 
   export interface FormsSpecDefinition {
