@@ -104,6 +104,12 @@ namespace formSpec {
 
   //? List
 
+  export interface ListDefinition {
+    location: string,
+    listName: string,
+    size: Vec2,
+    startingIndex: number
+  }
 
   export class List implements Element {
     location: string = ""
@@ -111,6 +117,12 @@ namespace formSpec {
     position: Vec2 = create(0,0)
     size: Vec2 = create(0,0)
     startingIndex: number = 0
+    constructor(definition: ListDefinition) {
+      this.location = definition.location
+      this.listName = definition.listName
+      this.size = definition.size
+      this.startingIndex = definition.startingIndex
+    }
   }
 
   //? This function will recurse.
