@@ -454,6 +454,44 @@ namespace formSpec {
     }
   }
 
+  //? HyperText
+
+  export interface HyperTextDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    text: string
+  }
+
+  export class HyperText implements Element {
+    position: Vec2
+    size: Vec2
+    name: string
+    text: string
+    constructor(definition: HyperTextDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.text = definition.text
+    }
+  }
+
+  //? VertLabel
+
+  export interface VertLabelDefinition {
+    position: Vec2
+    label: string
+  }
+
+  export class VertLabel implements Element {
+    position: Vec2
+    label: string
+    constructor(definition: VertLabelDefinition) {
+      this.position = definition.position
+      this.label = definition.label
+    }
+  }
+
 
 
 
@@ -682,10 +720,28 @@ namespace formSpec {
         name + ";" + label + ";" + def + "]\n"
 
       } else if (element instanceof Label) {
+
         const pos = element.position
         const label = element.label
 
         accumulator += "label[" + pos.x + "," + pos.y + ";" + label + "]\n"
+
+      } else if (element instanceof HyperText) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const text = element.text
+
+        accumulator += "hypertext[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
+        name + ";" + text + "]\n"
+
+      } else if (element instanceof VertLabel) {
+
+        const pos = element.position
+        const label = element.label
+
+        accumulator += "vertlabel[" + pos.x + "," + pos.y + ";" + label + "]\n"
 
       }
 
