@@ -124,10 +124,6 @@ export interface minetest {
   spawn_falling_node(position: Vec3): [boolean, ObjectRef] | boolean
   find_nodes_with_meta(pos1: Vec3, pos2: Vec3): Vec3[]
   get_meta(position: Vec3): MetaData
-  set_inventory_formspec(formspec: string): void
-  get_inventory_formspec(): string
-  set_formspec_prepend(formspec: string): void
-  get_formspec_prepend(): string
   get_node_timer(position: Vec3): NodeTimerObject
   add_entity(position: Vec3, entityName: string, staticData?: string): ObjectRef | null
   add_item(position: Vec3, item: ItemStackObject | string): ObjectRef
