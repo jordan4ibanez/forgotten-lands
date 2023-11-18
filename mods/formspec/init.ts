@@ -397,7 +397,7 @@ namespace formSpec {
 
   //? FieldEnterAfterEdit
 
-  export class FieldEnterAfterEdit {
+  export class FieldEnterAfterEdit implements Element {
     name: string
     constructor(name: string) {
       this.name = name
@@ -406,7 +406,7 @@ namespace formSpec {
 
   //? FieldCloseOnEnter
 
-  export class FieldCloseOnEnter {
+  export class FieldCloseOnEnter implements Element {
     name: string
     constructor(name: string) {
       this.name = name
@@ -423,7 +423,7 @@ namespace formSpec {
     default: string
   }
 
-  export class TextArea {
+  export class TextArea implements Element {
     position: Vec2
     size: Vec2
     name: string
@@ -445,7 +445,7 @@ namespace formSpec {
     label: string
   }
 
-  export class Label {
+  export class Label implements Element {
     position: Vec2
     label: string
     constructor(definition: LabelDefinition) {
@@ -686,7 +686,7 @@ namespace formSpec {
         const label = element.label
 
         accumulator += "label[" + pos.x + "," + pos.y + ";" + label + "]\n"
-        
+
       }
 
 
