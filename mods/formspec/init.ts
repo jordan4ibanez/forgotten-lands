@@ -22,7 +22,7 @@ namespace formSpec {
     anchor?: Vec2
     padding?: Vec2
     disablePrepend?: boolean
-    elements: FormSpecElement[]
+    elements: Element[]
   }
 
   export class FormSpec {
@@ -32,7 +32,7 @@ namespace formSpec {
     anchor?: Vec2
     padding?: Vec2
     disablePrepend?: boolean
-    elements: FormSpecElement[] = []
+    elements: Element[] = []
 
     constructor(definition: FormsSpecDefinition) {
       this.size = definition.size
@@ -44,28 +44,28 @@ namespace formSpec {
       this.elements = definition.elements
     }
 
-    attachElement(newElement: FormSpecElement): void {
+    attachElement(newElement: Element): void {
       this.elements.push(newElement)
     }
   }
 
   //? Element prototype.
 
-  interface FormSpecElement {
+  interface Element {
 
   }
 
   //? Container
 
-  export interface FormSpecContainerDefinition {
+  export interface ContainerDefinition {
     position: Vec2
-    elements: FormSpecElement[]
+    elements: Element[]
   }
 
-  export class FormSpecContainer implements FormSpecElement {
+  export class Container implements Element {
     position: Vec2 = create(0,0)
-    elements: FormSpecElement[] = []
-    constructor(definition: FormSpecContainerDefinition) {
+    elements: Element[] = []
+    constructor(definition: ContainerDefinition) {
       this.position = definition.position,
       this.elements = definition.elements
     }
@@ -78,19 +78,19 @@ namespace formSpec {
     horizontal = "horizontal"
   }
 
-  export interface FormSpecScrollContainerDefinition extends FormSpecContainerDefinition {
+  export interface ScrollContainerDefinition extends ContainerDefinition {
     size: Vec2
     orientation: ScrollOrientation
     factor?: number
     name: string
   }
 
-  export class FormSpecScollContainer extends FormSpecContainer {
+  export class ScrollContainer extends Container {
     size: Vec2 = create(0,0)
     orientation: ScrollOrientation = ScrollOrientation.vertical
     factor: number = 0.1
     name: string = "placeHolder"
-    constructor(definition: FormSpecScrollContainerDefinition) {
+    constructor(definition: ScrollContainerDefinition) {
       super({
         position: definition.position,
         elements: definition.elements
@@ -104,19 +104,22 @@ namespace formSpec {
 
   //? List
 
-  export interface FormSpecList extends FormSpecElement {
-    location: string
-    listName: string
-    position: Vec2
-    size: Vec2
-    startingIndex: number
+
+
+
+  export class FormSpecList implements Element {
+    location: string = ""
+    listName: string = ""
+    position: Vec2 = create(0,0)
+    size: Vec2 = create(0,0)
+    startingIndex: number = 0
   }
 
   //? This function will recurse.
-  function processElements(accumulator: string, elementArray: FormSpecElement[]): string {
+  function processElements(accumulator: string, elementArray: Element[]): string {
     // print(dump(elementArray))
     for (const element of elementArray) {
-      if (element instanceof FormSpecContainer) {
+      if (element instanceof Container) {
         const pos = element.position
         accumulator += "container[" +  pos.x + "," + pos.y + "]\n"
         
@@ -125,7 +128,7 @@ namespace formSpec {
 
         accumulator += "container_end[]\n"
 
-      } else if (element instanceof FormSpecScollContainer) {
+      } else if (element instanceof ScrollContainer) {
         const pos = element.position
         const size = element.size
         accumulator += "scroll_container[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" +
