@@ -237,8 +237,30 @@ namespace formSpec {
     }
   }
 
+  //? AnimatedImage
 
+  export interface AnimatedImageDefinition extends ImageDefinition {
+    name: string
+    frameCount: number
+    frameDuration: number
+    frameStart: number
+  }
 
+  export class AnimatedImage extends Image {
+    name: string = ""
+    frameCount: number = 0
+    frameDuration: number = 0
+    frameStart: number = 0
+    constructor(definition: AnimatedImageDefinition) {
+      super(definition)
+      this.name = definition.name
+      this.frameCount = definition.frameCount
+      this.frameDuration = definition.frameDuration
+      this.frameStart = definition.frameStart
+    }
+  }
+  
+  
 
 
   // ? Functional impelementation
@@ -339,6 +361,28 @@ namespace formSpec {
         const middle = element.middle
 
         accumulator += "image[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + texture
+
+        if (middle) {
+          accumulator += ";" + middle
+        }
+
+        accumulator += "]\n"
+
+      } else if (element instanceof AnimatedImage) {
+
+        //animated_image[<X>,<Y>;<W>,<H>;<name>;<texture name>;<frame count>;<frame duration>;<frame start>;<middle>]
+
+        const pos = element.position
+        const size = element.size
+        const texture = element.texture
+        const name = element.name
+        const frameCount = element.frameCount
+        const frameDuration = element.frameDuration
+        const frameStart = element.frameStart
+        const middle = element.middle
+
+        accumulator += "animated_image[" + pos.x + "," + pos.y + ";" + size.x + "," + size.y + ";" + 
+        name + ";" + texture + ";" + frameCount + ";" + frameDuration + ";" + frameStart
 
         if (middle) {
           accumulator += ";" + middle
