@@ -791,8 +791,8 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! Fixme: This should be an array!
-    cellList: string
+    //! Fixme: This might be an enum!
+    cells: string[]
     selectedIndex: number
   }
 
@@ -800,14 +800,14 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! Fixme: This should be an array!
-    cellList: string
+    //! Fixme: This might be an enum!
+    cells: string[]
     selectedIndex: number
     constructor(definition: TableDefinition) {
       this.position = definition.position
       this.size = definition.size
       this.name = definition.name
-      this.cellList = definition.cellList
+      this.cells = definition.cells
       this.selectedIndex = definition.selectedIndex
     }
   }
@@ -1251,7 +1251,9 @@ namespace formSpec {
         const pos = element.position
         const size = element.size
         const name = element.name
-        const cellList = element.cellList
+
+        const cellList = arrayToString(element.cells)
+
         const selectedIndex = element.selectedIndex
 
         accumulator += "table[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + cellList + ";" + selectedIndex + "]\n"
