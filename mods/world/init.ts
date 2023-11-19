@@ -304,4 +304,6 @@ namespace world {
       })
     }
   }
+
+  utility.loadFiles(["ores"])
 }
