@@ -751,6 +751,43 @@ namespace formSpec {
     }
   }
 
+  //? ScrollBarOptions
+
+  export class ScrollBarOptions implements Element{
+    //! Fixme: This should be an array!
+    options: string
+    constructor(options: string) {
+      this.options = options
+    }
+  }
+
+  //? Table
+
+  export interface TableDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! Fixme: This should be an array!
+    cellList: string
+    selectedIndex: number
+  }
+
+  export class Table implements Element {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! Fixme: This should be an array!
+    cellList: string
+    selectedIndex: number
+    constructor(definition: TableDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.cellList = definition.cellList
+      this.selectedIndex = definition.selectedIndex
+    }
+  }
+
 
   // ? Functional implementation
 
@@ -1114,7 +1151,28 @@ namespace formSpec {
       
         accumulator += "scrollbar[" + sVec(pos) + ";" + sVec(size) + ";" + orientation + ";" +
         name + ";" + value + "]\n"
+
+      } else if (element instanceof ScrollBarOptions) {
+
+        const options = element.options
+
+        accumulator += "scrollbaroptions[" + options + "]\n"
+
+      } else if (element instanceof Table) {
+
+        // table[<X>,<Y>;<W>,<H>;<name>;<cell 1>,<cell 2>,...,<cell n>;<selected idx>]
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const cellList = element.cellList
+        const selectedIndex = element.selectedIndex
+
+        accumulator += "table[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + cellList + ";" + selectedIndex + "]\n"
+
       }
+
+
       
 
 
