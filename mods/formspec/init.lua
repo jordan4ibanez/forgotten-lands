@@ -349,6 +349,150 @@ do
         ImageButton.____super.prototype.____constructor(self, definition)
         self.texture = definition.texture
     end
+    formSpec.ImageButtonAdvanced = __TS__Class()
+    local ImageButtonAdvanced = formSpec.ImageButtonAdvanced
+    ImageButtonAdvanced.name = "ImageButtonAdvanced"
+    __TS__ClassExtends(ImageButtonAdvanced, formSpec.ImageButton)
+    function ImageButtonAdvanced.prototype.____constructor(self, definition)
+        ImageButtonAdvanced.____super.prototype.____constructor(self, definition)
+        self.noClip = definition.noClip
+        self.drawBorder = definition.drawBorder
+        self.pressedTexture = definition.pressedTexture
+    end
+    formSpec.ItemImageButton = __TS__Class()
+    local ItemImageButton = formSpec.ItemImageButton
+    ItemImageButton.name = "ItemImageButton"
+    function ItemImageButton.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.itemName = definition.itemName
+        self.name = definition.name
+        self.label = definition.label
+    end
+    formSpec.ButtonExit = __TS__Class()
+    local ButtonExit = formSpec.ButtonExit
+    ButtonExit.name = "ButtonExit"
+    __TS__ClassExtends(ButtonExit, formSpec.Button)
+    function ButtonExit.prototype.____constructor(self, ...)
+        ButtonExit.____super.prototype.____constructor(self, ...)
+        self.nothing = false
+    end
+    formSpec.ImageButtonExit = __TS__Class()
+    local ImageButtonExit = formSpec.ImageButtonExit
+    ImageButtonExit.name = "ImageButtonExit"
+    __TS__ClassExtends(ImageButtonExit, formSpec.ImageButton)
+    function ImageButtonExit.prototype.____constructor(self, ...)
+        ImageButtonExit.____super.prototype.____constructor(self, ...)
+        self.nothing = false
+    end
+    formSpec.TextList = __TS__Class()
+    local TextList = formSpec.TextList
+    TextList.name = "TextList"
+    function TextList.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.listOfItems = definition.listOfItems
+        self.selectedIndex = definition.selectedIndex
+        self.transparent = definition.transparent
+    end
+    formSpec.TabHeader = __TS__Class()
+    local TabHeader = formSpec.TabHeader
+    TabHeader.name = "TabHeader"
+    function TabHeader.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.listOfCaptions = definition.listOfCaptions
+        self.currentTab = definition.currentTab
+        self.transparent = definition.transparent
+        self.drawBorder = definition.drawBorder
+    end
+    formSpec.Box = __TS__Class()
+    local Box = formSpec.Box
+    Box.name = "Box"
+    function Box.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.color = definition.color
+    end
+    formSpec.DropDown = __TS__Class()
+    local DropDown = formSpec.DropDown
+    DropDown.name = "DropDown"
+    function DropDown.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.itemList = definition.itemList
+        self.selectedIndex = definition.selectedIndex
+        self.indexEvent = definition.indexEvent
+    end
+    formSpec.CheckBox = __TS__Class()
+    local CheckBox = formSpec.CheckBox
+    CheckBox.name = "CheckBox"
+    function CheckBox.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.name = definition.name
+        self.label = definition.label
+        self.selected = definition.selected
+    end
+    formSpec.ScrollBar = __TS__Class()
+    local ScrollBar = formSpec.ScrollBar
+    ScrollBar.name = "ScrollBar"
+    function ScrollBar.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.orientation = definition.orientation
+        self.name = definition.name
+        self.value = definition.value
+    end
+    formSpec.ScrollBarOptions = __TS__Class()
+    local ScrollBarOptions = formSpec.ScrollBarOptions
+    ScrollBarOptions.name = "ScrollBarOptions"
+    function ScrollBarOptions.prototype.____constructor(self, options)
+        self.scrollBarOptions = options
+    end
+    formSpec.Table = __TS__Class()
+    local Table = formSpec.Table
+    Table.name = "Table"
+    function Table.prototype.____constructor(self, definition)
+        self.position = definition.position
+        self.size = definition.size
+        self.name = definition.name
+        self.cellList = definition.cellList
+        self.selectedIndex = definition.selectedIndex
+    end
+    formSpec.TableOptions = __TS__Class()
+    local TableOptions = formSpec.TableOptions
+    TableOptions.name = "TableOptions"
+    function TableOptions.prototype.____constructor(self, options)
+        self.tableOptions = options
+    end
+    formSpec.TableColumns = __TS__Class()
+    local TableColumns = formSpec.TableColumns
+    TableColumns.name = "TableColumns"
+    function TableColumns.prototype.____constructor(self, columns)
+        self.tableColumns = columns
+    end
+    formSpec.Style = __TS__Class()
+    local Style = formSpec.Style
+    Style.name = "Style"
+    function Style.prototype.____constructor(self, styleThings)
+        self.styleThings = styleThings
+    end
+    formSpec.StyleType = __TS__Class()
+    local StyleType = formSpec.StyleType
+    StyleType.name = "StyleType"
+    function StyleType.prototype.____constructor(self, styleTypes)
+        self.styleTypes = styleTypes
+    end
+    formSpec.SetFocus = __TS__Class()
+    local SetFocus = formSpec.SetFocus
+    SetFocus.name = "SetFocus"
+    function SetFocus.prototype.____constructor(self, definition)
+        self.name = definition.name
+        self.force = definition.force
+    end
     local function processElements(accumulator, elementArray)
         for ____, element in ipairs(elementArray) do
             if __TS__InstanceOf(element, formSpec.Container) then
@@ -518,6 +662,98 @@ do
                 local name = element.name
                 local label = element.label
                 accumulator = accumulator .. ((((((((("button[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. texture) .. ";") .. name) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ImageButtonAdvanced) then
+                local pos = element.position
+                local size = element.size
+                local texture = element.texture
+                local name = element.name
+                local label = element.label
+                local noClip = element.noClip
+                local drawBorder = element.drawBorder
+                local pressedTexture = element.pressedTexture
+                accumulator = accumulator .. ((((((((((((((("button[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. texture) .. ";") .. name) .. ";") .. label) .. ";") .. tostring(noClip)) .. ";") .. tostring(drawBorder)) .. ";") .. pressedTexture) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ItemImageButton) then
+                local pos = element.position
+                local size = element.size
+                local itemName = element.itemName
+                local name = element.name
+                local label = element.label
+                accumulator = accumulator .. ((((((((("item_image_button[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. itemName) .. ";") .. name) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ButtonExit) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local label = element.label
+                accumulator = accumulator .. ((((((("button_exit[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. label) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.TextList) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local listOfItems = element.listOfItems
+                local selectedIndex = element.selectedIndex
+                local transparent = element.transparent
+                accumulator = accumulator .. ((((((((((("textlist[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. listOfItems) .. ";") .. tostring(selectedIndex)) .. ";") .. tostring(transparent)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.TabHeader) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local listOfCaptions = element.listOfCaptions
+                local currentTab = element.currentTab
+                local transparent = element.transparent
+                local drawBorder = element.drawBorder
+                accumulator = accumulator .. ((((((((((((("tabheader[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. listOfCaptions) .. ";") .. tostring(currentTab)) .. ";") .. tostring(transparent)) .. ";") .. tostring(drawBorder)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Box) then
+                local pos = element.position
+                local size = element.size
+                local color = element.color
+                accumulator = accumulator .. ((((("box[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. color) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.DropDown) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local itemList = element.itemList
+                local selectedIndex = element.selectedIndex
+                local indexEvent = element.indexEvent
+                accumulator = accumulator .. ((((((((((("dropdown[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. itemList) .. ";") .. tostring(selectedIndex)) .. ";") .. tostring(indexEvent)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.CheckBox) then
+                local pos = element.position
+                local name = element.name
+                local label = element.label
+                local selected = element.selected
+                accumulator = accumulator .. ((((((("checkbox[" .. sVec(pos)) .. ";") .. name) .. ";") .. label) .. ";") .. tostring(selected)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ScrollBar) then
+                local pos = element.position
+                local size = element.size
+                local orientation = element.orientation
+                local name = element.name
+                local value = element.value
+                accumulator = accumulator .. ((((((((("scrollbar[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. orientation) .. ";") .. name) .. ";") .. value) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.ScrollBarOptions) then
+                local options = element.scrollBarOptions
+                accumulator = accumulator .. ("scrollbaroptions[" .. options) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Table) then
+                local pos = element.position
+                local size = element.size
+                local name = element.name
+                local cellList = element.cellList
+                local selectedIndex = element.selectedIndex
+                accumulator = accumulator .. ((((((((("table[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. cellList) .. ";") .. tostring(selectedIndex)) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.TableOptions) then
+                local options = element.tableOptions
+                accumulator = accumulator .. ("tableoptions[" .. options) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.TableColumns) then
+                local columns = element.tableColumns
+                accumulator = accumulator .. ("tablecolumns[" .. columns) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.Style) then
+                local styleThings = element.styleThings
+                accumulator = accumulator .. ("style[" .. styleThings) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.StyleType) then
+                local styleTypes = element.styleTypes
+                accumulator = accumulator .. ("style_type[" .. styleTypes) .. "]\n"
+            elseif __TS__InstanceOf(element, formSpec.SetFocus) then
+                local name = element.name
+                local force = element.force
+                accumulator = accumulator .. ((("set_focus[" .. name) .. ";") .. tostring(force)) .. "]\n"
             end
         end
         return accumulator
