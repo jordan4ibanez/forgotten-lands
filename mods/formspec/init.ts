@@ -651,8 +651,8 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! fixme: this should be an array!
-    listOfCaptions: string
+    //! Fixme: This might be an enum!
+    captions: string[]
     currentTab: number
     transparent: boolean
     drawBorder: boolean
@@ -662,8 +662,8 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! fixme: this should be an array!
-    listOfCaptions: string
+    //! Fixme: This might be an enum!
+    captions: string[]
     currentTab: number
     transparent: boolean
     drawBorder: boolean
@@ -671,7 +671,7 @@ namespace formSpec {
       this.position = definition.position
       this.size = definition.size
       this.name = definition.name
-      this.listOfCaptions = definition.listOfCaptions
+      this.captions = definition.captions
       this.currentTab = definition.currentTab
       this.transparent = definition.transparent
       this.drawBorder = definition.drawBorder
@@ -1185,7 +1185,9 @@ namespace formSpec {
         const pos = element.position
         const size = element.size
         const name = element.name
-        const listOfCaptions = element.listOfCaptions
+
+        const listOfCaptions = arrayToString(element.captions)
+
         const currentTab = element.currentTab
         const transparent = element.transparent
         const drawBorder = element.drawBorder
