@@ -808,7 +808,41 @@ namespace formSpec {
     }
   }
 
+  //? Style
 
+  export class Style implements Element {
+    //! Fixme: This should be an array!
+    styleThings: string
+    constructor(styleThings: string) {
+      this.styleThings = styleThings
+    }
+  }
+
+  //? StyleType
+
+  export class StyleType implements Element {
+    //! Fixme: this should be an array!
+    styleTypes: string
+    constructor(styleTypes: string) {
+      this.styleTypes = styleTypes
+    }
+  }
+
+  //? SetFocus
+
+  export interface SetFocusDefinition {
+    name: string
+    force: boolean
+  }
+
+  export class SetFocus implements Element {
+    name: string
+    force: boolean
+    constructor(definition: SetFocusDefinition) {
+      this.name = definition.name
+      this.force = definition.force
+    }
+  }
 
 
   // ? Functional implementation
@@ -1203,6 +1237,25 @@ namespace formSpec {
         const columns = element.tableColumns
 
         accumulator += "tablecolumns[" + columns + "]\n"
+
+      } else if (element instanceof Style) {
+
+        const styleThings = element.styleThings
+
+        accumulator += "style[" + styleThings + "]\n"
+
+      } else if (element instanceof StyleType) {
+
+        const styleTypes = element.styleTypes
+
+        accumulator += "style_type[" + styleTypes + "]\n"
+
+      } else if (element instanceof SetFocus) {
+
+        const name = element.name
+        const force = element.force
+
+        accumulator += "set_focus[" + name + ";" + force + "]\n"
 
       }
 
