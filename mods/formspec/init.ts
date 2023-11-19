@@ -778,9 +778,9 @@ namespace formSpec {
   //? ScrollBarOptions
 
   export class ScrollBarOptions implements Element {
-    //! Fixme: This should be an array!
-    scrollBarOptions: string
-    constructor(options: string) {
+    //! Fixme: This might be an enum!
+    scrollBarOptions: string[]
+    constructor(options: string[]) {
       this.scrollBarOptions = options
     }
   }
@@ -1240,7 +1240,7 @@ namespace formSpec {
 
       } else if (element instanceof ScrollBarOptions) {
 
-        const options = element.scrollBarOptions
+        const options = arrayToString(element.scrollBarOptions)
 
         accumulator += "scrollbaroptions[" + options + "]\n"
 
