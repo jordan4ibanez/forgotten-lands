@@ -753,12 +753,11 @@ namespace formSpec {
 
   //? ScrollBarOptions
 
-  export class ScrollBarOptions implements Element{
-    hidden = "ScrollBarOptions"
+  export class ScrollBarOptions implements Element {
     //! Fixme: This should be an array!
-    options: string
+    scrollBarOptions: string
     constructor(options: string) {
-      this.options = options
+      this.scrollBarOptions = options
     }
   }
 
@@ -792,13 +791,23 @@ namespace formSpec {
   //? TableOptions
 
   export class TableOptions implements Element {
-    hidden = "TableOptions"
     //! Fixme: This should be an array!
-    options: string
+    tableOptions: string
     constructor(options: string) {
-      this.options = options
+      this.tableOptions = options
     }
   }
+
+  //? TableColumns
+
+  export class TableColumns implements Element {
+    //! Fixme: This should be an array!
+    tableColumns: string
+    constructor(columns: string) {
+      this.tableColumns = columns
+    }
+  }
+
 
 
 
@@ -1167,7 +1176,7 @@ namespace formSpec {
 
       } else if (element instanceof ScrollBarOptions) {
 
-        const options = element.options
+        const options = element.scrollBarOptions
 
         accumulator += "scrollbaroptions[" + options + "]\n"
 
@@ -1185,9 +1194,15 @@ namespace formSpec {
 
       } else if (element instanceof TableOptions) {
 
-        const options = element.options
+        const options = element.tableOptions
         
         accumulator += "tableoptions[" + options + "]\n"
+
+      } else if (element instanceof TableColumns) {
+
+        const columns = element.tableColumns
+
+        accumulator += "tablecolumns[" + columns + "]\n"
 
       }
 
