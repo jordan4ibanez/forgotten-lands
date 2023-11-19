@@ -22,6 +22,25 @@ namespace formSpec {
     return input.x + "," + input.y
   }
 
+  /**
+   * Convert an array into a single string representation.
+   * @param input Array of strings.
+   * @returns Array as single string concatenated with ","
+   */
+  function arrayToString(input: string[]): string {
+    let temp = ""
+    let index = 0
+    for (const value of input) {
+      if (index != 0) {
+        temp += ","
+      }
+      temp += value
+      index++
+    }
+    return temp
+  }
+
+
   //? Definition root.
 
   export interface FormsSpecDefinition {
