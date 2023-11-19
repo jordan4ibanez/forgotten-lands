@@ -610,14 +610,14 @@ namespace formSpec {
 
   export class ButtonExit extends Button {
     //* Placeholder because I'm not sure minetest JIT impl will work with pure extension.
-    nothing: boolean = false
+    buttonExit: boolean = false
   }
 
   //? ImageButtonExit
 
   export class ImageButtonExit extends ImageButton {
     //* Placeholder because I'm not sure minetest JIT impl will work with pure extension.
-    nothing: boolean = false
+    imageButtonExit: boolean = false
   }
 
   //? TextList
