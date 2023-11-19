@@ -44,7 +44,7 @@ do
         if spec == nil then
             spec = {}
         end
-        spec.footstep = spec.footstep or ({name = "stone_step", gain = 0.4})
+        spec.footstep = spec.footstep or ({name = "stone_step", gain = 0.25})
         spec.dig = spec.dig or ({name = "stone_dig", gain = 0.75})
         spec.dug = spec.dug or ({name = "stone_dug", gain = 1})
         spec.place = spec.place or ({name = "stone_dug", gain = 0.8})

@@ -48,7 +48,7 @@ namespace sounds {
     if (spec == null) {
       spec = {}
     }
-    spec.footstep = spec.footstep || {name: "stone_step", gain: 0.4}
+    spec.footstep = spec.footstep || {name: "stone_step", gain: 0.25}
     spec.dig =      spec.dig      || {name: "stone_dig", gain: 0.75}
     spec.dug =      spec.dug      || {name: "stone_dug", gain: 1.0}
     spec.place =    spec.place    || {name: "stone_dug", gain: 0.8}
