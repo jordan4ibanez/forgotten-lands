@@ -212,11 +212,11 @@ namespace formSpec {
   }
 
   export class ElementToolTip implements Element {
-    guiElementName: string = ""
-    text: string = ""
+    guiElementName: string
+    text: string
     //! Note: This is optional in spec but I don't feel like it at the moment.
-    bgColor: string = ""
-    fontColor: string = ""
+    bgColor: string
+    fontColor: string
     constructor(definition: ElementToolTipDefinition) {
       this.guiElementName = definition.guiElementName
       this.text = definition.text
@@ -236,11 +236,11 @@ namespace formSpec {
   }
 
   export class AreaToolTip implements Element {
-    position: Vec2 = create(0,0)
-    size: Vec2 = create(0,0)
-    text: string = ""
-    bgColor: string = ""
-    fontColor: string = ""
+    position: Vec2
+    size: Vec2
+    text: string
+    bgColor: string
+    fontColor: string
     constructor(definition: AreaToolTipDefinition) {
       this.position = definition.position
       this.size = definition.size
@@ -260,9 +260,9 @@ namespace formSpec {
   }
 
   export class Image implements Element {
-    position: Vec2 = create(0,0)
-    size: Vec2 = create(0,0)
-    texture: string = ""
+    position: Vec2
+    size: Vec2
+    texture: string
     middle?: string
     constructor(definition: ImageDefinition) {
       this.position = definition.position
@@ -282,10 +282,10 @@ namespace formSpec {
   }
 
   export class AnimatedImage extends Image {
-    name: string = ""
-    frameCount: number = 0
-    frameDuration: number = 0
-    frameStart: number = 0
+    name: string
+    frameCount: number
+    frameDuration: number
+    frameStart: number
     constructor(definition: AnimatedImageDefinition) {
       super(definition)
       this.name = definition.name
@@ -346,9 +346,9 @@ namespace formSpec {
 
   export class BGColor implements Element{
     //! This one is quite confusing in docs
-    bgColor: string = ""
-    fullScreen: boolean | string = true
-    fullScreenbgColor: string = ""
+    bgColor: string
+    fullScreen: boolean | string
+    fullScreenbgColor: string
     constructor(definition: BGColorDefinition) {
       this.bgColor = definition.bgColor
       this.fullScreen = definition.fullScreen
@@ -367,9 +367,9 @@ namespace formSpec {
   }
 
   export class Background  implements Element {
-    position: Vec2 = create(0,0)
-    size: Vec2 = create(0,0)
-    texture: string = ""
+    position: Vec2
+    size: Vec2
+    texture: string
     autoclip?: boolean
     middle?: string
     constructor(definition: BackgroundDefinition) {
@@ -391,10 +391,10 @@ namespace formSpec {
   }
 
   export class PasswordField implements Element {
-    position: Vec2 = create(0,0)
-    size: Vec2 = create(0,0)
-    name: string = ""
-    label: string = ""
+    position: Vec2
+    size: Vec2 
+    name: string
+    label: string
     constructor(definition: PasswordFieldDefinition) {
       this.position = definition.position
       this.size = definition.size
@@ -416,9 +416,9 @@ namespace formSpec {
   export class Field implements Element{
     position?: Vec2
     size?: Vec2
-    name: string = ""
-    label: string = ""
-    default: string = ""
+    name: string
+    label: string
+    default: string
     constructor(definition: FieldDefinition) {
       this.position = definition.position
       this.size = definition.size
