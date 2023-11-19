@@ -621,8 +621,8 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! Fixme: This should be an array!
-    listOfItems: string
+    //! Fixme: This might be an enum!
+    items: string[]
     selectedIndex: number
     transparent: boolean
   }
@@ -631,15 +631,15 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! Fixme: This should be an array!
-    listOfItems: string
+    //! Fixme: This might be an enum!
+    items: string[]
     selectedIndex: number
     transparent: boolean
     constructor(definition: TextListDefinition) {
       this.position = definition.position
       this.size = definition.size
       this.name = definition.name
-      this.listOfItems = definition.listOfItems
+      this.items = definition.items
       this.selectedIndex = definition.selectedIndex
       this.transparent = definition.transparent
     }
@@ -1171,7 +1171,9 @@ namespace formSpec {
         const pos = element.position
         const size = element.size
         const name = element.name
-        const listOfItems = element.listOfItems
+
+        const listOfItems = arrayToString(element.items)
+
         const selectedIndex = element.selectedIndex
         const transparent = element.transparent
 
