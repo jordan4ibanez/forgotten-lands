@@ -654,7 +654,24 @@ namespace formSpec {
     }
   }
 
+  //? Box
 
+  export interface BoxDefinition {
+    position: Vec2
+    size: Vec2
+    color: string
+  }
+
+  export class Box implements Element {
+    position: Vec2
+    size: Vec2
+    color: string
+    constructor(definition: BoxDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.color = definition.color
+    }
+  }
 
 
   // ? Functional implementation
@@ -979,6 +996,14 @@ namespace formSpec {
         accumulator += "tabheader[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + listOfCaptions + ";" +
         currentTab + ";" + transparent + ";" + drawBorder + "]\n"
 
+      } else if (element instanceof Box) {
+
+        const pos = element.position
+        const size = element.size
+        const color = element.color
+
+        accumulator += "box[" + sVec(pos) + ";" + sVec(size) + ";" + color + "]\n"
+        
       }
 
 
