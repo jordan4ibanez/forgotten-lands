@@ -532,7 +532,53 @@ namespace formSpec {
     }
   }
 
-  //! note: was on image_button[<X>,<Y>;<W>,<H>;<texture name>;<name>;<label>;<noclip>;<drawborder>;<pressed texture name>]
+  //? ImageButtonAdvanced
+
+  export interface ImageButtonAdvancedDefinition extends ImageButtonDefinition {
+    noClip: boolean
+    drawBorder: boolean
+    pressedTexture: string
+  }
+
+  export class ImageButtonAdvanced extends ImageButton {
+    noClip: boolean
+    drawBorder: boolean
+    pressedTexture: string
+    constructor(definition: ImageButtonAdvancedDefinition) {
+      super(definition)
+      this.noClip = definition.noClip
+      this.drawBorder = definition.drawBorder
+      this.pressedTexture = definition.pressedTexture
+    }
+  }
+
+  //? ItemImageButton
+
+  export interface ItemImageButtonDefinition {
+    position: Vec2
+    size: Vec2
+    itemName: string
+    name: string
+    label: string
+  }
+
+  export class ItemImageButton implements Element {
+    position: Vec2
+    size: Vec2
+    itemName: string
+    name: string
+    label: string
+    constructor(definition: ItemImageButtonDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.itemName = definition.itemName
+      this.name = definition.name
+      this.label = definition.label
+    }
+  }
+
+
+
 
 
   // ? Functional implementation
@@ -798,7 +844,33 @@ namespace formSpec {
 
         accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + texture + ";" + name + ";" + label + "]\n"
 
+      } else if (element instanceof ImageButtonAdvanced) {
+
+        const pos = element.position
+        const size = element.size
+        const texture = element.texture
+        const name = element.name
+        const label = element.label
+        const noClip = element.noClip
+        const drawBorder = element.drawBorder
+        const pressedTexture = element.pressedTexture
+
+        accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + texture + ";" + name + ";" + label + ";" + 
+        noClip + ";" + drawBorder + ";" + pressedTexture + "]\n"
+
+      } else if (element instanceof ItemImageButton) {
+
+        const pos = element.position
+        const size = element.size
+        const itemName = element.itemName
+        const name = element.name
+        const label = element.label
+
+        accumulator += "item_image_button[" + sVec(pos) + ";" + sVec(size) + ";" + itemName + ";" +
+        name + ";" + label + "]\n"
+
       }
+
 
 
     }
