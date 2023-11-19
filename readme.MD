@@ -1,5 +1,5 @@
 # Forgotten Lands
- This game has already gone from lua, to teal, and finally TS.
+ A minetest game written in TypeScript because I felt like it.
 
  If you want to mess with this or maybe you would want to use TS for your minetest things.
  
