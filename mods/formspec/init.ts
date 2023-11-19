@@ -727,7 +727,7 @@ namespace formSpec {
 
   //? ScrollBar
 
-  export interface ScrollBar {
+  export interface ScrollBarDefinition {
     position: Vec2
     size: Vec2
     orientation: string
@@ -742,7 +742,7 @@ namespace formSpec {
     orientation: string
     name: string
     value: string
-    constructor(definition: ScrollBar) {
+    constructor(definition: ScrollBarDefinition) {
       this.position = definition.position
       this.size = definition.size
       this.orientation = definition.orientation
