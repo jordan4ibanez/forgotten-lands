@@ -725,6 +725,32 @@ namespace formSpec {
     }
   }
 
+  //? ScrollBar
+
+  export interface ScrollBar {
+    position: Vec2
+    size: Vec2
+    orientation: string
+    name: string
+    value: string
+  }
+
+  export class ScrollBar implements Element {
+    position: Vec2
+    size: Vec2
+    //! Fixme: This should be an enum!
+    orientation: string
+    name: string
+    value: string
+    constructor(definition: ScrollBar) {
+      this.position = definition.position
+      this.size = definition.size
+      this.orientation = definition.orientation
+      this.name = definition.name
+      this.value = definition.value
+    }
+  }
+
 
   // ? Functional implementation
 
@@ -1071,7 +1097,6 @@ namespace formSpec {
 
       } else if (element instanceof CheckBox) {
 
-        //checkbox[<X>,<Y>;<name>;<label>;<selected>]
         const pos = element.position
         const name = element.name
         const label = element.label
@@ -1079,6 +1104,16 @@ namespace formSpec {
 
         accumulator += "checkbox[" + sVec(pos) + ";" + name + ";" + label + ";" + selected + "]\n"
 
+      } else if (element instanceof ScrollBar) {
+
+        const pos = element.position
+        const size = element.size
+        const orientation = element.orientation
+        const name = element.name
+        const value = element.value
+      
+        accumulator += "scrollbar[" + sVec(pos) + ";" + sVec(size) + ";" + orientation + ";" +
+        name + ";" + value + "]\n"
       }
       
 
