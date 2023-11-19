@@ -577,7 +577,19 @@ namespace formSpec {
     }
   }
 
+  //? ButtonExit
 
+  export class ButtonExit extends Button {
+    //* Placeholder because I'm not sure minetest JIT impl will work with pure extension.
+    nothing: boolean = false
+  }
+
+  //? ImageButtonExit
+
+  export class ImageButtonExit extends ImageButton {
+    //* Placeholder because I'm not sure minetest JIT impl will work with pure extension.
+    nothing: boolean = false
+  }
 
 
 
@@ -868,6 +880,15 @@ namespace formSpec {
 
         accumulator += "item_image_button[" + sVec(pos) + ";" + sVec(size) + ";" + itemName + ";" +
         name + ";" + label + "]\n"
+
+      } else if (element instanceof ButtonExit) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const label = element.label
+
+        accumulator += "button_exit[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + label + "]\n"
 
       }
 
