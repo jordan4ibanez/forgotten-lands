@@ -673,6 +673,58 @@ namespace formSpec {
     }
   }
 
+  //? DropDown
+
+  export interface DropDownDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! Fixme: should be an array!
+    itemList: string
+    selectedIndex: number
+    indexEvent: boolean
+  }
+
+  export class DropDown implements Element {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! Fixme: should be an array!
+    itemList: string
+    selectedIndex: number
+    indexEvent: boolean
+    constructor(definition: DropDownDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.itemList = definition.itemList
+      this.selectedIndex = definition.selectedIndex
+      this.indexEvent = definition.indexEvent
+    }
+  }
+
+  //? CheckBox
+
+  export interface CheckBoxDefinition {
+    position: Vec2
+    name: string
+    label: string
+    selected: boolean
+  }
+
+  export class CheckBox implements Element {
+    position: Vec2
+    name: string
+    label: string
+    selected: boolean
+    constructor(definition: CheckBoxDefinition) {
+      this.position = definition.position
+      this.name = definition.name
+      this.label = definition.label
+      this.selected = definition.selected
+    }
+  }
+
 
   // ? Functional implementation
 
@@ -1004,7 +1056,31 @@ namespace formSpec {
 
         accumulator += "box[" + sVec(pos) + ";" + sVec(size) + ";" + color + "]\n"
         
+      } else if (element instanceof DropDown) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const itemList = element.itemList
+        const selectedIndex = element.selectedIndex
+        const indexEvent = element.indexEvent
+
+        accumulator += "dropdown[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + itemList + ";" +
+        selectedIndex + ";" + indexEvent + "]\n"
+
+
+      } else if (element instanceof CheckBox) {
+
+        //checkbox[<X>,<Y>;<name>;<label>;<selected>]
+        const pos = element.position
+        const name = element.name
+        const label = element.label
+        const selected = element.selected
+
+        accumulator += "checkbox[" + sVec(pos) + ";" + name + ";" + label + ";" + selected + "]\n"
+
       }
+      
 
 
 
