@@ -403,4 +403,5 @@ do
             )
         end
     end
+    utility.loadFiles({"ores"})
 end
