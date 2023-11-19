@@ -703,8 +703,8 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! Fixme: should be an array!
-    itemList: string
+    //! Fixme: This might be an enum!
+    items: string[]
     selectedIndex: number
     indexEvent: boolean
   }
@@ -713,15 +713,15 @@ namespace formSpec {
     position: Vec2
     size: Vec2
     name: string
-    //! Fixme: should be an array!
-    itemList: string
+    //! Fixme: This might be an enum!
+    items: string[]
     selectedIndex: number
     indexEvent: boolean
     constructor(definition: DropDownDefinition) {
       this.position = definition.position
       this.size = definition.size
       this.name = definition.name
-      this.itemList = definition.itemList
+      this.items = definition.items
       this.selectedIndex = definition.selectedIndex
       this.indexEvent = definition.indexEvent
     }
@@ -1208,7 +1208,9 @@ namespace formSpec {
         const pos = element.position
         const size = element.size
         const name = element.name
-        const itemList = element.itemList
+
+        const itemList = arrayToString(element.items)
+
         const selectedIndex = element.selectedIndex
         const indexEvent = element.indexEvent
 
