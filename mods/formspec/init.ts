@@ -295,8 +295,7 @@ namespace formSpec {
     size: Vec2
     name: string
     mesh: string
-    //! fixme: Make this an array! Or maybe it can be both string | string[]
-    textures: string
+    textures: string[]
     rotation: Vec2
     continuous: boolean
     mouseControl: boolean
@@ -305,17 +304,16 @@ namespace formSpec {
   }
 
   export class Model implements Element {
-    position: Vec2 = create(0,0)
-    size: Vec2 = create(0,0)
-    name: string = ""
-    mesh: string = ""
-    //! fixme: Make this an array! Or maybe it can be both string | string[]
-    textures: string = ""
-    rotation: Vec2 = create(0,0)
-    continuous: boolean = true
-    mouseControl: boolean = true
-    frameLoopRange: Vec2 = create(0,0)
-    animationSpeed: number = 1
+    position: Vec2
+    size: Vec2
+    name: string
+    mesh: string
+    textures: string[]
+    rotation: Vec2
+    continuous: boolean
+    mouseControl: boolean
+    frameLoopRange: Vec2
+    animationSpeed: number
     constructor(definition: ModelDefinition) {
       this.position = definition.position
       this.size = definition. size
@@ -1000,7 +998,9 @@ namespace formSpec {
         const size = element.size
         const name = element.name
         const mesh = element.mesh
-        const textures = element.textures
+
+        const textures = arrayToString(element.textures)
+
         const rotation = element.rotation
         const continuous = element.continuous
         const mouseControl = element.mouseControl
