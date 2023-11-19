@@ -815,9 +815,9 @@ namespace formSpec {
   //? TableOptions
 
   export class TableOptions implements Element {
-    //! Fixme: This should be an array!
-    tableOptions: string
-    constructor(options: string) {
+    //! Fixme: This might be an enum!
+    tableOptions: string[]
+    constructor(options: string[]) {
       this.tableOptions = options
     }
   }
@@ -1260,7 +1260,7 @@ namespace formSpec {
 
       } else if (element instanceof TableOptions) {
 
-        const options = element.tableOptions
+        const options = arrayToString(element.tableOptions)
         
         accumulator += "tableoptions[" + options + "]\n"
 
