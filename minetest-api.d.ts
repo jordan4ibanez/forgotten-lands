@@ -847,25 +847,25 @@ declare global {
   export interface OreDefinition {
     ore_type: OreType
     ore: string
-    ore_param2: number
+    ore_param2?: number
     wherein: string
     clust_scarcity: number
     clust_num_ores: number
     clust_size: number
     y_min: number
     y_max: number
-    flags: OreFlags
-    noise_threshold: number
-    noise_params: NoiseParams
-    biomes: string[]
-    column_height_min: number
-    column_height_max: number
-    column_midpoint_factor: number
-    np_puff_top: NoiseParams
-    np_puff_bottom: NoiseParams
-    random_factor: number
-    np_stratum_thickness: NoiseParams
-    stratum_thickness: number
+    flags?: OreFlags
+    noise_threshold?: number
+    noise_params?: NoiseParams
+    biomes?: string[]
+    column_height_min?: number
+    column_height_max?: number
+    column_midpoint_factor?: number
+    np_puff_top?: NoiseParams
+    np_puff_bottom?: NoiseParams
+    random_factor?: number
+    np_stratum_thickness?: NoiseParams
+    stratum_thickness?: number
   }
   
   export interface BiomeDefinition {
