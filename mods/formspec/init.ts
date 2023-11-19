@@ -754,6 +754,7 @@ namespace formSpec {
   //? ScrollBarOptions
 
   export class ScrollBarOptions implements Element{
+    hidden = "ScrollBarOptions"
     //! Fixme: This should be an array!
     options: string
     constructor(options: string) {
@@ -787,6 +788,18 @@ namespace formSpec {
       this.selectedIndex = definition.selectedIndex
     }
   }
+
+  //? TableOptions
+
+  export class TableOptions implements Element {
+    hidden = "TableOptions"
+    //! Fixme: This should be an array!
+    options: string
+    constructor(options: string) {
+      this.options = options
+    }
+  }
+
 
 
   // ? Functional implementation
@@ -1169,6 +1182,12 @@ namespace formSpec {
         const selectedIndex = element.selectedIndex
 
         accumulator += "table[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + cellList + ";" + selectedIndex + "]\n"
+
+      } else if (element instanceof TableOptions) {
+
+        const options = element.options
+        
+        accumulator += "tableoptions[" + options + "]\n"
 
       }
 
