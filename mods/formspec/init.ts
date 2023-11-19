@@ -12,7 +12,6 @@ namespace formSpec {
   // 2.) Literal compilation. An assignment via nested elements.
   //
   // * The constructor pattern needs a bit of work at the moment.
-  // todo: Needs string array to "list,1,2,3" function
   // todo: Needs multiple enum implementations for ease of use.
   // todo: All of these are encapsulated within fixme comments.
 
