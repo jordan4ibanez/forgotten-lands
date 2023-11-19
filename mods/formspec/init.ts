@@ -621,6 +621,39 @@ namespace formSpec {
     }
   }
 
+  //? TabHeader
+
+  export interface TabHeaderDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! fixme: this should be an array!
+    listOfCaptions: string
+    currentTab: number
+    transparent: boolean
+    drawBorder: boolean
+  }
+
+  export class TabHeader implements Element {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! fixme: this should be an array!
+    listOfCaptions: string
+    currentTab: number
+    transparent: boolean
+    drawBorder: boolean
+    constructor(definition: TabHeaderDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.listOfCaptions = definition.listOfCaptions
+      this.currentTab = definition.currentTab
+      this.transparent = definition.transparent
+      this.drawBorder = definition.drawBorder
+    }
+  }
+
 
 
 
@@ -933,8 +966,21 @@ namespace formSpec {
         accumulator += "textlist[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + listOfItems + ";" +
         selectedIndex + ";" + transparent + "]\n"
 
+      } else if (element instanceof TabHeader) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const listOfCaptions = element.listOfCaptions
+        const currentTab = element.currentTab
+        const transparent = element.transparent
+        const drawBorder = element.drawBorder
+
+        accumulator += "tabheader[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + listOfCaptions + ";" +
+        currentTab + ";" + transparent + ";" + drawBorder + "]\n"
+
       }
-      
+
 
 
 
