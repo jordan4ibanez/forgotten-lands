@@ -10,6 +10,8 @@ namespace formSpec {
   // It is written as so (minorly verbose) to allow:
   // 1.) Elemental compilation (constructor pattern)
   // 2.) Literal compilation. An assignment via nested elements.
+  //
+  // * The constructor pattern needs a bit of work at the moment.
 
   const create = vector.create2d;
 
