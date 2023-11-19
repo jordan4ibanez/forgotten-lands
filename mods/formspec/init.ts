@@ -825,9 +825,9 @@ namespace formSpec {
   //? TableColumns
 
   export class TableColumns implements Element {
-    //! Fixme: This should be an array!
-    tableColumns: string
-    constructor(columns: string) {
+    //! Fixme: This might be an enum!
+    tableColumns: string[]
+    constructor(columns: string[]) {
       this.tableColumns = columns
     }
   }
@@ -835,9 +835,9 @@ namespace formSpec {
   //? Style
 
   export class Style implements Element {
-    //! Fixme: This should be an array!
-    styleThings: string
-    constructor(styleThings: string) {
+    //! Fixme: This might be an enum!
+    styleThings: string[]
+    constructor(styleThings: string[]) {
       this.styleThings = styleThings
     }
   }
@@ -845,9 +845,9 @@ namespace formSpec {
   //? StyleType
 
   export class StyleType implements Element {
-    //! Fixme: this should be an array!
-    styleTypes: string
-    constructor(styleTypes: string) {
+    //! Fixme: This might be an enum!
+    styleTypes: string[]
+    constructor(styleTypes: string[]) {
       this.styleTypes = styleTypes
     }
   }
@@ -1266,19 +1266,19 @@ namespace formSpec {
 
       } else if (element instanceof TableColumns) {
 
-        const columns = element.tableColumns
+        const columns = arrayToString(element.tableColumns)
 
         accumulator += "tablecolumns[" + columns + "]\n"
 
       } else if (element instanceof Style) {
 
-        const styleThings = element.styleThings
+        const styleThings = arrayToString(element.styleThings)
 
         accumulator += "style[" + styleThings + "]\n"
 
       } else if (element instanceof StyleType) {
 
-        const styleTypes = element.styleTypes
+        const styleTypes = arrayToString(element.styleTypes)
 
         accumulator += "style_type[" + styleTypes + "]\n"
 
