@@ -591,6 +591,37 @@ namespace formSpec {
     nothing: boolean = false
   }
 
+  //? TextList
+
+  export interface TextListDefinition {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! Fixme: This should be an array!
+    listOfItems: string
+    selectedIndex: number
+    transparent: boolean
+  }
+
+  export class TextList implements Element {
+    position: Vec2
+    size: Vec2
+    name: string
+    //! Fixme: This should be an array!
+    listOfItems: string
+    selectedIndex: number
+    transparent: boolean
+    constructor(definition: TextListDefinition) {
+      this.position = definition.position
+      this.size = definition.size
+      this.name = definition.name
+      this.listOfItems = definition.listOfItems
+      this.selectedIndex = definition.selectedIndex
+      this.transparent = definition.transparent
+    }
+  }
+
+
 
 
   // ? Functional implementation
@@ -890,7 +921,20 @@ namespace formSpec {
 
         accumulator += "button_exit[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + label + "]\n"
 
+      } else if (element instanceof TextList) {
+
+        const pos = element.position
+        const size = element.size
+        const name = element.name
+        const listOfItems = element.listOfItems
+        const selectedIndex = element.selectedIndex
+        const transparent = element.transparent
+
+        accumulator += "textlist[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + listOfItems + ";" +
+        selectedIndex + ";" + transparent + "]\n"
+
       }
+      
 
 
 
