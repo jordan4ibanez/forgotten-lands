@@ -60,7 +60,7 @@ namespace formSpec {
     anchor?: Vec2
     padding?: Vec2
     disablePrepend?: boolean
-    elements: Element[] = []
+    elements: Element[]
 
     constructor(definition: FormsSpecDefinition) {
       this.size = definition.size
@@ -92,8 +92,8 @@ namespace formSpec {
   }
 
   export class Container implements Element {
-    position: Vec2 = create(0,0)
-    elements: Element[] = []
+    position: Vec2
+    elements: Element[]
     constructor(definition: ContainerDefinition) {
       this.position = definition.position,
       this.elements = definition.elements
@@ -119,10 +119,10 @@ namespace formSpec {
   }
 
   export class ScrollContainer extends Container {
-    size: Vec2 = create(0,0)
-    orientation: ScrollOrientation = ScrollOrientation.vertical
-    factor: number = 0.1
-    name: string = "placeHolder"
+    size: Vec2
+    orientation: ScrollOrientation
+    factor: number
+    name: string
     constructor(definition: ScrollContainerDefinition) {
       super({
         position: definition.position,
@@ -146,11 +146,11 @@ namespace formSpec {
   }
 
   export class List implements Element {
-    location: string = ""
-    listName: string = ""
-    position: Vec2 = create(0,0)
-    size: Vec2 = create(0,0)
-    startingIndex: number = 0
+    location: string
+    listName: string
+    position: Vec2
+    size: Vec2
+    startingIndex: number
     constructor(definition: ListDefinition) {
       this.location = definition.location
       this.listName = definition.listName
@@ -168,8 +168,8 @@ namespace formSpec {
   }
 
   export class ListRing implements Element {
-    location: string = ""
-    listName: string = ""
+    location: string
+    listName: string
     constructor(definition: ListRingDefinition) {
       this.location = definition.location
       this.listName = definition.listName
@@ -187,11 +187,18 @@ namespace formSpec {
   }
 
   export class ListColors implements Element {
-    slotBGNormal: string = ""
-    slotBGHover: string = ""
+    slotBGNormal: string
+    slotBGHover: string
     slotBorder?: string
     toolTipBGColor?: string
     toolTipFontColor?: string
+    constructor(definition: ListColorsDefinition) {
+      this.slotBGNormal = definition.slotBGNormal
+      this.slotBGHover = definition.slotBGHover
+      this.slotBorder = definition.slotBorder
+      this.toolTipBGColor = definition.toolTipBGColor
+      this.toolTipFontColor = definition.toolTipFontColor
+    }
   }
 
   //? ElementToolTip
