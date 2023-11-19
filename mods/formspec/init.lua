@@ -74,11 +74,26 @@ do
     local function sVec(input)
         return (tostring(input.x) .. ",") .. tostring(input.y)
     end
+    --- Convert an array into a single string representation.
+    -- 
+    -- @param input Array of strings.
+    -- @returns Array as single string concatenated with ","
+    local function arrayToString(input)
+        local temp = ""
+        local index = 0
+        for ____, value in ipairs(input) do
+            if index ~= 0 then
+                temp = temp .. ","
+            end
+            temp = temp .. value
+            index = index + 1
+        end
+        return temp
+    end
     formSpec.FormSpec = __TS__Class()
     local FormSpec = formSpec.FormSpec
     FormSpec.name = "FormSpec"
     function FormSpec.prototype.____constructor(self, definition)
-        self.elements = {}
         self.size = definition.size
         self.fixedSize = definition.fixedSize
         self.position = definition.position
@@ -96,8 +111,6 @@ do
     local Container = formSpec.Container
     Container.name = "Container"
     function Container.prototype.____constructor(self, definition)
-        self.position = create(0, 0)
-        self.elements = {}
         do
             self.position = definition.position
             self.elements = definition.elements
@@ -117,10 +130,6 @@ do
     __TS__ClassExtends(ScrollContainer, formSpec.Container)
     function ScrollContainer.prototype.____constructor(self, definition)
         ScrollContainer.____super.prototype.____constructor(self, {position = definition.position, elements = definition.elements})
-        self.size = create(0, 0)
-        self.orientation = formSpec.ScrollOrientation.vertical
-        self.factor = 0.1
-        self.name = "placeHolder"
         self.size = definition.size
         self.orientation = definition.orientation
         self.factor = definition.factor or 0.1
@@ -130,11 +139,6 @@ do
     local List = formSpec.List
     List.name = "List"
     function List.prototype.____constructor(self, definition)
-        self.location = ""
-        self.listName = ""
-        self.position = create(0, 0)
-        self.size = create(0, 0)
-        self.startingIndex = 0
         self.location = definition.location
         self.listName = definition.listName
         self.position = definition.position
@@ -145,26 +149,23 @@ do
     local ListRing = formSpec.ListRing
     ListRing.name = "ListRing"
     function ListRing.prototype.____constructor(self, definition)
-        self.location = ""
-        self.listName = ""
         self.location = definition.location
         self.listName = definition.listName
     end
     formSpec.ListColors = __TS__Class()
     local ListColors = formSpec.ListColors
     ListColors.name = "ListColors"
-    function ListColors.prototype.____constructor(self)
-        self.slotBGNormal = ""
-        self.slotBGHover = ""
+    function ListColors.prototype.____constructor(self, definition)
+        self.slotBGNormal = definition.slotBGNormal
+        self.slotBGHover = definition.slotBGHover
+        self.slotBorder = definition.slotBorder
+        self.toolTipBGColor = definition.toolTipBGColor
+        self.toolTipFontColor = definition.toolTipFontColor
     end
     formSpec.ElementToolTip = __TS__Class()
     local ElementToolTip = formSpec.ElementToolTip
     ElementToolTip.name = "ElementToolTip"
     function ElementToolTip.prototype.____constructor(self, definition)
-        self.guiElementName = ""
-        self.text = ""
-        self.bgColor = ""
-        self.fontColor = ""
         self.guiElementName = definition.guiElementName
         self.text = definition.text
         self.bgColor = definition.bgColor
@@ -174,11 +175,6 @@ do
     local AreaToolTip = formSpec.AreaToolTip
     AreaToolTip.name = "AreaToolTip"
     function AreaToolTip.prototype.____constructor(self, definition)
-        self.position = create(0, 0)
-        self.size = create(0, 0)
-        self.text = ""
-        self.bgColor = ""
-        self.fontColor = ""
         self.position = definition.position
         self.size = definition.size
         self.text = definition.text
@@ -189,9 +185,6 @@ do
     local Image = formSpec.Image
     Image.name = "Image"
     function Image.prototype.____constructor(self, definition)
-        self.position = create(0, 0)
-        self.size = create(0, 0)
-        self.texture = ""
         self.position = definition.position
         self.size = definition.size
         self.texture = definition.texture
@@ -203,10 +196,6 @@ do
     __TS__ClassExtends(AnimatedImage, formSpec.Image)
     function AnimatedImage.prototype.____constructor(self, definition)
         AnimatedImage.____super.prototype.____constructor(self, definition)
-        self.name = ""
-        self.frameCount = 0
-        self.frameDuration = 0
-        self.frameStart = 0
         self.name = definition.name
         self.frameCount = definition.frameCount
         self.frameDuration = definition.frameDuration
@@ -216,16 +205,6 @@ do
     local Model = formSpec.Model
     Model.name = "Model"
     function Model.prototype.____constructor(self, definition)
-        self.position = create(0, 0)
-        self.size = create(0, 0)
-        self.name = ""
-        self.mesh = ""
-        self.textures = ""
-        self.rotation = create(0, 0)
-        self.continuous = true
-        self.mouseControl = true
-        self.frameLoopRange = create(0, 0)
-        self.animationSpeed = 1
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
@@ -241,9 +220,6 @@ do
     local BGColor = formSpec.BGColor
     BGColor.name = "BGColor"
     function BGColor.prototype.____constructor(self, definition)
-        self.bgColor = ""
-        self.fullScreen = true
-        self.fullScreenbgColor = ""
         self.bgColor = definition.bgColor
         self.fullScreen = definition.fullScreen
         self.fullScreenbgColor = definition.fullScreenbgColor
@@ -252,9 +228,6 @@ do
     local Background = formSpec.Background
     Background.name = "Background"
     function Background.prototype.____constructor(self, definition)
-        self.position = create(0, 0)
-        self.size = create(0, 0)
-        self.texture = ""
         self.position = definition.position
         self.size = definition.size
         self.texture = definition.texture
@@ -265,10 +238,6 @@ do
     local PasswordField = formSpec.PasswordField
     PasswordField.name = "PasswordField"
     function PasswordField.prototype.____constructor(self, definition)
-        self.position = create(0, 0)
-        self.size = create(0, 0)
-        self.name = ""
-        self.label = ""
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
@@ -278,9 +247,6 @@ do
     local Field = formSpec.Field
     Field.name = "Field"
     function Field.prototype.____constructor(self, definition)
-        self.name = ""
-        self.label = ""
-        self.default = ""
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
@@ -375,7 +341,7 @@ do
     __TS__ClassExtends(ButtonExit, formSpec.Button)
     function ButtonExit.prototype.____constructor(self, ...)
         ButtonExit.____super.prototype.____constructor(self, ...)
-        self.nothing = false
+        self.buttonExit = false
     end
     formSpec.ImageButtonExit = __TS__Class()
     local ImageButtonExit = formSpec.ImageButtonExit
@@ -383,7 +349,7 @@ do
     __TS__ClassExtends(ImageButtonExit, formSpec.ImageButton)
     function ImageButtonExit.prototype.____constructor(self, ...)
         ImageButtonExit.____super.prototype.____constructor(self, ...)
-        self.nothing = false
+        self.imageButtonExit = false
     end
     formSpec.TextList = __TS__Class()
     local TextList = formSpec.TextList
@@ -392,7 +358,7 @@ do
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
-        self.listOfItems = definition.listOfItems
+        self.items = definition.items
         self.selectedIndex = definition.selectedIndex
         self.transparent = definition.transparent
     end
@@ -403,7 +369,7 @@ do
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
-        self.listOfCaptions = definition.listOfCaptions
+        self.captions = definition.captions
         self.currentTab = definition.currentTab
         self.transparent = definition.transparent
         self.drawBorder = definition.drawBorder
@@ -423,7 +389,7 @@ do
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
-        self.itemList = definition.itemList
+        self.items = definition.items
         self.selectedIndex = definition.selectedIndex
         self.indexEvent = definition.indexEvent
     end
@@ -459,7 +425,7 @@ do
         self.position = definition.position
         self.size = definition.size
         self.name = definition.name
-        self.cellList = definition.cellList
+        self.cells = definition.cells
         self.selectedIndex = definition.selectedIndex
     end
     formSpec.TableOptions = __TS__Class()
@@ -571,7 +537,7 @@ do
                 local size = element.size
                 local name = element.name
                 local mesh = element.mesh
-                local textures = element.textures
+                local textures = arrayToString(element.textures)
                 local rotation = element.rotation
                 local continuous = element.continuous
                 local mouseControl = element.mouseControl
@@ -689,7 +655,7 @@ do
                 local pos = element.position
                 local size = element.size
                 local name = element.name
-                local listOfItems = element.listOfItems
+                local listOfItems = arrayToString(element.items)
                 local selectedIndex = element.selectedIndex
                 local transparent = element.transparent
                 accumulator = accumulator .. ((((((((((("textlist[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. listOfItems) .. ";") .. tostring(selectedIndex)) .. ";") .. tostring(transparent)) .. "]\n"
@@ -697,7 +663,7 @@ do
                 local pos = element.position
                 local size = element.size
                 local name = element.name
-                local listOfCaptions = element.listOfCaptions
+                local listOfCaptions = arrayToString(element.captions)
                 local currentTab = element.currentTab
                 local transparent = element.transparent
                 local drawBorder = element.drawBorder
@@ -711,7 +677,7 @@ do
                 local pos = element.position
                 local size = element.size
                 local name = element.name
-                local itemList = element.itemList
+                local itemList = arrayToString(element.items)
                 local selectedIndex = element.selectedIndex
                 local indexEvent = element.indexEvent
                 accumulator = accumulator .. ((((((((((("dropdown[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. itemList) .. ";") .. tostring(selectedIndex)) .. ";") .. tostring(indexEvent)) .. "]\n"
@@ -729,26 +695,26 @@ do
                 local value = element.value
                 accumulator = accumulator .. ((((((((("scrollbar[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. orientation) .. ";") .. name) .. ";") .. value) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.ScrollBarOptions) then
-                local options = element.scrollBarOptions
+                local options = arrayToString(element.scrollBarOptions)
                 accumulator = accumulator .. ("scrollbaroptions[" .. options) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.Table) then
                 local pos = element.position
                 local size = element.size
                 local name = element.name
-                local cellList = element.cellList
+                local cellList = arrayToString(element.cells)
                 local selectedIndex = element.selectedIndex
                 accumulator = accumulator .. ((((((((("table[" .. sVec(pos)) .. ";") .. sVec(size)) .. ";") .. name) .. ";") .. cellList) .. ";") .. tostring(selectedIndex)) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.TableOptions) then
-                local options = element.tableOptions
+                local options = arrayToString(element.tableOptions)
                 accumulator = accumulator .. ("tableoptions[" .. options) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.TableColumns) then
-                local columns = element.tableColumns
+                local columns = arrayToString(element.tableColumns)
                 accumulator = accumulator .. ("tablecolumns[" .. columns) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.Style) then
-                local styleThings = element.styleThings
+                local styleThings = arrayToString(element.styleThings)
                 accumulator = accumulator .. ("style[" .. styleThings) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.StyleType) then
-                local styleTypes = element.styleTypes
+                local styleTypes = arrayToString(element.styleTypes)
                 accumulator = accumulator .. ("style_type[" .. styleTypes) .. "]\n"
             elseif __TS__InstanceOf(element, formSpec.SetFocus) then
                 local name = element.name
