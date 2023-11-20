@@ -134,7 +134,7 @@ export interface minetest {
   get_timeofday(): number
   get_gametime(): number
   get_day_count(): number
-  find_node_near(position: Vec3, radius: number, nodeNames: string[], searchCenter: boolean): Vec3 | void
+  find_node_near(position: Vec3, radius: number, nodeNames: string[], searchCenter?: boolean): Vec3 | void
   find_nodes_in_area(pos1: Vec3, pos2: Vec3, nodeNames: string[], grouped: boolean): any[] //! FIXME: returns a very specific thing, turn it into an interface
   find_nodes_in_area_under_air(pos1: Vec3, pos2: Vec3, nodeNames: string[]): Vec3[]
   get_perlin(nodeParams: NoiseParams): PerlinNoiseObject
@@ -202,7 +202,7 @@ export interface minetest {
   is_colored_paramtype(pType: number): boolean
   strip_param2_color(param2: number, paramType2: ParamType2): number | void
   get_node_drops(node: string | NodeTable, toolName: string): string[]
-  get_craft_result(input: CraftRecipeCheckDefinition): [CraftResultObject, CraftResultObject]
+  get_craft_result(input: CraftRecipeCheckDefinition): [CraftResultObject, CraftRecipeCheckDefinition]
   get_craft_recipe(output: string | NodeTable): CraftRecipeDefinition | void
   get_all_craft_recipes(queryItem: string | NodeTable): CraftRecipeDefinition[] | void
   handle_node_drops(position: Vec3, drops: string[], digger: ObjectRef): void
@@ -215,7 +215,7 @@ export interface minetest {
   // item_place_object(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): ItemStackObject 
   item_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, param2: number): [ItemStackObject, Vec3 | void]
   item_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): ItemStackObject
-  item_drop(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): ItemStackObject
+  item_drop(itemStack: ItemStackObject, dropper: ObjectRef | null, position: Vec3): ItemStackObject
   item_eat(hpChange: number, replaceWithItem: string): void
   node_punch(position: Vec3, nodeTable: NodeTable, puncher: ObjectRef, pointedThing: PointedThing): void
   node_dig(position: Vec3, nodeTable: NodeTable, digger: ObjectRef): void
@@ -394,7 +394,7 @@ declare global {
     get_width(listName: string): number
     set_width(listName: string, size: number): void
     get_stack(listName: string, i: number): ItemStackObject
-    set_stack(listName: string, i: number, stack: ItemStackObject): void
+    set_stack(listName: string, i: number, stack: ItemStackObject | string): void
     get_list(listName: string): ItemStackObject[]
     set_list(listName: string, list: ItemStackObject[]): void
     get_lists(): string[]
