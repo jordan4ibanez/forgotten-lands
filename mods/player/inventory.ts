@@ -13,7 +13,7 @@ namespace player {
       new BGColor({
         bgColor: "#D3D3D3",
         fullScreen: "both",
-        fullScreenbgColor: "#0000004F"
+        fullScreenbgColor: utility.color(0,0,0,20)
       }),
       //! Craft area.
       new List({

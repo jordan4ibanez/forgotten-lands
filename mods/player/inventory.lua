@@ -18,7 +18,14 @@ do
         {
             size = create(12, 12),
             elements = {
-                __TS__New(BGColor, {bgColor = "#D3D3D3", fullScreen = "both", fullScreenbgColor = "#0000004F"}),
+                __TS__New(
+                    BGColor,
+                    {
+                        bgColor = "#D3D3D3",
+                        fullScreen = "both",
+                        fullScreenbgColor = utility.color(0, 0, 0, 20)
+                    }
+                ),
                 __TS__New(
                     List,
                     {

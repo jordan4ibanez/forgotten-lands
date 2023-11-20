@@ -201,7 +201,7 @@ do
             dofile(((currentDirectory .. "/") .. file) .. ".lua")
         end
     end
-    utility.loadFiles({"enums"})
+    utility.loadFiles({"enums", "color_generator"})
     function utility.concat(...)
         local input = {...}
         local accumulator = ""

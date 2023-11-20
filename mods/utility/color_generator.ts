@@ -2,7 +2,7 @@ namespace utility {
   // Taken from: https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4 (Thanks lopspower & LeoMacherla!)
   // Written into this abomination.
 
-  const hexTransparencies: {[id: number] : string} = {
+  const hexValues: {[id: number] : string} = {
     100: "FF",
     99: "FC",
     98: "FA",
@@ -106,14 +106,28 @@ namespace utility {
     0: "00"
   }
 
+  function lockChannel(input: number): number {
+    return math.floor(math.clamp(0, 100, input))
+  }
+
   /**
    * Get the alpha level of a number. (Integers only)
    * @param input Integral percent. (0-100)
    * @returns Alpha AA string to bolt onto a color hex.
    */
   export function percentToAlphaHex(input: number): string {
-    const clamped = math.floor(math.clamp(0, 100, input))
-    return hexTransparencies[clamped]
+    const clamped = lockChannel(input)
+    return hexValues[clamped]
+  }
+
+  export function color(r: number, g: number, b: number, a?: number): string {
+    let newColor = ""
+    for (const channel of [r,g,b,a]) {
+      if (channel) {
+        newColor += lockChannel(channel)
+      }
+    }
+    return newColor
   }
 
 }
