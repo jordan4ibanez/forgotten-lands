@@ -169,6 +169,12 @@ enum CraftRecipeType {
   fuel = "fuel"
 }
 
+enum CraftCheckType {
+  normal = "normal",
+  cooking = "cooking",
+  fuel = "fuel"
+}
+
 enum HPChangeReasonType {
   set_hp = "set_hp",
   punch = "punch",
