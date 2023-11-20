@@ -22,8 +22,14 @@ do
     local colorScalar = utility.colorScalar
     local colorRGB = utility.colorRGB
     local vec3ToString = utility.vec3ToString
-    local function turnIt(input)
+    local function turnTexture(input)
         return input .. "^[transformR270"
+    end
+    local function turnOn(position)
+        minetest.swap_node(position, {name = "furnace_active"})
+    end
+    local function turnOff(position)
+        minetest.swap_node(position, {name = "furnace"})
     end
     local function think(position, elapsed, justConstructed)
         local currentBlock = minetest.get_node_or_nil(position)
@@ -31,7 +37,6 @@ do
             print("Furnace: Error, tried to do work on null object.")
             return
         end
-        local isActive = currentBlock.name == "furnace_active"
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
         if justConstructed then
@@ -40,7 +45,83 @@ do
             inventory:set_size("fuel", 1)
             inventory:set_size("output", 1)
         end
+        local isActive = currentBlock.name == "furnace_active"
+        local fuelTime = meta:get_float("fuelTime") or 0
+        local sourceTime = meta:get_float("sourceTime") or 0
+        local fuelTotalTime = meta:get_float("fuelTotalTime") or 0
+        local timerElapsed = meta:get_int("timerElapsed") or 0
+        meta:set_int("timerElapsed", timerElapsed + 1)
         print(("thinking at " .. vec3ToString(position)) .. "...")
+        local sourceList
+        local fuelList
+        local outputFull = false
+        local cookable = false
+        local cooked
+        local fuel
+        local update = true
+        while timerElapsed > 0 and update do
+            update = false
+            sourceList = inventory:get_list("input")
+            fuelList = inventory:get_list("fuel")
+            local afterCooked
+            cooked, afterCooked = unpack(minetest.get_craft_result({method = CraftCheckType.cooking, width = 1, items = sourceList}))
+            cookable = cooked.time ~= 0
+            local el = math.min(elapsed, fuelTotalTime - fuelTime)
+            if cookable then
+                el = math.min(el, cooked.time - sourceTime)
+            end
+            if fuelTime < fuelTotalTime then
+                fuelTime = fuelTime + el
+                if cookable then
+                    sourceTime = sourceTime + el
+                    if sourceTime >= cooked.time then
+                        if inventory:room_for_item("output", cooked.item) then
+                            inventory:add_item("output", cooked.item)
+                            inventory:set_stack("input", 1, afterCooked.items[2])
+                            sourceTime = sourceTime - cooked.time
+                            update = true
+                            print("Play cooked sound here...")
+                        else
+                            outputFull = false
+                        end
+                    else
+                        update = true
+                    end
+                end
+            else
+                if cookable then
+                    local afterFuel
+                    fuel, afterFuel = unpack(minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = fuelList}))
+                    if fuel.time == 0 then
+                        fuelTotalTime = 0
+                    else
+                        local isFuel, _ = unpack(minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = {afterFuel.items[2]}}))
+                        if isFuel.time == 0 then
+                            table.insert(fuel.replacements, afterFuel.items[2])
+                            inventory:set_stack("fuel", 1, "")
+                        else
+                            inventory:set_stack("fuel", 1, afterFuel.items[2])
+                        end
+                        local replacements = fuel.replacements
+                        if replacements[2] then
+                            local leftOver = inventory:add_item("output", replacements[2])
+                            if not leftOver:is_empty() then
+                                local above = vector.create(position.x, position.y + 1, position.z)
+                                local dropPosition = minetest.find_node_near(above, 1, {"air"}) or above
+                                minetest.item_drop(replacements[2], nil, dropPosition)
+                            end
+                        end
+                        update = true
+                        fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
+                    end
+                else
+                    fuelTotalTime = 0
+                    sourceTime = 0
+                end
+                fuelTime = 0
+            end
+            elapsed = elapsed - el
+        end
         local furnaceInventory = generate(__TS__New(
             FormSpec,
             {
@@ -85,7 +166,7 @@ do
                         {
                             position = create(5.5, 2.5),
                             size = create(1, 1),
-                            texture = turnIt("gui_furnace_arrow_bg.png")
+                            texture = turnTexture("gui_furnace_arrow_bg.png")
                         }
                     ),
                     __TS__New(
@@ -93,7 +174,7 @@ do
                         {
                             position = create(5.5, 2.5),
                             size = create(1, 1),
-                            texture = turnIt("gui_furnace_arrow_fg.png")
+                            texture = turnTexture("gui_furnace_arrow_fg.png")
                         }
                     ),
                     __TS__New(
