@@ -660,6 +660,8 @@ declare global {
     after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
   }
   
+  
+  /** @noSelf **/
   export interface NodeDefinition {
     drawtype?: Drawtype
     visual_scale?: number
