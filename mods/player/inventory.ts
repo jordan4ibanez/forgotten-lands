@@ -3,11 +3,18 @@ namespace player {
   const create = vector.create2d
   const generate = formSpec.generate
   const FormSpec = formSpec.FormSpec
+  const BackGround = formSpec.Background
+  const BGColor = formSpec.BGColor
   const List = formSpec.List
 
   const playerInventory: string = generate(new FormSpec({
     size: create(12,12),
     elements: [
+      new BGColor({
+        bgColor: "#D3D3D3",
+        fullScreen: "both",
+        fullScreenbgColor: "#0000004F"
+      }),
       //! Craft area.
       new List({
         location: "current_player",

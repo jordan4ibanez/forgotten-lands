@@ -10,12 +10,15 @@ do
     local create = vector.create2d
     local generate = formSpec.generate
     local FormSpec = formSpec.FormSpec
+    local BackGround = formSpec.Background
+    local BGColor = formSpec.BGColor
     local List = formSpec.List
     local playerInventory = generate(__TS__New(
         FormSpec,
         {
             size = create(12, 12),
             elements = {
+                __TS__New(BGColor, {bgColor = "#D3D3D3", fullScreen = "both", fullScreenbgColor = "#0000004F"}),
                 __TS__New(
                     List,
                     {
