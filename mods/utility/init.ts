@@ -8,7 +8,7 @@ namespace utility {
     }
   }
 
-  loadFiles(["enums"])
+  loadFiles(["enums", "alpha_to_hex"])
 
   export function concat(...input: string[]): string {
     let accumulator = ""
