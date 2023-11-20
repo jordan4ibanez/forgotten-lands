@@ -1,6 +1,7 @@
 namespace player {
 
-  export const INVENTORY_SIZE = vector.create2d(9,4)
+  export const CRAFT_INVENTORY_SIZE = vector.create2d(2,2)
+  export const MAIN_INVENTORY_SIZE = vector.create2d(9,4)
 
   const create = vector.create2d
 
@@ -10,6 +11,7 @@ namespace player {
   const BGColor = formSpec.BGColor
   const List = formSpec.List
   const ListColors = formSpec.ListColors
+  const ListRing = formSpec.ListRing
 
   const color = utility.color
   const colorScalar = utility.colorScalar
@@ -40,10 +42,7 @@ namespace player {
           5.5,
           1.75
         ),
-        size: create(
-          2,
-          2
-        ),
+        size: CRAFT_INVENTORY_SIZE,
         startingIndex: 0
       }),
       //! Craft output
@@ -69,7 +68,7 @@ namespace player {
           6.5
         ),
         size: create(
-          INVENTORY_SIZE.x,
+          MAIN_INVENTORY_SIZE.x,
           1
         ),
         startingIndex: 0
@@ -83,17 +82,30 @@ namespace player {
           8
         ),
         size: create(
-          INVENTORY_SIZE.x,
-          INVENTORY_SIZE.y - 1
+          MAIN_INVENTORY_SIZE.x,
+          MAIN_INVENTORY_SIZE.y - 1
         ),
-        startingIndex: INVENTORY_SIZE.x
+        startingIndex: MAIN_INVENTORY_SIZE.x
+      }),
+      //! List Rings.
+      new ListRing({
+        location: "current_player",
+        listName: "main"
+      }),
+      new ListRing({
+        location: "current_player",
+        listName: "craft"
       })
     ]
   }))
 
   minetest.register_on_joinplayer((newPlayer: ObjectRef) => {
-    newPlayer.hud_set_hotbar_itemcount(INVENTORY_SIZE.x)
-    newPlayer.get_inventory().set_size("main", INVENTORY_SIZE.x * INVENTORY_SIZE.y)
+    newPlayer.hud_set_hotbar_itemcount(MAIN_INVENTORY_SIZE.x)
+    const inventory = newPlayer.get_inventory()
+    inventory.set_size("main", MAIN_INVENTORY_SIZE.x * MAIN_INVENTORY_SIZE.y)
+    inventory.set_width("main", MAIN_INVENTORY_SIZE.x)
+    inventory.set_size("craft", CRAFT_INVENTORY_SIZE.x * CRAFT_INVENTORY_SIZE.y)
+    inventory.set_width("craft", CRAFT_INVENTORY_SIZE.x)
     newPlayer.set_inventory_formspec(playerInventory)
   })
 
