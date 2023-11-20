@@ -123,6 +123,17 @@ do
         end
         return newColor
     end
+    --- Like the color() function, but can take in raw (0-255) rgba elements.
+    -- 
+    -- @param r Red channel. (0-255)
+    -- @param g Green channel. (0-255)
+    -- @param b Blue channel. (0-255)
+    -- @param a Alpha channel. (0-255)
+    -- @returns Color string in hex.
+    function utility.colorRGB(r, g, b, a)
+        a = a and a / 2.55 or a
+        return utility.color(r / 2.55, g / 2.55, b / 2.55, a)
+    end
     function utility.colorScalar(s, a)
         local newColor = "#"
         local hex = hexValues[lockChannel(s)]

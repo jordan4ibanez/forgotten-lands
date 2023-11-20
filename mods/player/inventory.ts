@@ -3,21 +3,34 @@ namespace player {
   export const INVENTORY_SIZE = vector.create2d(9,4)
 
   const create = vector.create2d
+
   const generate = formSpec.generate
   const FormSpec = formSpec.FormSpec
   const BackGround = formSpec.Background
   const BGColor = formSpec.BGColor
   const List = formSpec.List
+  const ListColors = formSpec.ListColors
+
   const color = utility.color
   const colorScalar = utility.colorScalar
+  const colorRGB = utility.colorRGB
 
   const playerInventory: string = generate(new FormSpec({
     size: create(12,12),
     elements: [
+      //! Nice background colors.
       new BGColor({
         bgColor: colorScalar(85),
         fullScreen: "both",
-        fullScreenbgColor: colorScalar(0,30)
+        fullScreenbgColor: colorScalar(0,40)
+      }),
+      //! Make these lists look nice as well.
+      new ListColors({
+        slotBGHover: colorScalar(70),
+        slotBGNormal: colorScalar(55),
+        slotBorder: colorScalar(0),
+        toolTipBGColor: colorRGB(123,104,238),
+        toolTipFontColor: colorScalar(100)
       }),
       //! Craft area.
       new List({
@@ -39,7 +52,7 @@ namespace player {
         listName: "craftpreview",
         position: create(
           9,
-          2.25
+          2.375
         ),
         size: create(
           1,

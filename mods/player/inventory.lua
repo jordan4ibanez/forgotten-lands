@@ -14,8 +14,10 @@ do
     local BackGround = formSpec.Background
     local BGColor = formSpec.BGColor
     local List = formSpec.List
+    local ListColors = formSpec.ListColors
     local color = utility.color
     local colorScalar = utility.colorScalar
+    local colorRGB = utility.colorRGB
     local playerInventory = generate(__TS__New(
         FormSpec,
         {
@@ -26,7 +28,17 @@ do
                     {
                         bgColor = colorScalar(85),
                         fullScreen = "both",
-                        fullScreenbgColor = colorScalar(0, 30)
+                        fullScreenbgColor = colorScalar(0, 40)
+                    }
+                ),
+                __TS__New(
+                    ListColors,
+                    {
+                        slotBGHover = colorScalar(70),
+                        slotBGNormal = colorScalar(55),
+                        slotBorder = colorScalar(0),
+                        toolTipBGColor = colorRGB(123, 104, 238),
+                        toolTipFontColor = colorScalar(100)
                     }
                 ),
                 __TS__New(
@@ -44,7 +56,7 @@ do
                     {
                         location = "current_player",
                         listName = "craftpreview",
-                        position = create(9, 2.25),
+                        position = create(9, 2.375),
                         size = create(1, 1),
                         startingIndex = 0
                     }

@@ -130,6 +130,20 @@ namespace utility {
     return newColor
   }
 
+  /**
+   * Like the color() function, but can take in raw (0-255) rgba elements.
+   * @param r Red channel. (0-255)
+   * @param g Green channel. (0-255)
+   * @param b Blue channel. (0-255)
+   * @param a Alpha channel. (0-255)
+   * @returns Color string in hex.
+   */
+  export function colorRGB(r: number, g: number, b: number, a?: number): string {
+    // Get everything to 0-100 range
+    a = (a) ? a / 2.55 : a
+    return color(r / 2.55, g / 2.55, b / 2.55, a)
+  }
+
   export function colorScalar(s: number, a?: number): string {
     let newColor = "#"
     const hex = hexValues[lockChannel(s)]
