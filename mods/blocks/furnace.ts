@@ -7,6 +7,7 @@ namespace blocks {
   const generate = formSpec.generate
   const FormSpec = formSpec.FormSpec
   const BackGround = formSpec.Background
+  const Image = formSpec.Image
   const BGColor = formSpec.BGColor
   const List = formSpec.List
   const ListColors = formSpec.ListColors
@@ -15,9 +16,192 @@ namespace blocks {
   const color = utility.color
   const colorScalar = utility.colorScalar
   const colorRGB = utility.colorRGB
+  const vec3ToString = utility.vec3ToString
 
-  function think(position: Vec3, elapsed: number) {
-    print("thinking")
+  function turnIt(input: string): string {
+    return input + "^[transformR270"
+  }
+
+  function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
+
+    const currentBlock = minetest.get_node_or_nil(position)
+    if (!currentBlock || currentBlock.name == "ignore") {
+      print("Furnace: Error, tried to do work on null object.")
+      return
+    }
+
+    const isActive = (currentBlock.name == "furnace_active")
+
+    const meta = minetest.get_meta(position)
+    const inventory = meta.get_inventory()
+
+    if (justConstructed) {
+      print("Hey I'm new at " + vec3ToString(position))
+      inventory.set_size("input", 1)
+      inventory.set_size("fuel", 1)
+      inventory.set_size("output", 1)
+    }
+
+    print(`thinking at ${vec3ToString(position)}...`)
+
+
+    const furnaceInventory: string = generate(new FormSpec({
+      size: create(12,12),
+      elements: [
+        //! Nice background colors.
+        new BGColor({
+          bgColor: colorScalar(85),
+          fullScreen: "both",
+          fullScreenbgColor: colorScalar(0,40)
+        }),
+        //! Make these lists look nice as well.
+        new ListColors({
+          slotBGHover: colorScalar(70),
+          slotBGNormal: colorScalar(55),
+          slotBorder: colorScalar(0),
+          toolTipBGColor: colorRGB(123,104,238),
+          toolTipFontColor: colorScalar(100)
+        }),
+        //! Flame background.
+        new Image({
+          position: create(
+            3,
+            2.5
+          ),
+          size: create(
+            1,
+            1
+          ),
+          texture: "default_furnace_fire_bg.png"
+        }),
+        //! Flame foreground
+        new Image({
+          position: create(
+            3,
+            2.5
+          ),
+          size: create(
+            1,
+            1
+          ),
+          texture: "default_furnace_fire_fg.png"
+        }),
+        //! Arrow background.
+        new Image({
+          position: create(
+            5.5,
+            2.5
+          ),
+          size: create(
+            1,
+            1
+          ),
+          texture: turnIt("gui_furnace_arrow_bg.png")
+        }),
+        //! Arrow foreground.
+        new Image({
+          position: create(
+            5.5,
+            2.5
+          ),
+          size: create(
+            1,
+            1
+          ),
+          texture: turnIt("gui_furnace_arrow_fg.png")
+        }),
+        //! Fuel.
+        new List({
+          location: "context",
+          listName: "fuel",
+          position: create(
+            3,
+            4
+          ),
+          size: create(
+            1,
+            1
+          ),
+          startingIndex: 0
+        }),
+        //! Input.
+        new List({
+          location: "context",
+          listName: "input",
+          position: create(
+            3,
+            1
+          ),
+          size: create(
+            1,
+            1
+          ),
+          startingIndex: 0
+        }),
+        //! Output.
+        new List({
+          location: "context",
+          listName: "output",
+          position: create(
+            8,
+            2.5
+          ),
+          size: create(
+            1,
+            1
+          ),
+          startingIndex: 0
+        }),
+        //! Hot bar.
+        new List({
+          location: "current_player",
+          listName: "main",
+          position: create(
+            0.5,
+            6.5
+          ),
+          size: create(
+            MAIN_INVENTORY_SIZE.x,
+            1
+          ),
+          startingIndex: 0
+        }),
+        //! Main inventory.
+        new List({
+          location: "current_player",
+          listName: "main",
+          position: create(
+            0.5,
+            8
+          ),
+          size: create(
+            MAIN_INVENTORY_SIZE.x,
+            MAIN_INVENTORY_SIZE.y - 1
+          ),
+          startingIndex: MAIN_INVENTORY_SIZE.x
+        }),
+        //! List Rings.
+        new ListRing({
+          location: "current_player",
+          listName: "main"
+        }),
+        new ListRing({
+          location: "context",
+          listName: "fuel"
+        }),
+        new ListRing({
+          location: "current_player",
+          listName: "main"
+        }),
+        new ListRing({
+          location: "context",
+          listName: "input"
+        })
+
+      ]
+    }))
+
+    meta.set_string("formspec", furnaceInventory)
   }
 
   //? Functionality
@@ -26,90 +210,6 @@ namespace blocks {
   function pixel(inputPixel: number): number {
     return (inputPixel / textureSize) - 0.5
   }
-
-
-  const furnaceInventory: string = generate(new FormSpec({
-    size: create(12,12),
-    elements: [
-      //! Nice background colors.
-      new BGColor({
-        bgColor: colorScalar(85),
-        fullScreen: "both",
-        fullScreenbgColor: colorScalar(0,40)
-      }),
-      //! Make these lists look nice as well.
-      new ListColors({
-        slotBGHover: colorScalar(70),
-        slotBGNormal: colorScalar(55),
-        slotBorder: colorScalar(0),
-        toolTipBGColor: colorRGB(123,104,238),
-        toolTipFontColor: colorScalar(100)
-      }),
-      //todo: this will be the fuel and cooking portion
-      // //! Craft area.
-      // new List({
-      //   location: "current_player",
-      //   listName: "craft",
-      //   position: create(
-      //     5.5,
-      //     1.75
-      //   ),
-      //   size: CRAFT_INVENTORY_SIZE,
-      //   startingIndex: 0
-      // }),
-      //! Craft output
-      new List({
-        location: "current_player",
-        listName: "craftpreview",
-        position: create(
-          9,
-          2.375
-        ),
-        size: create(
-          1,
-          1
-        ),
-        startingIndex: 0
-      }),
-      //! Hot bar.
-      new List({
-        location: "current_player",
-        listName: "main",
-        position: create(
-          0.5,
-          6.5
-        ),
-        size: create(
-          MAIN_INVENTORY_SIZE.x,
-          1
-        ),
-        startingIndex: 0
-      }),
-      //! Main inventory.
-      new List({
-        location: "current_player",
-        listName: "main",
-        position: create(
-          0.5,
-          8
-        ),
-        size: create(
-          MAIN_INVENTORY_SIZE.x,
-          MAIN_INVENTORY_SIZE.y - 1
-        ),
-        startingIndex: MAIN_INVENTORY_SIZE.x
-      }),
-      //! List Rings.
-      new ListRing({
-        location: "current_player",
-        listName: "main"
-      }),
-      new ListRing({
-        location: "current_player",
-        listName: "craft"
-      })
-    ]
-  }))
 
 
   //? Visuals
@@ -171,15 +271,13 @@ namespace blocks {
 		  "default_furnace_side.png",
       "default_furnace_front.png"
     ],
+    on_punch: function(position: Vec3) {
+      think(position, 0)
+    },
     on_timer: think,
     on_construct(position: Vec3) {
-      print(dump(position))
-      const meta = minetest.get_meta(position)
-      const inventory = meta.get_inventory()
-      inventory.set_size("source", 1)
-      inventory.set_size("fuel", 1)
-      inventory.set_size("destination", 1)
-      meta.set_string("formspec", furnaceInventory)
+      // print(dump(position))
+      think(position, 0, true)
     }
   })
 
@@ -200,7 +298,11 @@ namespace blocks {
       "default_furnace_side.png",
 		  "default_furnace_side.png",
       "default_furnace_front_active.png"
-    ]
+    ],
+    on_timer: think,
+    on_construct(position: Vec3) {
+      think(position, 0, true)
+    }
   })
 
 }

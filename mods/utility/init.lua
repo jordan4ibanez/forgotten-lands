@@ -306,6 +306,9 @@ do
             return vector.distance(vecA, vecB)
         end
     end)()
+    function utility.vec3ToString(input)
+        return (((tostring(input.x) .. ", ") .. tostring(input.y)) .. ", ") .. tostring(input.z)
+    end
     minetest.registerTSEntity = function(clazz)
         local instance = __TS__New(clazz)
         if instance.name == nil then

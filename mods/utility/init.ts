@@ -121,6 +121,10 @@ namespace utility {
     }
   })();
 
+  export function vec3ToString(input: Vec3): string {
+    return input.x + ", " + input.y + ", " + input.z
+  }
+
   /**
    * A bolt on to allow you to directly register MT lua entities as TS classes.
    * @param clazz Class definition.
