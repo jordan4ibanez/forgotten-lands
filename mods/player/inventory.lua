@@ -25,7 +25,7 @@ do
                     {
                         bgColor = colorScalar(85),
                         fullScreen = "both",
-                        fullScreenbgColor = colorScalar(0, 20)
+                        fullScreenbgColor = colorScalar(0, 30)
                     }
                 ),
                 __TS__New(
@@ -33,7 +33,7 @@ do
                     {
                         location = "current_player",
                         listName = "craft",
-                        position = create(1.5, 1.5),
+                        position = create(5.5, 1.75),
                         size = create(2, 2),
                         startingIndex = 0
                     }
@@ -43,7 +43,7 @@ do
                     {
                         location = "current_player",
                         listName = "craftpreview",
-                        position = create(8, 2.25),
+                        position = create(9, 2.25),
                         size = create(1, 1),
                         startingIndex = 0
                     }

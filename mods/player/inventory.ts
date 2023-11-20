@@ -15,15 +15,15 @@ namespace player {
       new BGColor({
         bgColor: colorScalar(85),
         fullScreen: "both",
-        fullScreenbgColor: colorScalar(0,20)
+        fullScreenbgColor: colorScalar(0,30)
       }),
       //! Craft area.
       new List({
         location: "current_player",
         listName: "craft",
         position: create(
-          1.5,
-          1.5
+          5.5,
+          1.75
         ),
         size: create(
           2,
@@ -36,7 +36,7 @@ namespace player {
         location: "current_player",
         listName: "craftpreview",
         position: create(
-          8,
+          9,
           2.25
         ),
         size: create(
