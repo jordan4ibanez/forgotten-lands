@@ -8,7 +8,7 @@ namespace utility {
     }
   }
 
-  loadFiles(["enums", "alpha_to_hex"])
+  loadFiles(["enums", "color_generator"])
 
   export function concat(...input: string[]): string {
     let accumulator = ""
