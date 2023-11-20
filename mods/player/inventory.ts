@@ -1,5 +1,7 @@
 namespace player {
 
+  export const INVENTORY_SIZE = vector.create2d(9,4)
+
   const create = vector.create2d
   const generate = formSpec.generate
   const FormSpec = formSpec.FormSpec
@@ -45,25 +47,40 @@ namespace player {
         ),
         startingIndex: 0
       }),
+      //! Hot bar.
+      new List({
+        location: "current_player",
+        listName: "main",
+        position: create(
+          0.5,
+          6.5
+        ),
+        size: create(
+          INVENTORY_SIZE.x,
+          1
+        ),
+        startingIndex: 0
+      }),
       //! Main inventory.
       new List({
         location: "current_player",
         listName: "main",
         position: create(
-          1,
-          6
+          0.5,
+          8
         ),
         size: create(
-          8,
-          4
+          INVENTORY_SIZE.x,
+          INVENTORY_SIZE.y - 1
         ),
-        startingIndex: 0
-      }),
+        startingIndex: INVENTORY_SIZE.x
+      })
     ]
   }))
 
-  minetest.register_on_joinplayer((player: ObjectRef) => {
-    player.set_inventory_formspec(playerInventory)
+  minetest.register_on_joinplayer((newPlayer: ObjectRef) => {
+    newPlayer.get_inventory().set_size("main", INVENTORY_SIZE.x * INVENTORY_SIZE.y)
+    newPlayer.set_inventory_formspec(playerInventory)
   })
 
 }

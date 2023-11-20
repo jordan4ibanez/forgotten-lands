@@ -7,6 +7,7 @@ end
 -- End of Lua Library inline imports
 player = player or ({})
 do
+    player.INVENTORY_SIZE = vector.create2d(9, 4)
     local create = vector.create2d
     local generate = formSpec.generate
     local FormSpec = formSpec.FormSpec
@@ -53,15 +54,26 @@ do
                     {
                         location = "current_player",
                         listName = "main",
-                        position = create(1, 6),
-                        size = create(8, 4),
+                        position = create(0.5, 6.5),
+                        size = create(player.INVENTORY_SIZE.x, 1),
                         startingIndex = 0
+                    }
+                ),
+                __TS__New(
+                    List,
+                    {
+                        location = "current_player",
+                        listName = "main",
+                        position = create(0.5, 8),
+                        size = create(player.INVENTORY_SIZE.x, player.INVENTORY_SIZE.y - 1),
+                        startingIndex = player.INVENTORY_SIZE.x
                     }
                 )
             }
         }
     ))
-    minetest.register_on_joinplayer(function(player)
-        player:set_inventory_formspec(playerInventory)
+    minetest.register_on_joinplayer(function(newPlayer)
+        newPlayer:get_inventory():set_size("main", player.INVENTORY_SIZE.x * player.INVENTORY_SIZE.y)
+        newPlayer:set_inventory_formspec(playerInventory)
     end)
 end
