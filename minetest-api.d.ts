@@ -202,7 +202,7 @@ export interface minetest {
   is_colored_paramtype(pType: number): boolean
   strip_param2_color(param2: number, paramType2: ParamType2): number | void
   get_node_drops(node: string | NodeTable, toolName: string): string[]
-  get_craft_result(input: CraftRecipeDefinition): [ItemStackObject, ItemStackObject] //! TESTME: This documentation is confusing!
+  get_craft_result(input: CraftRecipeCheckDefinition): [CraftResultObject, CraftResultObject]
   get_craft_recipe(output: string | NodeTable): CraftRecipeDefinition | void
   get_all_craft_recipes(queryItem: string | NodeTable): CraftRecipeDefinition[] | void
   handle_node_drops(position: Vec3, drops: string[], digger: ObjectRef): void
@@ -578,8 +578,8 @@ declare global {
   
   export interface NodeTable {
     name: string
-    param1: number
-    param2: number
+    param1?: number
+    param2?: number
   }
   
   export interface PointedThing {
@@ -931,6 +931,18 @@ declare global {
     additional_wear?: number
     cooktime?: number
     burntime?: number
+  }
+
+  export interface CraftResultObject {
+    item: ItemStackObject
+    time: number
+    replacements: ItemStackObject[]
+  }
+
+  export interface CraftRecipeCheckDefinition {
+    method: CraftCheckType
+    width: number
+    items: ItemStackObject[]
   }
   
   export interface ChatCommandDefinition {
