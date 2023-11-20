@@ -73,6 +73,7 @@ do
         }
     ))
     minetest.register_on_joinplayer(function(newPlayer)
+        newPlayer:hud_set_hotbar_itemcount(player.INVENTORY_SIZE.x)
         newPlayer:get_inventory():set_size("main", player.INVENTORY_SIZE.x * player.INVENTORY_SIZE.y)
         newPlayer:set_inventory_formspec(playerInventory)
     end)
