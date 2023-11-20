@@ -18,8 +18,16 @@ namespace blocks {
   const colorRGB = utility.colorRGB
   const vec3ToString = utility.vec3ToString
 
-  function turnIt(input: string): string {
+  function turnTexture(input: string): string {
     return input + "^[transformR270"
+  }
+
+  function turnOn(position: Vec3) {
+    minetest.swap_node(position, {name: "furnace_active"})
+  }
+
+  function turnOff(position:Vec3) {
+    minetest.swap_node(position, {name: "furnace"})
   }
 
   function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
@@ -29,9 +37,6 @@ namespace blocks {
       print("Furnace: Error, tried to do work on null object.")
       return
     }
-
-    const isActive = (currentBlock.name == "furnace_active")
-
     const meta = minetest.get_meta(position)
     const inventory = meta.get_inventory()
 
@@ -42,7 +47,153 @@ namespace blocks {
       inventory.set_size("output", 1)
     }
 
+    const isActive = (currentBlock.name == "furnace_active")
+    let fuelTime = meta.get_float("fuelTime") || 0
+    let sourceTime = meta.get_float("sourceTime") || 0
+    let fuelTotalTime = meta.get_float("fuelTotalTime") || 0
+    const timerElapsed = meta.get_int("timerElapsed") || 0
+
+    meta.set_int("timerElapsed", timerElapsed + 1)
+    
     print(`thinking at ${vec3ToString(position)}...`)
+
+    //! FIXME: source is now input!
+    let sourceList: ItemStackObject[]
+    let fuelList: ItemStackObject[]
+    let outputFull = false
+
+
+    let cookable: boolean = false
+    let cooked: CraftResultObject
+    let fuel: CraftResultObject
+
+
+    let update = true
+
+    while (timerElapsed > 0 && update) {
+
+      update = false
+
+      sourceList = inventory.get_list("input")
+      fuelList = inventory.get_list("fuel")
+
+      //? Cooking
+
+      // Check if we have cookable items.
+
+      let afterCooked: CraftRecipeCheckDefinition
+
+      [cooked, afterCooked] = minetest.get_craft_result({
+        method: CraftCheckType.cooking,
+        width: 1,
+        items: sourceList
+      })
+
+      cookable = (cooked.time != 0)
+
+      //todo: make this a ternary
+      let el = math.min(elapsed, fuelTotalTime - fuelTime)
+
+      // Fuel lasts long enough, adjust el to cooking duration.
+      if (cookable) {
+        el = math.min(el, cooked.time - sourceTime)
+      }
+
+      // Check if we have enough fuel to burn.
+      if (fuelTime < fuelTotalTime) {
+
+        // The furnace is active and has enough fuel.
+        fuelTime += el
+
+        // If there is a cookable item then check if it ready.
+        if (cookable) {
+          sourceTime += el
+          if (sourceTime >= cooked.time) {
+
+            // Place result in output list if possible.
+            if (inventory.room_for_item("output", cooked.item)) {
+              inventory.add_item("output", cooked.item)
+              inventory.set_stack("input", 1, afterCooked.items[1])
+              sourceTime -= cooked.time
+              update = true
+              print("Play cooked sound here...")
+            } else {
+              outputFull = false
+            }
+          } else {
+
+            // Item could not be cooked, probably missing fuel.
+            update = true
+          }
+        }
+      } else {
+
+        // Furnace ran out of fuel.
+        if (cookable) {
+
+          // We need to get new fuel.
+          let afterFuel: CraftRecipeCheckDefinition
+
+          [fuel, afterFuel] = minetest.get_craft_result({
+            method: CraftCheckType.fuel,
+            width: 1,
+            items: fuelList
+          })
+
+          if (fuel.time == 0) {
+
+            // No valid fuel in the fuel list.
+            fuelTotalTime = 0
+
+          } else {
+
+            // Prevent blocking of fuel inventory. (For automation mods)
+            const [isFuel, _] = minetest.get_craft_result({
+              method: CraftCheckType.fuel,
+              width: 1,
+              items: [
+                afterFuel.items[1] //! FIXME: Might need to_string()
+              ]
+            })
+
+            if (isFuel.time == 0) {
+              table.insert(fuel.replacements, afterFuel.items[1])
+              inventory.set_stack("fuel", 1, "")
+            } else {
+              // Take fuel from fuel list.
+              inventory.set_stack("fuel", 1, afterFuel.items[1])
+            }
+
+            // Put replacements in output list or drop them on the furnace.
+            const replacements = fuel.replacements
+            if (replacements[1]) {
+              const leftOver = inventory.add_item("output", replacements[1])
+              if (!leftOver.is_empty()) {
+                const above = vector.create(position.x, position.y + 1, position.z)
+                const dropPosition = minetest.find_node_near(above, 1, ["air"]) || above
+                minetest.item_drop(replacements[1], null, dropPosition)
+              }
+            }
+            update = true
+            fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
+          }
+        } else {
+
+          // We don't need to get new fuel since there is no cookable item.
+          fuelTotalTime = 0
+          sourceTime = 0
+        }
+        fuelTime = 0
+      }
+
+      elapsed -= el
+
+    }
+
+    // Update formspec and node.
+    
+
+
 
 
     const furnaceInventory: string = generate(new FormSpec({
@@ -96,7 +247,7 @@ namespace blocks {
             1,
             1
           ),
-          texture: turnIt("gui_furnace_arrow_bg.png")
+          texture: turnTexture("gui_furnace_arrow_bg.png")
         }),
         //! Arrow foreground.
         new Image({
@@ -108,7 +259,7 @@ namespace blocks {
             1,
             1
           ),
-          texture: turnIt("gui_furnace_arrow_fg.png")
+          texture: turnTexture("gui_furnace_arrow_fg.png")
         }),
         //! Fuel.
         new List({
