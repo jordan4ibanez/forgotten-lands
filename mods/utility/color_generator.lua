@@ -123,4 +123,19 @@ do
         end
         return newColor
     end
+    function utility.colorScalar(s, a)
+        local newColor = "#"
+        local hex = hexValues[lockChannel(s)]
+        do
+            local i = 0
+            while i < 3 do
+                newColor = newColor .. hex
+                i = i + 1
+            end
+        end
+        if a then
+            newColor = newColor .. hexValues[lockChannel(a)]
+        end
+        return newColor
+    end
 end

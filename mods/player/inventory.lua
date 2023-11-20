@@ -14,7 +14,7 @@ do
     local BGColor = formSpec.BGColor
     local List = formSpec.List
     local color = utility.color
-    print(color(1, 2, 3))
+    local colorScalar = utility.colorScalar
     local playerInventory = generate(__TS__New(
         FormSpec,
         {
@@ -23,9 +23,9 @@ do
                 __TS__New(
                     BGColor,
                     {
-                        bgColor = color(100, 100, 100),
+                        bgColor = colorScalar(85),
                         fullScreen = "both",
-                        fullScreenbgColor = color(0, 0, 0, 20)
+                        fullScreenbgColor = colorScalar(0, 20)
                     }
                 ),
                 __TS__New(

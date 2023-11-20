@@ -130,4 +130,16 @@ namespace utility {
     return newColor
   }
 
+  export function colorScalar(s: number, a?: number): string {
+    let newColor = "#"
+    const hex = hexValues[lockChannel(s)]
+    for (let i = 0; i < 3; i++) {
+      newColor += hex
+    }
+    if (a) {
+      newColor += hexValues[lockChannel(a)]
+    }
+    return newColor
+  }
+
 }

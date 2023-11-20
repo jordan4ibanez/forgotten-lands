@@ -7,16 +7,15 @@ namespace player {
   const BGColor = formSpec.BGColor
   const List = formSpec.List
   const color = utility.color
-
-  print(color(1,2,3))
+  const colorScalar = utility.colorScalar
 
   const playerInventory: string = generate(new FormSpec({
     size: create(12,12),
     elements: [
       new BGColor({
-        bgColor: color(80,80,80),
+        bgColor: colorScalar(85),
         fullScreen: "both",
-        fullScreenbgColor: color(0,0,0,20)
+        fullScreenbgColor: colorScalar(0,20)
       }),
       //! Craft area.
       new List({
