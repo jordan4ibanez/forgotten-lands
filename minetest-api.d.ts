@@ -123,7 +123,7 @@ export interface minetest {
   punch_node(position: Vec3): void
   spawn_falling_node(position: Vec3): [boolean, ObjectRef] | boolean
   find_nodes_with_meta(pos1: Vec3, pos2: Vec3): Vec3[]
-  get_meta(position: Vec3): MetaData
+  get_meta(position: Vec3): MetaRef
   get_node_timer(position: Vec3): NodeTimerObject
   add_entity(position: Vec3, entityName: string, staticData?: string): ObjectRef | null
   add_item(position: Vec3, item: ItemStackObject | string): ObjectRef
