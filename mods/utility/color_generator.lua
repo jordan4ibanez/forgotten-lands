@@ -115,10 +115,10 @@ do
         return hexValues[clamped]
     end
     function utility.color(r, g, b, a)
-        local newColor = ""
+        local newColor = "#"
         for ____, channel in ipairs({r, g, b, a}) do
             if channel then
-                newColor = newColor .. tostring(lockChannel(channel))
+                newColor = newColor .. hexValues[lockChannel(channel)]
             end
         end
         return newColor

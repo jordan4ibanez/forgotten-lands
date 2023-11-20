@@ -121,10 +121,10 @@ namespace utility {
   }
 
   export function color(r: number, g: number, b: number, a?: number): string {
-    let newColor = ""
+    let newColor = "#"
     for (const channel of [r,g,b,a]) {
       if (channel) {
-        newColor += lockChannel(channel)
+        newColor += hexValues[lockChannel(channel)]
       }
     }
     return newColor
