@@ -234,7 +234,15 @@ namespace blocks {
     inventory.set_list("fuel", fuelInventory)
   }
 
-  function processFuelLogic(hasItem: boolean, hasFuel: boolean, fuelBuffer: number, fuelTime: number, meta: MetaRef, inventory: InvRef, fuelInventory: ItemStackObject[]): number {
+  function processFuelLogic(
+    hasItem: boolean,
+    hasFuel: boolean,
+    fuelBuffer: number,
+    fuelTime: number,
+    meta: MetaRef,
+    inventory: InvRef,
+    fuelInventory: ItemStackObject[]
+  ): number {
     if (hasItem && hasFuel && fuelBuffer == -1) {
       takeFromFuel(inventory, fuelInventory)
       meta.set_int("fuelBuffer", fuelTime)
@@ -256,7 +264,8 @@ namespace blocks {
     inputInventory: ItemStackObject[],
     inventory: InvRef,
     outputInventory: ItemStackObject[],
-    itemInHearth: CraftResultObject): number {
+    itemInHearth: CraftResultObject
+  ): number {
     if (hasItem && fuelMax > 0) {
       if (itemBuffer == -1) {
         meta.set_int("itemMax", itemTime)
