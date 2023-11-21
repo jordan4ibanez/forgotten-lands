@@ -28,71 +28,8 @@ namespace blocks {
     return "^[lowpart:" + percent + ":" + input
   }
 
-  function turnOn(position: Vec3) {
-    minetest.swap_node(position, {name: "furnace_active"})
-  }
-
-  function turnOff(position:Vec3) {
-    minetest.swap_node(position, {name: "furnace"})
-  }
-
-  function think(position: Vec3, elapsed: number, justConstructed?: boolean): boolean {
-
-    const currentBlock = minetest.get_node_or_nil(position)
-    if (!currentBlock || currentBlock.name == "ignore") {
-      print("Furnace: Error, tried to do work on null object.")
-      return false
-    }
-    const meta = minetest.get_meta(position)
-    const inventory = meta.get_inventory()
-
-    if (justConstructed) {
-      print("Hey I'm new at " + vec3ToString(position))
-      inventory.set_size("input", 1)
-      inventory.set_size("fuel", 1)
-      inventory.set_size("output", 1)
-    }
-
-    const currentlyActive = (currentBlock.name == "furnace_active")
-
-    let fuelTime = meta.get_float("fuelTime") || 0
-    let inputTime = meta.get_float("inputTime") || 0
-    let fuelTotalTime = meta.get_float("fuelTotalTime") || 0
-    let timerElapsed = meta.get_int("timerElapsed") || 0
-
-    meta.set_int("timerElapsed", timerElapsed + 1)
-    
-    print(`thinking at ${vec3ToString(position)}...`)
-
-
-
-    let active = false
-    let result = false
-
-    const itemPercent = 50
-    const fuelPercent = 100 - math.floor((fuelTime / fuelTotalTime) * 100)
-
-    // Furnace is currently active.
-    if (fuelTotalTime != 0) {
-      active = true
-      
-      if (!currentlyActive) {
-        turnOn(position)
-        print("sound handler goes here")
-      }
-    // Furnace is currently off.
-    } else {
-      if (currentlyActive) {
-        turnOff(position)
-      }
-      minetest.get_node_timer(position).stop()
-      meta.set_int("timerElapsed", 0)
-      
-      print("sound handler stopper goes here")
-    }
-
-    // Now update the formspec.
-    const furnaceInventory: string = generate(new FormSpec({
+  function generateFurnaceFormspec(fuelPercent: number, smeltPercent: number): string {
+    return generate(new FormSpec({
       size: create(12,12),
       elements: [
         //! Nice background colors.
@@ -131,7 +68,7 @@ namespace blocks {
             1,
             1
           ),
-          texture: turnTexture("gui_furnace_arrow_bg.png" + chopTexture("gui_furnace_arrow_fg.png", itemPercent)) + "]"
+          texture: turnTexture("gui_furnace_arrow_bg.png" + chopTexture("gui_furnace_arrow_fg.png", smeltPercent)) + "]"
         }),
         //! Fuel.
         new List({
@@ -223,14 +160,74 @@ namespace blocks {
 
       ]
     }))
+  }
 
-    // Set meta values.
-    meta.set_float("fuelTotalTime", fuelTotalTime)
-    meta.set_float("fuelTime", fuelTime)
-    meta.set_float("inputtime", inputTime)
-    meta.set_string("formspec", furnaceInventory)
-    return result
+  function turnOn(position: Vec3) {
+    minetest.swap_node(position, {name: "furnace_active"})
+  }
 
+  function turnOff(position:Vec3) {
+    minetest.swap_node(position, {name: "furnace"})
+  }
+
+  function fuelCheck(fuelInventory: ItemStackObject[]): CraftResultObject {
+    const result = minetest.get_craft_result({
+      method: CraftCheckType.fuel,
+      width: 1,
+      items: fuelInventory
+    })
+    
+    return result as CraftResultObject
+  }
+
+  function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
+
+    const currentBlock = minetest.get_node_or_nil(position)
+    if (!currentBlock || currentBlock.name == "ignore") {
+      print("Furnace: Error, tried to do work on null object.")
+      return false
+    }
+
+    const meta = minetest.get_meta(position)
+    const inventory = meta.get_inventory()
+
+    if (justConstructed) {
+      print("setting up new furnace")
+      inventory.set_size("input", 1)
+      inventory.set_size("fuel", 1)
+      inventory.set_size("output", 1)
+    }
+
+
+    print(`thinking at ${vec3ToString(position)}.............`)
+    
+    const currentlyActive = (currentBlock.name == "furnace_active")
+    
+    const inputInventory = inventory.get_list("input")
+    const fuelInventory = inventory.get_list("fuel")
+    const outputInventory = inventory.get_list("output")
+
+    const fuelInFirefox = fuelCheck(fuelInventory)
+    const hasFuel = fuelInFirefox.time > 0
+
+    const fuelBuffer = meta.get_int("fuelBuffer") | 0
+
+    print("Do I have fuel? " + hasFuel)
+    print("My fuel buffer: " + fuelBuffer)
+    
+  
+
+
+    const smeltPercent = 50
+    const fuelPercent = 50//100 - math.floor((fuelTime / fuelTotalTime) * 100)
+
+
+
+    // Now update the formspec.
+
+
+    meta.set_string("formspec", generateFurnaceFormspec(fuelPercent, smeltPercent))
+    meta.set_int("fuelBuffer", (fuelBuffer <= 0) ? 0 : fuelBuffer - 1)
   }
 
   //! This should probably be a utility function.
