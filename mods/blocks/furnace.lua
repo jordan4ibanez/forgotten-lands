@@ -126,6 +126,15 @@ do
             }
         ))
     end
+    local function initialPayload(inventory, justConstructed)
+        if not justConstructed then
+            return
+        end
+        print("setting up new furnace")
+        inventory:set_size("input", 1)
+        inventory:set_size("fuel", 1)
+        inventory:set_size("output", 1)
+    end
     local function turnOn(position)
         minetest.swap_node(position, {name = "furnace_active"})
     end
@@ -136,7 +145,7 @@ do
         local result = minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = fuelInventory})
         return result
     end
-    local function think(position, elapsed, justConstructed)
+    local function think(position, elapsedTime, justConstructed)
         local currentBlock = minetest.get_node_or_nil(position)
         if not currentBlock or currentBlock.name == "ignore" then
             print("Furnace: Error, tried to do work on null object.")
@@ -144,32 +153,35 @@ do
         end
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
-        if justConstructed then
-            print("setting up new furnace")
-            inventory:set_size("input", 1)
-            inventory:set_size("fuel", 1)
-            inventory:set_size("output", 1)
-        end
+        initialPayload(inventory, justConstructed)
         print(("thinking at " .. vec3ToString(position)) .. ".............")
         local currentlyActive = currentBlock.name == "furnace_active"
-        local inputInventory = inventory:get_list("input")
-        local fuelInventory = inventory:get_list("fuel")
-        local outputInventory = inventory:get_list("output")
-        local fuelInFirefox = fuelCheck(fuelInventory)
-        local hasFuel = fuelInFirefox.time > 0
-        local fuelBuffer = bit.bor(
-            meta:get_int("fuelBuffer"),
-            0
-        )
-        print("Do I have fuel? " .. tostring(hasFuel))
-        print("My fuel buffer: " .. tostring(fuelBuffer))
-        local smeltPercent = 50
-        local fuelPercent = 50
-        meta:set_string(
-            "formspec",
-            generateFurnaceFormspec(fuelPercent, smeltPercent)
-        )
-        meta:set_int("fuelBuffer", fuelBuffer <= 0 and 0 or fuelBuffer - 1)
+        do
+            local i = 0
+            while i <= elapsedTime do
+                print("run " .. tostring(i))
+                print("elapsed time: " .. tostring(elapsedTime))
+                local inputInventory = inventory:get_list("input")
+                local fuelInventory = inventory:get_list("fuel")
+                local outputInventory = inventory:get_list("output")
+                local fuelInFirefox = fuelCheck(fuelInventory)
+                local hasFuel = fuelInFirefox.time > 0
+                local fuelBuffer = bit.bor(
+                    meta:get_int("fuelBuffer"),
+                    0
+                )
+                print("Do I have fuel? " .. tostring(hasFuel))
+                print("My fuel buffer: " .. tostring(fuelBuffer))
+                local smeltPercent = 50
+                local fuelPercent = 50
+                meta:set_string(
+                    "formspec",
+                    generateFurnaceFormspec(fuelPercent, smeltPercent)
+                )
+                meta:set_int("fuelBuffer", fuelBuffer <= 0 and 0 or fuelBuffer - 1)
+                i = i + 1
+            end
+        end
     end
     local function pixel(inputPixel)
         return inputPixel / textureSize - 0.5

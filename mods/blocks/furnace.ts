@@ -188,7 +188,7 @@ namespace blocks {
     return result as CraftResultObject
   }
 
-  function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
+  function think(position: Vec3, elapsedTime: number, justConstructed?: boolean) {
 
     const currentBlock = minetest.get_node_or_nil(position)
     if (!currentBlock || currentBlock.name == "ignore") {
@@ -205,32 +205,37 @@ namespace blocks {
     print(`thinking at ${vec3ToString(position)}.............`)
     
     const currentlyActive = (currentBlock.name == "furnace_active")
-    
-    const inputInventory = inventory.get_list("input")
-    const fuelInventory = inventory.get_list("fuel")
-    const outputInventory = inventory.get_list("output")
-
-    const fuelInFirefox = fuelCheck(fuelInventory)
-    const hasFuel = fuelInFirefox.time > 0
-
-    const fuelBuffer = meta.get_int("fuelBuffer") | 0
-
-    print("Do I have fuel? " + hasFuel)
-    print("My fuel buffer: " + fuelBuffer)
-    
-  
 
 
-    const smeltPercent = 50
-    const fuelPercent = 50//100 - math.floor((fuelTime / fuelTotalTime) * 100)
+    // Simulate any time lost. Furnace works in 1 second intervals.
+    for (let i = 0; i <= elapsedTime; i++) {
+      print("run " + i)
+      print("elapsed time: " + elapsedTime)
+     
+      const inputInventory = inventory.get_list("input")
+      const fuelInventory = inventory.get_list("fuel")
+      const outputInventory = inventory.get_list("output")
 
+      const fuelInFirefox = fuelCheck(fuelInventory)
+      const hasFuel = fuelInFirefox.time > 0
 
+      
 
-    // Now update the formspec.
+      const fuelBuffer = meta.get_int("fuelBuffer") | 0
 
+      print("Do I have fuel? " + hasFuel)
+      print("My fuel buffer: " + fuelBuffer)
 
-    meta.set_string("formspec", generateFurnaceFormspec(fuelPercent, smeltPercent))
-    meta.set_int("fuelBuffer", (fuelBuffer <= 0) ? 0 : fuelBuffer - 1)
+      const smeltPercent = 50
+      const fuelPercent = 50//100 - math.floor((fuelTime / fuelTotalTime) * 100)
+
+      meta.set_string("formspec", generateFurnaceFormspec(fuelPercent, smeltPercent))
+      meta.set_int("fuelBuffer", (fuelBuffer <= 0) ? 0 : fuelBuffer - 1)
+
+      if (!hasFuel) {
+        break
+      }
+    }
   }
 
   //! This should probably be a utility function.
