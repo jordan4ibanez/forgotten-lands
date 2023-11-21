@@ -85,6 +85,14 @@ namespace blocks {
     return [update, outputFull, fuelTime]
   }
 
+  function getNewFuel(fuelList: ItemStackObject[]): [CraftResultObject, CraftRecipeCheckDefinition] {
+    return minetest.get_craft_result({
+      method: CraftCheckType.fuel,
+      width: 1,
+      items: fuelList
+    })
+  }
+
   function fuelCheck(afterFuel: CraftRecipeCheckDefinition): CraftResultObject {
     // Prevent blocking of fuel inventory. (For automation mods)
     const [isFuel, _] = minetest.get_craft_result({
@@ -195,9 +203,9 @@ namespace blocks {
       sourceList = inventory.get_list("input")
       fuelList = inventory.get_list("fuel")
 
-      //? Cooking
+      //? Smelting
 
-      // Check if we have cookable items.
+      // Check if we have smeltable items.
       let [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
 
       const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
@@ -214,20 +222,12 @@ namespace blocks {
 
           // We need to get new fuel.
           let afterFuel: CraftRecipeCheckDefinition
-
-          [fuel, afterFuel] = minetest.get_craft_result({
-            method: CraftCheckType.fuel,
-            width: 1,
-            items: fuelList
-          })
-
+          [fuel, afterFuel] = getNewFuel(fuelList)
+          
           if (fuel.time == 0) {
-
             // No valid fuel in the fuel list.
             fuelTotalTime = 0
-
           } else {
-
             const isFuel = fuelCheck(afterFuel)
             checkFuelTime(inventory, fuel, isFuel, afterFuel)
             processFuelReplacements(inventory, fuel, position);
