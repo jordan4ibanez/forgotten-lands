@@ -30,6 +30,16 @@ namespace blocks {
     minetest.swap_node(position, {name: "furnace"})
   }
 
+  function resolveSmeltingResults(sourceList: ItemStackObject[]): [CraftResultObject, CraftRecipeCheckDefinition, boolean] {  
+    const [cooked, afterCooked] = minetest.get_craft_result({
+      method: CraftCheckType.cooking,
+      width: 1,
+      items: sourceList
+    })
+    const cookable = (cooked.time != 0)
+    return [cooked, afterCooked, cookable]
+  }
+
   function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
 
     const currentBlock = minetest.get_node_or_nil(position)
@@ -72,6 +82,7 @@ namespace blocks {
 
     while (timerElapsed > 0 && update) {
 
+      
       update = false
 
       sourceList = inventory.get_list("input")
@@ -81,15 +92,8 @@ namespace blocks {
 
       // Check if we have cookable items.
 
-      let afterCooked: CraftRecipeCheckDefinition
+      let [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
 
-      [cooked, afterCooked] = minetest.get_craft_result({
-        method: CraftCheckType.cooking,
-        width: 1,
-        items: sourceList
-      })
-
-      cookable = (cooked.time != 0)
 
       //todo: make this a ternary
       let el = math.min(elapsed, fuelTotalTime - fuelTime)
