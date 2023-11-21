@@ -97,6 +97,44 @@ namespace blocks {
     return isFuel
   }
 
+  function checkFuelTime(inventory: InvRef, fuel: CraftResultObject, isFuel: CraftResultObject, afterFuel: CraftRecipeCheckDefinition) {
+    if (isFuel.time == 0) {
+      table.insert(fuel.replacements, afterFuel.items[1])
+      inventory.set_stack("fuel", 1, "")
+    } else {
+      // Take fuel from fuel list.
+      inventory.set_stack("fuel", 1, afterFuel.items[1])
+    }
+  }
+
+  function processFuelReplacements(
+    inventory: InvRef,
+    fuel: CraftResultObject,
+    position: Vec3,
+    ): void {
+    // Put replacements in output list or drop them on the furnace.
+    const replacements = fuel.replacements
+    if (replacements[1]) {
+      const leftOver = inventory.add_item("output", replacements[1])
+      if (!leftOver.is_empty()) {
+        const above = vector.create(position.x, position.y + 1, position.z)
+        const dropPosition = minetest.find_node_near(above, 1, ["air"]) || above
+        minetest.item_drop(replacements[1], null, dropPosition)
+      }
+    }
+  }
+
+  function finalizeFuelProcessing(
+    fuelTotalTime: number,
+    fuelTime: number,
+    fuel: CraftResultObject,
+    update: boolean
+  ): [boolean, number] {
+    update = true
+    fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
+    return [update, fuelTotalTime]
+  }
+
   function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, sourceTime: number): number {
 
     let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
@@ -191,27 +229,10 @@ namespace blocks {
           } else {
 
             const isFuel = fuelCheck(afterFuel)
+            checkFuelTime(inventory, fuel, isFuel, afterFuel)
+            processFuelReplacements(inventory, fuel, position);
 
-            if (isFuel.time == 0) {
-              table.insert(fuel.replacements, afterFuel.items[1])
-              inventory.set_stack("fuel", 1, "")
-            } else {
-              // Take fuel from fuel list.
-              inventory.set_stack("fuel", 1, afterFuel.items[1])
-            }
-
-            // Put replacements in output list or drop them on the furnace.
-            const replacements = fuel.replacements
-            if (replacements[1]) {
-              const leftOver = inventory.add_item("output", replacements[1])
-              if (!leftOver.is_empty()) {
-                const above = vector.create(position.x, position.y + 1, position.z)
-                const dropPosition = minetest.find_node_near(above, 1, ["air"]) || above
-                minetest.item_drop(replacements[1], null, dropPosition)
-              }
-            }
-            update = true
-            fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
+            [update, fuelTotalTime] = finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update)
           }
         } else {
 

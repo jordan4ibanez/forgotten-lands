@@ -31,6 +31,69 @@ do
     local function turnOff(position)
         minetest.swap_node(position, {name = "furnace"})
     end
+    local function resolveSmeltingResults(sourceList)
+        local cooked, afterCooked = unpack(minetest.get_craft_result({method = CraftCheckType.cooking, width = 1, items = sourceList}))
+        local cookable = cooked.time ~= 0
+        return {cooked, afterCooked, cookable}
+    end
+    local function smeltCheck(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
+        local update = false
+        local outputFull = false
+        fuelTime = fuelTime + accumulator
+        if not cookable then
+            return {update, outputFull, fuelTime}
+        end
+        sourceTime = sourceTime + accumulator
+        if sourceTime >= cooked.time then
+            if inventory:room_for_item("output", cooked.item) then
+                inventory:add_item("output", cooked.item)
+                inventory:set_stack("input", 1, afterCooked.items[2])
+                sourceTime = sourceTime - cooked.time
+                update = true
+                print("Play melt sound here...")
+            else
+                outputFull = false
+            end
+        else
+            update = true
+        end
+        return {update, outputFull, fuelTime}
+    end
+    local function fuelCheck(afterFuel)
+        local isFuel, _ = unpack(minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = {afterFuel.items[2]}}))
+        return isFuel
+    end
+    local function checkFuelTime(inventory, fuel, isFuel, afterFuel)
+        if isFuel.time == 0 then
+            table.insert(fuel.replacements, afterFuel.items[2])
+            inventory:set_stack("fuel", 1, "")
+        else
+            inventory:set_stack("fuel", 1, afterFuel.items[2])
+        end
+    end
+    local function processFuelReplacements(inventory, fuel, position)
+        local replacements = fuel.replacements
+        if replacements[2] then
+            local leftOver = inventory:add_item("output", replacements[2])
+            if not leftOver:is_empty() then
+                local above = vector.create(position.x, position.y + 1, position.z)
+                local dropPosition = minetest.find_node_near(above, 1, {"air"}) or above
+                minetest.item_drop(replacements[2], nil, dropPosition)
+            end
+        end
+    end
+    local function finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update)
+        update = true
+        fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
+        return {update, fuelTotalTime}
+    end
+    local function accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
+        local accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
+        if cookable then
+            accumulator = math.min(accumulator, cooked.time - sourceTime)
+        end
+        return accumulator
+    end
     local function think(position, elapsed, justConstructed)
         local currentBlock = minetest.get_node_or_nil(position)
         if not currentBlock or currentBlock.name == "ignore" then
@@ -52,42 +115,36 @@ do
         local timerElapsed = meta:get_int("timerElapsed") or 0
         meta:set_int("timerElapsed", timerElapsed + 1)
         print(("thinking at " .. vec3ToString(position)) .. "...")
-        local sourceList
+        local sourceList = nil
         local fuelList
         local outputFull = false
         local cookable = false
         local cooked
-        local fuel
+        local fuel = nil
         local update = true
         while timerElapsed > 0 and update do
             update = false
             sourceList = inventory:get_list("input")
             fuelList = inventory:get_list("fuel")
-            local afterCooked
-            cooked, afterCooked = unpack(minetest.get_craft_result({method = CraftCheckType.cooking, width = 1, items = sourceList}))
-            cookable = cooked.time ~= 0
-            local el = math.min(elapsed, fuelTotalTime - fuelTime)
-            if cookable then
-                el = math.min(el, cooked.time - sourceTime)
-            end
+            local cooked, afterCooked, cookable = unpack(resolveSmeltingResults(sourceList))
+            local accumulator = accumulate(
+                elapsed,
+                fuelTotalTime,
+                fuelTime,
+                cookable,
+                cooked,
+                sourceTime
+            )
             if fuelTime < fuelTotalTime then
-                fuelTime = fuelTime + el
-                if cookable then
-                    sourceTime = sourceTime + el
-                    if sourceTime >= cooked.time then
-                        if inventory:room_for_item("output", cooked.item) then
-                            inventory:add_item("output", cooked.item)
-                            inventory:set_stack("input", 1, afterCooked.items[2])
-                            sourceTime = sourceTime - cooked.time
-                            update = true
-                            print("Play cooked sound here...")
-                        else
-                            outputFull = false
-                        end
-                    else
-                        update = true
-                    end
-                end
+                update, outputFull, fuelTime = unpack(smeltCheck(
+                    fuelTime,
+                    accumulator,
+                    cookable,
+                    sourceTime,
+                    cooked,
+                    afterCooked,
+                    inventory
+                ))
             else
                 if cookable then
                     local afterFuel
@@ -95,24 +152,10 @@ do
                     if fuel.time == 0 then
                         fuelTotalTime = 0
                     else
-                        local isFuel, _ = unpack(minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = {afterFuel.items[2]}}))
-                        if isFuel.time == 0 then
-                            table.insert(fuel.replacements, afterFuel.items[2])
-                            inventory:set_stack("fuel", 1, "")
-                        else
-                            inventory:set_stack("fuel", 1, afterFuel.items[2])
-                        end
-                        local replacements = fuel.replacements
-                        if replacements[2] then
-                            local leftOver = inventory:add_item("output", replacements[2])
-                            if not leftOver:is_empty() then
-                                local above = vector.create(position.x, position.y + 1, position.z)
-                                local dropPosition = minetest.find_node_near(above, 1, {"air"}) or above
-                                minetest.item_drop(replacements[2], nil, dropPosition)
-                            end
-                        end
-                        update = true
-                        fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
+                        local isFuel = fuelCheck(afterFuel)
+                        checkFuelTime(inventory, fuel, isFuel, afterFuel)
+                        processFuelReplacements(inventory, fuel, position)
+                        update, fuelTotalTime = unpack(finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update))
                     end
                 else
                     fuelTotalTime = 0
@@ -120,7 +163,13 @@ do
                 end
                 fuelTime = 0
             end
-            elapsed = elapsed - el
+            elapsed = elapsed - accumulator
+        end
+        if fuel and fuelTotalTime > fuel.time then
+            fuelTotalTime = fuel.time
+        end
+        if sourceList and sourceList[2]:is_empty() then
+            sourceTime = 0
         end
         local furnaceInventory = generate(__TS__New(
             FormSpec,
