@@ -47,6 +47,8 @@ namespace blocks {
       inventory.set_size("output", 1)
     }
 
+    print("Hello from github!")
+
     const isActive = (currentBlock.name == "furnace_active")
     let fuelTime = meta.get_float("fuelTime") || 0
     let sourceTime = meta.get_float("sourceTime") || 0
