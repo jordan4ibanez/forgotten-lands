@@ -162,6 +162,14 @@ namespace blocks {
     }))
   }
 
+  function initialPayload(inventory: InvRef, justConstructed?: boolean) {
+    if (!justConstructed)  return
+    print("setting up new furnace")
+    inventory.set_size("input", 1)
+    inventory.set_size("fuel", 1)
+    inventory.set_size("output", 1)
+  }
+
   function turnOn(position: Vec3) {
     minetest.swap_node(position, {name: "furnace_active"})
   }
@@ -191,12 +199,7 @@ namespace blocks {
     const meta = minetest.get_meta(position)
     const inventory = meta.get_inventory()
 
-    if (justConstructed) {
-      print("setting up new furnace")
-      inventory.set_size("input", 1)
-      inventory.set_size("fuel", 1)
-      inventory.set_size("output", 1)
-    }
+    initialPayload(inventory, justConstructed)
 
 
     print(`thinking at ${vec3ToString(position)}.............`)
