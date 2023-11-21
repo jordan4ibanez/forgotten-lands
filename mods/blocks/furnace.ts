@@ -48,7 +48,7 @@ namespace blocks {
     fuelTime: number,
     accumulator: number,
     cookable: boolean,
-    sourceTime: number,
+    inputTime: number,
     // Refs
     cooked: CraftResultObject,
     afterCooked: CraftRecipeCheckDefinition,
@@ -66,15 +66,15 @@ namespace blocks {
       return [update, outputFull, fuelTime]
     }
       
-    sourceTime += accumulator
+    inputTime += accumulator
 
-    if (sourceTime >= cooked.time) {
+    if (inputTime >= cooked.time) {
 
       // Place result in output list if possible.
       if (inventory.room_for_item("output", cooked.item)) {
         inventory.add_item("output", cooked.item)
         inventory.set_stack("input", 1, afterCooked.items[1])
-        sourceTime -= cooked.time
+        inputTime -= cooked.time
         update = true
         print("Play melt sound here...")
       } else {
@@ -153,7 +153,7 @@ namespace blocks {
     cookable: boolean,
     fuelTotalTime: number,
     fuelTime: number,
-    sourceTime: number,
+    inputTime: number,
     // Refs
     fuel: CraftResultObject | undefined,
     fuelList: ItemStackObject[],
@@ -177,20 +177,20 @@ namespace blocks {
     } else {
       // We don't need to get new fuel since there is no cookable item.
       fuelTotalTime = 0
-      sourceTime = 0
+      inputTime = 0
     }
     fuelTime = 0
 
-    return [update, cookable, fuelTotalTime, fuelTime, sourceTime]
+    return [update, cookable, fuelTotalTime, fuelTime, inputTime]
   }
 
-  function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, sourceTime: number): number {
+  function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, inputTime: number): number {
 
     let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
 
     // Fuel lasts long enough, adjust accumulator to cooking duration.
     if (cookable) {
-      accumulator = math.min(accumulator, cooked.time - sourceTime)
+      accumulator = math.min(accumulator, cooked.time - inputTime)
     }
 
     return accumulator
@@ -204,7 +204,7 @@ namespace blocks {
     elapsed: number,
     fuelTime: number,
     fuelTotalTime: number,
-    sourceTime: number,
+    inputTime: number,
     // Refs
     cooked: CraftResultObject | undefined,
     inventory: InvRef,
@@ -228,20 +228,20 @@ namespace blocks {
       // Check if we have smeltable items.
       [cooked, afterCooked, cookable] = resolveSmeltingResults(inputList)
 
-      const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
+      const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, inputTime)
 
       // Check if we have enough fuel to burn.
       if (fuelTime < fuelTotalTime) {
-        [update, outputFull, fuelTime] = smeltLogic(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
+        [update, outputFull, fuelTime] = smeltLogic(fuelTime, accumulator, cookable, inputTime, cooked, afterCooked, inventory)
       } else {
-        [update, cookable, fuelTotalTime, fuelTime, sourceTime] = fuelLogic(update, cookable, fuelTotalTime, fuelTime, sourceTime, fuel, fuelList, inventory, position)
+        [update, cookable, fuelTotalTime, fuelTime, inputTime] = fuelLogic(update, cookable, fuelTotalTime, fuelTime, inputTime, fuel, fuelList, inventory, position)
       }
 
       elapsed -= accumulator
 
-      return runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, inputList, fuelList, fuel, position)
+      return runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime, cooked, inventory, inputList, fuelList, fuel, position)
     }
-    return [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime]
+    return [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime]
   }
 
   function think(position: Vec3, elapsed: number, justConstructed?: boolean): boolean {
@@ -264,7 +264,7 @@ namespace blocks {
     const currentlyActive = (currentBlock.name == "furnace_active")
 
     let fuelTime = meta.get_float("fuelTime") || 0
-    let sourceTime = meta.get_float("sourceTime") || 0
+    let inputTime = meta.get_float("inputTime") || 0
     let fuelTotalTime = meta.get_float("fuelTotalTime") || 0
     let timerElapsed = meta.get_int("timerElapsed") || 0
 
@@ -283,15 +283,15 @@ namespace blocks {
 
     let update = true;
 
-    [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime] = 
-    runLogic(update, cookable, outputFull,timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, inputList, fuelList, fuel, position);
+    [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime] = 
+    runLogic(update, cookable, outputFull,timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime, cooked, inventory, inputList, fuelList, fuel, position);
 
     if (fuel && fuelTotalTime > fuel.time) {
       fuelTotalTime = fuel.time
     }
 
     if (inputList && inputList[1].is_empty()) {
-      sourceTime = 0
+      inputTime = 0
     }
 
     // Update formspec and node.
@@ -299,7 +299,7 @@ namespace blocks {
     let itemPercent = 0
 
     if (cookable && cooked) {
-      itemPercent = math.floor(sourceTime / cooked.time * 100)
+      itemPercent = math.floor(inputTime / cooked.time * 100)
     }
 
     let active = false
@@ -486,7 +486,7 @@ namespace blocks {
     // Set meta values.
     meta.set_float("fuelTotalTime", fuelTotalTime)
     meta.set_float("fuelTime", fuelTime)
-    meta.set_float("sourcetime", sourceTime)
+    meta.set_float("inputtime", inputTime)
     meta.set_string("formspec", furnaceInventory)
     return result
 
