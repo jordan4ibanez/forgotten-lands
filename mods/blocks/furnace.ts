@@ -34,11 +34,11 @@ namespace blocks {
     minetest.swap_node(position, {name: "furnace"})
   }
 
-  function resolveSmeltingResults(sourceList: ItemStackObject[]): [CraftResultObject, CraftRecipeCheckDefinition, boolean] {  
+  function resolveSmeltingResults(inputList: ItemStackObject[]): [CraftResultObject, CraftRecipeCheckDefinition, boolean] {  
     const [cooked, afterCooked] = minetest.get_craft_result({
       method: CraftCheckType.cooking,
       width: 1,
-      items: sourceList
+      items: inputList
     })
     const cookable = (cooked.time != 0)
     return [cooked, afterCooked, cookable]
@@ -208,7 +208,7 @@ namespace blocks {
     // Refs
     cooked: CraftResultObject | undefined,
     inventory: InvRef,
-    sourceList: ItemStackObject[] | undefined,
+    inputList: ItemStackObject[] | undefined,
     fuelList: ItemStackObject[] | undefined,
     fuel: CraftResultObject | undefined,
     position: Vec3
@@ -218,7 +218,7 @@ namespace blocks {
       update = false
 
       //todo: check if we have to get lists every time
-      sourceList = inventory.get_list("input")
+      inputList = inventory.get_list("input")
       fuelList = inventory.get_list("fuel");
 
       //? Smelting
@@ -226,7 +226,7 @@ namespace blocks {
       let afterCooked: CraftRecipeCheckDefinition
 
       // Check if we have smeltable items.
-      [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
+      [cooked, afterCooked, cookable] = resolveSmeltingResults(inputList)
 
       const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
 
@@ -239,7 +239,7 @@ namespace blocks {
 
       elapsed -= accumulator
 
-      return runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, sourceList, fuelList, fuel, position)
+      return runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, inputList, fuelList, fuel, position)
     }
     return [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime]
   }
@@ -272,8 +272,7 @@ namespace blocks {
     
     print(`thinking at ${vec3ToString(position)}...`)
 
-    //! FIXME: source is now input!
-    let sourceList: ItemStackObject[] | undefined
+    let inputList: ItemStackObject[] | undefined
     let fuelList: ItemStackObject[] | undefined
     let outputFull = false
 
@@ -285,13 +284,13 @@ namespace blocks {
     let update = true;
 
     [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime] = 
-    runLogic(update, cookable, outputFull,timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, sourceList, fuelList, fuel, position);
+    runLogic(update, cookable, outputFull,timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, inputList, fuelList, fuel, position);
 
     if (fuel && fuelTotalTime > fuel.time) {
       fuelTotalTime = fuel.time
     }
 
-    if (sourceList && sourceList[1].is_empty()) {
+    if (inputList && inputList[1].is_empty()) {
       sourceTime = 0
     }
 
