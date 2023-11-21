@@ -91,28 +91,27 @@ namespace blocks {
       //? Cooking
 
       // Check if we have cookable items.
-
       let [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
 
 
       //todo: make this a ternary
-      let el = math.min(elapsed, fuelTotalTime - fuelTime)
+      let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
 
       // Fuel lasts long enough, adjust el to cooking duration.
       if (cookable) {
-        el = math.min(el, cooked.time - sourceTime)
+        accumulator = math.min(accumulator, cooked.time - sourceTime)
       }
 
       // Check if we have enough fuel to burn.
       if (fuelTime < fuelTotalTime) {
 
         // The furnace is active and has enough fuel.
-        fuelTime += el
+        fuelTime += accumulator
 
         // If there is a cookable item then check if it ready.
         if (cookable) {
           
-          sourceTime += el
+          sourceTime += accumulator
 
           if (sourceTime >= cooked.time) {
 
@@ -192,7 +191,7 @@ namespace blocks {
         fuelTime = 0
       }
 
-      elapsed -= el
+      elapsed -= accumulator
 
     }
 
