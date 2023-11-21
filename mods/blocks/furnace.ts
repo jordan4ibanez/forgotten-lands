@@ -22,6 +22,10 @@ namespace blocks {
     return input + "^[transformR270"
   }
 
+  function chopTexture(input: string, percent: number): string {
+    return input + "^[lowpart:" + percent
+  }
+
   function turnOn(position: Vec3) {
     minetest.swap_node(position, {name: "furnace_active"})
   }
@@ -240,12 +244,12 @@ namespace blocks {
     return [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime]
   }
 
-  function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
+  function think(position: Vec3, elapsed: number, justConstructed?: boolean): boolean {
 
     const currentBlock = minetest.get_node_or_nil(position)
     if (!currentBlock || currentBlock.name == "ignore") {
       print("Furnace: Error, tried to do work on null object.")
-      return
+      return false
     }
     const meta = minetest.get_meta(position)
     const inventory = meta.get_inventory()
@@ -257,7 +261,8 @@ namespace blocks {
       inventory.set_size("output", 1)
     }
 
-    const isActive = (currentBlock.name == "furnace_active")
+    const currentlyActive = (currentBlock.name == "furnace_active")
+
     let fuelTime = meta.get_float("fuelTime") || 0
     let sourceTime = meta.get_float("sourceTime") || 0
     let fuelTotalTime = meta.get_float("fuelTotalTime") || 0
@@ -290,10 +295,39 @@ namespace blocks {
       sourceTime = 0
     }
 
-    //! And here is where we stop for now because this is insanity
-
     // Update formspec and node.
 
+    let itemPercent = 0
+
+    if (cookable && cooked) {
+      itemPercent = math.floor(sourceTime / cooked.time * 100)
+    }
+
+    let active = false
+    let result = false
+
+    const fuelPercent = 100 - math.floor((fuelTime / fuelTotalTime) * 100)
+
+    // Furnace is currently active.
+    if (fuelTotalTime != 0) {
+      active = true
+      
+      if (!currentlyActive) {
+        turnOn(position)
+        print("sound handler goes here")
+      }
+    // Furnace is currently off.
+    } else {
+      if (currentlyActive) {
+        turnOff(position)
+      }
+      minetest.get_node_timer(position).stop()
+      meta.set_int("timerElapsed", 0)
+      
+      print("sound handler stopper goes here")
+    }
+
+    // Now update the formspec.
     const furnaceInventory: string = generate(new FormSpec({
       size: create(12,12),
       elements: [
@@ -333,7 +367,7 @@ namespace blocks {
             1,
             1
           ),
-          texture: "default_furnace_fire_fg.png"
+          texture: chopTexture("default_furnace_fire_fg.png", fuelPercent)
         }),
         //! Arrow background.
         new Image({
@@ -357,7 +391,7 @@ namespace blocks {
             1,
             1
           ),
-          texture: turnTexture("gui_furnace_arrow_fg.png")
+          texture: turnTexture(chopTexture("gui_furnace_arrow_fg.png", itemPercent))
         }),
         //! Fuel.
         new List({
@@ -450,7 +484,13 @@ namespace blocks {
       ]
     }))
 
+    // Set meta values.
+    meta.set_float("fuelTotalTime", fuelTotalTime)
+    meta.set_float("fuelTime", fuelTime)
+    meta.set_float("sourcetime", sourceTime)
     meta.set_string("formspec", furnaceInventory)
+    return result
+
   }
 
   //? Functionality
