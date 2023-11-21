@@ -40,7 +40,7 @@ namespace blocks {
     return [cooked, afterCooked, cookable]
   }
 
-  function smeltCheck(
+  function smeltLogic(
     fuelTime: number,
     accumulator: number,
     cookable: boolean,
@@ -250,7 +250,7 @@ namespace blocks {
       // Check if we have enough fuel to burn.
       if (fuelTime < fuelTotalTime) {
 
-        [update, outputFull, fuelTime] = smeltCheck(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
+        [update, outputFull, fuelTime] = smeltLogic(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
 
       } else {
 
