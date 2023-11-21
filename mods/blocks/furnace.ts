@@ -40,6 +40,18 @@ namespace blocks {
     return [cooked, afterCooked, cookable]
   }
 
+  function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, sourceTime: number): number {
+
+    let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
+
+    // Fuel lasts long enough, adjust accumulator to cooking duration.
+    if (cookable) {
+      accumulator = math.min(accumulator, cooked.time - sourceTime)
+    }
+
+    return accumulator
+  }
+
   function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
 
     const currentBlock = minetest.get_node_or_nil(position)
@@ -93,14 +105,7 @@ namespace blocks {
       // Check if we have cookable items.
       let [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
 
-
-      //todo: make this a ternary
-      let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
-
-      // Fuel lasts long enough, adjust el to cooking duration.
-      if (cookable) {
-        accumulator = math.min(accumulator, cooked.time - sourceTime)
-      }
+      const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
 
       // Check if we have enough fuel to burn.
       if (fuelTime < fuelTotalTime) {
