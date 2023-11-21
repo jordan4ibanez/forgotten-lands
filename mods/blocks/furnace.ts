@@ -515,9 +515,9 @@ namespace blocks {
     tiles: [
       "default_furnace_top.png",
       "default_furnace_bottom.png",
-		  "default_furnace_side.png",
       "default_furnace_side.png",
-		  "default_furnace_side.png",
+      "default_furnace_side.png",
+      "default_furnace_side.png",
       "default_furnace_front.png"
     ],
     on_punch: function(position: Vec3) {
@@ -543,9 +543,9 @@ namespace blocks {
     tiles: [
       "default_furnace_top.png",
       "default_furnace_bottom.png",
-		  "default_furnace_side.png",
       "default_furnace_side.png",
-		  "default_furnace_side.png",
+      "default_furnace_side.png",
+      "default_furnace_side.png",
       "default_furnace_front_active.png"
     ],
     on_timer: think,
