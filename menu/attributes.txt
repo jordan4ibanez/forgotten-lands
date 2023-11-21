@@ -4,4 +4,4 @@ Download: https://fonts.google.com/specimen/Lora
 Text color: #626262
 
 theme.1.ogg: https://youtu.be/REz-e-zsUbE?feature=shared Dark Reaven Music, CC BY 3.0 Unported
-theme.2.ogg: https://youtu.be/IoZBAHn3aHk?feature=shared jordan4ibanez, CC BY 3.0
+credits_theme.ogg: https://youtu.be/IoZBAHn3aHk?feature=shared jordan4ibanez, CC BY 3.0
