@@ -72,7 +72,7 @@ namespace blocks {
         inventory.set_stack("input", 1, afterCooked.items[1])
         sourceTime -= cooked.time
         update = true
-        print("Play cooked sound here...")
+        print("Play melt sound here...")
       } else {
         outputFull = false
       }
@@ -83,6 +83,18 @@ namespace blocks {
     }
 
     return [update, outputFull, fuelTime]
+  }
+
+  function fuelCheck(afterFuel: CraftRecipeCheckDefinition): CraftResultObject {
+    // Prevent blocking of fuel inventory. (For automation mods)
+    const [isFuel, _] = minetest.get_craft_result({
+      method: CraftCheckType.fuel,
+      width: 1,
+      items: [
+        afterFuel.items[1] //! FIXME: Might need to_string()
+      ]
+    })
+    return isFuel
   }
 
   function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, sourceTime: number): number {
@@ -178,14 +190,7 @@ namespace blocks {
 
           } else {
 
-            // Prevent blocking of fuel inventory. (For automation mods)
-            const [isFuel, _] = minetest.get_craft_result({
-              method: CraftCheckType.fuel,
-              width: 1,
-              items: [
-                afterFuel.items[1] //! FIXME: Might need to_string()
-              ]
-            })
+            const isFuel = fuelCheck(afterFuel)
 
             if (isFuel.time == 0) {
               table.insert(fuel.replacements, afterFuel.items[1])
