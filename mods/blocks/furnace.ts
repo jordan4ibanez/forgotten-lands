@@ -36,216 +36,6 @@ namespace blocks {
     minetest.swap_node(position, {name: "furnace"})
   }
 
-  function resolveSmeltingResults(inputList: ItemStackObject[]): [CraftResultObject, CraftRecipeCheckDefinition, boolean] {  
-    const [cooked, afterCooked] = minetest.get_craft_result({
-      method: CraftCheckType.cooking,
-      width: 1,
-      items: inputList
-    })
-    const cookable = (cooked.time != 0)
-    return [cooked, afterCooked, cookable]
-  }
-
-  function smeltLogic(
-    fuelTime: number,
-    accumulator: number,
-    cookable: boolean,
-    inputTime: number,
-    // Refs
-    cooked: CraftResultObject,
-    afterCooked: CraftRecipeCheckDefinition,
-    inventory: InvRef,
-  ): [boolean, boolean, number] {
-
-    let update = false
-    let outputFull = false
-
-    // The furnace is active and has enough fuel.
-    fuelTime += accumulator
-
-    // If there is a cookable item then check if it not ready.
-    if (!cookable) {
-      return [update, outputFull, fuelTime]
-    }
-      
-    inputTime += accumulator
-
-    if (inputTime >= cooked.time) {
-
-      // Place result in output list if possible.
-      if (inventory.room_for_item("output", cooked.item)) {
-        inventory.add_item("output", cooked.item)
-        inventory.set_stack("input", 1, afterCooked.items[1])
-        inputTime -= cooked.time
-        update = true
-        print("Play melt sound here...")
-      } else {
-        outputFull = false
-      }
-    } else {
-
-      // Item could not be cooked, probably missing fuel.
-      update = true
-    }
-
-    return [update, outputFull, fuelTime]
-  }
-
-  function getNewFuel(fuelList: ItemStackObject[]): [CraftResultObject, CraftRecipeCheckDefinition] {
-    return minetest.get_craft_result({
-      method: CraftCheckType.fuel,
-      width: 1,
-      items: fuelList
-    })
-  }
-
-  function fuelCheck(afterFuel: CraftRecipeCheckDefinition): CraftResultObject {
-    // Prevent blocking of fuel inventory. (For automation mods)
-    const [isFuel, _] = minetest.get_craft_result({
-      method: CraftCheckType.fuel,
-      width: 1,
-      items: [
-        afterFuel.items[1] //! FIXME: Might need to_string()
-      ]
-    })
-    return isFuel
-  }
-
-  function checkFuelTime(inventory: InvRef, fuel: CraftResultObject, isFuel: CraftResultObject, afterFuel: CraftRecipeCheckDefinition) {
-    if (isFuel.time == 0) {
-      table.insert(fuel.replacements, afterFuel.items[1])
-      inventory.set_stack("fuel", 1, "")
-    } else {
-      // Take fuel from fuel list.
-      inventory.set_stack("fuel", 1, afterFuel.items[1])
-    }
-  }
-
-  function processFuelReplacements(
-    inventory: InvRef,
-    fuel: CraftResultObject,
-    position: Vec3,
-    ): void {
-    // Put replacements in output list or drop them on the furnace.
-    const replacements = fuel.replacements
-    if (replacements[1]) {
-      const leftOver = inventory.add_item("output", replacements[1])
-      if (!leftOver.is_empty()) {
-        const above = vector.create(position.x, position.y + 1, position.z)
-        const dropPosition = minetest.find_node_near(above, 1, ["air"]) || above
-        minetest.item_drop(replacements[1], null, dropPosition)
-      }
-    }
-  }
-
-  function finalizeFuelProcessing(
-    fuelTotalTime: number,
-    fuelTime: number,
-    // Refs
-    fuel: CraftResultObject,
-    update: boolean
-  ): [boolean, number] {
-    update = true
-    fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
-    return [update, fuelTotalTime]
-  }
-
-  function fuelLogic(
-    update: boolean,
-    cookable: boolean,
-    fuelTotalTime: number,
-    fuelTime: number,
-    inputTime: number,
-    // Refs
-    fuel: CraftResultObject | undefined,
-    fuelList: ItemStackObject[],
-    inventory: InvRef,
-    position: Vec3
-  ): [boolean, boolean, number, number, number] {
-    // Furnace ran out of fuel.
-    if (cookable) {
-      // We need to get new fuel.
-      let afterFuel: CraftRecipeCheckDefinition
-      [fuel, afterFuel] = getNewFuel(fuelList)
-      if (fuel.time == 0) {
-        // No valid fuel in the fuel list.
-        fuelTotalTime = 0
-      } else {
-        const isFuel = fuelCheck(afterFuel)
-        checkFuelTime(inventory, fuel, isFuel, afterFuel)
-        processFuelReplacements(inventory, fuel, position);
-        [update, fuelTotalTime] = finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update)
-      }
-    } else {
-      // We don't need to get new fuel since there is no cookable item.
-      fuelTotalTime = 0
-      inputTime = 0
-    }
-    fuelTime = 0
-
-    return [update, cookable, fuelTotalTime, fuelTime, inputTime]
-  }
-
-  function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, inputTime: number): number {
-
-    let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
-
-    // Fuel lasts long enough, adjust accumulator to cooking duration.
-    if (cookable) {
-      accumulator = math.min(accumulator, cooked.time - inputTime)
-    }
-
-    return accumulator
-  }
-
-  function runLogic(
-    update: boolean,
-    cookable: boolean,
-    outputFull: boolean,
-    timerElapsed: number,
-    elapsed: number,
-    fuelTime: number,
-    fuelTotalTime: number,
-    inputTime: number,
-    // Refs
-    cooked: CraftResultObject | undefined,
-    inventory: InvRef,
-    inputList: ItemStackObject[] | undefined,
-    fuelList: ItemStackObject[] | undefined,
-    fuel: CraftResultObject | undefined,
-    position: Vec3
-    ): [boolean, boolean, boolean, number, number, number, number, number] {
-    if (timerElapsed > 0 && update) {
-
-      update = false
-
-      //todo: check if we have to get lists every time
-      inputList = inventory.get_list("input")
-      fuelList = inventory.get_list("fuel");
-
-      //? Smelting
-
-      let afterCooked: CraftRecipeCheckDefinition
-
-      // Check if we have smeltable items.
-      [cooked, afterCooked, cookable] = resolveSmeltingResults(inputList)
-
-      const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, inputTime)
-
-      // Check if we have enough fuel to burn.
-      if (fuelTime < fuelTotalTime) {
-        [update, outputFull, fuelTime] = smeltLogic(fuelTime, accumulator, cookable, inputTime, cooked, afterCooked, inventory)
-      } else {
-        [update, cookable, fuelTotalTime, fuelTime, inputTime] = fuelLogic(update, cookable, fuelTotalTime, fuelTime, inputTime, fuel, fuelList, inventory, position)
-      }
-
-      elapsed -= accumulator
-
-      return runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime, cooked, inventory, inputList, fuelList, fuel, position)
-    }
-    return [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime]
-  }
-
   function think(position: Vec3, elapsed: number, justConstructed?: boolean): boolean {
 
     const currentBlock = minetest.get_node_or_nil(position)
@@ -274,39 +64,12 @@ namespace blocks {
     
     print(`thinking at ${vec3ToString(position)}...`)
 
-    let inputList: ItemStackObject[] | undefined
-    let fuelList: ItemStackObject[] | undefined
-    let outputFull = false
 
-
-    let cookable: boolean = false
-    let cooked: CraftResultObject | undefined
-    let fuel: CraftResultObject | undefined
-
-    let update = true;
-
-    [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime] = 
-    runLogic(update, cookable, outputFull,timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime, cooked, inventory, inputList, fuelList, fuel, position);
-
-    if (fuel && fuelTotalTime > fuel.time) {
-      fuelTotalTime = fuel.time
-    }
-
-    if (inputList && inputList[1].is_empty()) {
-      inputTime = 0
-    }
-
-    // Update formspec and node.
-
-    let itemPercent = 0
-
-    if (cookable && cooked) {
-      itemPercent = math.floor(inputTime / cooked.time * 100)
-    }
 
     let active = false
     let result = false
 
+    const itemPercent = 50
     const fuelPercent = 100 - math.floor((fuelTime / fuelTotalTime) * 100)
 
     // Furnace is currently active.
@@ -327,8 +90,6 @@ namespace blocks {
       
       print("sound handler stopper goes here")
     }
-
-    print("gui_furnace_arrow_bg.png" + chopTexture("gui_furnace_arrow_fg.png", itemPercent) + "]")
 
     // Now update the formspec.
     const furnaceInventory: string = generate(new FormSpec({
@@ -479,6 +240,10 @@ namespace blocks {
 
   function startTimer(position: Vec3) {
     minetest.get_node_timer(position).start(1)
+  }
+
+  function allowPut() {
+    // todo
   }
 
 

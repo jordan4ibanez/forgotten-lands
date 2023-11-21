@@ -263,7 +263,6 @@ do
             meta:set_int("timerElapsed", 0)
             print("sound handler stopper goes here")
         end
-        print(("gui_furnace_arrow_bg.png" .. chopTexture("gui_furnace_arrow_fg.png", itemPercent)) .. "]")
         local furnaceInventory = generate(__TS__New(
             FormSpec,
             {
@@ -371,6 +370,8 @@ do
     end
     local function startTimer(position)
         minetest.get_node_timer(position):start(1)
+    end
+    local function allowPut()
     end
     local furnaceNodeBox = {
         type = Nodeboxtype.fixed,
