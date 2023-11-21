@@ -47,8 +47,6 @@ namespace blocks {
       inventory.set_size("output", 1)
     }
 
-    print("Hello from github!")
-
     const isActive = (currentBlock.name == "furnace_active")
     let fuelTime = meta.get_float("fuelTime") || 0
     let sourceTime = meta.get_float("sourceTime") || 0
@@ -60,14 +58,14 @@ namespace blocks {
     print(`thinking at ${vec3ToString(position)}...`)
 
     //! FIXME: source is now input!
-    let sourceList: ItemStackObject[]
+    let sourceList: ItemStackObject[] | null = null
     let fuelList: ItemStackObject[]
     let outputFull = false
 
 
     let cookable: boolean = false
     let cooked: CraftResultObject
-    let fuel: CraftResultObject
+    let fuel: CraftResultObject | null = null
 
 
     let update = true
@@ -192,11 +190,17 @@ namespace blocks {
 
     }
 
+    if (fuel && fuelTotalTime > fuel.time) {
+      fuelTotalTime = fuel.time
+    }
+
+    if (sourceList && sourceList[1].is_empty()) {
+      sourceTime = 0
+    }
+
+    //! And here is where we stop for now because this is insanity
+
     // Update formspec and node.
-    
-
-
-
 
     const furnaceInventory: string = generate(new FormSpec({
       size: create(12,12),
