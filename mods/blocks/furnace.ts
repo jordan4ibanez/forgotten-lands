@@ -40,6 +40,50 @@ namespace blocks {
     return [cooked, afterCooked, cookable]
   }
 
+  function smeltCheck(
+    fuelTime: number,
+    accumulator: number,
+    cookable: boolean,
+    sourceTime: number,
+    // Refs
+    cooked: CraftResultObject,
+    afterCooked: CraftRecipeCheckDefinition,
+    inventory: InvRef,
+  ): [boolean, boolean, number] {
+
+    let update = false
+    let outputFull = false
+
+    // The furnace is active and has enough fuel.
+    fuelTime += accumulator
+
+    // If there is a cookable item then check if it ready.
+    if (cookable) {
+      
+      sourceTime += accumulator
+
+      if (sourceTime >= cooked.time) {
+
+        // Place result in output list if possible.
+        if (inventory.room_for_item("output", cooked.item)) {
+          inventory.add_item("output", cooked.item)
+          inventory.set_stack("input", 1, afterCooked.items[1])
+          sourceTime -= cooked.time
+          update = true
+          print("Play cooked sound here...")
+        } else {
+          outputFull = false
+        }
+      } else {
+
+        // Item could not be cooked, probably missing fuel.
+        update = true
+      }
+    }
+
+    return [update, outputFull, fuelTime]
+  }
+
   function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, sourceTime: number): number {
 
     let accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
@@ -110,32 +154,8 @@ namespace blocks {
       // Check if we have enough fuel to burn.
       if (fuelTime < fuelTotalTime) {
 
-        // The furnace is active and has enough fuel.
-        fuelTime += accumulator
+        [update, outputFull, fuelTime] = smeltCheck(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
 
-        // If there is a cookable item then check if it ready.
-        if (cookable) {
-          
-          sourceTime += accumulator
-
-          if (sourceTime >= cooked.time) {
-
-            // Place result in output list if possible.
-            if (inventory.room_for_item("output", cooked.item)) {
-              inventory.add_item("output", cooked.item)
-              inventory.set_stack("input", 1, afterCooked.items[1])
-              sourceTime -= cooked.time
-              update = true
-              print("Play cooked sound here...")
-            } else {
-              outputFull = false
-            }
-          } else {
-
-            // Item could not be cooked, probably missing fuel.
-            update = true
-          }
-        }
       } else {
 
         // Furnace ran out of fuel.
