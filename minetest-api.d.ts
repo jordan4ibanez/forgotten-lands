@@ -669,6 +669,7 @@ declare global {
     overlay_tiles?: string[]
     special_tiles?: string[]
     color?: DynamicColorSpec
+    light_source?: number
     use_texture_alpha?: TextureAlpha
     palette?: string
     post_effect_color?: DynamicColorSpec
