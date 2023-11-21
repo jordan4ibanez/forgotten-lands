@@ -46,4 +46,5 @@ do
     recipes.processRecipeArray(toolRegistrationArray)
     local craftables = {{type = recipeType.shapeless, output = "oak_wood 4", recipe = {"oak_tree"}}, {output = "stick 4", recipe = {{craftBlockType.wood}, {craftBlockType.wood}}}}
     recipes.processRecipeArray(craftables)
+    utility.loadFiles({"cooking", "fuel"})
 end

@@ -114,4 +114,6 @@ namespace recipes {
 
   processRecipeArray(craftables)
 
+  utility.loadFiles(["cooking", "fuel"])
+
 }
