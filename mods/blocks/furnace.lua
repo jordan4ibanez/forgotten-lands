@@ -174,6 +174,41 @@ do
         fuelInventory[1]:take_item(1)
         inventory:set_list("fuel", fuelInventory)
     end
+    local function processFuelLogic(hasItem, hasFuel, fuelBuffer, fuelTime, meta, inventory, fuelInventory)
+        if hasItem and hasFuel and fuelBuffer == -1 then
+            takeFromFuel(inventory, fuelInventory)
+            meta:set_int("fuelBuffer", fuelTime)
+            meta:set_int("fuelMax", fuelTime)
+            return fuelTime
+        else
+            meta:set_int("fuelBuffer", fuelBuffer)
+            return math.clamp(0, 100000, fuelBuffer)
+        end
+    end
+    local function smeltItemLogic(hasItem, hasRoom, fuelMax, itemBuffer, itemTime, meta, inputInventory, inventory, outputInventory, itemInHearth)
+        if hasItem and fuelMax > 0 then
+            if itemBuffer == -1 then
+                meta:set_int("itemMax", itemTime)
+                meta:set_int("itemBuffer", itemTime)
+                return itemTime
+            else
+                if itemBuffer == 0 and hasRoom then
+                    inputInventory[1]:take_item(1)
+                    inventory:set_list("input", inputInventory)
+                    outputInventory[1]:add_item(itemInHearth.item)
+                    inventory:set_list("output", outputInventory)
+                end
+                meta:set_int("itemBuffer", itemBuffer)
+                return itemBuffer
+            end
+        else
+            if not hasItem then
+                meta:set_int("itemMax", -1)
+            end
+            meta:set_int("itemBuffer", -1)
+            return 0
+        end
+    end
     local function think(position, elapsedTime, justConstructed)
         local currentBlock = minetest.get_node_or_nil(position)
         if not currentBlock or currentBlock.name == "ignore" then
@@ -209,25 +244,44 @@ do
                     10000,
                     (meta:get_int("itemBuffer") or 0) - 1
                 )
-                local fuelProgress = (function()
-                    if hasFuel and fuelBuffer == -1 then
-                        takeFromFuel(inventory, fuelInventory)
-                        meta:set_int("fuelBuffer", fuelTime)
-                        meta:set_int("fuelMax", fuelTime)
-                        return fuelTime
-                    else
-                        meta:set_int("fuelBuffer", fuelBuffer)
-                        return math.clamp(0, 100000, fuelBuffer)
+                local fuelProgress = processFuelLogic(
+                    hasItem,
+                    hasFuel,
+                    fuelBuffer,
+                    fuelTime,
+                    meta,
+                    inventory,
+                    fuelInventory
+                )
+                if hasFuel and hasItem and hasRoom or fuelBuffer > 0 then
+                    print("continuing")
+                    continueCookTimer(position)
+                    if not furnaceIsActive then
+                        turnOn(position, rotation)
                     end
-                end)()
-                print("fuel progress: " .. tostring(fuelProgress))
+                else
+                    if furnaceIsActive then
+                        turnOff(position, rotation)
+                        meta:set_int("fuelMax", 0)
+                    end
+                end
                 local fuelMax = meta:get_int("fuelMax") or 0
+                local itemProgress = smeltItemLogic(
+                    hasItem,
+                    hasRoom,
+                    fuelMax,
+                    itemBuffer,
+                    itemTime,
+                    meta,
+                    inputInventory,
+                    inventory,
+                    outputInventory,
+                    itemInHearth
+                )
                 local itemMax = meta:get_int("itemMax") or 0
-                continueCookTimer(position)
-                local smeltPercent = math.round(math.random() * 100)
+                local smeltPercent = itemMax == -1 and 0 or 100 - math.floor(itemProgress / itemMax * 100)
                 local fuelPercent = math.floor(fuelProgress / fuelMax * 100)
-                print(fuelProgress, fuelMax)
-                print("fuelPercent: " .. tostring(fuelPercent))
+                print("item progress: " .. tostring(itemProgress))
                 meta:set_string(
                     "formspec",
                     generateFurnaceFormspec(fuelPercent, smeltPercent)

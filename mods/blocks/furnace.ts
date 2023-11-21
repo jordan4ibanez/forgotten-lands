@@ -234,8 +234,8 @@ namespace blocks {
     inventory.set_list("fuel", fuelInventory)
   }
 
-  function processFuelLogic(hasFuel: boolean, fuelBuffer: number, fuelTime: number, meta: MetaRef, inventory: InvRef, fuelInventory: ItemStackObject[]): number {
-    if (hasFuel && fuelBuffer == -1) {
+  function processFuelLogic(hasItem: boolean, hasFuel: boolean, fuelBuffer: number, fuelTime: number, meta: MetaRef, inventory: InvRef, fuelInventory: ItemStackObject[]): number {
+    if (hasItem && hasFuel && fuelBuffer == -1) {
       takeFromFuel(inventory, fuelInventory)
       meta.set_int("fuelBuffer", fuelTime)
       meta.set_int("fuelMax", fuelTime)
@@ -243,6 +243,41 @@ namespace blocks {
     } else {
       meta.set_int("fuelBuffer", fuelBuffer)
       return math.clamp(0, 100000, fuelBuffer)
+    }
+  }
+
+  function smeltItemLogic(
+    hasItem: boolean, 
+    hasRoom: boolean, 
+    fuelMax: number,
+    itemBuffer: number,
+    itemTime: number,
+    meta: MetaRef,
+    inputInventory: ItemStackObject[],
+    inventory: InvRef,
+    outputInventory: ItemStackObject[],
+    itemInHearth: CraftResultObject): number {
+    if (hasItem && fuelMax > 0) {
+      if (itemBuffer == -1) {
+        meta.set_int("itemMax", itemTime)
+        meta.set_int("itemBuffer", itemTime)
+        return itemTime
+      } else {
+        if (itemBuffer == 0 && hasRoom) {
+          inputInventory[0].take_item(1)
+          inventory.set_list("input", inputInventory)
+          outputInventory[0].add_item(itemInHearth.item)
+          inventory.set_list("output", outputInventory)
+        }
+        meta.set_int("itemBuffer", itemBuffer)
+        return itemBuffer
+      }
+    } else {
+      if (!hasItem) {
+        meta.set_int("itemMax", -1)
+      }
+      meta.set_int("itemBuffer", -1)
+      return 0
     }
   }
 
@@ -296,32 +331,33 @@ namespace blocks {
 
       // Setting the initial timer.
 
-      const fuelProgress = processFuelLogic(hasFuel, fuelBuffer, fuelTime, meta, inventory, fuelInventory)
+      const fuelProgress = processFuelLogic(hasItem, hasFuel, fuelBuffer, fuelTime, meta, inventory, fuelInventory)
 
-      print("fuel progress: " + fuelProgress)
+
+      // Furnace activity continuity.
+      if ((hasFuel && hasItem && hasRoom) || fuelBuffer > 0) {
+        print("continuing")
+        continueCookTimer(position)
+        if (!furnaceIsActive) {
+          turnOn(position, rotation)
+        }
+      } else {
+        if (furnaceIsActive) {
+          turnOff(position, rotation)
+          meta.set_int("fuelMax", 0)
+        }
+      }
 
       const fuelMax = meta.get_int("fuelMax") || 0
+
+      const itemProgress = smeltItemLogic(hasItem, hasRoom, fuelMax, itemBuffer, itemTime, meta, inputInventory, inventory, outputInventory, itemInHearth)
+
       const itemMax = meta.get_int("itemMax") || 0
 
-      continueCookTimer(position)
-      
-
-      // if (hasFuel && hasItem && hasRoom) {
-      //   if (!furnaceIsActive) {
-      //     turnOn(position, rotation)
-      //   }
-      //   inventory.add_item("output", itemInHearth.item)
-      //   continueCookTimer(position)
-      // } else {
-      //   if (furnaceIsActive) {
-      //     turnOff(position, rotation)
-      //   }
-      // }
-
-      const smeltPercent = math.round(math.random() * 100)
+      const smeltPercent = (itemMax == -1) ? 0 : 100 - math.floor((itemProgress / itemMax) * 100)
       const fuelPercent = math.floor((fuelProgress / fuelMax) * 100)
-      print(fuelProgress, fuelMax)
-      print("fuelPercent: " + fuelPercent)
+
+      print("item progress: " + itemProgress)
 
       meta.set_string("formspec", generateFurnaceFormspec(fuelPercent, smeltPercent))
       // meta.set_int("fuelBuffer", fuelBuffer)
