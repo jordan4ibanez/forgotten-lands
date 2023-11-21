@@ -18,12 +18,14 @@ namespace blocks {
   const colorRGB = utility.colorRGB
   const vec3ToString = utility.vec3ToString
 
+  //? Functionality
+
   function turnTexture(input: string): string {
     return input + "^[transformR270"
   }
 
   function chopTexture(input: string, percent: number): string {
-    return input + "^[lowpart:" + percent
+    return "^[lowpart:" + percent + ":" + input
   }
 
   function turnOn(position: Vec3) {
@@ -326,6 +328,8 @@ namespace blocks {
       print("sound handler stopper goes here")
     }
 
+    print("gui_furnace_arrow_bg.png" + chopTexture("gui_furnace_arrow_fg.png", itemPercent) + "]")
+
     // Now update the formspec.
     const furnaceInventory: string = generate(new FormSpec({
       size: create(12,12),
@@ -344,7 +348,7 @@ namespace blocks {
           toolTipBGColor: colorRGB(123,104,238),
           toolTipFontColor: colorScalar(100)
         }),
-        //! Flame background.
+        //! Flame.
         new Image({
           position: create(
             3,
@@ -354,21 +358,9 @@ namespace blocks {
             1,
             1
           ),
-          texture: "default_furnace_fire_bg.png"
+          texture: "default_furnace_fire_bg.png" + chopTexture("default_furnace_fire_fg.png", fuelPercent) + "]"
         }),
-        //! Flame foreground
-        new Image({
-          position: create(
-            3,
-            2.5
-          ),
-          size: create(
-            1,
-            1
-          ),
-          texture: chopTexture("default_furnace_fire_fg.png", fuelPercent)
-        }),
-        //! Arrow background.
+        //! Arrow.
         new Image({
           position: create(
             5.5,
@@ -378,19 +370,7 @@ namespace blocks {
             1,
             1
           ),
-          texture: turnTexture("gui_furnace_arrow_bg.png")
-        }),
-        //! Arrow foreground.
-        new Image({
-          position: create(
-            5.5,
-            2.5
-          ),
-          size: create(
-            1,
-            1
-          ),
-          texture: turnTexture(chopTexture("gui_furnace_arrow_fg.png", itemPercent))
+          texture: turnTexture("gui_furnace_arrow_bg.png" + chopTexture("gui_furnace_arrow_fg.png", itemPercent)) + "]"
         }),
         //! Fuel.
         new List({
@@ -492,11 +472,13 @@ namespace blocks {
 
   }
 
-  //? Functionality
-
   //! This should probably be a utility function.
   function pixel(inputPixel: number): number {
     return (inputPixel / textureSize) - 0.5
+  }
+
+  function startTimer(position: Vec3) {
+    minetest.get_node_timer(position).start(1)
   }
 
 
@@ -559,14 +541,17 @@ namespace blocks {
       "default_furnace_side.png",
       "default_furnace_front.png"
     ],
-    on_punch: function(position: Vec3) {
-      think(position, 0)
-    },
     on_timer: think,
+    on_punch: function(pos: Vec3){
+      think(pos, 0, true)
+    },
     on_construct(position: Vec3) {
       // print(dump(position))
       think(position, 0, true)
-    }
+    },
+    on_metadata_inventory_move: startTimer,
+    on_metadata_inventory_put: startTimer,
+    on_metadata_inventory_take: startTimer
   })
 
   minetest.register_node(":furnace_active", {
@@ -588,9 +573,15 @@ namespace blocks {
       "default_furnace_front_active.png"
     ],
     on_timer: think,
+    on_punch: function(pos: Vec3){
+      think(pos, 0, true)
+    },
     on_construct(position: Vec3) {
       think(position, 0, true)
-    }
+    },
+    on_metadata_inventory_move: startTimer,
+    on_metadata_inventory_put: startTimer,
+    on_metadata_inventory_take: startTimer
   })
 
 }

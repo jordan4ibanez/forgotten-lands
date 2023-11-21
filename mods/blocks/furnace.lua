@@ -25,30 +25,33 @@ do
     local function turnTexture(input)
         return input .. "^[transformR270"
     end
+    local function chopTexture(input, percent)
+        return (("^[lowpart:" .. tostring(percent)) .. ":") .. input
+    end
     local function turnOn(position)
         minetest.swap_node(position, {name = "furnace_active"})
     end
     local function turnOff(position)
         minetest.swap_node(position, {name = "furnace"})
     end
-    local function resolveSmeltingResults(sourceList)
-        local cooked, afterCooked = unpack(minetest.get_craft_result({method = CraftCheckType.cooking, width = 1, items = sourceList}))
+    local function resolveSmeltingResults(inputList)
+        local cooked, afterCooked = unpack(minetest.get_craft_result({method = CraftCheckType.cooking, width = 1, items = inputList}))
         local cookable = cooked.time ~= 0
         return {cooked, afterCooked, cookable}
     end
-    local function smeltCheck(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
+    local function smeltLogic(fuelTime, accumulator, cookable, inputTime, cooked, afterCooked, inventory)
         local update = false
         local outputFull = false
         fuelTime = fuelTime + accumulator
         if not cookable then
             return {update, outputFull, fuelTime}
         end
-        sourceTime = sourceTime + accumulator
-        if sourceTime >= cooked.time then
+        inputTime = inputTime + accumulator
+        if inputTime >= cooked.time then
             if inventory:room_for_item("output", cooked.item) then
                 inventory:add_item("output", cooked.item)
                 inventory:set_stack("input", 1, afterCooked.items[2])
-                sourceTime = sourceTime - cooked.time
+                inputTime = inputTime - cooked.time
                 update = true
                 print("Play melt sound here...")
             else
@@ -58,6 +61,9 @@ do
             update = true
         end
         return {update, outputFull, fuelTime}
+    end
+    local function getNewFuel(fuelList)
+        return minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = fuelList})
     end
     local function fuelCheck(afterFuel)
         local isFuel, _ = unpack(minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = {afterFuel.items[2]}}))
@@ -87,18 +93,110 @@ do
         fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
         return {update, fuelTotalTime}
     end
-    local function accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
+    local function fuelLogic(update, cookable, fuelTotalTime, fuelTime, inputTime, fuel, fuelList, inventory, position)
+        if cookable then
+            local afterFuel
+            fuel, afterFuel = unpack(getNewFuel(fuelList))
+            if fuel.time == 0 then
+                fuelTotalTime = 0
+            else
+                local isFuel = fuelCheck(afterFuel)
+                checkFuelTime(inventory, fuel, isFuel, afterFuel)
+                processFuelReplacements(inventory, fuel, position)
+                update, fuelTotalTime = unpack(finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update))
+            end
+        else
+            fuelTotalTime = 0
+            inputTime = 0
+        end
+        fuelTime = 0
+        return {
+            update,
+            cookable,
+            fuelTotalTime,
+            fuelTime,
+            inputTime
+        }
+    end
+    local function accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, inputTime)
         local accumulator = math.min(elapsed, fuelTotalTime - fuelTime)
         if cookable then
-            accumulator = math.min(accumulator, cooked.time - sourceTime)
+            accumulator = math.min(accumulator, cooked.time - inputTime)
         end
         return accumulator
+    end
+    local function runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime, cooked, inventory, inputList, fuelList, fuel, position)
+        if timerElapsed > 0 and update then
+            update = false
+            inputList = inventory:get_list("input")
+            fuelList = inventory:get_list("fuel")
+            local afterCooked
+            cooked, afterCooked, cookable = unpack(resolveSmeltingResults(inputList))
+            local accumulator = accumulate(
+                elapsed,
+                fuelTotalTime,
+                fuelTime,
+                cookable,
+                cooked,
+                inputTime
+            )
+            if fuelTime < fuelTotalTime then
+                update, outputFull, fuelTime = unpack(smeltLogic(
+                    fuelTime,
+                    accumulator,
+                    cookable,
+                    inputTime,
+                    cooked,
+                    afterCooked,
+                    inventory
+                ))
+            else
+                update, cookable, fuelTotalTime, fuelTime, inputTime = unpack(fuelLogic(
+                    update,
+                    cookable,
+                    fuelTotalTime,
+                    fuelTime,
+                    inputTime,
+                    fuel,
+                    fuelList,
+                    inventory,
+                    position
+                ))
+            end
+            elapsed = elapsed - accumulator
+            return runLogic(
+                update,
+                cookable,
+                outputFull,
+                timerElapsed,
+                elapsed,
+                fuelTime,
+                fuelTotalTime,
+                inputTime,
+                cooked,
+                inventory,
+                inputList,
+                fuelList,
+                fuel,
+                position
+            )
+        end
+        return {
+            update,
+            cookable,
+            outputFull,
+            timerElapsed,
+            elapsed,
+            fuelTime,
+            fuelTotalTime,
+            inputTime
+        }
     end
     local function think(position, elapsed, justConstructed)
         local currentBlock = minetest.get_node_or_nil(position)
         if not currentBlock or currentBlock.name == "ignore" then
             print("Furnace: Error, tried to do work on null object.")
-            return
+            return false
         end
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
@@ -108,69 +206,64 @@ do
             inventory:set_size("fuel", 1)
             inventory:set_size("output", 1)
         end
-        local isActive = currentBlock.name == "furnace_active"
+        local currentlyActive = currentBlock.name == "furnace_active"
         local fuelTime = meta:get_float("fuelTime") or 0
-        local sourceTime = meta:get_float("sourceTime") or 0
+        local inputTime = meta:get_float("inputTime") or 0
         local fuelTotalTime = meta:get_float("fuelTotalTime") or 0
         local timerElapsed = meta:get_int("timerElapsed") or 0
         meta:set_int("timerElapsed", timerElapsed + 1)
         print(("thinking at " .. vec3ToString(position)) .. "...")
-        local sourceList = nil
+        local inputList
         local fuelList
         local outputFull = false
         local cookable = false
         local cooked
-        local fuel = nil
+        local fuel
         local update = true
-        while timerElapsed > 0 and update do
-            update = false
-            sourceList = inventory:get_list("input")
-            fuelList = inventory:get_list("fuel")
-            local cooked, afterCooked, cookable = unpack(resolveSmeltingResults(sourceList))
-            local accumulator = accumulate(
-                elapsed,
-                fuelTotalTime,
-                fuelTime,
-                cookable,
-                cooked,
-                sourceTime
-            )
-            if fuelTime < fuelTotalTime then
-                update, outputFull, fuelTime = unpack(smeltCheck(
-                    fuelTime,
-                    accumulator,
-                    cookable,
-                    sourceTime,
-                    cooked,
-                    afterCooked,
-                    inventory
-                ))
-            else
-                if cookable then
-                    local afterFuel
-                    fuel, afterFuel = unpack(minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = fuelList}))
-                    if fuel.time == 0 then
-                        fuelTotalTime = 0
-                    else
-                        local isFuel = fuelCheck(afterFuel)
-                        checkFuelTime(inventory, fuel, isFuel, afterFuel)
-                        processFuelReplacements(inventory, fuel, position)
-                        update, fuelTotalTime = unpack(finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update))
-                    end
-                else
-                    fuelTotalTime = 0
-                    sourceTime = 0
-                end
-                fuelTime = 0
-            end
-            elapsed = elapsed - accumulator
-        end
+        update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, inputTime = unpack(runLogic(
+            update,
+            cookable,
+            outputFull,
+            timerElapsed,
+            elapsed,
+            fuelTime,
+            fuelTotalTime,
+            inputTime,
+            cooked,
+            inventory,
+            inputList,
+            fuelList,
+            fuel,
+            position
+        ))
         if fuel and fuelTotalTime > fuel.time then
             fuelTotalTime = fuel.time
         end
-        if sourceList and sourceList[2]:is_empty() then
-            sourceTime = 0
+        if inputList and inputList[2]:is_empty() then
+            inputTime = 0
         end
+        local itemPercent = 0
+        if cookable and cooked then
+            itemPercent = math.floor(inputTime / cooked.time * 100)
+        end
+        local active = false
+        local result = false
+        local fuelPercent = 100 - math.floor(fuelTime / fuelTotalTime * 100)
+        if fuelTotalTime ~= 0 then
+            active = true
+            if not currentlyActive then
+                turnOn(position)
+                print("sound handler goes here")
+            end
+        else
+            if currentlyActive then
+                turnOff(position)
+            end
+            minetest.get_node_timer(position):stop()
+            meta:set_int("timerElapsed", 0)
+            print("sound handler stopper goes here")
+        end
+        print(("gui_furnace_arrow_bg.png" .. chopTexture("gui_furnace_arrow_fg.png", itemPercent)) .. "]")
         local furnaceInventory = generate(__TS__New(
             FormSpec,
             {
@@ -199,15 +292,7 @@ do
                         {
                             position = create(3, 2.5),
                             size = create(1, 1),
-                            texture = "default_furnace_fire_bg.png"
-                        }
-                    ),
-                    __TS__New(
-                        Image,
-                        {
-                            position = create(3, 2.5),
-                            size = create(1, 1),
-                            texture = "default_furnace_fire_fg.png"
+                            texture = ("default_furnace_fire_bg.png" .. chopTexture("default_furnace_fire_fg.png", fuelPercent)) .. "]"
                         }
                     ),
                     __TS__New(
@@ -215,15 +300,7 @@ do
                         {
                             position = create(5.5, 2.5),
                             size = create(1, 1),
-                            texture = turnTexture("gui_furnace_arrow_bg.png")
-                        }
-                    ),
-                    __TS__New(
-                        Image,
-                        {
-                            position = create(5.5, 2.5),
-                            size = create(1, 1),
-                            texture = turnTexture("gui_furnace_arrow_fg.png")
+                            texture = turnTexture("gui_furnace_arrow_bg.png" .. chopTexture("gui_furnace_arrow_fg.png", itemPercent)) .. "]"
                         }
                     ),
                     __TS__New(
@@ -283,10 +360,17 @@ do
                 }
             }
         ))
+        meta:set_float("fuelTotalTime", fuelTotalTime)
+        meta:set_float("fuelTime", fuelTime)
+        meta:set_float("inputtime", inputTime)
         meta:set_string("formspec", furnaceInventory)
+        return result
     end
     local function pixel(inputPixel)
         return inputPixel / textureSize - 0.5
+    end
+    local function startTimer(position)
+        minetest.get_node_timer(position):start(1)
     end
     local furnaceNodeBox = {
         type = Nodeboxtype.fixed,
@@ -370,13 +454,16 @@ do
                 "default_furnace_side.png",
                 "default_furnace_front.png"
             },
-            on_punch = function(position)
-                think(position, 0)
-            end,
             on_timer = think,
+            on_punch = function(pos)
+                think(pos, 0, true)
+            end,
             on_construct = function(position)
                 think(position, 0, true)
-            end
+            end,
+            on_metadata_inventory_move = startTimer,
+            on_metadata_inventory_put = startTimer,
+            on_metadata_inventory_take = startTimer
         }
     )
     minetest.register_node(
@@ -398,9 +485,15 @@ do
                 "default_furnace_front_active.png"
             },
             on_timer = think,
+            on_punch = function(pos)
+                think(pos, 0, true)
+            end,
             on_construct = function(position)
                 think(position, 0, true)
-            end
+            end,
+            on_metadata_inventory_move = startTimer,
+            on_metadata_inventory_put = startTimer,
+            on_metadata_inventory_take = startTimer
         }
     )
 end
