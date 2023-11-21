@@ -925,7 +925,7 @@ declare global {
 
   export interface CraftRecipeDefinition {
     type?: CraftRecipeType
-    output: string
+    output?: string
     recipe: string[][] | string[] | string
     replacements?: string[]
     additional_wear?: number
