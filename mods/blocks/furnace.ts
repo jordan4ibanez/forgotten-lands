@@ -57,28 +57,29 @@ namespace blocks {
     // The furnace is active and has enough fuel.
     fuelTime += accumulator
 
-    // If there is a cookable item then check if it ready.
-    if (cookable) {
+    // If there is a cookable item then check if it not ready.
+    if (!cookable) {
+      return [update, outputFull, fuelTime]
+    }
       
-      sourceTime += accumulator
+    sourceTime += accumulator
 
-      if (sourceTime >= cooked.time) {
+    if (sourceTime >= cooked.time) {
 
-        // Place result in output list if possible.
-        if (inventory.room_for_item("output", cooked.item)) {
-          inventory.add_item("output", cooked.item)
-          inventory.set_stack("input", 1, afterCooked.items[1])
-          sourceTime -= cooked.time
-          update = true
-          print("Play cooked sound here...")
-        } else {
-          outputFull = false
-        }
-      } else {
-
-        // Item could not be cooked, probably missing fuel.
+      // Place result in output list if possible.
+      if (inventory.room_for_item("output", cooked.item)) {
+        inventory.add_item("output", cooked.item)
+        inventory.set_stack("input", 1, afterCooked.items[1])
+        sourceTime -= cooked.time
         update = true
+        print("Play cooked sound here...")
+      } else {
+        outputFull = false
       }
+    } else {
+
+      // Item could not be cooked, probably missing fuel.
+      update = true
     }
 
     return [update, outputFull, fuelTime]
