@@ -107,7 +107,9 @@ namespace blocks {
 
         // If there is a cookable item then check if it ready.
         if (cookable) {
+          
           sourceTime += el
+
           if (sourceTime >= cooked.time) {
 
             // Place result in output list if possible.
