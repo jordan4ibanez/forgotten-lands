@@ -121,10 +121,28 @@ do
                     __TS__New(ListRing, {location = "current_player", listName = "main"}),
                     __TS__New(ListRing, {location = "context", listName = "fuel"}),
                     __TS__New(ListRing, {location = "current_player", listName = "main"}),
-                    __TS__New(ListRing, {location = "context", listName = "input"})
+                    __TS__New(ListRing, {location = "context", listName = "input"}),
+                    __TS__New(ListRing, {location = "current_player", listName = "main"}),
+                    __TS__New(ListRing, {location = "context", listName = "output"})
                 }
             }
         ))
+    end
+    local function startCookTimer(position)
+        local timer = minetest.get_node_timer(position)
+        if timer:is_started() then
+            print("timer is already started")
+            return
+        end
+        minetest.get_node_timer(position):start(0)
+    end
+    local function continueCookTimer(position)
+        local timer = minetest.get_node_timer(position)
+        if timer:is_started() then
+            print("timer is already started")
+            return
+        end
+        minetest.get_node_timer(position):start(1)
     end
     local function initialPayload(inventory, justConstructed)
         if not justConstructed then
@@ -135,15 +153,26 @@ do
         inventory:set_size("fuel", 1)
         inventory:set_size("output", 1)
     end
-    local function turnOn(position)
-        minetest.swap_node(position, {name = "furnace_active"})
+    local function turnOn(position, rotation)
+        minetest.swap_node(position, {name = "furnace_active", param2 = rotation})
     end
-    local function turnOff(position)
-        minetest.swap_node(position, {name = "furnace"})
+    local function turnOff(position, rotation)
+        minetest.swap_node(position, {name = "furnace", param2 = rotation})
     end
     local function fuelCheck(fuelInventory)
         local result = minetest.get_craft_result({method = CraftCheckType.fuel, width = 1, items = fuelInventory})
         return result
+    end
+    local function itemCheck(inputInventory)
+        local result = minetest.get_craft_result({method = CraftCheckType.cooking, width = 1, items = inputInventory})
+        return result
+    end
+    local function outputCheck(inventory, itemInHearth)
+        return inventory:room_for_item("output", itemInHearth)
+    end
+    local function takeFromFuel(inventory, fuelInventory)
+        fuelInventory[1]:take_item(1)
+        inventory:set_list("fuel", fuelInventory)
     end
     local function think(position, elapsedTime, justConstructed)
         local currentBlock = minetest.get_node_or_nil(position)
@@ -155,39 +184,63 @@ do
         local inventory = meta:get_inventory()
         initialPayload(inventory, justConstructed)
         print(("thinking at " .. vec3ToString(position)) .. ".............")
-        local currentlyActive = currentBlock.name == "furnace_active"
+        local furnaceIsActive = currentBlock.name == "furnace_active"
+        local rotation = currentBlock.param2 or 0
         do
             local i = 0
-            while i <= elapsedTime do
-                print("run " .. tostring(i))
-                print("elapsed time: " .. tostring(elapsedTime))
+            while i < elapsedTime do
                 local inputInventory = inventory:get_list("input")
                 local fuelInventory = inventory:get_list("fuel")
                 local outputInventory = inventory:get_list("output")
-                local fuelInFirefox = fuelCheck(fuelInventory)
-                local hasFuel = fuelInFirefox.time > 0
-                local fuelBuffer = bit.bor(
-                    meta:get_int("fuelBuffer"),
-                    0
+                local fuelInFirebox = fuelCheck(fuelInventory)
+                local fuelTime = fuelInFirebox.time
+                local hasFuel = fuelTime > 0
+                local itemInHearth = itemCheck(inputInventory)
+                local itemTime = itemInHearth.time
+                local hasItem = itemInHearth.item:get_name() ~= ""
+                local hasRoom = outputCheck(inventory, itemInHearth.item)
+                local fuelBuffer = math.clamp(
+                    -1,
+                    10000,
+                    (meta:get_int("fuelBuffer") or 0) - 1
                 )
-                print("Do I have fuel? " .. tostring(hasFuel))
-                print("My fuel buffer: " .. tostring(fuelBuffer))
-                local smeltPercent = 50
-                local fuelPercent = 50
+                local itemBuffer = math.clamp(
+                    -1,
+                    10000,
+                    (meta:get_int("itemBuffer") or 0) - 1
+                )
+                local fuelProgress = (function()
+                    if hasFuel and fuelBuffer == -1 then
+                        takeFromFuel(inventory, fuelInventory)
+                        meta:set_int("fuelBuffer", fuelTime)
+                        meta:set_int("fuelMax", fuelTime)
+                        return fuelTime
+                    else
+                        meta:set_int("fuelBuffer", fuelBuffer)
+                        return math.clamp(0, 100000, fuelBuffer)
+                    end
+                end)()
+                print("fuel progress: " .. tostring(fuelProgress))
+                local fuelMax = meta:get_int("fuelMax") or 0
+                local itemMax = meta:get_int("itemMax") or 0
+                continueCookTimer(position)
+                local smeltPercent = math.round(math.random() * 100)
+                local fuelPercent = math.floor(fuelProgress / fuelMax * 100)
+                print(fuelProgress, fuelMax)
+                print("fuelPercent: " .. tostring(fuelPercent))
                 meta:set_string(
                     "formspec",
                     generateFurnaceFormspec(fuelPercent, smeltPercent)
                 )
-                meta:set_int("fuelBuffer", fuelBuffer <= 0 and 0 or fuelBuffer - 1)
+                if not hasFuel then
+                    break
+                end
                 i = i + 1
             end
         end
     end
     local function pixel(inputPixel)
         return inputPixel / textureSize - 0.5
-    end
-    local function startTimer(position)
-        minetest.get_node_timer(position):start(1)
     end
     local function allowPut()
     end
@@ -273,16 +326,14 @@ do
                 "default_furnace_side.png",
                 "default_furnace_front.png"
             },
-            on_timer = think,
-            on_punch = function(pos)
+            on_construct = function(pos)
                 think(pos, 0, true)
             end,
-            on_construct = function(position)
-                think(position, 0, true)
-            end,
-            on_metadata_inventory_move = startTimer,
-            on_metadata_inventory_put = startTimer,
-            on_metadata_inventory_take = startTimer
+            on_timer = think,
+            on_punch = startCookTimer,
+            on_metadata_inventory_move = startCookTimer,
+            on_metadata_inventory_put = startCookTimer,
+            on_metadata_inventory_take = startCookTimer
         }
     )
     minetest.register_node(
@@ -291,6 +342,7 @@ do
             drawtype = Drawtype.nodebox,
             paramtype2 = ParamType2.facedir,
             is_ground_content = false,
+            light_source = 8,
             node_box = furnaceNodeBox,
             selection_box = furnaceSelectionBox,
             groups = {stone = 1},
@@ -303,16 +355,14 @@ do
                 "default_furnace_side.png",
                 "default_furnace_front_active.png"
             },
-            on_timer = think,
-            on_punch = function(pos)
+            on_construct = function(pos)
                 think(pos, 0, true)
             end,
-            on_construct = function(position)
-                think(position, 0, true)
-            end,
-            on_metadata_inventory_move = startTimer,
-            on_metadata_inventory_put = startTimer,
-            on_metadata_inventory_take = startTimer
+            on_timer = think,
+            on_punch = startCookTimer,
+            on_metadata_inventory_move = startCookTimer,
+            on_metadata_inventory_put = startCookTimer,
+            on_metadata_inventory_take = startCookTimer
         }
     )
 end

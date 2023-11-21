@@ -156,10 +156,38 @@ namespace blocks {
         new ListRing({
           location: "context",
           listName: "input"
+        }),
+        new ListRing({
+          location: "current_player",
+          listName: "main"
+        }),
+        new ListRing({
+          location: "context",
+          listName: "output"
         })
 
       ]
     }))
+  }
+
+  function startCookTimer(position: Vec3) {
+    // print("start")
+    const timer = minetest.get_node_timer(position)
+    if (timer.is_started()) {
+      print("timer is already started")
+      return
+    }
+    minetest.get_node_timer(position).start(0)
+  }
+
+  function continueCookTimer(position: Vec3) {
+    // print("continue")
+    const timer = minetest.get_node_timer(position)
+    if (timer.is_started()) {
+      print("timer is already started")
+      return
+    }
+    minetest.get_node_timer(position).start(1)
   }
 
   function initialPayload(inventory: InvRef, justConstructed?: boolean) {
@@ -170,12 +198,12 @@ namespace blocks {
     inventory.set_size("output", 1)
   }
 
-  function turnOn(position: Vec3) {
-    minetest.swap_node(position, {name: "furnace_active"})
+  function turnOn(position: Vec3, rotation: number) {
+    minetest.swap_node(position, {name: "furnace_active", param2: rotation})
   }
 
-  function turnOff(position:Vec3) {
-    minetest.swap_node(position, {name: "furnace"})
+  function turnOff(position:Vec3, rotation: number) {
+    minetest.swap_node(position, {name: "furnace", param2: rotation})
   }
 
   function fuelCheck(fuelInventory: ItemStackObject[]): CraftResultObject {
@@ -186,6 +214,36 @@ namespace blocks {
     })
     
     return result as CraftResultObject
+  }
+
+  function itemCheck(inputInventory: ItemStackObject[]): CraftResultObject {
+    const result = minetest.get_craft_result({
+      method: CraftCheckType.cooking,
+      width: 1,
+      items: inputInventory
+    })
+    return result as CraftResultObject
+  }
+
+  function outputCheck(inventory: InvRef, itemInHearth: ItemStackObject) {
+    return inventory.room_for_item("output", itemInHearth)
+  }
+
+  function takeFromFuel(inventory: InvRef, fuelInventory: ItemStackObject[]) {
+    fuelInventory[0].take_item(1)
+    inventory.set_list("fuel", fuelInventory)
+  }
+
+  function processFuelLogic(hasFuel: boolean, fuelBuffer: number, fuelTime: number, meta: MetaRef, inventory: InvRef, fuelInventory: ItemStackObject[]): number {
+    if (hasFuel && fuelBuffer == -1) {
+      takeFromFuel(inventory, fuelInventory)
+      meta.set_int("fuelBuffer", fuelTime)
+      meta.set_int("fuelMax", fuelTime)
+      return fuelTime
+    } else {
+      meta.set_int("fuelBuffer", fuelBuffer)
+      return math.clamp(0, 100000, fuelBuffer)
+    }
   }
 
   function think(position: Vec3, elapsedTime: number, justConstructed?: boolean) {
@@ -204,33 +262,70 @@ namespace blocks {
 
     print(`thinking at ${vec3ToString(position)}.............`)
     
-    const currentlyActive = (currentBlock.name == "furnace_active")
+    const furnaceIsActive = (currentBlock.name == "furnace_active")
+    const rotation = currentBlock.param2 || 0
 
 
     // Simulate any time lost. Furnace works in 1 second intervals.
-    for (let i = 0; i <= elapsedTime; i++) {
-      print("run " + i)
-      print("elapsed time: " + elapsedTime)
+    for (let i = 0; i < elapsedTime; i++) {
+
+      // print("run " + i)
+      // print("elapsed time: " + elapsedTime)
      
       const inputInventory = inventory.get_list("input")
       const fuelInventory = inventory.get_list("fuel")
       const outputInventory = inventory.get_list("output")
 
-      const fuelInFirefox = fuelCheck(fuelInventory)
-      const hasFuel = fuelInFirefox.time > 0
+      const fuelInFirebox = fuelCheck(fuelInventory)
+      const fuelTime = fuelInFirebox.time
+      const hasFuel = fuelTime > 0
+      
+      // Quick note: The item is what it would be after being cooked.
+      const itemInHearth = itemCheck(inputInventory)
+      const itemTime = itemInHearth.time
+      const hasItem = itemInHearth.item.get_name() != ""
 
+      const hasRoom = outputCheck(inventory, itemInHearth.item)
+
+      const fuelBuffer = math.clamp(-1, 10000, (meta.get_int("fuelBuffer") || 0) - 1)
+      const itemBuffer = math.clamp(-1, 10000, (meta.get_int("itemBuffer") || 0) - 1)
+
+      // print("Do I have fuel? " + hasFuel)
+      // print("Do I have input? " + hasItem)
+      // print("My fuel buffer: " + fuelBuffer)
+
+      // Setting the initial timer.
+
+      const fuelProgress = processFuelLogic(hasFuel, fuelBuffer, fuelTime, meta, inventory, fuelInventory)
+
+      print("fuel progress: " + fuelProgress)
+
+      const fuelMax = meta.get_int("fuelMax") || 0
+      const itemMax = meta.get_int("itemMax") || 0
+
+      continueCookTimer(position)
       
 
-      const fuelBuffer = meta.get_int("fuelBuffer") | 0
+      // if (hasFuel && hasItem && hasRoom) {
+      //   if (!furnaceIsActive) {
+      //     turnOn(position, rotation)
+      //   }
+      //   inventory.add_item("output", itemInHearth.item)
+      //   continueCookTimer(position)
+      // } else {
+      //   if (furnaceIsActive) {
+      //     turnOff(position, rotation)
+      //   }
+      // }
 
-      print("Do I have fuel? " + hasFuel)
-      print("My fuel buffer: " + fuelBuffer)
-
-      const smeltPercent = 50
-      const fuelPercent = 50//100 - math.floor((fuelTime / fuelTotalTime) * 100)
+      const smeltPercent = math.round(math.random() * 100)
+      const fuelPercent = math.floor((fuelProgress / fuelMax) * 100)
+      print(fuelProgress, fuelMax)
+      print("fuelPercent: " + fuelPercent)
 
       meta.set_string("formspec", generateFurnaceFormspec(fuelPercent, smeltPercent))
-      meta.set_int("fuelBuffer", (fuelBuffer <= 0) ? 0 : fuelBuffer - 1)
+      // meta.set_int("fuelBuffer", fuelBuffer)
+      // meta.set_int("itemBuffer", itemBuffer)
 
       if (!hasFuel) {
         break
@@ -241,10 +336,6 @@ namespace blocks {
   //! This should probably be a utility function.
   function pixel(inputPixel: number): number {
     return (inputPixel / textureSize) - 0.5
-  }
-
-  function startTimer(position: Vec3) {
-    minetest.get_node_timer(position).start(1)
   }
 
   function allowPut() {
@@ -311,23 +402,21 @@ namespace blocks {
       "default_furnace_side.png",
       "default_furnace_front.png"
     ],
-    on_timer: think,
-    on_punch: function(pos: Vec3){
+    on_construct: function(pos: Vec3) {
       think(pos, 0, true)
     },
-    on_construct(position: Vec3) {
-      // print(dump(position))
-      think(position, 0, true)
-    },
-    on_metadata_inventory_move: startTimer,
-    on_metadata_inventory_put: startTimer,
-    on_metadata_inventory_take: startTimer
+    on_timer: think,
+    on_punch: startCookTimer,
+    on_metadata_inventory_move: startCookTimer,
+    on_metadata_inventory_put: startCookTimer,
+    on_metadata_inventory_take: startCookTimer
   })
 
   minetest.register_node(":furnace_active", {
     drawtype: Drawtype.nodebox,
     paramtype2: ParamType2.facedir,
     is_ground_content: false,
+    light_source: 8,
     node_box: furnaceNodeBox,
     selection_box: furnaceSelectionBox,
     groups: {
@@ -342,16 +431,14 @@ namespace blocks {
       "default_furnace_side.png",
       "default_furnace_front_active.png"
     ],
-    on_timer: think,
-    on_punch: function(pos: Vec3){
+    on_construct: function(pos: Vec3) {
       think(pos, 0, true)
     },
-    on_construct(position: Vec3) {
-      think(position, 0, true)
-    },
-    on_metadata_inventory_move: startTimer,
-    on_metadata_inventory_put: startTimer,
-    on_metadata_inventory_take: startTimer
+    on_timer: think,
+    on_punch: startCookTimer,
+    on_metadata_inventory_move: startCookTimer,
+    on_metadata_inventory_put: startCookTimer,
+    on_metadata_inventory_take: startCookTimer
   })
 
 }
