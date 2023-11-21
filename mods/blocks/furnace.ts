@@ -192,6 +192,54 @@ namespace blocks {
     return accumulator
   }
 
+  function runLogic(
+    update: boolean,
+    cookable: boolean,
+    outputFull: boolean,
+    timerElapsed: number,
+    elapsed: number,
+    fuelTime: number,
+    fuelTotalTime: number,
+    sourceTime: number,
+    // Refs
+    cooked: CraftResultObject | undefined,
+    inventory: InvRef,
+    sourceList: ItemStackObject[] | undefined,
+    fuelList: ItemStackObject[] | undefined,
+    fuel: CraftResultObject | undefined,
+    position: Vec3
+    ): [boolean, boolean, boolean, number, number, number, number, number] {
+    if (timerElapsed > 0 && update) {
+
+      update = false
+
+      //todo: check if we have to get lists every time
+      sourceList = inventory.get_list("input")
+      fuelList = inventory.get_list("fuel");
+
+      //? Smelting
+
+      let afterCooked: CraftRecipeCheckDefinition
+
+      // Check if we have smeltable items.
+      [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
+
+      const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
+
+      // Check if we have enough fuel to burn.
+      if (fuelTime < fuelTotalTime) {
+        [update, outputFull, fuelTime] = smeltLogic(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
+      } else {
+        [update, cookable, fuelTotalTime, fuelTime, sourceTime] = fuelLogic(update, cookable, fuelTotalTime, fuelTime, sourceTime, fuel, fuelList, inventory, position)
+      }
+
+      elapsed -= accumulator
+
+      return runLogic(update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, sourceList, fuelList, fuel, position)
+    }
+    return [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime]
+  }
+
   function think(position: Vec3, elapsed: number, justConstructed?: boolean) {
 
     const currentBlock = minetest.get_node_or_nil(position)
@@ -213,54 +261,26 @@ namespace blocks {
     let fuelTime = meta.get_float("fuelTime") || 0
     let sourceTime = meta.get_float("sourceTime") || 0
     let fuelTotalTime = meta.get_float("fuelTotalTime") || 0
-    const timerElapsed = meta.get_int("timerElapsed") || 0
+    let timerElapsed = meta.get_int("timerElapsed") || 0
 
     meta.set_int("timerElapsed", timerElapsed + 1)
     
     print(`thinking at ${vec3ToString(position)}...`)
 
     //! FIXME: source is now input!
-    let sourceList: ItemStackObject[] | null = null
-    let fuelList: ItemStackObject[]
+    let sourceList: ItemStackObject[] | undefined
+    let fuelList: ItemStackObject[] | undefined
     let outputFull = false
 
 
     let cookable: boolean = false
-    let cooked: CraftResultObject
+    let cooked: CraftResultObject | undefined
     let fuel: CraftResultObject | undefined
 
+    let update = true;
 
-    let update = true
-
-    while (timerElapsed > 0 && update) {
-
-      
-      update = false
-
-      sourceList = inventory.get_list("input")
-      fuelList = inventory.get_list("fuel")
-
-      //? Smelting
-
-      // Check if we have smeltable items.
-      let [cooked, afterCooked, cookable] = resolveSmeltingResults(sourceList)
-
-      const accumulator = accumulate(elapsed, fuelTotalTime, fuelTime, cookable, cooked, sourceTime)
-
-      // Check if we have enough fuel to burn.
-      if (fuelTime < fuelTotalTime) {
-
-        [update, outputFull, fuelTime] = smeltLogic(fuelTime, accumulator, cookable, sourceTime, cooked, afterCooked, inventory)
-
-      } else {
-
-        [update, cookable, fuelTotalTime, fuelTime, sourceTime] = fuelLogic(update, cookable, fuelTotalTime, fuelTime, sourceTime, fuel, fuelList, inventory, position)
-
-      }
-
-      elapsed -= accumulator
-
-    }
+    [update, cookable, outputFull, timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime] = 
+    runLogic(update, cookable, outputFull,timerElapsed, elapsed, fuelTime, fuelTotalTime, sourceTime, cooked, inventory, sourceList, fuelList, fuel, position);
 
     if (fuel && fuelTotalTime > fuel.time) {
       fuelTotalTime = fuel.time
