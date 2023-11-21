@@ -135,12 +135,49 @@ namespace blocks {
   function finalizeFuelProcessing(
     fuelTotalTime: number,
     fuelTime: number,
+    // Refs
     fuel: CraftResultObject,
     update: boolean
   ): [boolean, number] {
     update = true
     fuelTotalTime = fuel.time + (fuelTotalTime - fuelTime)
     return [update, fuelTotalTime]
+  }
+
+  function fuelLogic(
+    update: boolean,
+    cookable: boolean,
+    fuelTotalTime: number,
+    fuelTime: number,
+    sourceTime: number,
+    // Refs
+    fuel: CraftResultObject | undefined,
+    fuelList: ItemStackObject[],
+    inventory: InvRef,
+    position: Vec3
+  ): [boolean, boolean, number, number, number] {
+    // Furnace ran out of fuel.
+    if (cookable) {
+      // We need to get new fuel.
+      let afterFuel: CraftRecipeCheckDefinition
+      [fuel, afterFuel] = getNewFuel(fuelList)
+      if (fuel.time == 0) {
+        // No valid fuel in the fuel list.
+        fuelTotalTime = 0
+      } else {
+        const isFuel = fuelCheck(afterFuel)
+        checkFuelTime(inventory, fuel, isFuel, afterFuel)
+        processFuelReplacements(inventory, fuel, position);
+        [update, fuelTotalTime] = finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update)
+      }
+    } else {
+      // We don't need to get new fuel since there is no cookable item.
+      fuelTotalTime = 0
+      sourceTime = 0
+    }
+    fuelTime = 0
+
+    return [update, cookable, fuelTotalTime, fuelTime, sourceTime]
   }
 
   function accumulate(elapsed: number, fuelTotalTime: number, fuelTime: number, cookable: boolean, cooked: CraftResultObject, sourceTime: number): number {
@@ -190,7 +227,7 @@ namespace blocks {
 
     let cookable: boolean = false
     let cooked: CraftResultObject
-    let fuel: CraftResultObject | null = null
+    let fuel: CraftResultObject | undefined
 
 
     let update = true
@@ -217,30 +254,8 @@ namespace blocks {
 
       } else {
 
-        // Furnace ran out of fuel.
-        if (cookable) {
+        [update, cookable, fuelTotalTime, fuelTime, sourceTime] = fuelLogic(update, cookable, fuelTotalTime, fuelTime, sourceTime, fuel, fuelList, inventory, position)
 
-          // We need to get new fuel.
-          let afterFuel: CraftRecipeCheckDefinition
-          [fuel, afterFuel] = getNewFuel(fuelList)
-          
-          if (fuel.time == 0) {
-            // No valid fuel in the fuel list.
-            fuelTotalTime = 0
-          } else {
-            const isFuel = fuelCheck(afterFuel)
-            checkFuelTime(inventory, fuel, isFuel, afterFuel)
-            processFuelReplacements(inventory, fuel, position);
-
-            [update, fuelTotalTime] = finalizeFuelProcessing(fuelTotalTime, fuelTime, fuel, update)
-          }
-        } else {
-
-          // We don't need to get new fuel since there is no cookable item.
-          fuelTotalTime = 0
-          sourceTime = 0
-        }
-        fuelTime = 0
       }
 
       elapsed -= accumulator
