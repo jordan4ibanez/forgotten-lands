@@ -33,7 +33,7 @@ namespace blocks {
   function generateFurnaceFormspec(fuelPercent: number, smeltPercent: number): string {
     // Convert to 0-1 range.
     const fuelForegroundMultiplier = (minetest.is_nan(fuelPercent / 100)) ? 0 : (fuelPercent / 100) 
-    print (fuelForegroundMultiplier)
+    // print (fuelForegroundMultiplier)
     return generate(new FormSpec({
       size: create(12,12),
       elements: [
@@ -186,7 +186,7 @@ namespace blocks {
     // print("start")
     const timer = minetest.get_node_timer(position)
     if (timer.is_started()) {
-      print("timer is already started")
+      // print("timer is already started")
       return
     }
     minetest.get_node_timer(position).start(0)
@@ -196,7 +196,7 @@ namespace blocks {
     // print("continue")
     const timer = minetest.get_node_timer(position)
     if (timer.is_started()) {
-      print("timer is already started")
+      // print("timer is already started")
       return
     }
     minetest.get_node_timer(position).start(1)

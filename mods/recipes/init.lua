@@ -44,7 +44,7 @@ do
     end
     toolRegistrationArray[#toolRegistrationArray + 1] = {output = "shears", recipe = {{"", "iron"}, {"iron", ""}}}
     recipes.processRecipeArray(toolRegistrationArray)
-    local craftables = {{type = recipeType.shapeless, output = "oak_wood 4", recipe = {"oak_tree"}}, {output = "stick 4", recipe = {{craftBlockType.wood}, {craftBlockType.wood}}}, {output = "furnace", recipe = {{"cobblestone", "cobblestone", "cobblestone"}, {"cobblestone", "", "cobblestone"}, {"cobblestone", "cobblestone", "cobblestone"}}}}
+    local craftables = {{type = recipeType.shapeless, output = "oak_wood 4", recipe = {"oak_tree"}}, {output = "stick 4", recipe = {{craftBlockType.wood}, {craftBlockType.wood}}}, {output = "furnace", recipe = {{"cobblestone", "cobblestone", "cobblestone"}, {"cobblestone", "", "cobblestone"}, {"cobblestone", "cobblestone", "cobblestone"}}}, {output = "workbench", recipe = {{"group:wood", "group:wood"}, {"group:wood", "group:wood"}}}}
     recipes.processRecipeArray(craftables)
     utility.loadFiles({"cooking", "fuel"})
 end

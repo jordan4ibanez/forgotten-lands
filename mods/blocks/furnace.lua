@@ -32,7 +32,6 @@ do
     end
     local function generateFurnaceFormspec(fuelPercent, smeltPercent)
         local fuelForegroundMultiplier = minetest.is_nan(fuelPercent / 100) and 0 or fuelPercent / 100
-        print(fuelForegroundMultiplier)
         return generate(__TS__New(
             FormSpec,
             {
@@ -145,7 +144,6 @@ do
     local function startCookTimer(position)
         local timer = minetest.get_node_timer(position)
         if timer:is_started() then
-            print("timer is already started")
             return
         end
         minetest.get_node_timer(position):start(0)
@@ -153,7 +151,6 @@ do
     local function continueCookTimer(position)
         local timer = minetest.get_node_timer(position)
         if timer:is_started() then
-            print("timer is already started")
             return
         end
         minetest.get_node_timer(position):start(1)
@@ -216,7 +213,6 @@ do
                 return itemBuffer
             end
         else
-            print("ran out of fuel")
             if not hasItem then
                 meta:set_int("itemMax", -1)
             end

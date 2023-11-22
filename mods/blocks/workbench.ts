@@ -40,7 +40,7 @@ namespace blocks {
       //! Craft area.
       new List({
         location: "context",
-        listName: "craft",
+        listName: "workBenchCraft",
         position: create(
           4,
           1.125
@@ -97,7 +97,7 @@ namespace blocks {
       }),
       new ListRing({
         location: "context",
-        listName: "craft"
+        listName: "workBenchCraft"
       }),
       // new ListRing({
       //   location: "current_player",
@@ -128,7 +128,7 @@ namespace blocks {
   function workBenchLogic(position: Vec3, listName: string) {
     const meta = minetest.get_meta(position)
     const inventory = meta.get_inventory()
-    const craftArea = inventory.get_list("craft")
+    const craftArea = inventory.get_list("workBenchCraft")
   
     const [result, leftOver] = minetest.get_craft_result({
       method: CraftCheckType.normal,
@@ -140,7 +140,7 @@ namespace blocks {
 
     // If user takes from the output, the craft has been finalized. Take the items.
     if (listName == "output") {
-      inventory.set_list("craft", leftOver.items)
+      inventory.set_list("workBenchCraft", leftOver.items)
       // Now recurse 1 deep to update the output slot.
       workBenchLogic(position, "")
     }
@@ -196,8 +196,8 @@ namespace blocks {
       const meta = minetest.get_meta(position)
       const inventory = meta.get_inventory()
       meta.set_string("formspec", workBenchInventory)
-      inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
-      inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
+      inventory.set_size("workBenchCraft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
+      inventory.set_width("workBenchCraft", WORKBENCH_INVENTORY_SIZE.x)
       inventory.set_size("output", 1)
       inventory.set_width("output", 1)
     },

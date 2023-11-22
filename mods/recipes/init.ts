@@ -117,6 +117,13 @@ namespace recipes {
         ["cobblestone","",           "cobblestone"],
         ["cobblestone","cobblestone","cobblestone"]
       ]
+    },
+    {
+      output: "workbench",
+      recipe: [
+        ["group:wood","group:wood"],
+        ["group:wood","group:wood"]
+      ]
     }
   ]
 

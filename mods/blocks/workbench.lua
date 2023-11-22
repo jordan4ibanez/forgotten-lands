@@ -48,7 +48,7 @@ do
                     List,
                     {
                         location = "context",
-                        listName = "craft",
+                        listName = "workBenchCraft",
                         position = create(4, 1.125),
                         size = blocks.WORKBENCH_INVENTORY_SIZE,
                         startingIndex = 0
@@ -85,7 +85,7 @@ do
                     }
                 ),
                 __TS__New(ListRing, {location = "current_player", listName = "main"}),
-                __TS__New(ListRing, {location = "context", listName = "craft"})
+                __TS__New(ListRing, {location = "context", listName = "workBenchCraft"})
             }
         }
     ))
@@ -104,11 +104,11 @@ do
     local function workBenchLogic(position, listName)
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
-        local craftArea = inventory:get_list("craft")
+        local craftArea = inventory:get_list("workBenchCraft")
         local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = blocks.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
         inventory:set_list("output", {result.item})
         if listName == "output" then
-            inventory:set_list("craft", leftOver.items)
+            inventory:set_list("workBenchCraft", leftOver.items)
             workBenchLogic(position, "")
         end
     end
@@ -132,8 +132,8 @@ do
                 local meta = minetest.get_meta(position)
                 local inventory = meta:get_inventory()
                 meta:set_string("formspec", workBenchInventory)
-                inventory:set_size("craft", blocks.WORKBENCH_INVENTORY_SIZE.x * blocks.WORKBENCH_INVENTORY_SIZE.y)
-                inventory:set_width("craft", blocks.WORKBENCH_INVENTORY_SIZE.x)
+                inventory:set_size("workBenchCraft", blocks.WORKBENCH_INVENTORY_SIZE.x * blocks.WORKBENCH_INVENTORY_SIZE.y)
+                inventory:set_width("workBenchCraft", blocks.WORKBENCH_INVENTORY_SIZE.x)
                 inventory:set_size("output", 1)
                 inventory:set_width("output", 1)
             end,
