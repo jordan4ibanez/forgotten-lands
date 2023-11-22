@@ -31,7 +31,8 @@ do
         return (("^[lowpart:" .. tostring(percent)) .. ":") .. input
     end
     local function generateFurnaceFormspec(fuelPercent, smeltPercent)
-        local fuelForegroundMultiplier = fuelPercent / 100 or 0
+        local fuelForegroundMultiplier = minetest.is_nan(fuelPercent / 100) and 0 or fuelPercent / 100
+        print(fuelForegroundMultiplier)
         return generate(__TS__New(
             FormSpec,
             {

@@ -32,8 +32,8 @@ namespace blocks {
 
   function generateFurnaceFormspec(fuelPercent: number, smeltPercent: number): string {
     // Convert to 0-1 range.
-    const fuelForegroundMultiplier = (fuelPercent / 100) || 0
-
+    const fuelForegroundMultiplier = (minetest.is_nan(fuelPercent / 100)) ? 0 : (fuelPercent / 100) 
+    print (fuelForegroundMultiplier)
     return generate(new FormSpec({
       size: create(12,12),
       elements: [
