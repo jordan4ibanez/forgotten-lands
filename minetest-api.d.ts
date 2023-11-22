@@ -728,7 +728,7 @@ declare global {
     on_rightclick?(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
     on_dig?(position: Vec3, node: NodeTable, digger: ObjectRef): void
     on_timer?(position: Vec3, elapsed: number): void
-    on_receive_fields?(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
+    on_receive_fields?(position: Vec3, formName: string, fields: {[id: string] : any}, sender: ObjectRef): void
     allow_metadata_inventory_move?(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
     allow_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
     allow_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
