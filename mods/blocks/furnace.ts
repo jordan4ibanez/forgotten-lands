@@ -13,6 +13,7 @@ namespace blocks {
   const ListColors = formSpec.ListColors
   const ListRing = formSpec.ListRing
   const Label = formSpec.Label
+  const Style = formSpec.Style
 
   const color = utility.color
   const colorScalar = utility.colorScalar
@@ -30,6 +31,9 @@ namespace blocks {
   }
 
   function generateFurnaceFormspec(fuelPercent: number, smeltPercent: number): string {
+    // Convert to 0-1 range.
+    const fuelForegroundMultiplier = (fuelPercent / 100) || 0
+
     return generate(new FormSpec({
       size: create(12,12),
       elements: [
@@ -49,8 +53,10 @@ namespace blocks {
         }),
         //! Add a nice label to the top.
         new Label({
-          position: create(0,0),
-          label: "Furnace"
+          position: create(5.5,0.5),
+          //! Flame red foreground. 164,40,33 (Turns pink/peach)
+          //? Cool blue background. 24,154,211 (Not possible yet)
+          label: minetest.colorize( color(164 * fuelForegroundMultiplier, 0, 0), "Furnace")
         }),
         //! Flame.
         new Image({
@@ -372,7 +378,7 @@ namespace blocks {
       const smeltPercent = (itemMax == -1) ? 0 : 100 - math.floor((itemProgress / itemMax) * 100)
       const fuelPercent = math.floor((fuelProgress / fuelMax) * 100)
 
-      print("item progress: " + itemProgress)
+      // print("item progress: " + itemProgress)
 
       meta.set_string("formspec", generateFurnaceFormspec(fuelPercent, smeltPercent))
       // meta.set_int("fuelBuffer", fuelBuffer)
@@ -490,6 +496,7 @@ namespace blocks {
       think(pos, 1, true)
     },
     on_timer: think,
+    on_punch: startCookTimer,
     on_metadata_inventory_move: startCookTimer,
     on_metadata_inventory_put: startCookTimer,
     on_metadata_inventory_take: startCookTimer,
@@ -520,6 +527,7 @@ namespace blocks {
       think(pos, 1, true)
     },
     on_timer: think,
+    on_punch: startCookTimer,
     on_metadata_inventory_move: startCookTimer,
     on_metadata_inventory_put: startCookTimer,
     on_metadata_inventory_take: startCookTimer,

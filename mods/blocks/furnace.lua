@@ -19,6 +19,7 @@ do
     local ListColors = formSpec.ListColors
     local ListRing = formSpec.ListRing
     local Label = formSpec.Label
+    local Style = formSpec.Style
     local color = utility.color
     local colorScalar = utility.colorScalar
     local colorRGB = utility.colorRGB
@@ -30,6 +31,7 @@ do
         return (("^[lowpart:" .. tostring(percent)) .. ":") .. input
     end
     local function generateFurnaceFormspec(fuelPercent, smeltPercent)
+        local fuelForegroundMultiplier = fuelPercent / 100 or 0
         return generate(__TS__New(
             FormSpec,
             {
@@ -56,8 +58,11 @@ do
                     __TS__New(
                         Label,
                         {
-                            position = create(0, 0),
-                            label = "Furnace"
+                            position = create(5.5, 0.5),
+                            label = minetest.colorize(
+                                color(164 * fuelForegroundMultiplier, 0, 0),
+                                "Furnace"
+                            )
                         }
                     ),
                     __TS__New(
@@ -287,7 +292,6 @@ do
                 local itemMax = meta:get_int("itemMax") or 0
                 local smeltPercent = itemMax == -1 and 0 or 100 - math.floor(itemProgress / itemMax * 100)
                 local fuelPercent = math.floor(fuelProgress / fuelMax * 100)
-                print("item progress: " .. tostring(itemProgress))
                 meta:set_string(
                     "formspec",
                     generateFurnaceFormspec(fuelPercent, smeltPercent)
@@ -420,6 +424,7 @@ do
                 think(pos, 1, true)
             end,
             on_timer = think,
+            on_punch = startCookTimer,
             on_metadata_inventory_move = startCookTimer,
             on_metadata_inventory_put = startCookTimer,
             on_metadata_inventory_take = startCookTimer,
@@ -450,6 +455,7 @@ do
                 think(pos, 1, true)
             end,
             on_timer = think,
+            on_punch = startCookTimer,
             on_metadata_inventory_move = startCookTimer,
             on_metadata_inventory_put = startCookTimer,
             on_metadata_inventory_take = startCookTimer,
