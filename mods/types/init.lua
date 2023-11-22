@@ -18,6 +18,7 @@ do
     types.BlockType.wool = "wool"
     types.BlockType.planks = "planks"
     types.BlockType.tree = "tree"
+    types.BlockType.sand = "sand"
     types.CraftingBlockType = CraftingBlockType or ({})
     types.CraftingBlockType.soil = "group:soil"
     types.CraftingBlockType.wood = "group:wood"
@@ -28,4 +29,5 @@ do
     types.CraftingBlockType.wool = "group:wool"
     types.CraftingBlockType.planks = "group:planks"
     types.CraftingBlockType.tree = "group:tree"
+    types.CraftingBlockType.sand = "group:sand"
 end

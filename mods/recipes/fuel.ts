@@ -1,4 +1,7 @@
 namespace recipes {
+
+  const blockType = types.CraftingBlockType
+
   minetest.register_craft({
     type: CraftRecipeType.fuel,
     recipe: "coal",
@@ -13,14 +16,20 @@ namespace recipes {
 
   minetest.register_craft({
     type: CraftRecipeType.fuel,
-    recipe: "group:wood",
+    recipe: blockType.tree,
+    burntime: 40,
+  })
+
+  minetest.register_craft({
+    type: CraftRecipeType.fuel,
+    recipe: blockType.planks,
     burntime: 7,
   })
 
   minetest.register_craft({
     type: CraftRecipeType.fuel,
-    recipe: "group:wood",
-    burntime: 7,
+    recipe: "stick",
+    burntime: 1,
   })
 
   
