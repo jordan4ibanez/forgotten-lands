@@ -110,6 +110,14 @@ namespace recipes {
         [craftBlockType.wood]
       ]
     },
+    {
+      output: "furnace",
+      recipe: [
+        ["cobblestone","cobblestone","cobblestone"],
+        ["cobblestone","",           "cobblestone"],
+        ["cobblestone","cobblestone","cobblestone"]
+      ]
+    }
   ]
 
   processRecipeArray(craftables)
