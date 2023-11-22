@@ -303,8 +303,6 @@ do
         return inputPixel / textureSize - 0.5
     end
     local function allowPut(position, listName, index, stack, player)
-        local meta = minetest.get_meta(position)
-        local inventory = meta:get_inventory()
         repeat
             local ____switch38 = listName
             local ____cond38 = ____switch38 == "output"
@@ -319,8 +317,10 @@ do
             if ____cond38 then
                 return fuelCheck({stack}).time > 0 and stack:get_count() or 0
             end
+            do
+                return 0
+            end
         until true
-        return 0
     end
     local function allowMove(position, fromList, fromIndex, toList, toIndex, count, player)
         local meta = minetest.get_meta(position)

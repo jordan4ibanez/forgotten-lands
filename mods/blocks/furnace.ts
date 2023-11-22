@@ -390,10 +390,8 @@ namespace blocks {
   }
 
   function allowPut(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number {
-    // Protection can be bolted on here
 
-    const meta = minetest.get_meta(position)
-    const inventory = meta.get_inventory()
+    //* Protection can be bolted on here.
 
     switch (listName) {
       case "output":
@@ -402,8 +400,9 @@ namespace blocks {
         return (itemCheck([stack]).item.get_name() != "") ? stack.get_count() : 0
       case "fuel":
         return (fuelCheck([stack]).time > 0) ? stack.get_count() : 0
+      default:
+        return 0
     }
-    return 0
   }
 
   function allowMove(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number {
