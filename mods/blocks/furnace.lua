@@ -18,6 +18,7 @@ do
     local List = formSpec.List
     local ListColors = formSpec.ListColors
     local ListRing = formSpec.ListRing
+    local Label = formSpec.Label
     local color = utility.color
     local colorScalar = utility.colorScalar
     local colorRGB = utility.colorRGB
@@ -50,6 +51,13 @@ do
                             slotBorder = colorScalar(0),
                             toolTipBGColor = colorRGB(123, 104, 238),
                             toolTipFontColor = colorScalar(100)
+                        }
+                    ),
+                    __TS__New(
+                        Label,
+                        {
+                            position = create(0, 0),
+                            label = "Furnace"
                         }
                     ),
                     __TS__New(
@@ -218,7 +226,6 @@ do
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
         initialPayload(inventory, justConstructed)
-        print(("thinking at " .. vec3ToString(position)) .. ".............")
         local furnaceIsActive = currentBlock.name == "furnace_active"
         local rotation = currentBlock.param2 or 0
         do
@@ -254,7 +261,6 @@ do
                     fuelInventory
                 )
                 if hasFuel and hasItem and hasRoom or fuelBuffer > 0 then
-                    print("continuing")
                     continueCookTimer(position)
                     if not furnaceIsActive then
                         turnOn(position, rotation)
@@ -296,7 +302,37 @@ do
     local function pixel(inputPixel)
         return inputPixel / textureSize - 0.5
     end
-    local function allowPut()
+    local function allowPut(position, listName, index, stack, player)
+        local meta = minetest.get_meta(position)
+        local inventory = meta:get_inventory()
+        repeat
+            local ____switch38 = listName
+            local ____cond38 = ____switch38 == "output"
+            if ____cond38 then
+                return 0
+            end
+            ____cond38 = ____cond38 or ____switch38 == "input"
+            if ____cond38 then
+                return itemCheck({stack}).item:get_name() ~= "" and stack:get_count() or 0
+            end
+            ____cond38 = ____cond38 or ____switch38 == "fuel"
+            if ____cond38 then
+                return fuelCheck({stack}).time > 0 and stack:get_count() or 0
+            end
+        until true
+        return 0
+    end
+    local function allowMove(position, fromList, fromIndex, toList, toIndex, count, player)
+        local meta = minetest.get_meta(position)
+        local inventory = meta:get_inventory()
+        local stack = inventory:get_stack(fromList, fromIndex)
+        return allowPut(
+            position,
+            toList,
+            toIndex,
+            stack,
+            player
+        )
     end
     local furnaceNodeBox = {
         type = Nodeboxtype.fixed,
@@ -381,13 +417,14 @@ do
                 "default_furnace_front.png"
             },
             on_construct = function(pos)
-                think(pos, 0, true)
+                think(pos, 1, true)
             end,
             on_timer = think,
-            on_punch = startCookTimer,
             on_metadata_inventory_move = startCookTimer,
             on_metadata_inventory_put = startCookTimer,
-            on_metadata_inventory_take = startCookTimer
+            on_metadata_inventory_take = startCookTimer,
+            allow_metadata_inventory_put = allowPut,
+            allow_metadata_inventory_move = allowMove
         }
     )
     minetest.register_node(
@@ -410,13 +447,14 @@ do
                 "default_furnace_front_active.png"
             },
             on_construct = function(pos)
-                think(pos, 0, true)
+                think(pos, 1, true)
             end,
             on_timer = think,
-            on_punch = startCookTimer,
             on_metadata_inventory_move = startCookTimer,
             on_metadata_inventory_put = startCookTimer,
-            on_metadata_inventory_take = startCookTimer
+            on_metadata_inventory_take = startCookTimer,
+            allow_metadata_inventory_put = allowPut,
+            allow_metadata_inventory_move = allowMove
         }
     )
 end

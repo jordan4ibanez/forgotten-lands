@@ -310,7 +310,7 @@ namespace blocks {
     initialPayload(inventory, justConstructed)
 
 
-    print(`thinking at ${vec3ToString(position)}.............`)
+    // print(`thinking at ${vec3ToString(position)}.............`)
     
     const furnaceIsActive = (currentBlock.name == "furnace_active")
     const rotation = currentBlock.param2 || 0
@@ -351,7 +351,7 @@ namespace blocks {
 
       // Furnace activity continuity.
       if ((hasFuel && hasItem && hasRoom) || fuelBuffer > 0) {
-        print("continuing")
+        // print("continuing")
         continueCookTimer(position)
         if (!furnaceIsActive) {
           turnOn(position, rotation)
@@ -397,13 +397,11 @@ namespace blocks {
 
     switch (listName) {
       case "output":
-        print("Is output")
-        break
+        return 0
       case "input":
-        print("Is INPUT")
-        break
+        return (itemCheck([stack]).item.get_name() != "") ? stack.get_count() : 0
       case "fuel":
-        print("fuel check plz")
+        return (fuelCheck([stack]).time > 0) ? stack.get_count() : 0
     }
     return 0
   }
