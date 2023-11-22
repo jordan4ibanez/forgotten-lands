@@ -49,7 +49,7 @@ do
                     {
                         location = "context",
                         listName = "craft",
-                        position = create(5.5, 1.75),
+                        position = create(4, 1.125),
                         size = blocks.WORKBENCH_INVENTORY_SIZE,
                         startingIndex = 0
                     }
@@ -89,6 +89,38 @@ do
             }
         }
     ))
+    local function allowPut(position, listName, index, stack, player)
+        repeat
+            local ____switch4 = listName
+            local ____cond4 = ____switch4 == "output"
+            if ____cond4 then
+                return 0
+            end
+            do
+                return stack:get_count()
+            end
+        until true
+    end
+    local function workBenchLogic(position, listName)
+        local meta = minetest.get_meta(position)
+        local inventory = meta:get_inventory()
+        local craftArea = inventory:get_list("craft")
+        local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = blocks.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
+        inventory:set_list("output", {result.item})
+        if listName == "output" then
+            inventory:set_list("craft", leftOver.items)
+            workBenchLogic(position, "")
+        end
+    end
+    local function workBenchPut(position, listName, index, stack, player)
+        workBenchLogic(position, listName)
+    end
+    local function workBenchMove(position, fromList, fromIndex, toList, toIndex, count, player)
+        workBenchLogic(position, toList)
+    end
+    local function workBenchTake(position, listName, index, stack, player)
+        workBenchLogic(position, listName)
+    end
     minetest.register_node(
         ":workbench",
         {
@@ -104,7 +136,11 @@ do
                 inventory:set_width("craft", blocks.WORKBENCH_INVENTORY_SIZE.x)
                 inventory:set_size("output", 1)
                 inventory:set_width("output", 1)
-            end
+            end,
+            on_metadata_inventory_put = workBenchPut,
+            on_metadata_inventory_move = workBenchMove,
+            on_metadata_inventory_take = workBenchTake,
+            allow_metadata_inventory_put = allowPut
         }
     )
 end

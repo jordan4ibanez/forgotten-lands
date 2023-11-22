@@ -42,8 +42,8 @@ namespace blocks {
         location: "context",
         listName: "craft",
         position: create(
-          5.5,
-          1.75
+          4,
+          1.125
         ),
         size: WORKBENCH_INVENTORY_SIZE,
         startingIndex: 0
@@ -102,6 +102,76 @@ namespace blocks {
     ]
   }))
 
+  function allowPut(
+    position: Vec3,
+    listName: string,
+    index: number,
+    stack: ItemStackObject,
+    player: ObjectRef
+  ): number {
+    switch (listName) {
+      case "output":
+        return 0
+      default:
+        return stack.get_count()
+    }
+  }
+
+  function workBenchLogic(position: Vec3, listName: string) {
+    const meta = minetest.get_meta(position)
+    const inventory = meta.get_inventory()
+    const craftArea = inventory.get_list("craft")
+  
+    const [result, leftOver] = minetest.get_craft_result({
+      method: CraftCheckType.normal,
+      width: WORKBENCH_INVENTORY_SIZE.x,
+      items: craftArea
+    })
+
+    inventory.set_list("output", [result.item])
+
+    // If user takes from the output, the craft has been finalized. Take the items.
+    if (listName == "output") {
+      inventory.set_list("craft", leftOver.items)
+      // Now recurse 1 deep to update the output slot.
+      workBenchLogic(position, "")
+    }
+  }
+
+
+  function workBenchPut(
+    position: Vec3,
+    listName: string,
+    index: number,
+    stack: ItemStackObject,
+    player: ObjectRef
+   ) {
+    workBenchLogic(position, listName)
+  }
+
+  function workBenchMove(
+    position: Vec3,
+    fromList: string,
+    fromIndex: number,
+    toList: string,
+    toIndex: number,
+    count: number,
+    player: ObjectRef
+  ) {
+    workBenchLogic(position, toList)
+  }
+
+  function workBenchTake(
+    position: Vec3,
+    listName: string,
+    index: number,
+    stack: ItemStackObject,
+    player: ObjectRef
+  ) {
+    workBenchLogic(position, listName)
+  }
+
+
   minetest.register_node(":workbench", {
     drawtype: Drawtype.normal,
     tiles: [
@@ -122,6 +192,14 @@ namespace blocks {
       inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
       inventory.set_size("output", 1)
       inventory.set_width("output", 1)
-    }
+    },
+
+    //! todo: These 3 functions can probably just be one. Look into this.
+    on_metadata_inventory_put: workBenchPut,
+    on_metadata_inventory_move: workBenchMove,
+    on_metadata_inventory_take: workBenchTake,
+
+    // All this does is stop a player from jamming items in the output slot.
+    allow_metadata_inventory_put: allowPut,
   })
 }
