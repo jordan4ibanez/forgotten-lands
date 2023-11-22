@@ -17,6 +17,8 @@ namespace types {
     metal = "metal",
     glass = "glass",
     wool = "wool",
+    planks = "planks",
+    tree = "tree"
   }
 
   // This one is quite useful for crafting recipes.

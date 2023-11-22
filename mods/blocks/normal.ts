@@ -82,7 +82,8 @@ namespace blocks {
     ],
     sounds: sounds.wood(),
     groups: {
-      [blockType.wood]: 1
+      [blockType.wood]: 1,
+      [blockType.tree]: 1
     }
   })
 
@@ -114,7 +115,8 @@ namespace blocks {
     ],
     sounds: sounds.wood(),
     groups: {
-      [blockType.wood]: 1
+      [blockType.wood]: 1,
+      [blockType.planks]: 1
     }
   })
 
