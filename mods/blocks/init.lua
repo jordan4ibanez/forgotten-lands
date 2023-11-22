@@ -22,5 +22,5 @@ do
             i = i + 1
         end
     end
-    utility.loadFiles({"normal", "ores", "furnace"})
+    utility.loadFiles({"normal", "ores", "furnace", "workbench"})
 end
