@@ -121,7 +121,7 @@ namespace recipes {
     {
       output: "workbench",
       recipe: [
-        ["group:wood","group:wood"],
+        ["group:planks","group:wood"],
         ["group:wood","group:wood"]
       ]
     }

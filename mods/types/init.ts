@@ -30,5 +30,7 @@ namespace types {
     metal = "group:metal",
     glass = "group:glass",
     wool = "group:wool",
+    planks = "group:planks",
+    tree = "group:tree"
   }
 }
