@@ -320,6 +320,13 @@ export interface minetest {
 
   registerTSEntity(clazz: { new(): LuaEntity }): void
 
+  get_color_escape_sequence(color: string): string
+  colorize(color: string, message: string): string
+  get_background_escape_sequence(color: string): string
+  strip_foreground_colors(string: string): string
+  strip_background_colors(string: string): string
+  strip_colors(string: string): string
+
   /**
    * WARNING! THIS IS NOT MEANT TO BE USED IN PRODUCTION!
    * This is only exposed to allow extension!
