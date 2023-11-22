@@ -389,7 +389,13 @@ namespace blocks {
     return (inputPixel / textureSize) - 0.5
   }
 
-  function allowPut(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number {
+  function allowPut(
+    position: Vec3,
+    listName: string,
+    index: number,
+    stack: ItemStackObject,
+    player: ObjectRef
+  ): number {
 
     //* Protection can be bolted on here.
 
@@ -405,7 +411,15 @@ namespace blocks {
     }
   }
 
-  function allowMove(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number {
+  function allowMove(
+    position: Vec3,
+    fromList: string,
+    fromIndex: number,
+    toList: string,
+    toIndex: number,
+    count: number,
+    player: ObjectRef
+  ): number {
     const meta = minetest.get_meta(position)
     const inventory = meta.get_inventory()
     const stack = inventory.get_stack(fromList, fromIndex)
