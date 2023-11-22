@@ -1,4 +1,4 @@
-namespace narploop {
+namespace glarp {
 
   const create = vector.create2d
 
@@ -15,7 +15,7 @@ namespace narploop {
   const colorScalar = utility.colorScalar
   const colorRGB = utility.colorRGB
 
-  const playerInventorySize = player.CRAFT_INVENTORY_SIZE
+  const playerInventorySize = player.MAIN_INVENTORY_SIZE
 
   export const WORKBENCH_INVENTORY_SIZE = create(3,3)
   
@@ -39,8 +39,8 @@ namespace narploop {
       }),
       //! Craft area.
       new List({
-        location: "current_player",
-        listName: "craft",
+        location: "context",
+        listName: "workBenchCraft",
         position: create(
           4,
           1.125
@@ -48,10 +48,10 @@ namespace narploop {
         size: WORKBENCH_INVENTORY_SIZE,
         startingIndex: 0
       }),
-      //! Craft craftpreview
+      //! Craft output
       new List({
-        location: "current_player",
-        listName: "craftpreview",
+        location: "context",
+        listName: "output",
         position: create(
           9,
           2.375
@@ -96,16 +96,16 @@ namespace narploop {
         listName: "main"
       }),
       new ListRing({
-        location: "current_player",
-        listName: "craft"
+        location: "context",
+        listName: "workBenchCraft"
       }),
       new ListRing({
         location: "current_player",
         listName: "main"
       }),
       new ListRing({
-        location: "current_player",
-        listName: "craftpreview"
+        location: "context",
+        listName: "output"
       })
     ]
   }))
@@ -118,7 +118,7 @@ namespace narploop {
     player: ObjectRef
   ): number {
     switch (listName) {
-      case "craftpreview":
+      case "output":
         return 0
       default:
         return stack.get_count()
@@ -128,7 +128,7 @@ namespace narploop {
   function workBenchLogic(position: Vec3, listName: string) {
     const meta = minetest.get_meta(position)
     const inventory = meta.get_inventory()
-    const craftArea = inventory.get_list("craft")
+    const craftArea = inventory.get_list("workBenchCraft")
   
     const [result, leftOver] = minetest.get_craft_result({
       method: CraftCheckType.normal,
@@ -136,12 +136,12 @@ namespace narploop {
       items: craftArea
     })
 
-    inventory.set_list("craftpreview", [result.item])
+    inventory.set_list("output", [result.item])
 
-    // If user takes from the craftpreview, the craft has been finalized. Take the items.
-    if (listName == "craftpreview") {
-      inventory.set_list("craft", leftOver.items)
-      // Now recurse 1 deep to update the craftpreview slot.
+    // If user takes from the output, the craft has been finalized. Take the items.
+    if (listName == "output") {
+      inventory.set_list("workBenchCraft", leftOver.items)
+      // Now recurse 1 deep to update the output slot.
       workBenchLogic(position, "")
     }
   }
@@ -192,49 +192,35 @@ namespace narploop {
       [blockType.wood]: 1
     },
 
-    //! Fixme: Make a persistent inventory. :(
-    on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing) {
-      const inventory = clicker.get_inventory()
-      inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
-      inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
-    },
-
-    on_receive_fields(position: Vec3, formName: string, fields: {[id: string] : any}, sender: ObjectRef) {
-      // Just throw the items for now.
-      const inventory = sender.get_inventory()
-      const playerPos = sender.get_pos()
-      playerPos.y += 1.5
-      const yaw = sender.get_look_horizontal()
-
-      const items = inventory.get_list("craft")
-      for (const item of items) {
-        if (item.is_empty()) continue
-        const stackSize = item.get_count()
-        const itemName = item.get_name()
-        for (let i = 0; i < stackSize; i++) {
-          const item = minetest.add_item(playerPos, itemName)
-          if (!item) {
-            continue
-          }
-          const dir = vector.multiply(minetest.yaw_to_dir(yaw + ((math.random() - 0.5) * 1.25)), 2 + math.random())
-          dir.y = 1 + (math.random() * 3)
-          item.add_velocity(dir)
-        }
-      }
-
-      inventory.set_list("craft", [])
-
-      inventory.set_size("craft", playerInventorySize.x * playerInventorySize.y)
-      inventory.set_width("craft", playerInventorySize.x)
-      print("set everything correctlyl: " + playerInventorySize.x)
-    },
-
     on_construct(position: Vec3) {
       const meta = minetest.get_meta(position)
-      // const inventory = meta.get_inventory()
+      const inventory = meta.get_inventory()
       meta.set_string("formspec", workBenchInventory)
-      // inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
-      // inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
+      inventory.set_size("workBenchCraft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
+      inventory.set_width("workBenchCraft", WORKBENCH_INVENTORY_SIZE.x)
+      inventory.set_size("output", 1)
+      inventory.set_width("output", 1)
     },
+
+    //! todo: These 3 functions can probably just be one. Look into this.
+    on_metadata_inventory_put: workBenchPut,
+    on_metadata_inventory_move: workBenchMove,
+    on_metadata_inventory_take: workBenchTake,
+
+    // All this does is stop a player from jamming items in the output slot.
+    allow_metadata_inventory_put: allowPut,
+
+    allow_metadata_inventory_take(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number {
+      if (listName != "output") return stack.get_count()
+      const meta = minetest.get_meta(position)
+      const inventory = meta.get_inventory()
+      const list = inventory.get_list("output")
+      const shouldGotten = list[0].get_count()
+      const gotten = stack.get_count()
+
+      print(shouldGotten, gotten)
+
+      return (shouldGotten == gotten) ? gotten : 0
+    }
   })
 }

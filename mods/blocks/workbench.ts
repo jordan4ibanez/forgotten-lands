@@ -16,6 +16,7 @@ namespace blocks {
   const colorRGB = utility.colorRGB
 
   const playerInventorySize = player.MAIN_INVENTORY_SIZE
+  const playerRegularCraftSize = player.CRAFT_INVENTORY_SIZE
 
   export const WORKBENCH_INVENTORY_SIZE = create(3,3)
   
@@ -39,8 +40,8 @@ namespace blocks {
       }),
       //! Craft area.
       new List({
-        location: "context",
-        listName: "workBenchCraft",
+        location: "current_player",
+        listName: "craft",
         position: create(
           4,
           1.125
@@ -48,10 +49,10 @@ namespace blocks {
         size: WORKBENCH_INVENTORY_SIZE,
         startingIndex: 0
       }),
-      //! Craft output
+      //! Craft craftpreview
       new List({
-        location: "context",
-        listName: "output",
+        location: "current_player",
+        listName: "craftpreview",
         position: create(
           9,
           2.375
@@ -96,88 +97,88 @@ namespace blocks {
         listName: "main"
       }),
       new ListRing({
-        location: "context",
-        listName: "workBenchCraft"
+        location: "current_player",
+        listName: "craft"
       }),
-      // new ListRing({
-      //   location: "current_player",
-      //   listName: "main"
-      // }),
-      // new ListRing({
-      //   location: "context",
-      //   listName: "output"
-      // })
+      new ListRing({
+        location: "current_player",
+        listName: "main"
+      }),
+      new ListRing({
+        location: "current_player",
+        listName: "craftpreview"
+      })
     ]
   }))
 
-  function allowPut(
-    position: Vec3,
-    listName: string,
-    index: number,
-    stack: ItemStackObject,
-    player: ObjectRef
-  ): number {
-    switch (listName) {
-      case "output":
-        return 0
-      default:
-        return stack.get_count()
-    }
-  }
+  // function allowPut(
+  //   position: Vec3,
+  //   listName: string,
+  //   index: number,
+  //   stack: ItemStackObject,
+  //   player: ObjectRef
+  // ): number {
+  //   switch (listName) {
+  //     case "craftpreview":
+  //       return 0
+  //     default:
+  //       return stack.get_count()
+  //   }
+  // }
 
-  function workBenchLogic(position: Vec3, listName: string) {
-    const meta = minetest.get_meta(position)
-    const inventory = meta.get_inventory()
-    const craftArea = inventory.get_list("workBenchCraft")
+  // function workBenchLogic(position: Vec3, listName: string) {
+  //   const meta = minetest.get_meta(position)
+  //   const inventory = meta.get_inventory()
+  //   const craftArea = inventory.get_list("craft")
   
-    const [result, leftOver] = minetest.get_craft_result({
-      method: CraftCheckType.normal,
-      width: WORKBENCH_INVENTORY_SIZE.x,
-      items: craftArea
-    })
+  //   const [result, leftOver] = minetest.get_craft_result({
+  //     method: CraftCheckType.normal,
+  //     width: WORKBENCH_INVENTORY_SIZE.x,
+  //     items: craftArea
+  //   })
 
-    inventory.set_list("output", [result.item])
+  //   inventory.set_list("craftpreview", [result.item])
 
-    // If user takes from the output, the craft has been finalized. Take the items.
-    if (listName == "output") {
-      inventory.set_list("workBenchCraft", leftOver.items)
-      // Now recurse 1 deep to update the output slot.
-      workBenchLogic(position, "")
-    }
-  }
+  //   // If user takes from the craftpreview, the craft has been finalized. Take the items.
+  //   if (listName == "craftpreview") {
+  //     inventory.set_list("craft", leftOver.items)
+  //     // Now recurse 1 deep to update the craftpreview slot.
+  //     workBenchLogic(position, "")
+  //   }
+  // }
 
 
-  function workBenchPut(
-    position: Vec3,
-    listName: string,
-    index: number,
-    stack: ItemStackObject,
-    player: ObjectRef
-   ) {
-    workBenchLogic(position, listName)
-  }
+  // function workBenchPut(
+  //   position: Vec3,
+  //   listName: string,
+  //   index: number,
+  //   stack: ItemStackObject,
+  //   player: ObjectRef
+  //  ) {
+  //   workBenchLogic(position, listName)
+  // }
 
-  function workBenchMove(
-    position: Vec3,
-    fromList: string,
-    fromIndex: number,
-    toList: string,
-    toIndex: number,
-    count: number,
-    player: ObjectRef
-  ) {
-    workBenchLogic(position, toList)
-  }
+  // function workBenchMove(
+  //   position: Vec3,
+  //   fromList: string,
+  //   fromIndex: number,
+  //   toList: string,
+  //   toIndex: number,
+  //   count: number,
+  //   player: ObjectRef
+  // ) {
+  //   workBenchLogic(position, toList)
+  // }
 
-  function workBenchTake(
-    position: Vec3,
-    listName: string,
-    index: number,
-    stack: ItemStackObject,
-    player: ObjectRef
-  ) {
-    workBenchLogic(position, listName)
-  }
+  // function workBenchTake(
+  //   position: Vec3,
+  //   listName: string,
+  //   index: number,
+  //   stack: ItemStackObject,
+  //   player: ObjectRef
+  // ) {
+  //   workBenchLogic(position, listName)
+  // }
 
 
   minetest.register_node(":workbench", {
@@ -192,22 +193,46 @@ namespace blocks {
       [blockType.wood]: 1
     },
 
-    on_construct(position: Vec3) {
-      const meta = minetest.get_meta(position)
-      const inventory = meta.get_inventory()
-      meta.set_string("formspec", workBenchInventory)
-      inventory.set_size("workBenchCraft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
-      inventory.set_width("workBenchCraft", WORKBENCH_INVENTORY_SIZE.x)
-      inventory.set_size("output", 1)
-      inventory.set_width("output", 1)
+    //! Fixme: Make a persistent inventory. :(
+    on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing) {
+      const inventory = clicker.get_inventory()
+      inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
+      inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
     },
 
-    //! todo: These 3 functions can probably just be one. Look into this.
-    on_metadata_inventory_put: workBenchPut,
-    on_metadata_inventory_move: workBenchMove,
-    on_metadata_inventory_take: workBenchTake,
+    on_receive_fields(position: Vec3, formName: string, fields: {[id: string] : any}, sender: ObjectRef) {
+      // Just throw the items for now.
+      const inventory = sender.get_inventory()
+      const playerPos = sender.get_pos()
+      playerPos.y += 1.5
+      const yaw = sender.get_look_horizontal()
 
-    // All this does is stop a player from jamming items in the output slot.
-    allow_metadata_inventory_put: allowPut,
+      const items = inventory.get_list("craft")
+      for (const item of items) {
+        if (item.is_empty()) continue
+        const stackSize = item.get_count()
+        const itemName = item.get_name()
+        for (let i = 0; i < stackSize; i++) {
+          const item = minetest.add_item(playerPos, itemName)
+          if (!item) {
+            continue
+          }
+          const dir = vector.multiply(minetest.yaw_to_dir(yaw + ((math.random() - 0.5) * 1.25)), 2 + math.random())
+          dir.y = 1 + (math.random() * 3)
+          item.add_velocity(dir)
+        }
+      }
+      inventory.set_list("craft", [])
+      inventory.set_size("craft", playerRegularCraftSize.x * playerRegularCraftSize.y)
+      inventory.set_width("craft", playerRegularCraftSize.x)
+    },
+
+    on_construct(position: Vec3) {
+      const meta = minetest.get_meta(position)
+      // const inventory = meta.get_inventory()
+      meta.set_string("formspec", workBenchInventory)
+      // inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
+      // inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
+    },
   })
 }

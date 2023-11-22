@@ -5,7 +5,7 @@ local function __TS__New(target, ...)
     return instance
 end
 -- End of Lua Library inline imports
-blocks = blocks or ({})
+narploop = narploop or ({})
 do
     local create = vector.create2d
     local blockType = types.BlockType
@@ -19,9 +19,8 @@ do
     local color = utility.color
     local colorScalar = utility.colorScalar
     local colorRGB = utility.colorRGB
-    local playerInventorySize = player.MAIN_INVENTORY_SIZE
-    local playerRegularCraftSize = player.CRAFT_INVENTORY_SIZE
-    blocks.WORKBENCH_INVENTORY_SIZE = create(3, 3)
+    local playerInventorySize = player.CRAFT_INVENTORY_SIZE
+    narploop.WORKBENCH_INVENTORY_SIZE = create(3, 3)
     local workBenchInventory = generate(__TS__New(
         FormSpec,
         {
@@ -51,7 +50,7 @@ do
                         location = "current_player",
                         listName = "craft",
                         position = create(4, 1.125),
-                        size = blocks.WORKBENCH_INVENTORY_SIZE,
+                        size = narploop.WORKBENCH_INVENTORY_SIZE,
                         startingIndex = 0
                     }
                 ),
@@ -108,7 +107,7 @@ do
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
         local craftArea = inventory:get_list("craft")
-        local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = blocks.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
+        local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = narploop.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
         inventory:set_list("craftpreview", {result.item})
         if listName == "craftpreview" then
             inventory:set_list("craft", leftOver.items)
@@ -133,8 +132,8 @@ do
             groups = {[blockType.wood] = 1},
             on_rightclick = function(position, node, clicker, itemStack, pointedThing)
                 local inventory = clicker:get_inventory()
-                inventory:set_size("craft", blocks.WORKBENCH_INVENTORY_SIZE.x * blocks.WORKBENCH_INVENTORY_SIZE.y)
-                inventory:set_width("craft", blocks.WORKBENCH_INVENTORY_SIZE.x)
+                inventory:set_size("craft", narploop.WORKBENCH_INVENTORY_SIZE.x * narploop.WORKBENCH_INVENTORY_SIZE.y)
+                inventory:set_width("craft", narploop.WORKBENCH_INVENTORY_SIZE.x)
             end,
             on_receive_fields = function(position, formName, fields, sender)
                 local inventory = sender:get_inventory()
@@ -172,9 +171,9 @@ do
                     ::__continue12::
                 end
                 inventory:set_list("craft", {})
-                inventory:set_size("craft", playerRegularCraftSize.x * playerRegularCraftSize.y)
-                inventory:set_width("craft", playerRegularCraftSize.x)
-                print("set everything correctlyl: " .. tostring(playerRegularCraftSize.x))
+                inventory:set_size("craft", playerInventorySize.x * playerInventorySize.y)
+                inventory:set_width("craft", playerInventorySize.x)
+                print("set everything correctlyl: " .. tostring(playerInventorySize.x))
             end,
             on_construct = function(position)
                 local meta = minetest.get_meta(position)

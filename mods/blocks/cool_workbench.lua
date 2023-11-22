@@ -5,7 +5,7 @@ local function __TS__New(target, ...)
     return instance
 end
 -- End of Lua Library inline imports
-blocks = blocks or ({})
+glarp = glarp or ({})
 do
     local create = vector.create2d
     local blockType = types.BlockType
@@ -20,8 +20,7 @@ do
     local colorScalar = utility.colorScalar
     local colorRGB = utility.colorRGB
     local playerInventorySize = player.MAIN_INVENTORY_SIZE
-    local playerRegularCraftSize = player.CRAFT_INVENTORY_SIZE
-    blocks.WORKBENCH_INVENTORY_SIZE = create(3, 3)
+    glarp.WORKBENCH_INVENTORY_SIZE = create(3, 3)
     local workBenchInventory = generate(__TS__New(
         FormSpec,
         {
@@ -48,18 +47,18 @@ do
                 __TS__New(
                     List,
                     {
-                        location = "current_player",
-                        listName = "craft",
+                        location = "context",
+                        listName = "workBenchCraft",
                         position = create(4, 1.125),
-                        size = blocks.WORKBENCH_INVENTORY_SIZE,
+                        size = glarp.WORKBENCH_INVENTORY_SIZE,
                         startingIndex = 0
                     }
                 ),
                 __TS__New(
                     List,
                     {
-                        location = "current_player",
-                        listName = "craftpreview",
+                        location = "context",
+                        listName = "output",
                         position = create(9, 2.375),
                         size = create(1, 1),
                         startingIndex = 0
@@ -86,16 +85,16 @@ do
                     }
                 ),
                 __TS__New(ListRing, {location = "current_player", listName = "main"}),
-                __TS__New(ListRing, {location = "current_player", listName = "craft"}),
+                __TS__New(ListRing, {location = "context", listName = "workBenchCraft"}),
                 __TS__New(ListRing, {location = "current_player", listName = "main"}),
-                __TS__New(ListRing, {location = "current_player", listName = "craftpreview"})
+                __TS__New(ListRing, {location = "context", listName = "output"})
             }
         }
     ))
     local function allowPut(position, listName, index, stack, player)
         repeat
             local ____switch4 = listName
-            local ____cond4 = ____switch4 == "craftpreview"
+            local ____cond4 = ____switch4 == "output"
             if ____cond4 then
                 return 0
             end
@@ -107,11 +106,11 @@ do
     local function workBenchLogic(position, listName)
         local meta = minetest.get_meta(position)
         local inventory = meta:get_inventory()
-        local craftArea = inventory:get_list("craft")
-        local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = blocks.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
-        inventory:set_list("craftpreview", {result.item})
-        if listName == "craftpreview" then
-            inventory:set_list("craft", leftOver.items)
+        local craftArea = inventory:get_list("workBenchCraft")
+        local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = glarp.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
+        inventory:set_list("output", {result.item})
+        if listName == "output" then
+            inventory:set_list("workBenchCraft", leftOver.items)
             workBenchLogic(position, "")
         end
     end
@@ -131,54 +130,30 @@ do
             tiles = {"crafting_workbench_top.png", "default_wood.png", "crafting_workbench_side.png"},
             sounds = sounds.wood(),
             groups = {[blockType.wood] = 1},
-            on_rightclick = function(position, node, clicker, itemStack, pointedThing)
-                local inventory = clicker:get_inventory()
-                inventory:set_size("craft", blocks.WORKBENCH_INVENTORY_SIZE.x * blocks.WORKBENCH_INVENTORY_SIZE.y)
-                inventory:set_width("craft", blocks.WORKBENCH_INVENTORY_SIZE.x)
-            end,
-            on_receive_fields = function(position, formName, fields, sender)
-                local inventory = sender:get_inventory()
-                local playerPos = sender:get_pos()
-                playerPos.y = playerPos.y + 1.5
-                local yaw = sender:get_look_horizontal()
-                local items = inventory:get_list("craft")
-                for ____, item in ipairs(items) do
-                    do
-                        if item:is_empty() then
-                            goto __continue12
-                        end
-                        local stackSize = item:get_count()
-                        local itemName = item:get_name()
-                        do
-                            local i = 0
-                            while i < stackSize do
-                                do
-                                    local item = minetest.add_item(playerPos, itemName)
-                                    if not item then
-                                        goto __continue14
-                                    end
-                                    local dir = vector.multiply(
-                                        minetest.yaw_to_dir(yaw + (math.random() - 0.5) * 1.25),
-                                        2 + math.random()
-                                    )
-                                    dir.y = 1 + math.random() * 3
-                                    item:add_velocity(dir)
-                                end
-                                ::__continue14::
-                                i = i + 1
-                            end
-                        end
-                    end
-                    ::__continue12::
-                end
-                inventory:set_list("craft", {})
-                inventory:set_size("craft", playerRegularCraftSize.x * playerRegularCraftSize.y)
-                inventory:set_width("craft", playerRegularCraftSize.x)
-                print("set everything correctlyl: " .. tostring(playerRegularCraftSize.x))
-            end,
             on_construct = function(position)
                 local meta = minetest.get_meta(position)
+                local inventory = meta:get_inventory()
                 meta:set_string("formspec", workBenchInventory)
+                inventory:set_size("workBenchCraft", glarp.WORKBENCH_INVENTORY_SIZE.x * glarp.WORKBENCH_INVENTORY_SIZE.y)
+                inventory:set_width("workBenchCraft", glarp.WORKBENCH_INVENTORY_SIZE.x)
+                inventory:set_size("output", 1)
+                inventory:set_width("output", 1)
+            end,
+            on_metadata_inventory_put = workBenchPut,
+            on_metadata_inventory_move = workBenchMove,
+            on_metadata_inventory_take = workBenchTake,
+            allow_metadata_inventory_put = allowPut,
+            allow_metadata_inventory_take = function(position, listName, index, stack, player)
+                if listName ~= "output" then
+                    return stack:get_count()
+                end
+                local meta = minetest.get_meta(position)
+                local inventory = meta:get_inventory()
+                local list = inventory:get_list("output")
+                local shouldGotten = list[1]:get_count()
+                local gotten = stack:get_count()
+                print(shouldGotten, gotten)
+                return shouldGotten == gotten and gotten or 0
             end
         }
     )
