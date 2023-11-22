@@ -96,9 +96,17 @@ namespace blocks {
         listName: "main"
       }),
       new ListRing({
-        location: "current_player",
+        location: "context",
         listName: "craft"
-      })
+      }),
+      // new ListRing({
+      //   location: "current_player",
+      //   listName: "main"
+      // }),
+      // new ListRing({
+      //   location: "context",
+      //   listName: "output"
+      // })
     ]
   }))
 

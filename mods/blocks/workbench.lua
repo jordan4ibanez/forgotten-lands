@@ -85,7 +85,7 @@ do
                     }
                 ),
                 __TS__New(ListRing, {location = "current_player", listName = "main"}),
-                __TS__New(ListRing, {location = "current_player", listName = "craft"})
+                __TS__New(ListRing, {location = "context", listName = "craft"})
             }
         }
     ))
