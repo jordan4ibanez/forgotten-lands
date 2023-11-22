@@ -105,7 +105,9 @@ namespace blocks {
   minetest.register_node(":workbench", {
     drawtype: Drawtype.normal,
     tiles: [
-      "default_wood.png"
+      "crafting_workbench_top.png",
+      "default_wood.png",
+      "crafting_workbench_side.png"
     ],
     sounds: sounds.wood(),
     groups: {
