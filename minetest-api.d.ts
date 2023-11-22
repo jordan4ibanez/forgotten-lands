@@ -348,7 +348,7 @@ declare global {
 
   interface ItemStackObject {
     name: string
-    count: number
+    // count: number
     wear: number
     metadata: string
   
