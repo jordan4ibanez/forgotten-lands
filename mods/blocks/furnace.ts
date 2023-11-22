@@ -12,6 +12,7 @@ namespace blocks {
   const List = formSpec.List
   const ListColors = formSpec.ListColors
   const ListRing = formSpec.ListRing
+  const Label = formSpec.Label
 
   const color = utility.color
   const colorScalar = utility.colorScalar
@@ -45,6 +46,11 @@ namespace blocks {
           slotBorder: colorScalar(0),
           toolTipBGColor: colorRGB(123,104,238),
           toolTipFontColor: colorScalar(100)
+        }),
+        //! Add a nice label to the top.
+        new Label({
+          position: create(0,0),
+          label: "Furnace"
         }),
         //! Flame.
         new Image({
@@ -383,8 +389,30 @@ namespace blocks {
     return (inputPixel / textureSize) - 0.5
   }
 
-  function allowPut() {
-    // todo
+  function allowPut(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number {
+    // Protection can be bolted on here
+
+    const meta = minetest.get_meta(position)
+    const inventory = meta.get_inventory()
+
+    switch (listName) {
+      case "output":
+        print("Is output")
+        break
+      case "input":
+        print("Is INPUT")
+        break
+      case "fuel":
+        print("fuel check plz")
+    }
+    return 0
+  }
+
+  function allowMove(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number {
+    const meta = minetest.get_meta(position)
+    const inventory = meta.get_inventory()
+    const stack = inventory.get_stack(fromList, fromIndex)
+    return allowPut(position, toList, toIndex, stack, player)
   }
 
 
@@ -448,13 +476,14 @@ namespace blocks {
       "default_furnace_front.png"
     ],
     on_construct: function(pos: Vec3) {
-      think(pos, 0, true)
+      think(pos, 1, true)
     },
     on_timer: think,
-    on_punch: startCookTimer,
     on_metadata_inventory_move: startCookTimer,
     on_metadata_inventory_put: startCookTimer,
-    on_metadata_inventory_take: startCookTimer
+    on_metadata_inventory_take: startCookTimer,
+    allow_metadata_inventory_put: allowPut,
+    allow_metadata_inventory_move: allowMove
   })
 
   minetest.register_node(":furnace_active", {
@@ -477,13 +506,14 @@ namespace blocks {
       "default_furnace_front_active.png"
     ],
     on_construct: function(pos: Vec3) {
-      think(pos, 0, true)
+      think(pos, 1, true)
     },
     on_timer: think,
-    on_punch: startCookTimer,
     on_metadata_inventory_move: startCookTimer,
     on_metadata_inventory_put: startCookTimer,
-    on_metadata_inventory_take: startCookTimer
+    on_metadata_inventory_take: startCookTimer,
+    allow_metadata_inventory_put: allowPut,
+    allow_metadata_inventory_move: allowMove
   })
 
 }
