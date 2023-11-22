@@ -219,22 +219,22 @@ namespace blocks {
   }
 
   function fuelCheck(fuelInventory: ItemStackObject[]): CraftResultObject {
-    const result = minetest.get_craft_result({
+    const [result,] = minetest.get_craft_result({
       method: CraftCheckType.fuel,
       width: 1,
       items: fuelInventory
     })
     
-    return result as CraftResultObject
+    return result
   }
 
   function itemCheck(inputInventory: ItemStackObject[]): CraftResultObject {
-    const result = minetest.get_craft_result({
+    const [result,] = minetest.get_craft_result({
       method: CraftCheckType.cooking,
       width: 1,
       items: inputInventory
     })
-    return result as CraftResultObject
+    return result
   }
 
   function outputCheck(inventory: InvRef, itemInHearth: ItemStackObject) {
