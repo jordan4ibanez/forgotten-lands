@@ -730,8 +730,8 @@ declare global {
     on_timer?(position: Vec3, elapsed: number): void
     on_receive_fields?(position: Vec3, formName: string, fields: Map<string, any>, sender: ObjectRef): void
     allow_metadata_inventory_move?(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
-    allow_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
-    allow_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
+    allow_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
+    allow_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
     on_metadata_inventory_move?(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
     on_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
     on_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
