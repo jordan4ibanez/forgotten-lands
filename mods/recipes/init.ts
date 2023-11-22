@@ -106,8 +106,8 @@ namespace recipes {
     {
       output: "stick 4",
       recipe: [
-        [craftBlockType.wood],
-        [craftBlockType.wood]
+        [craftBlockType.planks],
+        [craftBlockType.planks]
       ]
     },
     {
@@ -121,8 +121,8 @@ namespace recipes {
     {
       output: "workbench",
       recipe: [
-        ["group:planks","group:wood"],
-        ["group:wood","group:wood"]
+        [craftBlockType.planks, craftBlockType.planks],
+        [craftBlockType.planks, craftBlockType.planks]
       ]
     }
   ]
