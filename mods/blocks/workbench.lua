@@ -92,38 +92,6 @@ do
             }
         }
     ))
-    local function allowPut(position, listName, index, stack, player)
-        repeat
-            local ____switch4 = listName
-            local ____cond4 = ____switch4 == "craftpreview"
-            if ____cond4 then
-                return 0
-            end
-            do
-                return stack:get_count()
-            end
-        until true
-    end
-    local function workBenchLogic(position, listName)
-        local meta = minetest.get_meta(position)
-        local inventory = meta:get_inventory()
-        local craftArea = inventory:get_list("craft")
-        local result, leftOver = minetest.get_craft_result({method = CraftCheckType.normal, width = blocks.WORKBENCH_INVENTORY_SIZE.x, items = craftArea})
-        inventory:set_list("craftpreview", {result.item})
-        if listName == "craftpreview" then
-            inventory:set_list("craft", leftOver.items)
-            workBenchLogic(position, "")
-        end
-    end
-    local function workBenchPut(position, listName, index, stack, player)
-        workBenchLogic(position, listName)
-    end
-    local function workBenchMove(position, fromList, fromIndex, toList, toIndex, count, player)
-        workBenchLogic(position, toList)
-    end
-    local function workBenchTake(position, listName, index, stack, player)
-        workBenchLogic(position, listName)
-    end
     minetest.register_node(
         ":workbench",
         {
@@ -145,7 +113,7 @@ do
                 for ____, item in ipairs(items) do
                     do
                         if item:is_empty() then
-                            goto __continue12
+                            goto __continue5
                         end
                         local stackSize = item:get_count()
                         local itemName = item:get_name()
@@ -155,7 +123,7 @@ do
                                 do
                                     local item = minetest.add_item(playerPos, itemName)
                                     if not item then
-                                        goto __continue14
+                                        goto __continue7
                                     end
                                     local dir = vector.multiply(
                                         minetest.yaw_to_dir(yaw + (math.random() - 0.5) * 1.25),
@@ -164,17 +132,16 @@ do
                                     dir.y = 1 + math.random() * 3
                                     item:add_velocity(dir)
                                 end
-                                ::__continue14::
+                                ::__continue7::
                                 i = i + 1
                             end
                         end
                     end
-                    ::__continue12::
+                    ::__continue5::
                 end
                 inventory:set_list("craft", {})
                 inventory:set_size("craft", playerRegularCraftSize.x * playerRegularCraftSize.y)
                 inventory:set_width("craft", playerRegularCraftSize.x)
-                print("set everything correctlyl: " .. tostring(playerRegularCraftSize.x))
             end,
             on_construct = function(position)
                 local meta = minetest.get_meta(position)

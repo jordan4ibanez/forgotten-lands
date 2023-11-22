@@ -68,7 +68,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
             sounds = sounds.wood(),
-            groups = {[blockType.wood] = 1}
+            groups = {[blockType.wood] = 1, [blockType.tree] = 1}
         }
     )
     minetest.register_node(
@@ -92,7 +92,7 @@ do
             drawtype = Drawtype.normal,
             tiles = {"default_wood.png"},
             sounds = sounds.wood(),
-            groups = {[blockType.wood] = 1}
+            groups = {[blockType.wood] = 1, [blockType.planks] = 1}
         }
     )
     local dyes = {

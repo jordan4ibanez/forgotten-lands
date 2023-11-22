@@ -18,9 +18,11 @@ namespace recipes {
   })
 
   minetest.register_craft({
-    type: CraftRecipeType.cooking,
-    output: "iron",
-    recipe: "iron_ore",
+    type: CraftRecipeType.fuel,
+    recipe: "group:wood",
+    burntime: 7,
   })
+
+  
   
 }

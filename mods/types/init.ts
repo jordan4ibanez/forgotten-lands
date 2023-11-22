@@ -18,7 +18,8 @@ namespace types {
     glass = "glass",
     wool = "wool",
     planks = "planks",
-    tree = "tree"
+    tree = "tree",
+    sand = "sand"
   }
 
   // This one is quite useful for crafting recipes.
@@ -31,6 +32,7 @@ namespace types {
     glass = "group:glass",
     wool = "group:wool",
     planks = "group:planks",
-    tree = "group:tree"
+    tree = "group:tree",
+    sand = "group:sand"
   }
 }

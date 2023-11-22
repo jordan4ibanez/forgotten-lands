@@ -16,6 +16,8 @@ do
     types.BlockType.metal = "metal"
     types.BlockType.glass = "glass"
     types.BlockType.wool = "wool"
+    types.BlockType.planks = "planks"
+    types.BlockType.tree = "tree"
     types.CraftingBlockType = CraftingBlockType or ({})
     types.CraftingBlockType.soil = "group:soil"
     types.CraftingBlockType.wood = "group:wood"
@@ -24,4 +26,6 @@ do
     types.CraftingBlockType.metal = "group:metal"
     types.CraftingBlockType.glass = "group:glass"
     types.CraftingBlockType.wool = "group:wool"
+    types.CraftingBlockType.planks = "group:planks"
+    types.CraftingBlockType.tree = "group:tree"
 end
