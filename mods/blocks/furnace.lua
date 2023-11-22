@@ -216,11 +216,12 @@ do
                 return itemBuffer
             end
         else
+            print("ran out of fuel")
             if not hasItem then
                 meta:set_int("itemMax", -1)
             end
             meta:set_int("itemBuffer", -1)
-            return 0
+            return -1
         end
     end
     local function think(position, elapsedTime, justConstructed)

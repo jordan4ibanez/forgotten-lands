@@ -294,11 +294,12 @@ namespace blocks {
         return itemBuffer
       }
     } else {
+      // Ran out of fuel.
       if (!hasItem) {
         meta.set_int("itemMax", -1)
       }
       meta.set_int("itemBuffer", -1)
-      return 0
+      return -1
     }
   }
 
