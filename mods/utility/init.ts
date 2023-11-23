@@ -1,5 +1,11 @@
 namespace utility {
 
+  const textureSize = 16
+
+  export function pixel(inputPixel: number): number {
+    return (inputPixel / textureSize) - 0.5
+  }
+
   export function loadFiles(filesToLoad: string[]): void {
     const currentMod = minetest.get_current_modname()
     const currentDirectory = minetest.get_modpath(currentMod)

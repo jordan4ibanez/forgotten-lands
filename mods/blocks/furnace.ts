@@ -1,7 +1,5 @@
 namespace blocks {
 
-
-  const textureSize = 16
   const MAIN_INVENTORY_SIZE = player.MAIN_INVENTORY_SIZE
   const create = vector.create2d
   const generate = formSpec.generate
@@ -19,6 +17,7 @@ namespace blocks {
   const colorScalar = utility.colorScalar
   const colorRGB = utility.colorRGB
   const vec3ToString = utility.vec3ToString
+  const pixel = utility.pixel
 
   //? Functionality
 
@@ -389,11 +388,6 @@ namespace blocks {
         break
       }
     }
-  }
-
-  //! This should probably be a utility function.
-  function pixel(inputPixel: number): number {
-    return (inputPixel / textureSize) - 0.5
   }
 
   function allowPut(
