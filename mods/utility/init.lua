@@ -194,6 +194,10 @@ end
 -- End of Lua Library inline imports
 utility = utility or ({})
 do
+    local textureSize = 16
+    function utility.pixel(inputPixel)
+        return inputPixel / textureSize - 0.5
+    end
     function utility.loadFiles(filesToLoad)
         local currentMod = minetest.get_current_modname()
         local currentDirectory = minetest.get_modpath(currentMod)
@@ -237,22 +241,22 @@ do
         for ____, item in __TS__Iterator(any) do
             builder = builder .. tostring((function()
                 repeat
-                    local ____switch15 = type(item)
+                    local ____switch16 = type(item)
                     local thing
-                    local ____cond15 = ____switch15 == "string"
-                    if ____cond15 then
+                    local ____cond16 = ____switch16 == "string"
+                    if ____cond16 then
                         return item
                     end
-                    ____cond15 = ____cond15 or ____switch15 == "number"
-                    if ____cond15 then
+                    ____cond16 = ____cond16 or ____switch16 == "number"
+                    if ____cond16 then
                         return tostring(item)
                     end
-                    ____cond15 = ____cond15 or ____switch15 == "table"
-                    if ____cond15 then
+                    ____cond16 = ____cond16 or ____switch16 == "table"
+                    if ____cond16 then
                         return dump(item)
                     end
-                    ____cond15 = ____cond15 or ____switch15 == "userdata"
-                    if ____cond15 then
+                    ____cond16 = ____cond16 or ____switch16 == "userdata"
+                    if ____cond16 then
                         thing = item
                         if thing:is_player() then
                             return thing:get_player_name()

@@ -7,7 +7,6 @@ end
 -- End of Lua Library inline imports
 blocks = blocks or ({})
 do
-    local textureSize = 16
     local MAIN_INVENTORY_SIZE = player.MAIN_INVENTORY_SIZE
     local create = vector.create2d
     local generate = formSpec.generate
@@ -24,6 +23,7 @@ do
     local colorScalar = utility.colorScalar
     local colorRGB = utility.colorRGB
     local vec3ToString = utility.vec3ToString
+    local pixel = utility.pixel
     local function turnTexture(input)
         return input .. "^[transformR270"
     end
@@ -301,22 +301,19 @@ do
             end
         end
     end
-    local function pixel(inputPixel)
-        return inputPixel / textureSize - 0.5
-    end
     local function allowPut(position, listName, index, stack, player)
         repeat
-            local ____switch38 = listName
-            local ____cond38 = ____switch38 == "output"
-            if ____cond38 then
+            local ____switch37 = listName
+            local ____cond37 = ____switch37 == "output"
+            if ____cond37 then
                 return 0
             end
-            ____cond38 = ____cond38 or ____switch38 == "input"
-            if ____cond38 then
+            ____cond37 = ____cond37 or ____switch37 == "input"
+            if ____cond37 then
                 return itemCheck({stack}).item:get_name() ~= "" and stack:get_count() or 0
             end
-            ____cond38 = ____cond38 or ____switch38 == "fuel"
-            if ____cond38 then
+            ____cond37 = ____cond37 or ____switch37 == "fuel"
+            if ____cond37 then
                 return fuelCheck({stack}).time > 0 and stack:get_count() or 0
             end
             do
