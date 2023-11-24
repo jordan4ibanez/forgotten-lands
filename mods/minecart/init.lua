@@ -14,7 +14,7 @@ do
     function MinecartEntity.prototype.____constructor(self)
         self.name = "minecart"
         self.object = fakeRef()
-        self.initial_properties = {mesh = "minecart.b3d", textures = {"default_dirt.png"}}
+        self.initial_properties = {visual = EntityVisual.mesh, mesh = "minecart.b3d", textures = {"default_dirt.png"}}
     end
     minetest.registerTSEntity(MinecartEntity)
 end
