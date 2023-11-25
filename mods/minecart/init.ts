@@ -8,7 +8,7 @@ namespace minecart {
       visual: EntityVisual.mesh,
       // Reference: carts_cart.b3d
       mesh: "minecart.b3d",
-      textures: ["default_dirt.png"]
+      textures: ["minecart.png"]
     }
   }
 
