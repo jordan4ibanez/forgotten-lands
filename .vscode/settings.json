@@ -3,6 +3,6 @@
     "minetest"
   ],
   "files.exclude": {
-    // "**/**/**.lua": true
+    "**/**/**.lua": true
   }
 }
