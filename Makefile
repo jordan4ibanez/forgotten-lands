@@ -30,5 +30,5 @@ linux:
 
 clean:
 	@echo Destroying the built game.
-	@rm -rf mods/
+	@rm --verbose -rf mods/
 	@echo "It's done."
