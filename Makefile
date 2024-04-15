@@ -5,7 +5,8 @@ default:
 	@echo Successfully built Forgotten Times.
 	@echo Copying mod conf files...
 	@./important_scripts/move_conf_files.sh
-	@echo Successfully copied mod conf files. 
+	@echo Successfully copied mod conf files.
+	@./important_scripts/hackjob_copy_textures.sh 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
@@ -22,7 +23,8 @@ linux:
 	@echo Successfully built Forgotten Times.
 	@echo Copying mod conf files...
 	@./important_scripts/move_conf_files.sh
-	@echo Successfully copied mod conf files. 
+	@echo Successfully copied mod conf files.
+	@./important_scripts/hackjob_copy_textures.sh 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
