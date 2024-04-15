@@ -4,6 +4,7 @@
   ],
   "files.exclude": {
     "**/**/**.lua": true,
-    "mods/": true
+    "mods/": true,
+    "node_modules": true
   }
 }
