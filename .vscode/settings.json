@@ -2,6 +2,8 @@
   "files.exclude": {
     "**/**/**.lua": true,
     "mods/": true,
-    "node_modules": true
+    "node_modules": true,
+    "scripts/": true,
+    "menu/": true,
   }
 }
