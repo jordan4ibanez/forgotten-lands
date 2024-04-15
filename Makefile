@@ -3,6 +3,9 @@ default:
 	@echo Transpiling Forgotten Times into lua...
 	@npx tstl
 	@echo Successfully built Forgotten Times.
+	@echo Copying mod conf files...
+	@./move_conf_files.sh
+	@echo Successfully copied mod conf files. 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
@@ -17,5 +20,8 @@ linux:
 	@echo Transpiling Forgotten Times into lua...
 	@npx tstl
 	@echo Successfully built Forgotten Times.
+	@echo Copying mod conf files...
+	@./move_conf_files.sh
+	@echo Successfully copied mod conf files. 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
