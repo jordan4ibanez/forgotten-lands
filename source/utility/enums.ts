@@ -1,4 +1,4 @@
-enum EntityVisual {
+export enum EntityVisual {
   cube = "cube",
   sprite = "sprite",
   upright_sprite = "upright_sprite",
@@ -7,7 +7,7 @@ enum EntityVisual {
   item = "item"
 }
 
-enum SchematicRotation {
+export enum SchematicRotation {
   zero = "0",
   ninety = "90",
   oneEighty = "180",
@@ -15,29 +15,29 @@ enum SchematicRotation {
   random = "random"
 }
 
-enum SchematicPlacementFlag {
+export enum SchematicPlacementFlag {
   place_center_x = "place_center_x",
   place_center_y = "place_center_y",
   place_center_z = "place_center_z"
 }
 
-enum SchematicFormat {
+export enum SchematicFormat {
   mts = "mts",
   lua = "lua"
 }
 
-enum SchematicSerializationOption {
+export enum SchematicSerializationOption {
   lua_use_comments = "lua_use_comments",
   lua_num_indent_spaces = "lua_num_indent_spaces"
 }
 
-enum SchematicReadOptionYSliceOption {
+export enum SchematicReadOptionYSliceOption {
   none = "none",
   low = "low",
   all = "all"
 }
 
-enum HTTPRequestMethod {
+export enum HTTPRequestMethod {
   GET = "GET",
   POST = "POST",
   PUT = "PUT",
@@ -45,7 +45,7 @@ enum HTTPRequestMethod {
 }
 
 
-enum OreType {
+export enum OreType {
   scatter = "scatter",
   sheet = "sheet",
   puff = "puff",
@@ -54,23 +54,23 @@ enum OreType {
   stratum = "stratum"
 }
 
-enum OreFlags {
+export enum OreFlags {
   puff_cliffs = "puff_cliffs",
   puff_additive_composition = "puff_additive_composition"
 }
 
-enum NoiseFlags {
+export enum NoiseFlags {
   defaults = "defaults",
   eased = "eased",
   absvalue = "absvalue"
 }
 
-enum DecorationType {
+export enum DecorationType {
   simple = "simple",
   schematic = "schematic"
 }
 
-enum DecorationFlags {
+export enum DecorationFlags {
   liquid_surface = "liquid_surface",
   force_placement = "force_placement",
   all_floors = "all_floors",
@@ -81,12 +81,12 @@ enum DecorationFlags {
 }
 
 
-enum ParamType1 {
+export enum ParamType1 {
   light = "light",
   none = "none"
 }
 
-enum ParamType2 {
+export enum ParamType2 {
   flowingliquid = "flowingliquid",
   wallmounted = "wallmounted",
   facedir = "facedir",
@@ -102,7 +102,7 @@ enum ParamType2 {
   colordegrotate = "colordegrotate"
 }
 
-enum Drawtype {
+export enum Drawtype {
   normal = "normal",
   airlike = "airlike",
   liquid = "liquid",
@@ -124,7 +124,7 @@ enum Drawtype {
 }
 
 
-enum Nodeboxtype {
+export enum Nodeboxtype {
   regular = "regular",
   fixed = "fixed",
   wallmounted = "wallmounted",
@@ -132,7 +132,7 @@ enum Nodeboxtype {
 }
 
 
-enum LogLevel {
+export enum LogLevel {
   none = "none",
   error = "error",
   warning = "warning",
@@ -141,19 +141,19 @@ enum LogLevel {
   verbose = "verbose"
 }
 
-enum TextureAlpha {
+export enum TextureAlpha {
   opaque = "opaque",
   clip = "clip",
   blend = "blend"
 }
 
-enum LiquidType {
+export enum LiquidType {
   none = "none",
   source = "source",
   flowing = "flowing"
 }
 
-enum NodeBoxConnections {
+export enum NodeBoxConnections {
   top = "top",
   bottom = "bottom",
   front = "front",
@@ -162,20 +162,20 @@ enum NodeBoxConnections {
   right = "right"
 }
 
-enum CraftRecipeType {
+export enum CraftRecipeType {
   shapeless = "shapeless",
   toolrepair = "toolrepair",
   cooking = "cooking",
   fuel = "fuel"
 }
 
-enum CraftCheckType {
+export enum CraftCheckType {
   normal = "normal",
   cooking = "cooking",
   fuel = "fuel"
 }
 
-enum HPChangeReasonType {
+export enum HPChangeReasonType {
   set_hp = "set_hp",
   punch = "punch",
   fall = "fall",
@@ -184,7 +184,7 @@ enum HPChangeReasonType {
   respawn = "respawn"
 }
 
-enum CheatType {
+export enum CheatType {
   moved_too_fast = "moved_too_fast",
   interacted_too_far = "interacted_too_far",
   interacted_with_self = "interacted_with_self",
@@ -194,12 +194,12 @@ enum CheatType {
   dug_too_fast = "dug_too_fast"
 }
 
-enum ClearObjectsOptions {
+export enum ClearObjectsOptions {
   full = "full",
   quick = "quick"
 }
 
-enum GenNotifyFlags {
+export enum GenNotifyFlags {
   dungeon = "dungeon",
   temple = "temple",
   cave_begin = "cave_begin",
@@ -209,60 +209,60 @@ enum GenNotifyFlags {
   decoration = "decoration"
 }
 
-enum SearchAlgorithm{
+export enum SearchAlgorithm {
   aStarNoprefetch = "A*_noprefetch",
   aStar = "A*",
   dijkstra = "Dijkstra"
 }
 
 
-enum SkyParametersType {
+export enum SkyParametersType {
   regular = "regular",
   skybox = "skybox",
   plain = "plain"
 }
 
-enum SkyParametersFogTintType {
+export enum SkyParametersFogTintType {
   custom = "custom",
   default = "default"
 }
 
-enum MinimapType {
+export enum MinimapType {
   off = "off",
   surface = "surface",
   radar = "radar",
   texture = "texture"
 }
 
-enum HudElementType {
+export enum HudElementType {
   image = "image",
   text = "text",
   statbar = "statbar",
   inventory = "inventory",
-  waypoint= "waypoint",
+  waypoint = "waypoint",
   image_waypoint = "image_waypoint",
   compass = "compass",
   minimap = "minimap"
 }
 
-enum HudReplaceBuiltinOption {
+export enum HudReplaceBuiltinOption {
   breath = "breath",
   health = "health"
 }
 
 
-enum ParseRelativeNumberArgument {
+export enum ParseRelativeNumberArgument {
   number = "<number>",
   relativeToPlus = "~<number>",
   relativeTo = "~"
 }
 
-enum CompressionMethod {
+export enum CompressionMethod {
   deflate = "deflate",
   zstd = "zstd"
 }
 
-enum RotateAndPlaceOrientationFlag {
+export enum RotateAndPlaceOrientationFlag {
   invert_wall = "invert_wall",
   force_wall = "force_wall",
   force_ceiling = "force_ceiling",
@@ -270,44 +270,44 @@ enum RotateAndPlaceOrientationFlag {
   force_facedir = "force_facedir"
 }
 
-enum BlockStatusCondition {
+export enum BlockStatusCondition {
   unknown = "unknown",
   emerging = "emerging",
   loaded = "loaded",
   active = "active"
 }
 
-enum TileAnimationType {
+export enum TileAnimationType {
   vertical_frames = "vertical_frames",
   sheed_2d = "sheed_2d"
 }
 
-enum ParticleSpawnerTweenStyle {
+export enum ParticleSpawnerTweenStyle {
   fwd = "fwd",
   rev = "rev",
   pulse = "pulse",
   flicker = "flicker"
 }
 
-enum ParticleSpawnerTextureBlend {
+export enum ParticleSpawnerTextureBlend {
   alpha = "alpha",
   add = "add",
   screen = "screen",
   sub = "sub"
 }
 
-enum ParticleSpawnerAttractionType {
+export enum ParticleSpawnerAttractionType {
   none = "none",
   point = "point",
   line = "line",
   plane = "plane"
 }
 
-enum AreaStoreType{
+export enum AreaStoreType {
   libSpatial = "LibSpatial"
 }
 
-enum TexturePoolComponentFade {
+export enum TexturePoolComponentFade {
   in = "in",
   out = "out"
 }
