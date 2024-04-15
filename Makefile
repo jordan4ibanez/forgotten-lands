@@ -1,15 +1,10 @@
 # defaults to linux, expects you to already have made the debugging world.
 default:
-	@echo Cleaning build directory.
-	@rm --verbose -rf mods/
-	@echo CLEANED!
-	@echo Transpiling Forgotten Times into lua...
-	@npx tstl
-	@echo Successfully built Forgotten Times.
-	@echo Copying mod conf files...
-	@./important_scripts/move_conf_files.sh
-	@echo Successfully copied mod conf files.
-	@./important_scripts/copy_textures.sh 
+	@./scripts/clean_build_dir.sh
+	@./scripts/compile_game.sh
+	@./scripts/copy_conf_files.sh
+	@./scripts/copy_textures.sh
+
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
@@ -21,16 +16,11 @@ windows:
 	@../../bin/minetest.exe
 
 linux:
-	@echo Cleaning build directory.
-	@rm --verbose -rf mods/
-	@echo CLEANED!
-	@echo Transpiling Forgotten Times into lua...
-	@npx tstl
-	@echo Successfully built Forgotten Times.
-	@echo Copying mod conf files...
-	@./important_scripts/move_conf_files.sh
-	@echo Successfully copied mod conf files.
-	@./important_scripts/copy_textures.sh 
+	@./scripts/clean_build_dir.sh
+	@./scripts/compile_game.sh
+	@./scripts/copy_conf_files.sh
+	@./scripts/copy_textures.sh
+	
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
