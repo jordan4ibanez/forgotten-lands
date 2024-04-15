@@ -1,7 +1,4 @@
 {
-  "Lua.diagnostics.globals": [
-    "minetest"
-  ],
   "files.exclude": {
     "**/**/**.lua": true,
     "mods/": true,
