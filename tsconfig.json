@@ -2,18 +2,23 @@
   "$schema": "https://raw.githubusercontent.com/TypeScriptToLua/TypeScriptToLua/master/tsconfig-schema.json",
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "System",
     "moduleResolution": "Node",
-    "types": ["lua-types/jit", "./minetest-api"],
+    "types": [
+      "lua-types/jit",
+      "./minetest-api"
+    ],
     "strict": true,
     "outDir": "mods/",
-    "rootDir": "mods/",
+    "rootDir": "source/",
     "sourceMap": false,
     "downlevelIteration": true
   },
   "include": [
-    "mods/**/*.ts"
+    "source/**/*.ts"
   ],
   "exclude": [
     "mods/**/*.lua",
