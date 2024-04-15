@@ -26,6 +26,16 @@ linux:
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
+build_linux:
+	@./scripts/clean_build_dir.sh
+	@./scripts/compile_game.sh
+	@./scripts/copy_conf_files.sh
+	@./scripts/copy_textures.sh
+	@./scripts/copy_sounds.sh
+
+release:
+	@./scripts/make_release.sh
+
 clean:
 	@echo Destroying the built game.
 	@rm --verbose -rf mods/
