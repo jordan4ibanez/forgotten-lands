@@ -1411,9 +1411,9 @@ declare global {
   }
 
   interface LightingDefinition {
-    saturation: number
-    shadows: LightShadowsSpec
-    exposure: LightExposureSpec
+    saturation?: number
+    shadows?: LightShadowsSpec
+    exposure?: LightExposureSpec
   }
 
   type CollisionBox = Array<number>
