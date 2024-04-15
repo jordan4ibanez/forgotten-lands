@@ -3,6 +3,7 @@
     "minetest"
   ],
   "files.exclude": {
-    "**/**/**.lua": true
+    "**/**/**.lua": true,
+    "mods/": true
   }
 }
