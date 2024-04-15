@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "lua-types": "^2.13.1",
+    "minetesthelper": "^1.0.0",
+    "typescript": "^5.4.2",
+    "typescript-to-lua": "^1.25.1"
+  }
+}
