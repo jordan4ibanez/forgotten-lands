@@ -14,4 +14,6 @@ namespace mob {
     hp = 5
   }
 
+  minetest.registerTSEntity(Cow);
+
 }
