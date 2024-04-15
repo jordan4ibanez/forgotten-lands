@@ -135,7 +135,7 @@ namespace blocks {
     "magenta",
     "orange",
     "pink",
-    "purple",
+    // "purple",
     "red",
     "violet",
     "white",
