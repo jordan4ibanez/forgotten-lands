@@ -1,4 +1,4 @@
-# defaults to linux
+# defaults to linux, expects you to already have made the debugging world.
 default:
 	@echo Transpiling Forgotten Times into lua...
 	@npx tstl
