@@ -25,3 +25,8 @@ linux:
 	@echo Successfully copied mod conf files. 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
+
+clean:
+	@echo Destroying the built game.
+	@rm -rf mods/
+	@echo "It's done."
