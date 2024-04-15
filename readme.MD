@@ -5,19 +5,22 @@
  
 First you need node, if you're on ubuntu it's super outdated so get it here https://github.com/nodesource/distributions#ubuntu-versions
 
+
+If you don't want to do the following manually, simply run ``install_npm_deps.sh``
+
 Next you need TypeScriptToLua
 ```
-sudo npm install --save-dev typescript-to-lua typescript
+npm install -D typescript-to-lua typescript
 ```
 
 Next you need Lua types for TS or else the compiler doesn't know what's going on.
 ```
-sudo npm install --save-dev lua-types
+npm install -D lua-types
 ```
 
 (if you want my minetest helper thing)
 ```
-sudo npm install --save-dev minetesthelper 
+npm install -D minetesthelper 
 ```
 
 Join my discord to see me ramble like a maniac:
