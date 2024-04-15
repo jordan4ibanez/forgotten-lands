@@ -1,3 +1,5 @@
+import { EntityVisual } from "../utility/enums"
+
 namespace minecart {
   const fakeRef = utility.fakeRef
 

@@ -1,3 +1,5 @@
+import { CraftRecipeType } from "../utility/enums"
+
 namespace recipes {
 
   const blockType = types.CraftingBlockType

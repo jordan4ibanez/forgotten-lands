@@ -1,3 +1,5 @@
+import { Drawtype, Nodeboxtype, ParamType1, ParamType2 } from "../utility/enums";
+
 namespace blocks {
   const blockType = types.BlockType;
   const pixel = utility.pixel

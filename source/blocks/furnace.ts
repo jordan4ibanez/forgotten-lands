@@ -1,3 +1,5 @@
+import { CraftCheckType, Drawtype, Nodeboxtype, ParamType2 } from "../utility/enums"
+
 namespace blocks {
 
   const MAIN_INVENTORY_SIZE = player.MAIN_INVENTORY_SIZE

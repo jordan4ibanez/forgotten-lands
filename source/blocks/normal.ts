@@ -1,3 +1,5 @@
+import { Drawtype, ParamType1, TextureAlpha } from "../utility/enums";
+
 namespace blocks {
   const generateDropRequirements = tools.generateDropRequirements;
   const ToolType = types.ToolType;

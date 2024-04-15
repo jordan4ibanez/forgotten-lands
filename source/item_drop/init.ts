@@ -1,8 +1,10 @@
+import { builtinEntity } from "../item_entity/init";
+
 namespace itemDrop {
   // Namespace magic.
   type ItemEntity = builtinEntity.ItemEntity;
 
-  minetest.handle_node_drops = function(position: Vec3, drops: string[], digger: ObjectRef) {
+  minetest.handle_node_drops = function (position: Vec3, drops: string[], digger: ObjectRef) {
     for (const drop of drops) {
       const item = minetest.add_item(position, drop)
       if (!item) {
@@ -10,16 +12,16 @@ namespace itemDrop {
         continue
       }
       item.add_velocity(vector.random(
-        -1,1,
-        1,2,
-        -1,1
+        -1, 1,
+        1, 2,
+        -1, 1
       ))
       const itemEntity = item.get_luaentity() as ItemEntity
       itemEntity.age = 1
     }
   }
 
-  minetest.spawn_item = function(pos: Vec3, item: string | ItemStackObject): ObjectRef | null {
+  minetest.spawn_item = function (pos: Vec3, item: string | ItemStackObject): ObjectRef | null {
     // Take item in any format.
     const stack = ItemStack(item)
     const object = minetest.add_entity(pos, "__builtin:item")

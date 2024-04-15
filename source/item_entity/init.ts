@@ -1,4 +1,6 @@
-namespace builtinEntity {
+import { EntityVisual } from "../utility/enums";
+
+export namespace builtinEntity {
   // const println = utility.println;
   const fakeRef = utility.fakeRef;
   const timeToLive = tonumber(minetest.settings.get("item_entity_ttl")) || 900
@@ -6,7 +8,7 @@ namespace builtinEntity {
   const randomRange = utility.randomRange;
 
   const addCollectionSound = (() => {
-    const playerSoundBuffer: {[id: string] : number} = {}
+    const playerSoundBuffer: { [id: string]: number } = {}
     const deletionQueue: string[] = []
 
     minetest.register_on_joinplayer((player: ObjectRef) => {
@@ -31,11 +33,11 @@ namespace builtinEntity {
         minetest.sound_play({
           name: "item_pickup"
         },
-        {
-          gain: 0.15,
-          pitch: randomRange(0.7, 1.0),
-          object: player
-        })
+          {
+            gain: 0.15,
+            pitch: randomRange(0.7, 1.0),
+            object: player
+          })
 
         playerSoundBuffer[name] -= 1
       }
@@ -47,7 +49,7 @@ namespace builtinEntity {
       }
     })
 
-    return function(player: ObjectRef) {
+    return function (player: ObjectRef) {
       const name = player.get_player_name()
       playerSoundBuffer[name] += 1
     }
@@ -64,22 +66,22 @@ namespace builtinEntity {
     forceOut = vector.create()
     forceOutStart = vector.create()
     droppedBy = ""
-    _collisionBox = [0,0,0,0,0,0]
+    _collisionBox = [0, 0, 0, 0, 0, 0]
     // Magnet components.
     collected = false
     collector: ObjectRef | null = null
 
     initial_properties = {
       hp_max: 1,
-      physical:  true,
-      collide_with_objects:  false,
-      collisionbox:  [-0.3, -0.3, -0.3, 0.3, 0.3, 0.3],
+      physical: true,
+      collide_with_objects: false,
+      collisionbox: [-0.3, -0.3, -0.3, 0.3, 0.3, 0.3],
       visual: EntityVisual.cube,
       visual_size: vector.create2d(),
       automatic_rotate: 1,
-      textures:  [""],
-      is_visible:  false,
-      pointable:  false
+      textures: [""],
+      is_visible: false,
+      pointable: false
     }
 
     setItem(item: ItemStackObject | string): void {
@@ -94,7 +96,7 @@ namespace builtinEntity {
       const size = 0.21
       const def = minetest.registered_items[itemName]
       const glow = def && def.light_source && math.floor(def.light_source / 2 + 0.5)
-      
+
       // Small random bias to counter Z-fighting.
       const bias = 1e-3 * math.random()
 
@@ -130,14 +132,14 @@ namespace builtinEntity {
         if (data && type(data) == "table") {
           this.itemString = data.itemString
           this.age = data.age
-          this.droppedBy = data.droppedBy 
+          this.droppedBy = data.droppedBy
         }
       } else {
         this.itemString = staticData
       }
-      this.object.set_armor_groups({immortal: 1})
+      this.object.set_armor_groups({ immortal: 1 })
       // this.object.set_velocity(vector.create(0,2,0))
-      this.object.set_acceleration(vector.create(0,-gravity,0))
+      this.object.set_acceleration(vector.create(0, -gravity, 0))
       this._collisionBox = this.initial_properties.collisionbox
       this.setItem("")
     }
@@ -145,15 +147,15 @@ namespace builtinEntity {
     enablePhysics(): void {
       if (this.physicalState) return
       this.physicalState = true
-      this.object.set_properties({physical: true})
+      this.object.set_properties({ physical: true })
       this.object.set_velocity(vector.create())
-      this.object.set_acceleration(vector.create(0,-gravity,0))
+      this.object.set_acceleration(vector.create(0, -gravity, 0))
     }
 
     disablePhysics(): void {
       if (!this.physicalState) return
       this.physicalState = false
-      this.object.set_properties({physical: false})
+      this.object.set_properties({ physical: false })
       this.object.set_velocity(vector.create())
       this.object.set_acceleration(vector.create())
     }
@@ -161,7 +163,7 @@ namespace builtinEntity {
     disablePhysicsSilent(): void {
       if (!this.physicalState) return
       this.physicalState = false
-      this.object.set_properties({physical: false})
+      this.object.set_properties({ physical: false })
     }
 
     tickAge(delta: number): boolean {
@@ -235,7 +237,7 @@ namespace builtinEntity {
         if (vector.distance(pos, playerPos) > 3) continue
         if (vector.distance2d(pos, playerPos) > 1.5) continue
         if (playerPos.y - pos.y > 0.05) continue
-        
+
         const inv = player.get_inventory()
         if (!inv) continue
         if (!inv.room_for_item("main", this.itemString)) continue
@@ -252,7 +254,7 @@ namespace builtinEntity {
     }
 
     collectionCleanup(delta: number, pos: Vec3): void {
-      
+
       //? Collection animation.
 
       this.age += delta
@@ -282,7 +284,7 @@ namespace builtinEntity {
       goal.y += 0.8
 
       // Overcomplicated, but smooth.
-      
+
       const distance = vector.distance(pos, goal)
 
       if (distance <= 0.1) {
@@ -306,7 +308,7 @@ namespace builtinEntity {
 
       let shootDir: Vec3 | null = (() => {
         //! fixme: this should be a cached single instance. Why is this getting created every time?
-        const order = [vector.create(1,0,0),vector.create(-1,0,0),vector.create(0,0,1),vector.create(0,0,-1),]
+        const order = [vector.create(1, 0, 0), vector.create(-1, 0, 0), vector.create(0, 0, 1), vector.create(0, 0, -1),]
         for (const direction of order) {
           const cNode = minetest.get_node(vector.add(pos, direction)).name
           const cDef = minetest.registered_nodes[cNode] || null
@@ -316,7 +318,7 @@ namespace builtinEntity {
         }
 
         // Iteration failed on X and Z axis, only way left is to go up.
-        const lastTry = vector.create(0,1,0)
+        const lastTry = vector.create(0, 1, 0)
         const cNode = minetest.get_node(vector.add(pos, lastTry)).name
         if (cNode != "ignore") {
           return lastTry
@@ -335,7 +337,7 @@ namespace builtinEntity {
       this.forceOut = newVelocity
       this.forceOutStart = vector.round(pos)
       this.beingForcedOut = true
-      
+
     }
 
     on_step(delta: number, moveResult: MoveResult): void {
