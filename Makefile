@@ -4,6 +4,7 @@ default:
 	@./scripts/compile_game.sh
 	@./scripts/copy_conf_files.sh
 	@./scripts/copy_textures.sh
+	@./scripts/copy_sounds.sh
 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
@@ -20,6 +21,7 @@ linux:
 	@./scripts/compile_game.sh
 	@./scripts/copy_conf_files.sh
 	@./scripts/copy_textures.sh
+	@./scripts/copy_sounds.sh
 	
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
