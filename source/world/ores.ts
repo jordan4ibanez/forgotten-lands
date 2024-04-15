@@ -1,3 +1,5 @@
+import { OreType } from "../utility/enums"
+
 namespace world {
   // These are the minetest v7 ore types because I am lazy and unoriginal.
 
