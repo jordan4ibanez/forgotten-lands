@@ -1,10 +1,10 @@
 #!/bin/bash
 # This hackjob copies over all the textures into the compiled build.
 # EVERY. TIME.
-echo "Trying to make the directory."
+echo "Trying to make the textures directory..."
 mkdir mods/sharpik_texture_pack/textures/
-echo "That probably worked."
+echo "Done."
 
-echo "Copying over all the files"
+echo "Copying over texture files..."
 cp --verbose -r source/sharpik_texture_pack/textures/* mods/sharpik_texture_pack/textures/
-echo "That did the trick, hopefully."
+echo "Done."
