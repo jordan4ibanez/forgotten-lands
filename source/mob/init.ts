@@ -19,7 +19,7 @@ namespace mob {
     hp = 5
 
     on_step(delta: number, moveResult: MoveResult): void {
-      print("I'm a cow, moo");
+      // print("I'm a cow, moo");
     }
   }
 
