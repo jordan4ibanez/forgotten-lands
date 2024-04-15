@@ -1,5 +1,3 @@
-import { CraftCheckType, Drawtype, Nodeboxtype, ParamType2 } from "../utility/enums"
-
 namespace blocks {
 
   const MAIN_INVENTORY_SIZE = player.MAIN_INVENTORY_SIZE
@@ -33,31 +31,31 @@ namespace blocks {
 
   function generateFurnaceFormspec(fuelPercent: number, smeltPercent: number): string {
     // Convert to 0-1 range.
-    const fuelForegroundMultiplier = (minetest.is_nan(fuelPercent / 100)) ? 0 : (fuelPercent / 100) 
+    const fuelForegroundMultiplier = (minetest.is_nan(fuelPercent / 100)) ? 0 : (fuelPercent / 100)
     // print (fuelForegroundMultiplier)
     return generate(new FormSpec({
-      size: create(12,12),
+      size: create(12, 12),
       elements: [
         //! Nice background colors.
         new BGColor({
           bgColor: colorScalar(85),
           fullScreen: "both",
-          fullScreenbgColor: colorScalar(0,40)
+          fullScreenbgColor: colorScalar(0, 40)
         }),
         //! Make these lists look nice as well.
         new ListColors({
           slotBGHover: colorScalar(70),
           slotBGNormal: colorScalar(55),
           slotBorder: colorScalar(0),
-          toolTipBGColor: colorRGB(123,104,238),
+          toolTipBGColor: colorRGB(123, 104, 238),
           toolTipFontColor: colorScalar(100)
         }),
         //! Add a nice label to the top.
         new Label({
-          position: create(5.5,0.5),
+          position: create(5.5, 0.5),
           //! Flame red foreground. 164,40,33 (Turns pink/peach)
           //? Cool blue background. 24,154,211 (Not possible yet)
-          label: minetest.colorize( color(164 * fuelForegroundMultiplier, 0, 0), "Furnace")
+          label: minetest.colorize(color(164 * fuelForegroundMultiplier, 0, 0), "Furnace")
         }),
         //! Flame.
         new Image({
@@ -204,7 +202,7 @@ namespace blocks {
   }
 
   function initialPayload(inventory: InvRef, justConstructed?: boolean) {
-    if (!justConstructed)  return
+    if (!justConstructed) return
     print("setting up new furnace")
     inventory.set_size("input", 1)
     inventory.set_size("fuel", 1)
@@ -212,26 +210,26 @@ namespace blocks {
   }
 
   function turnOn(position: Vec3, rotation: number) {
-    minetest.swap_node(position, {name: "furnace_active", param2: rotation})
+    minetest.swap_node(position, { name: "furnace_active", param2: rotation })
   }
 
-  function turnOff(position:Vec3, rotation: number) {
-    minetest.swap_node(position, {name: "furnace", param2: rotation})
+  function turnOff(position: Vec3, rotation: number) {
+    minetest.swap_node(position, { name: "furnace", param2: rotation })
   }
 
   function fuelCheck(fuelInventory: ItemStackObject[]): CraftResultObject {
     const [result,] = minetest.get_craft_result({
-      method: CraftCheckType.fuel,
+      method: utility.CraftCheckType.fuel,
       width: 1,
       items: fuelInventory
     })
-    
+
     return result
   }
 
   function itemCheck(inputInventory: ItemStackObject[]): CraftResultObject {
     const [result,] = minetest.get_craft_result({
-      method: CraftCheckType.cooking,
+      method: utility.CraftCheckType.cooking,
       width: 1,
       items: inputInventory
     })
@@ -268,8 +266,8 @@ namespace blocks {
   }
 
   function smeltItemLogic(
-    hasItem: boolean, 
-    hasRoom: boolean, 
+    hasItem: boolean,
+    hasRoom: boolean,
     fuelMax: number,
     itemBuffer: number,
     itemTime: number,
@@ -319,7 +317,7 @@ namespace blocks {
 
 
     // print(`thinking at ${vec3ToString(position)}.............`)
-    
+
     const furnaceIsActive = (currentBlock.name == "furnace_active")
     const rotation = currentBlock.param2 || 0
 
@@ -329,7 +327,7 @@ namespace blocks {
 
       // print("run " + i)
       // print("elapsed time: " + elapsedTime)
-     
+
       const inputInventory = inventory.get_list("input")
       const fuelInventory = inventory.get_list("fuel")
       const outputInventory = inventory.get_list("output")
@@ -337,7 +335,7 @@ namespace blocks {
       const fuelInFirebox = fuelCheck(fuelInventory)
       const fuelTime = fuelInFirebox.time
       const hasFuel = fuelTime > 0
-      
+
       // Quick note: The item is what it would be after being cooked.
       const itemInHearth = itemCheck(inputInventory)
       const itemTime = itemInHearth.time
@@ -433,47 +431,47 @@ namespace blocks {
   //? Visuals
 
   const furnaceNodeBox: NodeBox = {
-    type: Nodeboxtype.fixed,
-    fixed:[
+    type: utility.Nodeboxtype.fixed,
+    fixed: [
       [ // Left slice.
-        pixel(0),pixel(0),pixel(0),
-        pixel(2),pixel(16),pixel(16)
+        pixel(0), pixel(0), pixel(0),
+        pixel(2), pixel(16), pixel(16)
       ],
       [ // Right slice.
-        pixel(14),pixel(0),pixel(0),
-        pixel(16),pixel(16),pixel(16)
+        pixel(14), pixel(0), pixel(0),
+        pixel(16), pixel(16), pixel(16)
       ],
       [ // Top slice.
-        pixel(0),pixel(13),pixel(0),
-        pixel(16),pixel(16),pixel(16)
+        pixel(0), pixel(13), pixel(0),
+        pixel(16), pixel(16), pixel(16)
       ],
       [ // Center slice.
-        pixel(0),pixel(6),pixel(0),
-        pixel(16),pixel(9),pixel(16)
+        pixel(0), pixel(6), pixel(0),
+        pixel(16), pixel(9), pixel(16)
       ],
       [ // Bottom slice.
-        pixel(0),pixel(0),pixel(0),
-        pixel(16),pixel(1),pixel(16)
+        pixel(0), pixel(0), pixel(0),
+        pixel(16), pixel(1), pixel(16)
       ],
       [ // Inner core.
-        pixel(0),pixel(0),pixel(2),
-        pixel(16),pixel(16),pixel(16)
+        pixel(0), pixel(0), pixel(2),
+        pixel(16), pixel(16), pixel(16)
       ],
-    ] 
+    ]
   }
 
   const furnaceSelectionBox: NodeBox = {
-    type: Nodeboxtype.fixed,
+    type: utility.Nodeboxtype.fixed,
     fixed: [
-      [pixel(0),pixel(0),pixel(0),pixel(16),pixel(16),pixel(16)]
+      [pixel(0), pixel(0), pixel(0), pixel(16), pixel(16), pixel(16)]
     ]
   }
 
   //? Implementation
 
   minetest.register_node(":furnace", {
-    drawtype: Drawtype.nodebox,
-    paramtype2: ParamType2.facedir,
+    drawtype: utility.Drawtype.nodebox,
+    paramtype2: utility.ParamType2.facedir,
     is_ground_content: false,
     node_box: furnaceNodeBox,
     selection_box: furnaceSelectionBox,
@@ -489,7 +487,7 @@ namespace blocks {
       "default_furnace_side.png",
       "default_furnace_front.png"
     ],
-    on_construct: function(pos: Vec3) {
+    on_construct: function (pos: Vec3) {
       think(pos, 1, true)
     },
     on_timer: think,
@@ -502,8 +500,8 @@ namespace blocks {
   })
 
   minetest.register_node(":furnace_active", {
-    drawtype: Drawtype.nodebox,
-    paramtype2: ParamType2.facedir,
+    drawtype: utility.Drawtype.nodebox,
+    paramtype2: utility.ParamType2.facedir,
     is_ground_content: false,
     light_source: 8,
     node_box: furnaceNodeBox,
@@ -520,7 +518,7 @@ namespace blocks {
       "default_furnace_side.png",
       "default_furnace_front_active.png"
     ],
-    on_construct: function(pos: Vec3) {
+    on_construct: function (pos: Vec3) {
       think(pos, 1, true)
     },
     on_timer: think,

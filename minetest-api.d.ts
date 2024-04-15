@@ -1,13 +1,11 @@
-import { AreaStoreType, BlockStatusCondition, CheatType, ClearObjectsOptions, CompressionMethod, CraftCheckType, CraftRecipeType, DecorationType, Drawtype, EntityVisual, GenNotifyFlags, HPChangeReasonType, HTTPRequestMethod, HudElementType, HudReplaceBuiltinOption, LiquidType, LogLevel, MinimapType, NodeBoxConnections, Nodeboxtype, NoiseFlags, OreFlags, OreType, ParamType1, ParamType2, ParseRelativeNumberArgument, ParticleSpawnerAttractionType, ParticleSpawnerTextureBlend, ParticleSpawnerTweenStyle, RotateAndPlaceOrientationFlag, SchematicFormat, SchematicPlacementFlag, SchematicReadOptionYSliceOption, SchematicRotation, SchematicSerializationOption, SearchAlgorithm, SkyParametersFogTintType, SkyParametersType, TextureAlpha, TexturePoolComponentFade, TileAnimationType } from "./source/utility/enums";
-
-export {};
+export { };
 
 //* note: All enums were moved to mods/utility/enums.ts
 
 //? Everything was just dumped in as I looked down the lua_api.md
 
 /** @noSelf **/
-export interface minetest {
+interface minetest {
   get_current_modname(): string
   get_modpath(modName: string): string
   get_modnames(): string[]
@@ -31,7 +29,7 @@ export interface minetest {
   encode_png(width: number, height: number, data: ColorSpec[] | string, compression: number): string
   urlencode(url: string): string
   debug(anything: string): void
-  log(level: LogLevel, text: string): void
+  log(level: utility.LogLevel, text: string): void
   register_node(nodeName: string, definition: NodeDefinition): void
   register_craftitem(craftItemName: string, definition: ItemDefinition): void
   register_tool(toolName: string, definition: ItemDefinition): void
@@ -62,7 +60,7 @@ export interface minetest {
   register_on_mods_loaded(fun: () => void): void
   register_on_shutdown(fun: () => void): void
   register_on_placenode(fun: (pos: Vec3, node: NodeTable, placer: ObjectRef, oldNode: NodeTable, itemStack: ItemStackObject, pointedThing: PointedThing) => void): void
-  register_on_dignode(fun: (pos: Vec3, oldNode: NodeTable, digger: ObjectRef) =>  void): void
+  register_on_dignode(fun: (pos: Vec3, oldNode: NodeTable, digger: ObjectRef) => void): void
   register_on_punchnode(fun: (pos: Vec3, node: NodeTable, puncher: ObjectRef, pointedThing: PointedThing) => void): void
   register_on_generated(fun: (minp: Vec3, maxp: Vec3, blockSeed: number) => void): void
   register_on_newplayer(fun: (player: ObjectRef) => void): void
@@ -79,7 +77,7 @@ export interface minetest {
   register_on_cheat(fun: (player: ObjectRef, cheat: CheatDefinition) => void): void
   register_on_chat_message(fun: (name: string, message: string) => void): void
   register_on_chatcommand(fun: (name: string, command: string, params: string) => boolean): void
-  register_on_player_receive_fields(fun: (player: ObjectRef, formName: string, fields: {string : any}) => void): void
+  register_on_player_receive_fields(fun: (player: ObjectRef, formName: string, fields: { string: any }) => void): void
   register_on_craft(fun: (itemStack: ItemStackObject, player: ObjectRef, oldCraftGrid: any[], craftInv: string) => void): void
   register_craft_predict(fun: (itemStack: ItemStackObject, player: ObjectRef, oldCraftGrid: any[], craftInv: string) => void): void
   register_allow_player_inventory_action(fun: (player: ObjectRef, action: string, inventory: string, inventoryInfo: ActionDefinition) => void): void
@@ -105,7 +103,7 @@ export interface minetest {
   get_auth_handler(): AuthenticationHandlerDefinition
   notify_authentication_modified(playerName: string): void
   set_player_password(playerName: string, passwordHash: string): void
-  set_player_privs(playerName: string, {string : boolean}): void
+  set_player_privs(playerName: string, { string: boolean }): void
   auth_reload(): void
   chat_send_all(message: string): void
   chat_send_player(playerName: string, message: string): void
@@ -142,7 +140,7 @@ export interface minetest {
   get_perlin(nodeParams: NoiseParams): PerlinNoiseObject
   get_perlin(seedDiff: number, octaves: number, persistence: number, spread: number): PerlinNoiseObject
   get_voxel_manip(pos1: Vec3, pos2: Vec3): VoxelManipObject
-  set_gen_notify(flags: GenNotifyFlags, decorationIDs: number[]): void
+  set_gen_notify(flags: utility.GenNotifyFlags, decorationIDs: number[]): void
   get_gen_notify(): number[]
   get_decoration_id(decorationName: string): number
   get_mapgen_object(objectName: string): GenNotifyObject
@@ -161,13 +159,13 @@ export interface minetest {
   get_noiseparams(name: string): NoiseParams
   generate_ores(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void
   generate_decorations(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void
-  clear_objects(options: ClearObjectsOptions): void
+  clear_objects(options: utility.ClearObjectsOptions): void
   load_area(pos1: Vec3, pos2: Vec3): void
   emerge_area(pos1: Vec3, pos2: Vec3, fun: EmergeAreaCallback, param: any): void
   delete_area(pos1: Vec3, pos2: Vec3): void
   line_of_sight(pos1: Vec3, pos2: Vec3): [boolean, Vec3]
   raycast(pos1: Vec3, pos2: Vec3, hitObjects: boolean, hitLiquids: boolean): RaycastObject
-  find_path(pos1: Vec3, pos2: Vec3, searchDistance: number, maxJump: number, maxDrop: number, algorithm: SearchAlgorithm): Vec3[]
+  find_path(pos1: Vec3, pos2: Vec3, searchDistance: number, maxJump: number, maxDrop: number, algorithm: utility.SearchAlgorithm): Vec3[]
   spawn_tree(position: Vec3, definition: TreeDefinition): void
   transforming_liquid_add(position: Vec3): void
   get_node_max_level(position: Vec3): number
@@ -188,9 +186,9 @@ export interface minetest {
   show_formspec(playerName: string, formName: string, formSpec: string): void
   close_formspec(playerName: string, formName: string): void
   formspec_escape(escape: string): string
-  explode_table_event(string: string): Map<any,any>
-  explode_textlist_event(string: string): Map<any,any>
-  explode_scrollbar_event(string: string): Map<any,any>
+  explode_table_event(string: string): Map<any, any>
+  explode_textlist_event(string: string): Map<any, any>
+  explode_scrollbar_event(string: string): Map<any, any>
   inventorycube(img1: string, img2: string, img3: string): string
   get_pointed_thing_position(pointedThing: PointedThing, above: boolean): Vec3 | void
   dir_to_facedir(direction: Vec3, is6d: boolean): number
@@ -202,7 +200,7 @@ export interface minetest {
   dir_to_yaw(direction: Vec3): number
   yaw_to_dir(yaw: number): Vec3
   is_colored_paramtype(pType: number): boolean
-  strip_param2_color(param2: number, paramType2: ParamType2): number | void
+  strip_param2_color(param2: number, paramType2: utility.ParamType2): number | void
   get_node_drops(node: string | NodeTable, toolName: string): string[]
   get_craft_result(input: CraftRecipeCheckDefinition): LuaMultiReturn<[CraftResultObject, CraftRecipeCheckDefinition]>
   get_craft_recipe(output: string | NodeTable): CraftRecipeDefinition | void
@@ -242,17 +240,17 @@ export interface minetest {
   add_particlespawner(definition: ParticleSpawnerDefinition): number
   delete_particlespawner(id: number, playerName: string): void
   create_schematic(pos1: Vec3, pos2: Vec3, probabilityList: SchematicProbability[], fileName: string, sliceProbList: SchematicSliceProbability[]): void
-  place_schematic(position: Vec3, schematic: SchematicDefinition | string, rotation: SchematicRotation, replacements: Map<string, string>, forcePlacement: boolean, flags: SchematicPlacementFlag[]): void
-  place_schematic_on_vmanip(voxelManip: VoxelManipObject, position: Vec3, schematic: SchematicDefinition, rotation: SchematicRotation, replacement: Map<string, string>, forcePlacement: boolean, flags: SchematicPlacementFlag[]): void
-  serialize_schematic(schematic: SchematicDefinition, format: SchematicFormat, options: SchematicSerializationOption[]): void
+  place_schematic(position: Vec3, schematic: SchematicDefinition | string, rotation: utility.SchematicRotation, replacements: Map<string, string>, forcePlacement: boolean, flags: utility.SchematicPlacementFlag[]): void
+  place_schematic_on_vmanip(voxelManip: VoxelManipObject, position: Vec3, schematic: SchematicDefinition, rotation: utility.SchematicRotation, replacement: Map<string, string>, forcePlacement: boolean, flags: utility.SchematicPlacementFlag[]): void
+  serialize_schematic(schematic: SchematicDefinition, format: utility.SchematicFormat, options: utility.SchematicSerializationOption[]): void
   read_schematic(schematic: SchematicDefinition | string, options: SchematicReadOptionYSlice[]): Array<any>
   request_http_api(): HTTPApi
   get_mod_storage(): MetaRef
   get_connected_players(): ObjectRef[]
   is_player(thing: ObjectRef): boolean
   player_exists(playerName: string): boolean
-  hud_replace_builtin(name: HudReplaceBuiltinOption, definition: HudDefinition): void
-  parse_relative_number(arg: ParseRelativeNumberArgument, relativeTo: number): number | void
+  hud_replace_builtin(name: utility.HudReplaceBuiltinOption, definition: HudDefinition): void
+  parse_relative_number(arg: utility.ParseRelativeNumberArgument, relativeTo: number): number | void
   send_join_message(playerName: string): void
   send_leave_message(playerName: string, timedOut: boolean): void
   hash_node_position(position: Vec3): number
@@ -264,9 +262,9 @@ export interface minetest {
   parse_json(string: string, nullValue: any): Array<any>
   write_json(data: any[], styled: boolean): string | void
   serialize(any: any): string
-  deserialize(string: string, safe?: boolean): {[id: string | number | symbol] : any}
-  compress(data: string, method: CompressionMethod, ...any: any): string
-  decompress(data: string, method: CompressionMethod, ...any: any): string
+  deserialize(string: string, safe?: boolean): { [id: string | number | symbol]: any }
+  compress(data: string, method: utility.CompressionMethod, ...any: any): string
+  decompress(data: string, method: utility.CompressionMethod, ...any: any): string
   rgba(red: number, green: number, blue: number, alpha: number): string
   encode_base64(string: string): string
   decode_base64(string: string): string
@@ -274,32 +272,32 @@ export interface minetest {
   record_protection_violation(position: Vec3, name: string): void
   is_creative_enabled(name: string): boolean
   is_area_protected(pos1: Vec3, pos2: Vec3, playerName: string, interval: number): boolean
-  rotate_and_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, infiniteStacks: boolean, orientFlags: RotateAndPlaceOrientationFlag, preventAfterPlace: boolean): ItemStackObject
+  rotate_and_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, infiniteStacks: boolean, orientFlags: utility.RotateAndPlaceOrientationFlag, preventAfterPlace: boolean): ItemStackObject
   rotate_node(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
   calculate_knockback(player: ObjectRef, hitter: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, distance: number, damage: number): number
   forceload_block(position: Vec3, transient: boolean, limit: number): boolean
   forceload_free_block(position: Vec3, transient: boolean): void
-  compare_block_status(position: Vec3, condition: BlockStatusCondition): boolean | void
+  compare_block_status(position: Vec3, condition: utility.BlockStatusCondition): boolean | void
   request_insecure_environment(): any
   global_exists(name: string): boolean
 
-  registered_items: {[id: string] : ItemDefinition}
-  registered_nodes: {[id: string] : NodeDefinition}
-  registered_craftitems: {[id: string] : ItemDefinition}
-  registered_tools: {[id: string] : ItemDefinition}
-  registered_entities: {[id: string] : LuaEntity}
-  object_refs: {[id: string] : ObjectRef}
-  luaentities: {[id: string] : LuaEntity}
+  registered_items: { [id: string]: ItemDefinition }
+  registered_nodes: { [id: string]: NodeDefinition }
+  registered_craftitems: { [id: string]: ItemDefinition }
+  registered_tools: { [id: string]: ItemDefinition }
+  registered_entities: { [id: string]: LuaEntity }
+  object_refs: { [id: string]: ObjectRef }
+  luaentities: { [id: string]: LuaEntity }
   registered_abms: ABMDefinition[]
   registered_lbms: LBMDefinition[]
-  registered_aliases: {[id: string] : string}
-  registered_ores: {[id: string] : OreDefinition}
-  registered_biomes: {[id: string] : BiomeDefinition}
-  registered_decorations: {[id: string] : DecorationDefinition}
-  registered_schematics: {[id: string] : SchematicDefinition}
-  registered_chatcommands: {[id: string] : ChatCommandDefinition}
-  registered_privileges: {[id: string] : PrivilegeDefinition}
-  
+  registered_aliases: { [id: string]: string }
+  registered_ores: { [id: string]: OreDefinition }
+  registered_biomes: { [id: string]: BiomeDefinition }
+  registered_decorations: { [id: string]: DecorationDefinition }
+  registered_schematics: { [id: string]: SchematicDefinition }
+  registered_chatcommands: { [id: string]: ChatCommandDefinition }
+  registered_privileges: { [id: string]: PrivilegeDefinition }
+
   wrap_text(str: string, limit: number, asTable: boolean): string | string[]
   pos_to_string(position: Vec3, decimalPlaces: number): string
   string_to_pos(string: string): Vec3
@@ -337,19 +335,19 @@ export interface minetest {
 }
 
 
-// export interface HeightMapObject {
+// interface HeightMapObject {
 
 // }
 
-// export interface BiomeMapObject {
+// interface BiomeMapObject {
 
 // }
 
-// export interface HeatMapObject {
+// interface HeatMapObject {
 
 // }
 
-// export interface HumidityMapObject {
+// interface HumidityMapObject {
 
 // }
 
@@ -360,7 +358,7 @@ declare global {
     // count: number
     wear: number
     metadata: string
-  
+
     is_empty(): boolean
     get_name(): string
     set_name(name: string): boolean
@@ -388,15 +386,15 @@ declare global {
     peek_item(n: number): ItemStackObject
     equals(other: ItemStackObject): boolean
   }
-  
-  
-  export interface InvRefLocation {
+
+
+  interface InvRefLocation {
     type: string
     name: string
     pos: Vec3
   }
-  
-  export interface InvRef {
+
+  interface InvRef {
     is_empty(listName: string): boolean
     get_size(listName: string): number
     set_size(listName: string, size: number): boolean
@@ -414,8 +412,8 @@ declare global {
     remove_item(listName: string, stack: ItemStackObject | string): ItemStackObject[]
     get_location(): InvRefLocation
   }
-  
-  export interface TreeDefinition {
+
+  interface TreeDefinition {
     axiom: string
     rules_a: string
     rules_b: string
@@ -435,16 +433,16 @@ declare global {
     seed: number
   }
 
-  export type GenNotifyObject = Map<string, Vec3[]>
+  type GenNotifyObject = Map<string, Vec3[]>
 
-  export interface SimpleSoundSpec {
+  interface SimpleSoundSpec {
     name?: string
     gain?: number
     pitch?: number
     fade?: number
   }
-  
-  export interface SoundParameterTable extends SimpleSoundSpec {
+
+  interface SoundParameterTable extends SimpleSoundSpec {
     start_time?: number
     loop?: boolean
     pos?: Vec3
@@ -452,9 +450,9 @@ declare global {
     to_player?: string
     max_hear_distance?: number
   }
-  
-  export interface NodeBox {
-    type: Nodeboxtype
+
+  interface NodeBox {
+    type: utility.Nodeboxtype
     fixed?: boxTable
     wall_top?: box
     wall_bottom?: box
@@ -471,25 +469,25 @@ declare global {
     disconnected_left?: box
     disconnected_back?: box
     disconnected_right?: box
-    disconnected?: box 
+    disconnected?: box
     disconnected_sides?: box
   }
-  
-  export type box = number[]
-  
-  export type boxTable = box[]
-  
-  export type itemstring = string
-  
-  
-  export interface GameInfo {
+
+  type box = number[]
+
+  type boxTable = box[]
+
+  type itemstring = string
+
+
+  interface GameInfo {
     id: string
     title: string
     author: string
     path: string
   }
-  
-  export interface MinetestFeatures {
+
+  interface MinetestFeatures {
     glasslike_framed: boolean
     nodebox_as_selectionbox: boolean
     get_all_craft_recipes_works: boolean
@@ -517,8 +515,8 @@ declare global {
     mod_storage_on_disk: boolean
     compress_zstd: boolean
   }
-  
-  export interface PlayerInformation {
+
+  interface PlayerInformation {
     address: string
     ip_version: number
     connection_uptime: number
@@ -530,17 +528,17 @@ declare global {
     avg_rtt: number
     min_jitter: number
     max_jitter: number
-    avg_jitter: number 
+    avg_jitter: number
   }
-  
-  export interface WindowInformation {
+
+  interface WindowInformation {
     size: Vec2
     max_formspec_size: Vec2
     real_gui_scaling: number
     real_hud_scaling: number
   }
-  
-  export interface MinetestInfo {
+
+  interface MinetestInfo {
     project: string
     string: string
     proto_min: string
@@ -548,15 +546,15 @@ declare global {
     hash: string
     is_dev: boolean
   }
-  
-  export interface ColorSpec {
+
+  interface ColorSpec {
     a: number
     r: number
     g: number
     b: number
   }
-  
-  export interface NodeSoundSpec {
+
+  interface NodeSoundSpec {
     footstep?: SimpleSoundSpec
     dig?: SimpleSoundSpec | string
     dug?: SimpleSoundSpec
@@ -564,65 +562,65 @@ declare global {
     place_failed?: SimpleSoundSpec
     fall?: SimpleSoundSpec
   }
-  
-  export interface ItemDropSpec {
+
+  interface ItemDropSpec {
     tools?: string[]
     rarity?: number
     items?: string[]
     inherit_color?: boolean
     tool_groups?: string[] | string[][]
   }
-  
-  export interface NodeDropSpec {
+
+  interface NodeDropSpec {
     max_items?: number
     items: ItemDropSpec[]
   }
-  
-  export interface MapNode {
+
+  interface MapNode {
     name: string
     prob: number
     param2: number
     force_place: boolean
   }
-  
-  export interface NodeTable {
+
+  interface NodeTable {
     name: string
     param1?: number
     param2?: number
   }
-  
-  export interface PointedThing {
+
+  interface PointedThing {
     type: string
     under: Vec3
     above: Vec3
     ref: ObjectRef
   }
 
-  export interface GroupCap {
+  interface GroupCap {
     // Allow the end programmer to do it their way.
-    times: number[] | {[id: number] : number},
+    times: number[] | { [id: number]: number },
     uses?: number,
     maxlevel?: number
     // This is a bolt on specifically for Forgotten Lands. You can still use it though, but it won't do anything without implementation.
     maxdrop?: number
   }
-  
-  export interface ToolCapabilities {
+
+  interface ToolCapabilities {
     full_punch_interval?: number
     max_drop_level?: number
-    groupcaps?: {[id: string] : GroupCap}
-    damage_groups?: {[id: string] : number}
+    groupcaps?: { [id: string]: GroupCap }
+    damage_groups?: { [id: string]: number }
     punch_attack_uses?: number
   }
-  
-  export interface ItemSounds {
+
+  interface ItemSounds {
     breaks: SimpleSoundSpec
     eat: SimpleSoundSpec
     punch_use: SimpleSoundSpec
     punch_use_air: SimpleSoundSpec
   }
-  
-  export interface Collision {
+
+  interface Collision {
     type: string
     axis: string
     node_pos: Vec3
@@ -630,22 +628,22 @@ declare global {
     old_velocity: Vec3
     new_velocity: Vec3
   }
-  
-  export interface MoveResult {
+
+  interface MoveResult {
     touching_ground: boolean
     collides: boolean
     standing_on_object: boolean
     collisions: Collision[]
   }
-  
-  
-  export type DynamicColorSpec = (ColorSpec | string)
-  
-  export interface ItemDefinition {
+
+
+  type DynamicColorSpec = (ColorSpec | string)
+
+  interface ItemDefinition {
     type?: string
     description?: string
     short_description?: string
-    groups?: {[id: string]: number}
+    groups?: { [id: string]: number }
     inventory_image?: string
     inventory_overlay?: string
     wield_image?: string
@@ -666,37 +664,37 @@ declare global {
     on_drop?(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
     on_pickup?(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
     on_use?(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
-    after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, {string : any}): void
+    after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, { string: any }): void
   }
-  
-  
+
+
   /** @noSelf **/
-  export interface NodeDefinition {
-    drawtype?: Drawtype
+  interface NodeDefinition {
+    drawtype?: utility.Drawtype
     visual_scale?: number
     tiles?: string[]
     overlay_tiles?: string[]
     special_tiles?: string[]
     color?: DynamicColorSpec
     light_source?: number
-    use_texture_alpha?: TextureAlpha
+    use_texture_alpha?: utility.TextureAlpha
     palette?: string
     post_effect_color?: DynamicColorSpec
     post_effect_color_shaded?: boolean
-    paramtype?: ParamType1
-    paramtype2?: ParamType2
+    paramtype?: utility.ParamType1
+    paramtype2?: utility.ParamType2
     place_param2?: number
     is_ground_content?: boolean
     sunlight_propagates?: boolean
     walkable?: boolean
-    groups?: {[id: string] : number}
+    groups?: { [id: string]: number }
     pointable?: boolean
     diggable?: boolean
     climbable?: boolean
     move_resistance?: number
     buildable_to?: boolean
     floodable?: boolean
-    liquidtype?: LiquidType
+    liquidtype?: utility.LiquidType
     liquid_alternative_flowing?: string
     liquid_alternative_source?: string
     liquid_viscosity?: number
@@ -709,7 +707,7 @@ declare global {
     damage_per_second?: number
     node_box?: NodeBox
     connects_to?: string[]
-    connect_sides?: NodeBoxConnections
+    connect_sides?: utility.NodeBoxConnections
     mesh?: string
     selection_box?: NodeBox
     collision_box?: NodeBox
@@ -730,7 +728,7 @@ declare global {
     on_rightclick?(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing): void
     on_dig?(position: Vec3, node: NodeTable, digger: ObjectRef): void
     on_timer?(position: Vec3, elapsed: number): void
-    on_receive_fields?(position: Vec3, formName: string, fields: {[id: string] : any}, sender: ObjectRef): void
+    on_receive_fields?(position: Vec3, formName: string, fields: { [id: string]: any }, sender: ObjectRef): void
     allow_metadata_inventory_move?(position: Vec3, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): void
     allow_metadata_inventory_put?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
     allow_metadata_inventory_take?(position: Vec3, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
@@ -740,10 +738,10 @@ declare global {
     on_blast?(position: Vec3, intensity: number): void
     mod_origin?: string
   }
-  
-  
-  
-  export interface MetaRef {
+
+
+
+  interface MetaRef {
     set_tool_capabilities(toolCapabilities: ToolCapabilities): void
     contains(key: string): boolean
     get(key: string): string
@@ -770,7 +768,7 @@ declare global {
     is_started(): boolean
   }
 
-  export interface ABMDefinition {
+  interface ABMDefinition {
     label: string
     nodenames: string[]
     neighbors: string[]
@@ -781,71 +779,71 @@ declare global {
     catch_up: number
     action(pos: Vec3, node: NodeTable, activeObjectCount: number, activeObjectCountWider: number): void
   }
-  
-  export interface LBMDefinition {
+
+  interface LBMDefinition {
     label: string
     name: string
     nodenames: string[]
     run_at_every_load: boolean
     action(pos: Vec3, node: NodeTable, delta: number): void
   }
-  
-  export interface SchematicReadOptionYSlice {
-    write_yslice_prob: SchematicReadOptionYSliceOption
+
+  interface SchematicReadOptionYSlice {
+    write_yslice_prob: utility.SchematicReadOptionYSliceOption
   }
-  
-  export interface SchematicData {
+
+  interface SchematicData {
     name: string
     prob: number
     param1: number
     param2: number
     force_place: boolean
   }
-  
-  export interface SchematicProbability {
+
+  interface SchematicProbability {
     pos: Vec3
     prob: number
   }
-  
-  export interface SchematicSliceProbability {
+
+  interface SchematicSliceProbability {
     ypos: number
     prob: number
   }
-  
-  export interface SchematicDefinition {
+
+  interface SchematicDefinition {
     size: Vec3
     data: SchematicData[]
     yslice_prob: number[][]
   }
-  
-  
-  
-  export interface HTTPrequestDefinition {
+
+
+
+  interface HTTPrequestDefinition {
     url: string
     timeout: number
-    method: HTTPRequestMethod
-    data: string | {string : string}
+    method: utility.HTTPRequestMethod
+    data: string | { string: string }
     user_agent: string
     extra_headers: string[]
     multipart: boolean
-    post_data: string | {string : string}
+    post_data: string | { string: string }
   }
-  
-  export interface HTTPRequestResult {
+
+  interface HTTPRequestResult {
     completed: boolean
     succeeded: boolean
     timeout: boolean
     code: number
     data: string
   }
-  
-  export interface HTTPApi {
+
+  interface HTTPApi {
     fetch(req: HTTPrequestDefinition, callback: (res: HTTPRequestResult) => void): void
     fetch_async(req: HTTPrequestDefinition): number
     fetch_async_get(handle: number): HTTPRequestResult
   }
-  
-  export interface NoiseParams {
+
+  interface NoiseParams {
     offset: number
     scale: number
     spread: Vec3
@@ -853,11 +851,11 @@ declare global {
     octaves: number
     persistence: number
     lacunarity: number
-    flags: NoiseFlags
+    flags: utility.NoiseFlags
   }
-  
-  export interface OreDefinition {
-    ore_type: OreType
+
+  interface OreDefinition {
+    ore_type: utility.OreType
     ore: string
     ore_param2?: number
     wherein: string
@@ -866,7 +864,7 @@ declare global {
     clust_size: number
     y_min: number
     y_max: number
-    flags?: OreFlags
+    flags?: utility.OreFlags
     noise_threshold?: number
     noise_params?: NoiseParams
     biomes?: string[]
@@ -879,8 +877,8 @@ declare global {
     np_stratum_thickness?: NoiseParams
     stratum_thickness?: number
   }
-  
-  export interface BiomeDefinition {
+
+  interface BiomeDefinition {
     name: string
     node_dust?: string
     node_top?: string
@@ -906,10 +904,10 @@ declare global {
     heat_point?: number
     humidity_point?: number
   }
-  
-  export interface DecorationDefinition {
+
+  interface DecorationDefinition {
     name: string
-    deco_type?: DecorationType
+    deco_type?: utility.DecorationType
     place_on?: string
     sidelen?: number
     fill_ratio?: number
@@ -920,7 +918,7 @@ declare global {
     spawn_by?: string
     check_offset?: number
     num_spawn_by?: number
-    flags?: string | {string : boolean}
+    flags?: string | { string: boolean }
     decoration?: string | string[]
     height?: number
     height_max?: number
@@ -928,13 +926,13 @@ declare global {
     param2_max?: number
     place_offset_y?: number
     schematic?: string | SchematicDefinition | number
-    replacements?: {string : string}
+    replacements?: { string: string }
     rotation?: string
   }
-  
 
-  export interface CraftRecipeDefinition {
-    type?: CraftRecipeType
+
+  interface CraftRecipeDefinition {
+    type?: utility.CraftRecipeType
     output?: string
     recipe: string[][] | string[] | string
     replacements?: string[]
@@ -943,53 +941,53 @@ declare global {
     burntime?: number
   }
 
-  export interface CraftResultObject {
+  interface CraftResultObject {
     item: ItemStackObject
     time: number
     replacements: ItemStackObject[]
   }
 
-  export interface CraftRecipeCheckDefinition {
-    method: CraftCheckType
+  interface CraftRecipeCheckDefinition {
+    method: utility.CraftCheckType
     width: number
     items: ItemStackObject[]
   }
-  
-  export interface ChatCommandDefinition {
+
+  interface ChatCommandDefinition {
     params: string
     description: string
     privs: string[]
     func(name: string, param: string): [boolean, string]
   }
-  
-  export interface PrivilegeDefinition {
+
+  interface PrivilegeDefinition {
     description: string
     give_to_singleplayer: boolean
     give_to_admin: boolean
     on_grant(name: string, granterName: string): void
     on_revoke(name: string, revokerName: string): void
   }
-  
-  export interface AuthenticationHandlerDefinition {
+
+  interface AuthenticationHandlerDefinition {
     get_auth(name: string): void
     create_auth(name: string, password: string): void
     delete_auth(name: string): void
     set_password(name: string, password: string): void
-    set_privileges(name: string, privileges: Map<any,any>): void // ! fixme: this needs to be checked.
+    set_privileges(name: string, privileges: Map<any, any>): void // ! fixme: this needs to be checked.
     reload(): void
     record_login(name: string): void
     iterate(): void
   }
-  
-  export interface HPChangeReasonDefinition {
-    type: HPChangeReasonType
+
+  interface HPChangeReasonDefinition {
+    type: utility.HPChangeReasonType
     node: string
     node_pos: Vec3
     object: ObjectRef
     from: string
   }
-  
-  export interface ActionDefinition {
+
+  interface ActionDefinition {
     from_list: string
     to_list: string
     from_index: number
@@ -999,87 +997,87 @@ declare global {
     index: number
     stack: ItemStackObject
   }
-  
-  
-  export interface CheatDefinition {
-    type: CheatType
+
+
+  interface CheatDefinition {
+    type: utility.CheatType
   }
-  
-  
-  export type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
-  
-  export interface BiomeDataDefinition {
+
+
+  type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
+
+  interface BiomeDataDefinition {
     biome: number
     heat: number
     humidity: number
   }
-  
-  export interface MapGenSettingsDefinition {
+
+  interface MapGenSettingsDefinition {
     mgname: string
     seed: number
     chnksize: number
     water_level: number
     flags: string
   }
-  
 
-  export interface MetaData {
-    fields: {string : any}
-    inventory: {string : {number : string}}
+
+  interface MetaData {
+    fields: { string: any }
+    inventory: { string: { number: string } }
   }
 
-  export function ItemStack(stringOrObject: ItemStackObject | string): ItemStackObject
-  export function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
-  export function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
-  export function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
-  export function SecureRandom(): SecureRandomObject
-  export function Settings(_: string): MinetestSettingsObject
-  export function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
-  export function PerlinNoise(params: NoiseParams): PerlinNoiseObject
-  export function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
-  export function PseudoRandom(seed: number): PseudoRandomObject
-  export function AreaStore(_: AreaStoreType): AreaStoreObject
+  function ItemStack(stringOrObject: ItemStackObject | string): ItemStackObject
+  function VoxelManip(_pos1: Vec3, _pos2: Vec3): VoxelManipObject
+  function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject
+  function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject
+  function SecureRandom(): SecureRandomObject
+  function Settings(_: string): MinetestSettingsObject
+  function PcgRandom(seed: number, sequence: number[]): PcgRandomObject
+  function PerlinNoise(params: NoiseParams): PerlinNoiseObject
+  function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
+  function PseudoRandom(seed: number): PseudoRandomObject
+  function AreaStore(_: utility.AreaStoreType): AreaStoreObject
 
-  export namespace vector {
+  namespace vector {
 
-    export function zero(): Vec3
-    export function copy(vec: Vec3): Vec3
-    export function from_string(s: string, init: string): Vec3
-    export function to_string(vec: Vec3): string
-    export function direction(vec1: Vec3, vec2: Vec3): Vec3
-    export function distance(vec1: Vec3, vec2: Vec3): number
-    export function length(vec: Vec3): number
-    export function normalize(vec: Vec3): Vec3
-    export function floor(vec: Vec3): Vec3
-    export function round(vec: Vec3): Vec3
-    export function apply(vec: Vec3, fun: (input: number) => number): Vec3
-    export function combine(vec1: Vec3, vec2: Vec3, fun: (...any: any) => void): Vec3 //! fixme: test this
-    export function equals(vec1: Vec3, vec2: Vec3): boolean
-    export function sort(vec1: Vec3, vec2: Vec3): [Vec3, Vec3]
-    export function angle(vec1: Vec3, vec2: Vec3): number
-    export function dot(vec1: Vec3, vec2: Vec3): number
-    export function cross(vec1: Vec3, vec2: Vec3): number
-    export function check(vec: Vec3): boolean
-    export function in_area(vec: Vec3, min: Vec3, max: Vec3): boolean
-  
-    export function add(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-    export function subtract(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-    export function multiply(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-    export function divide(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
-  
-    export function rotate(vec: Vec3, radians: number): Vec3
-    export function rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
-    export function dir_to_rotation(vec: Vec3, up: Vec3): Vec3
+    function zero(): Vec3
+    function copy(vec: Vec3): Vec3
+    function from_string(s: string, init: string): Vec3
+    function to_string(vec: Vec3): string
+    function direction(vec1: Vec3, vec2: Vec3): Vec3
+    function distance(vec1: Vec3, vec2: Vec3): number
+    function length(vec: Vec3): number
+    function normalize(vec: Vec3): Vec3
+    function floor(vec: Vec3): Vec3
+    function round(vec: Vec3): Vec3
+    function apply(vec: Vec3, fun: (input: number) => number): Vec3
+    function combine(vec1: Vec3, vec2: Vec3, fun: (...any: any) => void): Vec3 //! fixme: test this
+    function equals(vec1: Vec3, vec2: Vec3): boolean
+    function sort(vec1: Vec3, vec2: Vec3): [Vec3, Vec3]
+    function angle(vec1: Vec3, vec2: Vec3): number
+    function dot(vec1: Vec3, vec2: Vec3): number
+    function cross(vec1: Vec3, vec2: Vec3): number
+    function check(vec: Vec3): boolean
+    function in_area(vec: Vec3, min: Vec3, max: Vec3): boolean
+
+    function add(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+    function subtract(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+    function multiply(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+    function divide(vec: Vec3, scalarOrVec: Vec3 | number): Vec3
+
+    function rotate(vec: Vec3, radians: number): Vec3
+    function rotate_around_axis(vec: Vec3, vec2: Vec3, radians: number): Vec3
+    function dir_to_rotation(vec: Vec3, up: Vec3): Vec3
 
     // This is created in the utility module because new is a reserved keyword in TS.
-    export function create(x?: number, y?: number, z?: number): Vec3
+    function create(x?: number, y?: number, z?: number): Vec3
     // Everything else is a bolt on created in the utility module.
-    export function create2d(x?: number, y?: number): Vec2
-    export function random(minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3
-    export function distance2d(vec1: Vec3, vec2: Vec3): number
+    function create2d(x?: number, y?: number): Vec2
+    function random(minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3
+    function distance2d(vec1: Vec3, vec2: Vec3): number
   }
 
-  export interface VoxelManipObject {
+  interface VoxelManipObject {
     read_from_map(pos1: Vec3, pos2: Vec3): [Vec3, Vec3]
     write_to_map(light: boolean): void
     get_node_at(position: Vec3): MapNode
@@ -1097,12 +1095,12 @@ declare global {
     get_emerged_area(): [Vec3, Vec3]
   }
 
-  export interface VoxelAreaInitializer {
+  interface VoxelAreaInitializer {
     MinEdge: Vec3
     MaxEdge: Vec3
   }
-  
-  export interface VoxelAreaObject {
+
+  interface VoxelAreaObject {
     ystride: number
     zstride: number
     new(init: VoxelAreaInitializer): VoxelAreaObject
@@ -1117,15 +1115,15 @@ declare global {
     iterp(minp: Vec3, maxp: Vec3): Iterator<number>
   }
 
-  export interface RaycastObject extends Iterator<PointedThing>{}
+  interface RaycastObject extends Iterator<PointedThing> { }
 
-  export interface SecureRandomObject {
+  interface SecureRandomObject {
     next_bytes(count: number): string
   }
 
 
-  
-  export interface DetachedInventoryCallbacks {
+
+  interface DetachedInventoryCallbacks {
     allow_move(inv: InvRef, fromList: string, fromIndex: number, toList: string, toIndex: number, count: number, player: ObjectRef): number
     allow_put(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
     allow_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): number
@@ -1134,7 +1132,7 @@ declare global {
     on_take(inv: InvRef, listName: string, index: number, stack: ItemStackObject, player: ObjectRef): void
   }
 
-  export interface AreaStoreObject {
+  interface AreaStoreObject {
     get_area(id: number, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
     get_areas_for_pos(pos: Vec3, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
     get_areas_in_area(corner1: Vec3, corner2: Vec3, acceptOverlap: boolean, includeCorners: boolean, includeData: boolean): Array<AreaStoreArea | boolean> | void
@@ -1147,13 +1145,13 @@ declare global {
     from_string(str: string): [boolean, string] | void
     from_file(fileName: string): [boolean, string] | void
   }
-  
 
-  export interface MinetestSettingsObject {
+
+  interface MinetestSettingsObject {
     get(key: string): any
     get_bool(key: string, defaul?: boolean): boolean | null
     get_np_group(key: string): NoiseParams
-    get_flags(key: string): {string : boolean}
+    get_flags(key: string): { string: boolean }
     set(key: string, value: string): void
     set_bool(key: string, value: boolean): void
     set_np_group(key: string, value: NoiseParams): void
@@ -1163,23 +1161,23 @@ declare global {
     write(): boolean
     to_table(): Map<string, any>
   }
-  
-  export interface NametagAttributes {
+
+  interface NametagAttributes {
     text: string
     color: RGBA
     bgcolor: RGBA
   }
-  
-  export interface AttachRef {
+
+  interface AttachRef {
     parent: ObjectRef
     bone: string
     position: Vec3
     rotation: Vec3
     forced_visible: boolean
   }
-  
-  
-  export interface ObjectRef {
+
+
+  interface ObjectRef {
     get_pos(): Vec3
     set_pos(position: Vec3): void
     get_velocity(): Vec3
@@ -1188,14 +1186,14 @@ declare global {
     punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3): void
     right_click(clicker: ObjectRef): void
     get_hp(): number
-    set_hp(hp: number, reason: HPChangeReasonType): void
+    set_hp(hp: number, reason: utility.HPChangeReasonType): void
     get_inventory(): InvRef
     get_wield_list(): string
     get_wield_index(): number
     get_wielded_item(): ItemStackObject
     set_wielded_item(item: ItemStackObject): boolean
-    get_armor_groups(): {string : number}
-    set_armor_groups(groups: {[id: string] : number}): void
+    get_armor_groups(): { string: number }
+    set_armor_groups(groups: { [id: string]: number }): void
     get_animation(): Array<Vec2 | number>
     set_animation(frameRange: Vec2, frameSpeed: number, frameBlend: number, loop: boolean): void
     set_animation_frame_speed(speed: number): void
@@ -1247,7 +1245,7 @@ declare global {
     get_physics_override(): PhysicsOverride
     hud_add(definition: HudDefinition): number
     hud_remove(id: number): void
-    hud_change(id: number, stat: HudElementType, value: any): void
+    hud_change(id: number, stat: utility.HudElementType, value: any): void
     hud_get(id: number): HudDefinition
     hud_set_flags(flags: HudFlags): void
     hud_get_flags(): HudFlags
@@ -1280,18 +1278,18 @@ declare global {
     respawn(): void
   }
 
-  export interface PcgRandomObject {
+  interface PcgRandomObject {
     next(): number
     next(min: number, max: number): number
     rand_normal_dist(min: number, max: number, trials: number): number
   }
 
-  export interface PerlinNoiseObject {
+  interface PerlinNoiseObject {
     get_2d(position: Vec2): number
     get_3d(position: Vec3): number
   }
 
-  export interface PerlinNoiseMapObject {
+  interface PerlinNoiseMapObject {
     get_2d_map(pos: Vec2): number[][]
     get_3d_map(pos: Vec3): number[][][]
     get_2d_map_flat(pos: Vec2, buffer: number[]): number[]
@@ -1301,12 +1299,12 @@ declare global {
     get_map_slice(sliceOffset: Vec3, sliceSize: Vec3, buffer: number[]): number[]
   }
 
-  export interface PseudoRandomObject {
+  interface PseudoRandomObject {
     next(): number
     next(min: number, max: number): number
   }
 
-  export interface PhysicsOverride {
+  interface PhysicsOverride {
     speed: number
     jump: number
     gravity: number
@@ -1323,7 +1321,7 @@ declare global {
   }
 
 
-  export interface PlayerControl {
+  interface PlayerControl {
     up: boolean
     down: boolean
     left: boolean
@@ -1338,7 +1336,7 @@ declare global {
     zoom: boolean
   }
 
-  export interface SkyParametersColor {
+  interface SkyParametersColor {
     day_sky: DynamicColorSpec
     day_horizon: DynamicColorSpec
     dawn_sky: DynamicColorSpec
@@ -1348,25 +1346,25 @@ declare global {
     indoors: DynamicColorSpec
     fog_sun_tint: DynamicColorSpec
     fog_moon_tint: DynamicColorSpec
-    fog_tint_type: SkyParametersFogTintType
+    fog_tint_type: utility.SkyParametersFogTintType
   }
 
-  export interface SkyParametersFog {
+  interface SkyParametersFog {
     fog_distance: number
     fog_start: number
   }
 
-  export interface SkyParameters {
+  interface SkyParameters {
     base_color: DynamicColorSpec
     body_orbit_tilt: number
-    type: SkyParametersType
+    type: utility.SkyParametersType
     textures: string[]
     clouds: boolean
     sky_color: SkyParametersColor
     fog: SkyParametersFog
   }
 
-  export interface SunParameters {
+  interface SunParameters {
     visible: boolean
     texture: string
     tonemap: string
@@ -1375,14 +1373,14 @@ declare global {
     scale: number
   }
 
-  export interface MoonParameters {
+  interface MoonParameters {
     visible: boolean
     texture: string
     tonemap: string
     scale: number
   }
 
-  export interface StarParameters {
+  interface StarParameters {
     visible: boolean
     day_opacity: number
     count: number
@@ -1390,7 +1388,7 @@ declare global {
     scale: number
   }
 
-  export interface CloudParameters {
+  interface CloudParameters {
     density: number
     color: DynamicColorSpec
     ambient: DynamicColorSpec
@@ -1399,11 +1397,11 @@ declare global {
     speed: Vec2
   }
 
-  export interface LightShadowsSpec {
+  interface LightShadowsSpec {
     intensity: number
   }
 
-  export interface LightExposureSpec {
+  interface LightExposureSpec {
     luminance_min: number
     luminance_max: number
     exposure_correction: number
@@ -1412,15 +1410,15 @@ declare global {
     center_weight_power: number
   }
 
-  export interface LightingDefinition {
+  interface LightingDefinition {
     saturation: number
     shadows: LightShadowsSpec
     exposure: LightExposureSpec
   }
 
-  export type CollisionBox = Array<number>
+  type CollisionBox = Array<number>
 
-  export interface ObjectProperties {
+  interface ObjectProperties {
     hp_max?: number
     breath_max?: number
     zoom_fov?: number
@@ -1431,7 +1429,7 @@ declare global {
     collisionbox?: CollisionBox
     selectionbox?: number[]
     pointable?: boolean
-    visual?: EntityVisual
+    visual?: utility.EntityVisual
     visual_size?: Vec3 | Vec2
     mesh?: string
     textures?: string[]
@@ -1457,34 +1455,34 @@ declare global {
     show_on_minimap?: boolean
   }
 
-  export interface LuaEntity {
+  interface LuaEntity {
     __index?: LuaEntity
     initial_properties?: ObjectProperties
     name: string
     object: ObjectRef
-    on_activate?(staticData: string, delta: number): void 
-    on_deactivate?(removal: boolean): void 
-    on_step?(delta: number, moveResult: MoveResult): void 
+    on_activate?(staticData: string, delta: number): void
+    on_deactivate?(removal: boolean): void
+    on_step?(delta: number, moveResult: MoveResult): void
     on_punch?(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void
     on_death?(killer: ObjectRef): void
-    on_rightclick?(clicker: ObjectRef): void 
+    on_rightclick?(clicker: ObjectRef): void
     on_attach_child?(child: ObjectRef): void
     on_detach_child?(child: ObjectRef): void
     on_detach?(parent: ObjectRef): void
     get_staticdata?(): string
   }
-  
 
-  
-  export interface MinimapModes {
-    type: MinimapType
+
+
+  interface MinimapModes {
+    type: utility.MinimapType
     label: string
     size: number
     texture: string
     scale: number
   }
-  
-  export interface HudFlags {
+
+  interface HudFlags {
     hotbar: boolean
     healthbar: boolean
     crosshair: boolean
@@ -1494,9 +1492,9 @@ declare global {
     minimap_radar: boolean
     basic_debug: boolean
   }
-  
-  export interface HudDefinition {
-    hud_elem_type: HudElementType
+
+  interface HudDefinition {
+    hud_elem_type: utility.HudElementType
     position: Vec2
     name: string
     scale: Vec2
@@ -1512,9 +1510,9 @@ declare global {
     z_index: number
     style: number
   }
-  
-  export interface TileAnimationDefinition {
-    type: TileAnimationType
+
+  interface TileAnimationDefinition {
+    type: utility.TileAnimationType
     aspect_w: number
     aspect_h: number
     length: number
@@ -1523,31 +1521,31 @@ declare global {
     frame_length: number
   }
 
-  export interface Rollback {
+  interface Rollback {
     actor: string
     pos: Vec3
     time: number
     oldnode: string
     newnode: string
   }
-  
-  export interface Job {
+
+  interface Job {
     cancel(): void
   }
-  
-  export interface DynamicAddMediaOptions {
+
+  interface DynamicAddMediaOptions {
     filepath: string
     to_player: string
     ephemeral: boolean
   }
-  
-  export interface ParticleBounceDefinition {
+
+  interface ParticleBounceDefinition {
     min: number
     max: number
     bias: number
   }
-  
-  export interface ParticleDefinition {
+
+  interface ParticleDefinition {
     pos: Vec3
     velocity: Vec3
     acceleration: Vec3
@@ -1566,15 +1564,15 @@ declare global {
     drag: Vec3
     bounce: ParticleBounceDefinition
   }
-  
-  export interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
+
+  interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
     // {number | ParticleSpawnerRangeDefinition}
-    style: ParticleSpawnerTweenStyle
+    style: utility.ParticleSpawnerTweenStyle
     reps: number
     start: number
   }
-  
-  export interface ParticleSpawnerRangeDefinition {
+
+  interface ParticleSpawnerRangeDefinition {
     min: Vec3
     max: Vec3
     bias: number
@@ -1583,37 +1581,37 @@ declare global {
     y: number
     z: number
   }
-  
-  export type ParticleSpawnerTextureScaleTween = Array<Vec2>
-  
-  export interface ParticleSpawnerTextureDefinition {
+
+  type ParticleSpawnerTextureScaleTween = Array<Vec2>
+
+  interface ParticleSpawnerTextureDefinition {
     name: string
     alpha: number
     alpha_tween: number[]
     scale: number | Vec2
     scale_tween: ParticleSpawnerTextureScaleTween
-    blend: ParticleSpawnerTextureBlend
+    blend: utility.ParticleSpawnerTextureBlend
     animation: TileAnimationDefinition
   }
-  
-  export interface TexturePoolComponentTweenDefinition extends Array<number> {
-    style: ParticleSpawnerTweenStyle
+
+  interface TexturePoolComponentTweenDefinition extends Array<number> {
+    style: utility.ParticleSpawnerTweenStyle
     reps: number
   }
-  
-  export interface TexturePoolComponentDefinition {
+
+  interface TexturePoolComponentDefinition {
     name: string
-    fade: TexturePoolComponentFade
+    fade: utility.TexturePoolComponentFade
     alpha: number
     scale: number
     animation: TileAnimationDefinition
     alpha_tween: TexturePoolComponentTweenDefinition
   }
-  
-  export type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
-  
-  export interface ParticleSpawnerAttractionDefinition {
-    kind: ParticleSpawnerAttractionType
+
+  type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
+
+  interface ParticleSpawnerAttractionDefinition {
+    kind: utility.ParticleSpawnerAttractionType
     strength: Vec2
     origin: Vec3
     direction: Vec3
@@ -1621,8 +1619,8 @@ declare global {
     direction_attached: ObjectRef
     die_on_contact: boolean
   }
-  
-  export interface ParticleSpawnerDefinition {
+
+  interface ParticleSpawnerDefinition {
     maxpos: Vec3
     minpos: Vec3
     pos: number | ParticleSpawnerRangeDefinition
@@ -1639,24 +1637,24 @@ declare global {
     texpool: ParticleSpawnerTexturePoolDefinition
   }
 
-  export interface AreaStoreArea {
+  interface AreaStoreArea {
     min: Vec3
     max: Vec3
     data: string
   }
-  
-  export interface AreaStoreCacheDefinition {
+
+  interface AreaStoreCacheDefinition {
     enabled: boolean
     block_radius: number
     limit: number
   }
 
-  export interface Vec2 {
+  interface Vec2 {
     x: number
     y: number
   }
 
-  export interface Vec3 extends Vec2 {
+  interface Vec3 extends Vec2 {
     __eq(other: Vec3): boolean
     __unm(): Vec3
     __add(other: Vec3): Vec3
@@ -1668,13 +1666,13 @@ declare global {
   }
 
 
-  export interface Vec3RangeBias {
+  interface Vec3RangeBias {
     min: Vec3
     max: Vec3
     bias: Vec3
   }
 
-  export interface RGBA {
+  interface RGBA {
     r: number
     g: number
     b: number
@@ -1682,7 +1680,7 @@ declare global {
   }
 
 
-  export interface DigParamsReturn {
+  interface DigParamsReturn {
     diggable: boolean
     time: number
     wear: number
@@ -1690,7 +1688,7 @@ declare global {
     tool_capabilities: ToolCapabilities
   }
 
-  export interface HitParamsReturn {
+  interface HitParamsReturn {
     hp: number
     wear: number
     groups: string[]
@@ -1698,7 +1696,7 @@ declare global {
     time_from_last_punch: number
   }
 
-  export interface NodeTimerObject {
+  interface NodeTimerObject {
     set(timeOut: number, elapsed: number): void
     start(timeOut: number): void
     stop(): void
@@ -1707,35 +1705,35 @@ declare global {
     is_started(): boolean
   }
 
-  export function dump(object: any, name?: string, dumped?: any[]): string
+  function dump(object: any, name?: string, dumped?: any[]): string
 
-  export function dump2(object: any, dumped?: any[]): string
+  function dump2(object: any, dumped?: any[]): string
 
-  export interface Translator {
+  interface Translator {
     __call(...string: string[]): string
   }
 
 
   // You can just bolt onto namespaces apparently!
-  export namespace math {
-    export function hypot(x: number, y: number): number
-    export function sign(x: number, tolerence: number): number
-    export function factorial(x: number): number
-    export function round(x: number): number
+  namespace math {
+    function hypot(x: number, y: number): number
+    function sign(x: number, tolerence: number): number
+    function factorial(x: number): number
+    function round(x: number): number
     // Clamp is a bolt on created in utility.
-    export function clamp(min: number, max: number, input: number): number
+    function clamp(min: number, max: number, input: number): number
   }
 
-  export namespace string {
-    export function split(str: string, separator: string, includeEmpty: box, maxSplits: number, sepIsPattern: boolean): string
-    export function trim(str: string): string
+  namespace string {
+    function split(str: string, separator: string, includeEmpty: box, maxSplits: number, sepIsPattern: boolean): string
+    function trim(str: string): string
   }
-  export namespace table {
-    export function copy(table: LuaTable): LuaTable
-    export function indexof(list: LuaTable, val: any): number
-    export function insert_all(table: LuaTable, otherTable: LuaTable): LuaTable
-    export function key_value_swap(t: LuaTable): LuaTable
-    export function shuffle(table: LuaTable, from: number, to: number, randomFunc: () => number): LuaTable
+  namespace table {
+    function copy(table: LuaTable): LuaTable
+    function indexof(list: LuaTable, val: any): number
+    function insert_all(table: LuaTable, otherTable: LuaTable): LuaTable
+    function key_value_swap(t: LuaTable): LuaTable
+    function shuffle(table: LuaTable, from: number, to: number, randomFunc: () => number): LuaTable
   }
 }
 

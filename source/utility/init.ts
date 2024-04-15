@@ -1,6 +1,6 @@
 namespace utility {
 
-  const textureSize = 16
+  export const textureSize = 16
 
   export function pixel(inputPixel: number): number {
     return (inputPixel / textureSize) - 0.5
@@ -19,12 +19,12 @@ namespace utility {
   export function concat(...input: string[]): string {
     let accumulator = ""
     input.forEach((val: string) => {
-      accumulator += val 
+      accumulator += val
     })
     return accumulator
   }
 
-  export function generateSchematic(size: Vec3, keys: {[id: string] : string}, forcePlace: {[id: string] : boolean}, data: string, ySliceProb: number[]): SchematicDefinition {
+  export function generateSchematic(size: Vec3, keys: { [id: string]: string }, forcePlace: { [id: string]: boolean }, data: string, ySliceProb: number[]): SchematicDefinition {
 
     let newSchematic = {
       size: size,
@@ -34,7 +34,7 @@ namespace utility {
 
     const length = data.length
     let countDown = length
-    for (let i = 1; i <= length; i++ ) {
+    for (let i = 1; i <= length; i++) {
       const databit = string.sub(data, countDown, countDown)
       table.insert(newSchematic.data, {
         name: keys[databit],
@@ -45,7 +45,7 @@ namespace utility {
     }
 
     for (const databit of ySliceProb) {
-      table.insert(newSchematic.yslice_prob, {prob: databit})
+      table.insert(newSchematic.yslice_prob, { prob: databit })
     }
 
     return newSchematic
@@ -54,7 +54,7 @@ namespace utility {
   export function println(...any: any): void {
     let builder = ""
     for (const item of any) {
-      builder += (function() {
+      builder += (function () {
         switch (type(item)) {
           case "string":
             return item
@@ -86,14 +86,14 @@ namespace utility {
 
   const rr = randomRange;
 
-  vector.create = function(x?: number, y?: number, z?: number): Vec3 {
+  vector.create = function (x?: number, y?: number, z?: number): Vec3 {
     let temp = vector.zero()
     temp.x = x || 0
     temp.y = y || 0
     temp.z = z || 0
     return temp
   };
-  vector.create2d = function(x?: number, y?: number): Vec2 {
+  vector.create2d = function (x?: number, y?: number): Vec2 {
     let temp = {
       x: x || 0,
       y: y || 0
@@ -101,10 +101,10 @@ namespace utility {
     return temp
   }
 
-  const create = vector.create;
+  export const create = vector.create;
 
   // TS is kinda cool
-  vector.random = function(minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3 {
+  vector.random = function (minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3 {
     return create(
       rr(minX, maxX),
       rr(minY, maxY),
@@ -116,7 +116,7 @@ namespace utility {
     // Hidden localized variables.
     const vecA = vector.create()
     const vecB = vector.create()
-    return function(vec1: Vec3, vec2: Vec3): number {
+    return function (vec1: Vec3, vec2: Vec3): number {
       vecA.x = vec1.x
       vecA.y = 0
       vecA.z = vec1.z
@@ -135,7 +135,7 @@ namespace utility {
    * A bolt on to allow you to directly register MT lua entities as TS classes.
    * @param clazz Class definition.
    */
-  minetest.registerTSEntity = function(clazz: { new(): LuaEntity }) {
+  minetest.registerTSEntity = function (clazz: { new(): LuaEntity }) {
     let instance: LuaEntity = new clazz()
     // print(dump(instance))
     if (instance.name == null) {
@@ -153,7 +153,7 @@ namespace utility {
    * @param input Value to be clamped.
    * @returns Clamped value.
    */
-  math.clamp = function(min: number, max: number, input: number): number {
+  math.clamp = function (min: number, max: number, input: number): number {
     if (input < min) {
       return min
     } else if (input > max) {

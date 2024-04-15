@@ -1,4 +1,3 @@
-import { Drawtype } from "../utility/enums";
 
 namespace blocks {
 
@@ -20,24 +19,24 @@ namespace blocks {
   const playerInventorySize = player.MAIN_INVENTORY_SIZE
   const playerRegularCraftSize = player.CRAFT_INVENTORY_SIZE
 
-  export const WORKBENCH_INVENTORY_SIZE = create(3,3)
-  
+  const WORKBENCH_INVENTORY_SIZE = create(3, 3)
+
 
   const workBenchInventory: string = generate(new FormSpec({
-    size: create(12,12),
+    size: create(12, 12),
     elements: [
       //! Nice background colors.
       new BGColor({
         bgColor: colorScalar(85),
         fullScreen: "both",
-        fullScreenbgColor: colorScalar(0,40)
+        fullScreenbgColor: colorScalar(0, 40)
       }),
       //! Make these lists look nice as well.
       new ListColors({
         slotBGHover: colorScalar(70),
         slotBGNormal: colorScalar(55),
         slotBorder: colorScalar(0),
-        toolTipBGColor: colorRGB(123,104,238),
+        toolTipBGColor: colorRGB(123, 104, 238),
         toolTipFontColor: colorScalar(100)
       }),
       //! Craft area.
@@ -132,7 +131,7 @@ namespace blocks {
   //   const meta = minetest.get_meta(position)
   //   const inventory = meta.get_inventory()
   //   const craftArea = inventory.get_list("craft")
-  
+
   //   const [result, leftOver] = minetest.get_craft_result({
   //     method: CraftCheckType.normal,
   //     width: WORKBENCH_INVENTORY_SIZE.x,
@@ -184,7 +183,7 @@ namespace blocks {
 
 
   minetest.register_node(":workbench", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: [
       "crafting_workbench_top.png",
       "default_wood.png",
@@ -202,7 +201,7 @@ namespace blocks {
       inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
     },
 
-    on_receive_fields(position: Vec3, formName: string, fields: {[id: string] : any}, sender: ObjectRef) {
+    on_receive_fields(position: Vec3, formName: string, fields: { [id: string]: any }, sender: ObjectRef) {
       // Just throw the items for now.
       const inventory = sender.get_inventory()
       const playerPos = sender.get_pos()

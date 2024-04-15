@@ -17,7 +17,7 @@ namespace formSpec {
 
   const create = vector.create2d;
 
-  function sVec(input: Vec2): string {
+  export function sVec(input: Vec2): string {
     return input.x + "," + input.y
   }
 
@@ -26,7 +26,7 @@ namespace formSpec {
    * @param input Array of strings.
    * @returns Array as single string concatenated with ","
    */
-  function arrayToString(input: string[]): string {
+  export function arrayToString(input: string[]): string {
     let temp = ""
     let index = 0
     for (const value of input) {
@@ -79,7 +79,7 @@ namespace formSpec {
 
   //? Element prototype.
 
-  interface Element {
+  export interface Element {
 
   }
 
@@ -95,7 +95,7 @@ namespace formSpec {
     elements: Element[]
     constructor(definition: ContainerDefinition) {
       this.position = definition.position,
-      this.elements = definition.elements
+        this.elements = definition.elements
     }
     attachElement(newElement: Element): Container {
       this.elements.push(newElement)
@@ -105,7 +105,7 @@ namespace formSpec {
 
   //? Scroll container
 
-  export enum ScrollOrientation {
+  enum ScrollOrientation {
     vertical = "vertical",
     horizontal = "horizontal"
   }
@@ -293,7 +293,7 @@ namespace formSpec {
       this.frameStart = definition.frameStart
     }
   }
-  
+
   //? Model
 
   export interface ModelDefinition {
@@ -322,7 +322,7 @@ namespace formSpec {
     animationSpeed: number
     constructor(definition: ModelDefinition) {
       this.position = definition.position
-      this.size = definition. size
+      this.size = definition.size
       this.name = definition.name
       this.mesh = definition.mesh
       this.textures = definition.textures
@@ -343,7 +343,7 @@ namespace formSpec {
     fullScreenbgColor: string
   }
 
-  export class BGColor implements Element{
+  export class BGColor implements Element {
     //! This one is quite confusing in docs
     bgColor: string
     fullScreen: boolean | string
@@ -365,7 +365,7 @@ namespace formSpec {
     middle?: string
   }
 
-  export class Background  implements Element {
+  export class Background implements Element {
     position: Vec2
     size: Vec2
     texture: string
@@ -391,7 +391,7 @@ namespace formSpec {
 
   export class PasswordField implements Element {
     position: Vec2
-    size: Vec2 
+    size: Vec2
     name: string
     label: string
     constructor(definition: PasswordFieldDefinition) {
@@ -412,7 +412,7 @@ namespace formSpec {
     default: string
   }
 
-  export class Field implements Element{
+  export class Field implements Element {
     position?: Vec2
     size?: Vec2
     name: string
@@ -548,7 +548,7 @@ namespace formSpec {
 
   //? ImageButton
 
-  export interface ImageButtonDefinition extends ButtonDefinition{
+  export interface ImageButtonDefinition extends ButtonDefinition {
     texture: string
   }
 
@@ -873,18 +873,18 @@ namespace formSpec {
   }
 
 
-  // ? Functional implementation
+  // ? export functional implementation
 
-  //* This function will recurse.
-  function processElements(accumulator: string, elementArray: Element[]): string {
+  //* This export function will recurse.
+  export function processElements(accumulator: string, elementArray: Element[]): string {
     // print(dump(elementArray))
     for (const element of elementArray) {
 
       if (element instanceof Container) {
 
         const pos = element.position
-        accumulator += "container[" +  sVec(pos) + "]\n"
-        
+        accumulator += "container[" + sVec(pos) + "]\n"
+
         //* todo: recurse here.
         // accumulator = processElements(accumulator, element.elements)
 
@@ -895,7 +895,7 @@ namespace formSpec {
         const pos = element.position
         const size = element.size
         accumulator += "scroll_container[" + sVec(pos) + ";" + sVec(size) + ";" +
-        element.name + ";" + element.orientation + ";" + element.factor + "]\n"
+          element.name + ";" + element.orientation + ";" + element.factor + "]\n"
 
         //* todo: recurse here
         // accumulator = processElements(accumulator, element.elements)
@@ -926,7 +926,7 @@ namespace formSpec {
         const slotBGNormal = element.slotBGNormal
         const slotBGHover = element.slotBGHover
         accumulator += "listcolors[" + slotBGNormal + ";" + slotBGHover
-        
+
         // Next definition
         const slotBorder = element.slotBorder
         if (slotBorder) {
@@ -954,7 +954,7 @@ namespace formSpec {
         accumulator += "tooltip[" + guiElementName + ";" + text + ";" + bgColor + ";" + fontColor + "]\n"
 
       } else if (element instanceof AreaToolTip) {
-        
+
         const pos = element.position
         const size = element.size
         const text = element.text
@@ -989,8 +989,8 @@ namespace formSpec {
         const frameStart = element.frameStart
         const middle = element.middle
 
-        accumulator += "animated_image[" + sVec(pos) + ";" + sVec(size) + ";" + 
-        name + ";" + texture + ";" + frameCount + ";" + frameDuration + ";" + frameStart
+        accumulator += "animated_image[" + sVec(pos) + ";" + sVec(size) + ";" +
+          name + ";" + texture + ";" + frameCount + ";" + frameDuration + ";" + frameStart
 
         if (middle) {
           accumulator += ";" + middle
@@ -1012,11 +1012,11 @@ namespace formSpec {
         const mouseControl = element.mouseControl
         const frameLoopRange = element.frameLoopRange
         const animationSpeed = element.animationSpeed
-        
+
         accumulator += "model[" + sVec(pos) + ";" + sVec(size) + ";" +
-        name + ";" + mesh + ";" + textures + ";" + sVec(rotation) + ";" +
-        continuous + ";" + mouseControl + ";" + sVec(frameLoopRange) + ";" +
-        animationSpeed + "]\n"
+          name + ";" + mesh + ";" + textures + ";" + sVec(rotation) + ";" +
+          continuous + ";" + mouseControl + ";" + sVec(frameLoopRange) + ";" +
+          animationSpeed + "]\n"
 
       } else if (element instanceof BGColor) {
 
@@ -1073,7 +1073,7 @@ namespace formSpec {
         const def = element.default
 
         accumulator += name + ";" + label + ";" + def + "]\n"
-        
+
       } else if (element instanceof FieldEnterAfterEdit) {
 
         const name = element.name
@@ -1093,7 +1093,7 @@ namespace formSpec {
         const def = element.default
 
         accumulator += "textarea[" + sVec(pos) + ";" + sVec(size) + ";" +
-        name + ";" + label + ";" + def + "]\n"
+          name + ";" + label + ";" + def + "]\n"
 
       } else if (element instanceof Label) {
 
@@ -1110,7 +1110,7 @@ namespace formSpec {
         const text = element.text
 
         accumulator += "hypertext[" + sVec(pos) + ";" + sVec(size) + ";" +
-        name + ";" + text + "]\n"
+          name + ";" + text + "]\n"
 
       } else if (element instanceof VertLabel) {
 
@@ -1149,8 +1149,8 @@ namespace formSpec {
         const drawBorder = element.drawBorder
         const pressedTexture = element.pressedTexture
 
-        accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + texture + ";" + name + ";" + label + ";" + 
-        noClip + ";" + drawBorder + ";" + pressedTexture + "]\n"
+        accumulator += "button[" + sVec(pos) + ";" + sVec(size) + ";" + texture + ";" + name + ";" + label + ";" +
+          noClip + ";" + drawBorder + ";" + pressedTexture + "]\n"
 
       } else if (element instanceof ItemImageButton) {
 
@@ -1161,7 +1161,7 @@ namespace formSpec {
         const label = element.label
 
         accumulator += "item_image_button[" + sVec(pos) + ";" + sVec(size) + ";" + itemName + ";" +
-        name + ";" + label + "]\n"
+          name + ";" + label + "]\n"
 
       } else if (element instanceof ButtonExit) {
 
@@ -1184,7 +1184,7 @@ namespace formSpec {
         const transparent = element.transparent
 
         accumulator += "textlist[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + listOfItems + ";" +
-        selectedIndex + ";" + transparent + "]\n"
+          selectedIndex + ";" + transparent + "]\n"
 
       } else if (element instanceof TabHeader) {
 
@@ -1199,7 +1199,7 @@ namespace formSpec {
         const drawBorder = element.drawBorder
 
         accumulator += "tabheader[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + listOfCaptions + ";" +
-        currentTab + ";" + transparent + ";" + drawBorder + "]\n"
+          currentTab + ";" + transparent + ";" + drawBorder + "]\n"
 
       } else if (element instanceof Box) {
 
@@ -1208,7 +1208,7 @@ namespace formSpec {
         const color = element.color
 
         accumulator += "box[" + sVec(pos) + ";" + sVec(size) + ";" + color + "]\n"
-        
+
       } else if (element instanceof DropDown) {
 
         const pos = element.position
@@ -1221,7 +1221,7 @@ namespace formSpec {
         const indexEvent = element.indexEvent
 
         accumulator += "dropdown[" + sVec(pos) + ";" + sVec(size) + ";" + name + ";" + itemList + ";" +
-        selectedIndex + ";" + indexEvent + "]\n"
+          selectedIndex + ";" + indexEvent + "]\n"
 
 
       } else if (element instanceof CheckBox) {
@@ -1240,9 +1240,9 @@ namespace formSpec {
         const orientation = element.orientation
         const name = element.name
         const value = element.value
-      
+
         accumulator += "scrollbar[" + sVec(pos) + ";" + sVec(size) + ";" + orientation + ";" +
-        name + ";" + value + "]\n"
+          name + ";" + value + "]\n"
 
       } else if (element instanceof ScrollBarOptions) {
 
@@ -1267,7 +1267,7 @@ namespace formSpec {
       } else if (element instanceof TableOptions) {
 
         const options = arrayToString(element.tableOptions)
-        
+
         accumulator += "tableoptions[" + options + "]\n"
 
       } else if (element instanceof TableColumns) {
@@ -1298,14 +1298,14 @@ namespace formSpec {
       }
 
 
-      
+
 
 
 
 
     }
 
-    
+
     return accumulator
   }
 
@@ -1313,7 +1313,7 @@ namespace formSpec {
     //? figure out if newlines are necessary.
     //* note: components of formspecs are context sensitive.
     //* so this turns into a bunch of if-then checks in order.
-    
+
     let accumulator = "formspec_version[7]\n"
     if (d.size) {
       const fixed = (d.fixedSize) ? true : false
@@ -1337,10 +1337,10 @@ namespace formSpec {
     }
     // Now recurse all elements in the array.
     accumulator = processElements(accumulator, d.elements)
-    
+
     return accumulator
   }
 
 
-  
+
 }

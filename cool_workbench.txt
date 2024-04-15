@@ -17,7 +17,7 @@ namespace glarp {
 
   const playerInventorySize = player.MAIN_INVENTORY_SIZE
 
-  export const WORKBENCH_INVENTORY_SIZE = create(3,3)
+  const WORKBENCH_INVENTORY_SIZE = create(3,3)
   
 
   const workBenchInventory: string = generate(new FormSpec({

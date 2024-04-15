@@ -1,11 +1,10 @@
-import { Drawtype, Nodeboxtype, ParamType1, ParamType2 } from "../utility/enums";
 
 namespace blocks {
   const blockType = types.BlockType;
   const pixel = utility.pixel
   const create = vector.create
 
-  const grassSize: {[id: number] : Vec3} = {
+  const grassSize: { [id: number]: Vec3 } = {
     // Start, height, end
     1: create(3, 3, 13),
     2: create(3, 5, 13),
@@ -18,27 +17,27 @@ namespace blocks {
 
     const size = grassSize[i]
 
-    const collisionBox: boxTable = 
-    [[
-      pixel(size.x), pixel(0), pixel(size.x),
-      pixel(size.z), pixel(size.y), pixel(size.z),
-    ]]
+    const collisionBox: boxTable =
+      [[
+        pixel(size.x), pixel(0), pixel(size.x),
+        pixel(size.z), pixel(size.y), pixel(size.z),
+      ]]
 
     minetest.register_node(":tall_grass_" + i, {
-      drawtype: Drawtype.plantlike,
+      drawtype: utility.Drawtype.plantlike,
       walkable: false,
       waving: 1,
-      paramtype: ParamType1.light,
-      paramtype2: ParamType2.degrotate,
+      paramtype: utility.ParamType1.light,
+      paramtype2: utility.ParamType2.degrotate,
       tiles: ["default_grass_" + i + ".png"],
       buildable_to: true,
       sounds: sounds.plant(),
       collision_box: {
-        type: Nodeboxtype.fixed,
+        type: utility.Nodeboxtype.fixed,
         fixed: collisionBox
       },
       selection_box: {
-        type: Nodeboxtype.fixed,
+        type: utility.Nodeboxtype.fixed,
         fixed: collisionBox
       },
       groups: {

@@ -1,6 +1,5 @@
-import { EntityVisual } from "../utility/enums";
 
-export namespace builtinEntity {
+namespace builtinEntity {
   // const println = utility.println;
   const fakeRef = utility.fakeRef;
   const timeToLive = tonumber(minetest.settings.get("item_entity_ttl")) || 900
@@ -76,7 +75,7 @@ export namespace builtinEntity {
       physical: true,
       collide_with_objects: false,
       collisionbox: [-0.3, -0.3, -0.3, 0.3, 0.3, 0.3],
-      visual: EntityVisual.cube,
+      visual: utility.EntityVisual.cube,
       visual_size: vector.create2d(),
       automatic_rotate: 1,
       textures: [""],
@@ -104,7 +103,7 @@ export namespace builtinEntity {
 
       this.object.set_properties({
         is_visible: true,
-        visual: EntityVisual.wielditem,
+        visual: utility.EntityVisual.wielditem,
         textures: [itemName],
         visual_size: vector.create2d(size + bias, size + bias),
         collisionbox: c,
@@ -409,6 +408,6 @@ export namespace builtinEntity {
   minetest.registerTSEntity(ItemEntity)
 }
 
-// export {
+// {
 //   ItemEntity
 // }

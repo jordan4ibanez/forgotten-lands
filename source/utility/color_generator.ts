@@ -2,7 +2,7 @@ namespace utility {
   // Taken from: https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4 (Thanks lopspower & LeoMacherla!)
   // Written into this abomination.
 
-  const hexValues: {[id: number] : string} = {
+  export const hexValues: { [id: number]: string } = {
     100: "FF",
     99: "FC",
     98: "FA",
@@ -106,7 +106,7 @@ namespace utility {
     0: "00"
   }
 
-  function lockChannel(input: number): number {
+  export function lockChannel(input: number): number {
     return math.floor(math.clamp(0, 100, input))
   }
 
@@ -122,7 +122,7 @@ namespace utility {
 
   export function color(r: number, g: number, b: number, a?: number): string {
     let newColor = "#"
-    for (const channel of [r,g,b,a]) {
+    for (const channel of [r, g, b, a]) {
       if (channel) {
         newColor += hexValues[lockChannel(channel)]
       }

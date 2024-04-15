@@ -7,7 +7,7 @@ namespace items {
    * Easily register a dictionary of craft items.
    * @param inputArray Key value assignment of craftitems to be registered.
    */
-  export function processCraftItemArray(inputArray: {[id: string] : ItemDefinition}) {
+  function processCraftItemArray(inputArray: { [id: string]: ItemDefinition }) {
     for (const [name, definition] of Object.entries(inputArray)) {
       craftRegister(name, definition)
     }
@@ -30,7 +30,7 @@ namespace items {
 
   }
 
-  const craftItems: {[id: string] : ItemDefinition} = {
+  const craftItems: { [id: string]: ItemDefinition } = {
     ":stick": {
       wield_scale: wieldScale,
       inventory_image: "default_stick.png",
@@ -56,6 +56,6 @@ namespace items {
       inventory_image: "default_mese_crystal.png"
     }
   }
-  
+
   processCraftItemArray(craftItems)
 }

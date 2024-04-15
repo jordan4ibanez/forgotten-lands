@@ -1,4 +1,3 @@
-import { Drawtype, ParamType1, TextureAlpha } from "../utility/enums";
 
 namespace blocks {
   const generateDropRequirements = tools.generateDropRequirements;
@@ -6,7 +5,7 @@ namespace blocks {
   const blockType = types.BlockType;
 
   minetest.register_node(":stone", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: ["default_stone.png"],
     sounds: sounds.stone(),
     groups: {
@@ -26,7 +25,7 @@ namespace blocks {
   })
 
   minetest.register_node(":cobblestone", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: ["default_cobble.png"],
     sounds: sounds.stone(),
     groups: {
@@ -35,7 +34,7 @@ namespace blocks {
   })
 
   minetest.register_node(":dirt", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: ["default_dirt.png"],
     sounds: sounds.dirt(),
     groups: {
@@ -44,7 +43,7 @@ namespace blocks {
   })
 
   minetest.register_node(":grass", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: [
       "default_grass.png",
       "default_dirt.png",
@@ -58,7 +57,7 @@ namespace blocks {
   })
 
   minetest.register_node(":sand", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: ["default_sand.png"],
     sounds: sounds.sand(),
     groups: {
@@ -67,7 +66,7 @@ namespace blocks {
   })
 
   minetest.register_node(":gravel", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: ["default_gravel.png"],
     sounds: sounds.gravel(),
     groups: {
@@ -76,7 +75,7 @@ namespace blocks {
   })
 
   minetest.register_node(":oak_tree", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: [
       "default_tree_top.png",
       "default_tree_top.png",
@@ -90,8 +89,8 @@ namespace blocks {
   })
 
   minetest.register_node(":oak_leaves", {
-    drawtype: Drawtype.allfaces_optional,
-    paramtype: ParamType1.light,
+    drawtype: utility.Drawtype.allfaces_optional,
+    paramtype: utility.ParamType1.light,
     waving: 1,
     tiles: ["default_leaves.png"],
     sounds: sounds.plant(),
@@ -111,7 +110,7 @@ namespace blocks {
   })
 
   minetest.register_node(":oak_wood", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: [
       "default_wood.png"
     ],
@@ -125,7 +124,7 @@ namespace blocks {
 
 
   const dyes = [
-    "black", 
+    "black",
     "blue",
     "brown",
     "cyan",
@@ -153,13 +152,13 @@ namespace blocks {
   }
 
   minetest.register_node(":glass", {
-    drawtype: Drawtype.glasslike_framed_optional,
+    drawtype: utility.Drawtype.glasslike_framed_optional,
     tiles: [
       "default_glass.png",
       "default_glass_detail.png"
     ],
-    use_texture_alpha: TextureAlpha.clip,
-    paramtype: ParamType1.light,
+    use_texture_alpha: utility.TextureAlpha.clip,
+    paramtype: utility.ParamType1.light,
     sunlight_propagates: true,
     is_ground_content: false,
     sounds: sounds.glass(),
@@ -168,5 +167,5 @@ namespace blocks {
     },
     drop: ""
   })
-  
+
 }

@@ -10,7 +10,7 @@ namespace tools {
    * Generates a node tool_groups array.
    * @param table Holds the ToolType and min tool level to drop an item.
    */
-  export function generateDropRequirements(table: {[id: string] : number}): string[] {
+  export function generateDropRequirements(table: { [id: string]: number }): string[] {
     let temp: string[] = []
     for (const [toolType, minLevel] of Object.entries(table)) {
       for (let i = minLevel; i <= CURRENT_MAX_LEVEL; i++) {
@@ -24,8 +24,8 @@ namespace tools {
    * Generates a tool group dictionary.
    * @param table The ToolType max level in which it can drop items from the tool group.
    */
-  export function generateToolDropGroups(table: {[id: string] : number}): {[id: string] : number} {
-    let temp: {[id: string] : number} = {}
+  export function generateToolDropGroups(table: { [id: string]: number }): { [id: string]: number } {
+    let temp: { [id: string]: number } = {}
     for (const [toolType, maxLevel] of Object.entries(table)) {
       for (let i = 1; i <= maxLevel; i++) {
         temp[toolType + "_" + i] = 1

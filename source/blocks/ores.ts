@@ -1,4 +1,3 @@
-import { Drawtype } from "../utility/enums";
 
 namespace blocks {
   const generateDropRequirements = tools.generateDropRequirements;
@@ -10,7 +9,7 @@ namespace blocks {
   }
 
   minetest.register_node(":coal_ore", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_coal.png"),
     sounds: sounds.stone(),
     groups: {
@@ -29,7 +28,7 @@ namespace blocks {
   })
 
   minetest.register_node(":iron_ore", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_iron.png"),
     sounds: sounds.stone(),
     groups: {
@@ -48,7 +47,7 @@ namespace blocks {
   })
 
   minetest.register_node(":gold_ore", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_gold.png"),
     sounds: sounds.stone(),
     groups: {
@@ -67,7 +66,7 @@ namespace blocks {
   })
 
   minetest.register_node(":diamond_ore", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_diamond.png"),
     sounds: sounds.stone(),
     groups: {
@@ -86,7 +85,7 @@ namespace blocks {
   })
 
   minetest.register_node(":mese_ore", {
-    drawtype: Drawtype.normal,
+    drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_mese.png"),
     sounds: sounds.stone(),
     groups: {

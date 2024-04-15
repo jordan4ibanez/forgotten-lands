@@ -1,8 +1,7 @@
-import { CraftRecipeType } from "../utility/enums";
 
 namespace recipes {
   const r = minetest.register_craft;
-  const recipeType = CraftRecipeType;
+  const recipeType = utility.CraftRecipeType;
   const craftBlockType = types.CraftingBlockType;
   // This will probably get broken down into sub-files in this namespace.
   // But for now, crafting goes here.
@@ -11,7 +10,7 @@ namespace recipes {
    * Easily process a bulk array of craft recipes.
    * @param inputArray Array of craft recipe definitions to be processed.
    */
-  export function processRecipeArray(inputArray: CraftRecipeDefinition[]): void {
+  function processRecipeArray(inputArray: CraftRecipeDefinition[]): void {
     for (const recipe of inputArray) {
       r(recipe)
     }
@@ -32,8 +31,8 @@ namespace recipes {
       output: material + "_pickaxe",
       recipe: [
         [requirement, requirement, requirement],
-        ["",          "stick",     ""],
-        ["",          "stick",     ""]
+        ["", "stick", ""],
+        ["", "stick", ""]
       ]
     })
     toolRegistrationArray.push({
@@ -49,16 +48,16 @@ namespace recipes {
       output: material + "_axe",
       recipe: [
         [requirement, requirement, ""],
-        [requirement, "stick",     ""],
-        ["",          "stick",     ""]
+        [requirement, "stick", ""],
+        ["", "stick", ""]
       ]
     })
     toolRegistrationArray.push({
       output: material + "_axe",
       recipe: [
         ["", requirement, requirement],
-        ["", "stick",     requirement],
-        ["", "stick",     ""]
+        ["", "stick", requirement],
+        ["", "stick", ""]
       ]
     })
     // Hoe can be crafted in both directions.
@@ -66,16 +65,16 @@ namespace recipes {
       output: material + "_hoe",
       recipe: [
         [requirement, requirement],
-        ["",          "stick"],
-        ["",          "stick"]
+        ["", "stick"],
+        ["", "stick"]
       ]
     })
     toolRegistrationArray.push({
       output: material + "_hoe",
       recipe: [
         [requirement, requirement],
-        ["stick",     ""],
-        ["stick",     ""]
+        ["stick", ""],
+        ["stick", ""]
       ]
     })
     toolRegistrationArray.push({
@@ -90,13 +89,13 @@ namespace recipes {
   toolRegistrationArray.push({
     output: "shears",
     recipe: [
-      ["",     "iron"],
+      ["", "iron"],
       ["iron", ""]
     ]
   })
   processRecipeArray(toolRegistrationArray)
 
-  
+
 
   // Generic craftables.
   const craftables: CraftRecipeDefinition[] = [
@@ -115,9 +114,9 @@ namespace recipes {
     {
       output: "furnace",
       recipe: [
-        ["cobblestone","cobblestone","cobblestone"],
-        ["cobblestone","",           "cobblestone"],
-        ["cobblestone","cobblestone","cobblestone"]
+        ["cobblestone", "cobblestone", "cobblestone"],
+        ["cobblestone", "", "cobblestone"],
+        ["cobblestone", "cobblestone", "cobblestone"]
       ]
     },
     {

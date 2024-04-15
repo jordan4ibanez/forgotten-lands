@@ -1,4 +1,3 @@
-import { builtinEntity } from "../item_entity/init";
 
 namespace itemDrop {
   // Namespace magic.
