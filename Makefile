@@ -4,7 +4,7 @@ default:
 	@npx tstl
 	@echo Successfully built Forgotten Times.
 	@echo Copying mod conf files...
-	@./move_conf_files.sh
+	@./important_scripts/move_conf_files.sh
 	@echo Successfully copied mod conf files. 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
@@ -21,7 +21,7 @@ linux:
 	@npx tstl
 	@echo Successfully built Forgotten Times.
 	@echo Copying mod conf files...
-	@./move_conf_files.sh
+	@./important_scripts/move_conf_files.sh
 	@echo Successfully copied mod conf files. 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
