@@ -1,0 +1,7 @@
+Author: j0j0n4th4n
+Textures:
+bones_bottom.png
+bones_front.png
+bones_rear.png
+bones_side.png
+bones_top.png
