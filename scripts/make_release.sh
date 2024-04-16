@@ -2,6 +2,10 @@
 
 # Wow it's almost like someone who had no idea what they're doing made this.
 
+echo "Deleting old release build..."
+rm forgotten_lands_release.zip
+echo "Done."
+
 echo "Creating release folder..."
 rm -rf forgotten_lands_release/
 mkdir forgotten_lands_release/
