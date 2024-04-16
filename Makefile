@@ -41,5 +41,5 @@ clean:
 	@rm --verbose -rf mods/
 	@echo "It's done."
 
-compress:
-	@./scripts/compress_pngs.sh
+optimize_pngs:
+	@./scripts/optimize_pngs.sh
