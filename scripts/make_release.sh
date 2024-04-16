@@ -31,7 +31,7 @@ zip -r forgotten_lands_release.zip forgotten_lands_release/
 echo "Build created."
 
 echo "Creating a tar.gz of the game!"
-tar czf forgotten_lands_release.tar.gz forgotten_lands_release/
+tar vczf forgotten_lands_release.tar.gz forgotten_lands_release/
 echo "Build created."
 
 echo "Cleaning release folder."
