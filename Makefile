@@ -40,3 +40,6 @@ clean:
 	@echo Destroying the built game.
 	@rm --verbose -rf mods/
 	@echo "It's done."
+
+compress:
+	@./scripts/compress_pngs.sh
