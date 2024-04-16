@@ -4,6 +4,7 @@
 
 echo "Deleting old release build..."
 rm forgotten_lands_release.zip
+rm forgotten_lands_release.tar.gz
 echo "Done."
 
 echo "Creating release folder..."
@@ -25,8 +26,12 @@ cp LICENSE forgotten_lands_release/LICENSE
 cp game.conf forgotten_lands_release/game.conf
 echo "Finished blindly shoveling all build game components into the output directory!"
 
-echo "Creating a zip of the build game!"
+echo "Creating a zip of the game!"
 zip -r forgotten_lands_release.zip forgotten_lands_release/
+echo "Build created."
+
+echo "Creating a tar.gz of the game!"
+tar czf forgotten_lands_release.tar.gz forgotten_lands_release/
 echo "Build created."
 
 echo "Cleaning release folder."
