@@ -280,7 +280,7 @@ export enum BlockStatusCondition {
 
 export enum TileAnimationType {
   vertical_frames = "vertical_frames",
-  sheed_2d = "sheed_2d"
+  sheet_2d = "sheet_2d"
 }
 
 export enum ParticleSpawnerTweenStyle {
