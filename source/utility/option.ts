@@ -22,6 +22,16 @@ namespace utility {
       }
     }
 
+    someFunction<T>(f: (input: T) => void): Option<T> {
+      f(this.data as T);
+      return this as unknown as Option<T>;
+    }
+
+    noneFunction<T>(f: () => void): Option<T> {
+      f();
+      return this as unknown as Option<T>;
+    }
+
     constructor(input: T | null) {
       if (input) {
         this.data = input;
