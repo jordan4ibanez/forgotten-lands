@@ -5,6 +5,7 @@ default:
 	@./scripts/copy_conf_files.sh
 	@./scripts/copy_textures.sh
 	@./scripts/copy_sounds.sh
+	@./scripts/copy_models.sh
 
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
@@ -25,6 +26,7 @@ linux:
 	@./scripts/copy_conf_files.sh
 	@./scripts/copy_textures.sh
 	@./scripts/copy_sounds.sh
+	@./scripts/copy_models.sh
 	
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
@@ -35,6 +37,8 @@ build_linux:
 	@./scripts/copy_conf_files.sh
 	@./scripts/copy_textures.sh
 	@./scripts/copy_sounds.sh
+	@./scripts/copy_models.sh
+
 
 release:
 	@./scripts/make_release.sh
