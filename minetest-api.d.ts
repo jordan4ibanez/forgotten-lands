@@ -1739,319 +1739,320 @@ declare global {
 }
 
 // Very annoying enums.
+// Why do they point to themselves? I dunno, it works though.
 
 declare interface EntityVisual {
-  cube: string,
-  sprite: string,
-  upright_sprite: string,
-  mesh: string,
-  wielditem: string,
-  item: string
+  cube: EntityVisual,
+  sprite: EntityVisual,
+  upright_sprite: EntityVisual,
+  mesh: EntityVisual,
+  wielditem: EntityVisual,
+  item: EntityVisual
 }
 
 declare interface SchematicRotation {
-  zero: string,
-  ninety: string,
-  oneEighty: string,
-  twoSeventy: string,
-  random: string
+  zero: SchematicRotation,
+  ninety: SchematicRotation,
+  oneEighty: SchematicRotation,
+  twoSeventy: SchematicRotation,
+  random: SchematicRotation
 }
 
 declare interface SchematicPlacementFlag {
-  place_center_x: string,
-  place_center_y: string,
-  place_center_z: string
+  place_center_x: SchematicPlacementFlag,
+  place_center_y: SchematicPlacementFlag,
+  place_center_z: SchematicPlacementFlag
 }
 
 declare interface SchematicFormat {
-  mts: string,
-  lua: string
+  mts: SchematicFormat,
+  lua: SchematicFormat
 }
 
 declare interface SchematicSerializationOption {
-  lua_use_comments: string,
-  lua_num_indent_spaces: string
+  lua_use_comments: SchematicSerializationOption,
+  lua_num_indent_spaces: SchematicSerializationOption
 }
 
 declare interface SchematicReadOptionYSliceOption {
-  none: string,
-  low: string,
-  all: string
+  none: SchematicReadOptionYSliceOption,
+  low: SchematicReadOptionYSliceOption,
+  all: SchematicReadOptionYSliceOption
 }
 
 declare interface HTTPRequestMethod {
-  GET: string,
-  POST: string,
-  PUT: string,
-  DELETE: string
+  GET: HTTPRequestMethod,
+  POST: HTTPRequestMethod,
+  PUT: HTTPRequestMethod,
+  DELETE: HTTPRequestMethod
 }
 
 
 declare interface OreType {
-  scatter: string,
-  sheet: string,
-  puff: string,
-  blob: string,
-  vein: string,
-  stratum: string
+  scatter: OreType,
+  sheet: OreType,
+  puff: OreType,
+  blob: OreType,
+  vein: OreType,
+  stratum: OreType
 }
 
 declare interface OreFlags {
-  puff_cliffs: string,
-  puff_additive_composition: string
+  puff_cliffs: OreFlags,
+  puff_additive_composition: OreFlags
 }
 
 declare interface NoiseFlags {
-  defaults: string,
-  eased: string,
-  absvalue: string
+  defaults: NoiseFlags,
+  eased: NoiseFlags,
+  absvalue: NoiseFlags
 }
 
 declare interface DecorationType {
-  simple: string,
-  schematic: string
+  simple: DecorationType,
+  schematic: DecorationType
 }
 
 declare interface DecorationFlags {
-  liquid_surface: string,
-  force_placement: string,
-  all_floors: string,
-  all_ceilings: string,
-  place_center_x: string,
-  place_center_y: string,
-  place_center_z: string
+  liquid_surface: DecorationFlags,
+  force_placement: DecorationFlags,
+  all_floors: DecorationFlags,
+  all_ceilings: DecorationFlags,
+  place_center_x: DecorationFlags,
+  place_center_y: DecorationFlags,
+  place_center_z: DecorationFlags
 }
 
 
 declare interface ParamType1 {
-  light: string,
-  none: string
+  light: ParamType1,
+  none: ParamType1
 }
 
 declare interface ParamType2 {
-  flowingliquid: string,
-  wallmounted: string,
-  facedir: string,
-  fourdir: string,
-  leveled: string,
-  degrotate: string,
-  meshoptions: string,
-  color: string,
-  colorfacedir: string,
-  color4dir: string,
-  colorwallmounted: string,
-  glasslikeliquidlevel: string,
-  colordegrotate: string
+  flowingliquid: ParamType2,
+  wallmounted: ParamType2,
+  facedir: ParamType2,
+  fourdir: ParamType2,
+  leveled: ParamType2,
+  degrotate: ParamType2,
+  meshoptions: ParamType2,
+  color: ParamType2,
+  colorfacedir: ParamType2,
+  color4dir: ParamType2,
+  colorwallmounted: ParamType2,
+  glasslikeliquidlevel: ParamType2,
+  colordegrotate: ParamType2
 }
 
 declare interface Drawtype {
-  normal: string,
-  airlike: string,
-  liquid: string,
-  flowingliquid: string,
-  glasslike: string,
-  glasslike_framed: string,
-  glasslike_framed_optional: string,
-  allfaces: string,
-  allfaces_optional: string,
-  torchlike: string,
-  signlike: string,
-  plantlike: string,
-  firelike: string,
-  fencelike: string,
-  raillike: string,
-  nodebox: string,
-  mesh: string,
-  plantlike_rooted: string
+  normal: Drawtype,
+  airlike: Drawtype,
+  liquid: Drawtype,
+  flowingliquid: Drawtype,
+  glasslike: Drawtype,
+  glasslike_framed: Drawtype,
+  glasslike_framed_optional: Drawtype,
+  allfaces: Drawtype,
+  allfaces_optional: Drawtype,
+  torchlike: Drawtype,
+  signlike: Drawtype,
+  plantlike: Drawtype,
+  firelike: Drawtype,
+  fencelike: Drawtype,
+  raillike: Drawtype,
+  nodebox: Drawtype,
+  mesh: Drawtype,
+  plantlike_rooted: Drawtype
 }
 
 
 declare interface Nodeboxtype {
-  regular: string,
-  fixed: string,
-  wallmounted: string,
-  connected: string
+  regular: Nodeboxtype,
+  fixed: Nodeboxtype,
+  wallmounted: Nodeboxtype,
+  connected: Nodeboxtype
 }
 
 
 declare interface LogLevel {
-  none: string,
-  error: string,
-  warning: string,
-  action: string,
-  info: string,
-  verbose: string
+  none: LogLevel,
+  error: LogLevel,
+  warning: LogLevel,
+  action: LogLevel,
+  info: LogLevel,
+  verbose: LogLevel
 }
 
 declare interface TextureAlpha {
-  opaque: string,
-  clip: string,
-  blend: string
+  opaque: TextureAlpha,
+  clip: TextureAlpha,
+  blend: TextureAlpha
 }
 
 declare interface LiquidType {
-  none: string,
-  source: string,
-  flowing: string
+  none: LiquidType,
+  source: LiquidType,
+  flowing: LiquidType
 }
 
 declare interface NodeBoxConnections {
-  top: string,
-  bottom: string,
-  front: string,
-  left: string,
-  back: string,
-  right: string
+  top: NodeBoxConnections,
+  bottom: NodeBoxConnections,
+  front: NodeBoxConnections,
+  left: NodeBoxConnections,
+  back: NodeBoxConnections,
+  right: NodeBoxConnections
 }
 
 declare interface CraftRecipeType {
-  shapeless: string,
-  toolrepair: string,
-  cooking: string,
-  fuel: string
+  shapeless: CraftRecipeType,
+  toolrepair: CraftRecipeType,
+  cooking: CraftRecipeType,
+  fuel: CraftRecipeType
 }
 
 declare interface CraftCheckType {
-  normal: string,
-  cooking: string,
-  fuel: string
+  normal: CraftCheckType,
+  cooking: CraftCheckType,
+  fuel: CraftCheckType
 }
 
 declare interface HPChangeReasonType {
-  set_hp: string,
-  punch: string,
-  fall: string,
-  node_damage: string,
-  drown: string,
-  respawn: string
+  set_hp: HPChangeReasonType,
+  punch: HPChangeReasonType,
+  fall: HPChangeReasonType,
+  node_damage: HPChangeReasonType,
+  drown: HPChangeReasonType,
+  respawn: HPChangeReasonType
 }
 
 declare interface CheatType {
-  moved_too_fast: string,
-  interacted_too_far: string,
-  interacted_with_self: string,
-  interacted_while_dead: string,
-  finished_unknown_dig: string,
-  dug_unbreakable: string,
-  dug_too_fast: string
+  moved_too_fast: CheatType,
+  interacted_too_far: CheatType,
+  interacted_with_self: CheatType,
+  interacted_while_dead: CheatType,
+  finished_unknown_dig: CheatType,
+  dug_unbreakable: CheatType,
+  dug_too_fast: CheatType
 }
 
 declare interface ClearObjectsOptions {
-  full: string,
-  quick: string
+  full: ClearObjectsOptions,
+  quick: ClearObjectsOptions
 }
 
 declare interface GenNotifyFlags {
-  dungeon: string,
-  temple: string,
-  cave_begin: string,
-  cave_end: string,
-  large_cave_begin: string,
-  large_cave_end: string,
-  decoration: string
+  dungeon: GenNotifyFlags,
+  temple: GenNotifyFlags,
+  cave_begin: GenNotifyFlags,
+  cave_end: GenNotifyFlags,
+  large_cave_begin: GenNotifyFlags,
+  large_cave_end: GenNotifyFlags,
+  decoration: GenNotifyFlags
 }
 
 declare interface SearchAlgorithm {
-  aStarNoprefetch: string,
-  aStar: string,
-  dijkstra: string
+  aStarNoprefetch: SearchAlgorithm,
+  aStar: SearchAlgorithm,
+  dijkstra: SearchAlgorithm
 }
 
 
 declare interface SkyParametersType {
-  regular: string,
-  skybox: string,
-  plain: string
+  regular: SkyParametersType,
+  skybox: SkyParametersType,
+  plain: SkyParametersType
 }
 
 declare interface SkyParametersFogTintType {
-  custom: string,
-  default: string
+  custom: SkyParametersFogTintType,
+  default: SkyParametersFogTintType
 }
 
 declare interface MinimapType {
-  off: string,
-  surface: string,
-  radar: string,
-  texture: string
+  off: MinimapType,
+  surface: MinimapType,
+  radar: MinimapType,
+  texture: MinimapType
 }
 
 declare interface HudElementType {
-  image: string,
-  text: string,
-  statbar: string,
-  inventory: string,
-  waypoint: string,
-  image_waypoint: string,
-  compass: string,
-  minimap: string
+  image: HudElementType,
+  text: HudElementType,
+  statbar: HudElementType,
+  inventory: HudElementType,
+  waypoint: HudElementType,
+  image_waypoint: HudElementType,
+  compass: HudElementType,
+  minimap: HudElementType
 }
 
 declare interface HudReplaceBuiltinOption {
-  breath: string,
-  health: string
+  breath: HudReplaceBuiltinOption,
+  health: HudReplaceBuiltinOption
 }
 
 
 declare interface ParseRelativeNumberArgument {
-  number: string,
-  relativeToPlus: string,
-  relativeTo: string
+  number: ParseRelativeNumberArgument,
+  relativeToPlus: ParseRelativeNumberArgument,
+  relativeTo: ParseRelativeNumberArgument
 }
 
 declare interface CompressionMethod {
-  deflate: string,
-  zstd: string
+  deflate: CompressionMethod,
+  zstd: CompressionMethod
 }
 
 declare interface RotateAndPlaceOrientationFlag {
-  invert_wall: string,
-  force_wall: string,
-  force_ceiling: string,
-  force_floor: string,
-  force_facedir: string
+  invert_wall: RotateAndPlaceOrientationFlag,
+  force_wall: RotateAndPlaceOrientationFlag,
+  force_ceiling: RotateAndPlaceOrientationFlag,
+  force_floor: RotateAndPlaceOrientationFlag,
+  force_facedir: RotateAndPlaceOrientationFlag
 }
 
 declare interface BlockStatusCondition {
-  unknown: string,
-  emerging: string,
-  loaded: string,
-  active: string
+  unknown: BlockStatusCondition,
+  emerging: BlockStatusCondition,
+  loaded: BlockStatusCondition,
+  active: BlockStatusCondition
 }
 
 declare interface TileAnimationType {
-  vertical_frames: string,
-  sheet_2d: string
+  vertical_frames: TileAnimationType,
+  sheet_2d: TileAnimationType
 }
 
 declare interface ParticleSpawnerTweenStyle {
-  fwd: string,
-  rev: string,
-  pulse: string,
-  flicker: string
+  fwd: ParticleSpawnerTweenStyle,
+  rev: ParticleSpawnerTweenStyle,
+  pulse: ParticleSpawnerTweenStyle,
+  flicker: ParticleSpawnerTweenStyle
 }
 
 declare interface ParticleSpawnerTextureBlend {
-  alpha: string,
-  add: string,
-  screen: string,
-  sub: string
+  alpha: ParticleSpawnerTextureBlend,
+  add: ParticleSpawnerTextureBlend,
+  screen: ParticleSpawnerTextureBlend,
+  sub: ParticleSpawnerTextureBlend
 }
 
 declare interface ParticleSpawnerAttractionType {
-  none: string,
-  point: string,
-  line: string,
-  plane: string
+  none: ParticleSpawnerAttractionType,
+  point: ParticleSpawnerAttractionType,
+  line: ParticleSpawnerAttractionType,
+  plane: ParticleSpawnerAttractionType
 }
 
 declare interface AreaStoreType {
-  libSpatial: string
+  libSpatial: AreaStoreType
 }
 
 declare interface TexturePoolComponentFade {
-  in: string,
-  out: string
+  in: TexturePoolComponentFade,
+  out: TexturePoolComponentFade
 }
 
 declare global {
