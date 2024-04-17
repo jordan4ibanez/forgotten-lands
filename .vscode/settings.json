@@ -4,7 +4,7 @@
     "mods/": true,
     "node_modules": true,
     "scripts/": true,
-    "menu/": true,
+    // "menu/": true,
   },
   "cSpell.words": [
     "absvalue",
