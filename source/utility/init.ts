@@ -14,7 +14,7 @@ namespace utility {
     }
   }
 
-  loadFiles(["math", "enums", "color_generator", "vector"])
+  loadFiles(["option", "math", "enums", "color_generator", "vector"])
 
   export function concat(...input: string[]): string {
     let accumulator = ""
