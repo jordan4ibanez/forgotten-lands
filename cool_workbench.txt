@@ -180,7 +180,7 @@ namespace glarp {
   }
 
 
-  utility.registerNode(":workbench", {
+  utility.registerNode("workbench", {
     drawtype: Drawtype.normal,
     tiles: [
       "crafting_workbench_top.png",

@@ -8,7 +8,7 @@ namespace blocks {
     return ["default_stone.png^" + oreTexture]
   }
 
-  utility.registerNode(":coal_ore", {
+  utility.registerNode("coal_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_coal.png"),
     sounds: sounds.stone(),
@@ -27,7 +27,7 @@ namespace blocks {
     }
   })
 
-  utility.registerNode(":iron_ore", {
+  utility.registerNode("iron_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_iron.png"),
     sounds: sounds.stone(),
@@ -46,7 +46,7 @@ namespace blocks {
     }
   })
 
-  utility.registerNode(":gold_ore", {
+  utility.registerNode("gold_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_gold.png"),
     sounds: sounds.stone(),
@@ -65,7 +65,7 @@ namespace blocks {
     }
   })
 
-  utility.registerNode(":diamond_ore", {
+  utility.registerNode("diamond_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_diamond.png"),
     sounds: sounds.stone(),
@@ -84,7 +84,7 @@ namespace blocks {
     }
   })
 
-  utility.registerNode(":mese_ore", {
+  utility.registerNode("mese_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_mese.png"),
     sounds: sounds.stone(),

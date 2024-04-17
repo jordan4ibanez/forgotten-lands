@@ -182,7 +182,7 @@ namespace blocks {
   // }
 
 
-  utility.registerNode(":workbench", {
+  utility.registerNode("workbench", {
     drawtype: utility.Drawtype.normal,
     tiles: [
       "crafting_workbench_top.png",

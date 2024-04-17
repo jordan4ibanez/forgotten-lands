@@ -469,7 +469,7 @@ namespace blocks {
 
   //? Implementation
 
-  utility.registerNode(":furnace", {
+  utility.registerNode("furnace", {
     drawtype: utility.Drawtype.nodebox,
     paramtype2: utility.ParamType2.facedir,
     is_ground_content: false,
@@ -499,7 +499,7 @@ namespace blocks {
     allow_metadata_inventory_move: allowMove
   })
 
-  utility.registerNode(":furnace_active", {
+  utility.registerNode("furnace_active", {
     drawtype: utility.Drawtype.nodebox,
     paramtype2: utility.ParamType2.facedir,
     is_ground_content: false,
