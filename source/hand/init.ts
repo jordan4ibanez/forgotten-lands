@@ -4,6 +4,7 @@ namespace hand {
     visual_scale: 1,
     wield_scale: vector.create3d(1, 1, 1),
     paramtype: utility.ParamType1.light,
+    
 
 
   })
