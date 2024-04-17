@@ -9,6 +9,9 @@ default:
 	@echo Starting Minetest.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
+dryrun:
+	@./scripts/compile_game.sh
+
 windows: 
 	@echo Transpiling Forgotten Times into lua...
 	@npx tstl
