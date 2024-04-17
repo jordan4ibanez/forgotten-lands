@@ -211,7 +211,7 @@ interface minetest {
   rollback_get_node_actions(position: Vec3, range: number, seconds: number, limit: number): Rollback[]
   rollback_revert_actions_by(actor: string, seconds: number): [boolean, string]
   item_place_node(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, param2: number, preventAfterPlace: boolean): [ItemStackObject, Vec3 | void]
-  //? Deprectated.
+  //? Deprecated.
   // item_place_object(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): ItemStackObject 
   item_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, param2: number): [ItemStackObject, Vec3 | void]
   item_pickup(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): ItemStackObject
@@ -756,7 +756,7 @@ declare global {
     to_table(): MetaData | void
     from_table(data: MetaData): boolean
     equals(other: MetaRef): boolean
-    //! FIXME: USE INHERITENCE!
+    //! FIXME: USE INHERITANCE!
     // node
     get_inventory(): InvRef
     mark_as_private(nameOrArray: string | string[]): void
@@ -1016,7 +1016,7 @@ declare global {
   interface MapGenSettingsDefinition {
     mgname: string
     seed: number
-    chnksize: number
+    chunksize: number
     water_level: number
     flags: string
   }
@@ -1718,7 +1718,7 @@ declare global {
   // You can just bolt onto namespaces apparently!
   namespace math {
     function hypot(x: number, y: number): number
-    function sign(x: number, tolerence: number): number
+    function sign(x: number, tolerance: number): number
     function factorial(x: number): number
     function round(x: number): number
     // Clamp is a bolt on created in utility.
