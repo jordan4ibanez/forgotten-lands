@@ -37,9 +37,7 @@ namespace utility {
     }
 
     constructor(input: T | null) {
-      if (input) {
-        this.data = input;
-      }
+      this.data = input;
     }
   }
 
