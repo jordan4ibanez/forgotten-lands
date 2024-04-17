@@ -43,7 +43,7 @@ namespace world {
 
     const concat = utility.concat;
     const generateSchematic = utility.generateSchematic;
-    const create = vector.create;
+    const create = vector.create3d;
 
     const smallOak = generateSchematic(
       create(5, 5, 5),

@@ -2,7 +2,7 @@
 namespace blocks {
   const blockType = types.BlockType;
   const pixel = utility.pixel
-  const create = vector.create
+  const create = vector.create3d
 
   const grassSize: { [id: number]: Vec3 } = {
     // Start, height, end

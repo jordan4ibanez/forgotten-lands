@@ -62,8 +62,8 @@ namespace builtinEntity {
     physicalState = true
     age = 0
     beingForcedOut = false
-    forceOut = vector.create()
-    forceOutStart = vector.create()
+    forceOut = vector.create3d()
+    forceOutStart = vector.create3d()
     droppedBy = ""
     _collisionBox = [0, 0, 0, 0, 0, 0]
     // Magnet components.
@@ -138,7 +138,7 @@ namespace builtinEntity {
       }
       this.object.set_armor_groups({ immortal: 1 })
       // this.object.set_velocity(vector.create(0,2,0))
-      this.object.set_acceleration(vector.create(0, -gravity, 0))
+      this.object.set_acceleration(vector.create3d(0, -gravity, 0))
       this._collisionBox = this.initial_properties.collisionbox
       this.setItem("")
     }
@@ -147,16 +147,16 @@ namespace builtinEntity {
       if (this.physicalState) return
       this.physicalState = true
       this.object.set_properties({ physical: true })
-      this.object.set_velocity(vector.create())
-      this.object.set_acceleration(vector.create(0, -gravity, 0))
+      this.object.set_velocity(vector.create3d())
+      this.object.set_acceleration(vector.create3d(0, -gravity, 0))
     }
 
     disablePhysics(): void {
       if (!this.physicalState) return
       this.physicalState = false
       this.object.set_properties({ physical: false })
-      this.object.set_velocity(vector.create())
-      this.object.set_acceleration(vector.create())
+      this.object.set_velocity(vector.create3d())
+      this.object.set_acceleration(vector.create3d())
     }
 
     disablePhysicsSilent(): void {
@@ -194,7 +194,7 @@ namespace builtinEntity {
       if (slippery != 0 && (math.abs(vel.x) > 0.1 || math.abs(vel.z))) {
         // Horizontal deceleration.
         const factor = math.min(4 / (slippery + 4) * delta, 1)
-        this.object.set_velocity(vector.create(
+        this.object.set_velocity(vector.create3d(
           vel.x * (1 - factor),
           0,
           vel.z * (1 - factor)
@@ -307,7 +307,7 @@ namespace builtinEntity {
 
       let shootDir: Vec3 | null = (() => {
         //! fixme: this should be a cached single instance. Why is this getting created every time?
-        const order = [vector.create(1, 0, 0), vector.create(-1, 0, 0), vector.create(0, 0, 1), vector.create(0, 0, -1),]
+        const order = [vector.create3d(1, 0, 0), vector.create3d(-1, 0, 0), vector.create3d(0, 0, 1), vector.create3d(0, 0, -1),]
         for (const direction of order) {
           const cNode = minetest.get_node(vector.add(pos, direction)).name
           const cDef = minetest.registered_nodes[cNode] || null
@@ -317,7 +317,7 @@ namespace builtinEntity {
         }
 
         // Iteration failed on X and Z axis, only way left is to go up.
-        const lastTry = vector.create(0, 1, 0)
+        const lastTry = vector.create3d(0, 1, 0)
         const cNode = minetest.get_node(vector.add(pos, lastTry)).name
         if (cNode != "ignore") {
           return lastTry
@@ -351,7 +351,7 @@ namespace builtinEntity {
 
       if (this.tickAge(delta)) return
 
-      let node = minetest.get_node_or_nil(vector.create(
+      let node = minetest.get_node_or_nil(vector.create3d(
         pos.x,
         pos.y + this._collisionBox[2] - 0.05,
         pos.z
@@ -394,7 +394,7 @@ namespace builtinEntity {
       const keepMovement = this.slipCheck(delta, def, node)
 
       if (!keepMovement) {
-        this.object.set_velocity(vector.create())
+        this.object.set_velocity(vector.create3d())
       }
 
       // Do not update anything until the moving state changes.

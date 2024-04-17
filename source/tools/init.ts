@@ -4,7 +4,7 @@ namespace tools {
   export const CURRENT_MAX_LEVEL = 5
 
   // Yoinked from MineClone2. But smallerized.
-  export const wieldScale = vector.create(1.5, 1.5, 1)
+  export const wieldScale = vector.create3d(1.5, 1.5, 1)
 
   /**
    * Generates a node tool_groups array.

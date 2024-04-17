@@ -6,7 +6,7 @@ namespace tools {
   //! NOTE: Do not ever add element 0 to times!
 
   minetest.override_item("", {
-    wield_scale: vector.create(1,1,2.5),
+    wield_scale: vector.create3d(1, 1, 2.5),
     tool_capabilities: {
       full_punch_interval: 0.9,
       max_drop_level: 1,

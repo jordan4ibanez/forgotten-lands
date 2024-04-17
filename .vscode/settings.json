@@ -13,6 +13,7 @@
     "drawtype",
     "facedir",
     "formspec",
+    "joinplayer",
     "lowpart",
     "minetest",
     "modname",
