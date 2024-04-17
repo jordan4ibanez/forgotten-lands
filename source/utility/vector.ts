@@ -2,13 +2,14 @@ namespace utility {
 
   const rr = randomRange;
 
-  vector.create = function (x?: number, y?: number, z?: number): Vec3 {
+  vector.create3d = function (x?: number, y?: number, z?: number): Vec3 {
     let temp = vector.zero()
     temp.x = x || 0
     temp.y = y || 0
     temp.z = z || 0
     return temp
   };
+
   vector.create2d = function (x?: number, y?: number): Vec2 {
     let temp = {
       x: x || 0,
@@ -17,13 +18,11 @@ namespace utility {
     return temp
   }
 
-
-  const create = vector.create;
-
+  const create3d = vector.create3d;
 
   // TS is kinda cool
   vector.random = function (minX: number, maxX: number, minY: number, maxY: number, minZ: number, maxZ: number): Vec3 {
-    return create(
+    return create3d(
       rr(minX, maxX),
       rr(minY, maxY),
       rr(minZ, maxZ)
@@ -32,8 +31,8 @@ namespace utility {
 
   vector.distance2d = (() => {
     // Hidden localized variables.
-    const vecA = vector.create()
-    const vecB = vector.create()
+    const vecA = vector.create3d()
+    const vecB = vector.create3d()
     return function (vec1: Vec3, vec2: Vec3): number {
       vecA.x = vec1.x
       vecA.y = 0
