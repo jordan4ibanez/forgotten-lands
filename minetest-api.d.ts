@@ -1738,6 +1738,323 @@ declare global {
   }
 }
 
+// Very annoying enums.
+
+declare interface EntityVisual {
+  cube: string,
+  sprite: string,
+  upright_sprite: string,
+  mesh: string,
+  wielditem: string,
+  item: string
+}
+
+declare interface SchematicRotation {
+  zero: string,
+  ninety: string,
+  oneEighty: string,
+  twoSeventy: string,
+  random: string
+}
+
+declare interface SchematicPlacementFlag {
+  place_center_x: string,
+  place_center_y: string,
+  place_center_z: string
+}
+
+declare interface SchematicFormat {
+  mts: string,
+  lua: string
+}
+
+declare interface SchematicSerializationOption {
+  lua_use_comments: string,
+  lua_num_indent_spaces: string
+}
+
+declare interface SchematicReadOptionYSliceOption {
+  none: string,
+  low: string,
+  all: string
+}
+
+declare interface HTTPRequestMethod {
+  GET: string,
+  POST: string,
+  PUT: string,
+  DELETE: string
+}
+
+
+declare interface OreType {
+  scatter: string,
+  sheet: string,
+  puff: string,
+  blob: string,
+  vein: string,
+  stratum: string
+}
+
+declare interface OreFlags {
+  puff_cliffs: string,
+  puff_additive_composition: string
+}
+
+declare interface NoiseFlags {
+  defaults: string,
+  eased: string,
+  absvalue: string
+}
+
+declare interface DecorationType {
+  simple: string,
+  schematic: string
+}
+
+declare interface DecorationFlags {
+  liquid_surface: string,
+  force_placement: string,
+  all_floors: string,
+  all_ceilings: string,
+  place_center_x: string,
+  place_center_y: string,
+  place_center_z: string
+}
+
+
+declare interface ParamType1 {
+  light: string,
+  none: string
+}
+
+declare interface ParamType2 {
+  flowingliquid: string,
+  wallmounted: string,
+  facedir: string,
+  fourdir: string,
+  leveled: string,
+  degrotate: string,
+  meshoptions: string,
+  color: string,
+  colorfacedir: string,
+  color4dir: string,
+  colorwallmounted: string,
+  glasslikeliquidlevel: string,
+  colordegrotate: string
+}
+
+declare interface Drawtype {
+  normal: string,
+  airlike: string,
+  liquid: string,
+  flowingliquid: string,
+  glasslike: string,
+  glasslike_framed: string,
+  glasslike_framed_optional: string,
+  allfaces: string,
+  allfaces_optional: string,
+  torchlike: string,
+  signlike: string,
+  plantlike: string,
+  firelike: string,
+  fencelike: string,
+  raillike: string,
+  nodebox: string,
+  mesh: string,
+  plantlike_rooted: string
+}
+
+
+declare interface Nodeboxtype {
+  regular: string,
+  fixed: string,
+  wallmounted: string,
+  connected: string
+}
+
+
+declare interface LogLevel {
+  none: string,
+  error: string,
+  warning: string,
+  action: string,
+  info: string,
+  verbose: string
+}
+
+declare interface TextureAlpha {
+  opaque: string,
+  clip: string,
+  blend: string
+}
+
+declare interface LiquidType {
+  none: string,
+  source: string,
+  flowing: string
+}
+
+declare interface NodeBoxConnections {
+  top: string,
+  bottom: string,
+  front: string,
+  left: string,
+  back: string,
+  right: string
+}
+
+declare interface CraftRecipeType {
+  shapeless: string,
+  toolrepair: string,
+  cooking: string,
+  fuel: string
+}
+
+declare interface CraftCheckType {
+  normal: string,
+  cooking: string,
+  fuel: string
+}
+
+declare interface HPChangeReasonType {
+  set_hp: string,
+  punch: string,
+  fall: string,
+  node_damage: string,
+  drown: string,
+  respawn: string
+}
+
+declare interface CheatType {
+  moved_too_fast: string,
+  interacted_too_far: string,
+  interacted_with_self: string,
+  interacted_while_dead: string,
+  finished_unknown_dig: string,
+  dug_unbreakable: string,
+  dug_too_fast: string
+}
+
+declare interface ClearObjectsOptions {
+  full: string,
+  quick: string
+}
+
+declare interface GenNotifyFlags {
+  dungeon: string,
+  temple: string,
+  cave_begin: string,
+  cave_end: string,
+  large_cave_begin: string,
+  large_cave_end: string,
+  decoration: string
+}
+
+declare interface SearchAlgorithm {
+  aStarNoprefetch: string,
+  aStar: string,
+  dijkstra: string
+}
+
+
+declare interface SkyParametersType {
+  regular: string,
+  skybox: string,
+  plain: string
+}
+
+declare interface SkyParametersFogTintType {
+  custom: string,
+  default: string
+}
+
+declare interface MinimapType {
+  off: string,
+  surface: string,
+  radar: string,
+  texture: string
+}
+
+declare interface HudElementType {
+  image: string,
+  text: string,
+  statbar: string,
+  inventory: string,
+  waypoint: string,
+  image_waypoint: string,
+  compass: string,
+  minimap: string
+}
+
+declare interface HudReplaceBuiltinOption {
+  breath: string,
+  health: string
+}
+
+
+declare interface ParseRelativeNumberArgument {
+  number: string,
+  relativeToPlus: string,
+  relativeTo: string
+}
+
+declare interface CompressionMethod {
+  deflate: string,
+  zstd: string
+}
+
+declare interface RotateAndPlaceOrientationFlag {
+  invert_wall: string,
+  force_wall: string,
+  force_ceiling: string,
+  force_floor: string,
+  force_facedir: string
+}
+
+declare interface BlockStatusCondition {
+  unknown: string,
+  emerging: string,
+  loaded: string,
+  active: string
+}
+
+declare interface TileAnimationType {
+  vertical_frames: string,
+  sheet_2d: string
+}
+
+declare interface ParticleSpawnerTweenStyle {
+  fwd: string,
+  rev: string,
+  pulse: string,
+  flicker: string
+}
+
+declare interface ParticleSpawnerTextureBlend {
+  alpha: string,
+  add: string,
+  screen: string,
+  sub: string
+}
+
+declare interface ParticleSpawnerAttractionType {
+  none: string,
+  point: string,
+  line: string,
+  plane: string
+}
+
+declare interface AreaStoreType {
+  libSpatial: string
+}
+
+declare interface TexturePoolComponentFade {
+  in: string,
+  out: string
+}
+
 declare global {
   const minetest: minetest
+  const ParamType1: ParamType1
 }
