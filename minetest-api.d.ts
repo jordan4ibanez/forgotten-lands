@@ -1740,6 +1740,7 @@ declare global {
 
 // Very annoying enums.
 // Why do they point to themselves? I dunno, it works though.
+//! If you don't have your mod depend on the utility library, this will just blow up when you try to use it. :D 
 
 declare interface EntityVisual {
   cube: EntityVisual,
