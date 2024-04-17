@@ -105,6 +105,7 @@
     "oldnode",
     "paramtype",
     "particlespawner",
+    "pcall",
     "perlin",
     "placenode",
     "playername",
