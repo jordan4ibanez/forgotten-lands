@@ -5,5 +5,15 @@
     "node_modules": true,
     "scripts/": true,
     "menu/": true,
-  }
+  },
+  "cSpell.words": [
+    "clazz",
+    "databit",
+    "dofile",
+    "minetest",
+    "modname",
+    "modpath",
+    "userdata",
+    "yslice"
+  ]
 }
