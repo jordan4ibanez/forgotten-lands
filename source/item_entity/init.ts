@@ -75,7 +75,7 @@ namespace builtinEntity {
       physical: true,
       collide_with_objects: false,
       collisionbox: [-0.3, -0.3, -0.3, 0.3, 0.3, 0.3],
-      visual: utility.EntityVisual.cube,
+      visual: EntityVisual.cube,
       visual_size: vector.create2d(),
       automatic_rotate: 1,
       textures: [""],
@@ -103,7 +103,7 @@ namespace builtinEntity {
 
       this.object.set_properties({
         is_visible: true,
-        visual: utility.EntityVisual.wielditem,
+        visual: EntityVisual.wielditem,
         textures: [itemName],
         visual_size: vector.create2d(size + bias, size + bias),
         collisionbox: c,
@@ -374,8 +374,8 @@ namespace builtinEntity {
       if (sNode) {
         const sDef = minetest.registered_nodes[sNode.name] || {}
         isStuck = (sDef.walkable == null || sDef.walkable == true) &&
-          (sDef.collision_box == null || sDef.collision_box.type == "regular") &&
-          (sDef.node_box == null || sDef.node_box.type == "regular")
+          (sDef.collision_box == null || sDef.collision_box.type == Nodeboxtype.regular) &&
+          (sDef.node_box == null || sDef.node_box.type == Nodeboxtype.regular)
         this.unstuckSelf(pos, isStuck)
       }
 

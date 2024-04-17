@@ -1,7 +1,7 @@
 
 namespace recipes {
   const r = minetest.register_craft;
-  const recipeType = utility.CraftRecipeType;
+  const recipeType = CraftRecipeType;
   const craftBlockType = types.CraftingBlockType;
   // This will probably get broken down into sub-files in this namespace.
   // But for now, crafting goes here.

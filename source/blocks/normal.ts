@@ -5,7 +5,7 @@ namespace blocks {
   const blockType = types.BlockType;
 
   utility.registerNode("stone", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: ["default_stone.png"],
     sounds: sounds.stone(),
     groups: {
@@ -25,7 +25,7 @@ namespace blocks {
   })
 
   utility.registerNode("cobblestone", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: ["default_cobble.png"],
     sounds: sounds.stone(),
     groups: {
@@ -34,7 +34,7 @@ namespace blocks {
   })
 
   utility.registerNode("dirt", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: ["default_dirt.png"],
     sounds: sounds.dirt(),
     groups: {
@@ -43,7 +43,7 @@ namespace blocks {
   })
 
   utility.registerNode("grass", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: [
       "default_grass.png",
       "default_dirt.png",
@@ -57,7 +57,7 @@ namespace blocks {
   })
 
   utility.registerNode("sand", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: ["default_sand.png"],
     sounds: sounds.sand(),
     groups: {
@@ -66,7 +66,7 @@ namespace blocks {
   })
 
   utility.registerNode("gravel", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: ["default_gravel.png"],
     sounds: sounds.gravel(),
     groups: {
@@ -75,7 +75,7 @@ namespace blocks {
   })
 
   utility.registerNode("oak_tree", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: [
       "default_tree_top.png",
       "default_tree_top.png",
@@ -89,8 +89,8 @@ namespace blocks {
   })
 
   utility.registerNode("oak_leaves", {
-    drawtype: utility.Drawtype.allfaces_optional,
-    paramtype: utility.ParamType1.light,
+    drawtype: Drawtype.allfaces_optional,
+    paramtype: ParamType1.light,
     waving: 1,
     tiles: ["default_leaves.png"],
     sounds: sounds.plant(),
@@ -110,7 +110,7 @@ namespace blocks {
   })
 
   utility.registerNode("oak_wood", {
-    drawtype: utility.Drawtype.normal,
+    drawtype: Drawtype.normal,
     tiles: [
       "default_wood.png"
     ],
@@ -152,13 +152,13 @@ namespace blocks {
   }
 
   utility.registerNode("glass", {
-    drawtype: utility.Drawtype.glasslike_framed_optional,
+    drawtype: Drawtype.glasslike_framed_optional,
     tiles: [
       "default_glass.png",
       "default_glass_detail.png"
     ],
-    use_texture_alpha: utility.TextureAlpha.clip,
-    paramtype: utility.ParamType1.light,
+    use_texture_alpha: TextureAlpha.clip,
+    paramtype: ParamType1.light,
     sunlight_propagates: true,
     is_ground_content: false,
     sounds: sounds.glass(),

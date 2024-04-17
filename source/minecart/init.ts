@@ -6,7 +6,7 @@ namespace minecart {
     name = "minecart"
     object = fakeRef()
     initial_properties = {
-      visual: utility.EntityVisual.mesh,
+      visual: EntityVisual.mesh,
       // Reference: carts_cart.b3d
       mesh: "minecart.b3d",
       textures: ["minecart.png"]

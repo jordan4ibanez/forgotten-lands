@@ -4,7 +4,7 @@ namespace world {
   //? Coal
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "coal_ore",
     wherein: "stone",
     clust_scarcity: 8 * 8 * 8,
@@ -15,7 +15,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "coal_ore",
     wherein: "stone",
     clust_scarcity: 12 * 12 * 12,
@@ -28,7 +28,7 @@ namespace world {
   //? Iron
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "iron_ore",
     wherein: "stone",
     clust_scarcity: 9 * 9 * 9,
@@ -39,7 +39,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "iron_ore",
     wherein: "stone",
     clust_scarcity: 7 * 7 * 7,
@@ -50,7 +50,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "iron_ore",
     wherein: "stone",
     clust_scarcity: 12 * 12 * 12,
@@ -63,7 +63,7 @@ namespace world {
   //? Gold
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "gold_ore",
     wherein: "stone",
     clust_scarcity: 13 * 13 * 13,
@@ -74,7 +74,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "gold_ore",
     wherein: "stone",
     clust_scarcity: 15 * 15 * 15,
@@ -85,7 +85,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "gold_ore",
     wherein: "stone",
     clust_scarcity: 13 * 13 * 13,
@@ -98,7 +98,7 @@ namespace world {
   //? Diamond
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "diamond_ore",
     wherein: "stone",
     clust_scarcity: 14 * 14 * 14,
@@ -109,7 +109,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "diamond_ore",
     wherein: "stone",
     clust_scarcity: 18 * 18 * 18,
@@ -120,7 +120,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "diamond_ore",
     wherein: "stone",
     clust_scarcity: 14 * 14 * 14,
@@ -133,7 +133,7 @@ namespace world {
   //? Mese
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "mese_ore",
     wherein: "stone",
     clust_scarcity: 15 * 15 * 15,
@@ -144,7 +144,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "mese_ore",
     wherein: "stone",
     clust_scarcity: 17 * 17 * 17,
@@ -155,7 +155,7 @@ namespace world {
   })
 
   minetest.register_ore({
-    ore_type: utility.OreType.scatter,
+    ore_type: OreType.scatter,
     ore: "mese_ore",
     wherein: "stone",
     clust_scarcity: 15 * 15 * 15,

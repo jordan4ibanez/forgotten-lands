@@ -24,20 +24,20 @@ namespace blocks {
       ]]
 
     utility.registerNode("tall_grass_" + i, {
-      drawtype: utility.Drawtype.plantlike,
+      drawtype: Drawtype.plantlike,
       walkable: false,
       waving: 1,
-      paramtype: utility.ParamType1.light,
-      paramtype2: utility.ParamType2.degrotate,
+      paramtype: ParamType1.light,
+      paramtype2: ParamType2.degrotate,
       tiles: ["default_grass_" + i + ".png"],
       buildable_to: true,
       sounds: sounds.plant(),
       collision_box: {
-        type: utility.Nodeboxtype.fixed,
+        type: Nodeboxtype.fixed,
         fixed: collisionBox
       },
       selection_box: {
-        type: utility.Nodeboxtype.fixed,
+        type: Nodeboxtype.fixed,
         fixed: collisionBox
       },
       groups: {

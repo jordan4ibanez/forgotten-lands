@@ -219,7 +219,7 @@ namespace blocks {
 
   function fuelCheck(fuelInventory: ItemStackObject[]): CraftResultObject {
     const [result,] = minetest.get_craft_result({
-      method: utility.CraftCheckType.fuel,
+      method: CraftCheckType.fuel,
       width: 1,
       items: fuelInventory
     })
@@ -229,7 +229,7 @@ namespace blocks {
 
   function itemCheck(inputInventory: ItemStackObject[]): CraftResultObject {
     const [result,] = minetest.get_craft_result({
-      method: utility.CraftCheckType.cooking,
+      method: CraftCheckType.cooking,
       width: 1,
       items: inputInventory
     })
@@ -431,7 +431,7 @@ namespace blocks {
   //? Visuals
 
   const furnaceNodeBox: NodeBox = {
-    type: utility.Nodeboxtype.fixed,
+    type: Nodeboxtype.fixed,
     fixed: [
       [ // Left slice.
         pixel(0), pixel(0), pixel(0),
@@ -461,7 +461,7 @@ namespace blocks {
   }
 
   const furnaceSelectionBox: NodeBox = {
-    type: utility.Nodeboxtype.fixed,
+    type: Nodeboxtype.fixed,
     fixed: [
       [pixel(0), pixel(0), pixel(0), pixel(16), pixel(16), pixel(16)]
     ]
@@ -470,8 +470,8 @@ namespace blocks {
   //? Implementation
 
   utility.registerNode("furnace", {
-    drawtype: utility.Drawtype.nodebox,
-    paramtype2: utility.ParamType2.facedir,
+    drawtype: Drawtype.nodebox,
+    paramtype2: ParamType2.facedir,
     is_ground_content: false,
     node_box: furnaceNodeBox,
     selection_box: furnaceSelectionBox,
@@ -500,8 +500,8 @@ namespace blocks {
   })
 
   utility.registerNode("furnace_active", {
-    drawtype: utility.Drawtype.nodebox,
-    paramtype2: utility.ParamType2.facedir,
+    drawtype: Drawtype.nodebox,
+    paramtype2: ParamType2.facedir,
     is_ground_content: false,
     light_source: 8,
     node_box: furnaceNodeBox,

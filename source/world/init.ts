@@ -32,7 +32,7 @@ namespace world {
 
     minetest.register_decoration({
       name: "grassOnFields",
-      deco_type: utility.DecorationType.simple,
+      deco_type: DecorationType.simple,
       place_on: "grass",
       biomes: ["Forgotten Fields"],
       decoration: grass,
@@ -294,7 +294,7 @@ namespace world {
       oakIDs.forEach((id, key) => {
         minetest.register_decoration({
           name: "oak_" + oakSize[key],
-          deco_type: utility.DecorationType.schematic,
+          deco_type: DecorationType.schematic,
           place_on: "grass",
           biomes: ["Forgotten Fields"],
           schematic: id,
