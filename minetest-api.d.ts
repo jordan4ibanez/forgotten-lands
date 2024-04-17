@@ -29,7 +29,7 @@ interface minetest {
   encode_png(width: number, height: number, data: ColorSpec[] | string, compression: number): string
   urlencode(url: string): string
   debug(anything: string): void
-  log(level: utility.LogLevel, text: string): void
+  log(level: LogLevel, text: string): void
   register_node(nodeName: string, definition: NodeDefinition): void
   register_craftitem(craftItemName: string, definition: ItemDefinition): void
   register_tool(toolName: string, definition: ItemDefinition): void
@@ -140,7 +140,7 @@ interface minetest {
   get_perlin(nodeParams: NoiseParams): PerlinNoiseObject
   get_perlin(seedDiff: number, octaves: number, persistence: number, spread: number): PerlinNoiseObject
   get_voxel_manip(pos1: Vec3, pos2: Vec3): VoxelManipObject
-  set_gen_notify(flags: utility.GenNotifyFlags, decorationIDs: number[]): void
+  set_gen_notify(flags: GenNotifyFlags, decorationIDs: number[]): void
   get_gen_notify(): number[]
   get_decoration_id(decorationName: string): number
   get_mapgen_object(objectName: string): GenNotifyObject
@@ -159,13 +159,13 @@ interface minetest {
   get_noiseparams(name: string): NoiseParams
   generate_ores(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void
   generate_decorations(voxelManip: VoxelManipObject, pos1: Vec3, pos2: Vec3): void
-  clear_objects(options: utility.ClearObjectsOptions): void
+  clear_objects(options: ClearObjectsOptions): void
   load_area(pos1: Vec3, pos2: Vec3): void
   emerge_area(pos1: Vec3, pos2: Vec3, fun: EmergeAreaCallback, param: any): void
   delete_area(pos1: Vec3, pos2: Vec3): void
   line_of_sight(pos1: Vec3, pos2: Vec3): [boolean, Vec3]
   raycast(pos1: Vec3, pos2: Vec3, hitObjects: boolean, hitLiquids: boolean): RaycastObject
-  find_path(pos1: Vec3, pos2: Vec3, searchDistance: number, maxJump: number, maxDrop: number, algorithm: utility.SearchAlgorithm): Vec3[]
+  find_path(pos1: Vec3, pos2: Vec3, searchDistance: number, maxJump: number, maxDrop: number, algorithm: SearchAlgorithm): Vec3[]
   spawn_tree(position: Vec3, definition: TreeDefinition): void
   transforming_liquid_add(position: Vec3): void
   get_node_max_level(position: Vec3): number
@@ -200,7 +200,7 @@ interface minetest {
   dir_to_yaw(direction: Vec3): number
   yaw_to_dir(yaw: number): Vec3
   is_colored_paramtype(pType: number): boolean
-  strip_param2_color(param2: number, paramType2: utility.ParamType2): number | void
+  strip_param2_color(param2: number, paramType2: ParamType2): number | void
   get_node_drops(node: string | NodeTable, toolName: string): string[]
   get_craft_result(input: CraftRecipeCheckDefinition): LuaMultiReturn<[CraftResultObject, CraftRecipeCheckDefinition]>
   get_craft_recipe(output: string | NodeTable): CraftRecipeDefinition | void
@@ -240,17 +240,17 @@ interface minetest {
   add_particlespawner(definition: ParticleSpawnerDefinition): number
   delete_particlespawner(id: number, playerName: string): void
   create_schematic(pos1: Vec3, pos2: Vec3, probabilityList: SchematicProbability[], fileName: string, sliceProbList: SchematicSliceProbability[]): void
-  place_schematic(position: Vec3, schematic: SchematicDefinition | string, rotation: utility.SchematicRotation, replacements: Map<string, string>, forcePlacement: boolean, flags: utility.SchematicPlacementFlag[]): void
-  place_schematic_on_vmanip(voxelManip: VoxelManipObject, position: Vec3, schematic: SchematicDefinition, rotation: utility.SchematicRotation, replacement: Map<string, string>, forcePlacement: boolean, flags: utility.SchematicPlacementFlag[]): void
-  serialize_schematic(schematic: SchematicDefinition, format: utility.SchematicFormat, options: utility.SchematicSerializationOption[]): void
+  place_schematic(position: Vec3, schematic: SchematicDefinition | string, rotation: SchematicRotation, replacements: Map<string, string>, forcePlacement: boolean, flags: SchematicPlacementFlag[]): void
+  place_schematic_on_vmanip(voxelManip: VoxelManipObject, position: Vec3, schematic: SchematicDefinition, rotation: SchematicRotation, replacement: Map<string, string>, forcePlacement: boolean, flags: SchematicPlacementFlag[]): void
+  serialize_schematic(schematic: SchematicDefinition, format: SchematicFormat, options: SchematicSerializationOption[]): void
   read_schematic(schematic: SchematicDefinition | string, options: SchematicReadOptionYSlice[]): Array<any>
   request_http_api(): HTTPApi
   get_mod_storage(): MetaRef
   get_connected_players(): ObjectRef[]
   is_player(thing: ObjectRef): boolean
   player_exists(playerName: string): boolean
-  hud_replace_builtin(name: utility.HudReplaceBuiltinOption, definition: HudDefinition): void
-  parse_relative_number(arg: utility.ParseRelativeNumberArgument, relativeTo: number): number | void
+  hud_replace_builtin(name: HudReplaceBuiltinOption, definition: HudDefinition): void
+  parse_relative_number(arg: ParseRelativeNumberArgument, relativeTo: number): number | void
   send_join_message(playerName: string): void
   send_leave_message(playerName: string, timedOut: boolean): void
   hash_node_position(position: Vec3): number
@@ -263,8 +263,8 @@ interface minetest {
   write_json(data: any[], styled: boolean): string | void
   serialize(any: any): string
   deserialize(string: string, safe?: boolean): { [id: string | number | symbol]: any }
-  compress(data: string, method: utility.CompressionMethod, ...any: any): string
-  decompress(data: string, method: utility.CompressionMethod, ...any: any): string
+  compress(data: string, method: CompressionMethod, ...any: any): string
+  decompress(data: string, method: CompressionMethod, ...any: any): string
   rgba(red: number, green: number, blue: number, alpha: number): string
   encode_base64(string: string): string
   decode_base64(string: string): string
@@ -272,12 +272,12 @@ interface minetest {
   record_protection_violation(position: Vec3, name: string): void
   is_creative_enabled(name: string): boolean
   is_area_protected(pos1: Vec3, pos2: Vec3, playerName: string, interval: number): boolean
-  rotate_and_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, infiniteStacks: boolean, orientFlags: utility.RotateAndPlaceOrientationFlag, preventAfterPlace: boolean): ItemStackObject
+  rotate_and_place(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing, infiniteStacks: boolean, orientFlags: RotateAndPlaceOrientationFlag, preventAfterPlace: boolean): ItemStackObject
   rotate_node(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): void
   calculate_knockback(player: ObjectRef, hitter: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, distance: number, damage: number): number
   forceload_block(position: Vec3, transient: boolean, limit: number): boolean
   forceload_free_block(position: Vec3, transient: boolean): void
-  compare_block_status(position: Vec3, condition: utility.BlockStatusCondition): boolean | void
+  compare_block_status(position: Vec3, condition: BlockStatusCondition): boolean | void
   request_insecure_environment(): any
   global_exists(name: string): boolean
 
@@ -452,7 +452,7 @@ declare global {
   }
 
   interface NodeBox {
-    type: utility.Nodeboxtype
+    type: Nodeboxtype
     fixed?: boxTable
     wall_top?: box
     wall_bottom?: box
@@ -670,7 +670,7 @@ declare global {
 
   /** @noSelf **/
   interface NodeDefinition {
-    drawtype?: utility.Drawtype
+    drawtype?: Drawtype
     visual_scale?: number
     tiles?: string[]
     overlay_tiles?: string[]
@@ -678,12 +678,12 @@ declare global {
     wield_scale?: Vec3,
     color?: DynamicColorSpec
     light_source?: number
-    use_texture_alpha?: utility.TextureAlpha
+    use_texture_alpha?: TextureAlpha
     palette?: string
     post_effect_color?: DynamicColorSpec
     post_effect_color_shaded?: boolean
-    paramtype?: utility.ParamType1
-    paramtype2?: utility.ParamType2
+    paramtype?: ParamType1
+    paramtype2?: ParamType2
     place_param2?: number
     is_ground_content?: boolean
     sunlight_propagates?: boolean
@@ -695,7 +695,7 @@ declare global {
     move_resistance?: number
     buildable_to?: boolean
     floodable?: boolean
-    liquidtype?: utility.LiquidType
+    liquidtype?: LiquidType
     liquid_alternative_flowing?: string
     liquid_alternative_source?: string
     liquid_viscosity?: number
@@ -708,7 +708,7 @@ declare global {
     damage_per_second?: number
     node_box?: NodeBox
     connects_to?: string[]
-    connect_sides?: utility.NodeBoxConnections
+    connect_sides?: NodeBoxConnections
     mesh?: string
     selection_box?: NodeBox
     collision_box?: NodeBox
@@ -790,7 +790,7 @@ declare global {
   }
 
   interface SchematicReadOptionYSlice {
-    write_yslice_prob: utility.SchematicReadOptionYSliceOption
+    write_yslice_prob: SchematicReadOptionYSliceOption
   }
 
   interface SchematicData {
@@ -822,7 +822,7 @@ declare global {
   interface HTTPrequestDefinition {
     url: string
     timeout: number
-    method: utility.HTTPRequestMethod
+    method: HTTPRequestMethod
     data: string | { string: string }
     user_agent: string
     extra_headers: string[]
@@ -852,11 +852,11 @@ declare global {
     octaves: number
     persistence: number
     lacunarity: number
-    flags: utility.NoiseFlags
+    flags: NoiseFlags
   }
 
   interface OreDefinition {
-    ore_type: utility.OreType
+    ore_type: OreType
     ore: string
     ore_param2?: number
     wherein: string
@@ -865,7 +865,7 @@ declare global {
     clust_size: number
     y_min: number
     y_max: number
-    flags?: utility.OreFlags
+    flags?: OreFlags
     noise_threshold?: number
     noise_params?: NoiseParams
     biomes?: string[]
@@ -908,7 +908,7 @@ declare global {
 
   interface DecorationDefinition {
     name: string
-    deco_type?: utility.DecorationType
+    deco_type?: DecorationType
     place_on?: string
     sidelen?: number
     fill_ratio?: number
@@ -933,7 +933,7 @@ declare global {
 
 
   interface CraftRecipeDefinition {
-    type?: utility.CraftRecipeType
+    type?: CraftRecipeType
     output?: string
     recipe: string[][] | string[] | string
     replacements?: string[]
@@ -949,7 +949,7 @@ declare global {
   }
 
   interface CraftRecipeCheckDefinition {
-    method: utility.CraftCheckType
+    method: CraftCheckType
     width: number
     items: ItemStackObject[]
   }
@@ -981,7 +981,7 @@ declare global {
   }
 
   interface HPChangeReasonDefinition {
-    type: utility.HPChangeReasonType
+    type: HPChangeReasonType
     node: string
     node_pos: Vec3
     object: ObjectRef
@@ -1001,7 +1001,7 @@ declare global {
 
 
   interface CheatDefinition {
-    type: utility.CheatType
+    type: CheatType
   }
 
 
@@ -1037,7 +1037,7 @@ declare global {
   function PerlinNoise(params: NoiseParams): PerlinNoiseObject
   function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject
   function PseudoRandom(seed: number): PseudoRandomObject
-  function AreaStore(_: utility.AreaStoreType): AreaStoreObject
+  function AreaStore(_: AreaStoreType): AreaStoreObject
 
   namespace vector {
 
@@ -1187,7 +1187,7 @@ declare global {
     punch(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3): void
     right_click(clicker: ObjectRef): void
     get_hp(): number
-    set_hp(hp: number, reason: utility.HPChangeReasonType): void
+    set_hp(hp: number, reason: HPChangeReasonType): void
     get_inventory(): InvRef
     get_wield_list(): string
     get_wield_index(): number
@@ -1246,7 +1246,7 @@ declare global {
     get_physics_override(): PhysicsOverride
     hud_add(definition: HudDefinition): number
     hud_remove(id: number): void
-    hud_change(id: number, stat: utility.HudElementType, value: any): void
+    hud_change(id: number, stat: HudElementType, value: any): void
     hud_get(id: number): HudDefinition
     hud_set_flags(flags: HudFlags): void
     hud_get_flags(): HudFlags
@@ -1347,7 +1347,7 @@ declare global {
     indoors: DynamicColorSpec
     fog_sun_tint: DynamicColorSpec
     fog_moon_tint: DynamicColorSpec
-    fog_tint_type: utility.SkyParametersFogTintType
+    fog_tint_type: SkyParametersFogTintType
   }
 
   interface SkyParametersFog {
@@ -1358,7 +1358,7 @@ declare global {
   interface SkyParameters {
     base_color: DynamicColorSpec
     body_orbit_tilt: number
-    type: utility.SkyParametersType
+    type: SkyParametersType
     textures: string[]
     clouds: boolean
     sky_color: SkyParametersColor
@@ -1430,7 +1430,7 @@ declare global {
     collisionbox?: CollisionBox
     selectionbox?: number[]
     pointable?: boolean
-    visual?: utility.EntityVisual
+    visual?: EntityVisual
     visual_size?: Vec3 | Vec2
     mesh?: string
     textures?: string[]
@@ -1476,7 +1476,7 @@ declare global {
 
 
   interface MinimapModes {
-    type: utility.MinimapType
+    type: MinimapType
     label: string
     size: number
     texture: string
@@ -1495,7 +1495,7 @@ declare global {
   }
 
   interface HudDefinition {
-    hud_elem_type: utility.HudElementType
+    hud_elem_type: HudElementType
     position: Vec2
     name: string
     scale: Vec2
@@ -1513,7 +1513,7 @@ declare global {
   }
 
   interface TileAnimationDefinition {
-    type: utility.TileAnimationType
+    type: TileAnimationType
     aspect_w: number
     aspect_h: number
     length: number
@@ -1568,7 +1568,7 @@ declare global {
 
   interface ParticleSpawnerTweenDefinition extends Array<number | ParticleSpawnerRangeDefinition> {
     // {number | ParticleSpawnerRangeDefinition}
-    style: utility.ParticleSpawnerTweenStyle
+    style: ParticleSpawnerTweenStyle
     reps: number
     start: number
   }
@@ -1591,18 +1591,18 @@ declare global {
     alpha_tween: number[]
     scale: number | Vec2
     scale_tween: ParticleSpawnerTextureScaleTween
-    blend: utility.ParticleSpawnerTextureBlend
+    blend: ParticleSpawnerTextureBlend
     animation: TileAnimationDefinition
   }
 
   interface TexturePoolComponentTweenDefinition extends Array<number> {
-    style: utility.ParticleSpawnerTweenStyle
+    style: ParticleSpawnerTweenStyle
     reps: number
   }
 
   interface TexturePoolComponentDefinition {
     name: string
-    fade: utility.TexturePoolComponentFade
+    fade: TexturePoolComponentFade
     alpha: number
     scale: number
     animation: TileAnimationDefinition
@@ -1612,7 +1612,7 @@ declare global {
   type ParticleSpawnerTexturePoolDefinition = Array<string | TexturePoolComponentDefinition>
 
   interface ParticleSpawnerAttractionDefinition {
-    kind: utility.ParticleSpawnerAttractionType
+    kind: ParticleSpawnerAttractionType
     strength: Vec2
     origin: Vec3
     direction: Vec3
@@ -1721,7 +1721,7 @@ declare global {
     function sign(x: number, tolerance: number): number
     function factorial(x: number): number
     function round(x: number): number
-    // Clamp is a bolt on created in utility.
+    // Clamp is a bolt on created in 
     function clamp(min: number, max: number, input: number): number
   }
 
