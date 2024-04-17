@@ -3,12 +3,12 @@ namespace blocks {
   const generateDropRequirements = tools.generateDropRequirements;
   const ToolType = types.ToolType;
   const blockType = types.BlockType;
-  
+
   function oreIt(oreTexture: string): string[] {
     return ["default_stone.png^" + oreTexture]
   }
 
-  minetest.register_node(":coal_ore", {
+  utility.registerNode(":coal_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_coal.png"),
     sounds: sounds.stone(),
@@ -27,7 +27,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":iron_ore", {
+  utility.registerNode(":iron_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_iron.png"),
     sounds: sounds.stone(),
@@ -46,7 +46,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":gold_ore", {
+  utility.registerNode(":gold_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_gold.png"),
     sounds: sounds.stone(),
@@ -65,7 +65,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":diamond_ore", {
+  utility.registerNode(":diamond_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_diamond.png"),
     sounds: sounds.stone(),
@@ -84,7 +84,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":mese_ore", {
+  utility.registerNode(":mese_ore", {
     drawtype: utility.Drawtype.normal,
     tiles: oreIt("default_mineral_mese.png"),
     sounds: sounds.stone(),

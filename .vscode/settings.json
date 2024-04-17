@@ -10,9 +10,17 @@
     "clazz",
     "databit",
     "dofile",
+    "drawtype",
+    "facedir",
+    "formspec",
+    "lowpart",
     "minetest",
     "modname",
     "modpath",
+    "nodebox",
+    "Nodeboxtype",
+    "paramtype",
+    "Screenbg",
     "userdata",
     "yslice"
   ]

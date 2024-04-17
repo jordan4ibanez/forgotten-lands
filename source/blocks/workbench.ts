@@ -182,7 +182,7 @@ namespace blocks {
   // }
 
 
-  minetest.register_node(":workbench", {
+  utility.registerNode(":workbench", {
     drawtype: utility.Drawtype.normal,
     tiles: [
       "crafting_workbench_top.png",

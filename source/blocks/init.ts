@@ -23,7 +23,7 @@ namespace blocks {
         pixel(size.z), pixel(size.y), pixel(size.z),
       ]]
 
-    minetest.register_node(":tall_grass_" + i, {
+    utility.registerNode(":tall_grass_" + i, {
       drawtype: utility.Drawtype.plantlike,
       walkable: false,
       waving: 1,

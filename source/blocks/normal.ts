@@ -4,7 +4,7 @@ namespace blocks {
   const ToolType = types.ToolType;
   const blockType = types.BlockType;
 
-  minetest.register_node(":stone", {
+  utility.registerNode(":stone", {
     drawtype: utility.Drawtype.normal,
     tiles: ["default_stone.png"],
     sounds: sounds.stone(),
@@ -24,7 +24,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":cobblestone", {
+  utility.registerNode(":cobblestone", {
     drawtype: utility.Drawtype.normal,
     tiles: ["default_cobble.png"],
     sounds: sounds.stone(),
@@ -33,7 +33,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":dirt", {
+  utility.registerNode(":dirt", {
     drawtype: utility.Drawtype.normal,
     tiles: ["default_dirt.png"],
     sounds: sounds.dirt(),
@@ -42,7 +42,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":grass", {
+  utility.registerNode(":grass", {
     drawtype: utility.Drawtype.normal,
     tiles: [
       "default_grass.png",
@@ -56,7 +56,7 @@ namespace blocks {
     drop: "dirt"
   })
 
-  minetest.register_node(":sand", {
+  utility.registerNode(":sand", {
     drawtype: utility.Drawtype.normal,
     tiles: ["default_sand.png"],
     sounds: sounds.sand(),
@@ -65,7 +65,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":gravel", {
+  utility.registerNode(":gravel", {
     drawtype: utility.Drawtype.normal,
     tiles: ["default_gravel.png"],
     sounds: sounds.gravel(),
@@ -74,7 +74,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":oak_tree", {
+  utility.registerNode(":oak_tree", {
     drawtype: utility.Drawtype.normal,
     tiles: [
       "default_tree_top.png",
@@ -88,7 +88,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":oak_leaves", {
+  utility.registerNode(":oak_leaves", {
     drawtype: utility.Drawtype.allfaces_optional,
     paramtype: utility.ParamType1.light,
     waving: 1,
@@ -109,7 +109,7 @@ namespace blocks {
     }
   })
 
-  minetest.register_node(":oak_wood", {
+  utility.registerNode(":oak_wood", {
     drawtype: utility.Drawtype.normal,
     tiles: [
       "default_wood.png"
@@ -142,7 +142,7 @@ namespace blocks {
     "yellow"
   ]
   for (const color of dyes) {
-    minetest.register_node(":" + color + "_wool", {
+    utility.registerNode(":" + color + "_wool", {
       tiles: ["wool_" + color + ".png"],
       sounds: sounds.wool(),
       groups: {
@@ -151,7 +151,7 @@ namespace blocks {
     })
   }
 
-  minetest.register_node(":glass", {
+  utility.registerNode(":glass", {
     drawtype: utility.Drawtype.glasslike_framed_optional,
     tiles: [
       "default_glass.png",
