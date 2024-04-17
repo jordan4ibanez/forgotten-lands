@@ -14,7 +14,7 @@ namespace utility {
     }
   }
 
-  loadFiles(["enums", "color_generator", "vector"])
+  loadFiles(["math", "enums", "color_generator", "vector"])
 
   export function concat(...input: string[]): string {
     let accumulator = ""
@@ -76,14 +76,9 @@ namespace utility {
     print(builder)
   }
 
-  export function randomRange(min: number, max: number): number {
-    return (math.random() * (max - min) + min)
-  }
-
   export function fakeRef(): ObjectRef {
     return {} as ObjectRef
   }
-
 
   /**
    * A bolt on to allow you to directly register MT lua entities as TS classes.
@@ -99,22 +94,13 @@ namespace utility {
     minetest.registered_entities[instance.name] = instance
   }
 
-
   /**
-   * Clamp a number between two number. (inclusive)
-   * @param min Min value.
-   * @param max Max value.
-   * @param input Value to be clamped.
-   * @returns Clamped value.
+   * Register a node regardless of it's name.
+   * @param nodeName The node name.
+   * @param definition The node definition.
    */
-  math.clamp = function (min: number, max: number, input: number): number {
-    if (input < min) {
-      return min
-    } else if (input > max) {
-      return max
-    }
-    return input
+  export function registerNode(nodeName: string, definition: NodeDefinition) {
+    minetest.register_node(":" + nodeName, definition);
   }
-
 
 }

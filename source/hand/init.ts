@@ -1,5 +1,5 @@
 namespace hand {
-  minetest.register_node("hand", {
+  utility.registerNode("hand", {
 
   })
 }
