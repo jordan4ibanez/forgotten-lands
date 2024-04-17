@@ -99,8 +99,18 @@ namespace utility {
    * @param nodeName The node name.
    * @param definition The node definition.
    */
-  export function registerNode(nodeName: string, definition: NodeDefinition) {
+  export function registerNode(nodeName: string, definition: NodeDefinition): void {
     minetest.register_node(":" + nodeName, definition);
+  }
+
+  /**
+   * Print a warning message instead of an error.
+   * @param message The warning message.
+   */
+  export function warning(message: string): void {
+    pcall(function () {
+      error(message)
+    })
   }
 
 }
