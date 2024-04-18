@@ -301,6 +301,7 @@ namespace world {
           schematic: id,
           fill_ratio: 0.01,
           place_offset_y: 1,
+          y_min: 1,
           flags: "place_center_x, place_center_z",
         });
       });
