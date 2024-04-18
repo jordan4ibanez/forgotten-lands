@@ -664,7 +664,7 @@ declare global {
     on_drop?(itemStack: ItemStackObject, dropper: ObjectRef, position: Vec3): void
     on_pickup?(itemStack: ItemStackObject, picker: ObjectRef, pointedThing: PointedThing, timeFromLastPunch: number, ...any: any): void
     on_use?(itemStack: ItemStackObject, user: ObjectRef, pointedThing: PointedThing): void
-    after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, { string: any }): void
+    after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, digParams: { string: any }): void
   }
 
 
@@ -672,7 +672,7 @@ declare global {
   interface NodeDefinition {
     drawtype?: Drawtype
     visual_scale?: number
-    tiles?: string[]
+    tiles?: string[] | [[key: string], string][]
     overlay_tiles?: string[]
     special_tiles?: string[]
     wield_scale?: Vec3,
