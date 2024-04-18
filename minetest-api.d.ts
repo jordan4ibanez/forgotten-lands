@@ -1513,6 +1513,7 @@ declare global {
   }
 
   interface TileAnimationDefinition {
+    name?: string,
     type?: TileAnimationType
     aspect_w?: number
     aspect_h?: number
