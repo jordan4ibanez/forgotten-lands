@@ -667,13 +667,12 @@ declare global {
     after_use?(itemStack: ItemStackObject, user: ObjectRef, nodeTable: NodeTable, digParams: { string: any }): void
   }
 
-
   /** @noSelf **/
   interface NodeDefinition {
     drawtype?: Drawtype
     visual_scale?: number
     //! fixme: Tiles needs an interface!
-    tiles?: string[] | { [key: string]: any }[]
+    tiles?: string[] | TileAnimationDefinition[]
     overlay_tiles?: string[]
     special_tiles?: string[]
     wield_scale?: Vec3,
@@ -1514,13 +1513,13 @@ declare global {
   }
 
   interface TileAnimationDefinition {
-    type: TileAnimationType
-    aspect_w: number
-    aspect_h: number
-    length: number
-    frames_w: number
-    frames_h: number
-    frame_length: number
+    type?: TileAnimationType
+    aspect_w?: number
+    aspect_h?: number
+    length?: number
+    frames_w?: number
+    frames_h?: number
+    frame_length?: number
   }
 
   interface Rollback {
