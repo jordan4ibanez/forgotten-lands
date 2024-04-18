@@ -3,8 +3,8 @@
     "**/**/**.lua": true,
     "mods/": true,
     "node_modules": true,
-    // "scripts/": true,
-    // "menu/": true,
+    "scripts/": true,
+    "menu/": true,
   },
   "cSpell.words": [
     "absvalue",
@@ -32,6 +32,7 @@
     "cpdir",
     "craftitem",
     "craftitems",
+    "craftpreview",
     "databit",
     "defaul",
     "degrotate",
