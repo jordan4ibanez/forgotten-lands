@@ -4,7 +4,7 @@ namespace utility {
    * Mini null safety wrapper.
    * Since this is single threaded, it's gonna get real weird.
    */
-  export class OptionSingleThreaded<T> {
+  export class Option<T> {
     data: T | null = null
 
     is_some(): boolean {
@@ -23,32 +23,32 @@ namespace utility {
       }
     }
 
-    someFunction<T>(f: (input: T) => void): OptionSingleThreaded<T> {
+    someFunction<T>(f: (input: T) => void): Option<T> {
       if (this.data != null) {
         f(this.data as T);
       }
-      return this as unknown as OptionSingleThreaded<T>;
+      return this as unknown as Option<T>;
     }
 
-    noneFunction<T>(f: () => void): OptionSingleThreaded<T> {
+    noneFunction<T>(f: () => void): Option<T> {
       if (this.data == null) {
         f();
       }
-      return this as unknown as OptionSingleThreaded<T>;
+      return this as unknown as Option<T>;
     }
 
     constructor(input: T | null) {
       this.data = input;
     }
 
-    mutate<Y>(input: Y | null): OptionSingleThreaded<Y> {
+    mutate<Y>(input: Y | null): Option<Y> {
       (this.data as Y | null) = input;
-      return this as unknown as OptionSingleThreaded<Y>;
+      return this as unknown as Option<Y>;
     }
   }
 
   // Brute force memory optimization in this single threaded environment.
-  let singleton = new OptionSingleThreaded<any>(null);
+  let singleton = new Option<any>(null);
 
   /**
    * If you're not sure if it's going to be nothing, safely wrap it.
@@ -56,7 +56,7 @@ namespace utility {
    * @param input Something...or maybe nothing?
    * @returns OptionSingleThreaded<Type>
    */
-  export function optionWrap<T>(input: T | null): OptionSingleThreaded<T> {
+  export function optionWrap<T>(input: T | null): Option<T> {
     return singleton.mutate(input);
   }
 }
