@@ -85,7 +85,7 @@ namespace blocks {
     groups: { water: 3, liquid: 3 },
     sounds: {}
 
-  })
+  });
 
 
 }

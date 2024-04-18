@@ -1,6 +1,6 @@
 namespace utility {
   export function randomRange(min: number, max: number): number {
-    return (math.random() * (max - min) + min)
+    return (math.random() * (max - min) + min);
   }
 
   /**
@@ -12,11 +12,11 @@ namespace utility {
    */
   math.clamp = function (min: number, max: number, input: number): number {
     if (input < min) {
-      return min
+      return min;
     } else if (input > max) {
-      return max
+      return max;
     }
-    return input
-  }
+    return input;
+  };
 
 }

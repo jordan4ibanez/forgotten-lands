@@ -26,7 +26,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 1
     })
-  })
+  });
 
   minetest.register_tool(":stone_pickaxe", {
     inventory_image: "default_tool_stonepick.png",
@@ -49,7 +49,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 2
     })
-  })
+  });
 
   minetest.register_tool(":iron_pickaxe", {
     inventory_image: "default_tool_steelpick.png",
@@ -73,7 +73,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 3
     })
-  })
+  });
 
   minetest.register_tool(":gold_pickaxe", {
     inventory_image: "default_tool_goldpick.png",
@@ -97,7 +97,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 3
     })
-  })
+  });
 
   minetest.register_tool(":diamond_pickaxe", {
     inventory_image: "default_tool_diamondpick.png",
@@ -122,7 +122,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 4
     })
-  })
+  });
 
   minetest.register_tool(":mese_pickaxe", {
     inventory_image: "default_tool_mesepick.png",
@@ -148,5 +148,5 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Pickaxe]: 5
     })
-  })
+  });
 }

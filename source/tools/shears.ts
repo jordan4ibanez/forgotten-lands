@@ -28,5 +28,5 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shears]: 5
     })
-  })
+  });
 }

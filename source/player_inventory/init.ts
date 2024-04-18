@@ -1,21 +1,21 @@
 namespace player {
 
-  export const CRAFT_INVENTORY_SIZE = vector.create2d(2, 2)
-  export const MAIN_INVENTORY_SIZE = vector.create2d(9, 4)
+  export const CRAFT_INVENTORY_SIZE = vector.create2d(2, 2);
+  export const MAIN_INVENTORY_SIZE = vector.create2d(9, 4);
 
-  const create = vector.create2d
+  const create = vector.create2d;
 
-  const generate = formSpec.generate
-  const FormSpec = formSpec.FormSpec
-  const BackGround = formSpec.Background
-  const BGColor = formSpec.BGColor
-  const List = formSpec.List
-  const ListColors = formSpec.ListColors
-  const ListRing = formSpec.ListRing
+  const generate = formSpec.generate;
+  const FormSpec = formSpec.FormSpec;
+  const BackGround = formSpec.Background;
+  const BGColor = formSpec.BGColor;
+  const List = formSpec.List;
+  const ListColors = formSpec.ListColors;
+  const ListRing = formSpec.ListRing;
 
-  const color = utility.color
-  const colorScalar = utility.colorScalar
-  const colorRGB = utility.colorRGB
+  const color = utility.color;
+  const colorScalar = utility.colorScalar;
+  const colorRGB = utility.colorRGB;
 
   export const playerInventory: string = generate(new FormSpec({
     size: create(12, 12),
@@ -97,16 +97,16 @@ namespace player {
         listName: "craft"
       })
     ]
-  }))
+  }));
 
   minetest.register_on_joinplayer((newPlayer: ObjectRef) => {
-    newPlayer.hud_set_hotbar_itemcount(MAIN_INVENTORY_SIZE.x)
-    const inventory = newPlayer.get_inventory()
-    inventory.set_size("main", MAIN_INVENTORY_SIZE.x * MAIN_INVENTORY_SIZE.y)
-    inventory.set_width("main", MAIN_INVENTORY_SIZE.x)
-    inventory.set_size("craft", CRAFT_INVENTORY_SIZE.x * CRAFT_INVENTORY_SIZE.y)
-    inventory.set_width("craft", CRAFT_INVENTORY_SIZE.x)
-    newPlayer.set_inventory_formspec(playerInventory)
-  })
+    newPlayer.hud_set_hotbar_itemcount(MAIN_INVENTORY_SIZE.x);
+    const inventory = newPlayer.get_inventory();
+    inventory.set_size("main", MAIN_INVENTORY_SIZE.x * MAIN_INVENTORY_SIZE.y);
+    inventory.set_width("main", MAIN_INVENTORY_SIZE.x);
+    inventory.set_size("craft", CRAFT_INVENTORY_SIZE.x * CRAFT_INVENTORY_SIZE.y);
+    inventory.set_width("craft", CRAFT_INVENTORY_SIZE.x);
+    newPlayer.set_inventory_formspec(playerInventory);
+  });
 
 }

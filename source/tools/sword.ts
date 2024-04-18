@@ -25,7 +25,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Sword]: 1
     })
-  })
+  });
 
   minetest.register_tool(":stone_sword", {
     inventory_image: "default_tool_stonesword.png",
@@ -48,7 +48,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Sword]: 2
     })
-  })
+  });
 
   minetest.register_tool(":iron_sword", {
     inventory_image: "default_tool_steelsword.png",
@@ -72,7 +72,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Sword]: 3
     })
-  })
+  });
 
   minetest.register_tool(":gold_sword", {
     inventory_image: "default_tool_goldsword.png",
@@ -96,7 +96,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Sword]: 3
     })
-  })
+  });
 
   minetest.register_tool(":diamond_sword", {
     inventory_image: "default_tool_diamondsword.png",
@@ -121,7 +121,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Sword]: 4
     })
-  })
+  });
 
   minetest.register_tool(":mese_sword", {
     inventory_image: "default_tool_mesesword.png",
@@ -147,5 +147,5 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Sword]: 5
     })
-  })
+  });
 }

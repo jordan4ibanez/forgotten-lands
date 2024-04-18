@@ -22,7 +22,7 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
   utility.registerNode("cobblestone", {
     drawtype: Drawtype.normal,
@@ -31,7 +31,7 @@ namespace blocks {
     groups: {
       [blockType.stone]: 1
     }
-  })
+  });
 
   utility.registerNode("dirt", {
     drawtype: Drawtype.normal,
@@ -40,7 +40,7 @@ namespace blocks {
     groups: {
       [blockType.soil]: 1
     }
-  })
+  });
 
   utility.registerNode("grass", {
     drawtype: Drawtype.normal,
@@ -54,7 +54,7 @@ namespace blocks {
       [blockType.soil]: 1
     },
     drop: "dirt"
-  })
+  });
 
   utility.registerNode("sand", {
     drawtype: Drawtype.normal,
@@ -63,7 +63,7 @@ namespace blocks {
     groups: {
       [blockType.soil]: 1
     }
-  })
+  });
 
   utility.registerNode("gravel", {
     drawtype: Drawtype.normal,
@@ -72,7 +72,7 @@ namespace blocks {
     groups: {
       [blockType.soil]: 1
     }
-  })
+  });
 
   utility.registerNode("oak_tree", {
     drawtype: Drawtype.normal,
@@ -86,7 +86,7 @@ namespace blocks {
       [blockType.wood]: 1,
       [blockType.tree]: 1
     }
-  })
+  });
 
   utility.registerNode("oak_leaves", {
     drawtype: Drawtype.allfaces_optional,
@@ -107,7 +107,7 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
   utility.registerNode("oak_wood", {
     drawtype: Drawtype.normal,
@@ -119,7 +119,7 @@ namespace blocks {
       [blockType.wood]: 1,
       [blockType.planks]: 1
     }
-  })
+  });
 
 
 
@@ -140,7 +140,7 @@ namespace blocks {
     "violet",
     "white",
     "yellow"
-  ]
+  ];
   for (const color of dyes) {
     utility.registerNode("" + color + "_wool", {
       tiles: ["wool_" + color + ".png"],
@@ -148,7 +148,7 @@ namespace blocks {
       groups: {
         [blockType.wool]: 1
       }
-    })
+    });
   }
 
   utility.registerNode("glass", {
@@ -166,6 +166,6 @@ namespace blocks {
       [blockType.glass]: 1
     },
     drop: ""
-  })
+  });
 
 }

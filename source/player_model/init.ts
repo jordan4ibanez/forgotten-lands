@@ -6,7 +6,7 @@ namespace playerModel {
   minetest.register_on_joinplayer((player: ObjectRef) => {
     player.set_properties({
 
-    })
+    });
 
   });
 }

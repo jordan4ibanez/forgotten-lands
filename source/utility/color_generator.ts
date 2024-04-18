@@ -2,7 +2,7 @@ namespace utility {
   // Taken from: https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4 (Thanks lopspower & LeoMacherla!)
   // Written into this abomination.
 
-  export const hexValues: { [id: number]: string } = {
+  export const hexValues: { [id: number]: string; } = {
     100: "FF",
     99: "FC",
     98: "FA",
@@ -104,10 +104,10 @@ namespace utility {
     2: "05",
     1: "03",
     0: "00"
-  }
+  };
 
   export function lockChannel(input: number): number {
-    return math.floor(math.clamp(0, 100, input))
+    return math.floor(math.clamp(0, 100, input));
   }
 
   /**
@@ -116,18 +116,18 @@ namespace utility {
    * @returns Alpha AA string to bolt onto a color hex.
    */
   export function percentToAlphaHex(input: number): string {
-    const clamped = lockChannel(input)
-    return hexValues[clamped]
+    const clamped = lockChannel(input);
+    return hexValues[clamped];
   }
 
   export function color(r: number, g: number, b: number, a?: number): string {
-    let newColor = "#"
+    let newColor = "#";
     for (const channel of [r, g, b, a]) {
       if (channel) {
-        newColor += hexValues[lockChannel(channel)]
+        newColor += hexValues[lockChannel(channel)];
       }
     }
-    return newColor
+    return newColor;
   }
 
   /**
@@ -140,20 +140,20 @@ namespace utility {
    */
   export function colorRGB(r: number, g: number, b: number, a?: number): string {
     // Get everything to 0-100 range
-    a = (a) ? a / 2.55 : a
-    return color(r / 2.55, g / 2.55, b / 2.55, a)
+    a = (a) ? a / 2.55 : a;
+    return color(r / 2.55, g / 2.55, b / 2.55, a);
   }
 
   export function colorScalar(s: number, a?: number): string {
-    let newColor = "#"
-    const hex = hexValues[lockChannel(s)]
+    let newColor = "#";
+    const hex = hexValues[lockChannel(s)];
     for (let i = 0; i < 3; i++) {
-      newColor += hex
+      newColor += hex;
     }
     if (a) {
-      newColor += hexValues[lockChannel(a)]
+      newColor += hexValues[lockChannel(a)];
     }
-    return newColor
+    return newColor;
   }
 
 }

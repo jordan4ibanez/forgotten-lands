@@ -25,7 +25,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shovel]: 1
     })
-  })
+  });
 
   minetest.register_tool(":stone_shovel", {
     inventory_image: "default_tool_stoneshovel.png",
@@ -48,7 +48,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shovel]: 2
     })
-  })
+  });
 
   minetest.register_tool(":iron_shovel", {
     inventory_image: "default_tool_steelshovel.png",
@@ -72,7 +72,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shovel]: 3
     })
-  })
+  });
 
   minetest.register_tool(":gold_shovel", {
     inventory_image: "default_tool_goldshovel.png",
@@ -96,7 +96,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shovel]: 3
     })
-  })
+  });
 
   minetest.register_tool(":diamond_shovel", {
     inventory_image: "default_tool_diamondshovel.png",
@@ -121,7 +121,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shovel]: 4
     })
-  })
+  });
 
   minetest.register_tool(":mese_shovel", {
     inventory_image: "default_tool_meseshovel.png",
@@ -147,5 +147,5 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Shovel]: 5
     })
-  })
+  });
 }

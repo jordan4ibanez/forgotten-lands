@@ -24,7 +24,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Axe]: 1
     })
-  })
+  });
 
   minetest.register_tool(":stone_axe", {
     inventory_image: "default_tool_stoneaxe.png",
@@ -47,7 +47,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Axe]: 2
     })
-  })
+  });
 
   minetest.register_tool(":iron_axe", {
     inventory_image: "default_tool_steelaxe.png",
@@ -71,7 +71,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Axe]: 3
     })
-  })
+  });
 
   minetest.register_tool(":gold_axe", {
     inventory_image: "default_tool_goldaxe.png",
@@ -95,7 +95,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Axe]: 3
     })
-  })
+  });
 
   minetest.register_tool(":diamond_axe", {
     inventory_image: "default_tool_diamondaxe.png",
@@ -120,7 +120,7 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Axe]: 4
     })
-  })
+  });
 
   minetest.register_tool(":mese_axe", {
     inventory_image: "default_tool_meseaxe.png",
@@ -146,5 +146,5 @@ namespace tools {
     groups: generateToolDropGroups({
       [toolType.Axe]: 5
     })
-  })
+  });
 }

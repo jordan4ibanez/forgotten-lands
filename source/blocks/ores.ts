@@ -5,7 +5,7 @@ namespace blocks {
   const blockType = types.BlockType;
 
   function oreIt(oreTexture: string): string[] {
-    return ["default_stone.png^" + oreTexture]
+    return ["default_stone.png^" + oreTexture];
   }
 
   utility.registerNode("coal_ore", {
@@ -25,7 +25,7 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
   utility.registerNode("iron_ore", {
     drawtype: Drawtype.normal,
@@ -44,7 +44,7 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
   utility.registerNode("gold_ore", {
     drawtype: Drawtype.normal,
@@ -63,7 +63,7 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
   utility.registerNode("diamond_ore", {
     drawtype: Drawtype.normal,
@@ -82,7 +82,7 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
   utility.registerNode("mese_ore", {
     drawtype: Drawtype.normal,
@@ -101,6 +101,6 @@ namespace blocks {
         }
       ]
     }
-  })
+  });
 
 }

@@ -5,7 +5,7 @@ namespace utility {
    * Since this is single threaded, it's gonna get real weird.
    */
   export class Option<T> {
-    data: T | null = null
+    data: T | null = null;
 
     is_some(): boolean {
       return (this.data != null);

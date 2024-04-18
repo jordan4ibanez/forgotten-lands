@@ -12,7 +12,7 @@ namespace recipes {
    */
   function processRecipeArray(inputArray: CraftRecipeDefinition[]): void {
     for (const recipe of inputArray) {
-      r(recipe)
+      r(recipe);
     }
   }
 
@@ -24,8 +24,8 @@ namespace recipes {
     gold: "gold",
     diamond: "diamond",
     mese: "mese"
-  }
-  let toolRegistrationArray: CraftRecipeDefinition[] = []
+  };
+  let toolRegistrationArray: CraftRecipeDefinition[] = [];
   for (const [material, requirement] of Object.entries(toolMaterialLinkages)) {
     toolRegistrationArray.push({
       output: material + "_pickaxe",
@@ -34,7 +34,7 @@ namespace recipes {
         ["", "stick", ""],
         ["", "stick", ""]
       ]
-    })
+    });
     toolRegistrationArray.push({
       output: material + "_shovel",
       recipe: [
@@ -42,7 +42,7 @@ namespace recipes {
         ["stick"],
         ["stick"]
       ]
-    })
+    });
     // Axe can be crafted in both directions.
     toolRegistrationArray.push({
       output: material + "_axe",
@@ -51,7 +51,7 @@ namespace recipes {
         [requirement, "stick", ""],
         ["", "stick", ""]
       ]
-    })
+    });
     toolRegistrationArray.push({
       output: material + "_axe",
       recipe: [
@@ -59,7 +59,7 @@ namespace recipes {
         ["", "stick", requirement],
         ["", "stick", ""]
       ]
-    })
+    });
     // Hoe can be crafted in both directions.
     toolRegistrationArray.push({
       output: material + "_hoe",
@@ -68,7 +68,7 @@ namespace recipes {
         ["", "stick"],
         ["", "stick"]
       ]
-    })
+    });
     toolRegistrationArray.push({
       output: material + "_hoe",
       recipe: [
@@ -76,7 +76,7 @@ namespace recipes {
         ["stick", ""],
         ["stick", ""]
       ]
-    })
+    });
     toolRegistrationArray.push({
       output: material + "_sword",
       recipe: [
@@ -84,7 +84,7 @@ namespace recipes {
         [requirement],
         ["stick"]
       ]
-    })
+    });
   }
   toolRegistrationArray.push({
     output: "shears",
@@ -92,8 +92,8 @@ namespace recipes {
       ["", "iron"],
       ["iron", ""]
     ]
-  })
-  processRecipeArray(toolRegistrationArray)
+  });
+  processRecipeArray(toolRegistrationArray);
 
 
 
@@ -126,10 +126,10 @@ namespace recipes {
         [craftBlockType.planks, craftBlockType.planks]
       ]
     }
-  ]
+  ];
 
-  processRecipeArray(craftables)
+  processRecipeArray(craftables);
 
-  utility.loadFiles(["cooking", "fuel"])
+  utility.loadFiles(["cooking", "fuel"]);
 
 }

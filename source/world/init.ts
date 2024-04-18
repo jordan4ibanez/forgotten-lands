@@ -1,15 +1,16 @@
 
 namespace world {
   // Solids
-  minetest.register_alias("mapgen_stone", "stone")
-  minetest.register_alias("mapgen_dirt", "dirt")
-  minetest.register_alias("mapgen_dirt_with_grass", "grass")
+  minetest.register_alias("mapgen_stone", "stone");
+  minetest.register_alias("mapgen_dirt", "dirt");
+  minetest.register_alias("mapgen_dirt_with_grass", "grass");
 
   // Falling
-  minetest.register_alias("mapgen_sand", "sand")
-  minetest.register_alias("mapgen_gravel", "gravel")
+  minetest.register_alias("mapgen_sand", "sand");
+  minetest.register_alias("mapgen_gravel", "gravel");
 
   // Liquids
+  minetest.register_alias("mapgen_water_source", "waterSource");
 
 
   // Biomes
@@ -20,14 +21,14 @@ namespace world {
     node_filler: "dirt",
     depth_filler: 6,
     node_stone: "stone"
-  })
+  });
 
   {
-    let grass: string[] = []
+    let grass: string[] = [];
 
     for (let i = 1; i <= 5; i++) {
-      const height = tostring(i)
-      table.insert(grass, "tall_grass_" + height)
+      const height = tostring(i);
+      table.insert(grass, "tall_grass_" + height);
     }
 
     minetest.register_decoration({
@@ -39,7 +40,7 @@ namespace world {
       param2: 0,
       param2_max: 239,
       fill_ratio: 0.98
-    })
+    });
 
     const concat = utility.concat;
     const generateSchematic = utility.generateSchematic;
@@ -93,7 +94,7 @@ namespace world {
         253, 254, 254, 254, 253,
         253, 253, 253, 253, 253
       ]
-    )
+    );
 
     const mediumOak = generateSchematic(
       create(7, 7, 7),
@@ -171,7 +172,7 @@ namespace world {
         252, 253, 253, 253, 253, 253, 252,
         252, 252, 252, 252, 252, 252, 252,
       ]
-    )
+    );
 
     const largeOak = generateSchematic(
       create(9, 9, 9),
@@ -284,13 +285,13 @@ namespace world {
         251, 252, 252, 252, 252, 252, 252, 252, 251,
         251, 251, 251, 251, 251, 251, 251, 251, 251,
       ]
-    )
+    );
     {
-      const smallID = minetest.register_schematic(smallOak)
-      const mediumID = minetest.register_schematic(mediumOak)
-      const largeID = minetest.register_schematic(largeOak)
-      const oakSize = ["small", "medium", "large"]
-      const oakIDs = [smallID, mediumID, largeID]
+      const smallID = minetest.register_schematic(smallOak);
+      const mediumID = minetest.register_schematic(mediumOak);
+      const largeID = minetest.register_schematic(largeOak);
+      const oakSize = ["small", "medium", "large"];
+      const oakIDs = [smallID, mediumID, largeID];
       oakIDs.forEach((id, key) => {
         minetest.register_decoration({
           name: "oak_" + oakSize[key],
@@ -301,10 +302,10 @@ namespace world {
           fill_ratio: 0.01,
           place_offset_y: 1,
           flags: "place_center_x, place_center_z",
-        })
-      })
+        });
+      });
     }
   }
 
-  utility.loadFiles(["ores"])
+  utility.loadFiles(["ores"]);
 }

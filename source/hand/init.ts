@@ -12,7 +12,7 @@ namespace hand {
     paramtype: ParamType1.light,
     drawtype: Drawtype.mesh,
     mesh: "hand.b3d"
-  })
+  });
 
   minetest.register_on_joinplayer((player: ObjectRef, _: string) => {
     // If the player's inventory disappears, uh oh.
@@ -28,5 +28,5 @@ namespace hand {
         warning("Player inventory disappeared when creating the 3D hand!");
       }
     }
-  })
+  });
 }

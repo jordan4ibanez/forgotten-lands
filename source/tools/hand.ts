@@ -1,6 +1,6 @@
 namespace tools {
 
-  const blockType = types.BlockType
+  const blockType = types.BlockType;
 
 
   //! NOTE: Do not ever add element 0 to times!
@@ -85,5 +85,5 @@ namespace tools {
         fleshy: 1
       }
     }
-  })
+  });
 }

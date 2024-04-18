@@ -1,25 +1,25 @@
 
 namespace blocks {
 
-  const create = vector.create2d
+  const create = vector.create2d;
 
   const blockType = types.BlockType;
-  const generate = formSpec.generate
-  const FormSpec = formSpec.FormSpec
-  const BackGround = formSpec.Background
-  const BGColor = formSpec.BGColor
-  const List = formSpec.List
-  const ListColors = formSpec.ListColors
-  const ListRing = formSpec.ListRing
+  const generate = formSpec.generate;
+  const FormSpec = formSpec.FormSpec;
+  const BackGround = formSpec.Background;
+  const BGColor = formSpec.BGColor;
+  const List = formSpec.List;
+  const ListColors = formSpec.ListColors;
+  const ListRing = formSpec.ListRing;
 
-  const color = utility.color
-  const colorScalar = utility.colorScalar
-  const colorRGB = utility.colorRGB
+  const color = utility.color;
+  const colorScalar = utility.colorScalar;
+  const colorRGB = utility.colorRGB;
 
-  const playerInventorySize = player.MAIN_INVENTORY_SIZE
-  const playerRegularCraftSize = player.CRAFT_INVENTORY_SIZE
+  const playerInventorySize = player.MAIN_INVENTORY_SIZE;
+  const playerRegularCraftSize = player.CRAFT_INVENTORY_SIZE;
 
-  const WORKBENCH_INVENTORY_SIZE = create(3, 3)
+  const WORKBENCH_INVENTORY_SIZE = create(3, 3);
 
 
   const workBenchInventory: string = generate(new FormSpec({
@@ -110,7 +110,7 @@ namespace blocks {
         listName: "craftpreview"
       })
     ]
-  }))
+  }));
 
   // function allowPut(
   //   position: Vec3,
@@ -196,44 +196,44 @@ namespace blocks {
 
     //! Fixme: Make a persistent inventory. :(
     on_rightclick(position: Vec3, node: NodeTable, clicker: ObjectRef, itemStack: ItemStackObject, pointedThing: PointedThing) {
-      const inventory = clicker.get_inventory()
-      inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
-      inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
+      const inventory = clicker.get_inventory();
+      inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y);
+      inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x);
     },
 
-    on_receive_fields(position: Vec3, formName: string, fields: { [id: string]: any }, sender: ObjectRef) {
+    on_receive_fields(position: Vec3, formName: string, fields: { [id: string]: any; }, sender: ObjectRef) {
       // Just throw the items for now.
-      const inventory = sender.get_inventory()
-      const playerPos = sender.get_pos()
-      playerPos.y += 1.5
-      const yaw = sender.get_look_horizontal()
+      const inventory = sender.get_inventory();
+      const playerPos = sender.get_pos();
+      playerPos.y += 1.5;
+      const yaw = sender.get_look_horizontal();
 
-      const items = inventory.get_list("craft")
+      const items = inventory.get_list("craft");
       for (const item of items) {
-        if (item.is_empty()) continue
-        const stackSize = item.get_count()
-        const itemName = item.get_name()
+        if (item.is_empty()) continue;
+        const stackSize = item.get_count();
+        const itemName = item.get_name();
         for (let i = 0; i < stackSize; i++) {
-          const item = minetest.add_item(playerPos, itemName)
+          const item = minetest.add_item(playerPos, itemName);
           if (!item) {
-            continue
+            continue;
           }
-          const dir = vector.multiply(minetest.yaw_to_dir(yaw + ((math.random() - 0.5) * 1.25)), 2 + math.random())
-          dir.y = 1 + (math.random() * 3)
-          item.add_velocity(dir)
+          const dir = vector.multiply(minetest.yaw_to_dir(yaw + ((math.random() - 0.5) * 1.25)), 2 + math.random());
+          dir.y = 1 + (math.random() * 3);
+          item.add_velocity(dir);
         }
       }
-      inventory.set_list("craft", [])
-      inventory.set_size("craft", playerRegularCraftSize.x * playerRegularCraftSize.y)
-      inventory.set_width("craft", playerRegularCraftSize.x)
+      inventory.set_list("craft", []);
+      inventory.set_size("craft", playerRegularCraftSize.x * playerRegularCraftSize.y);
+      inventory.set_width("craft", playerRegularCraftSize.x);
     },
 
     on_construct(position: Vec3) {
-      const meta = minetest.get_meta(position)
+      const meta = minetest.get_meta(position);
       // const inventory = meta.get_inventory()
-      meta.set_string("formspec", workBenchInventory)
+      meta.set_string("formspec", workBenchInventory);
       // inventory.set_size("craft", WORKBENCH_INVENTORY_SIZE.x * WORKBENCH_INVENTORY_SIZE.y)
       // inventory.set_width("craft", WORKBENCH_INVENTORY_SIZE.x)
     },
-  })
+  });
 }
