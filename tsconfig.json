@@ -28,7 +28,7 @@
     "luaTarget": "JIT",
     "noHeader": true,
     "noImplicitSelf": true,
-    // "sourceMapTraceback": true,
+    "sourceMapTraceback": true,
     "luaLibImport": "inline"
   }
 }
