@@ -22,6 +22,7 @@ namespace hand {
         const inv = result.unwrap();
         inv.set_size("hand", 1);
         inv.set_stack("hand", 1, "hand");
+        break;
       }
       case false: {
         warning("Player inventory disappeared when creating the 3D hand!");
