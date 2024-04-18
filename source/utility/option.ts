@@ -23,14 +23,14 @@ namespace utility {
       }
     }
 
-    someFunction<T>(f: (input: T) => void): Option<T> {
+    someFun<T>(f: (input: T) => void): Option<T> {
       if (this.data != null) {
         f(this.data as T);
       }
       return this as unknown as Option<T>;
     }
 
-    noneFunction<T>(f: () => void): Option<T> {
+    noneFun<T>(f: () => void): Option<T> {
       if (this.data == null) {
         f();
       }
