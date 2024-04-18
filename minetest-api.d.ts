@@ -676,12 +676,12 @@ declare global {
 
   /** @noSelf **/
   interface NodeDefinition {
+    description?: string
     drawtype?: Drawtype
     visual_scale?: number
-    //! fixme: Tiles needs an interface!
     tiles?: string[] | TileDefinition[]
     overlay_tiles?: string[]
-    special_tiles?: string[]
+    special_tiles?: string[] | TileDefinition[]
     wield_scale?: Vec3,
     color?: DynamicColorSpec
     light_source?: number
