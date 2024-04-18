@@ -5,7 +5,7 @@ namespace blocks {
     description: "Water",
     drawtype: Drawtype.liquid,
     waving: 3,
-    special_tiles: [{
+    tiles: [{
       name: "default_water_source_animated.png",
       backface_culling: false,
       animation: {
@@ -55,7 +55,7 @@ namespace blocks {
         type: TileAnimationType.vertical_frames,
         aspect_w: 16,
         aspect_h: 16,
-        length: 2
+        length: 2,
       }
     },
     {
