@@ -123,9 +123,19 @@ namespace utility {
    * @param message The warning message.
    */
   export function warning(message: string): void {
-    pcall(function () {
-      error(message)
-    })
-  }
 
+    let rawText: string = debug.traceback(message);
+    let textArray: string[] = rawText.split("\n");
+    let accumulator: string[] = [];
+
+    // We want to remove the line that points to the utility module.
+    for (const [key, value] of textArray.entries()) {
+      if (key != 2) {
+        accumulator.push(value)
+      }
+    }
+    let result: string = "WARNING! " + table.concat(accumulator, "\n");
+    // This only works on ANSI terminals, so sorry windows peoples.
+    print(terminalColorize(result, 255, 69, 0));
+  };
 }
