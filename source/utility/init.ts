@@ -128,9 +128,12 @@ namespace utility {
     let textArray: string[] = rawText.split("\n");
     let accumulator: string[] = [];
 
+    // ? For debugging.
+    // print(rawText);
+
     // We want to remove the line that points to the utility module.
     for (const [key, value] of textArray.entries()) {
-      if (key != 2) {
+      if (key != 2 && key != 3) {
         accumulator.push(value)
       }
     }
