@@ -1,4 +1,10 @@
 namespace hand {
+
+  const optionWrap = utility.optionWrap;
+  type Option<T> = utility.Option<T>;
+  let warning = utility.warning;
+
+
   utility.registerNode("hand", {
     tiles: ["character.png"],
     visual_scale: 1,
@@ -9,15 +15,17 @@ namespace hand {
   })
 
   minetest.register_on_joinplayer((player: ObjectRef, _: string) => {
-
     // If the player's inventory disappears, uh oh.
-    utility.optionWrap<InvRef>(player.get_inventory())
-      .someFunction((inv: InvRef) => {
+    let result: Option<InvRef> = optionWrap<InvRef>(player.get_inventory());
+    switch (result.is_some()) {
+      case true: {
+        const inv = result.unwrap();
         inv.set_size("hand", 1);
         inv.set_stack("hand", 1, "hand");
-      })
-      .noneFunction(() => {
-        utility.warning("Player inventory disappeared when creating the 3D hand!");
-      })
-  });
+      }
+      case false: {
+        warning("Player inventory disappeared when creating the 3D hand!");
+      }
+    }
+  })
 }
