@@ -136,6 +136,6 @@ namespace utility {
     }
     let result: string = "WARNING! " + table.concat(accumulator, "\n");
     // This only works on ANSI terminals, so sorry windows peoples.
-    print(terminalColorize(result, 255, 69, 0));
+    print(terminalColorize(result, 255, 165, 0));
   };
 }
