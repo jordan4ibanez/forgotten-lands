@@ -672,7 +672,8 @@ declare global {
   interface NodeDefinition {
     drawtype?: Drawtype
     visual_scale?: number
-    tiles?: string[] | [[key: string], string][]
+    //! fixme: Tiles needs an interface!
+    tiles?: string[] | { [key: string]: any }[]
     overlay_tiles?: string[]
     special_tiles?: string[]
     wield_scale?: Vec3,
