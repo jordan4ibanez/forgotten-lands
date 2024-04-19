@@ -1,6 +1,13 @@
 namespace utility {
+
+  const floor = math.floor;
+  const PI = math.pi;
+  const PI_HALF = math.pi / 2;
+  const PI2 = math.pi * 2;
+  const random = math.random;
+
   export function randomRange(min: number, max: number): number {
-    return (math.random() * (max - min) + min);
+    return (random() * (max - min) + min);
   }
 
   /**
@@ -17,6 +24,34 @@ namespace utility {
       return max;
     }
     return input;
+  };
+
+
+  /**
+   * Truncate (cast float to int) a floating point value.
+   * @param floating A floating point value.
+   * @returns A truncated (casted to int) value. As close as you can get in lua.
+   */
+  math.truncate = function (floating: number): number {
+    return math.floor(floating * 10) / 10;
+  };
+
+
+
+
+  math.cosFromSin = function (sin: number, angle: number): number {
+    //if (Options.FASTMATH){
+    // return math_sin(angle + PIHalf);
+    // }
+    // sin(x)^2 + cos(x)^2 = 1
+    let cos: number = math.sqrt(1.0 - sin * sin);
+    let a: number = angle + PI_HALF;
+    let b: number = a - floor(a / PI2) * PI2;
+    if (b < 0.0)
+      b = PI2 + b;
+    if (b >= PI)
+      return -cos;
+    return cos;
   };
 
 }
