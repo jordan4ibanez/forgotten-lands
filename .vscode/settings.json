@@ -57,6 +57,7 @@
     "expirationtime",
     "exptime",
     "facedir",
+    "FASTMATH",
     "fencelike",
     "firelike",
     "floodable",
