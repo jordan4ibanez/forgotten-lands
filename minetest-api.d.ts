@@ -1748,6 +1748,7 @@ declare global {
     function cosFromSin(sin: number, angle: number): number;
     // And this (required to D/Java style float to int truncation)
     function truncate(floating: number): number;
+    function fma(x: number, y: number, z: number): number;
   }
 
   namespace string {

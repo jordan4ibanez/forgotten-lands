@@ -56,4 +56,8 @@ namespace utility {
     return cos;
   };
 
+  math.fma = function (x: number, y: number, z: number): number {
+    return (x * y) + z;
+  };
+
 }
