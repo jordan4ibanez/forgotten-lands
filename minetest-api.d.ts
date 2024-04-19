@@ -1742,7 +1742,7 @@ declare global {
     function sign(x: number, tolerance: number): number;
     function factorial(x: number): number;
     function round(x: number): number;
-    // Clamp is a bolt on created in 
+    // Clamp is a bolt on created in.
     function clamp(min: number, max: number, input: number): number;
   }
 
