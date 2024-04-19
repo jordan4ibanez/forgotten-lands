@@ -13,12 +13,12 @@ namespace utility {
     w: number = 1;
 
     constructor(vec: Vec3) {
-      let sx = Math.sin(vec.x * 0.5);
-      let cx = Math.cosFromSin(sx, vec.x * 0.5);
-      let sy = Math.sin(vec.y * 0.5);
-      let cy = Math.cosFromSin(sy, vec.y * 0.5);
-      let sz = Math.sin(vec.Z * 0.5);
-      let cz = Math.cosFromSin(sz, vec.Z * 0.5);
+      let sx = math.sin(vec.x * 0.5);
+      let cx = math.cosFromSin(sx, vec.x * 0.5);
+      let sy = math.sin(vec.y * 0.5);
+      let cy = math.cosFromSin(sy, vec.y * 0.5);
+      let sz = math.sin(vec.z * 0.5);
+      let cz = math.cosFromSin(sz, vec.z * 0.5);
 
       let cycz = cy * cz;
       let sysz = sy * sz;
