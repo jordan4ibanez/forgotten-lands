@@ -16,7 +16,7 @@ namespace playerModel {
 
   }
 
-  minetest.register_on_joinplayer((player: AnimatedEntity) => {
+  minetest.register_on_joinplayer((player: ObjectRef) => {
     player.set_properties({
       mesh: "character.b3d",
       textures: ["character.png"],
@@ -28,6 +28,24 @@ namespace playerModel {
 
     // print(dump(player.get_bone_override("bone").rotation?.absolute));
     // print(dump(player.get_bone_overrides()));
+
+    player.set_bone_override("Head", {
+      rotation: {
+        vec: vector.create3d(0, 0.1, 0),
+        interpolation: 0,
+        absolute: false,
+      }
+    });
+
+    minetest.after(3, () => {
+      player.set_bone_override("Head", {
+        rotation: {
+          vec: vector.create3d(0, math.pi / 2, 0),
+          interpolation: 0.5,
+          absolute: false,
+        }
+      });
+    });
 
   });
 }
