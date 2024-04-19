@@ -1746,6 +1746,8 @@ declare global {
     function clamp(min: number, max: number, input: number): number;
     // So is this.
     function cosFromSin(sin: number, angle: number): number;
+    // And this (required to D/Java style float to int truncation)
+    function truncate(floating: number): number;
   }
 
   namespace string {
