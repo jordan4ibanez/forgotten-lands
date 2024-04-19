@@ -1744,6 +1744,8 @@ declare global {
     function round(x: number): number;
     // Clamp is a bolt on created in.
     function clamp(min: number, max: number, input: number): number;
+    // So is this.
+    function cosFromSin(sin: number, angle: number): number;
   }
 
   namespace string {
