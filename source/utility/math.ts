@@ -5,6 +5,7 @@ namespace utility {
   const PI_HALF = math.pi / 2;
   const PI2 = math.pi * 2;
   const random = math.random;
+  const sqrt = math.sqrt;
 
   export function randomRange(min: number, max: number): number {
     return (random() * (max - min) + min);
@@ -37,6 +38,7 @@ namespace utility {
   };
 
 
+  let truncate = math.truncate;
 
 
   math.cosFromSin = function (sin: number, angle: number): number {
@@ -44,9 +46,9 @@ namespace utility {
     // return math_sin(angle + PIHalf);
     // }
     // sin(x)^2 + cos(x)^2 = 1
-    let cos: number = math.sqrt(1.0 - sin * sin);
+    let cos: number = sqrt(1.0 - sin * sin);
     let a: number = angle + PI_HALF;
-    let b: number = a - floor(a / PI2) * PI2;
+    let b: number = a - truncate(a / PI2) * PI2;
     if (b < 0.0)
       b = PI2 + b;
     if (b >= PI)
