@@ -11,6 +11,7 @@ namespace playerModel {
       visual_size: vector.create3d(1, 1, 1)
     });
 
-    player.set_animation(vector.create2d(0, 79), 30, 0, true);
+    // player.set_animation(vector.create2d(0, 79), 30, 0, true);
+    
   });
 }
