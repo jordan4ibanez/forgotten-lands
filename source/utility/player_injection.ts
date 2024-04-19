@@ -21,4 +21,11 @@ namespace utility {
     }
   });
 
+  /**
+   * Makes it so you can ensure your injection function works before you start using anything.
+   */
+  export function registerAfterJoinPlayer(func: (player: ObjectRef) => void) {
+    minetest.after(0, func);
+  }
+
 }
