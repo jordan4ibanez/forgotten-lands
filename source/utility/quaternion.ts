@@ -1,10 +1,14 @@
 namespace utility {
+  const PI_HALF = math.pi / 2;
+
   /**
    * The only reason this exists is to smoothly interpolate euler rotation.
    * Anything else is just a bonus.
    * 
    * This is translated from D from Java into Typescript.
    * https://github.com/jordan4ibanez/doml/blob/main/source/doml/quaternion_d.d
+   * 
+   * This also tends to mutate in place to reduce garbage collector pressure.
    */
   class Quaternion {
     x: number = 0;
@@ -41,7 +45,7 @@ namespace utility {
       this.w = 0;
     }
 
-    slerp(target: Quaternion, alpha: number) {
+    slerp(target: Quaternion, alpha: number): void {
       let cosom = math.fma(this.x, target.x, math.fma(this.y, target.y, math.fma(this.z, target.z, this.w * target.w)));
       let absCosom = math.abs(cosom);
       let scale0, scale1;
@@ -60,6 +64,13 @@ namespace utility {
       this.y = math.fma(scale0, this.y, scale1 * target.y);
       this.z = math.fma(scale0, this.z, scale1 * target.z);
       this.w = math.fma(scale0, this.w, scale1 * target.w);
+    }
+
+    // Mutates in place to prevent excessive objects.
+    toVec3(mutation: Vec3): void {
+      mutation.x = math.atan2(this.x * this.w - this.y * this.z, 0.5 - this.x * this.x - this.y * this.y);
+      mutation.y = math.safeAsin(2.0 * (this.x * this.z + this.y * this.w));
+      mutation.z = math.atan2(this.z * this.w - this.x * this.y, 0.5 - this.y * this.y - this.z * this.z);
     }
 
   }
