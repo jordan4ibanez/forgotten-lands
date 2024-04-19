@@ -17,7 +17,7 @@ namespace utility {
    * 
    * This also tends to mutate in place to reduce garbage collector pressure.
    */
-  class Quaternion {
+  export class Quaternion {
     x: number = 0;
     y: number = 0;
     z: number = 0;
