@@ -1,6 +1,8 @@
 # Forgotten Lands
  A minetest game written in TypeScript because I felt like it.
 
+
+This be for minetest 5.9.0-dev (or 5.9.0 release) and if you use 5.8.0 anything it'll probably blow up.
 ---
 
 ### Using TS with this thing
