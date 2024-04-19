@@ -12,8 +12,11 @@ namespace playerModel {
   -Leg_Right
   */
 
+  interface AnimatedEntity extends ObjectRef {
 
-  minetest.register_on_joinplayer((player: ObjectRef) => {
+  }
+
+  minetest.register_on_joinplayer((player: AnimatedEntity) => {
     player.set_properties({
       mesh: "character.b3d",
       textures: ["character.png"],
