@@ -12,6 +12,9 @@ namespace playerModel {
     });
 
     // player.set_animation(vector.create2d(0, 79), 30, 0, true);
-    
+
+    // print(dump(player.get_bone_override("bone").rotation?.absolute));
+    // print(dump(player.get_bone_overrides()));
+
   });
 }
