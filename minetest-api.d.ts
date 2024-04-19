@@ -1190,6 +1190,12 @@ declare global {
     absolute: boolean;
   }
 
+  interface BoneOverride {
+    position?: BoneOverrideProperty,
+    rotation?: BoneOverrideProperty,
+    scale?: BoneOverrideProperty,
+  }
+
   interface ObjectRef {
     get_pos(): Vec3;
     set_pos(position: Vec3): void;
