@@ -5,6 +5,10 @@
     "node_modules": true,
     "scripts/": true,
     "menu/": true,
+    "package.json": true,
+    "package-lock.json": true,
+    "LICENSE": true,
+    "possibly_to_be_used/": true
   },
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
