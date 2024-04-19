@@ -2,8 +2,8 @@ namespace playerModel {
 
   type AnimationStation = animationStation.AnimationStation;
   /*
-
   character.b3d bone documentation, tree view.
+  --------------------------------------------
   Body
   -Head 
   -Arm_Left
