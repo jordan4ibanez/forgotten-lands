@@ -1187,6 +1187,7 @@ declare global {
   interface BoneOverrideProperty {
     vec: Vec3,
     interpolation: number,
+    /** If set to false, it's relative to the animated property. */
     absolute: boolean;
   }
 
