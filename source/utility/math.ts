@@ -6,6 +6,7 @@ namespace utility {
   const PI2 = math.pi * 2;
   const random = math.random;
   const sqrt = math.sqrt;
+  const asin = math.asin;
 
   export function randomRange(min: number, max: number): number {
     return (random() * (max - min) + min);
@@ -62,6 +63,10 @@ namespace utility {
 
   math.invsqrt = function (r: number): number {
     return 1.0 / sqrt(r);
+  };
+
+  math.safeAsin = function (r: number): number {
+    return r <= -1.0 ? -PI_HALF : r >= 1.0 ? PI_HALF : asin(r);
   };
 
 }

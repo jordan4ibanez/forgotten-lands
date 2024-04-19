@@ -1750,6 +1750,7 @@ declare global {
     function truncate(floating: number): number;
     function fma(x: number, y: number, z: number): number;
     function invsqrt(r: number): number;
+    function safeAsin(r: number): number;
   }
 
   namespace string {
