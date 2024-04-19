@@ -1214,8 +1214,9 @@ declare global {
     get_attach(): AttachRef | void;
     get_children(): ObjectRef[];
     set_detach(): void;
-    set_bone_override(bone: string, property: BoneOverrideProperty | null): void;
-    // set_bone_position(bone: string, position: Vec3, rotation: Vec3): void
+    set_bone_override(bone: string, property: BoneOverride | null): void;
+
+
     set_properties(objectPropertiesTable: ObjectProperties): void;
     get_properties(): ObjectProperties;
     is_player(): boolean;
