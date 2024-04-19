@@ -1749,6 +1749,7 @@ declare global {
     // And this (required to D/Java style float to int truncation)
     function truncate(floating: number): number;
     function fma(x: number, y: number, z: number): number;
+    function invsqrt(r: number): number;
   }
 
   namespace string {

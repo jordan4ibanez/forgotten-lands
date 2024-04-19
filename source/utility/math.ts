@@ -60,4 +60,8 @@ namespace utility {
     return (x * y) + z;
   };
 
+  math.invsqrt = function (r: number): number {
+    return 1.0 / sqrt(r);
+  };
+
 }
