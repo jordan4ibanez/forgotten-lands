@@ -52,7 +52,7 @@ namespace utility {
       this.w = 0;
     }
 
-    slerp(target: Quaternion, alpha: number): void {
+    slerp(target: Quaternion, alpha: number, mutation: Quaternion): void {
       let cosom = fma(this.x, target.x, fma(this.y, target.y, fma(this.z, target.z, this.w * target.w)));
       let absCosom = abs(cosom);
       let scale0, scale1;
@@ -67,10 +67,10 @@ namespace utility {
         scale1 = alpha;
       }
       scale1 = cosom >= 0.0 ? scale1 : -scale1;
-      this.x = fma(scale0, this.x, scale1 * target.x);
-      this.y = fma(scale0, this.y, scale1 * target.y);
-      this.z = fma(scale0, this.z, scale1 * target.z);
-      this.w = fma(scale0, this.w, scale1 * target.w);
+      mutation.x = fma(scale0, this.x, scale1 * target.x);
+      mutation.y = fma(scale0, this.y, scale1 * target.y);
+      mutation.z = fma(scale0, this.z, scale1 * target.z);
+      mutation.w = fma(scale0, this.w, scale1 * target.w);
     }
 
     // Mutates in place to prevent excessive objects.
