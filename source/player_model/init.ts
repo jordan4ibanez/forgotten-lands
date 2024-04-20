@@ -45,7 +45,7 @@ namespace playerModel {
   // });
 
   registerAnimation("character.b3d", "idle", new Map([
-    ["body", {
+    ["Body", {
       start: {
         translation: create3d(0, 0, 0),
         rotation: create3d(0, 0, 0),

@@ -230,6 +230,14 @@ namespace animationStation {
       //! Finally set it.
       modelAnimation.set(animationName, animation);
     }
+
+    registerBones(meshName: string, bones: [string]): void {
+      if (this.bones.has(meshName)) {
+        error("Tried to override bones for mesh [" + meshName + "]");
+      }
+
+      this.bones.set(meshName, bones);
+    }
   }
 
   let playerAnimationState: Map<string, PlayerAnimationState> = new Map<string, PlayerAnimationState>();
@@ -238,6 +246,9 @@ namespace animationStation {
   //? Now we publicize the animationRepository as a functional interface.
   export function registerAnimation(meshName: string, animationName: string, animation: Animation): void {
     animationRepository.registerAnimation(meshName, animationName, animation);
+  }
+  export function registerBones(meshName: string, bones: [string]): void {
+    animationRepository.registerBones(meshName, bones);
   }
 
   // /**
