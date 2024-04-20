@@ -4,6 +4,8 @@ namespace playerModel {
   const getPlayerAnimationProgress = animationStation.getPlayerAnimationProgress;
   const setPlayerAnimationProgress = animationStation.setPlayerAnimationProgress;
   const Quaternion = utility.Quaternion;
+  const registerAnimation = animationStation.registerAnimation;
+  const create3d = vector.create3d;
   /*
   character.b3d bone documentation, tree view.
   --------------------------------------------
@@ -42,6 +44,21 @@ namespace playerModel {
 
     }
   });
+
+  registerAnimation("character.b3d", "idle", new Map([
+    ["body", {
+      start: {
+        translation: create3d(0, 0, 0),
+        rotation: create3d(0, 0, 0),
+        scale: create3d(0, 0, 0)
+      },
+      end: {
+        translation: create3d(0, 0, 0),
+        rotation: create3d(0, 0, 0),
+        scale: create3d(1, 1, 1)
+      }
+    }]
+  ]));
 
 
   //! End this debug mess!!!

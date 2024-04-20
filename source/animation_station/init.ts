@@ -217,6 +217,10 @@ namespace animationStation {
   let playerAnimationState: { [key: string]: PlayerAnimationState; } = {};
   let animationRepository = new AnimationRepository();
 
+  //? Now we publicize the animationRepository as a functional interface.
+  export function registerAnimation(meshName: string, animationName: string, animation: Animation): void {
+    animationRepository.registerAnimation(meshName, animationName, animation);
+  }
 
   /**
    * Utilize this class to more easily animate entities and players.
