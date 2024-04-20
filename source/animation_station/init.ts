@@ -14,7 +14,16 @@ namespace animationStation {
   /**
    * AnimationPoint defines TRS for a frame of the animation.
    */
-  class AnimationPoint {
+  export interface AnimationPoint {
+    translation: Vec3;
+    rotation: Vec3;
+    scale: Vec3;
+  }
+
+  /**
+   * Internal worker for Animation Point.
+   */
+  class AnimationWorker implements AnimationPoint {
     translation: Vec3 = vector.create3d(0, 0, 0);
     rotation: Vec3 = vector.create3d(0, 0, 0);
     scale: Vec3 = vector.create3d(1, 1, 1);
@@ -33,12 +42,27 @@ namespace animationStation {
       this.scale.y = 1;
       this.scale.z = 1;
     }
+
+    /**
+     * So is this one.
+     */
+    set(trsObject: AnimationPoint): void {
+      this.translation.x = trsObject.translation.x;
+      this.translation.y = trsObject.translation.y;
+      this.translation.z = trsObject.translation.z;
+      this.rotation.x = trsObject.rotation.x;
+      this.rotation.y = trsObject.rotation.y;
+      this.rotation.z = trsObject.rotation.z;
+      this.scale.x = trsObject.scale.x;
+      this.scale.y = trsObject.scale.y;
+      this.scale.z = trsObject.scale.z;
+    }
   }
 
   /**
    * Animation Register defines a basic animation for a bone.
    */
-  interface AnimationRegister {
+  interface BoneTRSStartEnd {
     //? If I ever feel like making longer animations, I can use this.
     // frames: { [key: number]: AnimationPoint; } = {};
 
@@ -49,31 +73,76 @@ namespace animationStation {
   /**
    * BoneTRSStartEnd is the start and end of a bone's animation point in an animation.
    */
-  type BoneTRSStartEnd = { [boneName: string]: AnimationRegister; };
+  type Animation = Map<string, BoneTRSStartEnd>;
   /**
    * Animation encapsulates the Bone Animation's for a single animation in one container.
    */
-  type Animation = { [animationName: string]: BoneTRSStartEnd; };
+  type MeshAnimationContainer = Map<string, Animation>;
   /**
    * ModelRepo holds all the animations, for all registered models.
    */
-  type ModelRepo = { [modelName: string]: Animation; };
+  type ModelRepo = Map<string, MeshAnimationContainer>;
 
   /**
-   * Worker Animation Point is a piece of data which is used to reduce pressure
+   * Worker Animation Point start and end is a piece of data which is used to reduce pressure
    * on the garbage collector by reusing it's memory address over and over.
    */
-  let workerAnimationPoint: AnimationPoint = new AnimationPoint();
+  let workerAnimationPointStart: AnimationWorker = new AnimationWorker();
+  let workerAnimationPointEnd: AnimationWorker = new AnimationWorker();
 
   /**
    * Animation Repository holds all the animations for all bones on all models.
    */
   class AnimationRepository {
 
-    models: ModelRepo = {};
+    models: ModelRepo = new Map();
 
-    getStart(entity: ObjectRef): AnimationPoint {
+    getStart(entity: ObjectRef, animationName: string, boneName: string): AnimationPoint {
 
+      // We call identity to allow this to escape out early if a bone doesn't have animation.
+      workerAnimationPointStart.identity();
+
+      //! Check if the model has a mesh.
+      const meshName: string | undefined = entity.get_properties().mesh;
+
+      if (meshName == null) {
+        warning("Mesh was not defined for entity [" + tostring(entity) + "]!");
+        return workerAnimationPointStart;
+      }
+
+      //! Check if we have this mesh in the animation repo.
+      const modelAnimation: MeshAnimationContainer | undefined = this.models.get(meshName);
+
+      if (modelAnimation == null) {
+        warning("Mesh [" + meshName + "] has no registered animations!");
+        return workerAnimationPointStart;
+      }
+
+      //! Check if we have this animation in the mesh's repo.
+      const animation: Animation | undefined = modelAnimation.get(animationName);
+
+      if (animation == null) {
+        warning("Mesh [" + meshName + "] does not have animation [" + animationName + "]!");
+        return workerAnimationPointStart;
+      }
+
+      //! Check if we have the bone in the animation.
+      const boneStartEnd: BoneTRSStartEnd | undefined = animation.get(boneName);
+
+      if (boneStartEnd == null) {
+        warning("Mesh [" + meshName + "] animation [" + animation + "] does not contain bone [" + boneName + "]!");
+        return workerAnimationPointEnd;
+      }
+
+      //! Finally, even though we don't have to, check that the start exists.
+      const start: AnimationPoint | undefined = boneStartEnd.start;
+
+      if (start == null) {
+        warning("Mesh [" + meshName + "] animation [" + animation + "] bone [" + boneName + "] does not contain a start point!");
+      }
+
+      workerAnimationPointStart.set(start);
+      return workerAnimationPointStart;
     };
   }
 
