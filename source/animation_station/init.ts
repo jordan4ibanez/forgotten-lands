@@ -20,6 +20,9 @@ namespace animationStation {
     scale: Vec3,
   }
 
+  /**
+   * Animation Register defines a basic animation for a bone.
+   */
   interface AnimationRegister {
     //? If I ever feel like making longer animations, I can use this.
     // frames: { [key: number]: AnimationPoint; } = {};
@@ -28,9 +31,42 @@ namespace animationStation {
     end: AnimationPoint;
   }
 
-  let animationRepository:  = {};
+  /**
+   * BoneTRSStartEnd is the start and end of a bone's animation point in an animation.
+   */
+  type BoneTRSStartEnd = { [boneName: string]: AnimationRegister; };
+  /**
+   * Animation encapsulates the Bone Animation's for a single animation in one container.
+   */
+  type Animation = { [animationName: string]: BoneTRSStartEnd; };
+  /**
+   * ModelRepo holds all the animations, for all registered models.
+   */
+  type ModelRepo = { [modelName: string]: Animation; };
+
+  /**
+   * Worker Animation Point is a piece of data which is used to reduce pressure
+   * on the garbage collector by reusing it's memory address over and over.
+   */
+  let workerAnimationPoint: AnimationPoint = {
+    translation: vector.create3d(0, 0, 0),
+    rotation: vector.create3d(0, 0, 0),
+    scale: vector.create3d(1, 1, 1)
+  };
+
+  /**
+   * Animation Repository holds all the animations for all bones on all models.
+   */
+  class AnimationRepository {
+    models: { [modelName: string]: Animation; } = {};
+
+    getStart(entity: ObjectRef): {
+
+    };
+  }
 
   let playerAnimationState: { [key: string]: PlayerAnimationState; } = {};
+  let animationRepository = new AnimationRepository();
 
 
   /**
