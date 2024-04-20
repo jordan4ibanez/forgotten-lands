@@ -1,6 +1,7 @@
 namespace animationStation {
 
   const warning = utility.warning;
+  const Quaternion = utility.Quaternion;
 
   /**
    * This is the base of the animation for players.
@@ -8,7 +9,9 @@ namespace animationStation {
    * lua entities. They are pure userdata. It's EXTREMELY ANNOYING.
    */
   class PlayerAnimationState {
+    currentAnimation: string = "";
     animationProgress: number = 0;
+    up: boolean = true;
   }
 
   /**
@@ -71,6 +74,11 @@ namespace animationStation {
   }
 
   /**
+   * Holds the bones in a model
+   */
+  type BoneRepository = Map<string, [string]>;
+
+  /**
    * BoneTRSStartEnd is the start and end of a bone's animation point in an animation.
    */
   export type Animation = Map<string, BoneTRSStartEnd>;
@@ -89,6 +97,13 @@ namespace animationStation {
    */
   let workerAnimationPointStart: AnimationWorker = new AnimationWorker();
   let workerAnimationPointEnd: AnimationWorker = new AnimationWorker();
+  /**
+   * Same with these, they simply help performance.
+   */
+  let rotationStart = new Quaternion(vector.create3d(0, 0, 0));
+  let rotationEnd = new Quaternion(vector.create3d(0, math.pi, 0));
+  let workerRotation = new Quaternion(vector.create3d(0, 0, 0));
+  let workerVec = vector.create3d(0, 0, 0);
 
   /**
    * Animation Repository holds all the animations for all bones on all models.
@@ -96,6 +111,9 @@ namespace animationStation {
   class AnimationRepository {
 
     models: ModelRepo = new Map();
+
+    bones: BoneRepository = new Map();
+
 
     getStart(entity: ObjectRef, animationName: string, boneName: string): AnimationPoint {
 
@@ -204,7 +222,7 @@ namespace animationStation {
 
       //! Check if we have this animation in the mesh's repo.
       let gottenAnimation: Animation | undefined = modelAnimation.get(animationName);
-      if (animation != null) {
+      if (gottenAnimation != null) {
         // modelAnimation.set(animationName, new Map());
         error("Tried to redefine animation [" + animationName + "] for mesh [" + meshName + "]");
       }
@@ -214,7 +232,7 @@ namespace animationStation {
     }
   }
 
-  let playerAnimationState: { [key: string]: PlayerAnimationState; } = {};
+  let playerAnimationState: Map<string, PlayerAnimationState> = new Map<string, PlayerAnimationState>();
   let animationRepository = new AnimationRepository();
 
   //? Now we publicize the animationRepository as a functional interface.
@@ -222,41 +240,93 @@ namespace animationStation {
     animationRepository.registerAnimation(meshName, animationName, animation);
   }
 
+  // /**
+  //  * Utilize this class to more easily animate entities and players.
+  //  */
+  // export function getPlayerAnimationProgress(player: ObjectRef): number {
+  //   let name = player.get_player_name();
+  //   let gotten = playerAnimationState[name];
+  //   if (gotten) {
+  //     return gotten.animationProgress;
+  //   }
+  //   playerAnimationState[name] = new PlayerAnimationState();
+  //   return 0;
+  // };
+
+
+  // export function setPlayerAnimationProgress(player: ObjectRef, newValue: number): void {
+  //   let name = player.get_player_name();
+  //   let gotten = playerAnimationState[name];
+  //   if (gotten) {
+  //     gotten.animationProgress = newValue;
+  //   } else {
+  //     playerAnimationState[name] = new PlayerAnimationState();
+  //   }
+
+  // };
+
   /**
-   * Utilize this class to more easily animate entities and players.
+   * A player joins, add them to the state container.
    */
-  export function getPlayerAnimationProgress(player: ObjectRef): number {
-    let name = player.get_player_name();
-    let gotten = playerAnimationState[name];
-    if (gotten) {
-      return gotten.animationProgress;
-    }
-    playerAnimationState[name] = new PlayerAnimationState();
-    return 0;
-  };
-
-
-  export function setPlayerAnimationProgress(player: ObjectRef, newValue: number): void {
-    let name = player.get_player_name();
-    let gotten = playerAnimationState[name];
-    if (gotten) {
-      gotten.animationProgress = newValue;
-    } else {
-      playerAnimationState[name] = new PlayerAnimationState();
-    }
-
-  };
   minetest.register_on_joinplayer((player: ObjectRef, _: string) => {
     let name = player.get_player_name();
-    playerAnimationState[name] = new PlayerAnimationState();
+    if (name == null) {
+      error("Got a null player name!");
+    }
+    playerAnimationState.set(name, new PlayerAnimationState());
   });
 
   /**
-   * AnimationStation is a model container to make procedural animation easier.
+   * A player leaves, remove them from the state container.
    */
-  export class AnimationStation {
+  minetest.register_on_leaveplayer((player: ObjectRef, _: boolean) => {
+    let name = player.get_player_name();
+    if (name == null) {
+      error("Got a null player name!");
+    }
+    playerAnimationState.delete(name);
+  });
+
+  /**
+   * Handle the player's current animation.
+   * @param player A player.
+   */
+  function handlePlayerAnimation(player: ObjectRef): void {
+    const name = player.get_player_name();
+    if (name == null) {
+      error("Got a null player name!");
+    }
+
+    let currentAnimationState = playerAnimationState.get(name);
+    if (currentAnimationState == null) {
+      warning("Player [" + name + "] has no animation state.");
+      playerAnimationState.set(name, new PlayerAnimationState());
+      // Bail out
+      return;
+    }
+
+    if (currentAnimationState.currentAnimation == "") {
+      // No animation, reset
+      currentAnimationState.animationProgress = 0;
+      currentAnimationState.up = true;
+      return;
+    }
 
 
   }
+
+  /**
+   * Finally, we make it function.
+   */
+  minetest.register_globalstep((delta: number) => {
+    for (const player of minetest.get_connected_players()) {
+      if (player == null) {
+        warning("AnimationStation got a null player!");
+        continue;
+      }
+      // And if the player is in existence, we do their animation.
+      handlePlayerAnimation(player);
+    }
+  });
 
 }

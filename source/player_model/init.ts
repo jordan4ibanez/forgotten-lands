@@ -1,8 +1,7 @@
 namespace playerModel {
 
-  type AnimationStation = animationStation.AnimationStation;
-  const getPlayerAnimationProgress = animationStation.getPlayerAnimationProgress;
-  const setPlayerAnimationProgress = animationStation.setPlayerAnimationProgress;
+  // const getPlayerAnimationProgress = animationStation.getPlayerAnimationProgress;
+  // const setPlayerAnimationProgress = animationStation.setPlayerAnimationProgress;
   const Quaternion = utility.Quaternion;
   const registerAnimation = animationStation.registerAnimation;
   const create3d = vector.create3d;
@@ -24,26 +23,26 @@ namespace playerModel {
   let workerRotation = new Quaternion(vector.create3d(0, 0, 0));
   let workerVec = vector.create3d(0, 0, 0);
 
-  minetest.register_globalstep((delta: number) => {
-    for (let player of minetest.get_connected_players()) {
-      let animationProgress = getPlayerAnimationProgress(player);
-      animationProgress += delta;
-      setPlayerAnimationProgress(player, animationProgress);
-      print(animationProgress);
+  // minetest.register_globalstep((delta: number) => {
+  //   for (let player of minetest.get_connected_players()) {
+  //     let animationProgress = getPlayerAnimationProgress(player);
+  //     animationProgress += delta;
+  //     setPlayerAnimationProgress(player, animationProgress);
+  //     print(animationProgress);
 
-      rotationStart.slerp(rotationEnd, animationProgress, workerRotation);
-      workerRotation.toVec3(workerVec);
+  //     rotationStart.slerp(rotationEnd, animationProgress, workerRotation);
+  //     workerRotation.toVec3(workerVec);
 
-      player.set_bone_override("Head", {
-        rotation: {
-          vec: workerVec,
-          interpolation: 1,
-          absolute: false,
-        }
-      });
+  //     player.set_bone_override("Head", {
+  //       rotation: {
+  //         vec: workerVec,
+  //         interpolation: 1,
+  //         absolute: false,
+  //       }
+  //     });
 
-    }
-  });
+  //   }
+  // });
 
   registerAnimation("character.b3d", "idle", new Map([
     ["body", {
