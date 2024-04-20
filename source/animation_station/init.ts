@@ -193,7 +193,25 @@ namespace animationStation {
       return workerAnimationPointEnd;
     };
 
-    registerAnimation(animationName: string, boneName: string);
+    registerAnimation(meshName: string, animationName: string, animation: Animation): void {
+
+      //! Check if we have this mesh in the animation repo.
+      let modelAnimation: MeshAnimationContainer | undefined = this.models.get(meshName);
+      if (modelAnimation == null) {
+        this.models.set(meshName, new Map());
+      }
+      modelAnimation = this.models.get(meshName) as MeshAnimationContainer;
+
+      //! Check if we have this animation in the mesh's repo.
+      let gottenAnimation: Animation | undefined = modelAnimation.get(animationName);
+      if (animation != null) {
+        // modelAnimation.set(animationName, new Map());
+        error("Tried to redefine animation [" + animationName + "] for mesh [" + meshName + "]");
+      }
+
+      //! Finally set it.
+      modelAnimation.set(animationName, animation);
+    }
   }
 
   let playerAnimationState: { [key: string]: PlayerAnimationState; } = {};
