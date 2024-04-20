@@ -62,7 +62,7 @@ namespace animationStation {
   /**
    * Animation Register defines a basic animation for a bone.
    */
-  interface BoneTRSStartEnd {
+  export interface BoneTRSStartEnd {
     //? If I ever feel like making longer animations, I can use this.
     // frames: { [key: number]: AnimationPoint; } = {};
 
@@ -73,7 +73,7 @@ namespace animationStation {
   /**
    * BoneTRSStartEnd is the start and end of a bone's animation point in an animation.
    */
-  type Animation = Map<string, BoneTRSStartEnd>;
+  export type Animation = Map<string, BoneTRSStartEnd>;
   /**
    * Animation encapsulates the Bone Animation's for a single animation in one container.
    */
@@ -144,6 +144,56 @@ namespace animationStation {
       workerAnimationPointStart.set(start);
       return workerAnimationPointStart;
     };
+
+    getEnd(entity: ObjectRef, animationName: string, boneName: string): AnimationPoint {
+
+      // We call identity to allow this to escape out early if a bone doesn't have animation.
+      workerAnimationPointEnd.identity();
+
+      //! Check if the model has a mesh.
+      const meshName: string | undefined = entity.get_properties().mesh;
+
+      if (meshName == null) {
+        warning("Mesh was not defined for entity [" + tostring(entity) + "]!");
+        return workerAnimationPointEnd;
+      }
+
+      //! Check if we have this mesh in the animation repo.
+      const modelAnimation: MeshAnimationContainer | undefined = this.models.get(meshName);
+
+      if (modelAnimation == null) {
+        warning("Mesh [" + meshName + "] has no registered animations!");
+        return workerAnimationPointEnd;
+      }
+
+      //! Check if we have this animation in the mesh's repo.
+      const animation: Animation | undefined = modelAnimation.get(animationName);
+
+      if (animation == null) {
+        warning("Mesh [" + meshName + "] does not have animation [" + animationName + "]!");
+        return workerAnimationPointEnd;
+      }
+
+      //! Check if we have the bone in the animation.
+      const boneStartEnd: BoneTRSStartEnd | undefined = animation.get(boneName);
+
+      if (boneStartEnd == null) {
+        warning("Mesh [" + meshName + "] animation [" + animation + "] does not contain bone [" + boneName + "]!");
+        return workerAnimationPointEnd;
+      }
+
+      //! Finally, even though we don't have to, check that the end exists.
+      const end: AnimationPoint | undefined = boneStartEnd.end;
+
+      if (end == null) {
+        warning("Mesh [" + meshName + "] animation [" + animation + "] bone [" + boneName + "] does not contain an end point!");
+      }
+
+      workerAnimationPointEnd.set(end);
+      return workerAnimationPointEnd;
+    };
+
+    registerAnimation(animationName: string, boneName: string);
   }
 
   let playerAnimationState: { [key: string]: PlayerAnimationState; } = {};
