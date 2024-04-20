@@ -319,30 +319,23 @@ namespace animationStation {
     animationRepository.registerBones(meshName, bones);
   }
 
-  // /**
-  //  * Utilize this class to more easily animate entities and players.
-  //  */
-  // export function getPlayerAnimationProgress(player: ObjectRef): number {
-  //   let name = player.get_player_name();
-  //   let gotten = playerAnimationState[name];
-  //   if (gotten) {
-  //     return gotten.animationProgress;
-  //   }
-  //   playerAnimationState[name] = new PlayerAnimationState();
-  //   return 0;
-  // };
 
+  /**
+   * We literally have to create a separate function for players to set their animation because they
+   * are userdata.
+   */
+  export function setPlayerAnimation(playerName: string, animation: string) {
+    let currentAnimationState = playerAnimationState.get(playerName);
+    if (currentAnimationState == null) {
+      playerAnimationState.set(playerName, new PlayerAnimationState());
+      warning("Tried to set a player animation for [" + playerName + "] when they were not in the state list.");
+      currentAnimationState = playerAnimationState.get(playerName) as PlayerAnimationState;
+    }
 
-  // export function setPlayerAnimationProgress(player: ObjectRef, newValue: number): void {
-  //   let name = player.get_player_name();
-  //   let gotten = playerAnimationState[name];
-  //   if (gotten) {
-  //     gotten.animationProgress = newValue;
-  //   } else {
-  //     playerAnimationState[name] = new PlayerAnimationState();
-  //   }
-
-  // };
+    currentAnimationState.currentAnimation = animation;
+    currentAnimationState.animationProgress = 0;
+    currentAnimationState.up = true;
+  }
 
   /**
    * A player joins, add them to the state container.
@@ -370,7 +363,7 @@ namespace animationStation {
    * Handle the player's current animation.
    * @param player A player.
    */
-  function handlePlayerAnimation(player: ObjectRef): void {
+  function handlePlayerAnimation(player: ObjectRef, delta: number): void {
     const name = player.get_player_name();
     if (name == null) {
       error("Got a null player name!");
@@ -384,7 +377,7 @@ namespace animationStation {
       return;
     }
 
-    if (currentAnimationState.currentAnimation == "") {//&& currentAnimationState.animationProgress != 0) {
+    if (currentAnimationState.currentAnimation == "" && currentAnimationState.animationProgress != 0) {
       // No animation, reset.
 
       workerAnimationPointEnd.identity();
@@ -407,6 +400,11 @@ namespace animationStation {
       return;
     }
 
+    // Don't care about nothing.
+    if (currentAnimationState.currentAnimation == "") {
+      return;
+    }
+
 
   }
 
@@ -420,7 +418,7 @@ namespace animationStation {
         continue;
       }
       // And if the player is in existence, we do their animation.
-      handlePlayerAnimation(player);
+      handlePlayerAnimation(player, delta);
     }
   });
 

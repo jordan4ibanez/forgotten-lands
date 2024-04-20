@@ -49,12 +49,12 @@ namespace playerModel {
     ["Body", {
       start: {
         translation: create3d(0, 0, 0),
-        rotation: create3d(0, 0, 0),
+        rotation: create3d(math.pi / 4, 0, 0),
         scale: create3d(0, 0, 0)
       },
       end: {
         translation: create3d(0, 0, 0),
-        rotation: create3d(0, 0, 0),
+        rotation: create3d(-math.pi / 4, 0, 0),
         scale: create3d(1, 1, 1)
       }
     }]
@@ -73,11 +73,16 @@ namespace playerModel {
   //! End this debug mess!!!
 
   minetest.register_on_joinplayer((player: ObjectRef) => {
+
+    const name = player.get_player_name();
+
     player.set_properties({
       mesh: "character.b3d",
       textures: ["character.png"],
       visual: EntityVisual.mesh,
       visual_size: vector.create3d(1, 1, 1)
     });
+
+    animationStation.setPlayerAnimation(name, "idle");
   });
 }
