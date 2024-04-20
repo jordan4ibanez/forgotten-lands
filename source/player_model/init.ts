@@ -4,6 +4,7 @@ namespace playerModel {
   // const setPlayerAnimationProgress = animationStation.setPlayerAnimationProgress;
   const Quaternion = utility.Quaternion;
   const registerAnimation = animationStation.registerAnimation;
+  const registerBones = animationStation.registerBones;
   const create3d = vector.create3d;
   /*
   character.b3d bone documentation, tree view.
@@ -58,6 +59,15 @@ namespace playerModel {
       }
     }]
   ]));
+
+  registerBones("character.b3d", [
+    "Body",
+    "Head",
+    "Arm_Left",
+    "Arm_Right",
+    "Leg_Left",
+    "Leg_Right"
+  ]);
 
 
   //! End this debug mess!!!

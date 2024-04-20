@@ -76,7 +76,7 @@ namespace animationStation {
   /**
    * Holds the bones in a model
    */
-  type BoneRepository = Map<string, [string]>;
+  type BoneRepository = Map<string, string[]>;
 
   /**
    * BoneTRSStartEnd is the start and end of a bone's animation point in an animation.
@@ -231,7 +231,7 @@ namespace animationStation {
       modelAnimation.set(animationName, animation);
     }
 
-    registerBones(meshName: string, bones: [string]): void {
+    registerBones(meshName: string, bones: string[]): void {
       if (this.bones.has(meshName)) {
         error("Tried to override bones for mesh [" + meshName + "]");
       }
@@ -247,7 +247,7 @@ namespace animationStation {
   export function registerAnimation(meshName: string, animationName: string, animation: Animation): void {
     animationRepository.registerAnimation(meshName, animationName, animation);
   }
-  export function registerBones(meshName: string, bones: [string]): void {
+  export function registerBones(meshName: string, bones: string[]): void {
     animationRepository.registerBones(meshName, bones);
   }
 
@@ -316,8 +316,22 @@ namespace animationStation {
       return;
     }
 
-    if (currentAnimationState.currentAnimation == "") {
-      // No animation, reset
+    if (currentAnimationState.currentAnimation == "") {//&& currentAnimationState.animationProgress != 0) {
+      // No animation, reset.
+
+      workerAnimationPointEnd.identity();
+
+      let boneArray = animationRepository.bones.get("character.b3d");
+
+      if (boneArray == null) {
+        error("Forgot to register character.b3d with AnimationStation for players!");
+      }
+
+      for (const bone of boneArray) {
+        print(bone);
+        player.set_bone_override(bone, workerAnimationPointEnd);
+      }
+
       currentAnimationState.animationProgress = 0;
       currentAnimationState.up = true;
       return;
