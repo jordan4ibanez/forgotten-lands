@@ -13,6 +13,7 @@ namespace animationStation {
     currentAnimation: string = "";
     animationProgress: number = 0;
     up: boolean = true;
+    speed: number = 1.0;
   }
 
   /**
@@ -345,6 +346,17 @@ namespace animationStation {
     currentAnimationState.up = true;
   }
 
+  export function setPlayerAnimationSpeed(playerName: string, animationSpeed: number) {
+    let currentAnimationState = playerAnimationState.get(playerName);
+    if (currentAnimationState == null) {
+      playerAnimationState.set(playerName, new PlayerAnimationState());
+      warning("Tried to set a player animation for [" + playerName + "] when they were not in the state list.");
+      currentAnimationState = playerAnimationState.get(playerName) as PlayerAnimationState;
+    }
+
+    currentAnimationState.speed = animationSpeed;
+  }
+
   /**
    * A player joins, add them to the state container.
    */
@@ -447,13 +459,13 @@ namespace animationStation {
     }
 
     if (currentAnimationState.up == true) {
-      currentAnimationState.animationProgress += delta;
+      currentAnimationState.animationProgress += delta * currentAnimationState.speed;
       if (currentAnimationState.animationProgress >= 1.0) {
         currentAnimationState.up = false;
         currentAnimationState.animationProgress = 1.0;
       }
     } else {
-      currentAnimationState.animationProgress -= delta;
+      currentAnimationState.animationProgress -= delta * currentAnimationState.speed;
       if (currentAnimationState.animationProgress <= 0.0) {
         currentAnimationState.up = true;
         currentAnimationState.animationProgress = 0.0;
