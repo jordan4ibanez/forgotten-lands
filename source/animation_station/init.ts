@@ -14,10 +14,25 @@ namespace animationStation {
   /**
    * AnimationPoint defines TRS for a frame of the animation.
    */
-  interface AnimationPoint {
-    translation: Vec3,
-    rotation: Vec3,
-    scale: Vec3,
+  class AnimationPoint {
+    translation: Vec3 = vector.create3d(0, 0, 0);
+    rotation: Vec3 = vector.create3d(0, 0, 0);
+    scale: Vec3 = vector.create3d(1, 1, 1);
+
+    /**
+     * You can see this is so verbose specifically not to create new objects.
+     */
+    identity(): void {
+      this.translation.x = 0;
+      this.translation.y = 0;
+      this.translation.z = 0;
+      this.rotation.x = 0;
+      this.rotation.y = 0;
+      this.rotation.z = 0;
+      this.scale.x = 1;
+      this.scale.y = 1;
+      this.scale.z = 1;
+    }
   }
 
   /**
@@ -48,19 +63,16 @@ namespace animationStation {
    * Worker Animation Point is a piece of data which is used to reduce pressure
    * on the garbage collector by reusing it's memory address over and over.
    */
-  let workerAnimationPoint: AnimationPoint = {
-    translation: vector.create3d(0, 0, 0),
-    rotation: vector.create3d(0, 0, 0),
-    scale: vector.create3d(1, 1, 1)
-  };
+  let workerAnimationPoint: AnimationPoint = new AnimationPoint();
 
   /**
    * Animation Repository holds all the animations for all bones on all models.
    */
   class AnimationRepository {
-    models: { [modelName: string]: Animation; } = {};
 
-    getStart(entity: ObjectRef): {
+    models: ModelRepo = {};
+
+    getStart(entity: ObjectRef): AnimationPoint {
 
     };
   }
