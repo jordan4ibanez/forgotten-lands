@@ -2,6 +2,7 @@ namespace animationStation {
 
   const warning = utility.warning;
   const Quaternion = utility.Quaternion;
+  const create3d = vector.create3d;
 
   /**
    * This is the base of the animation for players.
@@ -104,6 +105,73 @@ namespace animationStation {
   let rotationEnd = new Quaternion(vector.create3d(0, math.pi, 0));
   let workerRotation = new Quaternion(vector.create3d(0, 0, 0));
   let workerVec = vector.create3d(0, 0, 0);
+  /**
+   * And the final processor, this guy.
+   */
+  class BoneOverrideWorker {
+    override: BoneOverride = {
+      position: {
+        vec: create3d(0, 0, 0),
+        interpolation: 0,
+        absolute: false
+      },
+      rotation: {
+        vec: create3d(0, 0, 0),
+        interpolation: 0,
+        absolute: false
+      },
+      scale: {
+        vec: create3d(1, 1, 1),
+        interpolation: 0,
+        absolute: true
+      }
+    };
+
+    identity(): void {
+      if (this.override.position != null) {
+        this.override.position.vec.x = 0;
+        this.override.position.vec.y = 0;
+        this.override.position.vec.z = 0;
+      }
+      if (this.override.rotation != null) {
+        this.override.rotation.vec.x = 0;
+        this.override.rotation.vec.y = 0;
+        this.override.rotation.vec.z = 0;
+      }
+      if (this.override.scale != null) {
+        this.override.scale.vec.x = 1;
+        this.override.scale.vec.y = 1;
+        this.override.scale.vec.z = 1;
+      }
+    }
+
+    setPosition(vec: Vec3): void {
+      if (this.override.position == null) {
+        error("Position went null in bone override worker.");
+      }
+      this.override.position.vec.x = vec.x;
+      this.override.position.vec.y = vec.y;
+      this.override.position.vec.z = vec.z;
+    }
+    setRotation(vec: Vec3): void {
+      if (this.override.rotation == null) {
+        error("Rotation went null in bone override worker.");
+      }
+      this.override.rotation.vec.x = vec.x;
+      this.override.rotation.vec.y = vec.y;
+      this.override.rotation.vec.z = vec.z;
+    }
+    setScale(vec: Vec3): void {
+      if (this.override.scale == null) {
+        error("Scale went null in bone override worker.");
+      }
+      this.override.scale.vec.x = vec.x;
+      this.override.scale.vec.y = vec.y;
+      this.override.scale.vec.z = vec.z;
+    }
+  }
+
+  let boneOverrideWorker: BoneOverrideWorker = new BoneOverrideWorker();
 
   /**
    * Animation Repository holds all the animations for all bones on all models.
@@ -327,9 +395,11 @@ namespace animationStation {
         error("Forgot to register character.b3d with AnimationStation for players!");
       }
 
+      boneOverrideWorker.identity();
+
       for (const bone of boneArray) {
         print(bone);
-        player.set_bone_override(bone, workerAnimationPointEnd);
+        player.set_bone_override(bone, boneOverrideWorker.override);
       }
 
       currentAnimationState.animationProgress = 0;
