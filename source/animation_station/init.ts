@@ -183,16 +183,24 @@ namespace animationStation {
     bones: BoneRepository = new Map();
 
 
-    getStart(entity: ObjectRef, animationName: string, boneName: string): AnimationPoint {
+    getStart(entityOrMeshName: ObjectRef | string, animationName: string, boneName: string): AnimationPoint {
 
       // We call identity to allow this to escape out early if a bone doesn't have animation.
       workerAnimationPointStart.identity();
 
       //! Check if the model has a mesh.
-      const meshName: string | undefined = entity.get_properties().mesh;
+      let meshName: string | undefined = undefined;
+
+      if (typeof entityOrMeshName == "string") {
+        meshName = entityOrMeshName;
+      } else {
+        meshName = entityOrMeshName.get_properties().mesh;
+      }
 
       if (meshName == null) {
-        warning("Mesh was not defined for entity [" + tostring(entity) + "]!");
+        if (typeof entityOrMeshName != "string") {
+          warning("Mesh was not defined for entity [" + tostring(entityOrMeshName) + "]!");
+        }
         return workerAnimationPointStart;
       }
 
@@ -216,7 +224,7 @@ namespace animationStation {
       const boneStartEnd: BoneTRSStartEnd | undefined = animation.get(boneName);
 
       if (boneStartEnd == null) {
-        warning("Mesh [" + meshName + "] animation [" + animation + "] does not contain bone [" + boneName + "]!");
+        // warning("Mesh [" + meshName + "] animation [" + animation + "] does not contain bone [" + boneName + "] (1)!");
         return workerAnimationPointEnd;
       }
 
@@ -264,7 +272,7 @@ namespace animationStation {
       const boneStartEnd: BoneTRSStartEnd | undefined = animation.get(boneName);
 
       if (boneStartEnd == null) {
-        warning("Mesh [" + meshName + "] animation [" + animation + "] does not contain bone [" + boneName + "]!");
+        // warning("Mesh [" + meshName + "] animation [" + animation + "] does not contain bone [" + boneName + "] (2)!");
         return workerAnimationPointEnd;
       }
 
@@ -405,6 +413,52 @@ namespace animationStation {
       return;
     }
 
+    //? Now we begin animation!
+
+    let boneArray = animationRepository.bones.get("character.b3d");
+
+    if (boneArray == null) {
+      error("Forgot to register character.b3d with AnimationStation for players!");
+    }
+
+    const currentAnimation = currentAnimationState.currentAnimation;
+    const animationProgress = currentAnimationState.animationProgress;
+
+    for (const bone of boneArray) {
+
+      boneOverrideWorker.identity();
+
+      animationRepository.getStart(player, currentAnimation, bone);
+      animationRepository.getEnd(player, currentAnimation, bone);
+
+      // todo: implement vector.lerp!
+
+      //workerAnimationPointStart
+
+      rotationStart.fromVec(workerAnimationPointStart.rotation);
+      rotationEnd.fromVec(workerAnimationPointEnd.rotation);
+      rotationStart.slerp(rotationEnd, animationProgress, workerRotation);
+
+      workerRotation.toVec3(workerVec);
+
+      boneOverrideWorker.setRotation(workerVec);
+
+      player.set_bone_override(bone, boneOverrideWorker.override);
+    }
+
+    if (currentAnimationState.up == true) {
+      currentAnimationState.animationProgress += delta;
+      if (currentAnimationState.animationProgress >= 1.0) {
+        currentAnimationState.up = false;
+        currentAnimationState.animationProgress = 1.0;
+      }
+    } else {
+      currentAnimationState.animationProgress -= delta;
+      if (currentAnimationState.animationProgress <= 0.0) {
+        currentAnimationState.up = true;
+        currentAnimationState.animationProgress = 0.0;
+      }
+    }
 
   }
 
