@@ -159,6 +159,10 @@ namespace animationStation {
      * String is the model name.
      */
     models: Map<string, AnimationContainer> = new Map();
+    /**
+     * String model name, Map of bones.
+     */
+    bones: Map<string, Set<string>> = new Map();
 
     registerAnimation(modelName: string, animationName: string, definition: BoneContainer) {
       // Create a blank model map if none exists.
@@ -177,7 +181,23 @@ namespace animationStation {
       container.animations.set(animationName, definition);
     }
 
+    registerBones(modelName: string, bones: Set<string>): void {
+      if (this.bones.has(modelName)) {
+        error("AnimationStation: Tried to redefine bones for model [" + modelName + "].");
+      }
+      this.bones.set(modelName, bones);
+    }
+
+
     getStart(modelName: string, animationName: string, boneName: string): AnimationWorker {
+      if (this.bones.has(modelName)) {
+        const gotten = this.bones.get(modelName) as Set<string>;
+        if (!gotten.has(boneName)) {
+          error("Model [" + modelName + "] bone [" + boneName + "] is not registered.");
+        }
+      } else {
+        error("Model [" + modelName + "] has no registered bones.");
+      }
       workerAnimationStart.identity();
       if (!this.models.has(modelName)) {
         return workerAnimationStart;
@@ -197,6 +217,14 @@ namespace animationStation {
     }
 
     getEnd(modelName: string, animationName: string, boneName: string): AnimationWorker {
+      if (this.bones.has(modelName)) {
+        const gotten = this.bones.get(modelName) as Set<string>;
+        if (!gotten.has(boneName)) {
+          error("Model [" + modelName + "] bone [" + boneName + "] is not registered.");
+        }
+      } else {
+        error("Model [" + modelName + "] has no registered bones.");
+      }
       workerAnimationEnd.identity();
       if (!this.models.has(modelName)) {
         return workerAnimationEnd;
@@ -214,6 +242,5 @@ namespace animationStation {
       workerAnimationEnd.set(endKeyframe);
       return workerAnimationEnd;
     }
-
   }
 }
