@@ -165,6 +165,7 @@
     "texpool",
     "textlist",
     "timeofday",
+    "tock",
     "tonemap",
     "toolrepair",
     "torchlike",

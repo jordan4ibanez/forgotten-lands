@@ -100,6 +100,51 @@ namespace playerModel {
 
   // // speed based animation
 
+  // This works with the default character.b3d
+  const start = vector.create3d(math.pi / 4, 0, 0);
+  const end = vector.create3d(-math.pi / 4, 0, 0);
+  let timer = 0;
+  let state = false;
+
+  minetest.register_globalstep((delta: number) => {
+
+    timer += delta;
+    if (timer > 1) {
+      // Get the players.
+      let playerIterator: ObjectRef[] = minetest.get_connected_players();
+      // Restart the timer.
+      timer = 0;
+      // Flip the state.
+      state = !state;
+      // Change the head bone override.
+      if (state) {
+        print("tick");
+        for (let player of playerIterator) {
+          player.set_bone_override("Head", {
+            rotation: {
+              vec: start,
+              // Literally does nothing.
+              interpolation: 1.0,
+              absolute: false,
+            }
+          });
+        }
+      } else {
+        print("tock");
+        for (let player of playerIterator) {
+          player.set_bone_override("Head", {
+            rotation: {
+              vec: end,
+              // Literally does nothing.
+              interpolation: 1.0,
+              absolute: false,
+            }
+          });
+        }
+      }
+    }
+  });
+
   // minetest.register_globalstep((_: number) => {
   //   for (const player of minetest.get_connected_players()) {
   //     let vel = player.get_velocity();
