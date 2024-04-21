@@ -188,7 +188,6 @@ namespace animationStation {
       this.bones.set(modelName, bones);
     }
 
-
     getStart(modelName: string, animationName: string, boneName: string): AnimationWorker {
       if (this.bones.has(modelName)) {
         const gotten = this.bones.get(modelName) as Set<string>;

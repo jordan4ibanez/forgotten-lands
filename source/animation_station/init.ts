@@ -9,8 +9,12 @@ namespace animationStation {
 
   let repository = new ModelContainer();
 
-  export function registerAnimation(modelName: string, animationName: string, definition: BoneContainer) {
+  //? Expose the functional interface.
+  export function registerAnimation(modelName: string, animationName: string, definition: BoneContainer): void {
     repository.registerAnimation(modelName, animationName, definition);
+  }
+  export function registerBones(modelName: string, bones: Set<string>): void {
+    repository.registerBones(modelName, bones);
   }
 
   registerAnimation("test.b3d", "walk", {
