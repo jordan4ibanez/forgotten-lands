@@ -84,19 +84,19 @@ namespace playerModel {
   // ]);
 
 
-  // minetest.register_on_joinplayer((player: ObjectRef) => {
+  minetest.register_on_joinplayer((player: ObjectRef) => {
 
-  //   const name = player.get_player_name();
+    const name = player.get_player_name();
 
-  //   player.set_properties({
-  //     mesh: "character.b3d",
-  //     textures: ["character.png"],
-  //     visual: EntityVisual.mesh,
-  //     visual_size: vector.create3d(1, 1, 1)
-  //   });
+    player.set_properties({
+      mesh: "character.b3d",
+      textures: ["character.png"],
+      visual: EntityVisual.mesh,
+      visual_size: vector.create3d(1, 1, 1)
+    });
 
 
-  // });
+  });
 
   // // speed based animation
 
