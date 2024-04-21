@@ -14,6 +14,7 @@ namespace animationStation {
     animationProgress: number = 0;
     up: boolean = true;
     speed: number = 1.0;
+    newAnimationTrigger: boolean = true;
   }
 
   /**
@@ -341,9 +342,15 @@ namespace animationStation {
       currentAnimationState = playerAnimationState.get(playerName) as PlayerAnimationState;
     }
 
+    // Already had this animation.
+    if (currentAnimationState.currentAnimation == animation) {
+      return;
+    }
+
     currentAnimationState.currentAnimation = animation;
     currentAnimationState.animationProgress = 0;
     currentAnimationState.up = true;
+    currentAnimationState.newAnimationTrigger = true;
   }
 
   export function setPlayerAnimationSpeed(playerName: string, animationSpeed: number) {
@@ -397,7 +404,7 @@ namespace animationStation {
       return;
     }
 
-    if (currentAnimationState.currentAnimation == "" && currentAnimationState.animationProgress != 0) {
+    if (currentAnimationState.currentAnimation == "" && currentAnimationState.newAnimationTrigger == true) {
       // No animation, reset.
 
       workerAnimationPointEnd.identity();
@@ -417,6 +424,7 @@ namespace animationStation {
 
       currentAnimationState.animationProgress = 0;
       currentAnimationState.up = true;
+      currentAnimationState.newAnimationTrigger = false;
       return;
     }
 
