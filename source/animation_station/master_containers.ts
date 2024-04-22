@@ -242,4 +242,13 @@ namespace animationStation {
       return workerAnimationEnd;
     }
   }
+
+
+  /**
+   * Specialized bone container interface.
+   */
+  export interface BoneState {
+    animation: string;
+    progress: number;
+  }
 }
