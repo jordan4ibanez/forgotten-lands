@@ -16,11 +16,22 @@ namespace animationStation {
   /**
    * Holds all the bone states for players.
    */
-  export class PlayerState {
+  class PlayerState {
     boneStates: Map<string, BoneState> = new Map();
     constructor() {
+      // for (let i = 0; i < 100; i++) {
+      //   print(i);
+      // }
       //! Hardcoded-ness starts here. We simply iterate the character.b3d bones.
+      const characterBones = repository.bones.get("character.b3d");
 
+      if (characterBones == null) {
+        error("Tried to create a player state without character.b3d bones registered!");
+      }
+
+      characterBones.forEach((value: string) => {
+        print(value);
+      });
     }
   }
 
@@ -32,20 +43,24 @@ namespace animationStation {
     repository.registerBones(modelName, bones);
   }
 
-  registerAnimation("test.b3d", "walk", {
-    bones: new Map([
-      ["leg", {
-        start: {
-          translation: create3d(),
-          rotation: create3d(),
-          scale: create3d(),
-        },
-        end: {
-          translation: create3d(),
-          rotation: create3d(),
-          scale: create3d(),
-        }
-      }]
-    ])
+  minetest.register_on_joinplayer((player: ObjectRef, _: string) => {
+    new PlayerState();
   });
+
+  // registerAnimation("test.b3d", "walk", {
+  //   bones: new Map([
+  //     ["leg", {
+  //       start: {
+  //         translation: create3d(),
+  //         rotation: create3d(),
+  //         scale: create3d(),
+  //       },
+  //       end: {
+  //         translation: create3d(),
+  //         rotation: create3d(),
+  //         scale: create3d(),
+  //       }
+  //     }]
+  //   ])
+  // });
 }
