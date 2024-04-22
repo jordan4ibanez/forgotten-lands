@@ -5,7 +5,7 @@ namespace animationStation {
   const create3d = vector.create3d;
   const loadFiles = utility.loadFiles;
 
-  loadFiles(["container"]);
+  loadFiles(["master_container"]);
 
   let repository = new ModelContainer();
 
