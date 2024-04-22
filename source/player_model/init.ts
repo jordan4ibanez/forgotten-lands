@@ -4,7 +4,7 @@ namespace playerModel {
   // const setPlayerAnimationProgress = animationStation.setPlayerAnimationProgress;
   const Quaternion = utility.Quaternion;
   // const registerAnimation = animationStation.registerAnimation;
-  // const registerBones = animationStation.registerBones;
+  const registerBones = animationStation.registerBones;
   // const setPlayerAnimation = animationStation.setPlayerAnimation;
   // const setPlayerAnimationSpeed = animationStation.setPlayerAnimationSpeed;
   const create3d = vector.create3d;
@@ -74,14 +74,14 @@ namespace playerModel {
   //     }]
   //   ]));
 
-  // registerBones("character.b3d", [
-  //   "Body",
-  //   "Head",
-  //   "Arm_Left",
-  //   "Arm_Right",
-  //   "Leg_Left",
-  //   "Leg_Right"
-  // ]);
+  registerBones("character.b3d", new Set([
+    "Body",
+    "Head",
+    "Arm_Left",
+    "Arm_Right",
+    "Leg_Left",
+    "Leg_Right"
+  ]));
 
 
   minetest.register_on_joinplayer((player: ObjectRef) => {
