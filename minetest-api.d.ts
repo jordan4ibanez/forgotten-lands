@@ -2068,7 +2068,7 @@ declare interface TexturePoolComponentFade {
   out: TexturePoolComponentFade;
 }
 
-declare interface Keys {
+declare interface _Keys {
   up: boolean,
   down: boolean,
   left: boolean,
@@ -2127,5 +2127,5 @@ declare global {
   const ParticleSpawnerAttractionType: ParticleSpawnerAttractionType;
   const AreaStoreType: AreaStoreType;
   const TexturePoolComponentFade: TexturePoolComponentFade;
-  const Keys: Keys;
+  type Keys = _Keys;
 }
