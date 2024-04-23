@@ -7,6 +7,9 @@ namespace animationStation {
 
   loadFiles(["master_containers"]);
 
+  /**
+   * Holds all the model animation information.
+   */
   let repository = new ModelContainer();
 
   //! This is hardcoded because I'm prototyping per-bone animation.
@@ -18,22 +21,26 @@ namespace animationStation {
    */
   class PlayerState {
     boneStates: Map<string, BoneState> = new Map();
+
     constructor() {
-      // for (let i = 0; i < 100; i++) {
-      //   print(i);
-      // }
       //! Hardcoded-ness starts here. We simply iterate the character.b3d bones.
       const characterBones = repository.bones.get("character.b3d");
 
       if (characterBones == null) {
-        error("Tried to create a player state without character.b3d bones registered!");
+        error("Tried to create a player state without [character.b3d] bones registered!");
       }
 
-      characterBones.forEach((value: string) => {
-        print(value);
+      characterBones.forEach((bone: string) => {
+        // print("setting bone: " + bone);
+        this.boneStates.set(bone, {
+          animation: "",
+          progress: 0
+        });
       });
     }
   }
+
+  let playerRepository: Map<string, PlayerState> = new Map();
 
   //? Expose the functional interface.
   export function registerAnimation(modelName: string, animationName: string, definition: BoneContainer): void {
@@ -43,8 +50,15 @@ namespace animationStation {
     repository.registerBones(modelName, bones);
   }
 
-  minetest.register_on_joinplayer((player: ObjectRef, _: string) => {
-    new PlayerState();
+  // When a player joins, add them to the player repository.
+  minetest.register_on_joinplayer((player: ObjectRef) => {
+    const name = player.get_player_name();
+    playerRepository.set(name, new PlayerState());
+  });
+  // When a player leaves, remove them from the player repository.
+  minetest.register_on_leaveplayer((player: ObjectRef) => {
+    const name = player.get_player_name();
+    playerRepository.delete(name);
   });
 
   // registerAnimation("test.b3d", "walk", {

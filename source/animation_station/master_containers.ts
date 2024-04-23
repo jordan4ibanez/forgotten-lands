@@ -130,12 +130,12 @@ namespace animationStation {
  * Contains Bones.
  *! (Please do not make a boneless version of this)
  */
-  export interface BoneContainer {
-    /**
-     * String is the bone name.
-     */
-    bones: Map<string, Animation>;
-  }
+  // export interface BoneContainer {
+  /**
+   * String is the bone name.
+   */
+  export type BoneContainer = Map<string, Animation>;
+  // }
 
   /**
    * Animation Container contains a map of Animations.
@@ -206,10 +206,10 @@ namespace animationStation {
         return workerAnimationStart;
       }
       const animationContainer = modelContainer.animations.get(animationName) as BoneContainer;
-      if (!animationContainer.bones.has(boneName)) {
+      if (!animationContainer.has(boneName)) {
         return workerAnimationStart;
       }
-      const boneContainer = animationContainer.bones.get(boneName) as Animation;
+      const boneContainer = animationContainer.get(boneName) as Animation;
       const startKeyframe = boneContainer.start;
       workerAnimationStart.set(startKeyframe);
       return workerAnimationStart;
@@ -233,10 +233,10 @@ namespace animationStation {
         return workerAnimationEnd;
       }
       const animationContainer = modelContainer.animations.get(animationName) as BoneContainer;
-      if (!animationContainer.bones.has(boneName)) {
+      if (!animationContainer.has(boneName)) {
         return workerAnimationEnd;
       }
-      const boneContainer = animationContainer.bones.get(boneName) as Animation;
+      const boneContainer = animationContainer.get(boneName) as Animation;
       const endKeyframe = boneContainer.start;
       workerAnimationEnd.set(endKeyframe);
       return workerAnimationEnd;
