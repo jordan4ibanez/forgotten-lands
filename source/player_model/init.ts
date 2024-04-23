@@ -88,7 +88,7 @@ namespace playerModel {
 
   minetest.register_on_joinplayer((player: ObjectRef) => {
 
-    const name = player.get_player_name();
+    // const name = player.get_player_name();
 
     player.set_properties({
       mesh: "character.b3d",

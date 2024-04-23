@@ -7,6 +7,12 @@ namespace animationStation {
 
   loadFiles(["master_containers"]);
 
+  const BoneOverrideWorker = animationStation.BoneOverrideWorker;
+
+  //? Workers
+  // let overrideStart: BoneOverrideWorker = new BoneOverrideWorker();
+  // let overrideEnd: BoneOverrideWorker = new BoneOverrideWorker();
+
   /**
    * Holds all the model animation information.
    */
@@ -65,6 +71,29 @@ namespace animationStation {
     playerRepository.delete(name);
   });
 
+  //? We have to process player animation separately as the player is not an object.
+  function processPlayerAnimations(player: ObjectRef, delta: number): void {
+    const name: string = player.get_player_name();
+    let playerContainer = playerRepository.get(name);
+    if (playerContainer == null) {
+      warning("Processing player animation failed! Nonexistent. Creating then aborting.");
+      playerRepository.set(name, new PlayerState());
+      return;
+    }
+
+    // Now process all bone animations and apply.
+    for (let [boneName, state] of playerContainer.boneStates) {
+      // We simply throw everything into the repository and it does the work for us.
+      repository.applyBoneAnimation(player, "character.b3d", state.animation, boneName);
+    }
+  }
+
+  //? We have to do this on step because the player is not an object.
+  minetest.register_globalstep((delta: number) => {
+    for (let player of minetest.get_connected_players()) {
+      processPlayerAnimations(player, delta);
+    }
+  });
 
 
 }

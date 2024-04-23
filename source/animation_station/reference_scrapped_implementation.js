@@ -17,14 +17,6 @@ namespace animationStation {
     newAnimationTrigger: boolean = true;
   }
 
-  /**
-   * AnimationPoint defines TRS for a frame of the animation.
-   */
-  export interface AnimationPoint {
-    translation: Vec3;
-    rotation: Vec3;
-    scale: Vec3;
-  }
 
 
 
