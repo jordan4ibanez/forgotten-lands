@@ -40,6 +40,10 @@ namespace animationStation {
     }
   }
 
+  /**
+   * Player Repository holds all the player bone states because:
+   * - the player is userdata, not an object. >:(
+   */
   let playerRepository: Map<string, PlayerState> = new Map();
 
   //? Expose the functional interface.
@@ -62,5 +66,5 @@ namespace animationStation {
   });
 
 
-  
+
 }
