@@ -246,7 +246,7 @@ namespace animationStation {
         return workerAnimationEnd;
       }
       const boneContainer = animationContainer.get(boneName) as Animation;
-      const endKeyframe = boneContainer.start;
+      const endKeyframe = boneContainer.end;
       workerAnimationEnd.set(endKeyframe);
       return workerAnimationEnd;
     }
