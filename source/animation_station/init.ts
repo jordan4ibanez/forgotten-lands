@@ -55,7 +55,7 @@ namespace animationStation {
   export function registerBones(modelName: string, bones: Set<string>): void {
     repository.registerBones(modelName, bones);
   }
-  export function setPlayerBoneAnimation(player: ObjectRef, boneName: string, animationName: string) {
+  export function setPlayerBoneAnimation(player: ObjectRef, boneName: string, animationName: string): void {
     const name = player.get_player_name();
     let state = playerRepository.get(name);
     if (state == null) {
@@ -71,15 +71,30 @@ namespace animationStation {
 
     // Allow functions to call this over and over without resetting.
     if (boneState.animation == animationName) {
-      // print("ignoring");
       return;
     }
-    // print("applying");
 
     // Reset the state.
     boneState.animation = animationName;
     boneState.up = true;
     boneState.progress = 0;
+  }
+
+  export function setPlayerBoneAnimationSpeed(player: ObjectRef, boneName: string, animationSpeed: number): void {
+    const name = player.get_player_name();
+    let state = playerRepository.get(name);
+    if (state == null) {
+      warning("Player [" + name + "] does not exist in database! Creating and aborting.");
+      playerRepository.set(name, new PlayerState());
+      return;
+    }
+
+    let boneState = state.boneStates.get(boneName);
+    if (boneState == null) {
+      error("Tried to set bone animation for bone [" + boneName + "] in character.b3d, which does not exist.");
+    }
+
+    boneState.speed = animationSpeed;
   }
 
   // When a player joins, add them to the player repository.
