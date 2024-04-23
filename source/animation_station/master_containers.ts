@@ -264,10 +264,12 @@ namespace animationStation {
       // todo: Translation
 
       // Rotation
+
       rotationStart.fromVec(workerAnimationStart.rotation);
       rotationEnd.fromVec(workerAnimationEnd.rotation);
       rotationStart.slerp(rotationEnd, animationProgress, outputRotation);
       outputRotation.toVec3(workerVec);
+
       outputOverride.setRotation(workerVec);
 
       // todo: Scale
@@ -284,7 +286,6 @@ namespace animationStation {
     progress: number;
     speed: number;
     up: boolean;
-    newAnimationTrigger: boolean;
   }
 
 }

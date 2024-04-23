@@ -5,6 +5,7 @@ namespace playerModel {
   const Quaternion = utility.Quaternion;
   const registerAnimation = animationStation.registerAnimation;
   const registerBones = animationStation.registerBones;
+  const setPlayerBoneAnimation = animationStation.setPlayerBoneAnimation;
   // const setPlayerAnimation = animationStation.setPlayerAnimation;
   // const setPlayerAnimationSpeed = animationStation.setPlayerAnimationSpeed;
   const create3d = vector.create3d;
@@ -102,20 +103,20 @@ namespace playerModel {
 
   // // speed based animation
 
-  // minetest.register_globalstep((_: number) => {
-  //   for (const player of minetest.get_connected_players()) {
-  //     let vel = player.get_velocity();
-  //     let speed = vector.length(vel);
-  //     const name = player.get_player_name();
+  minetest.register_globalstep((_: number) => {
+    for (const player of minetest.get_connected_players()) {
+      let vel = player.get_velocity();
+      let speed = vector.length(vel);
+      const name = player.get_player_name();
 
-  //     if (speed == 0) {
-  //       setPlayerAnimation(name, "");
-  //     } else {
-  //       setPlayerAnimation(name, "walk");
-  //       setPlayerAnimationSpeed(name, speed);
-  //     }
+      if (speed == 0) {
+        setPlayerBoneAnimation(player, "Leg_Left", "");
+      } else {
+        setPlayerBoneAnimation(player, "Leg_Left", "walk");
+        // setPlayerAnimationSpeed(name, speed);
+      }
 
-  //   }
+    }
 
-  // });
+  });
 }

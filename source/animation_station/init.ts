@@ -7,12 +7,6 @@ namespace animationStation {
 
   loadFiles(["master_containers"]);
 
-  const BoneOverrideWorker = animationStation.BoneOverrideWorker;
-
-  //? Workers
-  // let overrideStart: BoneOverrideWorker = new BoneOverrideWorker();
-  // let overrideEnd: BoneOverrideWorker = new BoneOverrideWorker();
-
   /**
    * Holds all the model animation information.
    */
@@ -43,7 +37,6 @@ namespace animationStation {
           progress: 0,
           speed: 1,
           up: true,
-          newAnimationTrigger: true
         });
       });
     }
@@ -61,6 +54,32 @@ namespace animationStation {
   }
   export function registerBones(modelName: string, bones: Set<string>): void {
     repository.registerBones(modelName, bones);
+  }
+  export function setPlayerBoneAnimation(player: ObjectRef, boneName: string, animationName: string) {
+    const name = player.get_player_name();
+    let state = playerRepository.get(name);
+    if (state == null) {
+      warning("Player [" + name + "] does not exist in database! Creating and aborting.");
+      playerRepository.set(name, new PlayerState());
+      return;
+    }
+
+    let boneState = state.boneStates.get(boneName);
+    if (boneState == null) {
+      error("Tried to set bone animation for bone [" + boneName + "] in character.b3d, which does not exist.");
+    }
+
+    // Allow functions to call this over and over without resetting.
+    if (boneState.animation == animationName) {
+      // print("ignoring");
+      return;
+    }
+    // print("applying");
+
+    // Reset the state.
+    boneState.animation = animationName;
+    boneState.up = true;
+    boneState.progress = 0;
   }
 
   // When a player joins, add them to the player repository.
@@ -88,6 +107,23 @@ namespace animationStation {
     for (let [boneName, state] of playerContainer.boneStates) {
       // We simply throw everything into the repository and it does the work for us.
       repository.applyBoneAnimation(player, state.progress, "character.b3d", state.animation, boneName);
+
+      // print(state.progress);
+
+      // Next we apply timescale to the bone state.
+      if (state.up) {
+        state.progress += delta * state.speed;
+        if (state.progress >= 1.0) {
+          state.progress = 1.0;
+          state.up = false;
+        }
+      } else {
+        state.progress -= delta * state.speed;
+        if (state.progress <= 0.0) {
+          state.progress = 0.0;
+          state.up = true;
+        }
+      }
     }
   }
 
