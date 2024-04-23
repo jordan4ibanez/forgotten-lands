@@ -1261,7 +1261,7 @@ declare global {
     get_inventory_formspec(): string;
     set_formspec_prepend(formSpec: string): void;
     get_formspec_prepend(): string;
-    get_player_control(): PlayerControl;
+    get_player_control(): Keys;
     get_player_control_bits(): number;
     set_physics_override(override: PhysicsOverride): void;
     get_physics_override(): PhysicsOverride;
@@ -1340,22 +1340,6 @@ declare global {
     sneak: boolean;
     sneak_glitch: boolean;
     new_move: boolean;
-  }
-
-
-  interface PlayerControl {
-    up: boolean;
-    down: boolean;
-    left: boolean;
-    right: boolean;
-    jump: boolean;
-    aux1: boolean;
-    sneak: boolean;
-    dig: boolean;
-    place: boolean;
-    LMB: boolean;
-    RMB: boolean;
-    zoom: boolean;
   }
 
   interface SkyParametersColor {
@@ -2084,6 +2068,21 @@ declare interface TexturePoolComponentFade {
   out: TexturePoolComponentFade;
 }
 
+declare interface Keys {
+  up: boolean,
+  down: boolean,
+  left: boolean,
+  right: boolean,
+  jump: boolean,
+  aux1: boolean,
+  sneak: boolean,
+  dig: boolean,
+  place: boolean,
+  LMB: boolean,
+  RMB: boolean,
+  zoom: boolean,
+}
+
 declare global {
   const minetest: minetest;
   const EntityVisual: EntityVisual;
@@ -2128,4 +2127,5 @@ declare global {
   const ParticleSpawnerAttractionType: ParticleSpawnerAttractionType;
   const AreaStoreType: AreaStoreType;
   const TexturePoolComponentFade: TexturePoolComponentFade;
+  const Keys: Keys;
 }
