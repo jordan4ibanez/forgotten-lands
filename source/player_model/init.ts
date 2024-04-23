@@ -3,7 +3,7 @@ namespace playerModel {
   // const getPlayerAnimationProgress = animationStation.getPlayerAnimationProgress;
   // const setPlayerAnimationProgress = animationStation.setPlayerAnimationProgress;
   const Quaternion = utility.Quaternion;
-  // const registerAnimation = animationStation.registerAnimation;
+  const registerAnimation = animationStation.registerAnimation;
   const registerBones = animationStation.registerBones;
   // const setPlayerAnimation = animationStation.setPlayerAnimation;
   // const setPlayerAnimationSpeed = animationStation.setPlayerAnimationSpeed;
@@ -20,59 +20,61 @@ namespace playerModel {
   */
 
 
-  // registerAnimation("character.b3d",
-  //   "walk",
-  //   new Map([
-  //     ["Arm_Left", {
-  //       start: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(math.pi / 4, 0, 0),
-  //         scale: create3d(0, 0, 0)
-  //       },
-  //       end: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(-math.pi / 4, 0, 0),
-  //         scale: create3d(1, 1, 1)
-  //       }
-  //     }],
-  //     ["Leg_Right", {
-  //       start: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(math.pi / 4, 0, 0),
-  //         scale: create3d(0, 0, 0)
-  //       },
-  //       end: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(-math.pi / 4, 0, 0),
-  //         scale: create3d(1, 1, 1)
-  //       }
-  //     }],
+  registerAnimation("character.b3d",
+    "walk",
 
-  //     ["Arm_Right", {
-  //       start: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(-math.pi / 4, 0, 0),
-  //         scale: create3d(0, 0, 0)
-  //       },
-  //       end: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(math.pi / 4, 0, 0),
-  //         scale: create3d(1, 1, 1)
-  //       }
-  //     }],
-  //     ["Leg_Left", {
-  //       start: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(-math.pi / 4, 0, 0),
-  //         scale: create3d(0, 0, 0)
-  //       },
-  //       end: {
-  //         translation: create3d(0, 0, 0),
-  //         rotation: create3d(math.pi / 4, 0, 0),
-  //         scale: create3d(1, 1, 1)
-  //       }
-  //     }]
-  //   ]));
+    new Map([
+      ["Arm_Left", {
+        start: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(math.pi / 4, 0, 0),
+          scale: create3d(0, 0, 0)
+        },
+        end: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(-math.pi / 4, 0, 0),
+          scale: create3d(1, 1, 1)
+        }
+      }],
+      ["Leg_Right", {
+        start: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(math.pi / 4, 0, 0),
+          scale: create3d(0, 0, 0)
+        },
+        end: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(-math.pi / 4, 0, 0),
+          scale: create3d(1, 1, 1)
+        }
+      }],
+
+      ["Arm_Right", {
+        start: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(-math.pi / 4, 0, 0),
+          scale: create3d(0, 0, 0)
+        },
+        end: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(math.pi / 4, 0, 0),
+          scale: create3d(1, 1, 1)
+        }
+      }],
+      ["Leg_Left", {
+        start: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(-math.pi / 4, 0, 0),
+          scale: create3d(0, 0, 0)
+        },
+        end: {
+          translation: create3d(0, 0, 0),
+          rotation: create3d(math.pi / 4, 0, 0),
+          scale: create3d(1, 1, 1)
+        }
+      }]
+    ])
+  );
 
   registerBones("character.b3d", new Set([
     "Body",
