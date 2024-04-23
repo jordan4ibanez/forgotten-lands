@@ -261,13 +261,16 @@ namespace animationStation {
 
       // todo: implement vector.lerp!
 
+      // todo: Translation
+
+      // Rotation
       rotationStart.fromVec(workerAnimationStart.rotation);
       rotationEnd.fromVec(workerAnimationEnd.rotation);
       rotationStart.slerp(rotationEnd, animationProgress, outputRotation);
-
       outputRotation.toVec3(workerVec);
-
       outputOverride.setRotation(workerVec);
+
+      // todo: Scale
 
       object.set_bone_override(boneName, outputOverride.override);
     }
