@@ -61,20 +61,6 @@ namespace animationStation {
     playerRepository.delete(name);
   });
 
-  // registerAnimation("test.b3d", "walk", {
-  //   bones: new Map([
-  //     ["leg", {
-  //       start: {
-  //         translation: create3d(),
-  //         rotation: create3d(),
-  //         scale: create3d(),
-  //       },
-  //       end: {
-  //         translation: create3d(),
-  //         rotation: create3d(),
-  //         scale: create3d(),
-  //       }
-  //     }]
-  //   ])
-  // });
+
+  
 }
