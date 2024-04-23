@@ -40,7 +40,10 @@ namespace animationStation {
         // print("setting bone: " + bone);
         this.boneStates.set(bone, {
           animation: "",
-          progress: 0
+          progress: 0,
+          speed: 1,
+          up: true,
+          newAnimationTrigger: true
         });
       });
     }
@@ -84,7 +87,7 @@ namespace animationStation {
     // Now process all bone animations and apply.
     for (let [boneName, state] of playerContainer.boneStates) {
       // We simply throw everything into the repository and it does the work for us.
-      repository.applyBoneAnimation(player, "character.b3d", state.animation, boneName);
+      repository.applyBoneAnimation(player, state.progress, "character.b3d", state.animation, boneName);
     }
   }
 

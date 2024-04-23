@@ -155,10 +155,10 @@ namespace animationStation {
   // Math workers.
   let rotationStart = new Quaternion(vector.create3d(0, 0, 0));
   let rotationEnd = new Quaternion(vector.create3d(0, math.pi, 0));
-  let workerRotation = new Quaternion(vector.create3d(0, 0, 0));
+  let outputRotation = new Quaternion(vector.create3d(0, 0, 0));
   let workerVec = vector.create3d(0, 0, 0);
   // This is the output worker.
-  let override = new BoneOverrideWorker();
+  let outputOverride = new BoneOverrideWorker();
 
   /**
    * Holds the Models.
@@ -254,11 +254,22 @@ namespace animationStation {
     /**
      * Apply animation to an object's model.
      */
-    applyBoneAnimation(object: ObjectRef, modelName: string, animationName: string, boneName: string): void {
+    applyBoneAnimation(object: ObjectRef, animationProgress: number, modelName: string, animationName: string, boneName: string): void {
       // These values are stored into the workers.
       this.getStart(modelName, animationName, boneName);
       this.getEnd(modelName, animationName, boneName);
 
+      // todo: implement vector.lerp!
+
+      rotationStart.fromVec(workerAnimationStart.rotation);
+      rotationEnd.fromVec(workerAnimationEnd.rotation);
+      rotationStart.slerp(rotationEnd, animationProgress, outputRotation);
+
+      outputRotation.toVec3(workerVec);
+
+      outputOverride.setRotation(workerVec);
+
+      object.set_bone_override(boneName, outputOverride.override);
     }
   }
 
@@ -268,6 +279,9 @@ namespace animationStation {
   export interface BoneState {
     animation: string;
     progress: number;
+    speed: number;
+    up: boolean;
+    newAnimationTrigger: boolean;
   }
 
 }
