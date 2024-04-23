@@ -321,3 +321,21 @@ globalEnvironment["TexturePoolComponentFade"] = {
   in: "in",
   out: "out"
 };
+
+/**
+ * Available keyboard & mouse keys.
+ */
+globalEnvironment["Keys"] = {
+  up: "up",
+  down: "down",
+  left: "left",
+  right: "right",
+  jump: "jump",
+  aux1: "aux1",
+  sneak: "sneak",
+  dig: "dig",
+  place: "place",
+  LMB: "LMB",
+  RMB: "RMB",
+  zoom: "zoom",
+}
