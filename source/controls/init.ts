@@ -139,7 +139,7 @@ namespace controls {
   function pollPlayerControls(player: ObjectRef): void {
     const name = player.get_player_name();
     const playerControl: PlayerControlObject = player.get_player_control();
-    let controlState = repository.get(name);
+    let controlState: PlayerControls | undefined = repository.get(name);
     if (controlState == null) {
       warning("Player control state did not exist. Creating and aborting.");
       repository.set(name, new PlayerControls());
