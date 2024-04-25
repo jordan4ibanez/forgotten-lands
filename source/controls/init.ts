@@ -1,10 +1,7 @@
 namespace controls {
 
   const warning = utility.warning;
-
   const Keys = _Keys;
-
-  print("hi", Keys);
 
   /**
    * 
@@ -34,6 +31,10 @@ namespace controls {
   }
 
   let repository: Map<string, PlayerControls> = new Map();
+  let onPress: ((player: ObjectRef) => void)[];
+  let onHold: ((player: ObjectRef) => void)[];
+  let onRelease: ((player: ObjectRef) => void)[];
+
 
 
   // Add player to the repository when they join.
