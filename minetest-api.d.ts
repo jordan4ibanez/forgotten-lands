@@ -1261,7 +1261,7 @@ declare global {
     get_inventory_formspec(): string;
     set_formspec_prepend(formSpec: string): void;
     get_formspec_prepend(): string;
-    get_player_control(): Keys;
+    get_player_control(): PlayerControlObject;
     get_player_control_bits(): number;
     set_physics_override(override: PhysicsOverride): void;
     get_physics_override(): PhysicsOverride;
@@ -1300,7 +1300,7 @@ declare global {
     respawn(): void;
   }
 
-  interface Keys {
+  interface PlayerControlObject {
     up: boolean,
     down: boolean,
     left: boolean,
@@ -1313,6 +1313,21 @@ declare global {
     LMB: boolean,
     RMB: boolean,
     zoom: boolean,
+  }
+
+  enum Keys {
+    up = "up",
+    down = "down",
+    left = "left",
+    right = "right",
+    jump = "jump",
+    aux1 = "aux1",
+    sneak = "sneak",
+    dig = "dig",
+    place = "place",
+    LMB = "LMB",
+    RMB = "RMB",
+    zoom = "zoom",
   }
 
   interface PcgRandomObject {
