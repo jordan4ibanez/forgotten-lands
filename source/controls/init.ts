@@ -17,17 +17,44 @@ namespace controls {
 
   class PlayerControls implements PlayerControlObject {
     up: boolean = false;
+    upTime: number;
     down: boolean = false;
+    downTime: number;
     left: boolean = false;
+    leftTime: number;
     right: boolean = false;
+    rightTime: number;
     jump: boolean = false;
+    jumpTime: number;
     aux1: boolean = false;
+    aux1Time: number;
     sneak: boolean = false;
+    sneakTime: number;
     dig: boolean = false;
+    digTime: number;
     place: boolean = false;
+    placeTime: number;
     LMB: boolean = false;
+    LMBTime: number;
     RMB: boolean = false;
+    RMBTime: number;
     zoom: boolean = false;
+    zoomTime: number;
+    constructor() {
+      const currentTime = minetest.get_us_time();
+      this.upTime = currentTime;
+      this.downTime = currentTime;
+      this.leftTime = currentTime;
+      this.rightTime = currentTime;
+      this.jumpTime = currentTime;
+      this.aux1Time = currentTime;
+      this.sneakTime = currentTime;
+      this.digTime = currentTime;
+      this.placeTime = currentTime;
+      this.LMBTime = currentTime;
+      this.RMBTime = currentTime;
+      this.zoomTime = currentTime;
+    }
   }
 
   // Little auto map population thing.
