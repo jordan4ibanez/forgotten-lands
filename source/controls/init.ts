@@ -46,37 +46,51 @@ namespace controls {
   let onHold: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
   let onRelease: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
 
-
-  export function registerOnPress(keys: _Keys[], fn: ((player: ObjectRef) => void)): void {
+  /**
+   * Register an on press callback for keys.
+   * @param keys The keys in which you want your callback to run for.
+   * @param callback The callback.
+   */
+  export function registerOnPress(keys: _Keys[], callback: ((player: ObjectRef) => void)): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onPress.get(key);
       if (funcArray == null) {
         error("Tried to assign [on press] to key [" + key + "] which doesn't exist.");
       }
-      funcArray.push(fn);
+      funcArray.push(callback);
     }
   }
 
-  export function registerOnHold(keys: _Keys[], fn: ((player: ObjectRef) => void)): void {
+  /**
+   * Register an on press callback for keys.
+   * @param keys The keys in which you want your callback to run for.
+   * @param callback The callback
+   */
+  export function registerOnHold(keys: _Keys[], callback: ((player: ObjectRef) => void)): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onHold.get(key);
       if (funcArray == null) {
         error("Tried to assign [on hold] to key [" + key + "] which doesn't exist.");
       }
-      funcArray.push(fn);
+      funcArray.push(callback);
     }
   }
 
-  export function registerOnRelease(keys: _Keys[], fn: ((player: ObjectRef) => void)): void {
+  /**
+   * Register an on release callback for keys.
+   * @param keys The keys in which you want your callback to run for.
+   * @param callback The callback.
+   */
+  export function registerOnRelease(keys: _Keys[], callback: ((player: ObjectRef) => void)): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onRelease.get(key);
       if (funcArray == null) {
         error("Tried to assign [on release] to key [" + key + "] which doesn't exist.");
       }
-      funcArray.push(fn);
+      funcArray.push(callback);
     }
   }
 
