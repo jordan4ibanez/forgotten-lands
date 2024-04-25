@@ -1300,6 +1300,21 @@ declare global {
     respawn(): void;
   }
 
+  interface Keys {
+    up: boolean,
+    down: boolean,
+    left: boolean,
+    right: boolean,
+    jump: boolean,
+    aux1: boolean,
+    sneak: boolean,
+    dig: boolean,
+    place: boolean,
+    LMB: boolean,
+    RMB: boolean,
+    zoom: boolean,
+  }
+
   interface PcgRandomObject {
     next(): number;
     next(min: number, max: number): number;
@@ -2068,21 +2083,6 @@ declare interface TexturePoolComponentFade {
   out: TexturePoolComponentFade;
 }
 
-declare interface _Keys {
-  up: boolean,
-  down: boolean,
-  left: boolean,
-  right: boolean,
-  jump: boolean,
-  aux1: boolean,
-  sneak: boolean,
-  dig: boolean,
-  place: boolean,
-  LMB: boolean,
-  RMB: boolean,
-  zoom: boolean,
-}
-
 declare global {
   const minetest: minetest;
   const EntityVisual: EntityVisual;
@@ -2127,5 +2127,4 @@ declare global {
   const ParticleSpawnerAttractionType: ParticleSpawnerAttractionType;
   const AreaStoreType: AreaStoreType;
   const TexturePoolComponentFade: TexturePoolComponentFade;
-  type Keys = _Keys;
 }

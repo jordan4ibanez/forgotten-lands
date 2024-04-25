@@ -12,7 +12,6 @@ namespace controls {
 
   minetest.register_on_joinplayer((player: ObjectRef) => {
     const gotten_control_module: Keys = player.get_player_control();
-    
   });
 
 
