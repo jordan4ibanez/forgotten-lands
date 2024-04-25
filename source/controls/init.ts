@@ -30,11 +30,41 @@ namespace controls {
     zoom: boolean = false;
   }
 
-  let repository: Map<string, PlayerControls> = new Map();
-  let onPress: ((player: ObjectRef) => void)[];
-  let onHold: ((player: ObjectRef) => void)[];
-  let onRelease: ((player: ObjectRef) => void)[];
+  // Little auto map population thing.
+  function generateKeyedMap(): Map<_Keys, ((player: ObjectRef) => void)[]> {
+    // Automatically populate the map.
+    let map = new Map();
+    for (let [key, _] of Object.entries(new PlayerControls()) as [keyof PlayerControls, any][]) {
+      map.set(key, []);
+    }
+    print(dump(map));
 
+    return map;
+  };
+
+  let repository: Map<string, PlayerControls> = new Map();
+
+  let onPress: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+
+  // let onHold: ((player: ObjectRef) => void)[];
+  // let onRelease: ((player: ObjectRef) => void)[];
+
+
+  // export function registerOnPress(fn: ((player: ObjectRef) => void)): void {
+  //   onPress.push(fn);
+  // }
+
+  // export function registerOnHold(fn: ((player: ObjectRef) => void)): void {
+  //   onHold.push(fn);
+  // }
+
+  // /**
+  //  * Register a callback to be run when a player releases a key.
+  //  * @param fn Closure.
+  //  */
+  // export function registerOnRelease(fn: ((player: ObjectRef) => void)): void {
+  //   onRelease.push(fn);
+  // }
 
 
   // Add player to the repository when they join.
