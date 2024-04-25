@@ -37,34 +37,48 @@ namespace controls {
     for (let [key, _] of Object.entries(new PlayerControls()) as [keyof PlayerControls, any][]) {
       map.set(key, []);
     }
-    print(dump(map));
-
     return map;
   };
 
   let repository: Map<string, PlayerControls> = new Map();
 
   let onPress: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+  let onHold: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+  let onRelease: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
 
-  // let onHold: ((player: ObjectRef) => void)[];
-  // let onRelease: ((player: ObjectRef) => void)[];
 
+  export function registerOnPress(keys: _Keys[], fn: ((player: ObjectRef) => void)): void {
+    // All these pushes will point to the same function memory address.
+    for (const key of keys) {
+      let funcArray = onPress.get(key);
+      if (funcArray == null) {
+        error("Tried to assign [on press] to key [" + key + "] which doesn't exist.");
+      }
+      funcArray.push(fn);
+    }
+  }
 
-  // export function registerOnPress(fn: ((player: ObjectRef) => void)): void {
-  //   onPress.push(fn);
-  // }
+  export function registerOnHold(keys: _Keys[], fn: ((player: ObjectRef) => void)): void {
+    // All these pushes will point to the same function memory address.
+    for (const key of keys) {
+      let funcArray = onHold.get(key);
+      if (funcArray == null) {
+        error("Tried to assign [on hold] to key [" + key + "] which doesn't exist.");
+      }
+      funcArray.push(fn);
+    }
+  }
 
-  // export function registerOnHold(fn: ((player: ObjectRef) => void)): void {
-  //   onHold.push(fn);
-  // }
-
-  // /**
-  //  * Register a callback to be run when a player releases a key.
-  //  * @param fn Closure.
-  //  */
-  // export function registerOnRelease(fn: ((player: ObjectRef) => void)): void {
-  //   onRelease.push(fn);
-  // }
+  export function registerOnRelease(keys: _Keys[], fn: ((player: ObjectRef) => void)): void {
+    // All these pushes will point to the same function memory address.
+    for (const key of keys) {
+      let funcArray = onRelease.get(key);
+      if (funcArray == null) {
+        error("Tried to assign [on release] to key [" + key + "] which doesn't exist.");
+      }
+      funcArray.push(fn);
+    }
+  }
 
 
   // Add player to the repository when they join.
