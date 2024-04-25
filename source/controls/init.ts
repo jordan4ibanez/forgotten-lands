@@ -2,7 +2,9 @@ namespace controls {
 
   const warning = utility.warning;
 
-  type Keys = _Keys;
+  const Keys = _Keys;
+
+  print("hi", Keys);
 
   /**
    * 
