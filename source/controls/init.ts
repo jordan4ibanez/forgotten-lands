@@ -14,31 +14,18 @@ namespace controls {
    * 
    */
 
-
-  class PlayerControls implements PlayerControlObject {
-    up: boolean = false;
+  class InputTimer {
     upTime: number;
-    down: boolean = false;
     downTime: number;
-    left: boolean = false;
     leftTime: number;
-    right: boolean = false;
     rightTime: number;
-    jump: boolean = false;
     jumpTime: number;
-    aux1: boolean = false;
     aux1Time: number;
-    sneak: boolean = false;
     sneakTime: number;
-    dig: boolean = false;
     digTime: number;
-    place: boolean = false;
     placeTime: number;
-    LMB: boolean = false;
     LMBTime: number;
-    RMB: boolean = false;
     RMBTime: number;
-    zoom: boolean = false;
     zoomTime: number;
     constructor() {
       const currentTime = minetest.get_us_time();
