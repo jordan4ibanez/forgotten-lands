@@ -150,6 +150,7 @@ namespace controls {
       controlState[key] = value;
     }
     // todo: do long press and whatnot.
+    // todo: work on timer elements here, probably needs a repository
   }
 
   // Poll each players inputs on every server step.
