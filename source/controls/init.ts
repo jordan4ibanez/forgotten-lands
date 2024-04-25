@@ -44,6 +44,21 @@ namespace controls {
     }
   }
 
+  class PlayerControls implements PlayerControlObject {
+    up: boolean = false;
+    down: boolean = false;
+    left: boolean = false;
+    right: boolean = false;
+    jump: boolean = false;
+    aux1: boolean = false;
+    sneak: boolean = false;
+    dig: boolean = false;
+    place: boolean = false;
+    LMB: boolean = false;
+    RMB: boolean = false;
+    zoom: boolean = false;
+  }
+
   // Little auto map population thing.
   function generateKeyedMap(): Map<_Keys, ((player: ObjectRef) => void)[]> {
     // Automatically populate the map.
