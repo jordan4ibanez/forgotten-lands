@@ -2,6 +2,8 @@ namespace controls {
 
   const warning = utility.warning;
 
+  type Keys = _Keys;
+
   /**
    * 
    * This was basically translated from this:

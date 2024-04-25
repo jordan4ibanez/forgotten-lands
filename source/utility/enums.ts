@@ -325,7 +325,7 @@ globalEnvironment["TexturePoolComponentFade"] = {
 /**
  * Available keyboard & mouse keys.
  */
-globalEnvironment["Keys"] = {
+globalEnvironment["_Keys"] = {
   up: "up",
   down: "down",
   left: "left",
@@ -338,4 +338,4 @@ globalEnvironment["Keys"] = {
   LMB: "LMB",
   RMB: "RMB",
   zoom: "zoom",
-}
+};

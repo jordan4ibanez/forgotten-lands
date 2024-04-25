@@ -1315,7 +1315,7 @@ declare global {
     zoom: boolean,
   }
 
-  enum Keys {
+  enum _Keys {
     up = "up",
     down = "down",
     left = "left",
