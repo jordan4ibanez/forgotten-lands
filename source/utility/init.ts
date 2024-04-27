@@ -141,4 +141,12 @@ namespace utility {
     // This only works on ANSI terminals, so sorry windows peoples.
     print(terminalColorize(result, 255, 165, 0));
   };
+
+  /**
+   * Run a function in a global step.
+   * @param func Function to be run on global step.
+   */
+  export function onStep(func: (delta: number) => void) {
+    minetest.register_globalstep(func);
+  }
 }
