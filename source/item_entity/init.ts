@@ -20,7 +20,7 @@ namespace builtinEntity {
       delete playerSoundBuffer[name];
     });
 
-    minetest.register_globalstep((delta: number) => {
+    utility.onStep((delta: number) => {
       for (const [name, remaining] of Object.entries(playerSoundBuffer)) {
         if (remaining <= 0) continue;
         const player = minetest.get_player_by_name(name);

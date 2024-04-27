@@ -76,7 +76,7 @@ namespace animationStation {
     bones: BoneRepository = new Map();
 
 
-  
+
 
     registerBones(meshName: string, bones: string[]): void {
       if (this.bones.has(meshName)) {
@@ -87,7 +87,7 @@ namespace animationStation {
     }
   }
 
-  let playerAnimationState: Map<string, PlayerAnimationState> = new Map<string, PlayerAnimationState>();
+  let playerAnimationState: Map<string, PlayerAnimationState> = new Map < string, PlayerAnimationState> ();
   let animationRepository = new AnimationRepository();
 
   //? Now we publicize the animationRepository as a functional interface.
@@ -254,7 +254,7 @@ namespace animationStation {
   /**
    * Finally, we make it function.
    */
-  minetest.register_globalstep((delta: number) => {
+  utility.onStep((delta: number) => {
     for (const player of minetest.get_connected_players()) {
       if (player == null) {
         warning("AnimationStation got a null player!");

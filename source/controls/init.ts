@@ -154,7 +154,7 @@ namespace controls {
   }
 
   // Poll each players inputs on every server step.
-  minetest.register_globalstep(() => {
+  utility.onStep(() => {
     for (let player of minetest.get_connected_players()) {
       pollPlayerControls(player);
     }

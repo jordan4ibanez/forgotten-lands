@@ -143,7 +143,7 @@ namespace animationStation {
   }
 
   //? We have to do this on step because the player is not an object.
-  minetest.register_globalstep((delta: number) => {
+  utility.onStep((delta: number) => {
     for (let player of minetest.get_connected_players()) {
       processPlayerAnimations(player, delta);
     }

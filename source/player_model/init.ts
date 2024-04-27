@@ -100,7 +100,7 @@ namespace playerModel {
 
   // // speed based animation
 
-  minetest.register_globalstep((_: number) => {
+  utility.onStep((_: number) => {
     for (const player of minetest.get_connected_players()) {
       let vel = player.get_velocity();
       let speed = vector.length(vel);
