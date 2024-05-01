@@ -1,7 +1,7 @@
 namespace controls {
 
   const warning = utility.warning;
-  const Keys = _Keys;
+  type Keys = _Keys;
 
   /**
    * 
@@ -162,6 +162,9 @@ namespace controls {
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
+
+    resetMemory();
+
     const name = player.get_player_name();
 
     const playerControl: PlayerControlObject = player.get_player_control();
@@ -176,6 +179,27 @@ namespace controls {
 
     // Now iterate key to values in the objects and clone them into the repository.
     for (let [key, value] of Object.entries(playerControl) as [keyof PlayerControls, boolean][]) {
+
+      // Memory has changed!
+      if (controlState[key] != value) {
+        // onPressed
+        if (value == true) {
+          print("onPress");
+        } else {
+          print("onRelease");
+        }
+      }
+
+      // onHold
+      if (value == true) {
+        const callbacks = onHold.get(key as Keys);
+        if (callbacks == null) {
+          error("Something went horribly wrong with the onHold " + key);
+        }
+        for (const callback of callbacks) {
+          callback(player);
+        }
+      }
       controlState[key] = value;
     }
 
