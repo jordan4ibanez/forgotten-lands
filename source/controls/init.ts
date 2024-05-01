@@ -213,9 +213,13 @@ namespace controls {
           if (callbacks == null) {
             error("Something went horribly wrong with the onRelease " + key);
           }
+          // Timer is the total time that the key was held down.
           for (const callback of callbacks) {
             callback(player, elapsedTime);
           }
+
+          // Timer is now ready to re-poll from the time that this key was released
+          timeState[key as keyof InputTimer] = currentTime;
         }
       }
 
