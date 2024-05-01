@@ -159,4 +159,14 @@ namespace utility {
   export function getTime(): number {
     return get_us_time();
   }
+
+  const get_connected_players = minetest.get_connected_players;
+
+  /**
+   * Get all players currently online.
+   * @returns Array of players currently online.
+   */
+  export function getPlayers(): ObjectRef[] {
+    return get_connected_players();
+  }
 }
