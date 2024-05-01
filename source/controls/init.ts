@@ -17,32 +17,32 @@ namespace controls {
    */
 
   class InputTimer {
-    upTime: number;
-    downTime: number;
-    leftTime: number;
-    rightTime: number;
-    jumpTime: number;
-    aux1Time: number;
-    sneakTime: number;
-    digTime: number;
-    placeTime: number;
-    LMBTime: number;
-    RMBTime: number;
-    zoomTime: number;
+    up: number;
+    down: number;
+    left: number;
+    right: number;
+    jump: number;
+    aux1: number;
+    sneak: number;
+    dig: number;
+    place: number;
+    LMB: number;
+    RMB: number;
+    zoom: number;
     constructor() {
       const currentTime = getTime();
-      this.upTime = currentTime;
-      this.downTime = currentTime;
-      this.leftTime = currentTime;
-      this.rightTime = currentTime;
-      this.jumpTime = currentTime;
-      this.aux1Time = currentTime;
-      this.sneakTime = currentTime;
-      this.digTime = currentTime;
-      this.placeTime = currentTime;
-      this.LMBTime = currentTime;
-      this.RMBTime = currentTime;
-      this.zoomTime = currentTime;
+      this.up = currentTime;
+      this.down = currentTime;
+      this.left = currentTime;
+      this.right = currentTime;
+      this.jump = currentTime;
+      this.aux1 = currentTime;
+      this.sneak = currentTime;
+      this.dig = currentTime;
+      this.place = currentTime;
+      this.LMB = currentTime;
+      this.RMB = currentTime;
+      this.zoom = currentTime;
     }
   }
 
@@ -144,17 +144,18 @@ namespace controls {
   });
 
 
-  registerOnHold([Keys.LMB], () => {
-    print("blorp");
-  });
+  //* debugging components
+  // registerOnHold([Keys.jump], (_, time: number) => {
+  //   print("holding since: " + time);
+  // });
 
-  registerOnPress([Keys.LMB], () => {
-    print("pressng");
-  });
+  // registerOnPress([Keys.jump], (_, time: number) => {
+  //   print("starting duration: " + time);
+  // });
 
-  registerOnRelease([Keys.LMB], () => {
-    print("Releasing");
-  });
+  // registerOnRelease([Keys.jump], (_, time: number) => {
+  //   print("Releasing total: " + time);
+  // });
 
 
   // Utility to poll player controls.
@@ -184,23 +185,19 @@ namespace controls {
 
     // Now iterate key to values in the objects and clone them into the repository.
     for (let [key, value] of Object.entries(playerControl) as [keyof PlayerControls, boolean][]) {
-
       // Memory has changed!
       if (controlState[key] != value) {
-
         // Get stateful change of this key action.
         const startTime: number = timeState[key as keyof InputTimer];
         if (startTime == null) {
           error("Null start time for key " + key + " for player " + name);
         }
-        const elapsedTime: number = currentTime - startTime / 1e6;
-
+        const elapsedTime: number = (currentTime - startTime) / 1e6;
         // onPressed
         if (value == true) {
           const callbacks = onPress.get(key as Keys);
           if (callbacks == null) {
             error("Something went horribly wrong with the onPress " + key);
-
           }
           // Elapsed time is from the last time the button was released. 
           for (const callback of callbacks) {
@@ -230,7 +227,7 @@ namespace controls {
         if (startTime == null) {
           error("Null start time for key " + key + " for player " + name);
         }
-        const elapsedTime: number = currentTime - startTime / 1e6;
+        const elapsedTime: number = (currentTime - startTime) / 1e6;
 
         const callbacks = onHold.get(key as Keys);
         if (callbacks == null) {
@@ -242,9 +239,6 @@ namespace controls {
       }
       controlState[key] = value;
     }
-
-    // todo: do long press and whatnot.
-    // todo: work on timer elements here, probably needs a repository
   }
 
   // Poll each players inputs on every server step.
