@@ -145,6 +145,14 @@ namespace controls {
     print("blorp");
   });
 
+  registerOnPress([Keys.LMB], () => {
+    print("pressng");
+  });
+
+  registerOnRelease([Keys.LMB], () => {
+    print("Releasing");
+  });
+
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
