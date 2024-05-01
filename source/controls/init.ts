@@ -69,7 +69,8 @@ namespace controls {
     return map;
   };
 
-  let repository: Map<string, PlayerControls> = new Map();
+  let keysRepository: Map<string, PlayerControls> = new Map();
+  let timeRepository: Map<string, InputTimer> = new Map();
 
   let onPress: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
   let onHold: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
@@ -127,22 +128,22 @@ namespace controls {
   // Add player to the repository when they join.
   minetest.register_on_joinplayer((player: ObjectRef) => {
     const name = player.get_player_name();
-    repository.set(name, new PlayerControls);
+    keysRepository.set(name, new PlayerControls);
   });
   // Remove player from the repository when they leave.
   minetest.register_on_leaveplayer((player: ObjectRef) => {
     const name = player.get_player_name();
-    repository.delete(name);
+    keysRepository.delete(name);
   });
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
     const name = player.get_player_name();
     const playerControl: PlayerControlObject = player.get_player_control();
-    let controlState: PlayerControls | undefined = repository.get(name);
+    let controlState: PlayerControls | undefined = keysRepository.get(name);
     if (controlState == null) {
       warning("Player control state did not exist. Creating and aborting.");
-      repository.set(name, new PlayerControls());
+      keysRepository.set(name, new PlayerControls());
       return;
     }
     // Now iterate key to values in the objects and clone them into the repository.
