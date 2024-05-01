@@ -193,16 +193,18 @@ namespace controls {
         if (startTime == null) {
           error("Null start time for key " + key + " for player " + name);
         }
+        const elapsedTime: number = currentTime - startTime / 1e6;
 
         // onPressed
         if (value == true) {
           const callbacks = onPress.get(key as Keys);
           if (callbacks == null) {
             error("Something went horribly wrong with the onPress " + key);
+
           }
-          // todo: reuse old timer to get elapsed time
+          // Elapsed time is from the last time the button was released. 
           for (const callback of callbacks) {
-            callback(player);
+            callback(player, elapsedTime);
           }
           // Timer is re-initialized to utilize in the callbacks.
           timeState[key as keyof InputTimer] = currentTime;
@@ -211,8 +213,6 @@ namespace controls {
           if (callbacks == null) {
             error("Something went horribly wrong with the onRelease " + key);
           }
-
-          const elapsedTime: number = currentTime - startTime / 1e6;
           for (const callback of callbacks) {
             callback(player, elapsedTime);
           }
@@ -221,12 +221,19 @@ namespace controls {
 
       // onHold
       if (value == true) {
+
+        const startTime: number = timeState[key as keyof InputTimer];
+        if (startTime == null) {
+          error("Null start time for key " + key + " for player " + name);
+        }
+        const elapsedTime: number = currentTime - startTime / 1e6;
+
         const callbacks = onHold.get(key as Keys);
         if (callbacks == null) {
           error("Something went horribly wrong with the onHold " + key);
         }
         for (const callback of callbacks) {
-          callback(player);
+          callback(player, elapsedTime);
         }
       }
       controlState[key] = value;
