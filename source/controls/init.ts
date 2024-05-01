@@ -57,6 +57,25 @@ namespace controls {
     LMB: boolean = false;
     RMB: boolean = false;
     zoom: boolean = false;
+
+    /**
+     * Flush out all values to false.
+     *! This is only to be used on the player control memory object.
+     */
+    reset(): void {
+      this.up = false;
+      this.down = false;
+      this.left = false;
+      this.right = false;
+      this.jump = false;
+      this.aux1 = false;
+      this.sneak = false;
+      this.dig = false;
+      this.place = false;
+      this.LMB = false;
+      this.RMB = false;
+      this.zoom = false;
+    }
   }
 
   // Little auto map population thing.
@@ -129,27 +148,36 @@ namespace controls {
   minetest.register_on_joinplayer((player: ObjectRef) => {
     const name = player.get_player_name();
     keysRepository.set(name, new PlayerControls);
+    timeRepository.set(name, new InputTimer());
   });
   // Remove player from the repository when they leave.
   minetest.register_on_leaveplayer((player: ObjectRef) => {
     const name = player.get_player_name();
     keysRepository.delete(name);
+    timeRepository.set(name, new InputTimer());
   });
+
+  let keyMemory = new PlayerControls();
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
     const name = player.get_player_name();
+
     const playerControl: PlayerControlObject = player.get_player_control();
+
     let controlState: PlayerControls | undefined = keysRepository.get(name);
+
     if (controlState == null) {
       warning("Player control state did not exist. Creating and aborting.");
       keysRepository.set(name, new PlayerControls());
       return;
     }
+
     // Now iterate key to values in the objects and clone them into the repository.
     for (let [key, value] of Object.entries(playerControl) as [keyof PlayerControls, boolean][]) {
       controlState[key] = value;
     }
+
     // todo: do long press and whatnot.
     // todo: work on timer elements here, probably needs a repository
   }
