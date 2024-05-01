@@ -1,6 +1,7 @@
 namespace controls {
 
   const warning = utility.warning;
+  const getTime = utility.getTime;
   type Keys = _Keys;
   const Keys = _Keys;
 
@@ -29,7 +30,7 @@ namespace controls {
     RMBTime: number;
     zoomTime: number;
     constructor() {
-      const currentTime = minetest.get_us_time();
+      const currentTime = getTime();
       this.upTime = currentTime;
       this.downTime = currentTime;
       this.leftTime = currentTime;
@@ -193,7 +194,7 @@ namespace controls {
             callback(player);
           }
           // Timer is initialized to utilize in the callbacks.
-          timeState[key as keyof InputTimer] = minetest.get_us_time();
+          timeState[key as keyof InputTimer] = getTime();
         } else {
           const callbacks = onRelease.get(key as Keys);
           if (callbacks == null) {
