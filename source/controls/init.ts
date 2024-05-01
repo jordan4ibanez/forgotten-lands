@@ -169,11 +169,20 @@ namespace controls {
       return;
     }
 
+    let timeState = timeRepository.get(name);
+
+    if (timeState == null) {
+      warning("Player time state did not exist. Creating and aborting.");
+      timeRepository.set(name, new InputTimer());
+      return;
+    }
+
     // Now iterate key to values in the objects and clone them into the repository.
     for (let [key, value] of Object.entries(playerControl) as [keyof PlayerControls, boolean][]) {
 
       // Memory has changed!
       if (controlState[key] != value) {
+
         // onPressed
         if (value == true) {
           const callbacks = onPress.get(key as Keys);
@@ -183,6 +192,8 @@ namespace controls {
           for (const callback of callbacks) {
             callback(player);
           }
+          // Timer is initialized to utilize in the callbacks.
+          timeState[key as keyof InputTimer] = minetest.get_us_time();
         } else {
           const callbacks = onRelease.get(key as Keys);
           if (callbacks == null) {
