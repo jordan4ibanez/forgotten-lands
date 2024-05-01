@@ -2,6 +2,7 @@ namespace controls {
 
   const warning = utility.warning;
   type Keys = _Keys;
+  const Keys = _Keys;
 
   /**
    * 
@@ -61,7 +62,7 @@ namespace controls {
 
 
   // Little auto map population thing.
-  function generateKeyedMap(): Map<_Keys, ((player: ObjectRef) => void)[]> {
+  function generateKeyedMap(): Map<Keys, ((player: ObjectRef) => void)[]> {
     // Automatically populate the map.
     let map = new Map();
     for (let [key, _] of Object.entries(new PlayerControls()) as [keyof PlayerControls, any][]) {
@@ -73,16 +74,16 @@ namespace controls {
   let keysRepository: Map<string, PlayerControls> = new Map();
   let timeRepository: Map<string, InputTimer> = new Map();
 
-  let onPress: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
-  let onHold: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
-  let onRelease: Map<_Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+  let onPress: Map<Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+  let onHold: Map<Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+  let onRelease: Map<Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
 
   /**
    * Register an on press callback for keys.
    * @param keys The keys in which you want your callback to run for.
    * @param callback The callback.
    */
-  export function registerOnPress(keys: _Keys[], callback: ((player: ObjectRef) => void)): void {
+  export function registerOnPress(keys: Keys[], callback: ((player: ObjectRef) => void)): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onPress.get(key);
@@ -98,7 +99,7 @@ namespace controls {
    * @param keys The keys in which you want your callback to run for.
    * @param callback The callback
    */
-  export function registerOnHold(keys: _Keys[], callback: ((player: ObjectRef) => void)): void {
+  export function registerOnHold(keys: Keys[], callback: ((player: ObjectRef) => void)): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onHold.get(key);
@@ -114,7 +115,7 @@ namespace controls {
    * @param keys The keys in which you want your callback to run for.
    * @param callback The callback.
    */
-  export function registerOnRelease(keys: _Keys[], callback: ((player: ObjectRef) => void)): void {
+  export function registerOnRelease(keys: Keys[], callback: ((player: ObjectRef) => void)): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onRelease.get(key);
@@ -140,6 +141,10 @@ namespace controls {
   });
 
 
+  registerOnHold([Keys.LMB], () => {
+    print("blorp");
+  });
+
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
@@ -163,9 +168,21 @@ namespace controls {
       if (controlState[key] != value) {
         // onPressed
         if (value == true) {
-          print("onPress");
+          const callbacks = onPress.get(key as Keys);
+          if (callbacks == null) {
+            error("Something went horribly wrong with the onPress " + key);
+          }
+          for (const callback of callbacks) {
+            callback(player);
+          }
         } else {
-          print("onRelease");
+          const callbacks = onRelease.get(key as Keys);
+          if (callbacks == null) {
+            error("Something went horribly wrong with the onRelease " + key);
+          }
+          for (const callback of callbacks) {
+            callback(player);
+          }
         }
       }
 
