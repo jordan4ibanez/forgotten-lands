@@ -188,6 +188,12 @@ namespace controls {
       // Memory has changed!
       if (controlState[key] != value) {
 
+        // Get stateful change of this key action.
+        const startTime: number = timeState[key as keyof InputTimer];
+        if (startTime == null) {
+          error("Null start time for key " + key + " for player " + name);
+        }
+
         // onPressed
         if (value == true) {
           const callbacks = onPress.get(key as Keys);
@@ -205,10 +211,7 @@ namespace controls {
           if (callbacks == null) {
             error("Something went horribly wrong with the onRelease " + key);
           }
-          const startTime: number = timeState[key as keyof InputTimer];
-          if (startTime == null) {
-            error("Null start time for key " + key + " for player " + name);
-          }
+
           const elapsedTime: number = currentTime - startTime / 1e6;
           for (const callback of callbacks) {
             callback(player, elapsedTime);
