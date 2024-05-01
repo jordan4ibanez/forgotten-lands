@@ -142,11 +142,21 @@ namespace utility {
     print(terminalColorize(result, 255, 165, 0));
   };
 
+  const register_globalstep = minetest.register_globalstep;
   /**
    * Run a function in a global step.
    * @param func Function to be run on global step.
    */
   export function onStep(func: (delta: number) => void) {
-    minetest.register_globalstep(func);
+    register_globalstep(func);
+  }
+
+  const get_us_time = minetest.get_us_time;
+  /**
+   * Get the US time. Somewhere in the US.
+   * @returns The time in the US.
+   */
+  export function getTime(): number {
+    return get_us_time();
   }
 }
