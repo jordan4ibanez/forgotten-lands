@@ -57,26 +57,8 @@ namespace controls {
     LMB: boolean = false;
     RMB: boolean = false;
     zoom: boolean = false;
-
-    /**
-     * Flush out all values to false.
-     *! This is only to be used on the player control memory object.
-     */
-    reset(): void {
-      this.up = false;
-      this.down = false;
-      this.left = false;
-      this.right = false;
-      this.jump = false;
-      this.aux1 = false;
-      this.sneak = false;
-      this.dig = false;
-      this.place = false;
-      this.LMB = false;
-      this.RMB = false;
-      this.zoom = false;
-    }
   }
+
 
   // Little auto map population thing.
   function generateKeyedMap(): Map<_Keys, ((player: ObjectRef) => void)[]> {
@@ -158,6 +140,25 @@ namespace controls {
   });
 
   let keyMemory = new PlayerControls();
+
+  /**
+ * Flush out all values to false.
+ *! This is only to be used on the player control memory object.
+ */
+  function resetMemory(): void {
+    keyMemory.up = false;
+    keyMemory.down = false;
+    keyMemory.left = false;
+    keyMemory.right = false;
+    keyMemory.jump = false;
+    keyMemory.aux1 = false;
+    keyMemory.sneak = false;
+    keyMemory.dig = false;
+    keyMemory.place = false;
+    keyMemory.LMB = false;
+    keyMemory.RMB = false;
+    keyMemory.zoom = false;
+  }
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
