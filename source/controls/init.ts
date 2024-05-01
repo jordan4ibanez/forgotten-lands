@@ -4,6 +4,7 @@ namespace controls {
   const getTime = utility.getTime;
   type Keys = _Keys;
   const Keys = _Keys;
+  const getPlayers = utility.getPlayers;
 
   /**
    * 
@@ -157,6 +158,45 @@ namespace controls {
   //   print("Releasing total: " + time);
   // });
 
+  /**
+   * Get if a key is down.
+   * @param player The player.
+   * @param key The key.
+   * @returns If they key is down.
+   */
+  export function isKeyDown(player: ObjectRef, key: Keys): boolean {
+    const name = player.get_player_name();
+    let controlState: PlayerControls | undefined = keysRepository.get(name);
+    if (controlState == null) {
+      warning("Player control state did not exist. Creating and aborting.");
+      keysRepository.set(name, new PlayerControls());
+      return false;
+    }
+    return controlState[key];
+  }
+
+  /**
+   * Get if any of a group of keys are down. Only one needs to be down to trigger true.
+   * @param player The player.
+   * @param keys The array of possible keys.
+   * @returns True if any of them are down, false if none.
+   */
+  export function areKeysDown(player: ObjectRef, keys: Keys[]): boolean {
+    const name = player.get_player_name();
+    let controlState: PlayerControls | undefined = keysRepository.get(name);
+    if (controlState == null) {
+      warning("Player control state did not exist. Creating and aborting.");
+      keysRepository.set(name, new PlayerControls());
+      return false;
+    }
+    for (const key of keys) {
+      if (controlState[key]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
@@ -243,7 +283,7 @@ namespace controls {
 
   // Poll each players inputs on every server step.
   utility.onStep(() => {
-    for (let player of minetest.get_connected_players()) {
+    for (let player of getPlayers()) {
       pollPlayerControls(player);
     }
   });
