@@ -139,31 +139,10 @@ namespace controls {
     timeRepository.set(name, new InputTimer());
   });
 
-  let keyMemory = new PlayerControls();
 
-  /**
- * Flush out all values to false.
- *! This is only to be used on the player control memory object.
- */
-  function resetMemory(): void {
-    keyMemory.up = false;
-    keyMemory.down = false;
-    keyMemory.left = false;
-    keyMemory.right = false;
-    keyMemory.jump = false;
-    keyMemory.aux1 = false;
-    keyMemory.sneak = false;
-    keyMemory.dig = false;
-    keyMemory.place = false;
-    keyMemory.LMB = false;
-    keyMemory.RMB = false;
-    keyMemory.zoom = false;
-  }
 
   // Utility to poll player controls.
   function pollPlayerControls(player: ObjectRef): void {
-
-    resetMemory();
 
     const name = player.get_player_name();
 
