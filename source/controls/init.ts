@@ -61,9 +61,11 @@ namespace controls {
     zoom: boolean = false;
   }
 
+  type keyCallback = (player: ObjectRef, elapsedTime: number) => void;
+
 
   // Little auto map population thing.
-  function generateKeyedMap(): Map<Keys, ((player: ObjectRef) => void)[]> {
+  function generateKeyedMap(): Map<Keys, keyCallback[]> {
     // Automatically populate the map.
     let map = new Map();
     for (let [key, _] of Object.entries(new PlayerControls()) as [keyof PlayerControls, any][]) {
@@ -75,16 +77,16 @@ namespace controls {
   let keysRepository: Map<string, PlayerControls> = new Map();
   let timeRepository: Map<string, InputTimer> = new Map();
 
-  let onPress: Map<Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
-  let onHold: Map<Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
-  let onRelease: Map<Keys, ((player: ObjectRef) => void)[]> = generateKeyedMap();
+  let onPress: Map<Keys, keyCallback[]> = generateKeyedMap();
+  let onHold: Map<Keys, keyCallback[]> = generateKeyedMap();
+  let onRelease: Map<Keys, keyCallback[]> = generateKeyedMap();
 
   /**
    * Register an on press callback for keys.
    * @param keys The keys in which you want your callback to run for.
    * @param callback The callback.
    */
-  export function registerOnPress(keys: Keys[], callback: ((player: ObjectRef) => void)): void {
+  export function registerOnPress(keys: Keys[], callback: keyCallback): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onPress.get(key);
@@ -100,7 +102,7 @@ namespace controls {
    * @param keys The keys in which you want your callback to run for.
    * @param callback The callback
    */
-  export function registerOnHold(keys: Keys[], callback: ((player: ObjectRef) => void)): void {
+  export function registerOnHold(keys: Keys[], callback: keyCallback): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onHold.get(key);
@@ -116,7 +118,7 @@ namespace controls {
    * @param keys The keys in which you want your callback to run for.
    * @param callback The callback.
    */
-  export function registerOnRelease(keys: Keys[], callback: ((player: ObjectRef) => void)): void {
+  export function registerOnRelease(keys: Keys[], callback: keyCallback): void {
     // All these pushes will point to the same function memory address.
     for (const key of keys) {
       let funcArray = onRelease.get(key);
@@ -178,6 +180,8 @@ namespace controls {
       return;
     }
 
+    const currentTime = getTime();
+
     // Now iterate key to values in the objects and clone them into the repository.
     for (let [key, value] of Object.entries(playerControl) as [keyof PlayerControls, boolean][]) {
 
@@ -190,18 +194,24 @@ namespace controls {
           if (callbacks == null) {
             error("Something went horribly wrong with the onPress " + key);
           }
+          // todo: reuse old timer to get elapsed time
           for (const callback of callbacks) {
             callback(player);
           }
-          // Timer is initialized to utilize in the callbacks.
-          timeState[key as keyof InputTimer] = getTime();
+          // Timer is re-initialized to utilize in the callbacks.
+          timeState[key as keyof InputTimer] = currentTime;
         } else {
           const callbacks = onRelease.get(key as Keys);
           if (callbacks == null) {
             error("Something went horribly wrong with the onRelease " + key);
           }
+          const startTime: number = timeState[key as keyof InputTimer];
+          if (startTime == null) {
+            error("Null start time for key " + key + " for player " + name);
+          }
+          const elapsedTime: number = currentTime - startTime / 1e6;
           for (const callback of callbacks) {
-            callback(player);
+            callback(player, elapsedTime);
           }
         }
       }
