@@ -287,13 +287,4 @@ namespace controls {
       pollPlayerControls(player);
     }
   });
-
-
-
-
-
-
-
-
-
 }
