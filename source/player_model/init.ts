@@ -131,7 +131,6 @@ namespace playerModel {
       let diggingTrigger = false;
 
       if (isKeyDown(player, Keys.dig)) {
-        setPlayerBoneAnimation(player, "Arm_Left", "");
         setPlayerBoneAnimation(player, "Arm_Right", "mine");
         setPlayerBoneAnimationSpeed(player, "Arm_Right", 7);
         diggingTrigger = true;
@@ -140,21 +139,21 @@ namespace playerModel {
       if (speed == 0) {
         setPlayerBoneAnimation(player, "Leg_Left", "");
         setPlayerBoneAnimation(player, "Leg_Right", "");
+        setPlayerBoneAnimation(player, "Arm_Left", "");
         if (!diggingTrigger) {
-          setPlayerBoneAnimation(player, "Arm_Left", "");
           setPlayerBoneAnimation(player, "Arm_Right", "");
         }
       } else {
         setPlayerBoneAnimation(player, "Leg_Left", "walk");
         setPlayerBoneAnimation(player, "Leg_Right", "walk");
+        setPlayerBoneAnimation(player, "Arm_Left", "walk");
         setPlayerBoneAnimationSpeed(player, "Leg_Left", speed);
         setPlayerBoneAnimationSpeed(player, "Leg_Right", speed);
+        setPlayerBoneAnimationSpeed(player, "Arm_Left", speed);
 
         if (!diggingTrigger) {
-          setPlayerBoneAnimationWithSync(player, "Arm_Left", "walk", "Leg_Left");
           setPlayerBoneAnimationWithSync(player, "Arm_Right", "walk", "Leg_Right");
           setPlayerBoneAnimationSpeed(player, "Arm_Right", speed);
-          setPlayerBoneAnimationSpeed(player, "Arm_Left", speed);
         }
       }
     }
