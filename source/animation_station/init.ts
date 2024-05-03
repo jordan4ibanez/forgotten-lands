@@ -90,6 +90,14 @@ namespace animationStation {
     return true;
   }
 
+  /**
+   * Set a bone animation which synchronizes with the current progress of another bone.
+   * @param player The player.
+   * @param boneName The bone name.
+   * @param animationName The animation name.
+   * @param boneToSyncWith The bone in which we are trying to synchronize with.
+   * @returns If the animation was applied or ignored.
+   */
   export function setPlayerBoneAnimationWithSync(player: ObjectRef, boneName: string, animationName: string, boneToSyncWith: string): boolean {
     // So first we just run the bone animation like normal.
     const applied = setPlayerBoneAnimation(player, boneName, animationName);
