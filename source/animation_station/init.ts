@@ -55,13 +55,21 @@ namespace animationStation {
   export function registerBones(modelName: string, bones: Set<string>): void {
     repository.registerBones(modelName, bones);
   }
-  export function setPlayerBoneAnimation(player: ObjectRef, boneName: string, animationName: string): void {
+
+  /**
+   * Set a player's bone animation.
+   * @param player The player.
+   * @param boneName The bone name.
+   * @param animationName The animation name.
+   * @returns If the animation was applied or it was simply ignored due to being the existing animation.
+   */
+  export function setPlayerBoneAnimation(player: ObjectRef, boneName: string, animationName: string): boolean {
     const name = player.get_player_name();
     let state = playerRepository.get(name);
     if (state == null) {
       warning("Player [" + name + "] does not exist in database! Creating and aborting.");
       playerRepository.set(name, new PlayerState());
-      return;
+      return false;
     }
 
     let boneState = state.boneStates.get(boneName);
@@ -71,13 +79,57 @@ namespace animationStation {
 
     // Allow functions to call this over and over without resetting.
     if (boneState.animation == animationName) {
-      return;
+      return false;
     }
 
     // Reset the state.
     boneState.animation = animationName;
     boneState.up = true;
     boneState.progress = 0;
+
+    return true;
+  }
+
+  export function setPlayerBoneAnimationWithSync(player: ObjectRef, boneName: string, animationName: string, boneToSyncWith: string): boolean {
+    // So first we just run the bone animation like normal.
+    const applied = setPlayerBoneAnimation(player, boneName, animationName);
+
+    if (!applied) {
+      return false;
+    }
+
+    // Now we need to synchronize with the goal bone.
+    const name = player.get_player_name();
+    let state = playerRepository.get(name);
+
+    if (state == null) {
+      warning("Player [" + name + "] does not exist in database! Creating and aborting.");
+      playerRepository.set(name, new PlayerState());
+      return false;
+    }
+
+    const syncBoneState = state.boneStates.get(boneToSyncWith);
+    if (syncBoneState == null) {
+      error("Tried to set synchronization animation for bone [" + boneToSyncWith + "] in character.b3d, which does not exist.");
+    }
+
+    const syncBoneProgress = syncBoneState.progress;
+    const syncBoneUp = syncBoneState.up;
+
+    // Now we need to update the actual bone's progress state to match.
+
+    let boneState = state.boneStates.get(boneName);
+
+    // This would have crashed earlier. But we will double check.
+    if (boneState == null) {
+      error("Tried to set synchronization animation for bone [" + boneName + "] in character.b3d, which does not exist. [flag 2]");
+    }
+
+    // Now we apply the synchronization.
+    boneState.progress = syncBoneProgress;
+    boneState.up = syncBoneUp;
+
+    return true;
   }
 
   export function setPlayerBoneAnimationSpeed(player: ObjectRef, boneName: string, animationSpeed: number): void {
