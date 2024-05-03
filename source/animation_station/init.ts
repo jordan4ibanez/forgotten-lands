@@ -140,6 +140,13 @@ namespace animationStation {
     return true;
   }
 
+  /**
+   * Set a player's bone animation speed.
+   * @param player The player.
+   * @param boneName The bone.
+   * @param animationSpeed The new animation speed.
+   * @returns Nothing.
+   */
   export function setPlayerBoneAnimationSpeed(player: ObjectRef, boneName: string, animationSpeed: number): void {
     const name = player.get_player_name();
     let state = playerRepository.get(name);
