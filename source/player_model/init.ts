@@ -5,6 +5,7 @@ namespace playerModel {
   const registerBones = animationStation.registerBones;
   const setPlayerBoneAnimation = animationStation.setPlayerBoneAnimation;
   const setPlayerBoneAnimationSpeed = animationStation.setPlayerBoneAnimationSpeed;
+  const setPlayerBoneAnimationWithSync = animationStation.setPlayerBoneAnimationWithSync;
   const create3d = vector.create3d;
   const Keys = _Keys;
   type Keys = _Keys;
@@ -148,9 +149,10 @@ namespace playerModel {
         setPlayerBoneAnimation(player, "Leg_Right", "walk");
         setPlayerBoneAnimationSpeed(player, "Leg_Left", speed);
         setPlayerBoneAnimationSpeed(player, "Leg_Right", speed);
+
         if (!diggingTrigger) {
-          setPlayerBoneAnimation(player, "Arm_Left", "walk");
-          setPlayerBoneAnimation(player, "Arm_Right", "walk");
+          setPlayerBoneAnimationWithSync(player, "Arm_Left", "walk", "Leg_Left");
+          setPlayerBoneAnimationWithSync(player, "Arm_Right", "walk", "Leg_Right");
           setPlayerBoneAnimationSpeed(player, "Arm_Right", speed);
           setPlayerBoneAnimationSpeed(player, "Arm_Left", speed);
         }
