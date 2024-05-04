@@ -2,6 +2,8 @@ namespace utility {
 
   export const textureSize = 16;
 
+  export const tickRate = 0.05;
+
   export function pixel(inputPixel: number): number {
     return (inputPixel / textureSize) - 0.5;
   }
