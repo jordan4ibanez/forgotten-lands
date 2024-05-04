@@ -2,6 +2,7 @@ namespace animationStation {
 
   const create3d = vector.create3d;
   const Quaternion = utility.Quaternion;
+  const tickRate = utility.tickRate;
 
   /**
    * And the final processor, this guy.
@@ -10,17 +11,17 @@ namespace animationStation {
     override: BoneOverride = {
       position: {
         vec: create3d(0, 0, 0),
-        interpolation: 0.05,
+        interpolation: tickRate,
         absolute: false
       },
       rotation: {
         vec: create3d(0, 0, 0),
-        interpolation: 0.05,
+        interpolation: tickRate,
         absolute: false
       },
       scale: {
         vec: create3d(1, 1, 1),
-        interpolation: 0.05,
+        interpolation: tickRate,
         absolute: true
       }
     };
