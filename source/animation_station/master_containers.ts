@@ -10,17 +10,17 @@ namespace animationStation {
     override: BoneOverride = {
       position: {
         vec: create3d(0, 0, 0),
-        interpolation: 0,
+        interpolate: 0.05,
         absolute: false
       },
       rotation: {
         vec: create3d(0, 0, 0),
-        interpolation: 0,
+        interpolate: 0.05,
         absolute: false
       },
       scale: {
         vec: create3d(1, 1, 1),
-        interpolation: 0,
+        interpolate: 0.05,
         absolute: true
       }
     };
