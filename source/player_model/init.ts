@@ -107,21 +107,15 @@ namespace playerModel {
 
 
   minetest.register_on_joinplayer((player: ObjectRef) => {
-
-    // const name = player.get_player_name();
-
     player.set_properties({
       mesh: "character.b3d",
       textures: ["character.png"],
       visual: EntityVisual.mesh,
       visual_size: vector.create3d(1, 1, 1)
     });
-
-
   });
 
-  // // speed based animation
-
+  // speed based animation
   utility.onStep((_: number) => {
     for (const player of minetest.get_connected_players()) {
       let vel = player.get_velocity();
