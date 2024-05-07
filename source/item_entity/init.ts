@@ -340,6 +340,21 @@ namespace builtinEntity {
     }
 
     on_step(delta: number, moveResult: MoveResult): void {
+
+      //! This is a temporary test to judge how efficient this would be to have a generic item entity attached to a player's hand.
+      //todo: probably should get rid of this garbage!
+
+      // const attachments = this.object.get_attach();
+
+      // print(dump(attachments));
+
+      // if (attachments == null) {
+      //   this.object.set_attach(minetest.get_player_by_name("singleplayer"), "Arm_Right", vector.create3d(), vector.create3d(), true);
+      // }
+
+      //! End test.
+
+
       const pos = this.object.get_pos();
 
       if (this.collected) {
