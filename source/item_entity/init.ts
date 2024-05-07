@@ -258,7 +258,7 @@ namespace builtinEntity {
 
       this.age += delta;
 
-      // A glitch occured. Extreme safety, had problems with this in previous iterations.
+      // A glitch occurred. Extreme safety, had problems with this in previous iterations.
       if (!this.collector) {
         this.object.remove();
         return;
