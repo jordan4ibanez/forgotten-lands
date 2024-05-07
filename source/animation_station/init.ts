@@ -4,6 +4,7 @@ namespace animationStation {
   const Quaternion = utility.Quaternion;
   const create3d = vector.create3d;
   const loadFiles = utility.loadFiles;
+  const fakeRef = utility.fakeRef;
 
   loadFiles(["master_containers"]);
 
@@ -216,5 +217,15 @@ namespace animationStation {
     }
   });
 
+  //! Begin AnimatedEntity!
+
+  /**
+   * AnimatedEntity class automatically gets animation handlers
+   * strapped into any child class for ease of use.
+   */
+  export class AnimatedEntity implements LuaEntity {
+    name: string = "Nothing";
+    object: ObjectRef = fakeRef();
+  }
 
 }
