@@ -27,7 +27,7 @@ cp game.conf forgotten_lands_release/game.conf
 echo "Finished blindly shoveling all build game components into the output directory!"
 
 echo "Creating a zip of the game!"
-zip -r forgotten_lands_release.zip forgotten_lands_release/
+zip -rq forgotten_lands_release.zip forgotten_lands_release/
 echo "Build created."
 
 echo "Creating a tar.gz of the game!"
