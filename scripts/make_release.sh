@@ -19,8 +19,8 @@ make build_linux
 echo "Blindly shoveling all built game components into the output directory!"
 mkdir forgotten_lands_release/mods/
 mkdir forgotten_lands_release/menu/
-cp --verbose -r mods/* forgotten_lands_release/mods/
-cp --verbose -r menu/* forgotten_lands_release/menu/
+cp -r mods/* forgotten_lands_release/mods/
+cp -r menu/* forgotten_lands_release/menu/
 cp readme.MD forgotten_lands_release/readme.MD
 cp LICENSE forgotten_lands_release/LICENSE
 cp game.conf forgotten_lands_release/game.conf
@@ -31,7 +31,7 @@ zip -r forgotten_lands_release.zip forgotten_lands_release/
 echo "Build created."
 
 echo "Creating a tar.gz of the game!"
-tar vczf forgotten_lands_release.tar.gz forgotten_lands_release/
+tar czf forgotten_lands_release.tar.gz forgotten_lands_release/
 echo "Build created."
 
 echo "Cleaning release folder."

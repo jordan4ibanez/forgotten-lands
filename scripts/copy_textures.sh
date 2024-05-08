@@ -6,5 +6,5 @@ mkdir mods/sharpik_texture_pack/textures/
 echo "Done."
 
 echo "Copying over texture files..."
-cp --verbose -r source/sharpik_texture_pack/textures/* mods/sharpik_texture_pack/textures/
+cp -r source/sharpik_texture_pack/textures/* mods/sharpik_texture_pack/textures/
 echo "Done."

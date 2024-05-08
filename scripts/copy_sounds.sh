@@ -5,5 +5,5 @@ mkdir mods/sounds/sounds/
 echo "Done."
 
 echo "Copying over the sound files..."
-cp --verbose -r source/sounds/sounds/* mods/sounds/sounds/
+cp -r source/sounds/sounds/* mods/sounds/sounds/
 echo "Done."
