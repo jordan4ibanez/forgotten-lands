@@ -1,4 +1,5 @@
 node_modules/
+# unfreeze me to make a release or else contentdb doesn't get an update lmao
 # mods/
 forgotten_lands_release/
 forgotten_lands_release.zip
