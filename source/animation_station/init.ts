@@ -244,6 +244,19 @@ namespace animationStation {
   export class AnimatedEntity implements LuaEntity {
     name: string = "Nothing";
     object: ObjectRef = fakeRef();
+
+    // Abstract members.
+    initial_properties?: ObjectProperties | undefined;
+    on_activate?(staticData: string, delta: number): void;
+    on_deactivate?(removal: boolean): void;
+    on_step?(delta: number, moveResult: MoveResult): void;
+    on_punch?(puncher: ObjectRef, timeFromLastPunch: number, toolCapabilities: ToolCapabilities, dir: Vec3, damage: number): void;
+    on_death?(killer: ObjectRef): void;
+    on_rightclick?(clicker: ObjectRef): void;
+    on_attach_child?(child: ObjectRef): void;
+    on_detach_child?(child: ObjectRef): void;
+    on_detach?(parent: ObjectRef): void;
+    get_staticdata?(): string;
   }
 
 }
