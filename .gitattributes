@@ -4,12 +4,20 @@
 .* export-ignore
 *.ts export-ignore
 
-source/ export-ignore
-possibly_to_be_used/ export-ignore
-MakeFile export-ignore
-install_npm_deps.sh export-ignore
-tsconfig.json export-ignore
-package.json export-ignore
-package-lock.json export-ignore
-meta.md export-ignore
-scripts/ export-ignore
+/source export-ignore
+
+/possibly_to_be_used export-ignore
+
+/MakeFile export-ignore
+
+/install_npm_deps.sh export-ignore
+
+/tsconfig.json export-ignore
+
+/package.json export-ignore
+
+/package-lock.json export-ignore
+
+/meta.md export-ignore
+
+/scripts export-ignore
