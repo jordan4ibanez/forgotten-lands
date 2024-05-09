@@ -10,6 +10,7 @@ namespace playerModel {
   const Keys = _Keys;
   type Keys = _Keys;
   const isKeyDown = controls.isKeyDown;
+  const setPlayerBoneRotation = animationStation.setPlayerBoneRotation;
 
   /*
   character.b3d bone documentation, tree view.
@@ -115,8 +116,11 @@ namespace playerModel {
     });
   });
 
+  // todo: Make this use less objects.
+
   // speed based animation
   utility.onStep((_: number) => {
+
     for (const player of minetest.get_connected_players()) {
       let vel = player.get_velocity();
       let speed = vector.length(vel);
@@ -150,6 +154,12 @@ namespace playerModel {
           setPlayerBoneAnimationSpeed(player, "Arm_Right", speed);
         }
       }
+
+      // Head bone.
+      const lookDir = player.get_look_vertical();
+      setPlayerBoneRotation(player, "Head", create3d(-lookDir, 0, 0));
+
+
     }
   });
 }
