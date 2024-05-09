@@ -3,3 +3,5 @@
 
 .* export-ignore
 *.ts export-ignore
+
+source export-ignore

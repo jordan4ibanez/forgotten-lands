@@ -10,8 +10,8 @@
     "LICENSE": true,
     //! Here starts things that probably shouldn't be hidden. :D
     "possibly_to_be_used/": true,
-    ".gitignore": true,
-    ".gitattributes": true,
+    // ".gitignore": true,
+    // ".gitattributes": true,
     "game.conf": true,
     "tsconfig.json": true,
     //? Don't disable this unless you feel like opening up this file in a text editor.
