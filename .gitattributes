@@ -8,7 +8,7 @@
 
 /possibly_to_be_used export-ignore
 
-/MakeFile export-ignore
+/Makefile export-ignore
 
 /install_npm_deps.sh export-ignore
 
