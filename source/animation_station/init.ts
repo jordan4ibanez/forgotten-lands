@@ -5,6 +5,7 @@ namespace animationStation {
   const create3d = vector.create3d;
   const loadFiles = utility.loadFiles;
   const fakeRef = utility.fakeRef;
+  const tickRate = utility.tickRate;
 
   loadFiles(["master_containers"]);
 
@@ -89,6 +90,22 @@ namespace animationStation {
     boneState.progress = 0;
 
     return true;
+  }
+
+  /**
+   * Set a player's bone rotation.
+   * @param player The player.
+   * @param boneName The bone.
+   * @param rotation The rotation (in radians).
+   */
+  export function setPlayerBoneRotation(player: ObjectRef, boneName: string, rotation: Vec3): void {
+    player.set_bone_override(boneName, {
+      rotation: {
+        vec: rotation,
+        interpolation: tickRate,
+        absolute: false
+      }
+    });
   }
 
   /**
