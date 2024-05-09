@@ -10,5 +10,5 @@ namespace mob {
     }
   }
 
-  minetest.registerTSEntity(Pig);
+  utility.registerTSEntity(Pig);
 }

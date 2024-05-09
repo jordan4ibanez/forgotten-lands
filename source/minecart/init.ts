@@ -13,5 +13,5 @@ namespace minecart {
     };
   }
 
-  minetest.registerTSEntity(MinecartEntity);
+  utility.registerTSEntity(MinecartEntity);
 }

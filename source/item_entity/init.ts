@@ -420,7 +420,7 @@ namespace builtinEntity {
   }
 
 
-  minetest.registerTSEntity(ItemEntity);
+  utility.registerTSEntity(ItemEntity);
 }
 
 // {

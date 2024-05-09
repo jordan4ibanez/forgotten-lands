@@ -318,8 +318,6 @@ interface minetest {
   sound_stop(handle: number): void;
   sound_fade(handle: number, step: number, gain: number): void;
 
-  registerTSEntity(clazz: { new(): LuaEntity; }): void;
-
   get_color_escape_sequence(color: string): string;
   colorize(color: string, message: string): string;
   get_background_escape_sequence(color: string): string;

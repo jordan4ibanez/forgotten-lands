@@ -86,7 +86,7 @@ namespace utility {
    * A bolt on to allow you to directly register MT lua entities as TS classes.
    * @param clazz Class definition.
    */
-  minetest.registerTSEntity = function (clazz: { new(): LuaEntity; }) {
+  export function registerTSEntity(clazz: { new(): LuaEntity; }) {
     let instance: LuaEntity = new clazz();
     // print(dump(instance))
     if (instance.name == null) {
