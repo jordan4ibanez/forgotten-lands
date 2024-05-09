@@ -92,6 +92,7 @@ namespace animationStation {
     return true;
   }
 
+  // todo: this is a hackjob and needs to be replaced with animation salt.
   /**
    * Set a player's bone rotation.
    * @param player The player.

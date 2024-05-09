@@ -156,9 +156,9 @@ namespace playerModel {
       }
 
       // Head bone.
+      // todo: this is a hackjob and needs to be replaced with animation salt.
       const lookDir = player.get_look_vertical();
       setPlayerBoneRotation(player, "Head", create3d(-lookDir, 0, 0));
-
 
     }
   });
