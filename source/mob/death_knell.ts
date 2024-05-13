@@ -5,7 +5,7 @@ namespace mob {
   /**
    * As per defined by lemente:
    * 
-   * [motivation needed] — Today at 6:06 PM
+   * [motivation needed] — 5/12/24 at 6:06 PM
    * (Invisible) Mob idea: pre-recorded laughing track that gets more and more distorted the angrier it gets.
    * 
    * Possible options:
