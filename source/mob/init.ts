@@ -14,6 +14,6 @@ namespace mob {
   }
 
 
-  loadFiles(["pig"]);
+  loadFiles(["pig", "death_knell"]);
 
 }
