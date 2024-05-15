@@ -1,7 +1,7 @@
 namespace textures {
-  // todo: unwrong this, wow
-  print("this is wrong ahhHHH");
-  print("SharpNet Photo Realism 64px texture pack brought to you by: Spharpik");
-  print("Link: https://content.minetest.net/packages/Sharpik/sharpnet_textures/");
-  print("License: GPL-3.0-only");
+  print("Texture pack: REFI Textures");
+  print("16px - Attempts to recapture the aesthetic of Minecraft, while improving upon visibility.");
+  print("Brought to you by: MysticTempest");
+  print("Link: https://content.minetest.net/packages/MysticTempest/refi_textures/");
+  print("License: CC-BY-SA-4.0");
 }
