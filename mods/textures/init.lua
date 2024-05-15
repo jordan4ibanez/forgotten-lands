@@ -68,11 +68,12 @@ local function __TS__SourceMapTraceBack(fileName, sourceMap)
     end
 end
 -- End of Lua Library inline imports
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["72"] = 1,["74"] = 3,["75"] = 4,["76"] = 5,["77"] = 6});
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["72"] = 1,["74"] = 2,["75"] = 3,["76"] = 4,["77"] = 5,["78"] = 6});
 textures = textures or ({})
 do
-    print("this is wrong ahhHHH")
-    print("SharpNet Photo Realism 64px texture pack brought to you by: Spharpik")
-    print("Link: https://content.minetest.net/packages/Sharpik/sharpnet_textures/")
-    print("License: GPL-3.0-only")
+    print("Texture pack: REFI Textures")
+    print("16px - Attempts to recapture the aesthetic of Minecraft, while improving upon visibility.")
+    print("Brought to you by: MysticTempest")
+    print("Link: https://content.minetest.net/packages/MysticTempest/refi_textures/")
+    print("License: CC-BY-SA-4.0")
 end
