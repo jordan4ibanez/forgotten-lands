@@ -36,13 +36,13 @@ No make automation scripts created for windows yet though. It's cause I'm very l
 
 ### Texture pack:
 
-https://content.minetest.net/packages/Sharpik/sharpnet_textures/
+https://content.minetest.net/packages/MysticTempest/refi_textures/
 
-SharpNet Photo Realism 64px
+Name: REFI Textures 
 
-Creator: Sharpik
+Creator: MysticTempest
 
-License: GPL-3.0-only
+License: CC-BY-SA-4.0
 
 ---
 
