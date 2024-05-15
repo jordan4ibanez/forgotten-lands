@@ -1,0 +1,450 @@
+#----------------------------------------------------------------
+# Minetest Game
+#----------------------------------------------------------------
+carts:cart inventory,wield carts_cart_wield.png
+
+
+# Fixes water opacity issues in v5.4
+default:water_source all default_water_source_animated.png^[opacity:191\^[verticalframe:32
+default:water_flowing special1,special2,special3,special4,special5,special6 default_water_flowing_animated.png^[opacity:191\^[verticalframe:16
+default:river_water_source all default_river_water_source_animated.png^[opacity:160\^[verticalframe:32
+default:river_water_flowing special1,special2,special3,special4,special5,special6 default_river_water_flowing_animated.png^[opacity:160\^[verticalframe:16
+
+
+farming:dry_soil all farming_dry_soil.png
+farming:dry_soil_wet all farming_dry_soil_wet.png
+tame_nodes:dry_soil all farming_dry_soil.png
+
+
+default:mese_post_light_acacia wield,sides mese_post_side_acacia.png^[makealpha:255,126,126
+default:mese_post_light_acacia_wood wield,sides mese_post_side_acacia.png^[makealpha:255,126,126
+default:mese_post_light_aspen_wood wield,sides mese_post_side_aspen.png^[makealpha:255,126,126
+default:mese_post_light_junglewood wield,sides mese_post_side_jungle.png^[makealpha:255,126,126
+default:mese_post_light_pine_wood wield,sides mese_post_side_pine.png^[makealpha:255,126,126
+default:mese_post_light wield,sides mese_post_side_oak.png^[makealpha:255,126,126
+
+
+
+#----------------------------------------------------------------
+# Mcimport Mods
+#----------------------------------------------------------------
+mesecons_detector:object_detector_off top mesecons_switch_side.png
+mesecons_detector:object_detector_off bottom mesecons_switch_side.png
+mesecons_detector:object_detector_on top mesecons_switch_side.png
+mesecons_detector:object_detector_on bottom mesecons_switch_side.png
+
+mesecons_detector:node_detector_off top mesecons_switch_side.png
+mesecons_detector:node_detector_off bottom mesecons_switch_side.png
+mesecons_detector:node_detector_off left mesecons_switch_side.png
+mesecons_detector:node_detector_off right mesecons_switch_side.png
+mesecons_detector:node_detector_off back mesecons_switch_side.png
+mesecons_detector:node_detector_on top mesecons_switch_side.png
+mesecons_detector:node_detector_on bottom mesecons_switch_side.png
+mesecons_detector:node_detector_on left mesecons_switch_side.png
+mesecons_detector:node_detector_on right mesecons_switch_side.png
+mesecons_detector:node_detector_on back mesecons_switch_side.png
+
+mesecons_movestones:sticky_movestone top jeija_movestone_side.png^(mesecons_glue.png^[opacity:127)
+mesecons_movestones:sticky_movestone bottom jeija_movestone_side.png^(mesecons_glue.png^[opacity:127)
+mesecons_movestones:sticky_movestone right jeija_sticky_movestone.png^[transformFX
+mesecons_movestones:sticky_movestone left jeija_sticky_movestone.png^[transformFX
+mesecons_movestones:sticky_movestone back jeija_sticky_movestone.png
+mesecons_movestones:sticky_movestone front jeija_sticky_movestone.png
+
+mesecons_movestones:sticky_movestone_vertical top jeija_movestone_side.png^(mesecons_glue.png^[opacity:127)
+mesecons_movestones:sticky_movestone_vertical bottom jeija_movestone_side.png^(mesecons_glue.png^[opacity:127)
+mesecons_movestones:sticky_movestone_vertical right jeija_sticky_movestone.png^[transformFXR90
+mesecons_movestones:sticky_movestone_vertical left jeija_sticky_movestone.png^[transformR90
+mesecons_movestones:sticky_movestone_vertical back jeija_sticky_movestone.png^[transformFXR90
+mesecons_movestones:sticky_movestone_vertical front jeija_sticky_movestone.png^[transformR90
+
+
+nether:lava_crust inventory nether_lava_crust_inventory.png
+
+xdecor:speaker left,right,back,top,bottom xdecor_speaker_side.png
+xdecor:radio left,right,back,top,bottom xdecor_speaker_side.png
+
+
+#----------------------------------------------------------------
+# Minetest Game Mods
+#----------------------------------------------------------------
+bees:extractor front bees_extractor.png
+bees:extractor top bees_extractor_front.png^[verticalframe:3]
+bees:hive_artificial left bees_side.png
+bees:hive_artificial right bees_side.png
+bees:hive_artificial back bees_side.png
+bees:hive_artificial top bees_top.png
+bees:hive_wild all wild_hive.png
+
+
+pipeworks:trashcan top pipeworks_trashcan_top.png
+
+
+#----------------------------------------------------------------
+# SkyFactory
+#----------------------------------------------------------------
+tinkering:part_builder top tinkering_part_builder_top.png
+tinkering:pattern_table top tinkering_pattern_table_top.png
+tinkering:tool_station top tinkering_tool_station_top.png
+
+
+farming:carrot_1 sides farming_carrot_1.png
+farming:carrot_2 sides farming_carrot_1.png
+farming:carrot_3 sides farming_carrot_2.png
+farming:carrot_4 sides farming_carrot_2.png
+farming:carrot_5 sides farming_carrot_2.png
+farming:carrot_6 sides farming_carrot_3.png
+farming:carrot_7 sides farming_carrot_3.png
+farming:carrot_8 sides farming_carrot_4.png
+
+
+
+#----------------------------------------------------------------
+# Mineclonia/Legacy MCL2:
+#----------------------------------------------------------------
+
+#-----------------------------------
+# MineClone2 large chest texture overrides for versions up to 0.70.0
+# For newer versions of MCL2; comment out, or delete this section.
+#
+# Mineclone2 chest textures - START.
+#-----------------------------------
+
+#mcl_chests:chest_left top mcl_chests_big_top_leftside.png
+#mcl_chests:chest_left bottom mcl_chests_big_top_leftside.png
+#mcl_chests:chest_left left mcl_chests_big_rightside.png^[transformFX
+#mcl_chests:chest_left right mcl_chests_big_rightside.png
+#mcl_chests:chest_left back mcl_chests_big_back_rightside.png
+#mcl_chests:chest_left front mcl_chests_big_front_leftside.png
+
+#mcl_chests:chest_right top mcl_chests_big_top_leftside.png^[transformFX
+#mcl_chests:chest_right bottom mcl_chests_big_top_leftside.png^[transformFX
+#mcl_chests:chest_right left mcl_chests_big_rightside.png^[transformFX
+#mcl_chests:chest_right right mcl_chests_big_rightside.png
+#mcl_chests:chest_right back mcl_chests_big_back_rightside.png^[transformFX
+#mcl_chests:chest_right front mcl_chests_big_front_rightside.png
+
+
+#mcl_chests:trapped_chest_left back mcl_chests_big_back_rightside.png
+#mcl_chests:trapped_chest_left front mcl_chests_big_front_leftside.png
+
+#mcl_chests:trapped_chest_right back mcl_chests_big_back_rightside.png^[transformFX
+#mcl_chests:trapped_chest_right front mcl_chests_big_front_rightside.png
+#---------------------------------
+# Mineclone2 chest textures - END.
+#---------------------------------
+
+
+# Fixes water opacity issues in v5.4
+mcl_core:water_source all default_water_source_animated.png^[opacity:179\^[verticalframe:80
+mcl_core:water_flowing special1,special2,special3,special4,special5,special6 default_water_flowing_animated.png^[opacity:179\^[verticalframe:64
+mclx_core:river_water_source all default_river_water_source_animated.png^[opacity:179\^[verticalframe:80
+mclx_core:river_water_flowing special1,special2,special3,special4,special5,special6 default_river_water_flowing_animated.png^[opacity:179\^[verticalframe:64
+
+
+mcl_barrels:barrel_closed top mcl_barrels_barrel_top.png
+
+mcl_beacons:beacon_beam all mcl_beacons_beam_base.png
+
+
+#-------------------------------------------
+# Mineclone2 bed inventory textures - START.
+# Override fixes for MCL2 version 0.80
+#-------------------------------------------
+mcl_beds:bed_black_bottom wield,inventory mcl_beds_bed_black_inv.png
+mcl_beds:bed_blue_bottom wield,inventory mcl_beds_bed_blue_inv.png
+mcl_beds:bed_brown_bottom wield,inventory mcl_beds_bed_brown_inv.png
+mcl_beds:bed_cyan_bottom wield,inventory mcl_beds_bed_cyan_inv.png
+mcl_beds:bed_green_bottom wield,inventory mcl_beds_bed_green_inv.png
+mcl_beds:bed_grey_bottom wield,inventory mcl_beds_bed_grey_inv.png
+mcl_beds:bed_light_blue_bottom wield,inventory mcl_beds_bed_light_blue_inv.png
+mcl_beds:bed_lime_bottom wield,inventory mcl_beds_bed_lime_inv.png
+mcl_beds:bed_magenta_bottom wield,inventory mcl_beds_bed_magenta_inv.png
+mcl_beds:bed_orange_bottom wield,inventory mcl_beds_bed_orange_inv.png
+mcl_beds:bed_pink_bottom wield,inventory mcl_beds_bed_pink_inv.png
+mcl_beds:bed_purple_bottom wield,inventory mcl_beds_bed_purple_inv.png
+mcl_beds:bed_red_bottom wield,inventory mcl_beds_bed_red_inv.png
+mcl_beds:bed_silver_bottom wield,inventory mcl_beds_bed_silver_inv.png
+mcl_beds:bed_white_bottom wield,inventory mcl_beds_bed_white_inv.png
+mcl_beds:bed_yellow_bottom wield,inventory mcl_beds_bed_yellow_inv.png
+#-------------------------------------------
+# Mineclone2 bed inventory textures - END.
+#-------------------------------------------
+
+
+mcl_blackstone:nether_gold all mcl_nether_netherrack.png^mcl_nether_gold_ore.png
+
+mcl_compass:lodestone sides lodestone_side.png
+
+mcl_core:apple_gold_enchanted inventory,wield mcl_core_apple_golden_enchanted.png
+
+mcl_crimson:stripped_warped_hyphae top,bottom stripped_warped_top.png
+mcl_crimson:stripped_warped_hyphae sides stripped_warped_side.png
+mcl_crimson:stripped_warped_hyphae_bark all stripped_warped_side.png
+mcl_crimson:stripped_crimson_hyphae top,bottom stripped_crimson_top.png
+mcl_crimson:stripped_crimson_hyphae sides stripped_crimson_side.png
+mcl_crimson:stripped_crimson_hyphae_bark all stripped_crimson_side.png
+
+#-------------------------------------------
+# Mineclonia dye texture fixes - START.
+# Override fixes for MCLA
+#-------------------------------------------
+mcl_dyes:black inventory,wield mcl_dye_black.png
+mcl_dyes:blue inventory,wield mcl_dye_blue.png
+mcl_dyes:brown inventory,wield mcl_dye_brown.png
+mcl_dyes:cyan inventory,wield mcl_dye_cyan.png
+mcl_dyes:green inventory,wield mcl_dye_dark_green.png
+mcl_dyes:dark_green inventory,wield mcl_dye_dark_green.png
+mcl_dyes:grey inventory,wield mcl_dye_dark_grey.png
+mcl_dyes:dark_grey inventory,wield mcl_dye_dark_grey.png
+mcl_dyes:lightblue inventory,wield mcl_dye_light_blue.png
+mcl_dyes:light_blue inventory,wield mcl_dye_light_blue.png
+mcl_dyes:lime inventory,wield mcl_dye_lime.png
+mcl_dyes:magenta inventory,wield mcl_dye_magenta.png
+mcl_dyes:orange inventory,wield mcl_dye_orange.png
+mcl_dyes:pink inventory,wield mcl_dye_pink.png
+mcl_dyes:violet inventory,wield mcl_dye_violet.png
+mcl_dyes:purple inventory,wield mcl_dye_violet.png
+mcl_dyes:red inventory,wield mcl_dye_red.png
+mcl_dyes:silver inventory,wield mcl_dye_grey.png
+mcl_dyes:yellow inventory,wield mcl_dye_yellow.png
+mcl_dyes:white inventory,wield mcl_dye_white.png
+#-------------------------------------------
+# Mineclonia dye texture fixes - END.
+#-------------------------------------------
+
+
+# Fix MineClone2 wieldview breakage.
+mcl_fishing:fishing_rod wield mcl_fishing_fishing_rod.png^[transformR270
+mcl_mobitems:carrot_on_a_stick wield mcl_mobitems_carrot_on_a_stick.png^[transformR270
+mcl_mobitems:warped_fungus_on_a_stick wield mcl_mobitems_warped_fungus_on_a_stick.png^[transformR270
+mcl_sus_nodes:brush wield mcl_sus_nodes_brush.png^[transformR270
+
+
+mcl_furnaces:furnace_active front default_furnace_front_active.png^[verticalframe:8
+
+mcl_beehives:beehive top mcl_beehives_beehive_top.png
+mcl_beehives:beehive_1 top mcl_beehives_beehive_top.png
+mcl_beehives:beehive_2 top mcl_beehives_beehive_top.png
+mcl_beehives:beehive_3 top mcl_beehives_beehive_top.png
+mcl_beehives:beehive_4 top mcl_beehives_beehive_top.png
+mcl_beehives:beehive_5 top mcl_beehives_beehive_top.png
+mcl_honey:honey_block all mcl_honey_block_side.png
+
+
+mcl_portals:end_portal_frame back mcl_portals_endframe_back.png
+mcl_portals:end_portal_frame_eye back mcl_portals_endframe_eye_back.png
+
+mcl_pottery_sherds:pot inventory,wield mcl_pottery_decorated_pot.png
+
+
+mcl_ocean:kelp_dirt all default_dirt.png^sea_decor_node_grass.png
+mcl_ocean:kelp_sand all default_sand.png^sea_decor_node_grass.png
+mcl_ocean:seagrass_dirt all default_dirt.png^sea_decor_node_grass.png
+mcl_ocean:seagrass_sand all default_sand.png^sea_decor_node_grass.png
+
+
+mcl_campfires:campfire inventory mcl_campfires_unlit_campfire_inv.png
+mcl_campfires:soul_campfire inventory mcl_campfires_unlit_campfire_inv.png
+
+
+mcl_cartography_table:cartography_table top mcl_cartography_table_top.png
+mcl_cartography_table:cartography_table front mcl_cartography_table_front.png
+mcl_cartography_table:cartography_table left mcl_cartography_table_left.png
+mcl_cartography_table:cartography_table right mcl_cartography_table_right.png
+mcl_cartography_table:cartography_table back mcl_cartography_table_back.png
+mcl_cartography_table:cartography_table bottom mcl_cartography_table_bottom.png
+mcl_fletching_table:fletching_table top mcl_fletching_table_top.png
+mcl_fletching_table:fletching_table front mcl_fletching_table_front.png
+mcl_fletching_table:fletching_table left mcl_fletching_table_left.png
+mcl_fletching_table:fletching_table right mcl_fletching_table_right.png
+mcl_fletching_table:fletching_table back mcl_fletching_table_back.png
+mcl_fletching_table:fletching_table bottom mcl_fletching_table_bottom.png
+mcl_loom:loom top mcl_loom_top.png
+mcl_loom:loom front mcl_loom_front.png
+mcl_loom:loom left mcl_loom_left.png
+mcl_loom:loom right mcl_loom_right.png
+mcl_loom:loom back mcl_loom_back.png
+mcl_loom:loom bottom mcl_loom_bottom.png
+
+
+# Override fixes for MCL2 version 0.81
+mcl_itemframes:item_frame inventory,wield mcl_itemframes_item_frame_inv.png
+mcl_itemframes:glow_item_frame inventory,wield mcl_itemframes_glow_item_frame_inv.png
+
+
+mcl_scaffolding:scaffolding_horizontal top mcl_scaffolding_scaffolding_top.png
+
+#--------------------------------------
+# Mineclone2 sign textures - START.
+# Override fixes for MCL2 version 0.80
+#--------------------------------------
+mcl_signs:wall_sign inventory,wield mcl_signs_inv_wood.png
+mcl_signs:wall_sign_acaciawood inventory,wield mcl_signs_inv_acacia.png
+mcl_signs:wall_sign_birchwood inventory,wield mcl_signs_inv_birch.png
+mcl_signs:wall_sign_darkwood inventory,wield mcl_signs_inv_darkoak.png
+mcl_signs:wall_sign_junglewood inventory,wield mcl_signs_inv_jungle.png
+mcl_signs:wall_sign_mangrove_wood inventory,wield mcl_signs_inv_mangrove.png
+mcl_signs:wall_sign_sprucewood inventory,wield mcl_signs_inv_spruce.png
+mcl_signs:wall_sign_crimson_hyphae_wood inventory,wield mcl_signs_inv_crimson.png
+mcl_signs:wall_sign_warped_hyphae_wood inventory,wield mcl_signs_inv_warped.png
+
+mcl_signs:wall_sign all mcl_signs_sign.png
+mcl_signs:wall_sign_acaciawood all mcl_signs_sign_acacia.png
+mcl_signs:wall_sign_birchwood all mcl_signs_sign_birch.png
+mcl_signs:wall_sign_darkwood all mcl_signs_sign_darkoak.png
+mcl_signs:wall_sign_junglewood all mcl_signs_sign_jungle.png
+mcl_signs:wall_sign_mangrove_wood all mcl_signs_sign_mangrove.png
+mcl_signs:wall_sign_sprucewood all mcl_signs_sign_spruce.png
+mcl_signs:wall_sign_crimson_hyphae_wood all mcl_signs_sign_crimson.png
+mcl_signs:wall_sign_warped_hyphae_wood all mcl_signs_sign_warped.png
+
+
+mcl_signs:standing_sign all mcl_signs_sign.png
+mcl_signs:standing_sign_acaciawood all mcl_signs_sign_acacia.png
+mcl_signs:standing_sign_birchwood all mcl_signs_sign_birch.png
+mcl_signs:standing_sign_darkwood all mcl_signs_sign_darkoak.png
+mcl_signs:standing_sign_junglewood all mcl_signs_sign_jungle.png
+mcl_signs:standing_sign_mangrove_wood all mcl_signs_sign_mangrove.png
+mcl_signs:standing_sign_sprucewood all mcl_signs_sign_spruce.png
+mcl_signs:standing_sign_crimson_hyphae_wood all mcl_signs_sign_crimson.png
+mcl_signs:standing_sign_warped_hyphae_wood all mcl_signs_sign_warped.png
+
+mcl_signs:standing_sign22_5_acaciawood all mcl_signs_sign_acacia.png
+mcl_signs:standing_sign22_5_birchwood all mcl_signs_sign_birch.png
+mcl_signs:standing_sign22_5_darkwood all mcl_signs_sign_darkoak.png
+mcl_signs:standing_sign22_5_junglewood all mcl_signs_sign_jungle.png
+mcl_signs:standing_sign22_5_mangrove_wood all mcl_signs_sign_mangrove.png
+mcl_signs:standing_sign22_5_sprucewood all mcl_signs_sign_spruce.png
+mcl_signs:standing_sign22_5_crimson_hyphae_wood all mcl_signs_sign_crimson.png
+mcl_signs:standing_sign22_5_warped_hyphae_wood all mcl_signs_sign_warped.png
+
+mcl_signs:standing_sign45_acaciawood all mcl_signs_sign_acacia.png
+mcl_signs:standing_sign45_birchwood all mcl_signs_sign_birch.png
+mcl_signs:standing_sign45_darkwood all mcl_signs_sign_darkoak.png
+mcl_signs:standing_sign45_junglewood all mcl_signs_sign_jungle.png
+mcl_signs:standing_sign45_mangrove_wood all mcl_signs_sign_mangrove.png
+mcl_signs:standing_sign45_sprucewood all mcl_signs_sign_spruce.png
+mcl_signs:standing_sign45_crimson_hyphae_wood all mcl_signs_sign_crimson.png
+mcl_signs:standing_sign45_warped_hyphae_wood all mcl_signs_sign_warped.png
+
+mcl_signs:standing_sign67_5_acaciawood all mcl_signs_sign_acacia.png
+mcl_signs:standing_sign67_5_birchwood all mcl_signs_sign_birch.png
+mcl_signs:standing_sign67_5_darkwood all mcl_signs_sign_darkoak.png
+mcl_signs:standing_sign67_5_junglewood all mcl_signs_sign_jungle.png
+mcl_signs:standing_sign67_5_mangrove_wood all mcl_signs_sign_mangrove.png
+mcl_signs:standing_sign67_5_sprucewood all mcl_signs_sign_spruce.png
+mcl_signs:standing_sign67_5_crimson_hyphae_wood all mcl_signs_sign_crimson.png
+mcl_signs:standing_sign67_5_warped_hyphae_wood all mcl_signs_sign_warped.png
+
+#-------------------------------------
+# MCLA sign fixes:
+#-------------------------------------
+mcl_signs:wall_sign_cherry_blossom inventory,wield mcl_signs_inv_cherry.png
+mcl_signs:wall_sign_cherry_blossom all mcl_signs_sign_cherry.png
+mcl_signs:standing_sign_cherry_blossom all mcl_signs_sign_cherry.png
+mcl_signs:standing_sign22_5_cherry_blossom all mcl_signs_sign_cherry.png
+mcl_signs:standing_sign45_cherry_blossom all mcl_signs_sign_cherry.png
+mcl_signs:standing_sign67_5_cherry_blossom all mcl_signs_sign_cherry.png
+
+mcl_signs:wall_sign_bamboo inventory,wield mcl_bamboo_bamboo_sign_wield.png
+mcl_signs:wall_sign_bamboo all mcl_bamboo_bamboo_sign.png
+mcl_signs:standing_sign_bamboo all mcl_bamboo_bamboo_sign.png
+mcl_signs:standing_sign22_5_bamboo all mcl_bamboo_bamboo_sign.png
+mcl_signs:standing_sign45_bamboo all mcl_bamboo_bamboo_sign.png
+mcl_signs:standing_sign67_5_bamboo all mcl_bamboo_bamboo_sign.png
+
+mcl_signs:wall_sign_oak inventory,wield mcl_signs_inv_wood.png
+mcl_signs:wall_sign_acacia inventory,wield mcl_signs_inv_acacia.png
+mcl_signs:wall_sign_birch inventory,wield mcl_signs_inv_birch.png
+mcl_signs:wall_sign_dark_oak inventory,wield mcl_signs_inv_darkoak.png
+mcl_signs:wall_sign_jungle inventory,wield mcl_signs_inv_jungle.png
+mcl_signs:wall_sign_mangrove inventory,wield mcl_signs_inv_mangrove.png
+mcl_signs:wall_sign_spruce inventory,wield mcl_signs_inv_spruce.png
+mcl_signs:wall_sign_crimson inventory,wield mcl_signs_inv_crimson.png
+mcl_signs:wall_sign_warped inventory,wield mcl_signs_inv_warped.png
+#-------------------------------------
+# Mineclone2 sign textures - END.
+#-------------------------------------
+
+
+#--------------------------------------
+# Mineclone2 torch textures - START.
+# Override fixes for MCL2 version 0.80
+#--------------------------------------
+mcl_torches:torch all mcl_torch_on_floor_animated.png
+mcl_torches:torch_wall all mcl_torch_on_floor_animated.png
+mcl_blackstone:soul_torch all mcl_soultorch_on_floor_animated.png
+mcl_blackstone:soul_torch_wall all mcl_soultorch_on_floor_animated.png
+#-------------------------------------
+# Mineclone2 torch textures - END.
+#-------------------------------------
+
+mesecons_commandblock:commandblock_on all jeija_commandblock_on.png
+mesecons_lightstone:lightstone_off all redstone_lamp_off.png
+mesecons_lightstone:lightstone_on all redstone_lamp_on.png
+
+
+#-------------------------------------
+# Mineclone2 mob egg textures - START.
+# Override fixes for MCL2 version 0.80
+#-------------------------------------
+mobs_mc:bat wield,inventory mobs_mc_spawn_icon_bat.png
+mobs_mc:blaze wield,inventory mobs_mc_spawn_icon_blaze.png
+mobs_mc:cave_spider wield,inventory mobs_mc_spawn_icon_cave_spider.png
+mobs_mc:chicken wield,inventory mobs_mc_spawn_icon_chicken.png
+mobs_mc:cod wield,inventory extra_mobs_spawn_icon_cod.png
+mobs_mc:cow wield,inventory mobs_mc_spawn_icon_cow.png
+mobs_mc:creeper wield,inventory mobs_mc_spawn_icon_creeper.png
+mobs_mc:dolphin wield,inventory extra_mobs_spawn_icon_dolphin.png
+mobs_mc:donkey wield,inventory mobs_mc_spawn_icon_donkey.png
+mobs_mc:enderman wield,inventory mobs_mc_spawn_icon_enderman.png
+mobs_mc:endermite wield,inventory mobs_mc_spawn_icon_endermite.png
+mobs_mc:evoker wield,inventory mobs_mc_spawn_icon_evoker.png
+mobs_mc:ghast wield,inventory mobs_mc_spawn_icon_ghast.png
+mobs_mc:guardian wield,inventory mobs_mc_spawn_icon_guardian.png
+mobs_mc:guardian_elder wield,inventory mobs_mc_spawn_icon_guardian_elder.png
+mobs_mc:horse wield,inventory mobs_mc_spawn_icon_horse.png
+mobs_mc:husk wield,inventory mobs_mc_spawn_icon_husk.png
+mobs_mc:illusioner wield,inventory mobs_mc_spawn_icon_illusioner.png
+mobs_mc:iron_golem wield,inventory mobs_mc_spawn_icon_iron_golem.png
+mobs_mc:killer_bunny wield,inventory mobs_mc_spawn_icon_killer_rabbit.png
+mobs_mc:llama wield,inventory mobs_mc_spawn_icon_llama.png
+mobs_mc:magma_cube_big wield,inventory mobs_mc_spawn_icon_magmacube.png
+mobs_mc:mooshroom wield,inventory mobs_mc_spawn_icon_mooshroom.png
+mobs_mc:mule wield,inventory mobs_mc_spawn_icon_mule.png
+mobs_mc:ocelot wield,inventory mobs_mc_spawn_icon_cat.png
+mobs_mc:parrot wield,inventory mobs_mc_spawn_icon_parrot.png
+mobs_mc:pig wield,inventory mobs_mc_spawn_icon_pig.png
+mobs_mc:pigman wield,inventory mobs_mc_spawn_icon_zombie_pigman.png
+mobs_mc:pillager wield,inventory mobs_mc_spawn_icon_pillager.png
+mobs_mc:polar_bear wield,inventory mobs_mc_spawn_icon_polarbear.png
+mobs_mc:rabbit wield,inventory mobs_mc_spawn_icon_rabbit.png
+mobs_mc:salmon wield,inventory extra_mobs_spawn_icon_salmon.png
+mobs_mc:sheep wield,inventory mobs_mc_spawn_icon_sheep.png
+mobs_mc:shulker wield,inventory mobs_mc_spawn_icon_shulker.png
+mobs_mc:silverfish wield,inventory mobs_mc_spawn_icon_silverfish.png
+mobs_mc:skeleton wield,inventory mobs_mc_spawn_icon_skeleton.png
+mobs_mc:skeleton_horse wield,inventory mobs_mc_spawn_icon_horse_skeleton.png
+mobs_mc:slime_big wield,inventory mobs_mc_spawn_icon_slime.png
+mobs_mc:snowman wield,inventory mobs_mc_spawn_icon_snowman.png
+mobs_mc:spider wield,inventory mobs_mc_spawn_icon_spider.png
+mobs_mc:squid wield,inventory mobs_mc_spawn_icon_squid.png
+mobs_mc:stray wield,inventory mobs_mc_spawn_icon_stray.png
+mobs_mc:tropical_fish wield,inventory extra_mobs_spawn_icon_tropical_fish.png
+mobs_mc:vex wield,inventory mobs_mc_spawn_icon_vex.png
+mobs_mc:villager wield,inventory mobs_mc_spawn_icon_villager.png
+mobs_mc:villager_zombie wield,inventory mobs_mc_spawn_icon_zombie_villager.png
+mobs_mc:vindicator wield,inventory mobs_mc_spawn_icon_vindicator.png
+mobs_mc:witherskeleton wield,inventory mobs_mc_spawn_icon_witherskeleton.png
+mobs_mc:wolf wield,inventory mobs_mc_spawn_icon_wolf.png
+mobs_mc:zombie wield,inventory mobs_mc_spawn_icon_zombie.png
+mobs_mc:witch wield,inventory mobs_mc_spawn_icon_witch.png
+mobs_mc:enderdragon wield,inventory mobs_mc_spawn_icon_dragon.png
+mobs_mc:wither wield,inventory mobs_mc_spawn_icon_wither.png
+mobs_mc:glow_squid wield,inventory extra_mobs_spawn_icon_glow_squid.png
+mobs_mc:bee wield,inventory mobs_mc_spawn_icon_bee.png
+#-------------------------------------
+# Mineclone2 mob egg textures - END.
+#-------------------------------------
+
