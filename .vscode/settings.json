@@ -7,7 +7,7 @@
     "menu/": true,
     "package.json": true,
     "package-lock.json": true,
-    "LICENSE": true,
+    // "LICENSE": true,
     //! Here starts things that probably shouldn't be hidden. :D
     "possibly_to_be_used/": true,
     // ".gitignore": true,
