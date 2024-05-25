@@ -559,6 +559,7 @@ declare global {
     place?: SimpleSoundSpec;
     place_failed?: SimpleSoundSpec;
     fall?: SimpleSoundSpec;
+    break?: SimpleSoundSpec;
   }
 
   interface ItemDropSpec {
