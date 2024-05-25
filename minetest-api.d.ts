@@ -440,6 +440,15 @@ declare global {
     fade?: number;
   }
 
+  /**
+   * I'm sure this can be used for something.
+   */
+  interface ComplexSoundSpec extends SimpleSoundSpec {
+    randomizePitch?: boolean,
+    min?: number;
+    max?: number;
+  }
+
   interface SoundParameterTable extends SimpleSoundSpec {
     start_time?: number;
     loop?: boolean;
