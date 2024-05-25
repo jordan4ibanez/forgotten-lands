@@ -1,0 +1,3 @@
+namespace sounds {
+  print("Heblo")
+}

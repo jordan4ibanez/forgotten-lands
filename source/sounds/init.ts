@@ -1,5 +1,7 @@
 namespace sounds {
 
+  const loadFiles = utility.loadFiles;
+
   export function grass(spec?: NodeSoundSpec): NodeSoundSpec {
     if (spec == null) {
       spec = {};
@@ -98,4 +100,6 @@ namespace sounds {
     spec.placed = spec.placed || { name: "wool_dug", gain: 0.8 };
     return spec;
   }
+
+  loadFiles(["place_sounds"]);
 }
