@@ -5,6 +5,14 @@
 This be for minetest 5.9.0-dev (or 5.9.0 release) and if you use 5.8.0 anything it'll probably blow up.
 ---
 
+### How to make this show up in the online content browser
+
+Go here: https://content.minetest.net/help/non_free/
+
+Follow the instructions in ``How can I show non-free packages in the client?``
+
+If you don't like this, don't complain to me.
+
 ### Using TS with this thing
 
 If you want to mess with this or maybe you would want to use TS for your minetest things.
