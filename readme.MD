@@ -48,7 +48,7 @@ License: CC-BY-SA-4.0
 
 ### Sounds
 
-Sound credits are documented in the sounds mod folder. (A hint to the contentdb reviewers)
+Sound credits are documented in the sounds mod folder.
 
 ---
 
