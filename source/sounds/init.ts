@@ -7,7 +7,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "grass_step", gain: 1.0 };
     spec.dig = spec.dig || { name: "grass_dig", gain: 1.5 };
     spec.break = spec.break || { name: "grass_dug", gain: 0.8 };
-    spec.place = spec.place || { name: "grass_dug", gain: 0.5 };
+    spec.placed = spec.placed || { name: "grass_dug", gain: 0.5 };
     return spec;
   }
 
@@ -18,7 +18,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "dirt_step", gain: 0.3 };
     spec.dig = spec.dig || { name: "dirt_dig", gain: 0.6 };
     spec.break = spec.break || { name: "dirt_dug", gain: 0.9 };
-    spec.place = spec.place || { name: "dirt_dug", gain: 0.6 };
+    spec.placed = spec.placed || { name: "dirt_dug", gain: 0.6 };
     return spec;
   }
 
@@ -29,7 +29,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "wood_step", gain: 0.35 };
     spec.dig = spec.dig || { name: "wood_dig", gain: 0.7 };
     spec.break = spec.break || { name: "wood_dug", gain: 1.0 };
-    spec.place = spec.place || { name: "wood_dug", gain: 0.6 };
+    spec.placed = spec.placed || { name: "wood_dug", gain: 0.6 };
     return spec;
   }
 
@@ -40,7 +40,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "dirt_step", gain: 0.3 };
     spec.dig = spec.dig || { name: "dirt_dig", gain: 0.6 };
     spec.break = spec.break || { name: "gravel_dug", gain: 0.9 };
-    spec.place = spec.place || { name: "dirt_dug", gain: 0.6 };
+    spec.placed = spec.placed || { name: "dirt_dug", gain: 0.6 };
     return spec;
   }
 
@@ -51,7 +51,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "stone_step", gain: 0.25 };
     spec.dig = spec.dig || { name: "stone_dig", gain: 0.75 };
     spec.break = spec.break || { name: "stone_dug", gain: 1.0 };
-    spec.place = spec.place || { name: "stone_dug", gain: 0.8 };
+    spec.placed = spec.placed || { name: "stone_dug", gain: 0.8 };
     return spec;
   }
 
@@ -62,7 +62,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "sand_step", gain: 0.5 };
     spec.dig = spec.dig || { name: "sand_dig", gain: 0.9 };
     spec.break = spec.break || { name: "sand_dug", gain: 1.0 };
-    spec.place = spec.place || { name: "sand_dug", gain: 0.8 };
+    spec.placed = spec.placed || { name: "sand_dug", gain: 0.8 };
     return spec;
   }
 
@@ -73,7 +73,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "dirt_step", gain: 0.5 };
     spec.dig = spec.dig || { name: "sand_dig", gain: 0.9 };
     spec.break = spec.break || { name: "dirt_dug", gain: 1.0 };
-    spec.place = spec.place || { name: "dirt_dug", gain: 0.8 };
+    spec.placed = spec.placed || { name: "dirt_dug", gain: 0.8 };
     return spec;
   }
 
@@ -84,7 +84,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "glass_step", gain: 0.4 };
     spec.dig = spec.dig || { name: "glass_dig", gain: 0.75 };
     spec.break = spec.break || { name: "glass_dug", gain: 1.0 };
-    spec.place = spec.place || { name: "glass_step", gain: 0.8 };
+    spec.placed = spec.placed || { name: "glass_step", gain: 0.8 };
     return spec;
   }
 
@@ -95,7 +95,7 @@ namespace sounds {
     spec.footstep = spec.footstep || { name: "wool_step", gain: 0.4 };
     spec.dig = spec.dig || { name: "wool_dig", gain: 0.75 };
     spec.break = spec.break || { name: "wool_dug", gain: 1.0 };
-    spec.place = spec.place || { name: "wool_dug", gain: 0.8 };
+    spec.placed = spec.placed || { name: "wool_dug", gain: 0.8 };
     return spec;
   }
 
@@ -110,7 +110,7 @@ namespace sounds {
   //   "| (1-6) - https://freesound.org/people/RavenWolfProds/sounds/503659/ CC0  |\n",
   //   "| - dig                                                                   |\n",
   //   "| (1-4) - https://freesound.org/people/drowsyprincess/sounds/463854/ CC0  |\n",
-  //   "| - dug/place                                                             |\n",
+  //   "| - dug/placed                                                             |\n",
   //   "| (1-5) - https://freesound.org/people/Adielees9/sounds/331167/ CC0       |\n",
   //   "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n",
   //   "| dirt                                                                    |\n",
@@ -190,7 +190,7 @@ namespace sounds {
   (1-6) - https://freesound.org/people/RavenWolfProds/sounds/503659/ CC0
   - dig
   (1-4) - https://freesound.org/people/drowsyprincess/sounds/463854/ CC0
-  - dug/place
+  - dug/placed
   (1-5) - https://freesound.org/people/Adielees9/sounds/331167/ CC0
   
   dirt

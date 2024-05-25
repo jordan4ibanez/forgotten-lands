@@ -555,11 +555,12 @@ declare global {
   interface NodeSoundSpec {
     footstep?: SimpleSoundSpec;
     dig?: SimpleSoundSpec | string;
-    dug?: SimpleSoundSpec;
-    place?: SimpleSoundSpec;
+    // dug?: SimpleSoundSpec;
+    // place?: SimpleSoundSpec;
     place_failed?: SimpleSoundSpec;
     fall?: SimpleSoundSpec;
     break?: SimpleSoundSpec;
+    placed?: SimpleSoundSpec;
   }
 
   interface ItemDropSpec {
