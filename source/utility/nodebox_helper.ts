@@ -16,7 +16,7 @@ namespace utility {
     const x = width / 2.0;
     const z = depth / 2.0;
 
-    return [-width / 2.0, 0, -depth / 2.0, width / 2.0, height, depth / 2.0];
+    return [-x, -0.5, -z, x, height - 0.5, z];
   }
 
 
@@ -30,10 +30,11 @@ namespace utility {
    */
   export function nodeBoxGenPixel(width: number, height: number, depth: number): box {
 
-    const x = width / textureSize;
-    const z = depth / textureSize;
+    const x = (width / 2) / textureSize;
+    const z = (depth / 2) / textureSize;
+    const yHeight = (height / textureSize);
 
-    return [-x, 0, -z, x, pixel(height), z];
+    return [-x, -0.5, -z, x, yHeight - 0.5, z];
   }
 
 }

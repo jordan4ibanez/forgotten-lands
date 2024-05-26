@@ -15,9 +15,10 @@ namespace fire {
     selection_box: {
       type: Nodeboxtype.fixed,
       fixed: [
-        utility.nodeBoxGenPixel(8, 4, 1)
+        utility.nodeBoxGenPixel(14, 12, 14)
       ]
-    }
+    },
+    walkable: false
   });
 
   loadFiles(["smoke"]);
