@@ -1,3 +1,0 @@
-all models come from here: https://github.com/22i/amc
-22i made all these.
-Under gpl v3 which this is already under
