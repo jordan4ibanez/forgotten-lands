@@ -16,7 +16,7 @@ namespace utility {
     }
   }
 
-  loadFiles(["option", "math", "enums", "color_generator", "quaternion", "vector"]);
+  loadFiles(["option", "math", "enums", "color_generator", "quaternion", "vector", "nodebox_helper"]);
 
   export function concat(...input: string[]): string {
     let accumulator = "";
