@@ -4,9 +4,7 @@ namespace utility {
 
   export const tickRate = 0.05;
 
-  export function pixel(inputPixel: number): number {
-    return (inputPixel / textureSize) - 0.5;
-  }
+
 
   export function loadFiles(filesToLoad: string[]): void {
     const currentMod = minetest.get_current_modname();
