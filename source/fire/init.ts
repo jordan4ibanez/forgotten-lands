@@ -12,10 +12,10 @@ namespace fire {
         length: 1
       }
     }],
-    collision_box: {
+    selection_box: {
       type: Nodeboxtype.fixed,
       fixed: [
-        [-0.5,]
+        utility.nodeBoxGenPixel(8, 4, 1)
       ]
     }
   });
