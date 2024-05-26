@@ -679,7 +679,7 @@ declare global {
   /** @noSelf */
   interface TileDefinition {
     name: string,
-    backface_culling: boolean,
+    backface_culling?: boolean,
     animation: TileAnimationDefinition;
   }
 
