@@ -19,7 +19,11 @@ namespace types {
     wool = "wool",
     planks = "planks",
     tree = "tree",
-    sand = "sand"
+    sand = "sand",
+    lava_cooling = "lava_cooling",
+    liquid = "liquid",
+    water = "water",
+    attached_node = "attached_node"
   }
 
   // This one is quite useful for crafting recipes.
@@ -34,5 +38,11 @@ namespace types {
     planks = "group:planks",
     tree = "group:tree",
     sand = "group:sand"
+  }
+
+  export enum DamageGroup {
+    flesh = "flesh",
+    metal = "metal",
+    bone = "bone"
   }
 }
