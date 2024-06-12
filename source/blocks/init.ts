@@ -42,7 +42,7 @@ namespace blocks {
       },
       groups: {
         [blockType.break_instant]: 1,
-        attached_node: 1
+        [blockType.attached_node]: 1
       },
       drop: ""
     });
