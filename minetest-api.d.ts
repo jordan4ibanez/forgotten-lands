@@ -460,24 +460,24 @@ declare global {
 
   interface NodeBox {
     type: Nodeboxtype;
-    fixed?: boxTable;
-    wall_top?: box;
-    wall_bottom?: box;
-    wall_side?: box;
-    connect_top?: box;
-    connect_bottom?: box;
-    connect_front?: box;
-    connect_left?: box;
-    connect_back?: box;
-    connect_right?: box;
-    disconnected_top?: box;
-    disconnected_bottom?: box;
-    disconnected_front?: box;
-    disconnected_left?: box;
-    disconnected_back?: box;
-    disconnected_right?: box;
-    disconnected?: box;
-    disconnected_sides?: box;
+    fixed?: box | boxTable;
+    wall_top?: box | boxTable;
+    wall_bottom?: box | boxTable;
+    wall_side?: box | boxTable;
+    connect_top?: box | boxTable;
+    connect_bottom?: box | boxTable;
+    connect_front?: box | boxTable;
+    connect_left?: box | boxTable;
+    connect_back?: box | boxTable;
+    connect_right?: box | boxTable;
+    disconnected_top?: box | boxTable;
+    disconnected_bottom?: box | boxTable;
+    disconnected_front?: box | boxTable;
+    disconnected_left?: box | boxTable;
+    disconnected_back?: box | boxTable;
+    disconnected_right?: box | boxTable;
+    disconnected?: box | boxTable;
+    disconnected_sides?: box | boxTable;
   }
 
   type box = number[];
