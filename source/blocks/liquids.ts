@@ -1,5 +1,6 @@
 namespace blocks {
   const registerNode = utility.registerNode;
+  const blockType = types.BlockType;
 
   registerNode("waterSource", {
     description: "Water",
@@ -39,7 +40,7 @@ namespace blocks {
     liquid_alternative_source: "waterSource",
     liquid_viscosity: 1,
     post_effect_color: { a: 103, r: 30, g: 60, b: 90 },
-    groups: { water: 3, liquid: 3, coolsLava: 3 },
+    groups: { [blockType.water]: 3, [blockType.liquid]: 3, [blockType.lava_cooling]: 3 },
     sounds: {}
   });
 
@@ -82,7 +83,7 @@ namespace blocks {
     liquid_alternative_source: "waterSource",
     liquid_viscosity: 1,
     post_effect_color: { a: 103, r: 30, g: 60, b: 90 },
-    groups: { water: 3, liquid: 3 },
+    groups: { [blockType.water]: 3, [blockType.liquid]: 3, [blockType.lava_cooling]: 3 },
     sounds: {}
 
   });
