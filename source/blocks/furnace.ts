@@ -18,6 +18,7 @@ namespace blocks {
   const colorRGB = utility.colorRGB;
   const vec3ToString = utility.vec3ToString;
   const pixel = utility.pixel;
+  const blockType = types.BlockType;
 
   //? Functionality
 
@@ -476,7 +477,7 @@ namespace blocks {
     node_box: furnaceNodeBox,
     selection_box: furnaceSelectionBox,
     groups: {
-      stone: 1
+      [blockType.stone]: 1
     },
     sounds: sounds.stone(),
     tiles: [
@@ -507,7 +508,7 @@ namespace blocks {
     node_box: furnaceNodeBox,
     selection_box: furnaceSelectionBox,
     groups: {
-      stone: 1
+      [blockType.stone]: 1
     },
     sounds: sounds.stone(),
     tiles: [
