@@ -16,7 +16,12 @@ namespace fire {
       type: Nodeboxtype.fixed,
       fixed: utility.nodeBoxGenPixel(14, 12, 14),
     },
-    walkable: false
+    walkable: false,
+    light_source: 14,
+    paramtype: ParamType1.light,
+    groups: {
+      [types.BlockType.break_instant]: 1
+    }
   });
 
   loadFiles(["smoke"]);
