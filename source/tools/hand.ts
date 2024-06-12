@@ -1,7 +1,7 @@
 namespace tools {
 
   const blockType = types.BlockType;
-
+  const damageGroup = types.DamageGroup;
 
   //! NOTE: Do not ever add element 0 to times!
 
@@ -82,7 +82,7 @@ namespace tools {
       },
       damage_groups: {
         // Needs a better group name.
-        fleshy: 1
+        [damageGroup.flesh]: 1
       }
     }
   });
