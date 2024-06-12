@@ -16,6 +16,12 @@ namespace fire {
       type: Nodeboxtype.fixed,
       fixed: [
         utility.nodeBoxGenPixel(14, 12, 14)
+      ],
+      connect_bottom: [
+        
+      ]
+      connect_back: [
+        utility.nodeBoxGenPixel(14, 12, 14)
       ]
     },
     walkable: false
