@@ -1,5 +1,6 @@
 namespace fire {
   const loadFiles = utility.loadFiles;
+  const blockType = types.BlockType;
 
   utility.registerNode("fire", {
     drawtype: Drawtype.firelike,
@@ -20,7 +21,7 @@ namespace fire {
     light_source: 14,
     paramtype: ParamType1.light,
     groups: {
-      [types.BlockType.break_instant]: 1
+      [blockType.break_instant]: 1
     }
   });
 
