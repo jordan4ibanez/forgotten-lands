@@ -60,6 +60,8 @@ namespace controls {
         LMB: boolean = false;
         RMB: boolean = false;
         zoom: boolean = false;
+        movement_x: number = 0;
+        movement_y: number = 0;
     }
 
     type keyCallback = (player: ObjectRef, elapsedTime: number) => void;
