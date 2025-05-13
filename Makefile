@@ -8,7 +8,7 @@ default:
 	@./scripts/copy_models.sh
 
 	@echo Starting Minetest.
-	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
+	@luanti --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
 dryrun:
 	@./scripts/compile_game.sh
