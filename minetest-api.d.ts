@@ -1322,6 +1322,8 @@ declare global {
     LMB: boolean,
     RMB: boolean,
     zoom: boolean,
+    movement_x: number,
+    movement_y: number
   }
 
   enum _Keys {
