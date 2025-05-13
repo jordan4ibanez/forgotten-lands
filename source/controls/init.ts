@@ -231,7 +231,7 @@ namespace controls {
         const currentTime = getTime();
 
         // Now iterate key to values in the objects and clone them into the repository.
-        for (let [key, value] of Object.entries(playerControl) as [keyof PlayerControls, boolean][]) {
+        for (let [key, value] of Object.entries(playerControl)) {
             // Memory has changed!
             if (controlState[key] != value) {
                 // Get stateful change of this key action.
