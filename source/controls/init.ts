@@ -48,6 +48,7 @@ namespace controls {
     }
 
     class PlayerControls implements PlayerControlObject {
+        [key: string]: number | boolean;
         up: boolean = false;
         down: boolean = false;
         left: boolean = false;
