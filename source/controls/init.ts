@@ -137,7 +137,6 @@ namespace controls {
     // Add player to the repository when they join.
     minetest.register_on_joinplayer((player: ObjectRef) => {
         const name = player.get_player_name();
-        print("hi");
         keysRepository.set(name, new PlayerControls);
         timeRepository.set(name, new InputTimer());
     });
