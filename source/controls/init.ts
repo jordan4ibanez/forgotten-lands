@@ -30,6 +30,8 @@ namespace controls {
         LMB: number;
         RMB: number;
         zoom: number;
+        movement_x: number;
+        movement_y: number;
         constructor() {
             const currentTime = getTime();
             this.up = currentTime;
@@ -44,6 +46,8 @@ namespace controls {
             this.LMB = currentTime;
             this.RMB = currentTime;
             this.zoom = currentTime;
+            this.movement_x = 0;
+            this.movement_y = 0;
         }
     }
 
