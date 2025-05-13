@@ -1309,7 +1309,11 @@ declare global {
         respawn(): void;
     }
 
-    interface PlayerControlObject {
+    interface Dictionary {
+        [key: string]: number | boolean;
+    }
+
+    interface PlayerControlObject extends Dictionary {
         up: boolean,
         down: boolean,
         left: boolean,
