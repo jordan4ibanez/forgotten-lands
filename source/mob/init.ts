@@ -1,19 +1,19 @@
 namespace mob {
 
-  const loadFiles = utility.loadFiles;
-  const AnimatedEntity = animationStation.AnimatedEntity;
+    const loadFiles = utility.loadFiles;
+    const AnimatedEntity = animationStation.AnimatedEntity;
 
-  export class Mob extends AnimatedEntity {
-    name: string = "mob_base";
+    export class Mob extends AnimatedEntity {
+        name: string = "mob_base";
 
-    hp = 10;
+        hp = 10;
 
-    on_step(delta: number, moveResult: MoveResult): void {
-      print("Not implemented");
+        on_step(delta: number, moveResult: MoveResult): void {
+            print("Not implemented");
+        }
     }
-  }
 
 
-  loadFiles(["pig", "death_knell"]);
+    loadFiles(["pig", "death_knell"]);
 
 }
