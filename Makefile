@@ -1,14 +1,17 @@
 # defaults to linux, expects you to already have made the debugging world.
-default:
-	@./scripts/clean_build_dir.sh
-	@./scripts/compile_game.sh
-	@./scripts/copy_conf_files.sh
-	@./scripts/copy_textures.sh
-	@./scripts/copy_sounds.sh
-	@./scripts/copy_models.sh
+defaults:
+	# @./scripts/clean_build_dir.sh
+	# @./scripts/compile_game.sh
+	# @./scripts/copy_conf_files.sh
+	# @./scripts/copy_textures.sh
+	# @./scripts/copy_sounds.sh
+	# @./scripts/copy_models.sh
 
 	@echo Starting Minetest.
 	@luanti --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
+
+watch:
+	@npx tstl --watch
 
 dryrun:
 	@./scripts/compile_game.sh
