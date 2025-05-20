@@ -1372,19 +1372,19 @@ declare global {
     }
 
     interface PhysicsOverride {
-        speed: number;
-        jump: number;
-        gravity: number;
-        speed_climb: number;
-        speed_crouch: number;
-        liquid_fluidity: number;
-        liquid_fluidity_smooth: number;
-        liquid_sink: number;
-        acceleration_default: number;
-        acceleration_air: number;
-        sneak: boolean;
-        sneak_glitch: boolean;
-        new_move: boolean;
+        speed?: number;
+        jump?: number;
+        gravity?: number;
+        speed_climb?: number;
+        speed_crouch?: number;
+        liquid_fluidity?: number;
+        liquid_fluidity_smooth?: number;
+        liquid_sink?: number;
+        acceleration_default?: number;
+        acceleration_air?: number;
+        sneak?: boolean;
+        sneak_glitch?: boolean;
+        new_move?: boolean;
     }
 
     interface SkyParametersColor {
