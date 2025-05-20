@@ -16,7 +16,7 @@
     "tsconfig.json": true,
     "old_code/": true,
     "install_npm_deps.sh": true,
-    //? Don't disable this unless you feel like opening up this file in your file manager.
+    //? Don't disable this unless you feel like opening up this project in your file manager to fix it.
     // ".vscode/": true
   },
   "typescript.format.semicolons": "insert",
