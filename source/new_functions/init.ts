@@ -89,12 +89,11 @@ namespace newFunctions {
         });
     });
 
-    // destroy player environment data
-    // local name
-    // minetest.register_on_leaveplayer(function(player)
-    // 	name = player:get_player_name()
-    // 	pool[name] = nil
-    // end)
+    // Destroy player environment data.
+    core.register_on_leaveplayer((player: ObjectRef) => {
+        name = player.get_player_name()!;
+        pool.delete(name);
+    });
 
 
 
