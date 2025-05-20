@@ -3,8 +3,8 @@
 namespace newFunctions {
 
     interface PType {
-        head: boolean;
-        legs: boolean;
+        head: string;
+        legs: string;
         under: string;
         swim_check: string;
     }
@@ -13,20 +13,20 @@ namespace newFunctions {
 
     var name: string;
 
-    export function get_player_head_env(player: ObjectRef): boolean {
+    export function get_player_head_env(player: ObjectRef): string | null {
         name = player.get_player_name()!;
         const data: PType | undefined = pool.get(name);
         if (!data) {
-            return false;
+            return null;
         }
         return data.head;
     }
 
-    export function get_player_legs_env(player: ObjectRef): boolean {
+    export function get_player_legs_env(player: ObjectRef): string | null {
         name = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
-            return false;
+            return null;
         }
         return data.legs;
     }
@@ -67,7 +67,6 @@ namespace newFunctions {
         }
 
         const nodeDef = core.registered_nodes[data.under];
-
         if (!nodeDef) {
             return false;
         }
