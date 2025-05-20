@@ -41,14 +41,19 @@ namespace newFunctions {
     }
 
 
-    export function player_swim_check(player: ObjectRef) {
+    export function player_swim_check(player: ObjectRef): boolean {
         name = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
             return false;
         }
 
-        return minetest.get_nodedef(data.swim_check, "walkable") == false;
+        const nodeDef = minetest.registered_nodes[data.swim_check];
+
+        if (!nodeDef) {
+            return false;
+        }
+        return nodeDef.walkable == false;
     }
 
     // local name
