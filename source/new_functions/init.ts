@@ -4,6 +4,7 @@ namespace newFunctions {
 
     interface PType {
         head: boolean;
+        legs: boolean
     }
 
     const pool = new Map<string, PType>();
@@ -11,23 +12,22 @@ namespace newFunctions {
     var name: string;
 
     function get_player_head_env(player: ObjectRef): boolean {
-
         name = player.get_player_name()!;
-
-        const p: PType | undefined = pool.get(name);
-
-        if (!p) {
+        const data: PType | undefined = pool.get(name);
+        if (!data) {
             return false;
         }
-        return p.head;
+        return data.head;
     }
 
-    // local name
-
-    // function get_player_legs_env (player: ObjectRef): boolean {
-    // 	name = player.get_player_name();
-    // 	return(pool[name].legs)
-    // end
+    function get_player_legs_env(player: ObjectRef): boolean {
+        name = player.get_player_name();
+        const data: PType | undefined = pool.get(name);
+        if (!data) {
+            return false;
+        }
+        return data.legs;
+    }
 
     // local name
     // player_under_check = function(player)
