@@ -5,7 +5,7 @@ namespace newFunctions {
     interface PType {
         head: boolean;
         legs: boolean;
-        under: boolean;
+        under: string;
         swim_check: string;
     }
 
@@ -31,11 +31,11 @@ namespace newFunctions {
         return data.legs;
     }
 
-    export function player_under_check(player: ObjectRef): boolean {
+    export function player_under_check(player: ObjectRef): string | null {
         name = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
-            return false;
+            return null;
         }
         return data.under;
     }
@@ -43,24 +43,37 @@ namespace newFunctions {
 
     export function player_swim_check(player: ObjectRef): boolean {
         name = player.get_player_name();
+
         const data: PType | undefined = pool.get(name);
         if (!data) {
             return false;
         }
 
         const nodeDef = core.registered_nodes[data.swim_check];
+        if (!nodeDef) {
+            return false;
+        }
+
+        return nodeDef.walkable == false;
+    }
+
+
+    function player_swim_under_check(player: ObjectRef) {
+        name = player.get_player_name();
+
+        const data: PType | undefined = pool.get(name);
+        if (!data) {
+            return false;
+        }
+
+        const nodeDef = core.registered_nodes[data.under];
 
         if (!nodeDef) {
             return false;
         }
+
         return nodeDef.walkable == false;
     }
-
-    // local name
-    // player_swim_under_check = function(player)
-    // 	name = player:get_player_name()
-    // 	return(minetest.get_nodedef(pool[name].under, "walkable") == false)
-    // end
 
     // -- create blank list for player environment data
     // local name
