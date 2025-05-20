@@ -2114,6 +2114,7 @@ declare interface TexturePoolComponentFade {
 }
 
 declare global {
+    const core: core;
     const EntityVisual: EntityVisual;
     const SchematicRotation: SchematicRotation;
     const SchematicPlacementFlag: SchematicPlacementFlag;
