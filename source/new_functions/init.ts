@@ -77,8 +77,6 @@ namespace newFunctions {
     }
 
     // Create blank list for player environment data.
-    // local name
-    // local temp_pool
     core.register_on_joinplayer((player: ObjectRef) => {
         name = player.get_player_name();
         pool.set(name, {
