@@ -16,7 +16,7 @@ namespace newFunctions {
     var name: string;
 
     export function get_player_head_env(player: ObjectRef): string | null {
-        name = player.get_player_name()!;
+        name = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
             return null;
