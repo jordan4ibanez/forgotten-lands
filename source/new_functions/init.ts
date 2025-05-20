@@ -97,24 +97,26 @@ namespace newFunctions {
 
 
 
-    // -- handle damage when touching node
-    // -- this is lua collision detection
-    // -- damages players 4 times a second
-    // local name
-    // local temp_pool
-    // local tick
-    // local handle_touch_hurting = function(player,damage,dtime)
-    // 	name      = player:get_player_name()
-    // 	temp_pool = pool[name]
-    // 	tick      = temp_pool.touch_hurt_ticker
+    // Handle damage when touching node.
+    // This is lua collision detection.
+    // Damages players 4 times a second.
+    function handle_touch_hurting(player: ObjectRef, damage: number, dtime: number) {
+        name = player.get_player_name();
 
-    // 	tick = tick - dtime
-    // 	if tick <= 0 then
-    // 		player:set_hp(player:get_hp()-damage)
-    // 		tick = 0.25
-    // 	end
-    // 	temp_pool.touch_hurt_ticker = tick
-    // end
+        const data = pool.get(name);
+        if (!data) {
+            return;
+        }
+
+        var tick = data.touch_hurt_ticker;
+        tick -= dtime;
+
+        if (tick <= 0) {
+            player.set_hp(player.get_hp() - damage);
+            tick = 0.25;
+        }
+        data.touch_hurt_ticker = tick;
+    }
 
 
     // local pos
