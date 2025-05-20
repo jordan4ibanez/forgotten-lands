@@ -5,14 +5,14 @@ export { };
 //? Everything was just dumped in as I looked down the lua_api.md
 
 /** @noSelf **/
-interface minetest {
+interface core {
     get_current_modname(): string;
     get_modpath(modName: string): string;
     get_modnames(): string[];
     get_game_info(): GameInfo;
     get_worldpath(): string;
     is_singleplayer(): boolean;
-    features(): MinetestFeatures;
+    features(): LuantiFeatures;
     has_feature(featureName: string): boolean;
     get_player_information(playerName: string): PlayerInformation;
     get_player_window_information(playerName: string): WindowInformation;
@@ -22,7 +22,7 @@ interface minetest {
     mvdir(dir: string): boolean;
     get_dir_list(dir: string, isDir: boolean): string[];
     safe_file_write(path: string, content: string): boolean;
-    get_version(): MinetestInfo;
+    get_version(): LuantiInfo;
     sha1(data: any, raw: boolean): string;
     colorspec_to_colorstring(colorSpec: ColorSpec): string;
     colorspec_to_bytes(colorSpec: ColorSpec): string;
@@ -91,7 +91,7 @@ interface minetest {
     register_on_modchannel_message(fun: (channelName: string, sender: string, message: string) => void): void;
     register_on_liquid_transformed(fun: (posList: Vec3[], nodeList: string[]) => void): void;
     register_on_mapblocks_changed(fun: (modifiedBlocks: string[], nodeList: any[]) => void): void;
-    settings: MinetestSettingsObject;
+    settings: LuantiSettingsObject;
     setting_get_pos(name: string): Vec3;
     string_to_privs(str: string, delim: string): string;
     privs_to_string(privs: string, delim: string): string;
@@ -494,7 +494,7 @@ declare global {
         path: string;
     }
 
-    interface MinetestFeatures {
+    interface LuantiFeatures {
         glasslike_framed: boolean;
         nodebox_as_selectionbox: boolean;
         get_all_craft_recipes_works: boolean;
@@ -545,7 +545,7 @@ declare global {
         real_hud_scaling: number;
     }
 
-    interface MinetestInfo {
+    interface LuantiInfo {
         project: string;
         string: string;
         proto_min: string;
@@ -1021,7 +1021,7 @@ declare global {
     }
 
 
-    type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void; // ! FIXME: figure out what minetest.EMERGE_CANCELLED EVEN IS!
+    type EmergeAreaCallback = (blockPos: Vec3, action: any, callsRemaining: number, param: any) => void; // ! FIXME: figure out what core.EMERGE_CANCELLED EVEN IS!
 
     interface BiomeDataDefinition {
         biome: number;
@@ -1048,7 +1048,7 @@ declare global {
     function VoxelArea(_min: Vec3, _max: Vec3): VoxelAreaObject;
     function Raycast(_pos1: Vec3, _pos2: Vec3, _object: boolean, _liquids: boolean): RaycastObject;
     function SecureRandom(): SecureRandomObject;
-    function Settings(_: string): MinetestSettingsObject;
+    function Settings(_: string): LuantiSettingsObject;
     function PcgRandom(seed: number, sequence: number[]): PcgRandomObject;
     function PerlinNoise(params: NoiseParams): PerlinNoiseObject;
     function PerlinNoiseMap(params: NoiseParams, size: Vec3): PerlinNoiseMapObject;
@@ -1164,7 +1164,7 @@ declare global {
     }
 
 
-    interface MinetestSettingsObject {
+    interface LuantiSettingsObject {
         get(key: string): any;
         get_bool(key: string, defaul?: boolean): boolean | null;
         get_np_group(key: string): NoiseParams;
@@ -2114,7 +2114,6 @@ declare interface TexturePoolComponentFade {
 }
 
 declare global {
-    const minetest: minetest;
     const EntityVisual: EntityVisual;
     const SchematicRotation: SchematicRotation;
     const SchematicPlacementFlag: SchematicPlacementFlag;
