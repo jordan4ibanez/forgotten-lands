@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo Cleaning build directory.
+# echo Cleaning build directory.
 rm -rf mods/
-echo CLEANED!
+# echo CLEANED!
