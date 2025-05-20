@@ -2,18 +2,30 @@
 
 namespace newFunctions {
 
-    const pool = new Map<string, any>();
+    interface PType {
+        head: boolean;
+    }
+
+    const pool = new Map<string, PType>();
 
     var name: string;
 
     function get_player_head_env(player: ObjectRef): boolean {
-        name = player.get_player_name();
-        return (pool.get(name).head || false);
+
+        name = player.get_player_name()!;
+
+        const p: PType | undefined = pool.get(name);
+
+        if (!p) {
+            return false;
+        }
+        return p.head;
     }
 
     // local name
-    // get_player_legs_env = function(player)
-    // 	name = player:get_player_name()
+
+    // function get_player_legs_env (player: ObjectRef): boolean {
+    // 	name = player.get_player_name();
     // 	return(pool[name].legs)
     // end
 
