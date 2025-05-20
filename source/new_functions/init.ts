@@ -91,7 +91,7 @@ namespace newFunctions {
         });
     });
 
-    // -- destroy player environment data
+    // destroy player environment data
     // local name
     // minetest.register_on_leaveplayer(function(player)
     // 	name = player:get_player_name()
