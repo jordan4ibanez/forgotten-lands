@@ -4,7 +4,6 @@
 (Don't tell anyone that this is crafter)
 
 
-This is designed for minetest 5.9.0-dev (or 5.9.0 release) and if you use 5.8.0 or below it'll probably blow up.
 ---
 
 ### How to make this show up in the online content browser
