@@ -4,14 +4,16 @@ namespace newFunctions {
 
     interface PType {
         head: boolean;
-        legs: boolean
+        legs: boolean;
+        under: boolean;
+        swim_check: string;
     }
 
     const pool = new Map<string, PType>();
 
     var name: string;
 
-    function get_player_head_env(player: ObjectRef): boolean {
+    export function get_player_head_env(player: ObjectRef): boolean {
         name = player.get_player_name()!;
         const data: PType | undefined = pool.get(name);
         if (!data) {
@@ -20,7 +22,7 @@ namespace newFunctions {
         return data.head;
     }
 
-    function get_player_legs_env(player: ObjectRef): boolean {
+    export function get_player_legs_env(player: ObjectRef): boolean {
         name = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
@@ -29,17 +31,25 @@ namespace newFunctions {
         return data.legs;
     }
 
-    // local name
-    // player_under_check = function(player)
-    // 	name = player:get_player_name()
-    // 	return(pool[name].under)
-    // end
+    export function player_under_check(player: ObjectRef): boolean {
+        name = player.get_player_name();
+        const data: PType | undefined = pool.get(name);
+        if (!data) {
+            return false;
+        }
+        return data.under;
+    }
 
-    // local name
-    // player_swim_check = function(player)
-    // 	name = player:get_player_name()
-    // 	return(minetest.get_nodedef(pool[name].swim_check, "walkable") == false)
-    // end
+
+    export function player_swim_check(player: ObjectRef) {
+        name = player.get_player_name();
+        const data: PType | undefined = pool.get(name);
+        if (!data) {
+            return false;
+        }
+
+        return minetest.get_nodedef(data.swim_check, "walkable") == false;
+    }
 
     // local name
     // player_swim_under_check = function(player)
