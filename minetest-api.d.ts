@@ -103,7 +103,7 @@ interface core {
     get_auth_handler(): AuthenticationHandlerDefinition;
     notify_authentication_modified(playerName: string): void;
     set_player_password(playerName: string, passwordHash: string): void;
-    set_player_privs(playerName: string, { string: boolean }): void;
+    set_player_privs(playerName: string, priv: { string: boolean; }): void;
     auth_reload(): void;
     chat_send_all(message: string): void;
     chat_send_player(playerName: string, message: string): void;
