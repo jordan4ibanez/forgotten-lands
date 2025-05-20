@@ -1,9 +1,9 @@
 #!/bin/bash
 # This is horrible and I love it.
-echo "Trying to make the sounds directory..."
+# echo "Trying to make the sounds directory..."
 mkdir mods/sounds/sounds/
-echo "Done."
+# echo "Done."
 
-echo "Copying over the sound files..."
+# echo "Copying over the sound files..."
 cp -r source/sounds/sounds/* mods/sounds/sounds/
-echo "Done."
+# echo "Done."
