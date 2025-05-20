@@ -48,7 +48,7 @@ namespace newFunctions {
             return false;
         }
 
-        const nodeDef = minetest.registered_nodes[data.swim_check];
+        const nodeDef = core.registered_nodes[data.swim_check];
 
         if (!nodeDef) {
             return false;
