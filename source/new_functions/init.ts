@@ -7,6 +7,8 @@ namespace newFunctions {
         legs: string;
         under: string;
         swim_check: string;
+        touch_hurt_ticker: number;
+        hurt_inside_ticker: number;
     }
 
     const pool = new Map<string, PType>();
@@ -58,7 +60,7 @@ namespace newFunctions {
     }
 
 
-    function player_swim_under_check(player: ObjectRef) {
+    export function player_swim_under_check(player: ObjectRef) {
         name = player.get_player_name();
 
         const data: PType | undefined = pool.get(name);
@@ -74,21 +76,20 @@ namespace newFunctions {
         return nodeDef.walkable == false;
     }
 
-    // -- create blank list for player environment data
+    // Create blank list for player environment data.
     // local name
     // local temp_pool
-    // minetest.register_on_joinplayer(function(player)
-    // 	name = player:get_player_name()
-    // 	pool[name] = {}
-    // 	temp_pool = pool[name]
-
-    // 	temp_pool.under  = ""
-    // 	temp_pool.legs   = ""
-    // 	temp_pool.head   = ""
-    // 	temp_pool.swim_check = ""
-    // 	temp_pool.touch_hurt_ticker  = 0
-    // 	temp_pool.hurt_inside_ticker = 0
-    // end)
+    core.register_on_joinplayer((player: ObjectRef) => {
+        name = player.get_player_name();
+        pool.set(name, {
+            under: "",
+            legs: "",
+            head: "",
+            swim_check: "",
+            touch_hurt_ticker: 0,
+            hurt_inside_ticker: 0,
+        });
+    });
 
     // -- destroy player environment data
     // local name
