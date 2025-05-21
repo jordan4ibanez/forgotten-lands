@@ -1,4 +1,20 @@
 import * as FS from "node:fs";
+import * as Exec from "node:child_process";
+
+//? Check if the project should be fully rebuilt.
+const fullRebuild: boolean = (() => {
+    const args = process.argv.slice(2);
+    if (!args) return false;
+    if (args.length == 0) return false;
+    if (args[0] === "--full-rebuild") return true;
+    return false;
+})();
+
+//? Remove the mods directory and recompile the entire program.
+if (fullRebuild) {
+    FS.rmSync("mods/", { recursive: true, force: true });
+    Exec.execSync("npx tstl");
+}
 
 //? Copy media assets into the build.
 ["models", "sounds", "schematics", "textures"].forEach((id: string) => {
