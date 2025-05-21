@@ -1,10 +1,7 @@
 import * as FS from "node:fs";
 
-function copyMediaAssets(id: string): void {
-    FS.cpSync(`source/${id}/${id}`, `mods/${id}/${id}`, { recursive: true });
-}
-
+//? Copy media assets into the build.
 ["models", "sounds", "schematics", "textures"].forEach((id: string) => {
-    copyMediaAssets(id);
+    FS.cpSync(`source/${id}/${id}`, `mods/${id}/${id}`, { recursive: true });
 })
 
