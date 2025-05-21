@@ -24,12 +24,14 @@ const [REBUILD_CODE, COPY_MEDIA] = (() => {
 })();
 
 //? Remove the mods directory and recompile the entire program.
+//~ Only if specified.
 if (REBUILD_CODE) {
     FS.rmSync("mods/", { recursive: true, force: true });
     Exec.execSync("npx tstl");
 }
 
 //? Copy media assets into the build.
+//~ Only if specified.
 if (COPY_MEDIA) {
     ["models", "sounds", "schematics", "textures"].forEach((id: string) => {
         FS.cpSync(`source/${id}/${id}`, `mods/${id}/${id}`, { recursive: true });
@@ -37,6 +39,7 @@ if (COPY_MEDIA) {
 }
 
 //? Copy the config files.
+//! Always runs.
 FS.readdirSync("source/", { recursive: false }).forEach((item: string | Buffer) => {
     // Basic checks to make sure nothing explodes.
     if (item instanceof Buffer) return;
