@@ -14,7 +14,8 @@
     "outDir": "mods/",
     "rootDir": "source/",
     "sourceMap": false,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "noImplicitAny": true
   },
   "include": [
     "source/**/*.ts"
