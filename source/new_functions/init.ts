@@ -263,16 +263,16 @@ namespace newFunctions {
     	const pos: Vec3 = player.get_pos()
 
         // fixme: This was a nice global weather variable.
-    	if (weather_type == 2) {
+    	// if (weather_type == 2) {
 
-    		const head_pos: Vec3 = vector.copy(pos)
-    		head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
-    		const light: number | null = core.get_node_light(head_pos, 0.5)
+    	// 	const head_pos: Vec3 = vector.copy(pos)
+    	// 	head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
+    	// 	const light: number | null = core.get_node_light(head_pos, 0.5)
 
-    		if (light && light == 15) {
-    			return
-            }
-        }
+    	// 	if (light && light == 15) {
+    	// 		return
+        //     }
+        // }
 
     	-- used for finding a damage node from the center of the player
     	-- rudementary collision detection
