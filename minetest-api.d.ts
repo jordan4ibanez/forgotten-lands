@@ -135,7 +135,8 @@ interface core {
     get_gametime(): number;
     get_day_count(): number;
     find_node_near(position: Vec3, radius: number, nodeNames: string[], searchCenter?: boolean): Vec3 | void;
-    find_nodes_in_area(pos1: Vec3, pos2: Vec3, nodeNames: string[], grouped: boolean): any[]; //! FIXME: returns a very specific thing, turn it into an interface
+    find_nodes_in_area(pos1: Vec3, pos2: Vec3, nodeNames: string[], grouped: true): { [id: string]: Vec3[]; };
+    find_nodes_in_area(pos1: Vec3, pos2: Vec3, nodeNames: string[], grouped?: false): LuaMultiReturn<[Vec3[], { [id: string]: number; }]>;
     find_nodes_in_area_under_air(pos1: Vec3, pos2: Vec3, nodeNames: string[]): Vec3[];
     get_perlin(nodeParams: NoiseParams): PerlinNoiseObject;
     get_perlin(seedDiff: number, octaves: number, persistence: number, spread: number): PerlinNoiseObject;
