@@ -20,6 +20,8 @@ If you want to mess with this or maybe you would want to use TS for your minetes
  
 First you need node, if you're on ubuntu it's super outdated so go to the nodejs website and install it.
 
+**This is developed with the latest version of nodejs/npm**
+
 Next you need TypeScriptToLua, typescript, and nodejs types.
 Also, you need Lua types for TS or else the compiler doesn't know what's going on.
 ```
