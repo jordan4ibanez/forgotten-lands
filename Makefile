@@ -3,7 +3,7 @@
 # @./scripts/compile_game.sh
 
 defaults:
-	@node --no-warnings=ExperimentalWarning testing.ts
+	@node --no-warnings=ExperimentalWarning copy_assets.ts
 
 # @./scripts/copy_conf_files.sh
 # @./scripts/copy_textures.sh
