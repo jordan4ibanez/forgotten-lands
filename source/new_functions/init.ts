@@ -159,7 +159,7 @@ namespace newFunctions {
                     hurt = damage_amount;
                 }
             }
-            handle_touch_hurting(player, damage_amount, dtime);
+            handle_touch_hurting(player, hurt, dtime);
         } else {
             const data: PType | undefined = pool.get(name);
             if (!data) {
@@ -240,7 +240,7 @@ namespace newFunctions {
                     hurt = damage_amount;
                 }
             }
-            handle_hurt_inside(player, damage_amount, dtime);
+            handle_hurt_inside(player, hurt, dtime);
         } else {
             const data: PType | undefined = pool.get(name);
             if (!data) {
