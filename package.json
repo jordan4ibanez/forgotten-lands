@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/node": "^22.15.21",
     "lua-types": "^2.13.1",
     "minetesthelper": "^1.0.0",
     "typescript": "^5.8.2",
