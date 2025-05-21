@@ -254,49 +254,52 @@ namespace newFunctions {
     // local _
     // local light
     // local head_pos
-    // local start_fire = function(player)
-    // 	name = player:get_player_name()
-    // 	if player:get_hp() <= 0 then
-    // 		return
-    // 	end
+    function start_fire (player: ObjectRef): void {
+    	const name: string = player.get_player_name()
+    	if (player.get_hp() <= 0) {
+    		return
+        }
 
-    // 	pos = player:get_pos()
+    	const pos: Vec3 = player.get_pos()
 
-    // 	if weather_type == 2 then
-    // 		head_pos = table.copy(pos)
-    // 		head_pos.y = head_pos.y + player:get_properties().collisionbox[5]
-    // 		light = minetest.get_node_light(head_pos, 0.5)
-    // 		if light and light == 15 then
-    // 			return
-    // 		end
-    // 	end
+        // fixme: This was a nice global weather variable.
+    	if (weather_type == 2) {
+            
+    		head_pos = table.copy(pos)
+    		head_pos.y = head_pos.y + player:get_properties().collisionbox[5]
+    		light = minetest.get_node_light(head_pos, 0.5)
 
-    // 	-- used for finding a damage node from the center of the player
-    // 	-- rudementary collision detection
-    // 	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
-    // 	a_min = vector.new(
-    // 		pos.x-0.25,
-    // 		pos.y-0.85,
-    // 		pos.z-0.25
-    // 	)
-    // 	a_max = vector.new(
-    // 		pos.x+0.25,
-    // 		pos.y+0.85,
-    // 		pos.z+0.25
-    // 	)
+    		if light and light == 15 then
+    			return
+    		end
+        }
 
-    // 	_,damage_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:fire"})
-    // 	real_nodes = {}
-    // 	for node_data,is_next_to in pairs(damage_nodes) do
-    // 		if damage_nodes[node_data] > 0 then
-    // 			table.insert(real_nodes,node_data)
-    // 		end
-    // 	end
+    	-- used for finding a damage node from the center of the player
+    	-- rudementary collision detection
+    	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
+    	a_min = vector.new(
+    		pos.x-0.25,
+    		pos.y-0.85,
+    		pos.z-0.25
+    	)
+    	a_max = vector.new(
+    		pos.x+0.25,
+    		pos.y+0.85,
+    		pos.z+0.25
+    	)
 
-    // 	if table.getn(real_nodes) > 0 then
-    // 		start_fire(player)
-    // 	end
-    // end
+    	_,damage_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:fire"})
+    	real_nodes = {}
+    	for node_data,is_next_to in pairs(damage_nodes) do
+    		if damage_nodes[node_data] > 0 then
+    			table.insert(real_nodes,node_data)
+    		end
+    	end
+
+    	if table.getn(real_nodes) > 0 then
+    		start_fire(player)
+    	end
+    }
 
     // -- this handles extinguishing a fire
     // local pos
