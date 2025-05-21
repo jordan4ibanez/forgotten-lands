@@ -19,6 +19,8 @@ const [REBUILD_CODE, COPY_MEDIA, CREATE_RELEASE] = (() => {
         } else if (arg === "--copy-media") {
             copyMedia = true;
         } else if (arg === "--create-release") {
+            rebuild = true;
+            copyMedia = true;
             createRelease = true;
         }
     });
