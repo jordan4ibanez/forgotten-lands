@@ -45,7 +45,7 @@ watch:
 
 
 release:
-	@node --no-warnings=ExperimentalWarning ts_lua_project_bridge.ts --rebuild-code --copy-media
+	@node --no-warnings=ExperimentalWarning ts_lua_project_bridge.ts --create-release
 
 # clean:
 # 	@echo Destroying the built game.
