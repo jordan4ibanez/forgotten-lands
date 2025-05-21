@@ -7,8 +7,8 @@ namespace utility {
 
 
     export function loadFiles(filesToLoad: string[]): void {
-        const currentMod = minetest.get_current_modname();
-        const currentDirectory = minetest.get_modpath(currentMod);
+        const currentMod = core.get_current_modname();
+        const currentDirectory = core.get_modpath(currentMod);
         for (const file of filesToLoad) {
             dofile(currentDirectory + "/" + file + ".lua");
         }
@@ -91,7 +91,7 @@ namespace utility {
             throw new Error("Unable to register entity: Name is null");
         }
         instance.__index = instance;
-        minetest.registered_entities[instance.name] = instance;
+        core.registered_entities[instance.name] = instance;
     };
 
     /**
@@ -100,7 +100,7 @@ namespace utility {
      * @param definition The node definition.
      */
     export function registerNode(nodeName: string, definition: NodeDefinition): void {
-        minetest.register_node(":" + nodeName, definition);
+        core.register_node(":" + nodeName, definition);
     }
 
 
@@ -142,7 +142,7 @@ namespace utility {
         print(terminalColorize(result, 255, 165, 0));
     };
 
-    const register_globalstep = minetest.register_globalstep;
+    const register_globalstep = core.register_globalstep;
     /**
      * Run a function in a global step.
      * @param func Function to be run on global step.
@@ -151,7 +151,7 @@ namespace utility {
         register_globalstep(func);
     }
 
-    const get_us_time = minetest.get_us_time;
+    const get_us_time = core.get_us_time;
     /**
      * Get the US time. Somewhere in the US.
      * @returns The time in the US.
@@ -160,7 +160,7 @@ namespace utility {
         return get_us_time();
     }
 
-    const get_connected_players = minetest.get_connected_players;
+    const get_connected_players = core.get_connected_players;
 
     /**
      * Get all players currently online.
