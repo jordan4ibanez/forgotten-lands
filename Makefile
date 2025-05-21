@@ -1,13 +1,16 @@
 # defaults to linux, expects you to already have made the debugging world.
-defaults:
 # @./scripts/clean_build_dir.sh
 # @./scripts/compile_game.sh
-	@./scripts/copy_conf_files.sh
-	@./scripts/copy_textures.sh
-	@./scripts/copy_sounds.sh
-	@./scripts/copy_models.sh
-	@echo Starting Luanti.
-	@luanti --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
+
+defaults:
+	@node --no-warnings=ExperimentalWarning testing.ts
+
+# @./scripts/copy_conf_files.sh
+# @./scripts/copy_textures.sh
+# @./scripts/copy_sounds.sh
+# @./scripts/copy_models.sh
+# @echo Starting Luanti.
+# @luanti --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
 
 watch:
