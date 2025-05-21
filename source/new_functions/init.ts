@@ -264,14 +264,14 @@ namespace newFunctions {
 
         // fixme: This was a nice global weather variable.
     	if (weather_type == 2) {
-            
-    		head_pos = table.copy(pos)
-    		head_pos.y = head_pos.y + player:get_properties().collisionbox[5]
-    		light = minetest.get_node_light(head_pos, 0.5)
 
-    		if light and light == 15 then
+    		const head_pos: Vec3 = vector.copy(pos)
+    		head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
+    		const light: number | null = core.get_node_light(head_pos, 0.5)
+
+    		if (light && light == 15) {
     			return
-    		end
+            }
         }
 
     	-- used for finding a damage node from the center of the player
