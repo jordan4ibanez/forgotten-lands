@@ -153,7 +153,7 @@ namespace newFunctions {
         // Find the highest damage node.
         if (real_nodes.length > 0) {
             var damage_amount: number = 0;
-            for (const node in real_nodes) {
+            for (const node of real_nodes) {
                 damage_amount = core.get_item_group(node, "touch_hurt");
                 if (damage_amount > hurt) {
                     hurt = damage_amount;
@@ -183,7 +183,7 @@ namespace newFunctions {
             return;
         }
 
-        var tick: number = data.hurt_inside_ticker;
+        let tick: number = data.hurt_inside_ticker;
         tick -= dtime;
 
         if (tick <= 0) {
@@ -220,10 +220,10 @@ namespace newFunctions {
             }
         }
 
-        var hurt: number = 0;
+        let hurt: number = 0;
         // Find the highest damage node.
         if (real_nodes.length > 0) {
-            var damage_amount: number = 0;
+            let damage_amount: number = 0;
             for (const node of real_nodes) {
                 damage_amount = core.get_item_group(node, "hurt_inside");
                 if (damage_amount > hurt) {
