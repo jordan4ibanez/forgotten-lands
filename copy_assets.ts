@@ -6,7 +6,7 @@ import * as FS from "node:fs";
 });
 
 //? Copy the config files.
-FS.readdirSync("source/", { recursive: false }).forEach((item: string | Buffer, index: number) => {
+FS.readdirSync("source/", { recursive: false }).forEach((item: string | Buffer) => {
     if (item instanceof Buffer) return;
     if (!FS.statSync(`source/${item}`).isDirectory()) return;
     if (!FS.existsSync(`source/${item}/mod.conf`)) throw new Error(`mod ${item} is missing a mod.conf!`);
