@@ -2,16 +2,27 @@ import * as FS from "node:fs";
 import * as Exec from "node:child_process";
 
 //? Check if the project should be fully rebuilt.
-const fullRebuild: boolean = (() => {
+const [REBUILD_CODE, COPY_MEDIA] = (() => {
+    let rebuild: boolean = false;
+    let copyMedia: boolean = false;
+
     const args = process.argv.slice(2);
-    if (!args) return false;
-    if (args.length == 0) return false;
-    if (args[0] === "--full-rebuild") return true;
-    return false;
+    if (!args) return [false, false];
+    if (args.length == 0) return [false, false];
+
+    args.forEach((arg: string) => {
+        if (arg === "--rebuild-code") {
+            rebuild = true;
+        } else if (arg === "--copy-media") {
+            copyMedia = true;
+        }
+    });
+
+    return [rebuild, copyMedia];
 })();
 
 //? Remove the mods directory and recompile the entire program.
-if (fullRebuild) {
+if (REBUILD_CODE) {
     FS.rmSync("mods/", { recursive: true, force: true });
     Exec.execSync("npx tstl");
 }
