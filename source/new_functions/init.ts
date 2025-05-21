@@ -188,8 +188,6 @@ namespace newFunctions {
         }
     }
 
-
-
     // Handle damage when inside node.
     // This is lua collision detection.
     // Damages players 4 times a second.
@@ -309,16 +307,7 @@ namespace newFunctions {
         }
     }
 
-    // -- this handles extinguishing a fire
-    // local pos
-    // local name
-    // local relief_nodes
-    // local real_nodes
-    // local a_min
-    // local a_max
-    // local _
-    // local light
-    // local head_pos
+    // This handles extinguishing a fire.
     function extinguish(player: ObjectRef): void {
         const name: string = player.get_player_name();
         if (player.get_hp() <= 0) {
@@ -407,11 +396,7 @@ namespace newFunctions {
 
     // Environment indexing.
 
-    // -- creates data at specific points of the player
-    // local name
-    // local temp_pool
-    // local pos
-    // local swimming
+    // Creates data at specific points of the player.
     function index_players_surroundings(dtime: number) {
         for (const player of core.get_connected_players()) {
 
