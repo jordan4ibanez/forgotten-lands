@@ -203,47 +203,53 @@ namespace newFunctions {
     // local damage_amount
     // local gotten_node
     // local _
-    // local hurt_inside = function(player,dtime)
-    // 	name = player:get_player_name()
-    // 	if player:get_hp() <= 0 then
-    // 		return
-    // 	end
-    // 	-- used for finding a damage node from the center of the player
-    // 	-- rudementary collision detection
-    // 	pos = player:get_pos()
-    // 	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
-    // 	a_min = vector.new(
-    // 		pos.x-0.25,
-    // 		pos.y-0.85,
-    // 		pos.z-0.25
-    // 	)
-    // 	a_max = vector.new(
-    // 		pos.x+0.25,
-    // 		pos.y+0.85,
-    // 		pos.z+0.25
-    // 	)
+    function hurt_inside(player: ObjectRef, dtime: number): void {
+        const name: string = player.get_player_name();
+        if (player.get_hp() <= 0) {
+            return;
+        }
+        // Used for finding a damage node from the center of the player.
+        // Rudementary collision detection.
+        const pos: Vec3 = player.get_pos();
+        pos.y = pos.y + (player.get_properties().collisionbox![5] / 2);
+        a_min.x = pos.x - 0.25;
+        a_min.y = pos.y - 0.85;
+        a_min.z = pos.z - 0.25;
 
-    // 	_,damage_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:hurt_inside"})
-    // 	real_nodes = {}
-    // 	for node_data,is_next_to in pairs(damage_nodes) do
-    // 		if damage_nodes[node_data] > 0 then
-    // 			table.insert(real_nodes,node_data)
-    // 		end
-    // 	end
-    // 	hurt = 0
-    // 	-- find the highest damage node
-    // 	if table.getn(real_nodes) > 0 then
-    // 		for _,node in ipairs(real_nodes) do
-    // 			damage_amount = minetest.get_item_group(node, "hurt_inside")
-    // 			if damage_amount >  hurt then
-    // 				hurt = damage_amount
-    // 			end
-    // 		end
-    // 		handle_hurt_inside(player,damage_amount,dtime)
-    // 	else
-    // 		pool[name].hurt_inside_ticker = 0
-    // 	end
-    // end
+        a_max.x = pos.x + 0.25;
+        a_max.y = pos.y + 0.85;
+        a_max.z = pos.z + 0.25;
+
+        const [_, damage_nodes] = core.find_nodes_in_area(a_min, a_max, ["group:hurt_inside"]);
+
+        const real_nodes: string[] = [];
+
+        for (const [node_data, count] of Object.entries(damage_nodes)) {
+            if (count > 0) {
+                table.insert(real_nodes, node_data);
+            }
+        }
+
+        var hurt: number = 0;
+        // Find the highest damage node.
+        if (real_nodes.length > 0) {
+            var damage_amount: number = 0;
+            for (const node in real_nodes) {
+                damage_amount = core.get_item_group(node, "hurt_inside");
+                if (damage_amount > hurt) {
+                    hurt = damage_amount;
+                }
+            }
+            handle_hurt_inside(player, damage_amount, dtime);
+        } else {
+            const data: PType | undefined = pool.get(name);
+            if (!data) {
+                print("warning: player pType undefined.");
+                return;
+            }
+            data.hurt_inside_ticker = 0;
+        }
+    }
 
 
 
