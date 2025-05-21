@@ -6,10 +6,12 @@ const [REBUILD_CODE, COPY_MEDIA] = (() => {
     let rebuild: boolean = false;
     let copyMedia: boolean = false;
 
+    // Certain scenarios need to be captured.
     const args = process.argv.slice(2);
     if (!args) return [false, false];
     if (args.length == 0) return [false, false];
 
+    // Now let's see if we have some arguments.
     args.forEach((arg: string) => {
         if (arg === "--rebuild-code") {
             rebuild = true;
@@ -28,9 +30,11 @@ if (REBUILD_CODE) {
 }
 
 //? Copy media assets into the build.
-["models", "sounds", "schematics", "textures"].forEach((id: string) => {
-    FS.cpSync(`source/${id}/${id}`, `mods/${id}/${id}`, { recursive: true });
-});
+if (COPY_MEDIA) {
+    ["models", "sounds", "schematics", "textures"].forEach((id: string) => {
+        FS.cpSync(`source/${id}/${id}`, `mods/${id}/${id}`, { recursive: true });
+    });
+}
 
 //? Copy the config files.
 FS.readdirSync("source/", { recursive: false }).forEach((item: string | Buffer) => {
