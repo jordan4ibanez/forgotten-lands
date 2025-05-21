@@ -193,16 +193,6 @@ namespace newFunctions {
         data.hurt_inside_ticker = tick;
     }
 
-    // local pos
-    // local hurt
-    // local name
-    // local damage_nodes
-    // local real_nodes
-    // local a_min
-    // local a_max
-    // local damage_amount
-    // local gotten_node
-    // local _
     function hurt_inside(player: ObjectRef, dtime: number): void {
         const name: string = player.get_player_name();
         if (player.get_hp() <= 0) {
