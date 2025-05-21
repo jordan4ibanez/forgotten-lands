@@ -300,85 +300,85 @@ namespace newFunctions {
     // local _
     // local light
     // local head_pos
-    // local extinguish = function(player)
-    // 	name = player:get_player_name()
-    // 	if player:get_hp() <= 0 then
-    // 		return
-    // 	end
-    // 	pos = player:get_pos()
-    // 	if weather_type == 2 then
-    // 		head_pos = table.copy(pos)
-    // 		head_pos.y = head_pos.y + player:get_properties().collisionbox[5]
-    // 		light = minetest.get_node_light(head_pos, 0.5)
-    // 		if light and light == 15 then
-    // 			put_fire_out(player)
-    // 			return
-    // 		end
-    // 	end
-    // 	-- used for finding a damage node from the center of the player
-    // 	-- rudementary collision detection
-    // 	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
-    // 	a_min = vector.new(
-    // 		pos.x-0.25,
-    // 		pos.y-0.85,
-    // 		pos.z-0.25
-    // 	)
-    // 	a_max = vector.new(
-    // 		pos.x+0.25,
-    // 		pos.y+0.85,
-    // 		pos.z+0.25
-    // 	)
+    local extinguish = function(player)
+    	name = player:get_player_name()
+    	if player:get_hp() <= 0 then
+    		return
+    	end
+    	pos = player:get_pos()
+    	if weather_type == 2 then
+    		head_pos = table.copy(pos)
+    		head_pos.y = head_pos.y + player:get_properties().collisionbox[5]
+    		light = minetest.get_node_light(head_pos, 0.5)
+    		if light and light == 15 then
+    			put_fire_out(player)
+    			return
+    		end
+    	end
+    	-- used for finding a damage node from the center of the player
+    	-- rudementary collision detection
+    	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
+    	a_min = vector.new(
+    		pos.x-0.25,
+    		pos.y-0.85,
+    		pos.z-0.25
+    	)
+    	a_max = vector.new(
+    		pos.x+0.25,
+    		pos.y+0.85,
+    		pos.z+0.25
+    	)
 
-    // 	_,relief_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:extinguish"})
-    // 	real_nodes = {}
-    // 	for node_data,is_next_to in pairs(relief_nodes) do
-    // 		if relief_nodes[node_data] > 0 then
-    // 			table.insert(real_nodes,node_data)
-    // 		end
-    // 	end
+    	_,relief_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:extinguish"})
+    	real_nodes = {}
+    	for node_data,is_next_to in pairs(relief_nodes) do
+    		if relief_nodes[node_data] > 0 then
+    			table.insert(real_nodes,node_data)
+    		end
+    	end
 
-    // 	if table.getn(real_nodes) > 0 then
-    // 		put_fire_out(player)
-    // 	end
-    // end
-    // --[[
-    // -- handle player suffocating inside solid node
-    // environment_class.handle_player_suffocation = function(player,dtime)
-    // 	if player:get_hp() <= 0 then
-    // 		return
-    // 	end
+    	if table.getn(real_nodes) > 0 then
+    		put_fire_out(player)
+    	end
+    end
+    --[[
+    -- handle player suffocating inside solid node
+    environment_class.handle_player_suffocation = function(player,dtime)
+    	if player:get_hp() <= 0 then
+    		return
+    	end
 
-    // 	local data = environment_class.get_data(player,{"head"})
+    	local data = environment_class.get_data(player,{"head"})
 
-    // 	if data then
-    // 		data = data.head
-    // 		if minetest.get_nodedef(data, "drawtype") == "normal" then
-    // 			environment_class.handle_suffocation_hurt(player,1,dtime)
-    // 		else
-    // 			environment_class.set_data(player,{suffocation_ticker = 0})
-    // 		end
-    // 	end		
-    // end
+    	if data then
+    		data = data.head
+    		if minetest.get_nodedef(data, "drawtype") == "normal" then
+    			environment_class.handle_suffocation_hurt(player,1,dtime)
+    		else
+    			environment_class.set_data(player,{suffocation_ticker = 0})
+    		end
+    	end		
+    end
 
-    // -- damages players 4 times a second
-    // environment_class.handle_suffocation_hurt = function(player,damage,dtime)
-    // 	environment_class.tick = environment_class.get_data(player,{"suffocation_ticker"})
-    // 	if environment_class.tick then
-    // 		environment_class.tick = environment_class.tick.suffocation_ticker
-    // 	end
-    // 	if not environment_class.tick then
-    // 		environment_class.set_data(player,{suffocation_ticker = 0.25})
-    // 		player:set_hp(player:get_hp()-damage)
-    // 	else
-    // 		environment_class.tick = environment_class.tick - dtime
-    // 		if environment_class.tick <= 0 then
-    // 			player:set_hp(player:get_hp()-damage)
-    // 			environment_class.set_data(player,{suffocation_ticker = 0.25})
-    // 		else
-    // 			environment_class.set_data(player,{suffocation_ticker = environment_class.tick})
-    // 		end
-    // 	end
-    // end
+    -- damages players 4 times a second
+    environment_class.handle_suffocation_hurt = function(player,damage,dtime)
+    	environment_class.tick = environment_class.get_data(player,{"suffocation_ticker"})
+    	if environment_class.tick then
+    		environment_class.tick = environment_class.tick.suffocation_ticker
+    	end
+    	if not environment_class.tick then
+    		environment_class.set_data(player,{suffocation_ticker = 0.25})
+    		player:set_hp(player:get_hp()-damage)
+    	else
+    		environment_class.tick = environment_class.tick - dtime
+    		if environment_class.tick <= 0 then
+    			player:set_hp(player:get_hp()-damage)
+    			environment_class.set_data(player,{suffocation_ticker = 0.25})
+    		else
+    			environment_class.set_data(player,{suffocation_ticker = environment_class.tick})
+    		end
+    	end
+    end
 
     // ]]--
 
