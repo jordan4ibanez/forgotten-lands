@@ -18,28 +18,17 @@ If you don't like this, don't complain to me.
 
 If you want to mess with this or maybe you would want to use TS for your minetest things.
  
-First you need node, if you're on ubuntu it's super outdated so get it here https://github.com/nodesource/distributions#ubuntu-versions
+First you need node, if you're on ubuntu it's super outdated so go to the nodejs website and install it.
 
-If you don't want to do the following manually, simply run ``install_npm_deps.sh``
-
-Next you need TypeScriptToLua
+Next you need TypeScriptToLua, typescript, and nodejs types.
+Also, you need Lua types for TS or else the compiler doesn't know what's going on.
 ```
-npm install -D typescript-to-lua typescript
-```
-
-Next you need Lua types for TS or else the compiler doesn't know what's going on.
-```
-npm install -D lua-types
-```
-
-(if you want my minetest helper thing)
-```
-npm install -D minetesthelper 
+npm install -D typescript-to-lua typescript @types/node lua-types
 ```
 
 I HIGHLY recommend you use ``make``. It automates a BUNCH of things. There's even ``make clean`` to see if everything is working.
 
-No make automation scripts created for windows yet though. It's cause I'm very lazy.
+No make automation scripts created for windows yet though. It's cause I don't run windows.
 
 ---
 
