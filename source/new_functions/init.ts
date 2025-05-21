@@ -13,10 +13,15 @@ namespace newFunctions {
 
     const pool = new Map<string, PType>();
 
+    function triggerNullPtype(name: string): void {
+
+    }
+
     export function get_player_head_env(player: ObjectRef): string | null {
         const name: string = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return null;
         }
         return data.head;
@@ -26,6 +31,7 @@ namespace newFunctions {
         const name: string = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return null;
         }
         return data.legs;
@@ -35,6 +41,7 @@ namespace newFunctions {
         const name: string = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return null;
         }
         return data.under;
@@ -46,6 +53,7 @@ namespace newFunctions {
 
         const data: PType | undefined = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return false;
         }
 
@@ -63,6 +71,7 @@ namespace newFunctions {
 
         const data: PType | undefined = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return false;
         }
 
@@ -103,6 +112,7 @@ namespace newFunctions {
 
         const data = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return;
         }
 
@@ -163,7 +173,7 @@ namespace newFunctions {
         } else {
             const data: PType | undefined = pool.get(name);
             if (!data) {
-                print("warning: player pType undefined.");
+                triggerNullPtype(name);
                 return;
             }
             data.touch_hurt_ticker = 0;
@@ -180,6 +190,7 @@ namespace newFunctions {
 
         const data: PType | undefined = pool.get(name);
         if (!data) {
+            triggerNullPtype(name);
             return;
         }
 
@@ -234,7 +245,7 @@ namespace newFunctions {
         } else {
             const data: PType | undefined = pool.get(name);
             if (!data) {
-                print("warning: player pType undefined.");
+                triggerNullPtype(name);
                 return;
             }
             data.hurt_inside_ticker = 0;
@@ -400,6 +411,7 @@ namespace newFunctions {
 
             const data: PType | undefined = pool.get(name);
             if (!data) {
+                triggerNullPtype(name);
                 continue;
             }
 
