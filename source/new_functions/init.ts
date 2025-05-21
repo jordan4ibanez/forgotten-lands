@@ -13,10 +13,8 @@ namespace newFunctions {
 
     const pool = new Map<string, PType>();
 
-    var name: string;
-
     export function get_player_head_env(player: ObjectRef): string | null {
-        name = player.get_player_name();
+        const name: string = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
             return null;
@@ -25,7 +23,7 @@ namespace newFunctions {
     }
 
     export function get_player_legs_env(player: ObjectRef): string | null {
-        name = player.get_player_name();
+        const name: string = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
             return null;
@@ -34,7 +32,7 @@ namespace newFunctions {
     }
 
     export function player_under_check(player: ObjectRef): string | null {
-        name = player.get_player_name();
+        const name: string = player.get_player_name();
         const data: PType | undefined = pool.get(name);
         if (!data) {
             return null;
@@ -44,7 +42,7 @@ namespace newFunctions {
 
 
     export function player_swim_check(player: ObjectRef): boolean {
-        name = player.get_player_name();
+        const name: string = player.get_player_name();
 
         const data: PType | undefined = pool.get(name);
         if (!data) {
@@ -60,8 +58,8 @@ namespace newFunctions {
     }
 
 
-    export function player_swim_under_check(player: ObjectRef) {
-        name = player.get_player_name();
+    export function player_swim_under_check(player: ObjectRef): boolean {
+        const name: string = player.get_player_name();
 
         const data: PType | undefined = pool.get(name);
         if (!data) {
@@ -78,7 +76,7 @@ namespace newFunctions {
 
     // Create blank list for player environment data.
     core.register_on_joinplayer((player: ObjectRef) => {
-        name = player.get_player_name();
+        const name: string = player.get_player_name();
         pool.set(name, {
             under: "",
             legs: "",
@@ -91,7 +89,7 @@ namespace newFunctions {
 
     // Destroy player environment data.
     core.register_on_leaveplayer((player: ObjectRef) => {
-        name = player.get_player_name()!;
+        const name: string = player.get_player_name()!;
         pool.delete(name);
     });
 
@@ -101,7 +99,7 @@ namespace newFunctions {
     // This is lua collision detection.
     // Damages players 4 times a second.
     function handle_touch_hurting(player: ObjectRef, damage: number, dtime: number) {
-        name = player.get_player_name();
+        const name: string = player.get_player_name();
 
         const data = pool.get(name);
         if (!data) {
