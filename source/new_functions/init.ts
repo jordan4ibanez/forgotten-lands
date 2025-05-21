@@ -386,56 +386,65 @@ namespace newFunctions {
 
     // ]]--
 
-    // -- environment indexing
+    // Environment indexing.
 
     // -- creates data at specific points of the player
     // local name
     // local temp_pool
     // local pos
     // local swimming
-    // local index_players_surroundings = function(dtime)
-    // 	for _,player in ipairs(minetest.get_connected_players()) do
+    function index_players_surroundings (dtime: number) {
+    	for (const player of core.get_connected_players()) {
 
-    // 		name = player:get_player_name()
-    // 		temp_pool = pool[name]
+    		const name: string = player.get_player_name()
 
-    // 		pos = player:get_pos()
-    // 		swimming = is_player_swimming(player)
+            const data: PType| undefined = pool.get(name);
+            if (!data) {
+                continue;
+            }
 
-    // 		if swimming then
-    // 			--this is where the legs would be
-    // 			temp_pool.under = minetest.get_node(pos).name
+    		const pos: Vec3 = player.get_pos()
 
-    // 			--legs and head are in the same position
-    // 			pos.y = pos.y + 1.35
-    // 			temp_pool.legs = minetest.get_node(pos).name
-    // 			temp_pool.head = minetest.get_node(pos).name
+            // fixme: a nice global from...somwhere?
+    		// const swimming: boolean = is_player_swimming(player)
 
-    // 			pos.y = pos.y + 0.7
-    // 			temp_pool.swim_check = minetest.get_node(pos).name
-    // 		else
-    // 			pos.y = pos.y - 0.1
-    // 			temp_pool.under = minetest.get_node(pos).name
+    		// if swimming then
+    		// 	--this is where the legs would be
+    		// 	temp_pool.under = minetest.get_node(pos).name
 
-    // 			pos.y = pos.y + 0.6
-    // 			temp_pool.legs = minetest.get_node(pos).name
+    		// 	--legs and head are in the same position
+    		// 	pos.y = pos.y + 1.35
+    		// 	temp_pool.legs = minetest.get_node(pos).name
+    		// 	temp_pool.head = minetest.get_node(pos).name
 
-    // 			pos.y = pos.y + 0.940
-    // 			temp_pool.head = minetest.get_node(pos).name
-    // 		end
+    		// 	pos.y = pos.y + 0.7
+    		// 	temp_pool.swim_check = minetest.get_node(pos).name
+    		// else
 
-    // 		hurt_collide(player,dtime)
+            pos.y = pos.y - 0.1
+            data.under = core.get_node(pos).name
 
-    // 		hurt_inside(player,dtime)
+            pos.y = pos.y + 0.6
+            data.legs = core.get_node(pos).name
 
-    // 		start_fire(player)
+            pos.y = pos.y + 0.940
+            data.head = core.get_node(pos).name
+            // fixme: another part of the global if statement.
+    		//end
 
-    // 		if is_player_on_fire(player) then
-    // 			extinguish(player)
-    // 		end
-    // 		--handle_player_suffocation(player,dtime)
-    // 	end
-    // end
+    		hurt_collide(player,dtime)
+
+    		hurt_inside(player,dtime)
+
+    		start_fire(player)
+
+            // fixme: not sure what's going on here
+    		// if is_player_on_fire(player) then
+    		// 	extinguish(player)
+    		// end
+    		// --handle_player_suffocation(player,dtime)
+        }
+    }
 
     // -- insert all indexing data into main loop
     // minetest.register_globalstep(function(dtime)
