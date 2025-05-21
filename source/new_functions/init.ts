@@ -241,19 +241,7 @@ namespace newFunctions {
         }
     }
 
-
-
-
-    // -- this handles lighting a player on fire
-    // local pos
-    // local name
-    // local damage_nodes
-    // local real_nodes
-    // local a_min
-    // local a_max
-    // local _
-    // local light
-    // local head_pos
+    // This handles lighting a player on fire.
     function start_fire(player: ObjectRef): void {
         const name: string = player.get_player_name();
         if (player.get_hp() <= 0) {
@@ -297,7 +285,7 @@ namespace newFunctions {
         }
 
         if (real_nodes.length > 0) {
-            // fixme: why is this function calling itself?
+            // fixme: call into the fire namespace. Also why is this even in here?
             start_fire(player);
         }
     }
