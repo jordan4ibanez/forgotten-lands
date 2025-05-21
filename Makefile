@@ -6,7 +6,7 @@ defaults:
 	@./scripts/copy_textures.sh
 	@./scripts/copy_sounds.sh
 	@./scripts/copy_models.sh
-	@echo Starting Minetest.
+	@echo Starting Luanti.
 	@luanti --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
 
@@ -20,8 +20,8 @@ windows:
 	@echo Transpiling Forgotten Times into lua...
 	@npx tstl
 	@echo Successfully built Forgotten Times.
-	@echo Starting Minetest.
-	@../../bin/minetest.exe
+	@echo Starting Luanti.
+	@../../bin/luanti.exe
 
 linux:
 	@./scripts/clean_build_dir.sh
@@ -31,7 +31,7 @@ linux:
 	@./scripts/copy_sounds.sh
 	@./scripts/copy_models.sh
 	
-	@echo Starting Minetest.
+	@echo Starting Luanti.
 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
 
 build_linux:
