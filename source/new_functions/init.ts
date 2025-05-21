@@ -319,31 +319,31 @@ namespace newFunctions {
         //     }
         // }
 
-    	-- used for finding a damage node from the center of the player
-    	-- rudementary collision detection
-    	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
-    	a_min = vector.new(
-    		pos.x-0.25,
-    		pos.y-0.85,
-    		pos.z-0.25
-    	)
-    	a_max = vector.new(
-    		pos.x+0.25,
-    		pos.y+0.85,
-    		pos.z+0.25
-    	)
+    	// Used for finding a damage node from the center of the player.
+    	// Rudementary collision detection.
+    	pos.y = pos.y + (player.get_properties().collisionbox![5]/2)
+    	a_min.x = pos.x-0.25;
+    		a_min.y = pos.y-0.85;
+    		a_min.z =pos.z-0.25;
+    	
+    	a_max.x = pos.x+0.25;
+    		a_max.y = pos.y+0.85;
+    		a_max.z = pos.z+0.25;
+    	
 
-    	_,relief_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:extinguish"})
-    	real_nodes = {}
-    	for node_data,is_next_to in pairs(relief_nodes) do
-    		if relief_nodes[node_data] > 0 then
-    			table.insert(real_nodes,node_data)
-    		end
-    	end
+    	const [_, damage_nodes] = core.find_nodes_in_area( a_min,  a_max, ["group:extinguish"])
+    	const real_nodes: string[] = [];
 
-    	if table.getn(real_nodes) > 0 then
-    		put_fire_out(player)
-    	end
+    	for (const [node_data, count] of Object.entries(damage_nodes)) {
+    		if (count > 0) {
+    			real_nodes.push(node_data)
+            }
+        }
+
+    	if (real_nodes.length > 0) {
+            // fixme: call into the fire namespace. Also why is this even in here?
+    		// put_fire_out(player)
+        }
     }
     // --[[
     // -- handle player suffocating inside solid node
