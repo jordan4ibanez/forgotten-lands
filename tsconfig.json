@@ -15,7 +15,7 @@
     "rootDir": "source/",
     "sourceMap": false,
     "downlevelIteration": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
   },
   "include": [
     "source/**/*.ts"
