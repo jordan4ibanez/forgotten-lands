@@ -254,51 +254,52 @@ namespace newFunctions {
     // local _
     // local light
     // local head_pos
-    function start_fire (player: ObjectRef): void {
-    	const name: string = player.get_player_name()
-    	if (player.get_hp() <= 0) {
-    		return
+    function start_fire(player: ObjectRef): void {
+        const name: string = player.get_player_name();
+        if (player.get_hp() <= 0) {
+            return;
         }
 
-    	const pos: Vec3 = player.get_pos()
+        const pos: Vec3 = player.get_pos();
 
         // fixme: This was a nice global weather variable.
-    	// if (weather_type == 2) {
+        // if (weather_type == 2) {
 
-    	// 	const head_pos: Vec3 = vector.copy(pos)
-    	// 	head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
-    	// 	const light: number | null = core.get_node_light(head_pos, 0.5)
+        //     const head_pos: Vec3 = vector.copy(pos);
+        //     head_pos.y = head_pos.y + player.get_properties().collisionbox![5];
+        //     const light: number | null = core.get_node_light(head_pos, 0.5);
 
-    	// 	if (light && light == 15) {
-    	// 		return
+        //     if (light && light == 15) {
+        //         return;
         //     }
         // }
 
-    	-- used for finding a damage node from the center of the player
-    	-- rudementary collision detection
-    	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
-    	a_min = vector.new(
-    		pos.x-0.25,
-    		pos.y-0.85,
-    		pos.z-0.25
-    	)
-    	a_max = vector.new(
-    		pos.x+0.25,
-    		pos.y+0.85,
-    		pos.z+0.25
-    	)
+        // Used for finding a damage node from the center of the player.
+        // Rudementary collision detection.
+        pos.y = pos.y + (player.get_properties().collisionbox![5] / 2);
+        a_min.x = pos.x - 0.25;
+        a_min.y = pos.y - 0.85;
+        a_min.z = pos.z - 0.25;
 
-    	_,damage_nodes = minetest.find_nodes_in_area( a_min,  a_max, {"group:fire"})
-    	real_nodes = {}
-    	for node_data,is_next_to in pairs(damage_nodes) do
-    		if damage_nodes[node_data] > 0 then
-    			table.insert(real_nodes,node_data)
-    		end
-    	end
+        a_max.x = pos.x + 0.25;
+        a_max.y = pos.y + 0.85;
+        a_max.z = pos.z + 0.25;
 
-    	if table.getn(real_nodes) > 0 then
-    		start_fire(player)
-    	end
+
+        const [_, damage_nodes] = core.find_nodes_in_area(a_min, a_max, ["group:fire"]);
+
+        const real_nodes: string[] = [];
+
+        for (const [node_data, count] of Object.entries(damage_nodes)) {
+            if (count > 0) {
+                real_nodes.push(node_data);
+            }
+        }
+
+        if (real_nodes.length > 0) {
+            // fixme: why is this function calling itself?
+            start_fire(player);
+        }
     }
 
     // -- this handles extinguishing a fire
