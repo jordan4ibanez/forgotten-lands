@@ -2,14 +2,15 @@ import * as FS from "node:fs";
 import * as Exec from "node:child_process";
 
 //? Check if the project should be fully rebuilt.
-const [REBUILD_CODE, COPY_MEDIA] = (() => {
+const [REBUILD_CODE, COPY_MEDIA, CREATE_RELEASE] = (() => {
     let rebuild: boolean = false;
     let copyMedia: boolean = false;
+    let createRelease: boolean = false;
 
     // Certain scenarios need to be captured.
     const args = process.argv.slice(2);
-    if (!args) return [false, false];
-    if (args.length == 0) return [false, false];
+    if (!args) return [false, false, false];
+    if (args.length == 0) return [false, false, false];
 
     // Now let's see if we have some arguments.
     args.forEach((arg: string) => {
@@ -17,10 +18,12 @@ const [REBUILD_CODE, COPY_MEDIA] = (() => {
             rebuild = true;
         } else if (arg === "--copy-media") {
             copyMedia = true;
+        } else if (arg === "--create-release") {
+            createRelease = true;
         }
     });
 
-    return [rebuild, copyMedia];
+    return [rebuild, copyMedia, createRelease];
 })();
 
 //? Remove the mods directory and recompile the entire program.
