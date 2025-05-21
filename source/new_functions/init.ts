@@ -300,21 +300,25 @@ namespace newFunctions {
     // local _
     // local light
     // local head_pos
-    local extinguish = function(player)
-    	name = player:get_player_name()
-    	if player:get_hp() <= 0 then
+    function extinguish  (player: ObjectRef) : void {
+    	const name: string = player.get_player_name()
+    	if (player.get_hp() <= 0) {
     		return
-    	end
-    	pos = player:get_pos()
-    	if weather_type == 2 then
-    		head_pos = table.copy(pos)
-    		head_pos.y = head_pos.y + player:get_properties().collisionbox[5]
-    		light = minetest.get_node_light(head_pos, 0.5)
-    		if light and light == 15 then
-    			put_fire_out(player)
-    			return
-    		end
-    	end
+        }
+
+    	const pos: Vec3 = player.get_pos()
+
+        // fixme: This was a nice global weather variable.
+    	// if (weather_type == 2) {
+    	// 	const head_pos: Vec3 = vector.copy(pos)
+    	// 	head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
+    	// 	const light: number | null = core.get_node_light(head_pos, 0.5)
+    	// 	if (light && light == 15) {
+    	// 		put_fire_out(player)
+    	// 		return
+        //     }
+        // }
+
     	-- used for finding a damage node from the center of the player
     	-- rudementary collision detection
     	pos.y = pos.y + (player:get_properties().collisionbox[5]/2)
@@ -340,7 +344,7 @@ namespace newFunctions {
     	if table.getn(real_nodes) > 0 then
     		put_fire_out(player)
     	end
-    end
+    }
     // --[[
     // -- handle player suffocating inside solid node
     // environment_class.handle_player_suffocation = function(player,dtime)
