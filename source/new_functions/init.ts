@@ -300,49 +300,49 @@ namespace newFunctions {
     // local _
     // local light
     // local head_pos
-    function extinguish  (player: ObjectRef) : void {
-    	const name: string = player.get_player_name()
-    	if (player.get_hp() <= 0) {
-    		return
+    function extinguish(player: ObjectRef): void {
+        const name: string = player.get_player_name();
+        if (player.get_hp() <= 0) {
+            return;
         }
 
-    	const pos: Vec3 = player.get_pos()
+        const pos: Vec3 = player.get_pos();
 
         // fixme: This was a nice global weather variable.
-    	// if (weather_type == 2) {
-    	// 	const head_pos: Vec3 = vector.copy(pos)
-    	// 	head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
-    	// 	const light: number | null = core.get_node_light(head_pos, 0.5)
-    	// 	if (light && light == 15) {
-    	// 		put_fire_out(player)
-    	// 		return
+        // if (weather_type == 2) {
+        // 	const head_pos: Vec3 = vector.copy(pos)
+        // 	head_pos.y = head_pos.y + player.get_properties().collisionbox![5]
+        // 	const light: number | null = core.get_node_light(head_pos, 0.5)
+        // 	if (light && light == 15) {
+        // 		put_fire_out(player)
+        // 		return
         //     }
         // }
 
-    	// Used for finding a damage node from the center of the player.
-    	// Rudementary collision detection.
-    	pos.y = pos.y + (player.get_properties().collisionbox![5]/2)
-    	a_min.x = pos.x-0.25;
-    		a_min.y = pos.y-0.85;
-    		a_min.z =pos.z-0.25;
-    	
-    	a_max.x = pos.x+0.25;
-    		a_max.y = pos.y+0.85;
-    		a_max.z = pos.z+0.25;
-    	
+        // Used for finding a damage node from the center of the player.
+        // Rudementary collision detection.
+        pos.y = pos.y + (player.get_properties().collisionbox![5] / 2);
+        a_min.x = pos.x - 0.25;
+        a_min.y = pos.y - 0.85;
+        a_min.z = pos.z - 0.25;
 
-    	const [_, damage_nodes] = core.find_nodes_in_area( a_min,  a_max, ["group:extinguish"])
-    	const real_nodes: string[] = [];
+        a_max.x = pos.x + 0.25;
+        a_max.y = pos.y + 0.85;
+        a_max.z = pos.z + 0.25;
 
-    	for (const [node_data, count] of Object.entries(damage_nodes)) {
-    		if (count > 0) {
-    			real_nodes.push(node_data)
+
+        const [_, damage_nodes] = core.find_nodes_in_area(a_min, a_max, ["group:extinguish"]);
+        const real_nodes: string[] = [];
+
+        for (const [node_data, count] of Object.entries(damage_nodes)) {
+            if (count > 0) {
+                real_nodes.push(node_data);
             }
         }
 
-    	if (real_nodes.length > 0) {
+        if (real_nodes.length > 0) {
             // fixme: call into the fire namespace. Also why is this even in here?
-    		// put_fire_out(player)
+            // put_fire_out(player)
         }
     }
     // --[[
@@ -393,78 +393,61 @@ namespace newFunctions {
     // local temp_pool
     // local pos
     // local swimming
-    function index_players_surroundings (dtime: number) {
-    	for (const player of core.get_connected_players()) {
+    function index_players_surroundings(dtime: number) {
+        for (const player of core.get_connected_players()) {
 
-    		const name: string = player.get_player_name()
+            const name: string = player.get_player_name();
 
-            const data: PType| undefined = pool.get(name);
+            const data: PType | undefined = pool.get(name);
             if (!data) {
                 continue;
             }
 
-    		const pos: Vec3 = player.get_pos()
+            const pos: Vec3 = player.get_pos();
 
             // fixme: a nice global from...somwhere?
-    		// const swimming: boolean = is_player_swimming(player)
+            // const swimming: boolean = is_player_swimming(player)
 
-    		// if swimming then
-    		// 	--this is where the legs would be
-    		// 	temp_pool.under = minetest.get_node(pos).name
+            // if swimming then
+            // 	--this is where the legs would be
+            // 	temp_pool.under = minetest.get_node(pos).name
 
-    		// 	--legs and head are in the same position
-    		// 	pos.y = pos.y + 1.35
-    		// 	temp_pool.legs = minetest.get_node(pos).name
-    		// 	temp_pool.head = minetest.get_node(pos).name
+            // 	--legs and head are in the same position
+            // 	pos.y = pos.y + 1.35
+            // 	temp_pool.legs = minetest.get_node(pos).name
+            // 	temp_pool.head = minetest.get_node(pos).name
 
-    		// 	pos.y = pos.y + 0.7
-    		// 	temp_pool.swim_check = minetest.get_node(pos).name
-    		// else
+            // 	pos.y = pos.y + 0.7
+            // 	temp_pool.swim_check = minetest.get_node(pos).name
+            // else
 
-            pos.y = pos.y - 0.1
-            data.under = core.get_node(pos).name
+            pos.y = pos.y - 0.1;
+            data.under = core.get_node(pos).name;
 
-            pos.y = pos.y + 0.6
-            data.legs = core.get_node(pos).name
+            pos.y = pos.y + 0.6;
+            data.legs = core.get_node(pos).name;
 
-            pos.y = pos.y + 0.940
-            data.head = core.get_node(pos).name
+            pos.y = pos.y + 0.940;
+            data.head = core.get_node(pos).name;
             // fixme: another part of the global if statement.
-    		//end
+            //end
 
-    		hurt_collide(player,dtime)
+            hurt_collide(player, dtime);
 
-    		hurt_inside(player,dtime)
+            hurt_inside(player, dtime);
 
-    		start_fire(player)
+            start_fire(player);
 
             // fixme: not sure what's going on here
-    		// if is_player_on_fire(player) then
-    		// 	extinguish(player)
-    		// end
-    		// --handle_player_suffocation(player,dtime)
+            // if is_player_on_fire(player) then
+            // 	extinguish(player)
+            // end
+            // --handle_player_suffocation(player,dtime)
         }
     }
 
-    // -- insert all indexing data into main loop
-    // minetest.register_globalstep(function(dtime)
-    // 	index_players_surroundings(dtime)
-    // end)
-
-    // -- a custom helper function
-    // minetest.get_nodedef = function(nodename, fieldname)
-    // 	if not minetest.registered_nodes[nodename] then
-    // 		return nil
-    // 	end
-    // 	return minetest.registered_nodes[nodename][fieldname]
-    // end
-
-    // -- a custom helper function
-    // minetest.get_itemdef = function(itemname, fieldname)
-    // 	if not minetest.registered_items[itemname] then
-    // 		return nil
-    // 	end
-    // 	return minetest.registered_items[itemname][fieldname]
-    // end
-
+    // Insert all indexing data into main loop.
+    core.register_globalstep((dtime: number) => {
+        index_players_surroundings(dtime);
+    });
 }
