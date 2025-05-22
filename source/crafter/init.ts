@@ -1,7 +1,7 @@
 namespace main {
-	const path: string | null = core.get_modpath("crafter_main");
+	const path: string | null = core.get_modpath("crafter");
 	if (!path) {
-		throw new Error("crafter_main doesn't exist!?");
+		throw new Error("crafter doesn't exist!?");
 	}
 
 	utility.loadFiles([
