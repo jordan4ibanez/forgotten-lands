@@ -28,10 +28,9 @@ namespace main {
 		};
 
 		node: MapNode = { name: "", prob: 3, param2: 0, force_place: false };
-		// itemstring: string = ""
-		// node: string = "";
-		meta: MetaData | null = null;
+		meta?: MetaData;
 		floats: boolean = false;
+		liquidtype?: typeof LiquidType;
 
 		set_node(node: MapNode, meta: MetaRef | MetaData): void {
 			node.param2 = node.param2 || 0;
@@ -79,7 +78,7 @@ namespace main {
 			this.floats = core.get_item_group(node.name, "float") != 0;
 
 			// -- Save liquidtype for falling water
-			// self.liquidtype = def.liquidtype
+			this.liquidtype = def.liquidtype;
 
 			// -- Set up entity visuals
 			// -- For compatibility with older clients we continue to use "item" visual
