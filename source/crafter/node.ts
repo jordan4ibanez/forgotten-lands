@@ -96,16 +96,16 @@ const drops: { [id: string]: string[] } = {
 	ruby: ["main:ruby"],
 };
 
-// local levels = {
-// 	["coal"]=1,
-// 	["iron"]=2,
-// 	["lapis"]=3,
-// 	["gold"]=3,
-// 	["diamond"]=4,
-// 	["emerald"]=5,
-// 	["sapphire"]=6,
-// 	["ruby"]=7,
-// }
+const levels: { [id: string]: number } = {
+	coal: 1,
+	iron: 2,
+	lapis: 3,
+	gold: 3,
+	diamond: 4,
+	emerald: 5,
+	sapphire: 6,
+	ruby: 7,
+};
 
 // local level = 0
 // local experience
