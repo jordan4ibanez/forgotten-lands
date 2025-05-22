@@ -85,16 +85,16 @@ const ores: { [id: string]: string[] } = {
 	],
 };
 
-// local drops ={
-// 	["coal"]={"main:coal"},
-// 	["iron"]={"main:ironore"},
-// 	["lapis"]={"main:lapis"},
-// 	["gold"]={"main:goldore"},
-// 	["diamond"]={"main:diamond"},
-// 	["emerald"]={"main:emerald"},
-// 	["sapphire"]={"main:sapphire"},
-// 	["ruby"]={"main:ruby"},
-// }
+const drops: { [id: string]: string[] } = {
+	coal: ["main:coal"],
+	iron: ["main:ironore"],
+	lapis: ["main:lapis"],
+	gold: ["main:goldore"],
+	diamond: ["main:diamond"],
+	emerald: ["main:emerald"],
+	sapphire: ["main:sapphire"],
+	ruby: ["main:ruby"],
+};
 
 // local levels = {
 // 	["coal"]=1,
