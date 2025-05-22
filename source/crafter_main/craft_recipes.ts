@@ -5,47 +5,47 @@ namespace main {
 
 //? Cooking.
 core.register_craft({
-	type = "cooking",
-	output = "main:diamond",
-	recipe = "main:diamondore",
-	cooktime = 12,
+	type : "cooking",
+	output:"main:diamond",
+	recipe:"main:diamondore",
+	cooktime:12,
 })
 core.register_craft({
-	type = "cooking",
-	output = "main:coal 4",
-	recipe = "main:coalore",
-	cooktime = 3,
+	type:"cooking",
+	output:"main:coal 4",
+	recipe:"main:coalore",
+	cooktime:3,
 })
 core.register_craft({
-	type = "cooking",
-	output = "main:charcoal",
-	recipe = "main:tree",
-	cooktime = 2,
+	type:"cooking",
+	output:"main:charcoal",
+	recipe:"main:tree",
+	cooktime:2,
 })
 core.register_craft({
-	type = "cooking",
-	output = "main:gold",
-	recipe = "main:goldore",
-	cooktime = 9,
+	type:"cooking",
+	output:"main:gold",
+	recipe:"main:goldore",
+	cooktime:9,
 })
 core.register_craft({
-	type = "cooking",
-	output = "main:iron",
-	recipe = "main:ironore",
-	cooktime = 6,
+	type:"cooking",
+	output:"main:iron",
+	recipe:"main:ironore",
+	cooktime:6,
 })
 core.register_craft({
-	type = "cooking",
-	output = "main:stone",
-	recipe = "main:cobble",
-	cooktime = 2,
+	type:"cooking",
+	output:"main:stone",
+	recipe:"main:cobble",
+	cooktime:2,
 })
 
 core.register_craft({
-	type = "cooking",
-	output = "main:glass",
-	recipe = "main:sand",
-	cooktime = 1,
+	type:"cooking",
+	output:"main:glass",
+	recipe:"main:sand",
+	cooktime:1,
 })
 
 
