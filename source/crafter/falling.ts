@@ -124,48 +124,52 @@ namespace main {
 				"4dir": true,
 			};
 
-
-			if (def.drawtype && drawtypes[def.drawtype] && def.paramtype2 && p2types[def.paramtype2] && def.use_texture_alpha != TextureAlpha.blend) {
-            
-			// 	-- Calculate size of falling node
-			// 	local s = vector.zero()
-			// 	s.x = (def.visual_scale or 1) * 0.667
-			// 	s.y = s.x
-			// 	s.z = s.x
-			// 	-- Compensate for wield_scale
-			// 	if def.wield_scale then
-			// 		s.x = s.x / def.wield_scale.x
-			// 		s.y = s.y / def.wield_scale.y
-			// 		s.z = s.z / def.wield_scale.z
-			// 	end
-			// 	self.object:set_properties({
-			// 		is_visible = true,
-			// 		visual = "item",
-			// 		wield_item = node.name,
-			// 		visual_size = s,
-			// 		glow = def.light_source,
-			// 	})
-			// 	-- Rotate as needed
-			// 	if def.paramtype2 == "facedir" then
-			// 		local fdir = node.param2 % 32 % 24
-			// 		local euler = facedir_to_euler[fdir + 1]
-			// 		if euler then
-			// 			self.object:set_rotation(euler)
-			// 		end
-			// 	elseif def.paramtype2 == "4dir" then
-			// 		local fdir = node.param2 % 4
-			// 		local euler = facedir_to_euler[fdir + 1]
-			// 		if euler then
-			// 			self.object:set_rotation(euler)
-			// 		end
-			// 	end
-			// elseif def.drawtype ~= "airlike" then
-			// 	self.object:set_properties({
-			// 		is_visible = true,
-			// 		node = node,
-			// 		glow = def.light_source,
-			// 	})
-            }
+			if (
+				def.drawtype &&
+				drawtypes[def.drawtype] &&
+				def.paramtype2 &&
+				p2types[def.paramtype2] &&
+				def.use_texture_alpha != TextureAlpha.blend
+			) {
+				// Calculate size of falling node.
+				const s: Vec3 = vector.zero();
+				s.x = (def.visual_scale || 1) * 0.667;
+				s.y = s.x;
+				s.z = s.x;
+				// Compensate for wield_scale.
+				if (def.wield_scale) {
+					s.x = s.x / def.wield_scale.x;
+					s.y = s.y / def.wield_scale.y;
+					s.z = s.z / def.wield_scale.z;
+				}
+				// 	self.object:set_properties({
+				// 		is_visible = true,
+				// 		visual = "item",
+				// 		wield_item = node.name,
+				// 		visual_size = s,
+				// 		glow = def.light_source,
+				// 	})
+				// 	-- Rotate as needed
+				// 	if def.paramtype2 == "facedir" then
+				// 		local fdir = node.param2 % 32 % 24
+				// 		local euler = facedir_to_euler[fdir + 1]
+				// 		if euler then
+				// 			self.object:set_rotation(euler)
+				// 		end
+				// 	elseif def.paramtype2 == "4dir" then
+				// 		local fdir = node.param2 % 4
+				// 		local euler = facedir_to_euler[fdir + 1]
+				// 		if euler then
+				// 			self.object:set_rotation(euler)
+				// 		end
+				// 	end
+				// elseif def.drawtype ~= "airlike" then
+				// 	self.object:set_properties({
+				// 		is_visible = true,
+				// 		node = node,
+				// 		glow = def.light_source,
+				// 	})
+			}
 
 			// -- Set collision box (certain nodeboxes only for now)
 			// local nb_types = {fixed=true, leveled=true, connected=true}
