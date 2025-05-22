@@ -2,8 +2,6 @@
 // Crafting recipes.
 
 namespace main {
-	const CraftRecipeType = types.CraftRecipeType;
-
 	//? Cooking.
 
 	core.register_craft({
