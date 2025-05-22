@@ -426,31 +426,6 @@ globalEnvironment.DamageGroup = {
 	bone: "bone",
 };
 
-globalEnvironment.CraftRecipeType = {
-	shapeless: "shapeless",
-	toolrepair: "toolrepair",
-	cooking: "cooking",
-	fuel: "fuel",
-};
-
-globalEnvironment.EntityVisual = {
-	cube: "cube",
-	sprite: "sprite",
-	upright_sprite: "upright_sprite",
-	mesh: "mesh",
-	wielditem: "wielditem",
-	item: "item",
-};
-
-globalEnvironment.LogLevel = {
-	none: "none",
-	error: "error",
-	warning: "warning",
-	action: "action",
-	info: "info",
-	verbose: "verbose",
-};
-
 namespace types {
 	/** Typescript Luaentity. :) */
 	export abstract class Entity implements LuaEntity {
