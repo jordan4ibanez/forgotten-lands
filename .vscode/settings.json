@@ -22,6 +22,6 @@
     "prettier.enable": true,
 	"prettier.bracketSpacing": true,
 	"prettier.tabWidth": 4,
-	"prettier.useTabs": false,
+	"prettier.useTabs": true,
     "typescript.format.semicolons": "insert",
 }
