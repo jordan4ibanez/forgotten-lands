@@ -2543,18 +2543,18 @@ enum CraftRecipeType {
 }
 
 enum LiquidType {
-	none: LiquidType;
-	source: LiquidType;
-	flowing: LiquidType;
+	none,
+	source,
+	flowing,
 }
 
 enum NodeBoxConnections {
-	top: NodeBoxConnections;
-	bottom: NodeBoxConnections;
-	front: NodeBoxConnections;
-	left: NodeBoxConnections;
-	back: NodeBoxConnections;
-	right: NodeBoxConnections;
+	top,
+	bottom,
+	front,
+	left,
+	back,
+	right,
 }
 
 enum CraftCheckType {
