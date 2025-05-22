@@ -325,10 +325,12 @@ namespace main {
 
 	utility.registerTSEntity(FallingNode);
 
+    // todo: fix this mess
+
 	core.register_on_joinplayer((player: ObjectRef) => {
 		const pos = player.get_pos();
 		pos.y += 5;
-        
+
 
 		core.spawn_falling_node(player.get_pos());
 
