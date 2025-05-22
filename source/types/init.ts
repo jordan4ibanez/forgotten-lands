@@ -4,7 +4,7 @@ let globalEnvironment = _G as unknown as {
 	[key: string]: { [key: string]: string };
 };
 
-globalEnvironment["EntityVisual"] = {
+globalEnvironment.EntityVisual = {
 	cube: "cube",
 	sprite: "sprite",
 	upright_sprite: "upright_sprite",
@@ -13,7 +13,7 @@ globalEnvironment["EntityVisual"] = {
 	item: "item",
 };
 
-globalEnvironment["SchematicRotation"] = {
+globalEnvironment.SchematicRotation = {
 	zero: "0",
 	ninety: "90",
 	oneEighty: "180",
@@ -21,36 +21,36 @@ globalEnvironment["SchematicRotation"] = {
 	random: "random",
 };
 
-globalEnvironment["SchematicPlacementFlag"] = {
+globalEnvironment.SchematicPlacementFlag = {
 	place_center_x: "place_center_x",
 	place_center_y: "place_center_y",
 	place_center_z: "place_center_z",
 };
 
-globalEnvironment["SchematicFormat"] = {
+globalEnvironment.SchematicFormat = {
 	mts: "mts",
 	lua: "lua",
 };
 
-globalEnvironment["SchematicSerializationOption"] = {
+globalEnvironment.SchematicSerializationOption = {
 	lua_use_comments: "lua_use_comments",
 	lua_num_indent_spaces: "lua_num_indent_spaces",
 };
 
-globalEnvironment["SchematicReadOptionYSliceOption"] = {
+globalEnvironment.SchematicReadOptionYSliceOption = {
 	none: "none",
 	low: "low",
 	all: "all",
 };
 
-globalEnvironment["HTTPRequestMethod"] = {
+globalEnvironment.HTTPRequestMethod = {
 	GET: "GET",
 	POST: "POST",
 	PUT: "PUT",
 	DELETE: "DELETE",
 };
 
-globalEnvironment["OreType"] = {
+globalEnvironment.OreType = {
 	scatter: "scatter",
 	sheet: "sheet",
 	puff: "puff",
@@ -59,23 +59,23 @@ globalEnvironment["OreType"] = {
 	stratum: "stratum",
 };
 
-globalEnvironment["OreFlags"] = {
+globalEnvironment.OreFlags = {
 	puff_cliffs: "puff_cliffs",
 	puff_additive_composition: "puff_additive_composition",
 };
 
-globalEnvironment["NoiseFlags"] = {
+globalEnvironment.NoiseFlags = {
 	defaults: "defaults",
 	eased: "eased",
 	absvalue: "absvalue",
 };
 
-globalEnvironment["DecorationType"] = {
+globalEnvironment.DecorationType = {
 	simple: "simple",
 	schematic: "schematic",
 };
 
-globalEnvironment["DecorationFlags"] = {
+globalEnvironment.DecorationFlags = {
 	liquid_surface: "liquid_surface",
 	force_placement: "force_placement",
 	all_floors: "all_floors",
@@ -85,12 +85,12 @@ globalEnvironment["DecorationFlags"] = {
 	place_center_z: "place_center_z",
 };
 
-globalEnvironment["ParamType1"] = {
+globalEnvironment.ParamType1 = {
 	light: "light",
 	none: "none",
 };
 
-globalEnvironment["ParamType2"] = {
+globalEnvironment.ParamType2 = {
 	flowingliquid: "flowingliquid",
 	wallmounted: "wallmounted",
 	facedir: "facedir",
@@ -106,7 +106,7 @@ globalEnvironment["ParamType2"] = {
 	colordegrotate: "colordegrotate",
 };
 
-globalEnvironment["Drawtype"] = {
+globalEnvironment.Drawtype = {
 	normal: "normal",
 	airlike: "airlike",
 	liquid: "liquid",
@@ -127,14 +127,14 @@ globalEnvironment["Drawtype"] = {
 	plantlike_rooted: "plantlike_rooted",
 };
 
-globalEnvironment["Nodeboxtype"] = {
+globalEnvironment.Nodeboxtype = {
 	regular: "regular",
 	fixed: "fixed",
 	wallmounted: "wallmounted",
 	connected: "connected",
 };
 
-globalEnvironment["LogLevel"] = {
+globalEnvironment.LogLevel = {
 	none: "none",
 	error: "error",
 	warning: "warning",
@@ -143,19 +143,19 @@ globalEnvironment["LogLevel"] = {
 	verbose: "verbose",
 };
 
-globalEnvironment["TextureAlpha"] = {
+globalEnvironment.TextureAlpha = {
 	opaque: "opaque",
 	clip: "clip",
 	blend: "blend",
 };
 
-globalEnvironment["LiquidType"] = {
+globalEnvironment.LiquidType = {
 	none: "none",
 	source: "source",
 	flowing: "flowing",
 };
 
-globalEnvironment["NodeBoxConnections"] = {
+globalEnvironment.NodeBoxConnections = {
 	top: "top",
 	bottom: "bottom",
 	front: "front",
@@ -164,20 +164,20 @@ globalEnvironment["NodeBoxConnections"] = {
 	right: "right",
 };
 
-globalEnvironment["CraftRecipeType"] = {
+globalEnvironment.CraftRecipeType = {
 	shapeless: "shapeless",
 	toolrepair: "toolrepair",
 	cooking: "cooking",
 	fuel: "fuel",
 };
 
-globalEnvironment["CraftCheckType"] = {
+globalEnvironment.CraftCheckType = {
 	normal: "normal",
 	cooking: "cooking",
 	fuel: "fuel",
 };
 
-globalEnvironment["HPChangeReasonType"] = {
+globalEnvironment.HPChangeReasonType = {
 	set_hp: "set_hp",
 	punch: "punch",
 	fall: "fall",
@@ -186,7 +186,7 @@ globalEnvironment["HPChangeReasonType"] = {
 	respawn: "respawn",
 };
 
-globalEnvironment["CheatType"] = {
+globalEnvironment.CheatType = {
 	moved_too_fast: "moved_too_fast",
 	interacted_too_far: "interacted_too_far",
 	interacted_with_self: "interacted_with_self",
@@ -196,12 +196,12 @@ globalEnvironment["CheatType"] = {
 	dug_too_fast: "dug_too_fast",
 };
 
-globalEnvironment["ClearObjectsOptions"] = {
+globalEnvironment.ClearObjectsOptions = {
 	full: "full",
 	quick: "quick",
 };
 
-globalEnvironment["GenNotifyFlags"] = {
+globalEnvironment.GenNotifyFlags = {
 	dungeon: "dungeon",
 	temple: "temple",
 	cave_begin: "cave_begin",
@@ -211,31 +211,31 @@ globalEnvironment["GenNotifyFlags"] = {
 	decoration: "decoration",
 };
 
-globalEnvironment["SearchAlgorithm"] = {
+globalEnvironment.SearchAlgorithm = {
 	aStarNoprefetch: "A*_noprefetch",
 	aStar: "A*",
 	dijkstra: "Dijkstra",
 };
 
-globalEnvironment["SkyParametersType"] = {
+globalEnvironment.SkyParametersType = {
 	regular: "regular",
 	skybox: "skybox",
 	plain: "plain",
 };
 
-globalEnvironment["SkyParametersFogTintType"] = {
+globalEnvironment.SkyParametersFogTintType = {
 	custom: "custom",
 	default: "default",
 };
 
-globalEnvironment["MinimapType"] = {
+globalEnvironment.MinimapType = {
 	off: "off",
 	surface: "surface",
 	radar: "radar",
 	texture: "texture",
 };
 
-globalEnvironment["HudElementType"] = {
+globalEnvironment.HudElementType = {
 	image: "image",
 	text: "text",
 	statbar: "statbar",
@@ -246,23 +246,23 @@ globalEnvironment["HudElementType"] = {
 	minimap: "minimap",
 };
 
-globalEnvironment["HudReplaceBuiltinOption"] = {
+globalEnvironment.HudReplaceBuiltinOption = {
 	breath: "breath",
 	health: "health",
 };
 
-globalEnvironment["ParseRelativeNumberArgument"] = {
+globalEnvironment.ParseRelativeNumberArgument = {
 	number: "<number>",
 	relativeToPlus: "~<number>",
 	relativeTo: "~",
 };
 
-globalEnvironment["CompressionMethod"] = {
+globalEnvironment.CompressionMethod = {
 	deflate: "deflate",
 	zstd: "zstd",
 };
 
-globalEnvironment["RotateAndPlaceOrientationFlag"] = {
+globalEnvironment.RotateAndPlaceOrientationFlag = {
 	invert_wall: "invert_wall",
 	force_wall: "force_wall",
 	force_ceiling: "force_ceiling",
@@ -270,44 +270,44 @@ globalEnvironment["RotateAndPlaceOrientationFlag"] = {
 	force_facedir: "force_facedir",
 };
 
-globalEnvironment["BlockStatusCondition"] = {
+globalEnvironment.BlockStatusCondition = {
 	unknown: "unknown",
 	emerging: "emerging",
 	loaded: "loaded",
 	active: "active",
 };
 
-globalEnvironment["TileAnimationType"] = {
+globalEnvironment.TileAnimationType = {
 	vertical_frames: "vertical_frames",
 	sheet_2d: "sheet_2d",
 };
 
-globalEnvironment["ParticleSpawnerTweenStyle"] = {
+globalEnvironment.ParticleSpawnerTweenStyle = {
 	fwd: "fwd",
 	rev: "rev",
 	pulse: "pulse",
 	flicker: "flicker",
 };
 
-globalEnvironment["ParticleSpawnerTextureBlend"] = {
+globalEnvironment.ParticleSpawnerTextureBlend = {
 	alpha: "alpha",
 	add: "add",
 	screen: "screen",
 	sub: "sub",
 };
 
-globalEnvironment["ParticleSpawnerAttractionType"] = {
+globalEnvironment.ParticleSpawnerAttractionType = {
 	none: "none",
 	point: "point",
 	line: "line",
 	plane: "plane",
 };
 
-globalEnvironment["AreaStoreType"] = {
+globalEnvironment.AreaStoreType = {
 	libSpatial: "LibSpatial",
 };
 
-globalEnvironment["TexturePoolComponentFade"] = {
+globalEnvironment.TexturePoolComponentFade = {
 	in: "in",
 	out: "out",
 };
@@ -315,7 +315,7 @@ globalEnvironment["TexturePoolComponentFade"] = {
 /**
  * Available keyboard & mouse keys.
  */
-globalEnvironment["_Keys"] = {
+globalEnvironment._Keys = {
 	up: "up",
 	down: "down",
 	left: "left",
