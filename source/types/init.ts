@@ -14,6 +14,7 @@ globalEnvironment.EntityVisual = {
 	item: "item",
 };
 
+//! Done.
 globalEnvironment.SchematicRotation = {
 	zero: "0",
 	ninety: "90",
@@ -22,28 +23,33 @@ globalEnvironment.SchematicRotation = {
 	random: "random",
 };
 
+//! Done.
 globalEnvironment.SchematicPlacementFlag = {
 	place_center_x: "place_center_x",
 	place_center_y: "place_center_y",
 	place_center_z: "place_center_z",
 };
 
+//! Done.
 globalEnvironment.SchematicFormat = {
 	mts: "mts",
 	lua: "lua",
 };
 
+//! Done.
 globalEnvironment.SchematicSerializationOption = {
 	lua_use_comments: "lua_use_comments",
 	lua_num_indent_spaces: "lua_num_indent_spaces",
 };
 
+//! Done.
 globalEnvironment.SchematicReadOptionYSliceOption = {
 	none: "none",
 	low: "low",
 	all: "all",
 };
 
+//! Done.
 globalEnvironment.HTTPRequestMethod = {
 	GET: "GET",
 	POST: "POST",
@@ -51,6 +57,7 @@ globalEnvironment.HTTPRequestMethod = {
 	DELETE: "DELETE",
 };
 
+//! Done.
 globalEnvironment.OreType = {
 	scatter: "scatter",
 	sheet: "sheet",
@@ -60,22 +67,26 @@ globalEnvironment.OreType = {
 	stratum: "stratum",
 };
 
+//! Done.
 globalEnvironment.OreFlags = {
 	puff_cliffs: "puff_cliffs",
 	puff_additive_composition: "puff_additive_composition",
 };
 
+//! Done.
 globalEnvironment.NoiseFlags = {
 	defaults: "defaults",
 	eased: "eased",
 	absvalue: "absvalue",
 };
 
+//! Done.
 globalEnvironment.DecorationType = {
 	simple: "simple",
 	schematic: "schematic",
 };
 
+//! Done.
 globalEnvironment.DecorationFlags = {
 	liquid_surface: "liquid_surface",
 	force_placement: "force_placement",
@@ -86,11 +97,13 @@ globalEnvironment.DecorationFlags = {
 	place_center_z: "place_center_z",
 };
 
+//! Done.
 globalEnvironment.ParamType1 = {
 	light: "light",
 	none: "none",
 };
 
+//! Done.
 globalEnvironment.ParamType2 = {
 	flowingliquid: "flowingliquid",
 	wallmounted: "wallmounted",
@@ -107,6 +120,7 @@ globalEnvironment.ParamType2 = {
 	colordegrotate: "colordegrotate",
 };
 
+//! Done.
 globalEnvironment.Drawtype = {
 	normal: "normal",
 	airlike: "airlike",
@@ -128,6 +142,7 @@ globalEnvironment.Drawtype = {
 	plantlike_rooted: "plantlike_rooted",
 };
 
+//! Done.
 globalEnvironment.Nodeboxtype = {
 	regular: "regular",
 	fixed: "fixed",
@@ -135,6 +150,7 @@ globalEnvironment.Nodeboxtype = {
 	connected: "connected",
 };
 
+//! Done.
 globalEnvironment.LogLevel = {
 	none: "none",
 	error: "error",
@@ -144,18 +160,21 @@ globalEnvironment.LogLevel = {
 	verbose: "verbose",
 };
 
+//! Done.
 globalEnvironment.TextureAlpha = {
 	opaque: "opaque",
 	clip: "clip",
 	blend: "blend",
 };
 
+//! Done.
 globalEnvironment.LiquidType = {
 	none: "none",
 	source: "source",
 	flowing: "flowing",
 };
 
+//! Done.
 globalEnvironment.NodeBoxConnections = {
 	top: "top",
 	bottom: "bottom",
@@ -165,6 +184,7 @@ globalEnvironment.NodeBoxConnections = {
 	right: "right",
 };
 
+//! Done.
 globalEnvironment.CraftRecipeType = {
 	shapeless: "shapeless",
 	toolrepair: "toolrepair",
@@ -172,12 +192,14 @@ globalEnvironment.CraftRecipeType = {
 	fuel: "fuel",
 };
 
+//! Done.
 globalEnvironment.CraftCheckType = {
 	normal: "normal",
 	cooking: "cooking",
 	fuel: "fuel",
 };
 
+//! Done.
 globalEnvironment.HPChangeReasonType = {
 	set_hp: "set_hp",
 	punch: "punch",
@@ -187,6 +209,7 @@ globalEnvironment.HPChangeReasonType = {
 	respawn: "respawn",
 };
 
+//! Done.
 globalEnvironment.CheatType = {
 	moved_too_fast: "moved_too_fast",
 	interacted_too_far: "interacted_too_far",
@@ -197,11 +220,13 @@ globalEnvironment.CheatType = {
 	dug_too_fast: "dug_too_fast",
 };
 
+//! Done.
 globalEnvironment.ClearObjectsOptions = {
 	full: "full",
 	quick: "quick",
 };
 
+//! Done.
 globalEnvironment.GenNotifyFlags = {
 	dungeon: "dungeon",
 	temple: "temple",
@@ -212,23 +237,27 @@ globalEnvironment.GenNotifyFlags = {
 	decoration: "decoration",
 };
 
+//! Done.
 globalEnvironment.SearchAlgorithm = {
 	aStarNoprefetch: "A*_noprefetch",
 	aStar: "A*",
 	dijkstra: "Dijkstra",
 };
 
+//! Done.
 globalEnvironment.SkyParametersType = {
 	regular: "regular",
 	skybox: "skybox",
 	plain: "plain",
 };
 
+//! Done.
 globalEnvironment.SkyParametersFogTintType = {
 	custom: "custom",
 	default: "default",
 };
 
+//! Done.
 globalEnvironment.MinimapType = {
 	off: "off",
 	surface: "surface",
@@ -236,6 +265,7 @@ globalEnvironment.MinimapType = {
 	texture: "texture",
 };
 
+//! Done.
 globalEnvironment.HudElementType = {
 	image: "image",
 	text: "text",
@@ -247,22 +277,26 @@ globalEnvironment.HudElementType = {
 	minimap: "minimap",
 };
 
+//! Done.
 globalEnvironment.HudReplaceBuiltinOption = {
 	breath: "breath",
 	health: "health",
 };
 
+//! Done.
 globalEnvironment.ParseRelativeNumberArgument = {
 	number: "<number>",
 	relativeToPlus: "~<number>",
 	relativeTo: "~",
 };
 
+//! Done.
 globalEnvironment.CompressionMethod = {
 	deflate: "deflate",
 	zstd: "zstd",
 };
 
+//! Done.
 globalEnvironment.RotateAndPlaceOrientationFlag = {
 	invert_wall: "invert_wall",
 	force_wall: "force_wall",
@@ -271,6 +305,7 @@ globalEnvironment.RotateAndPlaceOrientationFlag = {
 	force_facedir: "force_facedir",
 };
 
+//! Done.
 globalEnvironment.BlockStatusCondition = {
 	unknown: "unknown",
 	emerging: "emerging",
@@ -278,11 +313,13 @@ globalEnvironment.BlockStatusCondition = {
 	active: "active",
 };
 
+//! Done.
 globalEnvironment.TileAnimationType = {
 	vertical_frames: "vertical_frames",
 	sheet_2d: "sheet_2d",
 };
 
+//! Done.
 globalEnvironment.ParticleSpawnerTweenStyle = {
 	fwd: "fwd",
 	rev: "rev",
@@ -290,6 +327,7 @@ globalEnvironment.ParticleSpawnerTweenStyle = {
 	flicker: "flicker",
 };
 
+//! Done.
 globalEnvironment.ParticleSpawnerTextureBlend = {
 	alpha: "alpha",
 	add: "add",
@@ -297,6 +335,7 @@ globalEnvironment.ParticleSpawnerTextureBlend = {
 	sub: "sub",
 };
 
+//! Done.
 globalEnvironment.ParticleSpawnerAttractionType = {
 	none: "none",
 	point: "point",
@@ -304,10 +343,12 @@ globalEnvironment.ParticleSpawnerAttractionType = {
 	plane: "plane",
 };
 
+//! Done.
 globalEnvironment.AreaStoreType = {
 	libSpatial: "LibSpatial",
 };
 
+//! Done.
 globalEnvironment.TexturePoolComponentFade = {
 	in: "in",
 	out: "out",
