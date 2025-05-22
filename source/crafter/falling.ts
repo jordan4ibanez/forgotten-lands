@@ -46,7 +46,7 @@ namespace main {
 				}
 			}
 
-            // This was transformed in the previous statement, I think?
+			// This was transformed in the previous statement, I think?
 			meta = meta as MetaData;
 
 			for (let [_, list] of pairs(meta.inventory || {})) {
@@ -59,15 +59,16 @@ namespace main {
 				}
 			}
 
-			// local def = core.registered_nodes[node.name]
-			// if not def then
-			// 	-- Don't allow unknown nodes to fall
-			// 	core.log("info",
-			// 		"Unknown falling node removed at "..
-			// 		core.pos_to_string(self.object:get_pos()))
-			// 	self.object:remove()
-			// 	return
-			// end
+			const def: NodeDefinition = core.registered_nodes[node.name];
+
+			if (!def) {
+				// Don't allow unknown nodes to fall.
+				// core.log("info",
+				// 	"Unknown falling node removed at "..
+				// 	core.pos_to_string(self.object:get_pos()))
+				// self.object:remove()
+				// return
+			}
 			// self.meta = meta
 
 			// -- Cache whether we're supposed to float on water
