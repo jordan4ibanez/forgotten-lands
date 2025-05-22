@@ -153,6 +153,8 @@ namespace main {
         // liquids_pointable = false,
         on_place: (itemstack: ItemStackObject, placer: ObjectRef, pointed_thing: PointedThing) => {
 
+            // fixme: WHY ARE THERE 2 POINTED THINGS?!
+
             if (pointed_thing.under && core.get_node(pointed_thing.under).name === "tnt:tnt") {
                 core.remove_node(pointed_thing.under);
                 // fixme: this was calling the TNT mod.
@@ -167,71 +169,71 @@ namespace main {
                 return;
             }
 
-            const pos_under: Vec3 = pos.under;
-            const pos_above: Vec3 = pos.above;
+            const posUnder: Vec3 = pos.under;
+            const posAbove: Vec3 = pos.above;
 
-            const node_under: string = core.get_node(pos_under).name;
-            const node_above: string = core.get_node(pos_above).name;
+            const nodeUnder: string = core.get_node(posUnder).name;
+            const nodeAbove: string = core.get_node(posAbove).name;
 
-            const buildable_under: boolean = (core.registered_nodes[node_under].buildable_to === true);
-            const buildable_above: boolean = (core.registered_nodes[node_above].buildable_to === true);
+            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
+            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
 
             // Set it to lava.
-            if (buildable_under === true) {
-                if (pos_under.y < 20_000) {
-                    if (pos_under.y > -10_033) {
-                        core.add_node(pos_under, { name: "main:lava" });
+            if (buildableUnder === true) {
+                if (posUnder.y < 20_000) {
+                    if (posUnder.y > -10_033) {
+                        core.add_node(posUnder, { name: "main:lava" });
                     } else {
-                        core.add_node(pos_under, { name: "nether:lava" });
+                        core.add_node(posUnder, { name: "nether:lava" });
                     }
                     itemstack.replace(ItemStack("main:bucket"));
                     return itemstack;
                 }
-            } else if (buildable_above) {
-                if (pos_above.y < 20_000) {
-                    if (pos_above.y > -10_033) {
-                        core.add_node(pos_above, { name: "main:lava" });
+            } else if (buildableAbove) {
+                if (posAbove.y < 20_000) {
+                    if (posAbove.y > -10_033) {
+                        core.add_node(posAbove, { name: "main:lava" });
                     } else {
-                        core.add_node(pos_above, { name: "nether:lava" });
+                        core.add_node(posAbove, { name: "nether:lava" });
                     }
                     itemstack.replace(ItemStack("main:bucket"));
                     return itemstack;
                 }
             }
         },
-        on_secondary_use: (itemstack, user, pointed_thing) => {
-            const pos: PointedThing | null = bucket_raycast(user);
+        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, _: PointedThing) => {
+            const pointedThing: PointedThing | null = bucket_raycast(user);
 
-            if (!pos) {
+            if (!pointedThing) {
                 return;
             }
 
-            const pos_under: Vec3 = pos.under;
-            const pos_above: Vec3 = pos.above;
+            const posUnder: Vec3 = pointedThing.under;
+            const posAbove: Vec3 = pointedThing.above;
 
-            const node_under: string = core.get_node(pos_under).name;
-            const node_above: string = core.get_node(pos_above).name;
+            const nodeUnder: string = core.get_node(posUnder).name;
+            const nodeAbove: string = core.get_node(posAbove).name;
 
-            const buildable_under: boolean = (core.registered_nodes[node_under].buildable_to === true);
-            const buildable_above: boolean = (core.registered_nodes[node_above].buildable_to === true);
+            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
+            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
 
             // Set it to lava.
-            if (buildable_under === true) {
-                if (pos_under.y < 20_000) {
-                    if (pos_under.y > -10_033) {
-                        core.add_node(pos_under, { name: "main:lava" });
+            if (buildableUnder === true) {
+                if (posUnder.y < 20_000) {
+                    if (posUnder.y > -10_033) {
+                        core.add_node(posUnder, { name: "main:lava" });
                     } else {
-                        core.add_node(pos_under, { name: "nether:lava" });
+                        core.add_node(posUnder, { name: "nether:lava" });
                     }
                     itemstack.replace(ItemStack("main:bucket"));
                     return itemstack;
                 }
-            } else if (buildable_above) {
-                if (pos_above.y < 20_000) {
-                    if (pos_above.y > -10_033) {
-                        core.add_node(pos_above, { name: "main:lava" });
+            } else if (buildableAbove) {
+                if (posAbove.y < 20_000) {
+                    if (posAbove.y > -10_033) {
+                        core.add_node(posAbove, { name: "main:lava" });
                     } else {
-                        core.add_node(pos_above, { name: "nether:lava" });
+                        core.add_node(posAbove, { name: "nether:lava" });
                     }
                     itemstack.replace(ItemStack("main:bucket"));
                     return itemstack;
