@@ -2713,10 +2713,29 @@ declare interface ToolType {
 	shears: ToolType;
 }
 
+declare interface BlockType {
+	break_instant: BlockType;
+	soil: BlockType;
+	wood: BlockType;
+	leaf: BlockType;
+	stone: BlockType;
+	metal: BlockType;
+	glass: BlockType;
+	wool: BlockType;
+	planks: BlockType;
+	tree: BlockType;
+	sand: BlockType;
+	lava_cooling: BlockType;
+	liquid: BlockType;
+	water: BlockType;
+	attached_node: BlockType;
+}
+
 declare global {
 	const core: core;
 	const EntityVisual: EntityVisual;
 	const ToolType: ToolType;
+	const BlockType: BlockType;
 	const SchematicRotation: SchematicRotation;
 	const SchematicPlacementFlag: SchematicPlacementFlag;
 	const SchematicFormat: SchematicFormat;

@@ -383,6 +383,7 @@ globalEnvironment.ToolType = {
 	shears: "shears",
 };
 
+//! Done.
 globalEnvironment.BlockType = {
 	break_instant: "break_instant",
 	soil: "soil",
