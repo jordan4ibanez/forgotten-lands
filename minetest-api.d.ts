@@ -2657,29 +2657,29 @@ enum RotateAndPlaceOrientationFlag {
 }
 
 enum BlockStatusCondition {
-	unknown: BlockStatusCondition;
-	emerging: BlockStatusCondition;
-	loaded: BlockStatusCondition;
-	active: BlockStatusCondition;
+	unknown,
+	emerging,
+	loaded,
+	active,
 }
 
 enum TileAnimationType {
-	vertical_frames: TileAnimationType;
-	sheet_2d: TileAnimationType;
+	vertical_frames,
+	sheet_2d,
 }
 
 enum ParticleSpawnerTweenStyle {
-	fwd: ParticleSpawnerTweenStyle;
-	rev: ParticleSpawnerTweenStyle;
-	pulse: ParticleSpawnerTweenStyle;
-	flicker: ParticleSpawnerTweenStyle;
+	fwd,
+	rev,
+	pulse,
+	flicker,
 }
 
 enum ParticleSpawnerTextureBlend {
-	alpha: ParticleSpawnerTextureBlend;
-	add: ParticleSpawnerTextureBlend;
-	screen: ParticleSpawnerTextureBlend;
-	sub: ParticleSpawnerTextureBlend;
+	alpha,
+	add,
+	screen,
+	sub,
 }
 
 enum ParticleSpawnerAttractionType {
