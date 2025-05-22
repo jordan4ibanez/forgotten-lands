@@ -1,5 +1,8 @@
 namespace main {
-    const path: string = core.get_modpath("main");
+    const path: string | null = core.get_modpath("crafter_main");
+    if (!path) {
+        throw new Error("crafter_main doesn't exist!?");
+    }
 
     utility.loadFiles([
         `${path}/sounds.lua`,
@@ -18,6 +21,4 @@ namespace main {
         `${path}/lava_cooling.lua`,
         `${path}/command_overrides.lua`
     ]);
-
-
 }
