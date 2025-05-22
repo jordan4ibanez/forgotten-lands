@@ -2393,49 +2393,48 @@ declare global {
 }
 
 // Very annoying enums.
-// Why do they point to themselves? I dunno, it works though.
-//! If you don't have your mod depend on the utility library, this will just blow up when you try to use it. :D
+//! If you don't have your mod depend on the utility library, this will just blow up when you try to use it.
 
 declare global {
 
-declare interface SchematicRotation {
 	zero: SchematicRotation;
 	ninety: SchematicRotation;
 	oneEighty: SchematicRotation;
 	twoSeventy: SchematicRotation;
 	random: SchematicRotation;
+enum SchematicRotation {
 }
 
-declare interface SchematicPlacementFlag {
+enum SchematicPlacementFlag {
 	place_center_x: SchematicPlacementFlag;
 	place_center_y: SchematicPlacementFlag;
 	place_center_z: SchematicPlacementFlag;
 }
 
-declare interface SchematicFormat {
+enum SchematicFormat {
 	mts: SchematicFormat;
 	lua: SchematicFormat;
 }
 
-declare interface SchematicSerializationOption {
+enum SchematicSerializationOption {
 	lua_use_comments: SchematicSerializationOption;
 	lua_num_indent_spaces: SchematicSerializationOption;
 }
 
-declare interface SchematicReadOptionYSliceOption {
+enum SchematicReadOptionYSliceOption {
 	none: SchematicReadOptionYSliceOption;
 	low: SchematicReadOptionYSliceOption;
 	all: SchematicReadOptionYSliceOption;
 }
 
-declare interface HTTPRequestMethod {
+enum HTTPRequestMethod {
 	GET: HTTPRequestMethod;
 	POST: HTTPRequestMethod;
 	PUT: HTTPRequestMethod;
 	DELETE: HTTPRequestMethod;
 }
 
-declare interface OreType {
+enum OreType {
 	scatter: OreType;
 	sheet: OreType;
 	puff: OreType;
@@ -2444,23 +2443,23 @@ declare interface OreType {
 	stratum: OreType;
 }
 
-declare interface OreFlags {
+enum OreFlags {
 	puff_cliffs: OreFlags;
 	puff_additive_composition: OreFlags;
 }
 
-declare interface NoiseFlags {
+enum NoiseFlags {
 	defaults: NoiseFlags;
 	eased: NoiseFlags;
 	absvalue: NoiseFlags;
 }
 
-declare interface DecorationType {
+enum DecorationType {
 	simple: DecorationType;
 	schematic: DecorationType;
 }
 
-declare interface DecorationFlags {
+enum DecorationFlags {
 	liquid_surface: DecorationFlags;
 	force_placement: DecorationFlags;
 	all_floors: DecorationFlags;
@@ -2470,12 +2469,12 @@ declare interface DecorationFlags {
 	place_center_z: DecorationFlags;
 }
 
-declare interface ParamType1 {
+enum ParamType1 {
 	light: ParamType1;
 	none: ParamType1;
 }
 
-declare interface ParamType2 {
+enum ParamType2 {
 	flowingliquid: ParamType2;
 	wallmounted: ParamType2;
 	facedir: ParamType2;
@@ -2491,7 +2490,7 @@ declare interface ParamType2 {
 	colordegrotate: ParamType2;
 }
 
-declare interface Drawtype {
+enum Drawtype {
 	normal: Drawtype;
 	airlike: Drawtype;
 	liquid: Drawtype;
@@ -2512,20 +2511,20 @@ declare interface Drawtype {
 	plantlike_rooted: Drawtype;
 }
 
-declare interface Nodeboxtype {
+enum Nodeboxtype {
 	regular: Nodeboxtype;
 	fixed: Nodeboxtype;
 	wallmounted: Nodeboxtype;
 	connected: Nodeboxtype;
 }
 
-declare interface TextureAlpha {
+enum TextureAlpha {
 	opaque: TextureAlpha;
 	clip: TextureAlpha;
 	blend: TextureAlpha;
 }
 
-declare interface LogLevel {
+enum LogLevel {
 	none: LogLevel;
 	error: LogLevel;
 	warning: LogLevel;
@@ -2534,20 +2533,20 @@ declare interface LogLevel {
 	verbose: LogLevel;
 }
 
-declare interface CraftRecipeType {
+enum CraftRecipeType {
 	shapeless: CraftRecipeType;
 	toolrepair: CraftRecipeType;
 	cooking: CraftRecipeType;
 	fuel: CraftRecipeType;
 }
 
-declare interface LiquidType {
+enum LiquidType {
 	none: LiquidType;
 	source: LiquidType;
 	flowing: LiquidType;
 }
 
-declare interface NodeBoxConnections {
+enum NodeBoxConnections {
 	top: NodeBoxConnections;
 	bottom: NodeBoxConnections;
 	front: NodeBoxConnections;
@@ -2556,13 +2555,13 @@ declare interface NodeBoxConnections {
 	right: NodeBoxConnections;
 }
 
-declare interface CraftCheckType {
+enum CraftCheckType {
 	normal: CraftCheckType;
 	cooking: CraftCheckType;
 	fuel: CraftCheckType;
 }
 
-declare interface HPChangeReasonType {
+enum HPChangeReasonType {
 	set_hp: HPChangeReasonType;
 	punch: HPChangeReasonType;
 	fall: HPChangeReasonType;
@@ -2571,7 +2570,7 @@ declare interface HPChangeReasonType {
 	respawn: HPChangeReasonType;
 }
 
-declare interface CheatType {
+enum CheatType {
 	moved_too_fast: CheatType;
 	interacted_too_far: CheatType;
 	interacted_with_self: CheatType;
@@ -2581,12 +2580,12 @@ declare interface CheatType {
 	dug_too_fast: CheatType;
 }
 
-declare interface ClearObjectsOptions {
+enum ClearObjectsOptions {
 	full: ClearObjectsOptions;
 	quick: ClearObjectsOptions;
 }
 
-declare interface GenNotifyFlags {
+enum GenNotifyFlags {
 	dungeon: GenNotifyFlags;
 	temple: GenNotifyFlags;
 	cave_begin: GenNotifyFlags;
@@ -2596,31 +2595,31 @@ declare interface GenNotifyFlags {
 	decoration: GenNotifyFlags;
 }
 
-declare interface SearchAlgorithm {
+enum SearchAlgorithm {
 	aStarNoprefetch: SearchAlgorithm;
 	aStar: SearchAlgorithm;
 	dijkstra: SearchAlgorithm;
 }
 
-declare interface SkyParametersType {
+enum SkyParametersType {
 	regular: SkyParametersType;
 	skybox: SkyParametersType;
 	plain: SkyParametersType;
 }
 
-declare interface SkyParametersFogTintType {
+enum SkyParametersFogTintType {
 	custom: SkyParametersFogTintType;
 	default: SkyParametersFogTintType;
 }
 
-declare interface MinimapType {
+enum MinimapType {
 	off: MinimapType;
 	surface: MinimapType;
 	radar: MinimapType;
 	texture: MinimapType;
 }
 
-declare interface HudElementType {
+enum HudElementType {
 	image: HudElementType;
 	text: HudElementType;
 	statbar: HudElementType;
@@ -2631,23 +2630,23 @@ declare interface HudElementType {
 	minimap: HudElementType;
 }
 
-declare interface HudReplaceBuiltinOption {
+enum HudReplaceBuiltinOption {
 	breath: HudReplaceBuiltinOption;
 	health: HudReplaceBuiltinOption;
 }
 
-declare interface ParseRelativeNumberArgument {
+enum ParseRelativeNumberArgument {
 	number: ParseRelativeNumberArgument;
 	relativeToPlus: ParseRelativeNumberArgument;
 	relativeTo: ParseRelativeNumberArgument;
 }
 
-declare interface CompressionMethod {
+enum CompressionMethod {
 	deflate: CompressionMethod;
 	zstd: CompressionMethod;
 }
 
-declare interface RotateAndPlaceOrientationFlag {
+enum RotateAndPlaceOrientationFlag {
 	invert_wall: RotateAndPlaceOrientationFlag;
 	force_wall: RotateAndPlaceOrientationFlag;
 	force_ceiling: RotateAndPlaceOrientationFlag;
@@ -2655,49 +2654,49 @@ declare interface RotateAndPlaceOrientationFlag {
 	force_facedir: RotateAndPlaceOrientationFlag;
 }
 
-declare interface BlockStatusCondition {
+enum BlockStatusCondition {
 	unknown: BlockStatusCondition;
 	emerging: BlockStatusCondition;
 	loaded: BlockStatusCondition;
 	active: BlockStatusCondition;
 }
 
-declare interface TileAnimationType {
+enum TileAnimationType {
 	vertical_frames: TileAnimationType;
 	sheet_2d: TileAnimationType;
 }
 
-declare interface ParticleSpawnerTweenStyle {
+enum ParticleSpawnerTweenStyle {
 	fwd: ParticleSpawnerTweenStyle;
 	rev: ParticleSpawnerTweenStyle;
 	pulse: ParticleSpawnerTweenStyle;
 	flicker: ParticleSpawnerTweenStyle;
 }
 
-declare interface ParticleSpawnerTextureBlend {
+enum ParticleSpawnerTextureBlend {
 	alpha: ParticleSpawnerTextureBlend;
 	add: ParticleSpawnerTextureBlend;
 	screen: ParticleSpawnerTextureBlend;
 	sub: ParticleSpawnerTextureBlend;
 }
 
-declare interface ParticleSpawnerAttractionType {
+enum ParticleSpawnerAttractionType {
 	none: ParticleSpawnerAttractionType;
 	point: ParticleSpawnerAttractionType;
 	line: ParticleSpawnerAttractionType;
 	plane: ParticleSpawnerAttractionType;
 }
 
-declare interface AreaStoreType {
+enum AreaStoreType {
 	libSpatial: AreaStoreType;
 }
 
-declare interface TexturePoolComponentFade {
+enum TexturePoolComponentFade {
 	in: TexturePoolComponentFade;
 	out: TexturePoolComponentFade;
 }
 
-declare interface EntityVisual {
+enum EntityVisual {
 	cube: EntityVisual;
 	sprite: EntityVisual;
 	upright_sprite: EntityVisual;
@@ -2706,7 +2705,7 @@ declare interface EntityVisual {
 	item: EntityVisual;
 }
 
-declare interface ToolType {
+enum ToolType {
 	pickaxe: ToolType;
 	shovel: ToolType;
 	axe: ToolType;
@@ -2715,7 +2714,7 @@ declare interface ToolType {
 	shears: ToolType;
 }
 
-declare interface BlockType {
+enum BlockType {
 	break_instant: BlockType;
 	soil: BlockType;
 	wood: BlockType;
@@ -2733,7 +2732,7 @@ declare interface BlockType {
 	attached_node: BlockType;
 }
 
-declare interface CraftingBlockType {
+enum CraftingBlockType {
 	soil: CraftingBlockType;
 	wood: CraftingBlockType;
 	leaf: CraftingBlockType;
@@ -2746,7 +2745,7 @@ declare interface CraftingBlockType {
 	sand: CraftingBlockType;
 }
 
-declare interface DamageGroup {
+enum DamageGroup {
 	flesh: DamageGroup;
 	metal: DamageGroup;
 	bone: DamageGroup;
