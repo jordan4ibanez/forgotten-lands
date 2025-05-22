@@ -34,7 +34,7 @@ interface core {
 	): string;
 	urlencode(url: string): string;
 	debug(anything: string): void;
-	log(level: string, text: string): void;
+	log(level: LogLevel, text: string): void;
 	register_node(nodeName: string, definition: NodeDefinition): void;
 	register_craftitem(craftItemName: string, definition: ItemDefinition): void;
 	register_tool(toolName: string, definition: ItemDefinition): void;
@@ -2523,6 +2523,15 @@ declare interface TextureAlpha {
 	blend: TextureAlpha;
 }
 
+declare interface LogLevel {
+	none: LogLevel;
+	error: LogLevel;
+	warning: LogLevel;
+	action: LogLevel;
+	info: LogLevel;
+	verbose: LogLevel;
+}
+
 declare interface LiquidType {
 	none: LiquidType;
 	source: LiquidType;
@@ -2696,6 +2705,7 @@ declare global {
 	const ParamType2: ParamType2;
 	const Drawtype: Drawtype;
 	const Nodeboxtype: Nodeboxtype;
+	const LogLevel: LogLevel;
 	const TextureAlpha: TextureAlpha;
 	const LiquidType: LiquidType;
 	const NodeBoxConnections: NodeBoxConnections;
