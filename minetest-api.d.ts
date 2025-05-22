@@ -952,7 +952,7 @@ declare global {
     interface CraftRecipeDefinition {
         type?: string;
         output?: string;
-        recipe: string[][] | string[] | string;
+        recipe?: string[][] | string[] | string;
         replacements?: string[];
         additional_wear?: number;
         cooktime?: number;
