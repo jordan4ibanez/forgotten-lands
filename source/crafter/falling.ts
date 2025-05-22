@@ -228,6 +228,7 @@ namespace main {
 		}
 
 		on_activate(staticdata: string) {
+			print("hi");
 			this.object.set_armor_groups({ immortal: 1 });
 
 			// Lua unsafety just kinda unravels here.
@@ -325,6 +326,12 @@ namespace main {
 	utility.registerTSEntity(FallingNode);
 
 	core.register_on_joinplayer((player: ObjectRef) => {
+		const pos = player.get_pos();
+		pos.y += 5;
+        
+
+		core.spawn_falling_node(player.get_pos());
+
 		core.add_item(player.get_pos(), "main:paper");
 	});
 }
