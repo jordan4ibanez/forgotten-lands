@@ -2397,18 +2397,18 @@ declare global {
 
 declare global {
 
-	zero: SchematicRotation;
-	ninety: SchematicRotation;
-	oneEighty: SchematicRotation;
-	twoSeventy: SchematicRotation;
-	random: SchematicRotation;
 enum SchematicRotation {
+	zero,
+	ninety,
+	oneEighty,
+	twoSeventy,
+	random,
 }
 
 enum SchematicPlacementFlag {
-	place_center_x: SchematicPlacementFlag;
-	place_center_y: SchematicPlacementFlag;
-	place_center_z: SchematicPlacementFlag;
+	place_center_x,
+	place_center_y,
+	place_center_z,
 }
 
 enum SchematicFormat {
