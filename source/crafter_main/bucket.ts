@@ -144,95 +144,97 @@ namespace main {
     });
 
 
-    // minetest.register_craftitem("main:bucket_lava", {
-    // 	description = "Bucket of Lava",
-    // 	inventory_image = "bucket_lava.png",
-    // 	stack_max = 1,
-    // 	--liquids_pointable = false,
-    // 	on_place = function(itemstack, placer, pointed_thing)
-    // 		if pointed_thing.under and minetest.get_node(pointed_thing.under).name == "tnt:tnt" then
-    // 			minetest.remove_node(pointed_thing.under)
-    // 			tnt(pointed_thing.under,7)
-    // 			itemstack:replace(ItemStack("main:bucket"))
-    // 			return(itemstack)
-    // 		end
+    core.register_craftitem("main:bucket_lava", {
+        description: "Bucket of Lava",
+        inventory_image: "bucket_lava.png",
+        stack_max: 1,
+        // liquids_pointable = false,
+        on_place: (itemstack: ItemStackObject, placer: ObjectRef, pointed_thing: PointedThing) => {
 
-    // 		local pos = bucket_raycast(placer)
+            if (pointed_thing.under && core.get_node(pointed_thing.under).name === "tnt:tnt") {
+                core.remove_node(pointed_thing.under);
+                // fixme: this was calling the TNT mod.
+                // tnt(pointed_thing.under,7)
+                itemstack.replace(ItemStack("main:bucket"));
+                return itemstack;
+            }
 
-    // 		if not pos then
-    // 			return
-    // 		end
+            const pos: PointedThing | null = bucket_raycast(placer);
 
-    // 		local pos_under = pos.under
-    // 		local pos_above = pos.above
+            if (!pos) {
+                return;
+            }
 
-    // 		local node_under = minetest.get_node(pos_under).name
-    // 		local node_above = minetest.get_node(pos_above).name
+            const pos_under: Vec3 = pos.under;
+            const pos_above: Vec3 = pos.above;
 
-    // 		local buildable_under = (minetest.registered_nodes[node_under].buildable_to == true)
-    // 		local buildable_above = (minetest.registered_nodes[node_above].buildable_to == true)
+            const node_under: string = core.get_node(pos_under).name;
+            const node_above: string = core.get_node(pos_above).name;
 
-    // 		--set it to lava
-    // 		if buildable_under == true then
-    // 			if pos_under.y < 20000 then
-    // 				if pos_under.y > -10033 then
-    // 					minetest.add_node(pos_under,{name="main:lava"})
-    // 				else
-    // 					minetest.add_node(pos_under,{name="nether:lava"})
-    // 				end
-    // 				itemstack:replace(ItemStack("main:bucket"))
-    // 				return(itemstack)
-    // 			end
-    // 		elseif buildable_above then
-    // 			if pos_above.y < 20000 then
-    // 				if pos_above.y > -10033 then
-    // 					minetest.add_node(pos_above,{name="main:lava"})
-    // 				else
-    // 					minetest.add_node(pos_above,{name="nether:lava"})
-    // 				end
-    // 				itemstack:replace(ItemStack("main:bucket"))
-    // 				return(itemstack)
-    // 			end
-    // 		end
-    // 	end,
-    // 	on_secondary_use = function(itemstack, user, pointed_thing)
-    // 		local pos = bucket_raycast(user)
+            const buildable_under: boolean = (core.registered_nodes[node_under].buildable_to === true);
+            const buildable_above: boolean = (core.registered_nodes[node_above].buildable_to === true);
 
-    // 		if not pos then
-    // 			return
-    // 		end
+            // Set it to lava.
+            if (buildable_under === true) {
+                if (pos_under.y < 20_000) {
+                    if (pos_under.y > -10_033) {
+                        core.add_node(pos_under, { name: "main:lava" });
+                    } else {
+                        core.add_node(pos_under, { name: "nether:lava" });
+                    }
+                    itemstack.replace(ItemStack("main:bucket"));
+                    return itemstack;
+                }
+            } else if (buildable_above) {
+                if (pos_above.y < 20_000) {
+                    if (pos_above.y > -10_033) {
+                        core.add_node(pos_above, { name: "main:lava" });
+                    } else {
+                        core.add_node(pos_above, { name: "nether:lava" });
+                    }
+                    itemstack.replace(ItemStack("main:bucket"));
+                    return itemstack;
+                }
+            }
+        },
+        // on_secondary_use = function(itemstack, user, pointed_thing)
+        // 	local pos = bucket_raycast(user)
 
-    // 		local pos_under = pos.under
-    // 		local pos_above = pos.above
+        // 	if not pos then
+        // 		return
+        // 	end
 
-    // 		local node_under = minetest.get_node(pos_under).name
-    // 		local node_above = minetest.get_node(pos_above).name
+        // 	local pos_under = pos.under
+        // 	local pos_above = pos.above
 
-    // 		local buildable_under = (minetest.registered_nodes[node_under].buildable_to == true)
-    // 		local buildable_above = (minetest.registered_nodes[node_above].buildable_to == true)
+        // 	local node_under = minetest.get_node(pos_under).name
+        // 	local node_above = minetest.get_node(pos_above).name
 
-    // 		--set it to lava
-    // 		if buildable_under == true then
-    // 			if pos_under.y < 20000 then
-    // 				if pos_under.y > -10033 then
-    // 					minetest.add_node(pos_under,{name="main:lava"})
-    // 				else
-    // 					minetest.add_node(pos_under,{name="nether:lava"})
-    // 				end
-    // 				itemstack:replace(ItemStack("main:bucket"))
-    // 				return(itemstack)
-    // 			end
-    // 		elseif buildable_above then
-    // 			if pos_above.y < 20000 then
-    // 				if pos_above.y > -10033 then
-    // 					minetest.add_node(pos_above,{name="main:lava"})
-    // 				else
-    // 					minetest.add_node(pos_above,{name="nether:lava"})
-    // 				end
-    // 				itemstack:replace(ItemStack("main:bucket"))
-    // 				return(itemstack)
-    // 			end
-    // 		end
-    // 	end,
-    // })
+        // 	local buildable_under = (minetest.registered_nodes[node_under].buildable_to == true)
+        // 	local buildable_above = (minetest.registered_nodes[node_above].buildable_to == true)
+
+        // 	--set it to lava
+        // 	if buildable_under == true then
+        // 		if pos_under.y < 20000 then
+        // 			if pos_under.y > -10033 then
+        // 				minetest.add_node(pos_under,{name="main:lava"})
+        // 			else
+        // 				minetest.add_node(pos_under,{name="nether:lava"})
+        // 			end
+        // 			itemstack:replace(ItemStack("main:bucket"))
+        // 			return(itemstack)
+        // 		end
+        // 	elseif buildable_above then
+        // 		if pos_above.y < 20000 then
+        // 			if pos_above.y > -10033 then
+        // 				minetest.add_node(pos_above,{name="main:lava"})
+        // 			else
+        // 				minetest.add_node(pos_above,{name="nether:lava"})
+        // 			end
+        // 			itemstack:replace(ItemStack("main:bucket"))
+        // 			return(itemstack)
+        // 		end
+        // 	end
+        // end,
+    });
 }
