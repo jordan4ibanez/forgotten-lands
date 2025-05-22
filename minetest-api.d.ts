@@ -2731,11 +2731,25 @@ declare interface BlockType {
 	attached_node: BlockType;
 }
 
+declare interface CraftingBlockType {
+	soil: CraftingBlockType;
+	wood: CraftingBlockType;
+	leaf: CraftingBlockType;
+	stone: CraftingBlockType;
+	metal: CraftingBlockType;
+	glass: CraftingBlockType;
+	wool: CraftingBlockType;
+	planks: CraftingBlockType;
+	tree: CraftingBlockType;
+	sand: CraftingBlockType;
+}
+
 declare global {
 	const core: core;
 	const EntityVisual: EntityVisual;
 	const ToolType: ToolType;
 	const BlockType: BlockType;
+	const CraftingBlockType: CraftingBlockType;
 	const SchematicRotation: SchematicRotation;
 	const SchematicPlacementFlag: SchematicPlacementFlag;
 	const SchematicFormat: SchematicFormat;

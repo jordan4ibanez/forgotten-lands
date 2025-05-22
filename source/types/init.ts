@@ -1,5 +1,7 @@
 //? Note: This is a special hack to globalize components without a namespace.
 
+//! Note: You must synchronize this with the luanti-api.d.ts file.
+
 let globalEnvironment = _G as unknown as {
 	[key: string]: { [key: string]: string };
 };
@@ -402,6 +404,7 @@ globalEnvironment.BlockType = {
 	attached_node: "attached_node",
 };
 
+//! Done.
 // This one is quite useful for crafting recipes.
 globalEnvironment.CraftingBlockType = {
 	soil: "group:soil",
