@@ -146,7 +146,11 @@ namespace newFunctions {
         // Rudementary collision detection.
         const pos: Vec3 = player.get_pos();
 
-        pos.y = pos.y + (player.get_properties().collisionbox![5] / 2);
+        const cbox = player.get_properties().collisionbox;
+        if (!cbox) {
+            throw new Error("collisionbox for player became null.");
+        }
+        pos.y = pos.y + (cbox[5] / 2);
 
         a_min.x = pos.x - 0.25;
         a_min.y = pos.y - 0.9;
