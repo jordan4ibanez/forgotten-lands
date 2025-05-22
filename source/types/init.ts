@@ -45,4 +45,11 @@ namespace types {
         metal = "metal",
         bone = "bone"
     }
+
+    export enum CraftRecipeType {
+        shapeless = "shapeless",
+        toolrepair = "toolrepair",
+        cooking = "cooking",
+        fuel = "fuel"
+    }
 }
