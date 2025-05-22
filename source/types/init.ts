@@ -354,6 +354,7 @@ globalEnvironment.TexturePoolComponentFade = {
 	out: "out",
 };
 
+//! Done.
 /**
  * Available keyboard & mouse keys.
  */
@@ -372,6 +373,7 @@ globalEnvironment.InputKeys = {
 	zoom: "zoom",
 };
 
+//! Done.
 globalEnvironment.ToolType = {
 	pickaxe: "pickaxe",
 	shovel: "shovel",

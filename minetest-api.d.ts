@@ -2704,9 +2704,19 @@ declare interface EntityVisual {
 	item: EntityVisual;
 }
 
+declare interface ToolType {
+	pickaxe: ToolType;
+	shovel: ToolType;
+	axe: ToolType;
+	hoe: ToolType;
+	sword: ToolType;
+	shears: ToolType;
+}
+
 declare global {
 	const core: core;
 	const EntityVisual: EntityVisual;
+	const ToolType: ToolType;
 	const SchematicRotation: SchematicRotation;
 	const SchematicPlacementFlag: SchematicPlacementFlag;
 	const SchematicFormat: SchematicFormat;
