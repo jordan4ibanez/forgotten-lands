@@ -15,6 +15,33 @@ namespace main {
 	// 	[1] = math.pi*1.5,
 	// }
 
+	const facedir_to_euler: { x: number; y: number; z: number }[] = [
+		{ y: 0, x: 0, z: 0 },
+		{ y: -math.pi / 2, x: 0, z: 0 },
+		{ y: math.pi, x: 0, z: 0 },
+		{ y: math.pi / 2, x: 0, z: 0 },
+		{ y: math.pi / 2, x: -math.pi / 2, z: math.pi / 2 },
+		{ y: math.pi / 2, x: math.pi, z: math.pi / 2 },
+		{ y: math.pi / 2, x: math.pi / 2, z: math.pi / 2 },
+		{ y: math.pi / 2, x: 0, z: math.pi / 2 },
+		{ y: -math.pi / 2, x: math.pi / 2, z: math.pi / 2 },
+		{ y: -math.pi / 2, x: 0, z: math.pi / 2 },
+		{ y: -math.pi / 2, x: -math.pi / 2, z: math.pi / 2 },
+		{ y: -math.pi / 2, x: math.pi, z: math.pi / 2 },
+		{ y: 0, x: 0, z: math.pi / 2 },
+		{ y: 0, x: -math.pi / 2, z: math.pi / 2 },
+		{ y: 0, x: math.pi, z: math.pi / 2 },
+		{ y: 0, x: math.pi / 2, z: math.pi / 2 },
+		{ y: math.pi, x: math.pi, z: math.pi / 2 },
+		{ y: math.pi, x: math.pi / 2, z: math.pi / 2 },
+		{ y: math.pi, x: 0, z: math.pi / 2 },
+		{ y: math.pi, x: -math.pi / 2, z: math.pi / 2 },
+		{ y: math.pi, x: math.pi, z: 0 },
+		{ y: -math.pi / 2, x: math.pi, z: 0 },
+		{ y: 0, x: math.pi, z: 0 },
+		{ y: math.pi / 2, x: math.pi, z: 0 },
+	];
+
 	class FallingNode extends types.Entity {
 		override name: string = ":__builtin:falling_node";
 		initial_properties = {
