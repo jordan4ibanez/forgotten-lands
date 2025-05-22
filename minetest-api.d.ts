@@ -2610,50 +2610,50 @@ enum SkyParametersType {
 }
 
 enum SkyParametersFogTintType {
-	custom: SkyParametersFogTintType;
-	default: SkyParametersFogTintType;
+	custom,
+	default,
 }
 
 enum MinimapType {
-	off: MinimapType;
-	surface: MinimapType;
-	radar: MinimapType;
-	texture: MinimapType;
+	off,
+	surface,
+	radar,
+	texture,
 }
 
 enum HudElementType {
-	image: HudElementType;
-	text: HudElementType;
-	statbar: HudElementType;
-	inventory: HudElementType;
-	waypoint: HudElementType;
-	image_waypoint: HudElementType;
-	compass: HudElementType;
-	minimap: HudElementType;
+	image,
+	text,
+	statbar,
+	inventory,
+	waypoint,
+	image_waypoint,
+	compass,
+	minimap,
 }
 
 enum HudReplaceBuiltinOption {
-	breath: HudReplaceBuiltinOption;
-	health: HudReplaceBuiltinOption;
+	breath,
+	health,
 }
 
 enum ParseRelativeNumberArgument {
-	number: ParseRelativeNumberArgument;
-	relativeToPlus: ParseRelativeNumberArgument;
-	relativeTo: ParseRelativeNumberArgument;
+	number,
+	relativeToPlus,
+	relativeTo,
 }
 
 enum CompressionMethod {
-	deflate: CompressionMethod;
-	zstd: CompressionMethod;
+	deflate,
+	zstd,
 }
 
 enum RotateAndPlaceOrientationFlag {
-	invert_wall: RotateAndPlaceOrientationFlag;
-	force_wall: RotateAndPlaceOrientationFlag;
-	force_ceiling: RotateAndPlaceOrientationFlag;
-	force_floor: RotateAndPlaceOrientationFlag;
-	force_facedir: RotateAndPlaceOrientationFlag;
+	invert_wall,
+	force_wall,
+	force_ceiling,
+	force_floor,
+	force_facedir,
 }
 
 enum BlockStatusCondition {
