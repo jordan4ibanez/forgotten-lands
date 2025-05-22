@@ -55,42 +55,42 @@ namespace main {
     //? Fuel.
 
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:stick",
         burntime: 1,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:sapling",
         burntime: 1,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:paper",
         burntime: 1,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:tree",
         burntime: 24,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:wood",
         burntime: 12,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:leaves",
         burntime: 3,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:coal",
         burntime: 20,
     });
     core.register_craft({
-        type: "fuel",
+        type: CraftRecipeType.fuel,
         recipe: "main:charcoal",
         burntime: 7,
     });
