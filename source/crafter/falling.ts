@@ -155,7 +155,7 @@ namespace main {
 					const euler: Vec3 | null = facedir_to_euler[
 						fdir + 1
 					] as Vec3;
-					if (euler) {
+					if (euler != null) {
 						this.object.set_rotation(euler);
 					}
 				} else if (def.paramtype2 == ParamType2["4dir"]) {
@@ -163,7 +163,7 @@ namespace main {
 					const euler: Vec3 | null = facedir_to_euler[
 						fdir + 1
 					] as Vec3;
-					if (euler) {
+					if (euler != null) {
 						this.object.set_rotation(euler);
 					}
 				}
