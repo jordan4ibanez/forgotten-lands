@@ -46,13 +46,20 @@ namespace main {
 				}
 			}
 
-			// for _, list in pairs(meta.inventory or {}) do
-			// 	for i, stack in pairs(list) do
-			// 		if type(stack) == "userdata" then
-			// 			list[i] = stack:to_string()
-			// 		end
-			// 	end
-			// end
+			if ((meta as MetaData).inventory) {
+				for (let [_, list] of pairs(
+					(meta as MetaData).inventory || {}
+				)) {
+					for (let [i, stack] of pairs(list)) {
+						if (type(stack) == "userdata") {
+							list[i as number] = (
+								stack as ItemStackObject
+							).to_string();
+						}
+					}
+				}
+			}
+
 			// local def = core.registered_nodes[node.name]
 			// if not def then
 			// 	-- Don't allow unknown nodes to fall
