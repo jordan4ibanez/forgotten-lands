@@ -156,41 +156,38 @@ namespace main {
 				["", "main:stick", ""],
 			],
 		});
-
-		// core.register_craft({
-		// 	output = "main:"..tool.."shovel",
-		// 	recipe = {
-		// 		{"","main:"..material[id], ""},
-		// 		{"", "main:stick", ""},
-		// 		{"", "main:stick", ""}
-		// 	}
-		// })
-
-		// core.register_craft({
-		// 	output = "main:"..tool.."axe",
-		// 	recipe = {
-		// 		{"main:"..material[id], "main:"..material[id], ""},
-		// 		{"main:"..material[id], "main:stick", ""},
-		// 		{"", "main:stick", ""}
-		// 	}
-		// })
-		// core.register_craft({
-		// 	output = "main:"..tool.."axe",
-		// 	recipe = {
-		// 		{"", "main:"..material[id], "main:"..material[id]},
-		// 		{"", "main:stick", "main:"..material[id]},
-		// 		{"", "main:stick", ""}
-		// 	}
-		// })
-
-		// core.register_craft({
-		// 	output = "main:"..tool.."sword",
-		// 	recipe = {
-		// 		{"","main:"..material[id], ""},
-		// 		{"","main:"..material[id], ""},
-		// 		{"", "main:stick", ""}
-		// 	}
-		// })
+		core.register_craft({
+			output: "main:" + tool + "shovel",
+			recipe: [
+				["", "main:" + material[id], ""],
+				["", "main:stick", ""],
+				["", "main:stick", ""],
+			],
+		});
+		core.register_craft({
+			output: "main:" + tool + "axe",
+			recipe: [
+				["main:" + material[id], "main:" + material[id], ""],
+				["main:" + material[id], "main:stick", ""],
+				["", "main:stick", ""],
+			],
+		});
+		core.register_craft({
+			output: "main:" + tool + "axe",
+			recipe: [
+				["", "main:" + material[id], "main:" + material[id]],
+				["", "main:stick", "main:" + material[id]],
+				["", "main:stick", ""],
+			],
+		});
+		core.register_craft({
+			output: "main:" + tool + "sword",
+			recipe: [
+				["", "main:" + material[id], ""],
+				["", "main:" + material[id], ""],
+				["", "main:stick", ""],
+			],
+		});
 	}
 
 	// core.register_craft({
