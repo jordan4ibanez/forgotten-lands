@@ -59,7 +59,7 @@ namespace main {
 				}
 			}
 
-			const def: NodeDefinition = core.registered_nodes[node.name];
+			const def: NodeDefinition | null = core.registered_nodes[node.name];
 
 			if (!def) {
 				// Don't allow unknown nodes to fall.
