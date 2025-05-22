@@ -2462,13 +2462,13 @@ enum DecorationType {
 }
 
 enum DecorationFlags {
-	liquid_surface: DecorationFlags;
-	force_placement: DecorationFlags;
-	all_floors: DecorationFlags;
-	all_ceilings: DecorationFlags;
-	place_center_x: DecorationFlags;
-	place_center_y: DecorationFlags;
-	place_center_z: DecorationFlags;
+	liquid_surface,
+	force_placement,
+	all_floors,
+	all_ceilings,
+	place_center_x,
+	place_center_y,
+	place_center_z,
 }
 
 enum ParamType1 {
