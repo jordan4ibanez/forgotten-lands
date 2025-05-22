@@ -143,6 +143,8 @@ namespace main {
         },
     });
 
+    // fixme: there are hardcodes for the NETHER IN HERE! Use a module!
+
 
     core.register_craftitem("main:bucket_lava", {
         description: "Bucket of Lava",
