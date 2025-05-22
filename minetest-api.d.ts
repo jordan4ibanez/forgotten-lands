@@ -2753,50 +2753,5 @@ enum DamageGroup {
 
 
 	const core: core;
-	// const EntityVisual: EntityVisual;
-	// const ToolType: ToolType;
-	// const BlockType: BlockType;
-	// const CraftingBlockType: CraftingBlockType;
-	// const DamageGroup: DamageGroup;
-	// const SchematicRotation: SchematicRotation;
-	// const SchematicPlacementFlag: SchematicPlacementFlag;
-	// const SchematicFormat: SchematicFormat;
-	// const SchematicSerializationOption: SchematicSerializationOption;
-	// const SchematicReadOptionYSliceOption: SchematicReadOptionYSliceOption;
-	// const HTTPRequestMethod: HTTPRequestMethod;
-	// const OreType: OreType;
-	// const OreFlags: OreFlags;
-	// const NoiseFlags: NoiseFlags;
-	// const DecorationType: DecorationType;
-	// const DecorationFlags: DecorationFlags;
-	// const ParamType1: ParamType1;
-	// const ParamType2: ParamType2;
-	// const Drawtype: Drawtype;
-	// const Nodeboxtype: Nodeboxtype;
-	// const LogLevel: LogLevel;
-	// const TextureAlpha: TextureAlpha;
 
-	// const NodeBoxConnections: NodeBoxConnections;
-	// const CraftCheckType: CraftCheckType;
-	// const HPChangeReasonType: HPChangeReasonType;
-	// const CheatType: CheatType;
-	// const ClearObjectsOptions: ClearObjectsOptions;
-	// const GenNotifyFlags: GenNotifyFlags;
-	// const SearchAlgorithm: SearchAlgorithm;
-	// const SkyParametersType: SkyParametersType;
-	// const SkyParametersFogTintType: SkyParametersFogTintType;
-	// const MinimapType: MinimapType;
-	// const HudElementType: HudElementType;
-	// const HudReplaceBuiltinOption: HudReplaceBuiltinOption;
-	// const ParseRelativeNumberArgument: ParseRelativeNumberArgument;
-	// const CompressionMethod: CompressionMethod;
-	// const RotateAndPlaceOrientationFlag: RotateAndPlaceOrientationFlag;
-	// const BlockStatusCondition: BlockStatusCondition;
-	// const TileAnimationType: TileAnimationType;
-	// const ParticleSpawnerTweenStyle: ParticleSpawnerTweenStyle;
-	// const ParticleSpawnerTextureBlend: ParticleSpawnerTextureBlend;
-	// const ParticleSpawnerAttractionType: ParticleSpawnerAttractionType;
-	// const AreaStoreType: AreaStoreType;
-	// const TexturePoolComponentFade: TexturePoolComponentFade;
-	// const CraftRecipeType: CraftRecipeType;
 }
