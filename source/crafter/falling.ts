@@ -46,16 +46,15 @@ namespace main {
 				}
 			}
 
+            // This was transformed in the previous statement, I think?
 			meta = meta as MetaData;
 
-			if (meta.inventory) {
-				for (let [_, list] of pairs(meta.inventory || {})) {
-					for (let [i, stack] of pairs(list)) {
-						if (type(stack) == "userdata") {
-							list[i as number] = (
-								stack as ItemStackObject
-							).to_string();
-						}
+			for (let [_, list] of pairs(meta.inventory || {})) {
+				for (let [i, stack] of pairs(list)) {
+					if (type(stack) == "userdata") {
+						list[i as number] = (
+							stack as ItemStackObject
+						).to_string();
 					}
 				}
 			}
