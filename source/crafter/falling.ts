@@ -46,10 +46,10 @@ namespace main {
 				}
 			}
 
-			if ((meta as MetaData).inventory) {
-				for (let [_, list] of pairs(
-					(meta as MetaData).inventory || {}
-				)) {
+			meta = meta as MetaData;
+
+			if (meta.inventory) {
+				for (let [_, list] of pairs(meta.inventory || {})) {
 					for (let [i, stack] of pairs(list)) {
 						if (type(stack) == "userdata") {
 							list[i as number] = (
@@ -149,19 +149,19 @@ namespace main {
 		// 	}
 		// 	return minetest.serialize(ds)
 		// end,
-		on_activate(staticdata: string) {
-			this.object.set_armor_groups({ immortal: 1 });
-			const ds: { [id: string | number | symbol]: any } =
-				core.deserialize(staticdata);
+		// on_activate(staticdata: string) {
+		// 	this.object.set_armor_groups({ immortal: 1 });
+		// 	const ds: { [id: string | number | symbol]: any } =
+		// 		core.deserialize(staticdata);
 
-			if (ds && ds.node) {
-				this.set_node(ds.node, ds.meta);
-			} else if (ds) {
-				this.set_node(ds);
-			} else if (staticdata !== "") {
-				this.set_node({ name: staticdata });
-			}
-		}
+		// 	if (ds && ds.node) {
+		// 		this.set_node(ds.node, ds.meta);
+		// 	} else if (ds) {
+		// 		this.set_node(ds);
+		// 	} else if (staticdata !== "") {
+		// 		this.set_node({ name: staticdata });
+		// 	}
+		// }
 		// on_step = function(self, dtime)
 		// 	-- Set gravity
 		// 	local acceleration = self.object:get_acceleration()
