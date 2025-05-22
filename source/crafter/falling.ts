@@ -188,20 +188,31 @@ namespace main {
 				connected: true,
 			};
 
-			if (def.drawtype == Drawtype.nodebox && def.node_box) {
-				// 	nb_types[def.node_box.type] and def.node_box.fixed then
-				// 	local box = table.copy(def.node_box.fixed)
-				// 	if type(box[1]) == "table" then
-				// 		box = #box == 1 and box[1] or nil -- We can only use a single box
-				// 	end
-				// 	if box then
-				// 		if def.paramtype2 == "leveled" and (self.node.level or 0) > 0 then
-				// 			box[5] = -0.5 + self.node.level / 64
-				// 		end
-				// 		self.object:set_properties({
-				// 			collisionbox = box
-				// 		})
-				// 	end
+			if (
+				def.drawtype == Drawtype.nodebox &&
+				def.node_box &&
+				nb_types[def.node_box.type] &&
+				def.node_box.fixed
+			) {
+				let box: number | number[] | number[][] | null =
+					def.node_box.fixed.slice();
+
+				if (box && type(box[1]) == "table") {
+					box = (box.length == 1 && box[1]) || null; // We can only use a single box.
+				}
+
+				if (box != null) {
+					box = box as number[];
+					if (
+						def.paramtype2 == ParamType2.leveled &&
+						(this.node.level || 0) > 0
+					) {
+						box[5] = -0.5 + this.node.level / 64;
+					}
+					this.object.set_properties({
+						collisionbox: box,
+					});
+				}
 			}
 		}
 
