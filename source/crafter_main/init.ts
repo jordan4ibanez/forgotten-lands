@@ -5,20 +5,20 @@ namespace main {
     }
 
     utility.loadFiles([
-        "sounds",
-        "nodes",
-        "grass_spread",
-        "saplings",
-        "ore",
-        "items",
-        "schematics",
-        "mapgen",
-        "tools",
-        "settings",
+        // "sounds",
+        // "nodes",
+        // "grass_spread",
+        // "saplings",
+        // "ore",
+        // "items",
+        // "schematics",
+        // "mapgen",
+        // "tools",
+        // "settings",
         "craft_recipes",
-        "falling",
-        "bucket",
-        "lava_cooling",
-        "command_overrides"
+        // "falling",
+        // "bucket",
+        // "lava_cooling",
+        // "command_overrides"
     ]);
 }
