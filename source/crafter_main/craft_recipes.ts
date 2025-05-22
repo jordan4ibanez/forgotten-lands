@@ -87,12 +87,12 @@ namespace main {
     // 	recipe = "main:coal",
     // 	burntime = 20,
     // })
-
     // core.register_craft({
     // 	type = "fuel",
     // 	recipe = "main:charcoal",
     // 	burntime = 7,
     // })
+
     // ---crafting
     // core.register_craft({
     // 	type = "shapeless",
