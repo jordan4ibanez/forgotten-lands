@@ -82,66 +82,66 @@ namespace main {
     });
 
 
-    // minetest.register_craftitem("main:bucket_water", {
-    // 	description = "Bucket of Water",
-    // 	inventory_image = "bucket_water.png",
-    // 	stack_max = 1,
-    // 	--liquids_pointable = false,
-    // 	on_place = function(itemstack, placer, pointed_thing)
-    // 		local pos = bucket_raycast(placer)
+    core.register_craftitem("main:bucket_water", {
+        description: "Bucket of Water",
+        inventory_image: "bucket_water.png",
+        stack_max: 1,
+        // liquids_pointable = false,
+        on_place: (itemstack: ItemStackObject, placer: ObjectRef, _: PointedThing) => {
+            const pos: PointedThing | null = bucket_raycast(placer);
 
-    // 		if not pos then
-    // 			return
-    // 		end
+            if (!pos) {
+                return;
+            }
 
-    // 		local pos_under = pos.under
-    // 		local pos_above = pos.above
+            const pos_under: Vec3 = pos.under;
+            const pos_above: Vec3 = pos.above;
 
-    // 		local node_under = minetest.get_node(pos_under).name
-    // 		local node_above = minetest.get_node(pos_above).name
+            const node_under: string = core.get_node(pos_under).name;
+            const node_above: string = core.get_node(pos_above).name;
 
-    // 		local buildable_under = (minetest.registered_nodes[node_under].buildable_to == true)
-    // 		local buildable_above = (minetest.registered_nodes[node_above].buildable_to == true)
+            const buildable_under = (core.registered_nodes[node_under].buildable_to === true);
+            const buildable_above = (core.registered_nodes[node_above].buildable_to === true);
 
-    // 		--set it to water
-    // 		if buildable_under == true then
-    // 			minetest.set_node(pos_under,{name="main:water"})
-    // 			itemstack:replace(ItemStack("main:bucket"))
-    // 			return(itemstack)
-    // 		elseif buildable_above then
-    // 			minetest.set_node(pos_above,{name="main:water"})
-    // 			itemstack:replace(ItemStack("main:bucket"))
-    // 			return(itemstack)
-    // 		end
-    // 	end,
-    // 	on_secondary_use = function(itemstack, user, pointed_thing)
-    // 		local pos = bucket_raycast(user)
+            // Set it to water.
+            if (buildable_under === true) {
+                core.set_node(pos_under, { name: "main:water" });
+                itemstack.replace(ItemStack("main:bucket"));
+                return itemstack;
+            } else if (buildable_above) {
+                core.set_node(pos_above, { name: "main:water" });
+                itemstack.replace(ItemStack("main:bucket"));
+                return itemstack;
+            }
+        },
+        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, pointed_thing) => {
+            const pos: PointedThing | null = bucket_raycast(user);
 
-    // 		if not pos then
-    // 			return
-    // 		end
+            if (!pos) {
+                return;
+            }
 
-    // 		local pos_under = pos.under
-    // 		local pos_above = pos.above
+            const pos_under: Vec3 = pos.under;
+            const pos_above: Vec3 = pos.above;
 
-    // 		local node_under = minetest.get_node(pos_under).name
-    // 		local node_above = minetest.get_node(pos_above).name
+            const node_under: string = core.get_node(pos_under).name;
+            const node_above: string = core.get_node(pos_above).name;
 
-    // 		local buildable_under = (minetest.registered_nodes[node_under].buildable_to == true)
-    // 		local buildable_above = (minetest.registered_nodes[node_above].buildable_to == true)
+            const buildable_under: boolean = (core.registered_nodes[node_under].buildable_to === true);
+            const buildable_above: boolean = (core.registered_nodes[node_above].buildable_to === true);
 
-    // 		--set it to water
-    // 		if buildable_under == true then
-    // 			minetest.add_node(pos_under,{name="main:water"})
-    // 			itemstack:replace(ItemStack("main:bucket"))
-    // 			return(itemstack)
-    // 		elseif buildable_above then
-    // 			minetest.add_node(pos_above,{name="main:water"})
-    // 			itemstack:replace(ItemStack("main:bucket"))
-    // 			return(itemstack)
-    // 		end
-    // 	end,
-    // })
+            // Set it to water.
+            if (buildable_under === true) {
+                core.add_node(pos_under, { name: "main:water" });
+                itemstack.replace(ItemStack("main:bucket"));
+                return itemstack;
+            } else if (buildable_above) {
+                core.add_node(pos_above, { name: "main:water" });
+                itemstack.replace(ItemStack("main:bucket"));
+                return itemstack;
+            }
+        },
+    });
 
 
     // minetest.register_craftitem("main:bucket_lava", {
