@@ -2583,30 +2583,30 @@ enum CheatType {
 }
 
 enum ClearObjectsOptions {
-	full: ClearObjectsOptions;
-	quick: ClearObjectsOptions;
+	full,
+	quick,
 }
 
 enum GenNotifyFlags {
-	dungeon: GenNotifyFlags;
-	temple: GenNotifyFlags;
-	cave_begin: GenNotifyFlags;
-	cave_end: GenNotifyFlags;
-	large_cave_begin: GenNotifyFlags;
-	large_cave_end: GenNotifyFlags;
-	decoration: GenNotifyFlags;
+	dungeon,
+	temple,
+	cave_begin,
+	cave_end,
+	large_cave_begin,
+	large_cave_end,
+	decoration,
 }
 
 enum SearchAlgorithm {
-	aStarNoprefetch: SearchAlgorithm;
-	aStar: SearchAlgorithm;
-	dijkstra: SearchAlgorithm;
+	aStarNoprefetch,
+	aStar,
+	dijkstra,
 }
 
 enum SkyParametersType {
-	regular: SkyParametersType;
-	skybox: SkyParametersType;
-	plain: SkyParametersType;
+	regular,
+	skybox,
+	plain,
 }
 
 enum SkyParametersFogTintType {
