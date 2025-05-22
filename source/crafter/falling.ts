@@ -150,25 +150,25 @@ namespace main {
 					glow: def.light_source,
 				});
 				// Rotate as needed.
-				// 	if def.paramtype2 == "facedir" then
-				// 		local fdir = node.param2 % 32 % 24
-				// 		local euler = facedir_to_euler[fdir + 1]
-				// 		if euler then
-				// 			self.object:set_rotation(euler)
-				// 		end
-				// 	elseif def.paramtype2 == "4dir" then
-				// 		local fdir = node.param2 % 4
-				// 		local euler = facedir_to_euler[fdir + 1]
-				// 		if euler then
-				// 			self.object:set_rotation(euler)
-				// 		end
-				// 	end
-            } else if (def.drawtype != Drawtype.airlike) {
-				// 	self.object:set_properties({
-				// 		is_visible = true,
-				// 		node = node,
-				// 		glow = def.light_source,
-				// 	})
+				if (def.paramtype2 == ParamType2.facedir) {
+					// local fdir = node.param2 % 32 % 24
+					// local euler = facedir_to_euler[fdir + 1]
+					// if euler then
+					// 	self.object:set_rotation(euler)
+					// end
+				} else if (def.paramtype2 == ParamType2["4dir"]) {
+					// local fdir = node.param2 % 4
+					// local euler = facedir_to_euler[fdir + 1]
+					// if euler then
+					// 	self.object:set_rotation(euler)
+					// end
+				}
+			} else if (def.drawtype != Drawtype.airlike) {
+				this.object.set_properties({
+					is_visible: true,
+					node: node,
+					glow: def.light_source,
+				});
 			}
 
 			// -- Set collision box (certain nodeboxes only for now)
