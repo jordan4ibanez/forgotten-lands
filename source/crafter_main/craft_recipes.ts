@@ -95,7 +95,8 @@ namespace main {
         burntime: 7,
     });
 
-    // ---crafting
+    //? Crafting.
+
     // core.register_craft({
     // 	type = "shapeless",
     // 	output = "main:wood 4",
