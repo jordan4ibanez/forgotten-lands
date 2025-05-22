@@ -31,6 +31,7 @@ namespace main {
 		// itemstring: string = ""
 		// node: string = "";
 		meta: MetaData | null = null;
+		floats: boolean = false;
 
 		set_node(node: MapNode, meta: MetaRef | MetaData): void {
 			node.param2 = node.param2 || 0;
@@ -74,10 +75,8 @@ namespace main {
 
 			this.meta = meta;
 
-            
-
-			// -- Cache whether we're supposed to float on water
-			// self.floats = core.get_item_group(node.name, "float") ~= 0
+			// Cache whether we're supposed to float on water.
+			this.floats = core.get_item_group(node.name, "float") != 0;
 
 			// -- Save liquidtype for falling water
 			// self.liquidtype = def.liquidtype
