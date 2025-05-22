@@ -27,42 +27,111 @@ namespace main {
 			collisionbox: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 		};
 
-		node: string = "";
+		node: MapNode = { name: "", prob: 3, param2: 0, force_place: false };
+		// itemstring: string = ""
+		// node: string = "";
 		// meta: LuaTable = new LuaTable();
 
-		set_node(node: string, newMeta?: MetaRef) {
+		set_node(node: MapNode, meta: MetaRef | MetaData): void {
+			node.param2 = node.param2 || 0;
+
 			this.node = node;
 
-			let workerMeta: MetaData | null = null;
+			meta = meta || {};
 
-			if (newMeta && type(newMeta.to_table) === "function") {
-				workerMeta = newMeta.to_table();
-			}
-
-			if (workerMeta) {
-				for (const [_, list] of Object.entries(workerMeta.inventory)) {
-					// for (const [i, stack] of Object.entries(list)) {
-					//     if (type(stack) === "userdata") {
-					//         // const a=  list ;
-					//         list[i] = "hi";
-					//         // const a: number = i;
-					//         // (stack as any).to_string()
-					//     }
-					// }
+			if (type((meta as MetaRef).to_table) == "function") {
+				const attempt = (meta as MetaRef).to_table();
+				if (attempt) {
+					meta = attempt;
 				}
-
-				// 		if type(stack) == "userdata" then
-				// 			list[i] = stack:to_string()
-				// 		end
 			}
 
+			// for _, list in pairs(meta.inventory or {}) do
+			// 	for i, stack in pairs(list) do
+			// 		if type(stack) == "userdata" then
+			// 			list[i] = stack:to_string()
+			// 		end
+			// 	end
+			// end
+			// local def = core.registered_nodes[node.name]
+			// if not def then
+			// 	-- Don't allow unknown nodes to fall
+			// 	core.log("info",
+			// 		"Unknown falling node removed at "..
+			// 		core.pos_to_string(self.object:get_pos()))
+			// 	self.object:remove()
+			// 	return
+			// end
 			// self.meta = meta
-			// self.object:set_properties({
-			// 	is_visible = true,
-			// 	textures = {node.name},
-			// })
-			// if node.param2 then
-			// 	self.object:set_rotation(vector.new(0,param_translation[node.param2],0))
+
+			// -- Cache whether we're supposed to float on water
+			// self.floats = core.get_item_group(node.name, "float") ~= 0
+
+			// -- Save liquidtype for falling water
+			// self.liquidtype = def.liquidtype
+
+			// -- Set up entity visuals
+			// -- For compatibility with older clients we continue to use "item" visual
+			// -- for simple situations.
+			// local drawtypes = {normal=true, glasslike=true, allfaces=true, nodebox=true}
+			// local p2types = {none=true, facedir=true, ["4dir"]=true}
+			// if drawtypes[def.drawtype] and p2types[def.paramtype2] and def.use_texture_alpha ~= "blend" then
+			// 	-- Calculate size of falling node
+			// 	local s = vector.zero()
+			// 	s.x = (def.visual_scale or 1) * 0.667
+			// 	s.y = s.x
+			// 	s.z = s.x
+			// 	-- Compensate for wield_scale
+			// 	if def.wield_scale then
+			// 		s.x = s.x / def.wield_scale.x
+			// 		s.y = s.y / def.wield_scale.y
+			// 		s.z = s.z / def.wield_scale.z
+			// 	end
+			// 	self.object:set_properties({
+			// 		is_visible = true,
+			// 		visual = "item",
+			// 		wield_item = node.name,
+			// 		visual_size = s,
+			// 		glow = def.light_source,
+			// 	})
+			// 	-- Rotate as needed
+			// 	if def.paramtype2 == "facedir" then
+			// 		local fdir = node.param2 % 32 % 24
+			// 		local euler = facedir_to_euler[fdir + 1]
+			// 		if euler then
+			// 			self.object:set_rotation(euler)
+			// 		end
+			// 	elseif def.paramtype2 == "4dir" then
+			// 		local fdir = node.param2 % 4
+			// 		local euler = facedir_to_euler[fdir + 1]
+			// 		if euler then
+			// 			self.object:set_rotation(euler)
+			// 		end
+			// 	end
+			// elseif def.drawtype ~= "airlike" then
+			// 	self.object:set_properties({
+			// 		is_visible = true,
+			// 		node = node,
+			// 		glow = def.light_source,
+			// 	})
+			// end
+
+			// -- Set collision box (certain nodeboxes only for now)
+			// local nb_types = {fixed=true, leveled=true, connected=true}
+			// if def.drawtype == "nodebox" and def.node_box and
+			// 	nb_types[def.node_box.type] and def.node_box.fixed then
+			// 	local box = table.copy(def.node_box.fixed)
+			// 	if type(box[1]) == "table" then
+			// 		box = #box == 1 and box[1] or nil -- We can only use a single box
+			// 	end
+			// 	if box then
+			// 		if def.paramtype2 == "leveled" and (self.node.level or 0) > 0 then
+			// 			box[5] = -0.5 + self.node.level / 64
+			// 		end
+			// 		self.object:set_properties({
+			// 			collisionbox = box
+			// 		})
+			// 	end
 			// end
 		}
 
@@ -73,17 +142,19 @@ namespace main {
 		// 	}
 		// 	return minetest.serialize(ds)
 		// end,
-		// on_activate = function(self, staticdata)
-		// 	self.object:set_armor_groups({immortal = 1})
-		// 	local ds = minetest.deserialize(staticdata)
-		// 	if ds and ds.node then
-		// 		self:set_node(ds.node, ds.meta)
-		// 	elseif ds then
-		// 		self:set_node(ds)
-		// 	elseif staticdata ~= "" then
-		// 		self:set_node({name = staticdata})
-		// 	end
-		// end,
+		on_activate(staticdata: string) {
+			this.object.set_armor_groups({ immortal: 1 });
+			const ds: { [id: string | number | symbol]: any } =
+				core.deserialize(staticdata);
+
+			if (ds && ds.node) {
+				this.set_node(ds.node, ds.meta);
+			} else if (ds) {
+				this.set_node(ds);
+			} else if (staticdata !== "") {
+				this.set_node({ name: staticdata });
+			}
+		}
 		// on_step = function(self, dtime)
 		// 	-- Set gravity
 		// 	local acceleration = self.object:get_acceleration()
