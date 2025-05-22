@@ -1,6 +1,8 @@
 // local minetest,pairs = minetest,pairs
 // Crafting recipes.
 
+namespace main {
+
 //? Cooking.
 core.register_craft({
 	type = "cooking",
@@ -216,3 +218,4 @@ for _,name in pairs(raw_material) do
 		recipe = {"main:"..name.."block"},
 	})
 end
+}
