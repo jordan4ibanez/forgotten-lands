@@ -151,17 +151,21 @@ namespace main {
 				});
 				// Rotate as needed.
 				if (def.paramtype2 == ParamType2.facedir) {
-					// local fdir = node.param2 % 32 % 24
-					// local euler = facedir_to_euler[fdir + 1]
-					// if euler then
-					// 	self.object:set_rotation(euler)
-					// end
+					const fdir: number = (node.param2 % 32) % 24;
+					const euler: Vec3 | null = facedir_to_euler[
+						fdir + 1
+					] as Vec3;
+					if (euler) {
+						this.object.set_rotation(euler);
+					}
 				} else if (def.paramtype2 == ParamType2["4dir"]) {
-					// local fdir = node.param2 % 4
-					// local euler = facedir_to_euler[fdir + 1]
-					// if euler then
-					// 	self.object:set_rotation(euler)
-					// end
+					const fdir: number = node.param2 % 4;
+					const euler: Vec3 | null = facedir_to_euler[
+						fdir + 1
+					] as Vec3;
+					if (euler) {
+						this.object.set_rotation(euler);
+					}
 				}
 			} else if (def.drawtype != Drawtype.airlike) {
 				this.object.set_properties({
