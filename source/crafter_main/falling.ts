@@ -1,21 +1,18 @@
-// local
-// minetest,vector,table,pairs,type,math
-// =
-// minetest,vector,table,pairs,type,math
-// --
-// -- Falling entity ("rewrite"")
-// --
-
-// local param_translation = {
-// 	[0] = 0,
-// 	[3] = math.pi/2,
-// 	[2] = math.pi,
-// 	[1] = math.pi*1.5,
-// }
-
-
-
-// core.register_entity(":__builtin:falling_node", {
+namespace main {
+	// local
+	// minetest,vector,table,pairs,type,math
+	// =
+	// minetest,vector,table,pairs,type,math
+	// --
+	// -- Falling entity ("rewrite"")
+	// --
+	// local param_translation = {
+	// 	[0] = 0,
+	// 	[3] = math.pi/2,
+	// 	[2] = math.pi,
+	// 	[1] = math.pi*1.5,
+	// }
+	// core.register_entity(":__builtin:falling_node", {
 	// initial_properties = {
 	// 	visual = "wielditem",
 	// 	visual_size = {x = 0.667, y = 0.667},
@@ -25,10 +22,8 @@
 	// 	collide_with_objects = false,
 	// 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	// },
-
 	// node = {},
 	// meta = {},
-
 	// set_node = function(self, node, meta)
 	// 	self.node = node
 	// 	meta = meta or {}
@@ -43,18 +38,14 @@
 	// 		end
 	// 	end
 	// 	self.meta = meta
-
-
 	// 	self.object:set_properties({
 	// 		is_visible = true,
 	// 		textures = {node.name},
 	// 	})
-
 	// 	if node.param2 then
 	// 		self.object:set_rotation(vector.new(0,param_translation[node.param2],0))
 	// 	end
 	// end,
-
 	// get_staticdata = function(self)
 	// 	local ds = {
 	// 		node = self.node,
@@ -62,10 +53,8 @@
 	// 	}
 	// 	return minetest.serialize(ds)
 	// end,
-
 	// on_activate = function(self, staticdata)
 	// 	self.object:set_armor_groups({immortal = 1})
-
 	// 	local ds = minetest.deserialize(staticdata)
 	// 	if ds and ds.node then
 	// 		self:set_node(ds.node, ds.meta)
@@ -75,7 +64,6 @@
 	// 		self:set_node({name = staticdata})
 	// 	end
 	// end,
-
 	// on_step = function(self, dtime)
 	// 	-- Set gravity
 	// 	local acceleration = self.object:get_acceleration()
@@ -148,11 +136,11 @@
 	// 		minetest.check_for_falling(np)
 	// 		return
 	// 	end
-
 	// 	local vel = self.object:get_velocity()
 	// 	if vector.equals(vel, {x = 0, y = 0, z = 0}) then
 	// 		local npos = self.object:get_pos()
 	// 		self.object:set_pos(vector.round(npos))
 	// 	end
 	// end
-// })
+	// })
+}
