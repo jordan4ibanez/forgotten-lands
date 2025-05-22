@@ -17,18 +17,16 @@ namespace main {
 
 	class FallingNode extends types.Entity {
 		override name: string = ":__builtin:falling_node";
-		override on_activate(staticData: string, delta: number): void {}
+		initial_properties = {
+			visual: "wielditem",
+			visual_size: { x: 0.667, y: 0.667 },
+			textures: {},
+			physical: true,
+			is_visible: false,
+			collide_with_objects: false,
+			collisionbox: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
+		};
 
-		// {
-		// initial_properties = {
-		// 	visual = "wielditem",
-		// 	visual_size = {x = 0.667, y = 0.667},
-		// 	textures = {},
-		// 	physical = true,
-		// 	is_visible = false,
-		// 	collide_with_objects = false,
-		// 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
-		// },
 		// node = {},
 		// meta = {},
 		// set_node = function(self, node, meta)
