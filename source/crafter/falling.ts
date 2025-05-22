@@ -142,14 +142,14 @@ namespace main {
 					s.y = s.y / def.wield_scale.y;
 					s.z = s.z / def.wield_scale.z;
 				}
-				// 	self.object:set_properties({
-				// 		is_visible = true,
-				// 		visual = "item",
-				// 		wield_item = node.name,
-				// 		visual_size = s,
-				// 		glow = def.light_source,
-				// 	})
-				// 	-- Rotate as needed
+				this.object.set_properties({
+					is_visible: true,
+					visual: EntityVisual.item,
+					wield_item: node.name,
+					visual_size: s,
+					glow: def.light_source,
+				});
+				// Rotate as needed.
 				// 	if def.paramtype2 == "facedir" then
 				// 		local fdir = node.param2 % 32 % 24
 				// 		local euler = facedir_to_euler[fdir + 1]
