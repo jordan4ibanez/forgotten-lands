@@ -2446,19 +2446,19 @@ enum OreType {
 }
 
 enum OreFlags {
-	puff_cliffs: OreFlags;
-	puff_additive_composition: OreFlags;
+	puff_cliffs,
+	puff_additive_composition,
 }
 
 enum NoiseFlags {
-	defaults: NoiseFlags;
-	eased: NoiseFlags;
-	absvalue: NoiseFlags;
+	defaults,
+	eased,
+	absvalue,
 }
 
 enum DecorationType {
-	simple: DecorationType;
-	schematic: DecorationType;
+	simple,
+	schematic,
 }
 
 enum DecorationFlags {
