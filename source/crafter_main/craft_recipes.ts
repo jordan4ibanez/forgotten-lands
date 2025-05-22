@@ -13,38 +13,38 @@ namespace main {
         cooktime: 12,
     });
     core.register_craft({
-        type: "cooking",
+        type: CraftRecipeType.cooking,
         output: "main:coal 4",
         recipe: "main:coalore",
         cooktime: 3,
     });
     core.register_craft({
-        type: "cooking",
+        type: CraftRecipeType.cooking,
         output: "main:charcoal",
         recipe: "main:tree",
         cooktime: 2,
     });
     core.register_craft({
-        type: "cooking",
+        type: CraftRecipeType.cooking,
         output: "main:gold",
         recipe: "main:goldore",
         cooktime: 9,
     });
     core.register_craft({
-        type: "cooking",
+        type: CraftRecipeType.cooking,
         output: "main:iron",
         recipe: "main:ironore",
         cooktime: 6,
     });
     core.register_craft({
-        type: "cooking",
+        type: CraftRecipeType.cooking,
         output: "main:stone",
         recipe: "main:cobble",
         cooktime: 2,
     });
 
     core.register_craft({
-        type: "cooking",
+        type: CraftRecipeType.cooking,
         output: "main:glass",
         recipe: "main:sand",
         cooktime: 1,
