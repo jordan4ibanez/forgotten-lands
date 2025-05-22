@@ -3,4 +3,5 @@
 
 namespace main {
 
+    const CraftRecipeType = types.CraftRecipeType;
 }
