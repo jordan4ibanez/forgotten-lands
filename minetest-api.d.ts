@@ -620,7 +620,7 @@ interface core {
 	registered_privileges: { [id: string]: PrivilegeDefinition };
 
 	wrap_text(str: string, limit: number, asTable: boolean): string | string[];
-	pos_to_string(position: Vec3, decimalPlaces: number): string;
+	pos_to_string(position: Vec3, decimalPlaces?: number): string;
 	string_to_pos(string: string): Vec3;
 	string_to_area(positions: string, relativeTo: Vec3): [Vec3, Vec3];
 	formspec_escape(string: string): string;
