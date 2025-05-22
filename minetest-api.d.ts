@@ -2683,28 +2683,28 @@ enum ParticleSpawnerTextureBlend {
 }
 
 enum ParticleSpawnerAttractionType {
-	none: ParticleSpawnerAttractionType;
-	point: ParticleSpawnerAttractionType;
-	line: ParticleSpawnerAttractionType;
-	plane: ParticleSpawnerAttractionType;
+	none,
+	point,
+	line,
+	plane,
 }
 
 enum AreaStoreType {
-	libSpatial: AreaStoreType;
+	libSpatial,
 }
 
 enum TexturePoolComponentFade {
-	in: TexturePoolComponentFade;
-	out: TexturePoolComponentFade;
+	in,
+	out,
 }
 
 enum EntityVisual {
-	cube: EntityVisual;
-	sprite: EntityVisual;
-	upright_sprite: EntityVisual;
-	mesh: EntityVisual;
-	wielditem: EntityVisual;
-	item: EntityVisual;
+	cube,
+	sprite,
+	upright_sprite,
+	mesh,
+	wielditem,
+	item,
 }
 
 enum ToolType {
