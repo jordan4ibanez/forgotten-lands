@@ -97,7 +97,9 @@ namespace main {
 				"4dir": true,
 			};
 
-			// if drawtypes[def.drawtype] and p2types[def.paramtype2] and def.use_texture_alpha ~= "blend" then
+
+			if (def.drawtype && drawtypes[def.drawtype] && def.paramtype2 && p2types[def.paramtype2] && def.use_texture_alpha != TextureAlpha.blend) {
+            
 			// 	-- Calculate size of falling node
 			// 	local s = vector.zero()
 			// 	s.x = (def.visual_scale or 1) * 0.667
@@ -136,7 +138,7 @@ namespace main {
 			// 		node = node,
 			// 		glow = def.light_source,
 			// 	})
-			// end
+            }
 
 			// -- Set collision box (certain nodeboxes only for now)
 			// local nb_types = {fixed=true, leveled=true, connected=true}
