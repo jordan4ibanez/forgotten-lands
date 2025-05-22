@@ -2069,6 +2069,7 @@ declare global {
 		colors?: DynamicColorSpec[];
 		use_texture_alpha?: boolean;
 		spritediv?: Vec2;
+		node?: MapNode;
 		initial_sprite_basepos?: Vec2;
 		is_visible?: boolean;
 		makes_footstep_sound?: boolean;
