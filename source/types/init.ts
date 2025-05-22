@@ -62,6 +62,15 @@ namespace types {
 		item = "item",
 	}
 
+	export enum LogLevel {
+		none = "none",
+		error = "error",
+		warning = "warning",
+		action = "action",
+		info = "info",
+		verbose = "verbose",
+	}
+
 	/** Typescript Luaentity. :) */
 	export abstract class Entity implements LuaEntity {
 		// Name is required.
