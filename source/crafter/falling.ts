@@ -68,8 +68,8 @@ namespace main {
 					"Unknown falling node removed at " +
 						core.pos_to_string(this.object.get_pos())
 				);
-				// self.object:remove()
-				// return
+				this.object.remove();
+				return;
 			}
 			// self.meta = meta
 
