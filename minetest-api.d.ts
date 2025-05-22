@@ -2396,6 +2396,7 @@ declare global {
 // Why do they point to themselves? I dunno, it works though.
 //! If you don't have your mod depend on the utility library, this will just blow up when you try to use it. :D
 
+declare global {
 declare interface SchematicRotation {
 	zero: SchematicRotation;
 	ninety: SchematicRotation;
@@ -2750,7 +2751,6 @@ declare interface DamageGroup {
 	bone: DamageGroup;
 }
 
-declare global {
 	const core: core;
 	const EntityVisual: EntityVisual;
 	const ToolType: ToolType;
