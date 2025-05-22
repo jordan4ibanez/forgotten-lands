@@ -6,6 +6,7 @@ namespace main {
     const CraftRecipeType = types.CraftRecipeType;
 
     //? Cooking.
+
     core.register_craft({
         type: CraftRecipeType.cooking,
         output: "main:diamond",
@@ -51,47 +52,48 @@ namespace main {
     });
 
 
-    // --fuel fuel fuel
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:stick",
-    // 	burntime = 1,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:sapling",
-    // 	burntime = 1,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:paper",
-    // 	burntime = 1,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:tree",
-    // 	burntime = 24,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:wood",
-    // 	burntime = 12,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:leaves",
-    // 	burntime = 3,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:coal",
-    // 	burntime = 20,
-    // })
-    // core.register_craft({
-    // 	type = "fuel",
-    // 	recipe = "main:charcoal",
-    // 	burntime = 7,
-    // })
+    //? Fuel.
+
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:stick",
+        burntime: 1,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:sapling",
+        burntime: 1,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:paper",
+        burntime: 1,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:tree",
+        burntime: 24,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:wood",
+        burntime: 12,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:leaves",
+        burntime: 3,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:coal",
+        burntime: 20,
+    });
+    core.register_craft({
+        type: "fuel",
+        recipe: "main:charcoal",
+        burntime: 7,
+    });
 
     // ---crafting
     // core.register_craft({
