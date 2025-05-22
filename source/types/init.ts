@@ -357,7 +357,7 @@ globalEnvironment.TexturePoolComponentFade = {
 /**
  * Available keyboard & mouse keys.
  */
-globalEnvironment._Keys = {
+globalEnvironment.InputKeys = {
 	up: "up",
 	down: "down",
 	left: "left",

@@ -1908,7 +1908,7 @@ declare global {
 		movement_y: number;
 	}
 
-	enum _Keys {
+	enum InputKeys {
 		up = "up",
 		down = "down",
 		left = "left",
