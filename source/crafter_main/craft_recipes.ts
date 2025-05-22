@@ -97,31 +97,29 @@ namespace main {
 
     //? Crafting.
 
-    // core.register_craft({
-    // 	type = "shapeless",
-    // 	output = "main:wood 4",
-    // 	recipe = {"main:tree"},
-    // })
-    // core.register_craft({
-    // 	type = "shapeless",
-    // 	output = "main:sugar 3",
-    // 	recipe = {"farming:sugarcane"},
-    // })
-
-    // core.register_craft({
-    // 	output = "main:stick 4",
-    // 	recipe = {
-    // 		{"main:wood"},
-    // 		{"main:wood"}
-    // 	}
-    // })
-
-    // core.register_craft({
-    // 	output = "main:paper",
-    // 	recipe = {
-    // 		{"farming:sugarcane","farming:sugarcane","farming:sugarcane"},
-    // 	}
-    // })
+    core.register_craft({
+        type: "shapeless",
+        output: "main:wood 4",
+        recipe: ["main:tree"],
+    });
+    core.register_craft({
+        type: "shapeless",
+        output: "main:sugar 3",
+        recipe: ["farming:sugarcane"],
+    });
+    core.register_craft({
+        output: "main:stick 4",
+        recipe: [
+            ["main:wood"],
+            ["main:wood"]
+        ]
+    });
+    core.register_craft({
+        output: "main:paper",
+        recipe: [
+            ["farming:sugarcane", "farming:sugarcane", "farming:sugarcane"],
+        ]
+    });
 
     // local tool =     {"coal","wood","stone" ,"lapis","iron","gold","diamond","emerald","sapphire","ruby"}--the tool name
     // local material = {"coal","wood","cobble","lapis","iron","gold","diamond","emerald","sapphire","ruby"}--material to craft
