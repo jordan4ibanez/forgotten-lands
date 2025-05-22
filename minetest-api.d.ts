@@ -950,7 +950,7 @@ declare global {
 
 
     interface CraftRecipeDefinition {
-        type?: CraftRecipeType;
+        type?: string;
         output?: string;
         recipe: string[][] | string[] | string;
         replacements?: string[];
@@ -1968,13 +1968,6 @@ declare interface NodeBoxConnections {
     right: NodeBoxConnections;
 }
 
-declare interface CraftRecipeType {
-    shapeless: CraftRecipeType,
-    toolrepair: CraftRecipeType,
-    cooking: CraftRecipeType,
-    fuel: CraftRecipeType;
-}
-
 declare interface CraftCheckType {
     normal: CraftCheckType,
     cooking: CraftCheckType,
@@ -2140,7 +2133,6 @@ declare global {
     const TextureAlpha: TextureAlpha;
     const LiquidType: LiquidType;
     const NodeBoxConnections: NodeBoxConnections;
-    const CraftRecipeType: CraftRecipeType;
     const CraftCheckType: CraftCheckType;
     const HPChangeReasonType: HPChangeReasonType;
     const CheatType: CheatType;
