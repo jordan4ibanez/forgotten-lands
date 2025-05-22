@@ -112,6 +112,8 @@ if (CREATE_RELEASE) {
         });
     });
 
+    // todo: create a tar.gz creator, or not.
+
     // And finally, remove the build folder.
     if (FS.existsSync(releaseFolder)) {
         FS.rmSync(releaseFolder, { recursive: true, force: true });
