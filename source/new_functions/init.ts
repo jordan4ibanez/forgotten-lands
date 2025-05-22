@@ -106,7 +106,7 @@ namespace newFunctions {
 
     // Destroy player environment data.
     core.register_on_leaveplayer((player: ObjectRef) => {
-        const name: string = player.get_player_name()!;
+        const name: string = player.get_player_name();
         pool.delete(name);
     });
 
