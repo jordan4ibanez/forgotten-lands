@@ -2062,7 +2062,7 @@ declare global {
 		collisionbox?: CollisionBox;
 		selectionbox?: number[];
 		pointable?: boolean;
-		visual?: string;
+		visual?: EntityVisual;
 		visual_size?: Vec3 | Vec2;
 		mesh?: string;
 		textures?: string[];
@@ -2695,8 +2695,18 @@ declare interface TexturePoolComponentFade {
 	out: TexturePoolComponentFade;
 }
 
+declare interface EntityVisual {
+	cube: EntityVisual;
+	sprite: EntityVisual;
+	upright_sprite: EntityVisual;
+	mesh: EntityVisual;
+	wielditem: EntityVisual;
+	item: EntityVisual;
+}
+
 declare global {
 	const core: core;
+	const EntityVisual: EntityVisual;
 	const SchematicRotation: SchematicRotation;
 	const SchematicPlacementFlag: SchematicPlacementFlag;
 	const SchematicFormat: SchematicFormat;

@@ -4,6 +4,7 @@ let globalEnvironment = _G as unknown as {
 	[key: string]: { [key: string]: string };
 };
 
+//! Done.
 globalEnvironment.EntityVisual = {
 	cube: "cube",
 	sprite: "sprite",
