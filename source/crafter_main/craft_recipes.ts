@@ -49,173 +49,173 @@ core.register_craft({
 })
 
 
---fuel fuel fuel
-core.register_craft({
-	type = "fuel",
-	recipe = "main:stick",
-	burntime = 1,
-})
-core.register_craft({
-	type = "fuel",
-	recipe = "main:sapling",
-	burntime = 1,
-})
-core.register_craft({
-	type = "fuel",
-	recipe = "main:paper",
-	burntime = 1,
-})
-core.register_craft({
-	type = "fuel",
-	recipe = "main:tree",
-	burntime = 24,
-})
-core.register_craft({
-	type = "fuel",
-	recipe = "main:wood",
-	burntime = 12,
-})
-core.register_craft({
-	type = "fuel",
-	recipe = "main:leaves",
-	burntime = 3,
-})
-core.register_craft({
-	type = "fuel",
-	recipe = "main:coal",
-	burntime = 20,
-})
+// --fuel fuel fuel
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:stick",
+// 	burntime = 1,
+// })
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:sapling",
+// 	burntime = 1,
+// })
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:paper",
+// 	burntime = 1,
+// })
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:tree",
+// 	burntime = 24,
+// })
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:wood",
+// 	burntime = 12,
+// })
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:leaves",
+// 	burntime = 3,
+// })
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:coal",
+// 	burntime = 20,
+// })
 
-core.register_craft({
-	type = "fuel",
-	recipe = "main:charcoal",
-	burntime = 7,
-})
----crafting
-core.register_craft({
-	type = "shapeless",
-	output = "main:wood 4",
-	recipe = {"main:tree"},
-})
-core.register_craft({
-	type = "shapeless",
-	output = "main:sugar 3",
-	recipe = {"farming:sugarcane"},
-})
+// core.register_craft({
+// 	type = "fuel",
+// 	recipe = "main:charcoal",
+// 	burntime = 7,
+// })
+// ---crafting
+// core.register_craft({
+// 	type = "shapeless",
+// 	output = "main:wood 4",
+// 	recipe = {"main:tree"},
+// })
+// core.register_craft({
+// 	type = "shapeless",
+// 	output = "main:sugar 3",
+// 	recipe = {"farming:sugarcane"},
+// })
 
-core.register_craft({
-	output = "main:stick 4",
-	recipe = {
-		{"main:wood"},
-		{"main:wood"}
-	}
-})
+// core.register_craft({
+// 	output = "main:stick 4",
+// 	recipe = {
+// 		{"main:wood"},
+// 		{"main:wood"}
+// 	}
+// })
 
-core.register_craft({
-	output = "main:paper",
-	recipe = {
-		{"farming:sugarcane","farming:sugarcane","farming:sugarcane"},
-	}
-})
+// core.register_craft({
+// 	output = "main:paper",
+// 	recipe = {
+// 		{"farming:sugarcane","farming:sugarcane","farming:sugarcane"},
+// 	}
+// })
 
-local tool =     {"coal","wood","stone" ,"lapis","iron","gold","diamond","emerald","sapphire","ruby"}--the tool name
-local material = {"coal","wood","cobble","lapis","iron","gold","diamond","emerald","sapphire","ruby"}--material to craft
+// local tool =     {"coal","wood","stone" ,"lapis","iron","gold","diamond","emerald","sapphire","ruby"}--the tool name
+// local material = {"coal","wood","cobble","lapis","iron","gold","diamond","emerald","sapphire","ruby"}--material to craft
 
-for id,tool in pairs(tool) do
+// for id,tool in pairs(tool) do
 
 	
-	core.register_craft({
-		output = "main:"..tool.."pick",
-		recipe = {
-			{"main:"..material[id], "main:"..material[id], "main:"..material[id]},
-			{"", "main:stick", ""},
-			{"", "main:stick", ""}
-		}
-	})
+// 	core.register_craft({
+// 		output = "main:"..tool.."pick",
+// 		recipe = {
+// 			{"main:"..material[id], "main:"..material[id], "main:"..material[id]},
+// 			{"", "main:stick", ""},
+// 			{"", "main:stick", ""}
+// 		}
+// 	})
 	
-	core.register_craft({
-		output = "main:"..tool.."shovel",
-		recipe = {
-			{"","main:"..material[id], ""},
-			{"", "main:stick", ""},
-			{"", "main:stick", ""}
-		}
-	})
+// 	core.register_craft({
+// 		output = "main:"..tool.."shovel",
+// 		recipe = {
+// 			{"","main:"..material[id], ""},
+// 			{"", "main:stick", ""},
+// 			{"", "main:stick", ""}
+// 		}
+// 	})
 	
-	core.register_craft({
-		output = "main:"..tool.."axe",
-		recipe = {
-			{"main:"..material[id], "main:"..material[id], ""},
-			{"main:"..material[id], "main:stick", ""},
-			{"", "main:stick", ""}
-		}
-	})
-	core.register_craft({
-		output = "main:"..tool.."axe",
-		recipe = {
-			{"", "main:"..material[id], "main:"..material[id]},
-			{"", "main:stick", "main:"..material[id]},
-			{"", "main:stick", ""}
-		}
-	})
+// 	core.register_craft({
+// 		output = "main:"..tool.."axe",
+// 		recipe = {
+// 			{"main:"..material[id], "main:"..material[id], ""},
+// 			{"main:"..material[id], "main:stick", ""},
+// 			{"", "main:stick", ""}
+// 		}
+// 	})
+// 	core.register_craft({
+// 		output = "main:"..tool.."axe",
+// 		recipe = {
+// 			{"", "main:"..material[id], "main:"..material[id]},
+// 			{"", "main:stick", "main:"..material[id]},
+// 			{"", "main:stick", ""}
+// 		}
+// 	})
 	
-	core.register_craft({
-		output = "main:"..tool.."sword",
-		recipe = {
-			{"","main:"..material[id], ""},
-			{"","main:"..material[id], ""},
-			{"", "main:stick", ""}
-		}
-	})
-end
+// 	core.register_craft({
+// 		output = "main:"..tool.."sword",
+// 		recipe = {
+// 			{"","main:"..material[id], ""},
+// 			{"","main:"..material[id], ""},
+// 			{"", "main:stick", ""}
+// 		}
+// 	})
+// end
 
-core.register_craft({
-	output = "main:ladder 16",
-	recipe = {
-		{"main:stick","", "main:stick"},
-		{"main:stick","main:stick", "main:stick"},
-		{"main:stick", "", "main:stick"}
-	}
-})
+// core.register_craft({
+// 	output = "main:ladder 16",
+// 	recipe = {
+// 		{"main:stick","", "main:stick"},
+// 		{"main:stick","main:stick", "main:stick"},
+// 		{"main:stick", "", "main:stick"}
+// 	}
+// })
 
-core.register_craft({
-	output = "main:shears",
-	recipe = {
-		{"","main:iron"},
-		{"main:iron",""},
-	}
-})
+// core.register_craft({
+// 	output = "main:shears",
+// 	recipe = {
+// 		{"","main:iron"},
+// 		{"main:iron",""},
+// 	}
+// })
 
-core.register_craft({
-	output = "main:bucket",
-	recipe = {
-		{"main:iron","","main:iron"},
-		{"","main:iron",""},
-	}
-})
+// core.register_craft({
+// 	output = "main:bucket",
+// 	recipe = {
+// 		{"main:iron","","main:iron"},
+// 		{"","main:iron",""},
+// 	}
+// })
 
---tool repair
-core.register_craft({
-	type = "toolrepair",
-	additional_wear = -0.02,
-})
+// --tool repair
+// core.register_craft({
+// 	type = "toolrepair",
+// 	additional_wear = -0.02,
+// })
 
 
 
-local raw_material = {"coal","lapis","iron","gold","diamond","emerald","sapphire","ruby"}
-for _,name in pairs(raw_material) do
-	core.register_craft({
-		output = "main:"..name.."block",
-		recipe = {
-			{"main:"..name, "main:"..name, "main:"..name},
-			{"main:"..name, "main:"..name, "main:"..name},
-			{"main:"..name, "main:"..name, "main:"..name},
-		}
-	})
-	core.register_craft({
-		type = "shapeless",
-		output = "main:"..name.." 9",
-		recipe = {"main:"..name.."block"},
-	})
-end
+// local raw_material = {"coal","lapis","iron","gold","diamond","emerald","sapphire","ruby"}
+// for _,name in pairs(raw_material) do
+// 	core.register_craft({
+// 		output = "main:"..name.."block",
+// 		recipe = {
+// 			{"main:"..name, "main:"..name, "main:"..name},
+// 			{"main:"..name, "main:"..name, "main:"..name},
+// 			{"main:"..name, "main:"..name, "main:"..name},
+// 		}
+// 	})
+// 	core.register_craft({
+// 		type = "shapeless",
+// 		output = "main:"..name.." 9",
+// 		recipe = {"main:"..name.."block"},
+// 	})
+// end
 }
