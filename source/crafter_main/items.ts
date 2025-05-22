@@ -1,18 +1,19 @@
 // Item definition.
 
-core.register_food("main:apple", {
-    description: "Apple",
-    texture: "apple.png",
-    satiation: 1,
-    hunger: 2,
-});
+// fixme: depends on the food mod!
+// core.register_food("main:apple", {
+//     description: "Apple",
+//     texture: "apple.png",
+//     satiation: 1,
+//     hunger: 2,
+// });
 
-core.register_food("main:sugar", {
-    description: "Sugar",
-    texture: "sugar.png",
-    satiation: 1,
-    hunger: 1,
-});
+// core.register_food("main:sugar", {
+//     description: "Sugar",
+//     texture: "sugar.png",
+//     satiation: 1,
+//     hunger: 1,
+// });
 
 core.register_craftitem("main:stick", {
     description: "Stick",
