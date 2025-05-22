@@ -5,23 +5,29 @@ It works better and doesn't block digging with a bucket through water.
 */
 namespace main {
 
-local function bucket_raycast(user,type)
-	local pos = user:get_pos()
-	pos.y = pos.y + user:get_properties().eye_height
-	local look_dir = user:get_look_dir()
+function bucket_raycast(user: ObjectRef ,type: string): PointedThing | null {
+	const pos: Vec3 = user.get_pos()
+    const eyeHeight = user.get_properties().eye_height
+    if (!eyeHeight) {
+        throw new Error("How did a player's eye height become null?");
+    }
+	pos.y = pos.y + eyeHeight;
+	let look_dir: Vec3 = user.get_look_dir()
 	look_dir = vector.multiply(look_dir,4)
-	local pos2 = vector.add(pos,look_dir)
+	const pos2: Vec3 = vector.add(pos,look_dir)
 	
-	local ray = minetest.raycast(pos, pos2, false, true)		
-	if ray then
-		for pointed_thing in ray do
-			if pointed_thing then
-				return({under=pointed_thing.under,above=pointed_thing.above})
-			end
-		end
-	end
-	return(nil)
-end
+	const ray: RaycastObject = core.raycast(pos, pos2, false, true)		
+
+	
+    for (const pointed_thing of ray ) {
+
+        if (pointed_thing !== null) {
+            return pointed_thing;
+        }
+    }
+	
+	return null
+}
 
 // -- Item definitions
 // minetest.register_craftitem("main:bucket", {
