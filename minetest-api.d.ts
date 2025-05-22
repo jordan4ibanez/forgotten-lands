@@ -2414,19 +2414,19 @@ enum SchematicPlacementFlag {
 }
 
 enum SchematicFormat {
-	mts: SchematicFormat;
-	lua: SchematicFormat;
+	mts,
+	lua,
 }
 
 enum SchematicSerializationOption {
-	lua_use_comments: SchematicSerializationOption;
-	lua_num_indent_spaces: SchematicSerializationOption;
+	lua_use_comments,
+	lua_num_indent_spaces,
 }
 
 enum SchematicReadOptionYSliceOption {
-	none: SchematicReadOptionYSliceOption;
-	low: SchematicReadOptionYSliceOption;
-	all: SchematicReadOptionYSliceOption;
+	none,
+	low,
+	all,
 }
 
 enum HTTPRequestMethod {
