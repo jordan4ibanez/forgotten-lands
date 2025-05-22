@@ -7,23 +7,23 @@ https://youtu.be/j0cq27qqnE8
 */
 namespace main {
 
-    function bucket_raycast(user: ObjectRef): PointedThing | null {
-        const pos: Vec3 = user.get_pos();
-        const eyeHeight = user.get_properties().eye_height;
+    function bucket_raycast(player: ObjectRef): PointedThing | null {
+        const pos: Vec3 = player.get_pos();
+        const eyeHeight = player.get_properties().eye_height;
         if (!eyeHeight) {
             throw new Error("How did a player's eye height become null?");
         }
         pos.y = pos.y + eyeHeight;
-        let look_dir: Vec3 = user.get_look_dir();
-        look_dir = vector.multiply(look_dir, 4);
-        const pos2: Vec3 = vector.add(pos, look_dir);
+        let lookDir: Vec3 = player.get_look_dir();
+        lookDir = vector.multiply(lookDir, 4);
+        const pos2: Vec3 = vector.add(pos, lookDir);
 
         const ray: RaycastObject = core.raycast(pos, pos2, false, true);
 
-        for (const pointed_thing of ray) {
+        for (const pointedThing of ray) {
 
-            if (pointed_thing !== null) {
-                return pointed_thing;
+            if (pointedThing !== null) {
+                return pointedThing;
             }
         }
         return null;
@@ -94,22 +94,22 @@ namespace main {
                 return;
             }
 
-            const pos_under: Vec3 = pos.under;
-            const pos_above: Vec3 = pos.above;
+            const posUnder: Vec3 = pos.under;
+            const posAbove: Vec3 = pos.above;
 
-            const node_under: string = core.get_node(pos_under).name;
-            const node_above: string = core.get_node(pos_above).name;
+            const nodeUnder: string = core.get_node(posUnder).name;
+            const nodeAbove: string = core.get_node(posAbove).name;
 
-            const buildable_under = (core.registered_nodes[node_under].buildable_to === true);
-            const buildable_above = (core.registered_nodes[node_above].buildable_to === true);
+            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
+            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
 
             // Set it to water.
-            if (buildable_under === true) {
-                core.set_node(pos_under, { name: "main:water" });
+            if (buildableUnder === true) {
+                core.set_node(posUnder, { name: "main:water" });
                 itemstack.replace(ItemStack("main:bucket"));
                 return itemstack;
-            } else if (buildable_above) {
-                core.set_node(pos_above, { name: "main:water" });
+            } else if (buildableAbove) {
+                core.set_node(posAbove, { name: "main:water" });
                 itemstack.replace(ItemStack("main:bucket"));
                 return itemstack;
             }
@@ -121,22 +121,22 @@ namespace main {
                 return;
             }
 
-            const pos_under: Vec3 = pos.under;
-            const pos_above: Vec3 = pos.above;
+            const posUnder: Vec3 = pos.under;
+            const posAbove: Vec3 = pos.above;
 
-            const node_under: string = core.get_node(pos_under).name;
-            const node_above: string = core.get_node(pos_above).name;
+            const nodeUnder: string = core.get_node(posUnder).name;
+            const nodeAbove: string = core.get_node(posAbove).name;
 
-            const buildable_under: boolean = (core.registered_nodes[node_under].buildable_to === true);
-            const buildable_above: boolean = (core.registered_nodes[node_above].buildable_to === true);
+            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
+            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
 
             // Set it to water.
-            if (buildable_under === true) {
-                core.add_node(pos_under, { name: "main:water" });
+            if (buildableUnder === true) {
+                core.add_node(posUnder, { name: "main:water" });
                 itemstack.replace(ItemStack("main:bucket"));
                 return itemstack;
-            } else if (buildable_above) {
-                core.add_node(pos_above, { name: "main:water" });
+            } else if (buildableAbove) {
+                core.add_node(posAbove, { name: "main:water" });
                 itemstack.replace(ItemStack("main:bucket"));
                 return itemstack;
             }
