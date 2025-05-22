@@ -30,7 +30,7 @@ namespace main {
 		node: MapNode = { name: "", prob: 3, param2: 0, force_place: false };
 		// itemstring: string = ""
 		// node: string = "";
-		// meta: LuaTable = new LuaTable();
+		meta: MetaData | null = null;
 
 		set_node(node: MapNode, meta: MetaRef | MetaData): void {
 			node.param2 = node.param2 || 0;
@@ -71,7 +71,8 @@ namespace main {
 				this.object.remove();
 				return;
 			}
-			// self.meta = meta
+
+			this.meta = meta;
 
 			// -- Cache whether we're supposed to float on water
 			// self.floats = core.get_item_group(node.name, "float") ~= 0
