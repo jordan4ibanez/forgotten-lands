@@ -18,7 +18,7 @@ namespace main {
 	class FallingNode extends types.Entity {
 		override name: string = ":__builtin:falling_node";
 		initial_properties = {
-			visual: "wielditem",
+			visual: EntityVisual.wielditem,
 			visual_size: { x: 0.667, y: 0.667 },
 			textures: [],
 			physical: true,
