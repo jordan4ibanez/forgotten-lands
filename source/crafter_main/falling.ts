@@ -20,7 +20,7 @@ namespace main {
 		initial_properties = {
 			visual: "wielditem",
 			visual_size: { x: 0.667, y: 0.667 },
-			textures: {},
+			textures: [],
 			physical: true,
 			is_visible: false,
 			collide_with_objects: false,
