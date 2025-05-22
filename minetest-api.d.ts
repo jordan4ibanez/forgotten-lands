@@ -7,7 +7,7 @@ export { };
 /** @noSelf **/
 interface core {
     get_current_modname(): string;
-    get_modpath(modName: string): string;
+    get_modpath(modName: string): string | null;
     get_modnames(): string[];
     get_game_info(): GameInfo;
     get_worldpath(): string;
