@@ -108,7 +108,6 @@ const levels: { [id: string]: number } = {
 };
 
 let level: number = 0;
-// let experience: any
 
 for (const [ore, tool_required] of pairs(ores)) {
 	level = levels[ore];
