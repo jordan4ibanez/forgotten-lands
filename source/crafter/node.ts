@@ -107,78 +107,81 @@ const levels: { [id: string]: number } = {
 	ruby: 7,
 };
 
-// local level = 0
-// local experience
-// for ore,tool_required in pairs(ores) do
-// 	level = levels[ore]
+let level: number = 0;
+// let experience: any
 
-// 	if ore == "iron" or ore == "gold" then
-// 		experience = 0
-// 	else
-// 		experience = level
-// 	end
+for (const [ore, tool_required] of pairs(ores)) {
+	level = levels[ore];
 
-// 	minetest.register_node("main:"..ore.."block", {
-// 		description = ore:gsub("^%l", string.upper).." Block",
-// 		tiles = {ore.."block.png"},
-// 		groups = {stone = level, pathable = 1},
-// 		sounds = main.stoneSound(),
-// 		--light_source = 14,--debugging ore spawn
-// 		drop = {
-// 			max_items = 1,
-// 			items= {
-// 				{
-// 					rarity = 0,
-// 					tools = tool_required,
-// 					items = {"main:"..ore.."block"},
-// 				},
-// 				},
-// 			},
-// 		})
+	let experience: number = 0;
 
-// 	minetest.register_node("main:"..ore.."ore", {
-// 		description = ore:gsub("^%l", string.upper).." Ore",
-// 		tiles = {"stone.png^"..ore.."ore.png"},
-// 		groups = {stone = level, pathable = 1,experience=experience},
-// 		sounds = main.stoneSound(),
-// 		--light_source = 14,--debugging ore spawn
-// 		drop = {
-// 			max_items = 1,
-// 			items= {
-// 				{
-// 					rarity = 0,
-// 					tools = tool_required,
-// 					items = drops[ore],
-// 				},
-// 				},
-// 			},
-// 		})
-// 	minetest.register_node(":nether:"..ore.."ore", {
-// 		description = "Nether "..ore:gsub("^%l", string.upper).." Ore",
-// 		tiles = {"netherrack.png^"..ore.."ore.png"},
-// 		groups = {netherrack = level, pathable = 1, experience = experience},
-// 		sounds = main.stoneSound(),
-// 		light_source = 7,
-// 		drop = {
-// 			max_items = 1,
-// 			items= {
-// 				{
-// 					rarity = 0,
-// 					tools = tool_required,
-// 					items = drops[ore],
-// 				},
-// 				},
-// 			},
-// 		after_destruct = function(pos, oldnode)
-// 			if math.random() > 0.95 then
-// 				minetest.sound_play("tnt_ignite",{pos=pos,max_hear_distance=64})
-// 				minetest.after(1.5, function(pos)
-// 					tnt(pos,5)
-// 				end,pos)
-// 			end
-// 		end,
-// 	})
-// end
+	if (ore == "iron" || ore == "gold") {
+		experience = 0;
+	} else {
+		experience = level;
+	}
+
+	// 	minetest.register_node("main:"..ore.."block", {
+	// 		description = ore:gsub("^%l", string.upper).." Block",
+	// 		tiles = {ore.."block.png"},
+	// 		groups = {stone = level, pathable = 1},
+	// 		sounds = main.stoneSound(),
+	// 		--light_source = 14,--debugging ore spawn
+	// 		drop = {
+	// 			max_items = 1,
+	// 			items= {
+	// 				{
+	// 					rarity = 0,
+	// 					tools = tool_required,
+	// 					items = {"main:"..ore.."block"},
+	// 				},
+	// 				},
+	// 			},
+	// 		})
+
+	// 	minetest.register_node("main:"..ore.."ore", {
+	// 		description = ore:gsub("^%l", string.upper).." Ore",
+	// 		tiles = {"stone.png^"..ore.."ore.png"},
+	// 		groups = {stone = level, pathable = 1,experience=experience},
+	// 		sounds = main.stoneSound(),
+	// 		--light_source = 14,--debugging ore spawn
+	// 		drop = {
+	// 			max_items = 1,
+	// 			items= {
+	// 				{
+	// 					rarity = 0,
+	// 					tools = tool_required,
+	// 					items = drops[ore],
+	// 				},
+	// 				},
+	// 			},
+	// 		})
+	// 	minetest.register_node(":nether:"..ore.."ore", {
+	// 		description = "Nether "..ore:gsub("^%l", string.upper).." Ore",
+	// 		tiles = {"netherrack.png^"..ore.."ore.png"},
+	// 		groups = {netherrack = level, pathable = 1, experience = experience},
+	// 		sounds = main.stoneSound(),
+	// 		light_source = 7,
+	// 		drop = {
+	// 			max_items = 1,
+	// 			items= {
+	// 				{
+	// 					rarity = 0,
+	// 					tools = tool_required,
+	// 					items = drops[ore],
+	// 				},
+	// 				},
+	// 			},
+	// 		after_destruct = function(pos, oldnode)
+	// 			if math.random() > 0.95 then
+	// 				minetest.sound_play("tnt_ignite",{pos=pos,max_hear_distance=64})
+	// 				minetest.after(1.5, function(pos)
+	// 					tnt(pos,5)
+	// 				end,pos)
+	// 			end
+	// 		end,
+	// 	})
+}
 
 // minetest.register_node("main:stone", {
 //     description = "Stone",
