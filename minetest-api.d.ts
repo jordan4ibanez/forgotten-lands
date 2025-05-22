@@ -270,7 +270,7 @@ interface core {
 		staticData?: string
 	): ObjectRef | null;
 	add_item(position: Vec3, item: ItemStackObject | string): ObjectRef;
-	get_player_by_name(playerName: string): ObjectRef;
+	get_player_by_name(playerName: string): ObjectRef | null;
 	get_objects_inside_radius(position: Vec3, radius: number): ObjectRef[];
 	get_objects_in_area(pos1: Vec3, pos2: Vec3): ObjectRef[];
 	set_timeofday(newTimeOfDay: number): void;
@@ -1492,7 +1492,7 @@ declare global {
 
 	interface MetaData {
 		fields: { string: any };
-		inventory: { string: { number: string } };
+		inventory: { string: [string | ItemStackObject] };
 	}
 
 	function ItemStack(
