@@ -2396,364 +2396,359 @@ declare global {
 //! If you don't have your mod depend on the utility library, this will just blow up when you try to use it.
 
 declare global {
+	const core: core;
 
-    const core: core;
+	enum SchematicRotation {
+		zero,
+		ninety,
+		oneEighty,
+		twoSeventy,
+		random,
+	}
 
-enum SchematicRotation {
-	zero,
-	ninety,
-	oneEighty,
-	twoSeventy,
-	random,
-}
+	enum SchematicPlacementFlag {
+		place_center_x,
+		place_center_y,
+		place_center_z,
+	}
 
-enum SchematicPlacementFlag {
-	place_center_x,
-	place_center_y,
-	place_center_z,
-}
+	enum SchematicFormat {
+		mts,
+		lua,
+	}
 
-enum SchematicFormat {
-	mts,
-	lua,
-}
+	enum SchematicSerializationOption {
+		lua_use_comments,
+		lua_num_indent_spaces,
+	}
 
-enum SchematicSerializationOption {
-	lua_use_comments,
-	lua_num_indent_spaces,
-}
+	enum SchematicReadOptionYSliceOption {
+		none,
+		low,
+		all,
+	}
 
-enum SchematicReadOptionYSliceOption {
-	none,
-	low,
-	all,
-}
+	enum HTTPRequestMethod {
+		GET,
+		POST,
+		PUT,
+		DELETE,
+	}
 
-enum HTTPRequestMethod {
-	GET,
-	POST,
-	PUT,
-	DELETE,
-}
+	enum OreType {
+		scatter,
+		sheet,
+		puff,
+		blob,
+		vein,
+		stratum,
+	}
 
-enum OreType {
-	scatter,
-	sheet,
-	puff,
-	blob,
-	vein,
-	stratum,
-}
+	enum OreFlags {
+		puff_cliffs,
+		puff_additive_composition,
+	}
 
-enum OreFlags {
-	puff_cliffs,
-	puff_additive_composition,
-}
+	enum NoiseFlags {
+		defaults,
+		eased,
+		absvalue,
+	}
 
-enum NoiseFlags {
-	defaults,
-	eased,
-	absvalue,
-}
+	enum DecorationType {
+		simple,
+		schematic,
+	}
 
-enum DecorationType {
-	simple,
-	schematic,
-}
+	enum DecorationFlags {
+		liquid_surface,
+		force_placement,
+		all_floors,
+		all_ceilings,
+		place_center_x,
+		place_center_y,
+		place_center_z,
+	}
 
-enum DecorationFlags {
-	liquid_surface,
-	force_placement,
-	all_floors,
-	all_ceilings,
-	place_center_x,
-	place_center_y,
-	place_center_z,
-}
+	enum ParamType1 {
+		light,
+		none,
+	}
 
-enum ParamType1 {
-	light,
-	none,
-}
+	enum ParamType2 {
+		flowingliquid,
+		wallmounted,
+		facedir,
+		fourdir,
+		leveled,
+		degrotate,
+		meshoptions,
+		color,
+		colorfacedir,
+		color4dir,
+		colorwallmounted,
+		glasslikeliquidlevel,
+		colordegrotate,
+	}
 
-enum ParamType2 {
-	flowingliquid,
-	wallmounted,
-	facedir,
-	fourdir,
-	leveled,
-	degrotate,
-	meshoptions,
-	color,
-	colorfacedir,
-	color4dir,
-	colorwallmounted,
-	glasslikeliquidlevel,
-	colordegrotate,
-}
+	enum Drawtype {
+		normal,
+		airlike,
+		liquid,
+		flowingliquid,
+		glasslike,
+		glasslike_framed,
+		glasslike_framed_optional,
+		allfaces,
+		allfaces_optional,
+		torchlike,
+		signlike,
+		plantlike,
+		firelike,
+		fencelike,
+		raillike,
+		nodebox,
+		mesh,
+		plantlike_rooted,
+	}
 
-enum Drawtype {
-	normal,
-	airlike,
-	liquid,
-	flowingliquid,
-	glasslike,
-	glasslike_framed,
-	glasslike_framed_optional,
-	allfaces,
-	allfaces_optional,
-	torchlike,
-	signlike,
-	plantlike,
-	firelike,
-	fencelike,
-	raillike,
-	nodebox,
-	mesh,
-	plantlike_rooted,
-}
+	enum Nodeboxtype {
+		regular,
+		fixed,
+		wallmounted,
+		connected,
+	}
 
-enum Nodeboxtype {
-	regular,
-	fixed,
-	wallmounted,
-	connected,
-}
+	enum TextureAlpha {
+		opaque,
+		clip,
+		blend,
+	}
 
-enum TextureAlpha {
-	opaque,
-	clip,
-	blend,
-}
+	enum LogLevel {
+		none,
+		error,
+		warning,
+		action,
+		info,
+		verbose,
+	}
 
-enum LogLevel {
-	none,
-	error,
-	warning,
-	action,
-	info,
-	verbose,
-}
+	enum CraftRecipeType {
+		shapeless,
+		toolrepair,
+		cooking,
+		fuel,
+	}
 
-enum CraftRecipeType {
-	shapeless,
-	toolrepair,
-	cooking,
-	fuel,
-}
+	enum LiquidType {
+		none,
+		source,
+		flowing,
+	}
 
-enum LiquidType {
-	none,
-	source,
-	flowing,
-}
+	enum NodeBoxConnections {
+		top,
+		bottom,
+		front,
+		left,
+		back,
+		right,
+	}
 
-enum NodeBoxConnections {
-	top,
-	bottom,
-	front,
-	left,
-	back,
-	right,
-}
+	enum CraftCheckType {
+		normal,
+		cooking,
+		fuel,
+	}
 
-enum CraftCheckType {
-	normal,
-	cooking,
-	fuel,
-}
+	enum HPChangeReasonType {
+		set_hp,
+		punch,
+		fall,
+		node_damage,
+		drown,
+		respawn,
+	}
 
-enum HPChangeReasonType {
-	set_hp,
-	punch,
-	fall,
-	node_damage,
-	drown,
-	respawn,
-}
+	enum CheatType {
+		moved_too_fast,
+		interacted_too_far,
+		interacted_with_self,
+		interacted_while_dead,
+		finished_unknown_dig,
+		dug_unbreakable,
+		dug_too_fast,
+	}
 
-enum CheatType {
-	moved_too_fast,
-	interacted_too_far,
-	interacted_with_self,
-	interacted_while_dead,
-	finished_unknown_dig,
-	dug_unbreakable,
-	dug_too_fast,
-}
+	enum ClearObjectsOptions {
+		full,
+		quick,
+	}
 
-enum ClearObjectsOptions {
-	full,
-	quick,
-}
+	enum GenNotifyFlags {
+		dungeon,
+		temple,
+		cave_begin,
+		cave_end,
+		large_cave_begin,
+		large_cave_end,
+		decoration,
+	}
 
-enum GenNotifyFlags {
-	dungeon,
-	temple,
-	cave_begin,
-	cave_end,
-	large_cave_begin,
-	large_cave_end,
-	decoration,
-}
+	enum SearchAlgorithm {
+		aStarNoprefetch,
+		aStar,
+		dijkstra,
+	}
 
-enum SearchAlgorithm {
-	aStarNoprefetch,
-	aStar,
-	dijkstra,
-}
+	enum SkyParametersType {
+		regular,
+		skybox,
+		plain,
+	}
 
-enum SkyParametersType {
-	regular,
-	skybox,
-	plain,
-}
+	enum SkyParametersFogTintType {
+		custom,
+		default,
+	}
 
-enum SkyParametersFogTintType {
-	custom,
-	default,
-}
+	enum MinimapType {
+		off,
+		surface,
+		radar,
+		texture,
+	}
 
-enum MinimapType {
-	off,
-	surface,
-	radar,
-	texture,
-}
+	enum HudElementType {
+		image,
+		text,
+		statbar,
+		inventory,
+		waypoint,
+		image_waypoint,
+		compass,
+		minimap,
+	}
 
-enum HudElementType {
-	image,
-	text,
-	statbar,
-	inventory,
-	waypoint,
-	image_waypoint,
-	compass,
-	minimap,
-}
+	enum HudReplaceBuiltinOption {
+		breath,
+		health,
+	}
 
-enum HudReplaceBuiltinOption {
-	breath,
-	health,
-}
+	enum ParseRelativeNumberArgument {
+		number,
+		relativeToPlus,
+		relativeTo,
+	}
 
-enum ParseRelativeNumberArgument {
-	number,
-	relativeToPlus,
-	relativeTo,
-}
+	enum CompressionMethod {
+		deflate,
+		zstd,
+	}
 
-enum CompressionMethod {
-	deflate,
-	zstd,
-}
+	enum RotateAndPlaceOrientationFlag {
+		invert_wall,
+		force_wall,
+		force_ceiling,
+		force_floor,
+		force_facedir,
+	}
 
-enum RotateAndPlaceOrientationFlag {
-	invert_wall,
-	force_wall,
-	force_ceiling,
-	force_floor,
-	force_facedir,
-}
+	enum BlockStatusCondition {
+		unknown,
+		emerging,
+		loaded,
+		active,
+	}
 
-enum BlockStatusCondition {
-	unknown,
-	emerging,
-	loaded,
-	active,
-}
+	enum TileAnimationType {
+		vertical_frames,
+		sheet_2d,
+	}
 
-enum TileAnimationType {
-	vertical_frames,
-	sheet_2d,
-}
+	enum ParticleSpawnerTweenStyle {
+		fwd,
+		rev,
+		pulse,
+		flicker,
+	}
 
-enum ParticleSpawnerTweenStyle {
-	fwd,
-	rev,
-	pulse,
-	flicker,
-}
+	enum ParticleSpawnerTextureBlend {
+		alpha,
+		add,
+		screen,
+		sub,
+	}
 
-enum ParticleSpawnerTextureBlend {
-	alpha,
-	add,
-	screen,
-	sub,
-}
+	enum ParticleSpawnerAttractionType {
+		none,
+		point,
+		line,
+		plane,
+	}
 
-enum ParticleSpawnerAttractionType {
-	none,
-	point,
-	line,
-	plane,
-}
+	enum AreaStoreType {
+		libSpatial,
+	}
 
-enum AreaStoreType {
-	libSpatial,
-}
+	enum TexturePoolComponentFade {
+		in,
+		out,
+	}
 
-enum TexturePoolComponentFade {
-	in,
-	out,
-}
+	enum EntityVisual {
+		cube,
+		sprite,
+		upright_sprite,
+		mesh,
+		wielditem,
+		item,
+	}
 
-enum EntityVisual {
-	cube,
-	sprite,
-	upright_sprite,
-	mesh,
-	wielditem,
-	item,
-}
+	enum ToolType {
+		pickaxe,
+		shovel,
+		axe,
+		hoe,
+		sword,
+		shears,
+	}
 
-enum ToolType {
-	pickaxe,
-	shovel,
-	axe,
-	hoe,
-	sword,
-	shears,
-}
+	enum BlockType {
+		break_instant,
+		soil,
+		wood,
+		leaf,
+		stone,
+		metal,
+		glass,
+		wool,
+		planks,
+		tree,
+		sand,
+		lava_cooling,
+		liquid,
+		water,
+		attached_node,
+	}
 
-enum BlockType {
-	break_instant,
-	soil,
-	wood,
-	leaf,
-	stone,
-	metal,
-	glass,
-	wool,
-	planks,
-	tree,
-	sand,
-	lava_cooling,
-	liquid,
-	water,
-	attached_node,
-}
+	enum CraftingBlockType {
+		soil,
+		wood,
+		leaf,
+		stone,
+		metal,
+		glass,
+		wool,
+		planks,
+		tree,
+		sand,
+	}
 
-enum CraftingBlockType {
-	soil,
-	wood,
-	leaf,
-	stone,
-	metal,
-	glass,
-	wool,
-	planks,
-	tree,
-	sand,
-}
-
-enum DamageGroup {
-	flesh,
-	metal,
-	bone,
-}
-
-
-	
-
+	enum DamageGroup {
+		flesh,
+		metal,
+		bone,
+	}
 }
