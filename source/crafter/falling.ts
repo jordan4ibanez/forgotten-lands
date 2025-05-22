@@ -27,30 +27,45 @@ namespace main {
 			collisionbox: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 		};
 
-		// node = {},
-		// meta = {},
-		// set_node = function(self, node, meta)
-		// 	self.node = node
-		// 	meta = meta or {}
-		// 	if type(meta.to_table) == "function" then
-		// 		meta = meta:to_table()
-		// 	end
-		// 	for _, list in pairs(meta.inventory or {}) do
-		// 		for i, stack in pairs(list) do
-		// 			if type(stack) == "userdata" then
-		// 				list[i] = stack:to_string()
-		// 			end
-		// 		end
-		// 	end
-		// 	self.meta = meta
-		// 	self.object:set_properties({
-		// 		is_visible = true,
-		// 		textures = {node.name},
-		// 	})
-		// 	if node.param2 then
-		// 		self.object:set_rotation(vector.new(0,param_translation[node.param2],0))
-		// 	end
-		// end,
+		node: string = "";
+		// meta: LuaTable = new LuaTable();
+
+		set_node(node: string, newMeta?: MetaRef) {
+			this.node = node;
+
+			let workerMeta: MetaData | null = null;
+
+			if (newMeta && type(newMeta.to_table) === "function") {
+				workerMeta = newMeta.to_table();
+			}
+
+			if (workerMeta) {
+				for (const [_, list] of Object.entries(workerMeta.inventory)) {
+					// for (const [i, stack] of Object.entries(list)) {
+					//     if (type(stack) === "userdata") {
+					//         // const a=  list ;
+					//         list[i] = "hi";
+					//         // const a: number = i;
+					//         // (stack as any).to_string()
+					//     }
+					// }
+				}
+
+				// 		if type(stack) == "userdata" then
+				// 			list[i] = stack:to_string()
+				// 		end
+			}
+
+			// self.meta = meta
+			// self.object:set_properties({
+			// 	is_visible = true,
+			// 	textures = {node.name},
+			// })
+			// if node.param2 then
+			// 	self.object:set_rotation(vector.new(0,param_translation[node.param2],0))
+			// end
+		}
+
 		// get_staticdata = function(self)
 		// 	local ds = {
 		// 		node = self.node,
@@ -151,4 +166,8 @@ namespace main {
 	}
 
 	utility.registerTSEntity(FallingNode);
+
+	core.register_on_joinplayer((player: ObjectRef) => {
+		core.add_item(player.get_pos(), "main:paper");
+	});
 }
