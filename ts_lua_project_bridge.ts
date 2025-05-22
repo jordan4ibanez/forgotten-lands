@@ -112,7 +112,7 @@ if (CREATE_RELEASE) {
         });
     });
 
-    // todo: create a tar.gz creator, or not.
+    // todo: create a tar.gz creator, or not. tar czf crafter_release.tar.gz crafter_release/
 
     // And finally, remove the build folder.
     if (FS.existsSync(releaseFolder)) {
