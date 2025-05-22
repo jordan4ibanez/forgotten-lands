@@ -2708,49 +2708,49 @@ enum EntityVisual {
 }
 
 enum ToolType {
-	pickaxe: ToolType;
-	shovel: ToolType;
-	axe: ToolType;
-	hoe: ToolType;
-	sword: ToolType;
-	shears: ToolType;
+	pickaxe,
+	shovel,
+	axe,
+	hoe,
+	sword,
+	shears,
 }
 
 enum BlockType {
-	break_instant: BlockType;
-	soil: BlockType;
-	wood: BlockType;
-	leaf: BlockType;
-	stone: BlockType;
-	metal: BlockType;
-	glass: BlockType;
-	wool: BlockType;
-	planks: BlockType;
-	tree: BlockType;
-	sand: BlockType;
-	lava_cooling: BlockType;
-	liquid: BlockType;
-	water: BlockType;
-	attached_node: BlockType;
+	break_instant,
+	soil,
+	wood,
+	leaf,
+	stone,
+	metal,
+	glass,
+	wool,
+	planks,
+	tree,
+	sand,
+	lava_cooling,
+	liquid,
+	water,
+	attached_node,
 }
 
 enum CraftingBlockType {
-	soil: CraftingBlockType;
-	wood: CraftingBlockType;
-	leaf: CraftingBlockType;
-	stone: CraftingBlockType;
-	metal: CraftingBlockType;
-	glass: CraftingBlockType;
-	wool: CraftingBlockType;
-	planks: CraftingBlockType;
-	tree: CraftingBlockType;
-	sand: CraftingBlockType;
+	soil,
+	wood,
+	leaf,
+	stone,
+	metal,
+	glass,
+	wool,
+	planks,
+	tree,
+	sand,
 }
 
 enum DamageGroup {
-	flesh: DamageGroup;
-	metal: DamageGroup;
-	bone: DamageGroup;
+	flesh,
+	metal,
+	bone,
 }
 
 
