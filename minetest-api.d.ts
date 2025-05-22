@@ -2397,6 +2397,8 @@ declare global {
 
 declare global {
 
+    const core: core;
+
 enum SchematicRotation {
 	zero,
 	ninety,
@@ -2752,6 +2754,6 @@ enum DamageGroup {
 }
 
 
-	const core: core;
+	
 
 }
