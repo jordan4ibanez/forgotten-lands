@@ -63,9 +63,11 @@ namespace main {
 
 			if (!def) {
 				// Don't allow unknown nodes to fall.
-				// core.log("info",
-				// 	"Unknown falling node removed at "..
-				// 	core.pos_to_string(self.object:get_pos()))
+				core.log(
+					types.LogLevel.error,
+					"Unknown falling node removed at " +
+						core.pos_to_string(this.object.get_pos())
+				);
 				// self.object:remove()
 				// return
 			}
