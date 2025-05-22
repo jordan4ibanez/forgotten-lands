@@ -30,6 +30,7 @@ namespace main {
     }
 
     // Item definitions.
+    // fixme: Why aren't we using functions?!
 
     core.register_craftitem("main:bucket", {
         description: "Bucket",
