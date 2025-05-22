@@ -7,7 +7,7 @@ https://youtu.be/j0cq27qqnE8
 */
 namespace main {
 
-    function bucket_raycast(user: ObjectRef, type: string): PointedThing | null {
+    function bucket_raycast(user: ObjectRef): PointedThing | null {
         const pos: Vec3 = user.get_pos();
         const eyeHeight = user.get_properties().eye_height;
         if (!eyeHeight) {
@@ -20,14 +20,12 @@ namespace main {
 
         const ray: RaycastObject = core.raycast(pos, pos2, false, true);
 
-
         for (const pointed_thing of ray) {
 
             if (pointed_thing !== null) {
                 return pointed_thing;
             }
         }
-
         return null;
     }
 
