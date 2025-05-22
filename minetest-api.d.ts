@@ -1399,7 +1399,7 @@ declare global {
 	}
 
 	interface CraftRecipeDefinition {
-		type?: string;
+		type?: CraftRecipeType;
 		output?: string;
 		recipe?: string[][] | string[] | string;
 		replacements?: string[];
@@ -2532,6 +2532,13 @@ declare interface LogLevel {
 	verbose: LogLevel;
 }
 
+declare interface CraftRecipeType {
+	shapeless: CraftRecipeType;
+	toolrepair: CraftRecipeType;
+	cooking: CraftRecipeType;
+	fuel: CraftRecipeType;
+}
+
 declare interface LiquidType {
 	none: LiquidType;
 	source: LiquidType;
@@ -2730,4 +2737,5 @@ declare global {
 	const ParticleSpawnerAttractionType: ParticleSpawnerAttractionType;
 	const AreaStoreType: AreaStoreType;
 	const TexturePoolComponentFade: TexturePoolComponentFade;
+	const CraftRecipeType: CraftRecipeType;
 }
