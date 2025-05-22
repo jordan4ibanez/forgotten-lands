@@ -14,34 +14,9 @@ assets:
 watch:
 	@npx tstl --watch
 
-# dryrun:
-# 	@./scripts/compile_game.sh
+clean:
+	@node --no-warnings=ExperimentalWarning ts_lua_project_bridge.ts --rebuild-code --copy-media
 
-# windows: 
-# 	@echo Transpiling Forgotten Times into lua...
-# 	@npx tstl
-# 	@echo Successfully built Forgotten Times.
-# 	@echo Starting Luanti.
-# 	@../../bin/luanti.exe
-
-# linux:
-# 	@./scripts/clean_build_dir.sh
-# 	@./scripts/compile_game.sh
-# 	@./scripts/copy_conf_files.sh
-# 	@./scripts/copy_textures.sh
-# 	@./scripts/copy_sounds.sh
-# 	@./scripts/copy_models.sh
-	
-# 	@echo Starting Luanti.
-# 	@minetest --go --gameid forgotten-lands --world $$HOME/.minetest/worlds/debugging
-
-# build_linux:
-# 	@./scripts/clean_build_dir.sh
-# 	@./scripts/compile_game.sh
-# 	@./scripts/copy_conf_files.sh
-# 	@./scripts/copy_textures.sh
-# 	@./scripts/copy_sounds.sh
-# 	@./scripts/copy_models.sh
 
 
 release:
