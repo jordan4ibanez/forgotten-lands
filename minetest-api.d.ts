@@ -2397,6 +2397,7 @@ declare global {
 //! If you don't have your mod depend on the utility library, this will just blow up when you try to use it. :D
 
 declare global {
+
 declare interface SchematicRotation {
 	zero: SchematicRotation;
 	ninety: SchematicRotation;
@@ -2750,6 +2751,7 @@ declare interface DamageGroup {
 	metal: DamageGroup;
 	bone: DamageGroup;
 }
+
 
 	const core: core;
 	const EntityVisual: EntityVisual;
