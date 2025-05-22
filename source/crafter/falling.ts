@@ -80,11 +80,23 @@ namespace main {
 			// -- Save liquidtype for falling water
 			this.liquidtype = def.liquidtype;
 
-			// -- Set up entity visuals
-			// -- For compatibility with older clients we continue to use "item" visual
-			// -- for simple situations.
-			// local drawtypes = {normal=true, glasslike=true, allfaces=true, nodebox=true}
-			// local p2types = {none=true, facedir=true, ["4dir"]=true}
+			// Set up entity visuals.
+			// For compatibility with older clients we continue to use "item" visual
+			// for simple situations.
+
+			const drawtypes: { [id: string]: boolean } = {
+				normal: true,
+				glasslike: true,
+				allfaces: true,
+				nodebox: true,
+			};
+
+			const p2types: { [id: string]: boolean } = {
+				none: true,
+				facedir: true,
+				"4dir": true,
+			};
+
 			// if drawtypes[def.drawtype] and p2types[def.paramtype2] and def.use_texture_alpha ~= "blend" then
 			// 	-- Calculate size of falling node
 			// 	local s = vector.zero()
