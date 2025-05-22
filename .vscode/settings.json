@@ -16,5 +16,12 @@
         "tsconfig.json": true,
         "old_code/": true,
     },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.enable": true,
+	"prettier.bracketSpacing": true,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": false,
     "typescript.format.semicolons": "insert",
 }
