@@ -190,30 +190,30 @@ namespace main {
 		});
 	}
 
-	// core.register_craft({
-	// 	output = "main:ladder 16",
-	// 	recipe = {
-	// 		{"main:stick","", "main:stick"},
-	// 		{"main:stick","main:stick", "main:stick"},
-	// 		{"main:stick", "", "main:stick"}
-	// 	}
-	// })
+	core.register_craft({
+		output: "main:ladder 16",
+		recipe: [
+			["main:stick", "", "main:stick"],
+			["main:stick", "main:stick", "main:stick"],
+			["main:stick", "", "main:stick"],
+		],
+	});
 
-	// core.register_craft({
-	// 	output = "main:shears",
-	// 	recipe = {
-	// 		{"","main:iron"},
-	// 		{"main:iron",""},
-	// 	}
-	// })
+	core.register_craft({
+		output: "main:shears",
+		recipe: [
+			["", "main:iron"],
+			["main:iron", ""],
+		],
+	});
 
-	// core.register_craft({
-	// 	output = "main:bucket",
-	// 	recipe = {
-	// 		{"main:iron","","main:iron"},
-	// 		{"","main:iron",""},
-	// 	}
-	// })
+	core.register_craft({
+		output: "main:bucket",
+		recipe: [
+			["main:iron", "", "main:iron"],
+			["", "main:iron", ""],
+		],
+	});
 
 	// --tool repair
 	// core.register_craft({
