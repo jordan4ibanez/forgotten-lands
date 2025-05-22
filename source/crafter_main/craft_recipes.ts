@@ -2,7 +2,6 @@
 // Crafting recipes.
 
 namespace main {
-
     const CraftRecipeType = types.CraftRecipeType;
 
     //? Cooking.
@@ -50,7 +49,6 @@ namespace main {
         recipe: "main:sand",
         cooktime: 1,
     });
-
 
     //? Fuel.
 
@@ -109,69 +107,90 @@ namespace main {
     });
     core.register_craft({
         output: "main:stick 4",
-        recipe: [
-            ["main:wood"],
-            ["main:wood"]
-        ]
+        recipe: [["main:wood"], ["main:wood"]],
     });
     core.register_craft({
         output: "main:paper",
         recipe: [
             ["farming:sugarcane", "farming:sugarcane", "farming:sugarcane"],
-        ]
+        ],
     });
 
     // Tool name.
-    const __tools: string[] = ["coal", "wood", "stone", "lapis", "iron", "gold", "diamond", "emerald", "sapphire", "ruby"];
+    const __tools: string[] = [
+        "coal",
+        "wood",
+        "stone",
+        "lapis",
+        "iron",
+        "gold",
+        "diamond",
+        "emerald",
+        "sapphire",
+        "ruby",
+    ];
     // Material to craft.
-    const material: string[] = ["coal", "wood", "cobble", "lapis", "iron", "gold", "diamond", "emerald", "sapphire", "ruby"];
+    const material: string[] = [
+        "coal",
+        "wood",
+        "cobble",
+        "lapis",
+        "iron",
+        "gold",
+        "diamond",
+        "emerald",
+        "sapphire",
+        "ruby",
+    ];
 
     for (const [id, tool] of __tools.entries()) {
+        core.register_craft({
+            output: "main:" + tool + "pick",
+            recipe: [
+                [
+                    "main:" + material[id],
+                    "main:" + material[id],
+                    "main:" + material[id],
+                ],
+                ["", "main:stick", ""],
+                ["", "main:stick", ""],
+            ],
+        });
 
-        	core.register_craft({
-        		output : "main:" + tool + "pick",
-        		recipe : [
-        			["main:"+material[id], "main:"+material[id], "main:"+material[id]],
-        			["", "main:stick", ""],
-        			["", "main:stick", ""]
-                ]
-        	})
+        // core.register_craft({
+        // 	output = "main:"..tool.."shovel",
+        // 	recipe = {
+        // 		{"","main:"..material[id], ""},
+        // 		{"", "main:stick", ""},
+        // 		{"", "main:stick", ""}
+        // 	}
+        // })
 
-        	// core.register_craft({
-        	// 	output = "main:"..tool.."shovel",
-        	// 	recipe = {
-        	// 		{"","main:"..material[id], ""},
-        	// 		{"", "main:stick", ""},
-        	// 		{"", "main:stick", ""}
-        	// 	}
-        	// })
+        // core.register_craft({
+        // 	output = "main:"..tool.."axe",
+        // 	recipe = {
+        // 		{"main:"..material[id], "main:"..material[id], ""},
+        // 		{"main:"..material[id], "main:stick", ""},
+        // 		{"", "main:stick", ""}
+        // 	}
+        // })
+        // core.register_craft({
+        // 	output = "main:"..tool.."axe",
+        // 	recipe = {
+        // 		{"", "main:"..material[id], "main:"..material[id]},
+        // 		{"", "main:stick", "main:"..material[id]},
+        // 		{"", "main:stick", ""}
+        // 	}
+        // })
 
-        	// core.register_craft({
-        	// 	output = "main:"..tool.."axe",
-        	// 	recipe = {
-        	// 		{"main:"..material[id], "main:"..material[id], ""},
-        	// 		{"main:"..material[id], "main:stick", ""},
-        	// 		{"", "main:stick", ""}
-        	// 	}
-        	// })
-        	// core.register_craft({
-        	// 	output = "main:"..tool.."axe",
-        	// 	recipe = {
-        	// 		{"", "main:"..material[id], "main:"..material[id]},
-        	// 		{"", "main:stick", "main:"..material[id]},
-        	// 		{"", "main:stick", ""}
-        	// 	}
-        	// })
-
-        	// core.register_craft({
-        	// 	output = "main:"..tool.."sword",
-        	// 	recipe = {
-        	// 		{"","main:"..material[id], ""},
-        	// 		{"","main:"..material[id], ""},
-        	// 		{"", "main:stick", ""}
-        	// 	}
-        	// })
-
+        // core.register_craft({
+        // 	output = "main:"..tool.."sword",
+        // 	recipe = {
+        // 		{"","main:"..material[id], ""},
+        // 		{"","main:"..material[id], ""},
+        // 		{"", "main:stick", ""}
+        // 	}
+        // })
     }
 
     // core.register_craft({
@@ -204,8 +223,6 @@ namespace main {
     // 	type = "toolrepair",
     // 	additional_wear = -0.02,
     // })
-
-
 
     // local raw_material = {"coal","lapis","iron","gold","diamond","emerald","sapphire","ruby"}
     // for _,name in pairs(raw_material) do
