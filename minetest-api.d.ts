@@ -1386,7 +1386,7 @@ declare global {
 		spawn_by?: string;
 		check_offset?: number;
 		num_spawn_by?: number;
-		flags?: string | { string: boolean };
+		flags?: DecorationFlags | { DecorationFlags: boolean };
 		decoration?: string | string[];
 		height?: number;
 		height_max?: number;
