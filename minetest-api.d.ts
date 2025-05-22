@@ -1485,7 +1485,7 @@ declare global {
         collisionbox?: CollisionBox;
         selectionbox?: number[];
         pointable?: boolean;
-        visual?: EntityVisual;
+        visual?: string;
         visual_size?: Vec3 | Vec2;
         mesh?: string;
         textures?: string[];
@@ -1804,14 +1804,7 @@ declare global {
 // Why do they point to themselves? I dunno, it works though.
 //! If you don't have your mod depend on the utility library, this will just blow up when you try to use it. :D 
 
-declare interface EntityVisual {
-    cube: EntityVisual,
-    sprite: EntityVisual,
-    upright_sprite: EntityVisual,
-    mesh: EntityVisual,
-    wielditem: EntityVisual,
-    item: EntityVisual;
-}
+
 
 declare interface SchematicRotation {
     zero: SchematicRotation,
@@ -2113,7 +2106,6 @@ declare interface TexturePoolComponentFade {
 
 declare global {
     const core: core;
-    const EntityVisual: EntityVisual;
     const SchematicRotation: SchematicRotation;
     const SchematicPlacementFlag: SchematicPlacementFlag;
     const SchematicFormat: SchematicFormat;

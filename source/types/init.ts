@@ -53,9 +53,18 @@ namespace types {
 		fuel = "fuel",
 	}
 
+	export enum EntityVisual {
+		cube = "cube",
+		sprite = "sprite",
+		upright_sprite = "upright_sprite",
+		mesh = "mesh",
+		wielditem = "wielditem",
+		item = "item",
+	}
+
 	/** Typescript Luaentity. :) */
 	export abstract class Entity implements LuaEntity {
-        // Name is required.
+		// Name is required.
 		abstract name: string;
 		object: ObjectRef = utility.fakeRef();
 
