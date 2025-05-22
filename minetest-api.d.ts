@@ -2430,19 +2430,19 @@ enum SchematicReadOptionYSliceOption {
 }
 
 enum HTTPRequestMethod {
-	GET: HTTPRequestMethod;
-	POST: HTTPRequestMethod;
-	PUT: HTTPRequestMethod;
-	DELETE: HTTPRequestMethod;
+	GET,
+	POST,
+	PUT,
+	DELETE,
 }
 
 enum OreType {
-	scatter: OreType;
-	sheet: OreType;
-	puff: OreType;
-	blob: OreType;
-	vein: OreType;
-	stratum: OreType;
+	scatter,
+	sheet,
+	puff,
+	blob,
+	vein,
+	stratum,
 }
 
 enum OreFlags {
