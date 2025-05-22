@@ -2,17 +2,88 @@
 
 // Ore def with required tool.
 
-local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","main:lapispick","main:goldpick","main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"]
-// local ores = {
-// ["coal"]={"main:woodpick","main:coalpick","main:stonepick","main:ironpick","main:lapispick","main:goldpick","main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["iron"]={"main:coalpick","main:stonepick","main:ironpick","main:lapispick","main:goldpick","main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["lapis"]={"main:ironpick","main:lapispick","main:goldpick","main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["gold"]={"main:ironpick","main:lapispick","main:goldpick","main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["diamond"]={"main:ironpick","main:lapispick","main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["emerald"]={"main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["sapphire"]={"main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// ["ruby"]={"main:diamondpick","main:emeraldpick","main:sapphirepick","main:rubypick"},
-// }
+const tool: string[] = [
+	"main:woodpick",
+	"main:coalpick",
+	"main:stonepick",
+	"main:ironpick",
+	"main:lapispick",
+	"main:goldpick",
+	"main:diamondpick",
+	"main:emeraldpick",
+	"main:sapphirepick",
+	"main:rubypick",
+];
+
+const ores: { [id: string]: string[] } = {
+	coal: [
+		"main:woodpick",
+		"main:coalpick",
+		"main:stonepick",
+		"main:ironpick",
+		"main:lapispick",
+		"main:goldpick",
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	iron: [
+		"main:coalpick",
+		"main:stonepick",
+		"main:ironpick",
+		"main:lapispick",
+		"main:goldpick",
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	lapis: [
+		"main:ironpick",
+		"main:lapispick",
+		"main:goldpick",
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	gold: [
+		"main:ironpick",
+		"main:lapispick",
+		"main:goldpick",
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	diamond: [
+		"main:ironpick",
+		"main:lapispick",
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	emerald: [
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	sapphire: [
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+	ruby: [
+		"main:diamondpick",
+		"main:emeraldpick",
+		"main:sapphirepick",
+		"main:rubypick",
+	],
+};
 
 // local drops ={
 // 	["coal"]={"main:coal"},
@@ -36,18 +107,17 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 	["ruby"]=7,
 // }
 
-
 // local level = 0
 // local experience
 // for ore,tool_required in pairs(ores) do
 // 	level = levels[ore]
 
-// 	if ore == "iron" or ore == "gold" then 
+// 	if ore == "iron" or ore == "gold" then
 // 		experience = 0
 // 	else
 // 		experience = level
 // 	end
-	
+
 // 	minetest.register_node("main:"..ore.."block", {
 // 		description = ore:gsub("^%l", string.upper).." Block",
 // 		tiles = {ore.."block.png"},
@@ -175,7 +245,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 	}),
 //     drop = "",
 // })
-	
+
 // minetest.register_node("main:ice", {
 //     description = "Ice",
 //     tiles = {"ice.png"},
@@ -193,8 +263,8 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 	--alpha = 100,
 //     drop = "",
 //     after_destruct = function(pos, oldnode)
-//        minetest.set_node(pos, {name="main:water"})                            
-//     end                
+//        minetest.set_node(pos, {name="main:water"})
+//     end
 // })
 // minetest.register_node("main:ice_mapgen", {
 //     description = "Ice",
@@ -209,7 +279,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 //         dug =  {name = "break_glass", gain = 0.4},
 // 	}),
 // 	use_texture_alpha = false,
-//     drop = "",           
+//     drop = "",
 // })
 
 // minetest.register_node("main:dirt", {
@@ -283,18 +353,18 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 		if not pointed_thing.type == "node" then
 // 			return
 // 		end
-		
+
 // 		local sneak = placer:get_player_control().sneak
 // 		local noddef = minetest.registered_nodes[minetest.get_node(pointed_thing.under).name]
 // 		if not sneak and noddef.on_rightclick then
 // 			minetest.item_place(itemstack, placer, pointed_thing)
 // 			return
 // 		end
-		
+
 // 		local pos = pointed_thing.above
 // 		minetest.item_place_node(itemstack, placer, pointed_thing)
 // 		local meta = minetest.get_meta(pos)
-// 		meta:set_string("placed", "true")	
+// 		meta:set_string("placed", "true")
 // 		return(itemstack)
 // 	end,
 // 	--treecapitator - move treecapitator into own file using override
@@ -307,7 +377,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 		--if tool_meta:get_int("treecapitator") > 0 then
 // 		if not meta:contains("placed") and string.match(digger:get_wielded_item():get_name(), "axe") then
 // 			local tool_capabilities = digger:get_wielded_item():get_tool_capabilities()
-			
+
 // 			local wear = minetest.get_dig_params({wood=1}, tool_capabilities).wear
 
 // 			local wield_stack = digger:get_wielded_item()
@@ -336,7 +406,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 						vertical = false,
 // 						node = {name= name},
 // 					})
-					
+
 // 					local name2 = minetest.get_node(vector.new(pos.x,pos.y+y-1,pos.z)).name
 // 					if acceptable_soil[name2] then
 // 						minetest.add_node(vector.new(pos.x,pos.y+y,pos.z),{name="main:sapling"})
@@ -347,7 +417,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 		else
 // 			minetest.node_dig(pos, node, digger)
 // 		end
-		
+
 // 	end
 // })
 
@@ -365,7 +435,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 	walkable = false,
 // 	climbable = true,
 // 	paramtype = "light",
-// 	is_ground_content = false,	
+// 	is_ground_content = false,
 //     tiles = {"leaves.png"},
 //     groups = {leaves = 1, leafdecay = 1,flammable=1},
 //     sounds = main.grassSound(),
@@ -388,7 +458,6 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 //     },
 // })
 
-
 // minetest.register_node("main:dropped_leaves", {
 //     description = "Leaves",
 //     drawtype = "allfaces_optional",
@@ -396,7 +465,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 	walkable = false,
 // 	climbable = false,
 // 	paramtype = "light",
-// 	is_ground_content = false,	
+// 	is_ground_content = false,
 //     tiles = {"leaves.png"},
 //     groups = {leaves = 1, flammable=1},
 //     sounds = main.grassSound(),
@@ -410,11 +479,6 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 //     },
 //     },
 // })
-
-
-
-
-
 
 // minetest.register_node("main:water", {
 // 	description = "Water Source",
@@ -457,7 +521,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 	post_effect_color = {a = 103, r = 30, g = 60, b = 90},
 // 	groups = {water = 1, liquid = 1, cools_lava = 1, bucket = 1, source = 1,pathable = 1,drowning=1,disable_fall_damage=1,extinguish=1},
 // 	--sounds = default.node_sound_water_defaults(),
-	
+
 // 	--water explodes in the nether
 // 	on_construct = function(pos)
 // 		local under = minetest.get_node(vector.new(pos.x,pos.y-1,pos.z)).name
@@ -643,7 +707,7 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 		if pointed_thing.type ~= "node" then
 // 			return itemstack
 // 		end
-		
+
 // 		local wdir = minetest.dir_to_wallmounted(vector.subtract(pointed_thing.under,pointed_thing.above))
 
 // 		local fakestack = itemstack
@@ -653,17 +717,17 @@ local tool = ["main:woodpick","main:coalpick","main:stonepick","main:ironpick","
 // 		else
 // 			return itemstack
 // 		end
-		
+
 // 		if not retval then
 // 			return itemstack
 // 		end
-		
+
 // 		itemstack, retval = minetest.item_place(fakestack, placer, pointed_thing, wdir)
-		
+
 // 		if retval then
 // 			minetest.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
 // 		end
-		
+
 // 		print(itemstack, retval)
 // 		itemstack:set_name("main:ladder")
 
