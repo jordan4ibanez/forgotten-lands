@@ -38,43 +38,43 @@ namespace main {
         // wield_image = "bucket.png",
         // liquids_pointable = true,
         on_place: (itemstack, placer, pointed_thing) => {
-            const pos: PointedThing | null = bucket_raycast(placer);
+            const pointedThing: PointedThing | null = bucket_raycast(placer);
 
-            if (!pos) {
+            if (!pointedThing) {
                 return;
             }
 
-            const pos_under: Vec3 = pos.under;
+            const posUnder: Vec3 = pointedThing.under;
 
-            const node: string = core.get_node(pos_under).name;
+            const nodeName: string = core.get_node(posUnder).name;
 
-            if (node === "main:water") {
+            if (nodeName === "main:water") {
                 itemstack.replace(ItemStack("main:bucket_water"));
-                core.remove_node(pos_under);
+                core.remove_node(posUnder);
                 return (itemstack);
-            } else if (node === "main:lava" || node === "nether:lava") {
+            } else if (nodeName === "main:lava" || nodeName === "nether:lava") {
                 itemstack.replace(ItemStack("main:bucket_lava"));
-                core.remove_node(pos_under);
+                core.remove_node(posUnder);
                 return (itemstack);
             }
         },
 
         on_secondary_use: (itemstack, user, pointed_thing) => {
-            const pos: PointedThing | null = bucket_raycast(user);
-            if (!pos) {
+            const pointedThing: PointedThing | null = bucket_raycast(user);
+            if (!pointedThing) {
                 return;
             }
-            const pos_under: Vec3 = pos.under;
+            const posUnder: Vec3 = pointedThing.under;
 
-            const node: string = core.get_node(pos_under).name;
+            const nodeName: string = core.get_node(posUnder).name;
 
-            if (node === "main:water") {
+            if (nodeName === "main:water") {
                 itemstack.replace(ItemStack("main:bucket_water"));
-                core.remove_node(pos_under);
+                core.remove_node(posUnder);
                 return itemstack;
-            } else if (node === "main:lava" || node === "nether:lava") {
+            } else if (nodeName === "main:lava" || nodeName === "nether:lava") {
                 itemstack.replace(ItemStack("main:bucket_lava"));
-                core.remove_node(pos_under);
+                core.remove_node(posUnder);
                 return itemstack;
             }
         },
