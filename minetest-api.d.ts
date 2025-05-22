@@ -2472,45 +2472,45 @@ enum DecorationFlags {
 }
 
 enum ParamType1 {
-	light: ParamType1;
-	none: ParamType1;
+	light,
+	none,
 }
 
 enum ParamType2 {
-	flowingliquid: ParamType2;
-	wallmounted: ParamType2;
-	facedir: ParamType2;
-	fourdir: ParamType2;
-	leveled: ParamType2;
-	degrotate: ParamType2;
-	meshoptions: ParamType2;
-	color: ParamType2;
-	colorfacedir: ParamType2;
-	color4dir: ParamType2;
-	colorwallmounted: ParamType2;
-	glasslikeliquidlevel: ParamType2;
-	colordegrotate: ParamType2;
+	flowingliquid,
+	wallmounted,
+	facedir,
+	fourdir,
+	leveled,
+	degrotate,
+	meshoptions,
+	color,
+	colorfacedir,
+	color4dir,
+	colorwallmounted,
+	glasslikeliquidlevel,
+	colordegrotate,
 }
 
 enum Drawtype {
-	normal: Drawtype;
-	airlike: Drawtype;
-	liquid: Drawtype;
-	flowingliquid: Drawtype;
-	glasslike: Drawtype;
-	glasslike_framed: Drawtype;
-	glasslike_framed_optional: Drawtype;
-	allfaces: Drawtype;
-	allfaces_optional: Drawtype;
-	torchlike: Drawtype;
-	signlike: Drawtype;
-	plantlike: Drawtype;
-	firelike: Drawtype;
-	fencelike: Drawtype;
-	raillike: Drawtype;
-	nodebox: Drawtype;
-	mesh: Drawtype;
-	plantlike_rooted: Drawtype;
+	normal,
+	airlike,
+	liquid,
+	flowingliquid,
+	glasslike,
+	glasslike_framed,
+	glasslike_framed_optional,
+	allfaces,
+	allfaces_optional,
+	torchlike,
+	signlike,
+	plantlike,
+	firelike,
+	fencelike,
+	raillike,
+	nodebox,
+	mesh,
+	plantlike_rooted,
 }
 
 enum Nodeboxtype {
