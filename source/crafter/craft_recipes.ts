@@ -94,12 +94,12 @@ namespace main {
 	//? Crafting.
 
 	core.register_craft({
-		type: "shapeless",
+		type: CraftRecipeType.shapeless,
 		output: "main:wood 4",
 		recipe: ["main:tree"],
 	});
 	core.register_craft({
-		type: "shapeless",
+		type: CraftRecipeType.shapeless,
 		output: "main:sugar 3",
 		recipe: ["farming:sugarcane"],
 	});
@@ -240,7 +240,7 @@ namespace main {
 			],
 		});
 		core.register_craft({
-			type: "shapeless",
+			type: CraftRecipeType.shapeless,
 			output: "main:" + name + " 9",
 			recipe: ["main:" + name + "block"],
 		});
