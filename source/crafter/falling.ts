@@ -30,7 +30,7 @@ namespace main {
 		node: MapNode = { name: "", prob: 3, param2: 0, force_place: false };
 		meta?: MetaData;
 		floats: boolean = false;
-		liquidtype?: typeof LiquidType;
+		liquidtype?: LiquidType;
 
 		set_node(node: MapNode, meta: MetaRef | MetaData): void {
 			node.param2 = node.param2 || 0;
