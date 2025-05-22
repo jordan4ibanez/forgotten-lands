@@ -2490,6 +2490,7 @@ declare global {
 		colorwallmounted,
 		glasslikeliquidlevel,
 		colordegrotate,
+		"4dir",
 	}
 
 	enum Drawtype {
