@@ -38,7 +38,7 @@ namespace main {
         stack_max: 1,
         // wield_image = "bucket.png",
         // liquids_pointable = true,
-        on_place: (itemstack, placer, pointed_thing) => {
+        on_place: (itemstack: ItemStackObject, placer: ObjectRef, _: PointedThing) => {
             const pointedThing: PointedThing | null = bucket_raycast(placer);
 
             if (!pointedThing) {
@@ -60,7 +60,7 @@ namespace main {
             }
         },
 
-        on_secondary_use: (itemstack, user, pointed_thing) => {
+        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, _: PointedThing) => {
             const pointedThing: PointedThing | null = bucket_raycast(user);
             if (!pointedThing) {
                 return;
