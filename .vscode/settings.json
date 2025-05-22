@@ -24,4 +24,5 @@
 	"prettier.tabWidth": 4,
 	"prettier.useTabs": true,
     "typescript.format.semicolons": "insert",
+    "Lua.runtime.version": "LuaJIT"
 }
