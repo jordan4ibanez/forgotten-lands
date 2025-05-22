@@ -1,5 +1,6 @@
 import * as FS from "node:fs";
 import * as Exec from "node:child_process";
+import Zip from "jszip";
 
 //? Check if the project should be fully rebuilt.
 const [REBUILD_CODE, COPY_MEDIA, CREATE_RELEASE] = (() => {
@@ -59,3 +60,61 @@ FS.readdirSync("source/", { recursive: false }).forEach((item: string | Buffer) 
     }
     FS.copyFileSync(`source/${item}/mod.conf`, `mods/${item}/mod.conf`,);
 });
+
+//? Create a release zip file for this to be deployed on github.
+//~ This is the most time consuming option.
+if (CREATE_RELEASE) {
+    const releaseFolder: string = "crafter/";
+    // Set up the release build folder.
+    console.log("Creating release.");
+    if (FS.existsSync("crafter_release.zip")) {
+        console.log("Deleting old zip.");
+        FS.rmSync("crafter_release.zip");
+    }
+    if (FS.existsSync(releaseFolder)) {
+        console.log("Removing old release folder.");
+        FS.rmSync(releaseFolder, { recursive: true, force: true });
+    }
+
+    FS.mkdirSync(releaseFolder);
+
+    // Now copy...
+
+    // mods/ folder.
+    FS.cpSync(`mods/`, `${releaseFolder}mods/`, { recursive: true });
+    // menu/ folder.
+    FS.cpSync(`menu/`, `${releaseFolder}menu/`, { recursive: true });
+    // readme.MD
+    FS.cpSync(`readme.MD`, `${releaseFolder}readme.MD`);
+    // LICENSE
+    FS.cpSync(`LICENSE`, `${releaseFolder}LICENSE`);
+    // game.conf
+    FS.cpSync(`game.conf`, `${releaseFolder}game.conf`);
+
+    // Then make a zip.
+    const zip: Zip = new Zip();
+
+    FS.readdirSync(releaseFolder, { recursive: true }).forEach((item: string | Buffer) => {
+        // Basic checks to make sure nothing explodes.
+        if (!item) return;
+        if (item instanceof Buffer) return;
+        if (typeof item === "object") return;
+        // And raw copying.
+        const current: string = `${releaseFolder}${item}`;
+        if (!FS.statSync(current).isDirectory()) {
+            zip.file(current, FS.readFileSync(current));
+        }
+    });
+
+    zip.generateAsync({ type: "blob" }).then((content: Blob) => {
+        content.arrayBuffer().then((data: ArrayBuffer) => {
+            FS.writeFileSync("crafter_release.zip", new DataView(data));
+        });
+    });
+
+    // And finally, remove the build folder.
+    if (FS.existsSync(releaseFolder)) {
+        FS.rmSync(releaseFolder, { recursive: true, force: true });
+        console.log("Completed.");
+    }
+}
