@@ -2514,32 +2514,32 @@ enum Drawtype {
 }
 
 enum Nodeboxtype {
-	regular: Nodeboxtype;
-	fixed: Nodeboxtype;
-	wallmounted: Nodeboxtype;
-	connected: Nodeboxtype;
+	regular,
+	fixed,
+	wallmounted,
+	connected,
 }
 
 enum TextureAlpha {
-	opaque: TextureAlpha;
-	clip: TextureAlpha;
-	blend: TextureAlpha;
+	opaque,
+	clip,
+	blend,
 }
 
 enum LogLevel {
-	none: LogLevel;
-	error: LogLevel;
-	warning: LogLevel;
-	action: LogLevel;
-	info: LogLevel;
-	verbose: LogLevel;
+	none,
+	error,
+	warning,
+	action,
+	info,
+	verbose,
 }
 
 enum CraftRecipeType {
-	shapeless: CraftRecipeType;
-	toolrepair: CraftRecipeType;
-	cooking: CraftRecipeType;
-	fuel: CraftRecipeType;
+	shapeless,
+	toolrepair,
+	cooking,
+	fuel,
 }
 
 enum LiquidType {
