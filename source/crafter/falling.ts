@@ -216,13 +216,14 @@ namespace main {
 			}
 		}
 
-		// get_staticdata = function(self)
-		// 	local ds = {
-		// 		node = self.node,
-		// 		meta = self.meta,
-		// 	}
-		// 	return minetest.serialize(ds)
-		// end,
+		get_staticdata(): string {
+			const ds = {
+				node: this.node,
+				meta: this.meta,
+			};
+			return core.serialize(ds);
+		}
+
 		// on_activate(staticdata: string) {
 		// 	this.object.set_armor_groups({ immortal: 1 });
 		// 	const ds: { [id: string | number | symbol]: any } =
