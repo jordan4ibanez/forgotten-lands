@@ -120,23 +120,26 @@ for (const [ore, tool_required] of pairs(ores)) {
 		experience = level;
 	}
 
-	// 	minetest.register_node("main:"..ore.."block", {
-	// 		description = ore:gsub("^%l", string.upper).." Block",
-	// 		tiles = {ore.."block.png"},
-	// 		groups = {stone = level, pathable = 1},
-	// 		sounds = main.stoneSound(),
-	// 		--light_source = 14,--debugging ore spawn
-	// 		drop = {
-	// 			max_items = 1,
-	// 			items= {
-	// 				{
-	// 					rarity = 0,
-	// 					tools = tool_required,
-	// 					items = {"main:"..ore.."block"},
-	// 				},
-	// 				},
-	// 			},
-	// 		})
+	print(ore);
+
+	// core.register_node("main:"+ore+"block", {
+	// description : ore.gsub("^%l", string.upper)+" Block",
+	// tiles : [ore+"block.png"],
+	// groups : {stone : level, pathable : 1},
+	// sounds : main.stoneSound(),
+	// light_source = 14,--debugging ore spawn
+	// drop : {
+	// 	max_items = 1,
+	// 	items= {
+	// 		{
+	// 			rarity = 0,
+	// 			tools = tool_required,
+	// 			items = {"main:"..ore.."block"},
+	// 		},
+	// 		},
+	// 	},
+	// }
+	// )
 
 	// 	minetest.register_node("main:"..ore.."ore", {
 	// 		description = ore:gsub("^%l", string.upper).." Ore",
