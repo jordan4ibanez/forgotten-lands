@@ -215,26 +215,36 @@ namespace main {
 		],
 	});
 
-	// --tool repair
-	// core.register_craft({
-	// 	type = "toolrepair",
-	// 	additional_wear = -0.02,
-	// })
+	//? Tool repair.
 
-	// local raw_material = {"coal","lapis","iron","gold","diamond","emerald","sapphire","ruby"}
-	// for _,name in pairs(raw_material) do
-	// 	core.register_craft({
-	// 		output = "main:"..name.."block",
-	// 		recipe = {
-	// 			{"main:"..name, "main:"..name, "main:"..name},
-	// 			{"main:"..name, "main:"..name, "main:"..name},
-	// 			{"main:"..name, "main:"..name, "main:"..name},
-	// 		}
-	// 	})
-	// 	core.register_craft({
-	// 		type = "shapeless",
-	// 		output = "main:"..name.." 9",
-	// 		recipe = {"main:"..name.."block"},
-	// 	})
-	// end
+	core.register_craft({
+		type: CraftRecipeType.toolrepair,
+		additional_wear: -0.02,
+	});
+
+	const raw_material: string[] = [
+		"coal",
+		"lapis",
+		"iron",
+		"gold",
+		"diamond",
+		"emerald",
+		"sapphire",
+		"ruby",
+	];
+	for (const name of raw_material) {
+		core.register_craft({
+			output: "main:" + name + "block",
+			recipe: [
+				["main:" + name, "main:" + name, "main:" + name],
+				["main:" + name, "main:" + name, "main:" + name],
+				["main:" + name, "main:" + name, "main:" + name],
+			],
+		});
+		core.register_craft({
+			type: "shapeless",
+			output: "main:" + name + " 9",
+			recipe: ["main:" + name + "block"],
+		});
+	}
 }
