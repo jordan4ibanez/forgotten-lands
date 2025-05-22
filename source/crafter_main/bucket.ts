@@ -114,7 +114,7 @@ namespace main {
                 return itemstack;
             }
         },
-        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, pointed_thing) => {
+        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, _: PointedThing) => {
             const pos: PointedThing | null = bucket_raycast(user);
 
             if (!pos) {
