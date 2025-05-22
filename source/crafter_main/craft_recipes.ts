@@ -121,8 +121,10 @@ namespace main {
         ]
     });
 
-    // local tool =     {"coal","wood","stone" ,"lapis","iron","gold","diamond","emerald","sapphire","ruby"}--the tool name
-    // local material = {"coal","wood","cobble","lapis","iron","gold","diamond","emerald","sapphire","ruby"}--material to craft
+    // Tool name.
+    const tool: string[] = ["coal", "wood", "stone", "lapis", "iron", "gold", "diamond", "emerald", "sapphire", "ruby"];
+    // Material to craft.
+    const material: string[] = ["coal", "wood", "cobble", "lapis", "iron", "gold", "diamond", "emerald", "sapphire", "ruby"];
 
     // for id,tool in pairs(tool) do
 
