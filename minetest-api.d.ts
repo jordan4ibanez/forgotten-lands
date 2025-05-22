@@ -1214,7 +1214,7 @@ declare global {
 		set_float(key: string, value: number): void;
 		get_float(key: string): number;
 		get_keys(): string[];
-		to_table(): MetaData | void;
+		to_table(): MetaData | null;
 		from_table(data: MetaData): boolean;
 		equals(other: MetaRef): boolean;
 		//! FIXME: USE INHERITANCE!
