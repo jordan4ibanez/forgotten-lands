@@ -2744,12 +2744,19 @@ declare interface CraftingBlockType {
 	sand: CraftingBlockType;
 }
 
+declare interface DamageGroup {
+	flesh: DamageGroup;
+	metal: DamageGroup;
+	bone: DamageGroup;
+}
+
 declare global {
 	const core: core;
 	const EntityVisual: EntityVisual;
 	const ToolType: ToolType;
 	const BlockType: BlockType;
 	const CraftingBlockType: CraftingBlockType;
+	const DamageGroup: DamageGroup;
 	const SchematicRotation: SchematicRotation;
 	const SchematicPlacementFlag: SchematicPlacementFlag;
 	const SchematicFormat: SchematicFormat;

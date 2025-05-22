@@ -419,6 +419,7 @@ globalEnvironment.CraftingBlockType = {
 	sand: "group:sand",
 };
 
+//! Done.
 globalEnvironment.DamageGroup = {
 	flesh: "flesh",
 	metal: "metal",
