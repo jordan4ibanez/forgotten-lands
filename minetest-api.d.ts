@@ -940,6 +940,7 @@ declare global {
 		prob: number;
 		param2: number;
 		force_place: boolean;
+		level: number;
 	}
 
 	interface NodeTable {
