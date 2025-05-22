@@ -29,54 +29,56 @@ namespace main {
         return null;
     }
 
-    // -- Item definitions
-    // minetest.register_craftitem("main:bucket", {
-    // 	description = "Bucket",
-    // 	inventory_image = "bucket.png",
-    // 	stack_max = 1,
-    // 	--wield_image = "bucket.png",
-    // 	--liquids_pointable = true,
-    // 	on_place = function(itemstack, placer, pointed_thing)		
-    // 		local pos = bucket_raycast(placer)
+    // Item definitions.
 
-    // 		if not pos then
-    // 			return
-    // 		end
+    core.register_craftitem("main:bucket", {
+        description: "Bucket",
+        inventory_image: "bucket.png",
+        stack_max: 1,
+        // wield_image = "bucket.png",
+        // liquids_pointable = true,
+        on_place: (itemstack, placer, pointed_thing) => {
+            const pos: PointedThing | null = bucket_raycast(placer);
 
-    // 		local pos_under = pos.under
+            if (!pos) {
+                return;
+            }
 
-    // 		local node = minetest.get_node(pos_under).name
+            const pos_under: Vec3 = pos.under;
 
-    // 		if node == "main:water" then
-    // 			itemstack:replace(ItemStack("main:bucket_water"))
-    // 			minetest.remove_node(pos_under)
-    // 			return(itemstack)
-    // 		elseif node == "main:lava" or node == "nether:lava" then
-    // 			itemstack:replace(ItemStack("main:bucket_lava"))
-    // 			minetest.remove_node(pos_under)
-    // 			return(itemstack)
-    // 		end
-    // 	end,
-    // 	on_secondary_use = function(itemstack, user, pointed_thing)
-    // 		local pos = bucket_raycast(user)
-    // 		if not pos then
-    // 			return
-    // 		end
-    // 		local pos_under = pos.under
+            const node: string = core.get_node(pos_under).name;
 
-    // 		local node = minetest.get_node(pos_under).name
+            if (node === "main:water") {
+                itemstack.replace(ItemStack("main:bucket_water"));
+                core.remove_node(pos_under);
+                return (itemstack);
+            } else if (node === "main:lava" || node === "nether:lava") {
+                itemstack.replace(ItemStack("main:bucket_lava"));
+                core.remove_node(pos_under);
+                return (itemstack);
+            }
+        },
 
-    // 		if node == "main:water" then
-    // 			itemstack:replace(ItemStack("main:bucket_water"))
-    // 			minetest.remove_node(pos_under)
-    // 			return(itemstack)
-    // 		elseif node == "main:lava" or node == "nether:lava" then
-    // 			itemstack:replace(ItemStack("main:bucket_lava"))
-    // 			minetest.remove_node(pos_under)
-    // 			return(itemstack)
-    // 		end
-    // 	end,
-    // })
+        on_secondary_use: (itemstack, user, pointed_thing) => {
+            const pos: PointedThing | null = bucket_raycast(user);
+            if (!pos) {
+                return;
+            }
+            const pos_under: Vec3 = pos.under;
+
+            const node: string = core.get_node(pos_under).name;
+
+            if (node === "main:water") {
+                itemstack.replace(ItemStack("main:bucket_water"));
+                core.remove_node(pos_under);
+                return itemstack;
+            } else if (node === "main:lava" || node === "nether:lava") {
+                itemstack.replace(ItemStack("main:bucket_lava"));
+                core.remove_node(pos_under);
+                return itemstack;
+            }
+        },
+    });
 
 
     // minetest.register_craftitem("main:bucket_water", {
