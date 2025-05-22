@@ -55,6 +55,7 @@ namespace types {
 
 	/** Typescript Luaentity. :) */
 	export abstract class Entity implements LuaEntity {
+        // Name is required.
 		abstract name: string;
 		object: ObjectRef = utility.fakeRef();
 
