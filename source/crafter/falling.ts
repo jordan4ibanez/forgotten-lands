@@ -64,7 +64,7 @@ namespace main {
 			if (!def) {
 				// Don't allow unknown nodes to fall.
 				core.log(
-					types.LogLevel.error,
+					LogLevel.error,
 					"Unknown falling node removed at " +
 						core.pos_to_string(this.object.get_pos())
 				);
@@ -73,6 +73,8 @@ namespace main {
 			}
 
 			this.meta = meta;
+
+            
 
 			// -- Cache whether we're supposed to float on water
 			// self.floats = core.get_item_group(node.name, "float") ~= 0
