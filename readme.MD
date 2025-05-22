@@ -24,8 +24,9 @@ First you need node, if you're on ubuntu it's super outdated so go to the nodejs
 
 Next you need TypeScriptToLua, typescript, and nodejs types.
 Also, you need Lua types for TS or else the compiler doesn't know what's going on.
+Also also, jszip is for creating a release zip.
 ```
-npm install -D typescript-to-lua typescript @types/node lua-types
+npm install -D typescript-to-lua typescript @types/node lua-types jszip
 ```
 
 I HIGHLY recommend you use ``make``. It automates a BUNCH of things. There's even ``make clean`` to see if everything is working.
