@@ -175,8 +175,12 @@ namespace main {
 				});
 			}
 
-			// -- Set collision box (certain nodeboxes only for now)
-			// local nb_types = {fixed=true, leveled=true, connected=true}
+			// Set collision box (certain nodeboxes only for now).
+			const nb_types: { [id: string]: boolean } = {
+				fixed: true,
+				leveled: true,
+				connected: true,
+			};
 			// if def.drawtype == "nodebox" and def.node_box and
 			// 	nb_types[def.node_box.type] and def.node_box.fixed then
 			// 	local box = table.copy(def.node_box.fixed)
