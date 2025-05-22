@@ -181,21 +181,22 @@ namespace main {
 				leveled: true,
 				connected: true,
 			};
-			// if def.drawtype == "nodebox" and def.node_box and
-			// 	nb_types[def.node_box.type] and def.node_box.fixed then
-			// 	local box = table.copy(def.node_box.fixed)
-			// 	if type(box[1]) == "table" then
-			// 		box = #box == 1 and box[1] or nil -- We can only use a single box
-			// 	end
-			// 	if box then
-			// 		if def.paramtype2 == "leveled" and (self.node.level or 0) > 0 then
-			// 			box[5] = -0.5 + self.node.level / 64
-			// 		end
-			// 		self.object:set_properties({
-			// 			collisionbox = box
-			// 		})
-			// 	end
-			// end
+
+			if (def.drawtype == Drawtype.nodebox && def.node_box) {
+				// 	nb_types[def.node_box.type] and def.node_box.fixed then
+				// 	local box = table.copy(def.node_box.fixed)
+				// 	if type(box[1]) == "table" then
+				// 		box = #box == 1 and box[1] or nil -- We can only use a single box
+				// 	end
+				// 	if box then
+				// 		if def.paramtype2 == "leveled" and (self.node.level or 0) > 0 then
+				// 			box[5] = -0.5 + self.node.level / 64
+				// 		end
+				// 		self.object:set_properties({
+				// 			collisionbox = box
+				// 		})
+				// 	end
+			}
 		}
 
 		// get_staticdata = function(self)
