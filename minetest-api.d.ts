@@ -2558,28 +2558,28 @@ enum NodeBoxConnections {
 }
 
 enum CraftCheckType {
-	normal: CraftCheckType;
-	cooking: CraftCheckType;
-	fuel: CraftCheckType;
+	normal,
+	cooking,
+	fuel,
 }
 
 enum HPChangeReasonType {
-	set_hp: HPChangeReasonType;
-	punch: HPChangeReasonType;
-	fall: HPChangeReasonType;
-	node_damage: HPChangeReasonType;
-	drown: HPChangeReasonType;
-	respawn: HPChangeReasonType;
+	set_hp,
+	punch,
+	fall,
+	node_damage,
+	drown,
+	respawn,
 }
 
 enum CheatType {
-	moved_too_fast: CheatType;
-	interacted_too_far: CheatType;
-	interacted_with_self: CheatType;
-	interacted_while_dead: CheatType;
-	finished_unknown_dig: CheatType;
-	dug_unbreakable: CheatType;
-	dug_too_fast: CheatType;
+	moved_too_fast,
+	interacted_too_far,
+	interacted_with_self,
+	interacted_while_dead,
+	finished_unknown_dig,
+	dug_unbreakable,
+	dug_too_fast,
 }
 
 enum ClearObjectsOptions {
