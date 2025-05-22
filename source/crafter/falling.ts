@@ -163,7 +163,7 @@ namespace main {
 				// 			self.object:set_rotation(euler)
 				// 		end
 				// 	end
-				// elseif def.drawtype ~= "airlike" then
+            } else if (def.drawtype != Drawtype.airlike) {
 				// 	self.object:set_properties({
 				// 		is_visible = true,
 				// 		node = node,
