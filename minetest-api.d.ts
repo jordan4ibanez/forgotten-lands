@@ -1083,6 +1083,7 @@ declare global {
 		post_effect_color?: DynamicColorSpec;
 		post_effect_color_shaded?: boolean;
 		paramtype?: ParamType1;
+		alpha?: number;
 		paramtype2?: ParamType2;
 		place_param2?: number;
 		is_ground_content?: boolean;
