@@ -242,77 +242,73 @@ namespace main {
 		on_step(dtime: number) {
 			print("hi");
 				// Set gravity
-				local acceleration = self.object:get_acceleration()
-				if not vector.equals(acceleration, {x = 0, y = -10, z = 0}) then
-					self.object:set_acceleration({x = 0, y = -10, z = 0})
-				end
+				const acceleration: Vec3 = this.object.get_acceleration()
+				if (! vector.equals(acceleration, vector.create3d({x : 0, y : -10, z : 0}))) {
+					this.object.set_acceleration(vector.create3d({x : 0, y : -10, z : 0}))
+                }
 				// Turn to actual node when colliding with ground, or continue to move
-				local pos = self.object:get_pos()
+				const pos: Vec3 = this.object.get_pos()
 				// Position of bottom center point
-				local bcp = {x = pos.x, y = pos.y - 0.7, z = pos.z}
+				const bcp: Vec3 = vector.create3d({x : pos.x, y : pos.y - 0.7, z : pos.z})
 				// 'bcn' is nil for unloaded nodes
-				local bcn = minetest.get_node_or_nil(bcp)
+				const bcn: NodeTable | null = core.get_node_or_nil(bcp)
 				// Delete on contact with ignore at world edges
-				if bcn and bcn.name == "ignore" then
-					self.object:remove()
+				if (bcn && bcn.name == "ignore") {
+					this.object.remove()
 					return
-				end
+                }
 
-				local bcd = bcn and minetest.registered_nodes[bcn.name]
-				if bcn and
-						(not bcd or bcd.walkable or
-						(minetest.get_item_group(self.node.name, "float") ~= 0 and
-						bcd.liquidtype ~= "none")) then
-					if bcd and bcd.leveled and
-							bcn.name == self.node.name then
-						local addlevel = self.node.level
-						if not addlevel or addlevel <= 0 then
+				const bcd = bcn && core.registered_nodes[bcn.name]
+				if (bcn && (! bcd || bcd.walkable || (core.get_item_group(this.node.name, "float") != 0 && bcd.liquidtype != LiquidType.none))) {
+					if (bcd && bcd.leveled && bcn.name == this.node.name) {
+						let addlevel = this.node.level
+						if (! addlevel || addlevel <= 0) {
 							addlevel = bcd.leveled
-						end
-						if minetest.add_node_level(bcp, addlevel) == 0 then
-							self.object:remove()
+                        }
+						if (core.add_node_level(bcp, addlevel) == 0) {
+							this.object.remove()
 							return
-						end
-					elseif bcd and bcd.buildable_to and
-							(minetest.get_item_group(self.node.name, "float") == 0 or
-							bcd.liquidtype == "none") then
-						minetest.remove_node(bcp)
+                        }
+                    } else if (bcd && bcd.buildable_to && (core.get_item_group(this.node.name, "float") == 0 || bcd.liquidtype == LiquidType.none)) {
+						core.remove_node(bcp)
 						return
-					end
-					local np = {x = bcp.x, y = bcp.y + 1, z = bcp.z}
+                    }
+					const np: Vec3 = vector.create3d({x : bcp.x, y : bcp.y + 1, z : bcp.z})
 					// Check what's here
-					local n2 = minetest.get_node(np)
-					local nd = minetest.registered_nodes[n2.name]
+					const n2: NodeTable = core.get_node(np)
+					const nd:NodeDefinition = core.registered_nodes[n2.name]
 					// If it's not air or liquid, remove node and replace it with
 					// it's drops
-					if n2.name ~= "air" and (not nd or nd.liquidtype == "none") then
-						local drops = minetest.get_node_drops(self.node.name, "")
-						if drops and table.getn(drops) > 0 then
-							for _,droppy in pairs(drops) do
-								minetest.throw_item(np,droppy)
-							end
-						else
-							minetest.throw_item(np,self.node)
-						end
-						self.object:remove()
+					if (n2.name != "air" && (! nd || nd.liquidtype == LiquidType.none)) {
+						const drops: string[] | null = core.get_node_drops(this.node.name, "")
+						if (drops && drops.length > 0) {
+							for (const[_,droppy] of pairs(drops)) {
+                                // fixme: this was engine custom.
+								// core.throw_item(np,droppy)
+                            }
+                        }else{
+                            // fixme: this was engine custom.
+							// core.throw_item(np,self.node)
+                        }
+						this.object.remove()
 						return
-					end
+                    }
 					// Create node and remove entity
-					local def = minetest.registered_nodes[self.node.name]
+					local def = core.registered_nodes[self.node.name]
 					if def then
-						minetest.add_node(np, self.node)
+						core.add_node(np, self.node)
 						if self.meta then
-							local meta = minetest.get_meta(np)
+							local meta = core.get_meta(np)
 							meta:from_table(self.meta)
 						end
 						if def.sounds and def.sounds.fall then
-							minetest.sound_play(def.sounds.fall, {pos = np}, true)
+							core.sound_play(def.sounds.fall, {pos = np}, true)
 						end
 					end
 					self.object:remove()
-					minetest.check_for_falling(np)
+					core.check_for_falling(np)
 					return
-				end
+                }
 				local vel = self.object:get_velocity()
 				if vector.equals(vel, {x = 0, y = 0, z = 0}) then
 					local npos = self.object:get_pos()
