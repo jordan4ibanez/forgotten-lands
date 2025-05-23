@@ -244,6 +244,7 @@ namespace main {
 		}
 
 		on_step(dtime: number) {
+			// print("hi");
 			// 	-- Set gravity
 			// 	local acceleration = self.object:get_acceleration()
 			// 	if not vector.equals(acceleration, {x = 0, y = -10, z = 0}) then
@@ -325,15 +326,11 @@ namespace main {
 
 	utility.registerTSEntity(FallingNode);
 
-    // todo: fix this mess
-
 	core.register_on_joinplayer((player: ObjectRef) => {
 		const pos = player.get_pos();
 		pos.y += 5;
 
-
-		core.spawn_falling_node(player.get_pos());
-
-		core.add_item(player.get_pos(), "main:paper");
+		core.set_node(pos, { name: "crafter:dirt" });
+		core.spawn_falling_node(pos);
 	});
 }
