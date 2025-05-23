@@ -19,21 +19,16 @@ namespace main {
 		return table;
 	}
 
-	// function main.sandSound(table)
-	// 	table = table or {}
-	// 	table.dig = table.dig or
-	// 			{name = "sand",gain=0.09}
-	// 	table.footstep = table.footstep or
-	// 			{name = "sand", gain = 0.07}
-	// 	table.dug = table.dug or
-	// 			{name = "sand", gain = 0.09}
-	// 	table.placing = table.placing or
-	// 			{name = "sand", gain = 0.09}
-	// 	table.fall = table.fall or
-	// 			{name = "sand", gain = 0.01}
-	// 	--default.node_sound_defaults(table)
-	// 	return table
-	// end
+	export function sandSound(table?: NodeSoundSpec): NodeSoundSpec {
+		table = table || {};
+		table.dig = table.dig || { name: "sand", gain: 0.09 };
+		table.footstep = table.footstep || { name: "sand", gain: 0.07 };
+		table.dug = table.dug || { name: "sand", gain: 0.09 };
+		table.placing = table.placing || { name: "sand", gain: 0.09 };
+		table.fall = table.fall || { name: "sand", gain: 0.01 };
+		// default.node_sound_defaults(table)
+		return table;
+	}
 
 	// function main.grassSound(table)
 	// 	table = table or {}
