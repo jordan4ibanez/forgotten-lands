@@ -9,19 +9,15 @@ namespace main {
 		return table;
 	}
 
-	// function main.woodSound(table)
-	// 	table = table or {}
-	// 	table.dig = table.dig or
-	// 			{name = "wood",gain=0.3}
-	// 	table.footstep = table.footstep or
-	// 			{name = "wood", gain = 0.2}
-	// 	table.dug = table.dug or
-	// 			{name = "wood", gain = 1.0}
-	// 	table.placing = table.placing or
-	// 			{name = "wood", gain = 1.0}
-	// 	--default.node_sound_defaults(table)
-	// 	return table
-	// end
+	export function woodSound(table?: NodeSoundSpec): NodeSoundSpec {
+		table = table || {};
+		table.dig = table.dig || { name: "wood", gain: 0.3 };
+		table.footstep = table.footstep || { name: "wood", gain: 0.2 };
+		table.dug = table.dug || { name: "wood", gain: 1.0 };
+		table.placing = table.placing || { name: "wood", gain: 1.0 };
+		// default.node_sound_defaults(table)
+		return table;
+	}
 
 	// function main.sandSound(table)
 	// 	table = table or {}
