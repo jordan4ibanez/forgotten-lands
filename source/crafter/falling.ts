@@ -231,7 +231,8 @@ namespace main {
 			this.object.set_armor_groups({ immortal: 1 });
 
 			// Lua unsafety just kinda unravels here.
-			const ds: any = core.deserialize(staticdata);
+			const ds: { node: MapNode; meta: MetaData } | MapNode | any =
+				core.deserialize(staticdata);
 
 			if (ds && ds.node) {
 				this.set_node(ds.node, ds.meta);
