@@ -241,79 +241,114 @@ namespace main {
 
 		on_step(dtime: number) {
 			print("hi");
-				// Set gravity
-				const acceleration: Vec3 = this.object.get_acceleration()
-				if (! vector.equals(acceleration, vector.create3d({x : 0, y : -10, z : 0}))) {
-					this.object.set_acceleration(vector.create3d({x : 0, y : -10, z : 0}))
-                }
-				// Turn to actual node when colliding with ground, or continue to move
-				const pos: Vec3 = this.object.get_pos()
-				// Position of bottom center point
-				const bcp: Vec3 = vector.create3d({x : pos.x, y : pos.y - 0.7, z : pos.z})
-				// 'bcn' is nil for unloaded nodes
-				const bcn: NodeTable | null = core.get_node_or_nil(bcp)
-				// Delete on contact with ignore at world edges
-				if (bcn && bcn.name == "ignore") {
-					this.object.remove()
-					return
-                }
+			// Set gravity
+			const acceleration: Vec3 = this.object.get_acceleration();
+			if (
+				!vector.equals(
+					acceleration,
+					vector.create3d({ x: 0, y: -10, z: 0 })
+				)
+			) {
+				this.object.set_acceleration(
+					vector.create3d({ x: 0, y: -10, z: 0 })
+				);
+			}
+			// Turn to actual node when colliding with ground, or continue to move
+			const pos: Vec3 = this.object.get_pos();
+			// Position of bottom center point
+			const bcp: Vec3 = vector.create3d({
+				x: pos.x,
+				y: pos.y - 0.7,
+				z: pos.z,
+			});
+			// 'bcn' is nil for unloaded nodes
+			const bcn: NodeTable | null = core.get_node_or_nil(bcp);
+			// Delete on contact with ignore at world edges
+			if (bcn && bcn.name == "ignore") {
+				this.object.remove();
+				return;
+			}
 
-				const bcd = bcn && core.registered_nodes[bcn.name]
-				if (bcn && (! bcd || bcd.walkable || (core.get_item_group(this.node.name, "float") != 0 && bcd.liquidtype != LiquidType.none))) {
-					if (bcd && bcd.leveled && bcn.name == this.node.name) {
-						let addlevel = this.node.level
-						if (! addlevel || addlevel <= 0) {
-							addlevel = bcd.leveled
-                        }
-						if (core.add_node_level(bcp, addlevel) == 0) {
-							this.object.remove()
-							return
-                        }
-                    } else if (bcd && bcd.buildable_to && (core.get_item_group(this.node.name, "float") == 0 || bcd.liquidtype == LiquidType.none)) {
-						core.remove_node(bcp)
-						return
-                    }
-					const np: Vec3 = vector.create3d({x : bcp.x, y : bcp.y + 1, z : bcp.z})
-					// Check what's here
-					const n2: NodeTable = core.get_node(np)
-					const nd:NodeDefinition = core.registered_nodes[n2.name]
-					// If it's not air or liquid, remove node and replace it with
-					// it's drops
-					if (n2.name != "air" && (! nd || nd.liquidtype == LiquidType.none)) {
-						const drops: string[] | null = core.get_node_drops(this.node.name, "")
-						if (drops && drops.length > 0) {
-							for (const[_,droppy] of pairs(drops)) {
-                                // fixme: this was engine custom.
-								// core.throw_item(np,droppy)
-                            }
-                        }else{
-                            // fixme: this was engine custom.
-							// core.throw_item(np,self.node)
-                        }
-						this.object.remove()
-						return
-                    }
-					// Create node and remove entity
-					local def = core.registered_nodes[self.node.name]
-					if def then
-						core.add_node(np, self.node)
-						if self.meta then
-							local meta = core.get_meta(np)
-							meta:from_table(self.meta)
-						end
-						if def.sounds and def.sounds.fall then
-							core.sound_play(def.sounds.fall, {pos = np}, true)
-						end
-					end
-					self.object:remove()
-					core.check_for_falling(np)
-					return
-                }
-				local vel = self.object:get_velocity()
-				if vector.equals(vel, {x = 0, y = 0, z = 0}) then
-					local npos = self.object:get_pos()
-					self.object:set_pos(vector.round(npos))
-				end
+			const bcd = bcn && core.registered_nodes[bcn.name];
+			if (
+				bcn &&
+				(!bcd ||
+					bcd.walkable ||
+					(core.get_item_group(this.node.name, "float") != 0 &&
+						bcd.liquidtype != LiquidType.none))
+			) {
+				if (bcd && bcd.leveled && bcn.name == this.node.name) {
+					let addlevel = this.node.level;
+					if (!addlevel || addlevel <= 0) {
+						addlevel = bcd.leveled;
+					}
+					if (core.add_node_level(bcp, addlevel) == 0) {
+						this.object.remove();
+						return;
+					}
+				} else if (
+					bcd &&
+					bcd.buildable_to &&
+					(core.get_item_group(this.node.name, "float") == 0 ||
+						bcd.liquidtype == LiquidType.none)
+				) {
+					core.remove_node(bcp);
+					return;
+				}
+				const np: Vec3 = vector.create3d({
+					x: bcp.x,
+					y: bcp.y + 1,
+					z: bcp.z,
+				});
+				// Check what's here
+				const n2: NodeTable = core.get_node(np);
+				const nd: NodeDefinition = core.registered_nodes[n2.name];
+				// If it's not air or liquid, remove node and replace it with
+				// it's drops
+				if (
+					n2.name != "air" &&
+					(!nd || nd.liquidtype == LiquidType.none)
+				) {
+					const drops: string[] | null = core.get_node_drops(
+						this.node.name,
+						""
+					);
+					if (drops && drops.length > 0) {
+						for (const [_, droppy] of pairs(drops)) {
+							// fixme: this was engine custom.
+							// core.throw_item(np,droppy)
+						}
+					} else {
+						// fixme: this was engine custom.
+						// core.throw_item(np,self.node)
+					}
+					this.object.remove();
+					return;
+				}
+
+				// Create node and remove entity
+				const def: NodeDefinition | null =
+					core.registered_nodes[this.node.name];
+				if (def) {
+					core.add_node(np, this.node);
+
+					if (this.meta) {
+						const meta: MetaRef = core.get_meta(np);
+						meta.from_table(this.meta);
+					}
+					if (def.sounds && def.sounds.fall) {
+						core.sound_play(def.sounds.fall, { pos: np }, true);
+					}
+				}
+				this.object.remove();
+				core.check_for_falling(np);
+				return;
+			}
+			const vel: Vec3 = this.object.get_velocity();
+			if (vector.equals(vel, vector.create3d({ x: 0, y: 0, z: 0 }))) {
+				const npos: Vec3 = this.object.get_pos();
+				this.object.set_pos(vector.round(npos));
+			}
 		}
 	}
 
