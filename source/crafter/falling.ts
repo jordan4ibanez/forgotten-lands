@@ -113,7 +113,7 @@ namespace main {
 			// Cache whether we're supposed to float on water.
 			this.floats = core.get_item_group(node.name, "float") != 0;
 
-			// -- Save liquidtype for falling water
+			// Save liquidtype for falling water
 			this.liquidtype = def.liquidtype;
 
 			// Set up entity visuals.
@@ -244,83 +244,84 @@ namespace main {
 		}
 
 		on_step(dtime: number) {
-			// print("hi");
-			// 	-- Set gravity
-			// 	local acceleration = self.object:get_acceleration()
-			// 	if not vector.equals(acceleration, {x = 0, y = -10, z = 0}) then
-			// 		self.object:set_acceleration({x = 0, y = -10, z = 0})
-			// 	end
-			// 	-- Turn to actual node when colliding with ground, or continue to move
-			// 	local pos = self.object:get_pos()
-			// 	-- Position of bottom center point
-			// 	local bcp = {x = pos.x, y = pos.y - 0.7, z = pos.z}
-			// 	-- 'bcn' is nil for unloaded nodes
-			// 	local bcn = minetest.get_node_or_nil(bcp)
-			// 	-- Delete on contact with ignore at world edges
-			// 	if bcn and bcn.name == "ignore" then
-			// 		self.object:remove()
-			// 		return
-			// 	end
-			// 	local bcd = bcn and minetest.registered_nodes[bcn.name]
-			// 	if bcn and
-			// 			(not bcd or bcd.walkable or
-			// 			(minetest.get_item_group(self.node.name, "float") ~= 0 and
-			// 			bcd.liquidtype ~= "none")) then
-			// 		if bcd and bcd.leveled and
-			// 				bcn.name == self.node.name then
-			// 			local addlevel = self.node.level
-			// 			if not addlevel or addlevel <= 0 then
-			// 				addlevel = bcd.leveled
-			// 			end
-			// 			if minetest.add_node_level(bcp, addlevel) == 0 then
-			// 				self.object:remove()
-			// 				return
-			// 			end
-			// 		elseif bcd and bcd.buildable_to and
-			// 				(minetest.get_item_group(self.node.name, "float") == 0 or
-			// 				bcd.liquidtype == "none") then
-			// 			minetest.remove_node(bcp)
-			// 			return
-			// 		end
-			// 		local np = {x = bcp.x, y = bcp.y + 1, z = bcp.z}
-			// 		-- Check what's here
-			// 		local n2 = minetest.get_node(np)
-			// 		local nd = minetest.registered_nodes[n2.name]
-			// 		-- If it's not air or liquid, remove node and replace it with
-			// 		-- it's drops
-			// 		if n2.name ~= "air" and (not nd or nd.liquidtype == "none") then
-			// 			local drops = minetest.get_node_drops(self.node.name, "")
-			// 			if drops and table.getn(drops) > 0 then
-			// 				for _,droppy in pairs(drops) do
-			// 					minetest.throw_item(np,droppy)
-			// 				end
-			// 			else
-			// 				minetest.throw_item(np,self.node)
-			// 			end
-			// 			self.object:remove()
-			// 			return
-			// 		end
-			// 		-- Create node and remove entity
-			// 		local def = minetest.registered_nodes[self.node.name]
-			// 		if def then
-			// 			minetest.add_node(np, self.node)
-			// 			if self.meta then
-			// 				local meta = minetest.get_meta(np)
-			// 				meta:from_table(self.meta)
-			// 			end
-			// 			if def.sounds and def.sounds.fall then
-			// 				minetest.sound_play(def.sounds.fall, {pos = np}, true)
-			// 			end
-			// 		end
-			// 		self.object:remove()
-			// 		minetest.check_for_falling(np)
-			// 		return
-			// 	end
-			// 	local vel = self.object:get_velocity()
-			// 	if vector.equals(vel, {x = 0, y = 0, z = 0}) then
-			// 		local npos = self.object:get_pos()
-			// 		self.object:set_pos(vector.round(npos))
-			// 	end
+			print("hi");
+				// Set gravity
+				local acceleration = self.object:get_acceleration()
+				if not vector.equals(acceleration, {x = 0, y = -10, z = 0}) then
+					self.object:set_acceleration({x = 0, y = -10, z = 0})
+				end
+				// Turn to actual node when colliding with ground, or continue to move
+				local pos = self.object:get_pos()
+				// Position of bottom center point
+				local bcp = {x = pos.x, y = pos.y - 0.7, z = pos.z}
+				// 'bcn' is nil for unloaded nodes
+				local bcn = minetest.get_node_or_nil(bcp)
+				// Delete on contact with ignore at world edges
+				if bcn and bcn.name == "ignore" then
+					self.object:remove()
+					return
+				end
+
+				local bcd = bcn and minetest.registered_nodes[bcn.name]
+				if bcn and
+						(not bcd or bcd.walkable or
+						(minetest.get_item_group(self.node.name, "float") ~= 0 and
+						bcd.liquidtype ~= "none")) then
+					if bcd and bcd.leveled and
+							bcn.name == self.node.name then
+						local addlevel = self.node.level
+						if not addlevel or addlevel <= 0 then
+							addlevel = bcd.leveled
+						end
+						if minetest.add_node_level(bcp, addlevel) == 0 then
+							self.object:remove()
+							return
+						end
+					elseif bcd and bcd.buildable_to and
+							(minetest.get_item_group(self.node.name, "float") == 0 or
+							bcd.liquidtype == "none") then
+						minetest.remove_node(bcp)
+						return
+					end
+					local np = {x = bcp.x, y = bcp.y + 1, z = bcp.z}
+					// Check what's here
+					local n2 = minetest.get_node(np)
+					local nd = minetest.registered_nodes[n2.name]
+					// If it's not air or liquid, remove node and replace it with
+					// it's drops
+					if n2.name ~= "air" and (not nd or nd.liquidtype == "none") then
+						local drops = minetest.get_node_drops(self.node.name, "")
+						if drops and table.getn(drops) > 0 then
+							for _,droppy in pairs(drops) do
+								minetest.throw_item(np,droppy)
+							end
+						else
+							minetest.throw_item(np,self.node)
+						end
+						self.object:remove()
+						return
+					end
+					// Create node and remove entity
+					local def = minetest.registered_nodes[self.node.name]
+					if def then
+						minetest.add_node(np, self.node)
+						if self.meta then
+							local meta = minetest.get_meta(np)
+							meta:from_table(self.meta)
+						end
+						if def.sounds and def.sounds.fall then
+							minetest.sound_play(def.sounds.fall, {pos = np}, true)
+						end
+					end
+					self.object:remove()
+					minetest.check_for_falling(np)
+					return
+				end
+				local vel = self.object:get_velocity()
+				if vector.equals(vel, {x = 0, y = 0, z = 0}) then
+					local npos = self.object:get_pos()
+					self.object:set_pos(vector.round(npos))
+				end
 		}
 	}
 
