@@ -239,8 +239,7 @@ namespace main {
 			}
 		}
 
-		on_step(dtime: number) {
-			print("hi");
+		on_step(delta: number) {
 			// Set gravity
 			const acceleration: Vec3 = this.object.get_acceleration();
 			if (
