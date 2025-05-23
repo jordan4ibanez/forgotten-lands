@@ -920,6 +920,8 @@ declare global {
 		fall?: SimpleSoundSpec;
 		// break?: SimpleSoundSpec;
 		placed?: SimpleSoundSpec;
+        //* Crafter custom.
+		placing?: SimpleSoundSpec;
 	}
 
 	interface ItemDropSpec {
