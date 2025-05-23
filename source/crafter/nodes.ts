@@ -311,12 +311,12 @@ core.register_node("main:grass", {
 	drop: "main:dirt",
 });
 
-// core.register_node("main:sand", {
-//     description = "Sand",
-//     tiles = {"sand.png"},
-//     groups = {sand = 1, falling_node = 1,pathable = 1,soil=1},
-//     sounds = main.sandSound(),
-// })
+core.register_node("main:sand", {
+	description: "Sand",
+	tiles: ["sand.png"],
+	groups: { sand: 1, falling_node: 1, pathable: 1, soil: 1 },
+	sounds: main.sandSound(),
+});
 
 // core.register_node("main:gravel", {
 //     description = "Gravel",
