@@ -937,15 +937,14 @@ declare global {
 	interface MapNode {
 		name: string;
 		prob: number;
-		param2: number;
 		force_place: boolean;
-		level: number;
 	}
 
 	interface NodeTable {
 		name: string;
 		param1?: number;
 		param2?: number;
+        level: number;
 	}
 
 	interface PointedThing {
