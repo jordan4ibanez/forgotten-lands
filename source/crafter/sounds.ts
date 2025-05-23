@@ -40,19 +40,16 @@ namespace main {
 		return table;
 	}
 
-	// function main.dirtSound(table)
-	// 	table = table or {}
-	// 	table.dig = table.dig or
-	// 			{name = "dirt",gain=0.5}
-	// 	table.footstep = table.footstep or
-	// 			{name = "dirt", gain = 0.3}
-	// 	table.dug = table.dug or
-	// 			{name = "dirt", gain = 1.0}
-	// 	table.placing = table.placing or
-	// 			{name = "dirt", gain = 0.5}
-	// 	--default.node_sound_defaults(table)
-	// 	return table
-	// end
+	export function dirtSound(table?: NodeSoundSpec): NodeSoundSpec {
+		table = table || {};
+		table.dig = table.dig || { name: "dirt", gain: 0.5 };
+		table.footstep = table.footstep || { name: "dirt", gain: 0.3 };
+		table.dug = table.dug || { name: "dirt", gain: 1.0 };
+		table.placing = table.placing || { name: "dirt", gain: 0.5 };
+		// default.node_sound_defaults(table)
+		return table;
+	}
+
 	// function main.woolSound(table)
 	// 	table = table or {}
 	// 	table.dig = table.dig or
