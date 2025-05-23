@@ -1068,6 +1068,11 @@ declare global {
 		drawtype?: Drawtype;
 		visual_scale?: number;
 		tiles?: string[] | TileDefinition[];
+		on_place?(
+			itemStack: ItemStackObject,
+			placer: ObjectRef,
+			pointedThing: PointedThing
+		): void;
 		overlay_tiles?: string[];
 		special_tiles?: string[] | TileDefinition[];
 		wield_scale?: Vec3;
