@@ -211,22 +211,22 @@ core.register_node("main:stone", {
 	},
 });
 
-// core.register_node("main:cobble", {
-//     description = "Cobblestone",
-//     tiles = {"cobble.png"},
-//     groups = {stone = 1, pathable = 1},
-//     sounds = main.stoneSound(),
-//     drop = {
-// 		max_items = 1,
-// 		items= {
-// 			{
-// 				rarity = 0,
-// 				tools = tool,
-// 				items = {"main:cobble"},
-// 			},
-// 			},
-// 		},
-// })
+core.register_node("main:cobble", {
+	description: "Cobblestone",
+	tiles: ["cobble.png"],
+	groups: { stone: 1, pathable: 1 },
+	sounds: main.stoneSound(),
+	drop: {
+		max_items: 1,
+		items: [
+			{
+				rarity: 0,
+				tools: tool,
+				items: ["main:cobble"],
+			},
+		],
+	},
+});
 
 // core.register_node("main:mossy_cobble", {
 //     description = "Mossy Cobblestone",
