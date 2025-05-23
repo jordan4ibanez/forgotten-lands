@@ -280,21 +280,21 @@ core.register_node("main:ice", {
 	},
 });
 
-// core.register_node("main:ice_mapgen", {
-//     description = "Ice",
-//     tiles = {"ice.png"},
-//     drawtype = "normal",
-// 	sunlight_propagates = true,
-// 	sunlight_propagates = true,
-// 	is_ground_content = false,
-//     groups = {glass = 1, pathable = 1,slippery=3},
-//     sounds = main.stoneSound({
-// 		footstep = {name = "glass_footstep", gain = 0.4},
-//         dug =  {name = "break_glass", gain = 0.4},
-// 	}),
-// 	use_texture_alpha = false,
-//     drop = "",
-// })
+core.register_node("main:ice_mapgen", {
+    description : "Ice",
+    tiles : ["ice.png"],
+    drawtype : Drawtype.normal,
+	sunlight_propagates : true,
+	sunlight_propagates : true,
+	is_ground_content : false,
+    groups : {glass : 1, pathable : 1,slippery:3},
+    sounds : main.stoneSound({
+		footstep : {name : "glass_footstep", gain : 0.4},
+        dug :  {name : "break_glass", gain : 0.4},
+	}),
+	use_texture_alpha :  false,
+    drop : "",
+})
 
 // core.register_node("main:dirt", {
 //     description = "Dirt",
