@@ -944,7 +944,7 @@ declare global {
 		name: string;
 		param1?: number;
 		param2?: number;
-		level: number;
+		level?: number;
 	}
 
 	interface PointedThing {
