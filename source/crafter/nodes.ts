@@ -606,56 +606,63 @@ core.register_node("main:water", {
 	},
 });
 
-// core.register_node("main:waterflow", {
-// 	description = "Water Flow",
-// 	drawtype = "flowingliquid",
-// 	waving = 3,
-// 	tiles = {"water_static.png"},
-// 	special_tiles = {
-// 		{
-// 			name = "water_flow.png",
-// 			backface_culling = false,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 0.5,
-// 			},
-// 		},
-// 		{
-// 			name = "water_flow.png",
-// 			backface_culling = true,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 0.5,
-// 			},
-// 		},
-// 	},
-// 	selection_box = {
-//             type = "fixed",
-//             fixed = {
-//                 {0, 0, 0, 0, 0, 0},
-//             },
-//         },
-// 	alpha = 191,
-// 	paramtype = "light",
-// 	paramtype2 = "flowingliquid",
-// 	walkable = false,
-// 	pointable = false,
-// 	diggable = false,
-// 	buildable_to = true,
-// 	is_ground_content = false,
-// 	drop = "",
-// 	liquidtype = "flowing",
-// 	liquid_alternative_flowing = "main:waterflow",
-// 	liquid_alternative_source = "main:water",
-// 	liquid_viscosity = 0,
-// 	post_effect_color = {a = 103, r = 30, g = 60, b = 90},
-// 	groups = {water = 1, liquid = 1, notInCreative = 1, cools_lava = 1,pathable = 1,drowning=1,disable_fall_damage=1,extinguish=1},
-// 	--sounds = default.node_sound_water_defaults(),
-// })
+core.register_node("main:waterflow", {
+	description: "Water Flow",
+	drawtype: Drawtype.flowingliquid,
+	waving: 3,
+	tiles: ["water_static.png"],
+	special_tiles: [
+		{
+			name: "water_flow.png",
+			backface_culling: false,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 0.5,
+			},
+		},
+		{
+			name: "water_flow.png",
+			backface_culling: true,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 0.5,
+			},
+		},
+	],
+	selection_box: {
+		type: Nodeboxtype.fixed,
+		fixed: [[0, 0, 0, 0, 0, 0]],
+	},
+	alpha: 191,
+	paramtype: ParamType1.light,
+	paramtype2: ParamType2.flowingliquid,
+	walkable: false,
+	pointable: false,
+	diggable: false,
+	buildable_to: true,
+	is_ground_content: false,
+	drop: "",
+	liquidtype: LiquidType.flowing,
+	liquid_alternative_flowing: "main:waterflow",
+	liquid_alternative_source: "main:water",
+	liquid_viscosity: 0,
+	post_effect_color: { a: 103, r: 30, g: 60, b: 90 },
+	groups: {
+		water: 1,
+		liquid: 1,
+		notInCreative: 1,
+		cools_lava: 1,
+		pathable: 1,
+		drowning: 1,
+		disable_fall_damage: 1,
+		extinguish: 1,
+	},
+	// sounds = default.node_sound_water_defaults(),
+});
 
 // core.register_node("main:lava", {
 // 	description = "Lava",
