@@ -328,7 +328,7 @@ namespace main {
 				// Create node and remove entity
 				const def: NodeDefinition | null =
 					core.registered_nodes[this.node.name];
-				if (def) {
+				if (def != null) {
 					core.add_node(np, this.node);
 
 					if (this.meta) {
