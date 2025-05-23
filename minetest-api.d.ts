@@ -438,8 +438,8 @@ interface core {
 		itemStack: ItemStackObject,
 		placer: ObjectRef,
 		pointedThing: PointedThing,
-		param2: number,
-		preventAfterPlace: boolean
+		param2?: number,
+		preventAfterPlace?: boolean
 	): [ItemStackObject, Vec3 | void];
 	//? Deprecated.
 	// item_place_object(itemStack: ItemStackObject, placer: ObjectRef, pointedThing: PointedThing): ItemStackObject
