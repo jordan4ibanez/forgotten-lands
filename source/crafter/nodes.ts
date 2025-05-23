@@ -175,7 +175,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 				},
 			],
 		},
-		after_destruct: (pos: Vec3, oldnode: MapNode) => {
+		after_destruct: (pos: Vec3) => {
 			if (math.random() > 0.95) {
 				core.sound_play("tnt_ignite", {
 					pos: pos,
@@ -396,7 +396,7 @@ core.register_node("crafter:tree", {
 		return itemstack;
 	},
 	// todo: treecapitator - move treecapitator into own file using override.
-	on_dig: (pos: Vec3, node: MapNode, digger: ObjectRef) => {
+	on_dig: (pos: Vec3, node: NodeTable, digger: ObjectRef) => {
 		//bvav_create_vessel(pos,core.facedir_to_dir(core.dir_to_facedir(core.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
 		//check if wielding axe?
 		//turn treecapitator into an enchantment?
