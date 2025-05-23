@@ -3,6 +3,7 @@
 
 (Don't tell anyone that this is crafter)
 
+todo: This thing needs the blocks put in it's own mod because this is a disaster.
 
 ---
 
