@@ -156,31 +156,42 @@ for (const [ore, tool_required] of pairs(ores)) {
 		},
 	});
 
-	// 	minetest.register_node(":nether:"..ore.."ore", {
-	// 		description = "Nether "..ore:gsub("^%l", string.upper).." Ore",
-	// 		tiles = {"netherrack.png^"..ore.."ore.png"},
-	// 		groups = {netherrack = level, pathable = 1, experience = experience},
-	// 		sounds = main.stoneSound(),
-	// 		light_source = 7,
-	// 		drop = {
-	// 			max_items = 1,
-	// 			items= {
-	// 				{
-	// 					rarity = 0,
-	// 					tools = tool_required,
-	// 					items = drops[ore],
-	// 				},
-	// 				},
-	// 			},
-	// 		after_destruct = function(pos, oldnode)
-	// 			if math.random() > 0.95 then
-	// 				minetest.sound_play("tnt_ignite",{pos=pos,max_hear_distance=64})
-	// 				minetest.after(1.5, function(pos)
-	// 					tnt(pos,5)
-	// 				end,pos)
-	// 			end
-	// 		end,
-	// 	})
+	core.register_node(":nether:" + ore + "ore", {
+		description:
+			"Nether " +
+			string.gsub(ore as string, "^%l", string.upper) +
+			" Ore",
+		tiles: ["netherrack.png^" + ore + "ore.png"],
+		groups: { netherrack: level, pathable: 1, experience: experience },
+		sounds: main.stoneSound(),
+		light_source: 7,
+		drop: {
+			max_items: 1,
+			items: [
+				{
+					rarity: 0,
+					tools: tool_required,
+					items: drops[ore],
+				},
+			],
+		},
+		after_destruct: (pos: Vec3, oldnode: MapNode) => {
+			if (math.random() > 0.95) {
+				core.sound_play("tnt_ignite", {
+					pos: pos,
+					max_hear_distance: 64,
+				});
+				core.after(
+					1.5,
+					function (pos) {
+						//fixme: needs the TNT mod.
+						// tnt(pos, 5);
+					},
+					pos
+				);
+			}
+		},
+	});
 }
 
 // minetest.register_node("main:stone", {
