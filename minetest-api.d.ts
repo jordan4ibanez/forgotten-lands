@@ -553,10 +553,7 @@ interface core {
 	parse_json(string: string, nullValue: any): Array<any>;
 	write_json(data: any[], styled: boolean): string | void;
 	serialize(any: any): string;
-	deserialize(
-		string: string,
-		safe?: boolean
-	): { [id: string | number | symbol]: any };
+	deserialize(string: string, safe?: boolean): any;
 	compress(data: string, method: CompressionMethod, ...any: any): string;
 	decompress(data: string, method: CompressionMethod, ...any: any): string;
 	rgba(red: number, green: number, blue: number, alpha: number): string;
