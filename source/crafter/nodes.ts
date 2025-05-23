@@ -245,41 +245,42 @@ core.register_node("main:mossy_cobble", {
 	},
 });
 
-// core.register_node("main:glass", {
-//     description = "Glass",
-//     tiles = {"glass.png"},
-//     drawtype = "glasslike",
-// 	paramtype = "light",
-// 	sunlight_propagates = true,
-// 	is_ground_content = false,
-//     groups = {glass = 1, pathable = 1},
-//     sounds = main.stoneSound({
-// 		footstep = {name = "glass_footstep", gain = 0.4},
-//         dug =  {name = "break_glass", gain = 0.4},
-// 	}),
-//     drop = "",
-// })
+core.register_node("main:glass", {
+	description: "Glass",
+	tiles: ["glass.png"],
+	drawtype: Drawtype.glasslike,
+	paramtype: ParamType1.light,
+	sunlight_propagates: true,
+	is_ground_content: false,
+	groups: { glass: 1, pathable: 1 },
+	sounds: main.stoneSound({
+		footstep: { name: "glass_footstep", gain: 0.4 },
+		dug: { name: "break_glass", gain: 0.4 },
+	}),
+	drop: "",
+});
 
-// core.register_node("main:ice", {
-//     description = "Ice",
-//     tiles = {"ice.png"},
-//     drawtype = "normal",
-// 	paramtype = "light",
-// 	sunlight_propagates = true,
-// 	sunlight_propagates = true,
-// 	is_ground_content = false,
-//     groups = {glass = 1, pathable = 1,slippery=3},
-//     sounds = main.stoneSound({
-// 		footstep = {name = "glass_footstep", gain = 0.4},
-//         dug =  {name = "break_glass", gain = 0.4},
-// 	}),
-// 	--use_texture_alpha = false,
-// 	--alpha = 100,
-//     drop = "",
-//     after_destruct = function(pos, oldnode)
-//        core.set_node(pos, {name="main:water"})
-//     end
-// })
+core.register_node("main:ice", {
+	description: "Ice",
+	tiles: ["ice.png"],
+	drawtype: Drawtype.normal,
+	paramtype: ParamType1.light,
+	sunlight_propagates: true,
+	sunlight_propagates: true,
+	is_ground_content: false,
+	groups: { glass: 1, pathable: 1, slippery: 3 },
+	sounds: main.stoneSound({
+		footstep: { name: "glass_footstep", gain: 0.4 },
+		dug: { name: "break_glass", gain: 0.4 },
+	}),
+	// use_texture_alpha = false,
+	// alpha = 100,
+	drop: "",
+	after_destruct: (pos: Vec3) => {
+		core.set_node(pos, { name: "main:water" });
+	},
+});
+
 // core.register_node("main:ice_mapgen", {
 //     description = "Ice",
 //     tiles = {"ice.png"},
