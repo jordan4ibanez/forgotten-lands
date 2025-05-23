@@ -206,7 +206,7 @@ namespace main {
 						def.paramtype2 == ParamType2.leveled &&
 						(this.node.level || 0) > 0
 					) {
-						box[5] = -0.5 + this.node.level / 64;
+						box[5] = -0.5 + (this.node.level || 0) / 64;
 					}
 					this.object.set_properties({
 						collisionbox: box,
