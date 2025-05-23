@@ -2269,6 +2269,7 @@ declare global {
 	}
 
 	interface ParticleSpawnerDefinition {
+		amount?: number;
 		maxpos: Vec3;
 		minpos: Vec3;
 		pos: number | ParticleSpawnerRangeDefinition;
