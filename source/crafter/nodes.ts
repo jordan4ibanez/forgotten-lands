@@ -357,83 +357,84 @@ const acceptable_soil: { [id: string]: boolean } = {
 	"aether:dirt": true,
 	"aether:grass": true,
 };
-// core.register_node("main:tree", {
-//     description = "Tree",
-//     tiles = {"treeCore.png","treeCore.png","treeOut.png","treeOut.png","treeOut.png","treeOut.png"},
-//     groups = {wood = 1, tree = 1, pathable = 1, flammable=1},
-//     sounds = main.woodSound(),
-//     --set metadata so treecapitator doesn't destroy houses
-//     on_place = function(itemstack, placer, pointed_thing)
-// 		if not pointed_thing.type == "node" then
-// 			return
-// 		end
 
-// 		local sneak = placer:get_player_control().sneak
-// 		local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
-// 		if not sneak and noddef.on_rightclick then
-// 			core.item_place(itemstack, placer, pointed_thing)
-// 			return
-// 		end
+core.register_node("main:tree", {
+    description = "Tree",
+    tiles = {"treeCore.png","treeCore.png","treeOut.png","treeOut.png","treeOut.png","treeOut.png"},
+    groups = {wood = 1, tree = 1, pathable = 1, flammable=1},
+    sounds = main.woodSound(),
+    --set metadata so treecapitator doesn't destroy houses
+    on_place = function(itemstack, placer, pointed_thing)
+		if not pointed_thing.type == "node" then
+			return
+		end
 
-// 		local pos = pointed_thing.above
-// 		core.item_place_node(itemstack, placer, pointed_thing)
-// 		local meta = core.get_meta(pos)
-// 		meta:set_string("placed", "true")
-// 		return(itemstack)
-// 	end,
-// 	--treecapitator - move treecapitator into own file using override
-// 	on_dig = function(pos, node, digger)
-// 		--bvav_create_vessel(pos,core.facedir_to_dir(core.dir_to_facedir(core.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
-// 		--check if wielding axe?
-// 		--turn treecapitator into an enchantment?
-// 		local meta = core.get_meta(pos)
-// 		--local tool_meta = digger:get_wielded_item():get_meta()
-// 		--if tool_meta:get_int("treecapitator") > 0 then
-// 		if not meta:contains("placed") and string.match(digger:get_wielded_item():get_name(), "axe") then
-// 			local tool_capabilities = digger:get_wielded_item():get_tool_capabilities()
+		local sneak = placer:get_player_control().sneak
+		local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
+		if not sneak and noddef.on_rightclick then
+			core.item_place(itemstack, placer, pointed_thing)
+			return
+		end
 
-// 			local wear = core.get_dig_params({wood=1}, tool_capabilities).wear
+		local pos = pointed_thing.above
+		core.item_place_node(itemstack, placer, pointed_thing)
+		local meta = core.get_meta(pos)
+		meta:set_string("placed", "true")
+		return(itemstack)
+	end,
+	--treecapitator - move treecapitator into own file using override
+	on_dig = function(pos, node, digger)
+		--bvav_create_vessel(pos,core.facedir_to_dir(core.dir_to_facedir(core.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
+		--check if wielding axe?
+		--turn treecapitator into an enchantment?
+		local meta = core.get_meta(pos)
+		--local tool_meta = digger:get_wielded_item():get_meta()
+		--if tool_meta:get_int("treecapitator") > 0 then
+		if not meta:contains("placed") and string.match(digger:get_wielded_item():get_name(), "axe") then
+			local tool_capabilities = digger:get_wielded_item():get_tool_capabilities()
 
-// 			local wield_stack = digger:get_wielded_item()
+			local wear = core.get_dig_params({wood=1}, tool_capabilities).wear
 
-// 			--remove tree
-// 			for y = -6,6 do
-// 				local name = core.get_node(vector.new(pos.x,pos.y+y,pos.z)).name
+			local wield_stack = digger:get_wielded_item()
 
-// 				if name == "main:tree" or name == "redstone:node_activated_tree" then
-// 					wield_stack:add_wear(wear)
-// 					core.node_dig(vector.new(pos.x,pos.y+y,pos.z), node, digger)
-// 					core.add_particlespawner({
-// 						amount = 30,
-// 						time = 0.0001,
-// 						minpos = {x=pos.x-0.5, y=pos.y-0.5+y, z=pos.z-0.5},
-// 						maxpos = {x=pos.x+0.5, y=pos.y+0.5+y, z=pos.z+0.5},
-// 						minvel = vector.new(-1,0,-1),
-// 						maxvel = vector.new(1,0,1),
-// 						minacc = {x=0, y=-9.81, z=0},
-// 						maxacc = {x=0, y=-9.81, z=0},
-// 						minexptime = 0.5,
-// 						maxexptime = 1.5,
-// 						minsize = 0,
-// 						maxsize = 0,
-// 						collisiondetection = true,
-// 						vertical = false,
-// 						node = {name= name},
-// 					})
+			--remove tree
+			for y = -6,6 do
+				local name = core.get_node(vector.new(pos.x,pos.y+y,pos.z)).name
 
-// 					local name2 = core.get_node(vector.new(pos.x,pos.y+y-1,pos.z)).name
-// 					if acceptable_soil[name2] then
-// 						core.add_node(vector.new(pos.x,pos.y+y,pos.z),{name="main:sapling"})
-// 					end
-// 				end
-// 			end
-// 			digger:set_wielded_item(wield_stack)
-// 		else
-// 			core.node_dig(pos, node, digger)
-// 		end
+				if name == "main:tree" or name == "redstone:node_activated_tree" then
+					wield_stack:add_wear(wear)
+					core.node_dig(vector.new(pos.x,pos.y+y,pos.z), node, digger)
+					core.add_particlespawner({
+						amount = 30,
+						time = 0.0001,
+						minpos = {x=pos.x-0.5, y=pos.y-0.5+y, z=pos.z-0.5},
+						maxpos = {x=pos.x+0.5, y=pos.y+0.5+y, z=pos.z+0.5},
+						minvel = vector.new(-1,0,-1),
+						maxvel = vector.new(1,0,1),
+						minacc = {x=0, y=-9.81, z=0},
+						maxacc = {x=0, y=-9.81, z=0},
+						minexptime = 0.5,
+						maxexptime = 1.5,
+						minsize = 0,
+						maxsize = 0,
+						collisiondetection = true,
+						vertical = false,
+						node = {name= name},
+					})
 
-// 	end
-// })
+					local name2 = core.get_node(vector.new(pos.x,pos.y+y-1,pos.z)).name
+					if acceptable_soil[name2] then
+						core.add_node(vector.new(pos.x,pos.y+y,pos.z),{name="main:sapling"})
+					end
+				end
+			end
+			digger:set_wielded_item(wield_stack)
+		else
+			core.node_dig(pos, node, digger)
+		end
+
+	end
+})
 
 // core.register_node("main:wood", {
 //     description = "Wood",
