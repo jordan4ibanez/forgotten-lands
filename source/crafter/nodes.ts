@@ -195,21 +195,21 @@ for (const [ore, tool_required] of pairs(ores)) {
 }
 
 core.register_node("main:stone", {
-    description = "Stone",
-    tiles = {"stone.png"},
-    groups = {stone = 1, hand = 1,pathable = 1},
-    sounds = main.stoneSound(),
-    drop = {
-		max_items = 1,
-		items= {
+	description: "Stone",
+	tiles: ["stone.png"],
+	groups: { stone: 1, hand: 1, pathable: 1 },
+	sounds: main.stoneSound(),
+	drop: {
+		max_items: 1,
+		items: [
 			{
-				rarity = 0,
-				tools = tool,
-				items = {"main:cobble"},
+				rarity: 0,
+				tools: tool,
+				items: ["main:cobble"],
 			},
-			},
-		},
-	})
+		],
+	},
+});
 
 // core.register_node("main:cobble", {
 //     description = "Cobblestone",
