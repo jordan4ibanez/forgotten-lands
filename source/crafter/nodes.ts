@@ -266,7 +266,6 @@ core.register_node("main:ice", {
 	drawtype: Drawtype.normal,
 	paramtype: ParamType1.light,
 	sunlight_propagates: true,
-	sunlight_propagates: true,
 	is_ground_content: false,
 	groups: { glass: 1, pathable: 1, slippery: 3 },
 	sounds: main.stoneSound({
