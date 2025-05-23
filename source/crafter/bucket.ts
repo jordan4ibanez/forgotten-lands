@@ -32,7 +32,7 @@ namespace main {
     // Item definitions.
     // fixme: Why aren't we using functions?!
 
-    core.register_craftitem("main:bucket", {
+    core.register_craftitem("crafter:bucket", {
         description: "Bucket",
         inventory_image: "bucket.png",
         stack_max: 1,
@@ -49,12 +49,12 @@ namespace main {
 
             const nodeName: string = core.get_node(posUnder).name;
 
-            if (nodeName === "main:water") {
-                itemstack.replace(ItemStack("main:bucket_water"));
+            if (nodeName === "crafter:water") {
+                itemstack.replace(ItemStack("crafter:bucket_water"));
                 core.remove_node(posUnder);
                 return (itemstack);
-            } else if (nodeName === "main:lava" || nodeName === "nether:lava") {
-                itemstack.replace(ItemStack("main:bucket_lava"));
+            } else if (nodeName === "crafter:lava" || nodeName === "nether:lava") {
+                itemstack.replace(ItemStack("crafter:bucket_lava"));
                 core.remove_node(posUnder);
                 return (itemstack);
             }
@@ -69,12 +69,12 @@ namespace main {
 
             const nodeName: string = core.get_node(posUnder).name;
 
-            if (nodeName === "main:water") {
-                itemstack.replace(ItemStack("main:bucket_water"));
+            if (nodeName === "crafter:water") {
+                itemstack.replace(ItemStack("crafter:bucket_water"));
                 core.remove_node(posUnder);
                 return itemstack;
-            } else if (nodeName === "main:lava" || nodeName === "nether:lava") {
-                itemstack.replace(ItemStack("main:bucket_lava"));
+            } else if (nodeName === "crafter:lava" || nodeName === "nether:lava") {
+                itemstack.replace(ItemStack("crafter:bucket_lava"));
                 core.remove_node(posUnder);
                 return itemstack;
             }
@@ -82,7 +82,7 @@ namespace main {
     });
 
 
-    core.register_craftitem("main:bucket_water", {
+    core.register_craftitem("crafter:bucket_water", {
         description: "Bucket of Water",
         inventory_image: "bucket_water.png",
         stack_max: 1,
@@ -105,12 +105,12 @@ namespace main {
 
             // Set it to water.
             if (buildableUnder === true) {
-                core.set_node(posUnder, { name: "main:water" });
-                itemstack.replace(ItemStack("main:bucket"));
+                core.set_node(posUnder, { name: "crafter:water" });
+                itemstack.replace(ItemStack("crafter:bucket"));
                 return itemstack;
             } else if (buildableAbove) {
-                core.set_node(posAbove, { name: "main:water" });
-                itemstack.replace(ItemStack("main:bucket"));
+                core.set_node(posAbove, { name: "crafter:water" });
+                itemstack.replace(ItemStack("crafter:bucket"));
                 return itemstack;
             }
         },
@@ -132,12 +132,12 @@ namespace main {
 
             // Set it to water.
             if (buildableUnder === true) {
-                core.add_node(posUnder, { name: "main:water" });
-                itemstack.replace(ItemStack("main:bucket"));
+                core.add_node(posUnder, { name: "crafter:water" });
+                itemstack.replace(ItemStack("crafter:bucket"));
                 return itemstack;
             } else if (buildableAbove) {
-                core.add_node(posAbove, { name: "main:water" });
-                itemstack.replace(ItemStack("main:bucket"));
+                core.add_node(posAbove, { name: "crafter:water" });
+                itemstack.replace(ItemStack("crafter:bucket"));
                 return itemstack;
             }
         },
@@ -146,7 +146,7 @@ namespace main {
     // fixme: there are hardcodes for the NETHER IN HERE! Use a module!
 
 
-    core.register_craftitem("main:bucket_lava", {
+    core.register_craftitem("crafter:bucket_lava", {
         description: "Bucket of Lava",
         inventory_image: "bucket_lava.png",
         stack_max: 1,
@@ -159,7 +159,7 @@ namespace main {
                 core.remove_node(pointed_thing.under);
                 // fixme: this was calling the TNT mod.
                 // tnt(pointed_thing.under,7)
-                itemstack.replace(ItemStack("main:bucket"));
+                itemstack.replace(ItemStack("crafter:bucket"));
                 return itemstack;
             }
 
@@ -182,21 +182,21 @@ namespace main {
             if (buildableUnder === true) {
                 if (posUnder.y < 20_000) {
                     if (posUnder.y > -10_033) {
-                        core.add_node(posUnder, { name: "main:lava" });
+                        core.add_node(posUnder, { name: "crafter:lava" });
                     } else {
                         core.add_node(posUnder, { name: "nether:lava" });
                     }
-                    itemstack.replace(ItemStack("main:bucket"));
+                    itemstack.replace(ItemStack("crafter:bucket"));
                     return itemstack;
                 }
             } else if (buildableAbove) {
                 if (posAbove.y < 20_000) {
                     if (posAbove.y > -10_033) {
-                        core.add_node(posAbove, { name: "main:lava" });
+                        core.add_node(posAbove, { name: "crafter:lava" });
                     } else {
                         core.add_node(posAbove, { name: "nether:lava" });
                     }
-                    itemstack.replace(ItemStack("main:bucket"));
+                    itemstack.replace(ItemStack("crafter:bucket"));
                     return itemstack;
                 }
             }
@@ -221,21 +221,21 @@ namespace main {
             if (buildableUnder === true) {
                 if (posUnder.y < 20_000) {
                     if (posUnder.y > -10_033) {
-                        core.add_node(posUnder, { name: "main:lava" });
+                        core.add_node(posUnder, { name: "crafter:lava" });
                     } else {
                         core.add_node(posUnder, { name: "nether:lava" });
                     }
-                    itemstack.replace(ItemStack("main:bucket"));
+                    itemstack.replace(ItemStack("crafter:bucket"));
                     return itemstack;
                 }
             } else if (buildableAbove) {
                 if (posAbove.y < 20_000) {
                     if (posAbove.y > -10_033) {
-                        core.add_node(posAbove, { name: "main:lava" });
+                        core.add_node(posAbove, { name: "crafter:lava" });
                     } else {
                         core.add_node(posAbove, { name: "nether:lava" });
                     }
-                    itemstack.replace(ItemStack("main:bucket"));
+                    itemstack.replace(ItemStack("crafter:bucket"));
                     return itemstack;
                 }
             }
