@@ -664,48 +664,48 @@ core.register_node("main:waterflow", {
 	// sounds = default.node_sound_water_defaults(),
 });
 
-// core.register_node("main:lava", {
-// 	description = "Lava",
-// 	drawtype = "liquid",
-// 	tiles = {
-// 		{
-// 			name = "lava_source.png",
-// 			backface_culling = false,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 2.0,
-// 			},
-// 		},
-// 		{
-// 			name = "lava_source.png",
-// 			backface_culling = true,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 2.0,
-// 			},
-// 		},
-// 	},
-// 	paramtype = "light",
-// 	light_source = 13,
-// 	walkable = false,
-// 	pointable = false,
-// 	diggable = false,
-// 	buildable_to = true,
-// 	is_ground_content = false,
-// 	drop = "",
-// 	drowning = 1,
-// 	liquidtype = "source",
-// 	liquid_alternative_flowing = "main:lavaflow",
-// 	liquid_alternative_source = "main:lava",
-// 	liquid_viscosity = 7,
-// 	liquid_renewable = false,
-// 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
-// 	groups = {lava = 3, liquid = 2, igniter = 1, fire=1,hurt_inside=1},
-// })
+core.register_node("main:lava", {
+	description: "Lava",
+	drawtype: Drawtype.liquid,
+	tiles: [
+		{
+			name: "lava_source.png",
+			backface_culling: false,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 2.0,
+			},
+		},
+		{
+			name: "lava_source.png",
+			backface_culling: true,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 2.0,
+			},
+		},
+	],
+	paramtype: ParamType1.light,
+	light_source: 13,
+	walkable: false,
+	pointable: false,
+	diggable: false,
+	buildable_to: true,
+	is_ground_content: false,
+	drop: "",
+	drowning: 1,
+	liquidtype: LiquidType.source,
+	liquid_alternative_flowing: "main:lavaflow",
+	liquid_alternative_source: "main:lava",
+	liquid_viscosity: 7,
+	liquid_renewable: false,
+	post_effect_color: { a: 191, r: 255, g: 64, b: 0 },
+	groups: { lava: 3, liquid: 2, igniter: 1, fire: 1, hurt_inside: 1 },
+});
 
 // core.register_node("main:lavaflow", {
 // 	description = "Flowing Lava",
