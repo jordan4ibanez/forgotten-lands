@@ -12,6 +12,6 @@ core.register_abm({
 		if (!light || light < 10) {
 			return;
 		}
-		core.set_node(pos, { name: "main:grass" });
+		core.set_node(pos, { name: "crafter:grass" });
 	},
 });
