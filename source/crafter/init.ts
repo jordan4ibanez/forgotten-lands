@@ -14,10 +14,10 @@ namespace main {
 		// "schematics",
 		// "mapgen",
 		// "tools",
-		// "settings",
+		"settings",
 		"craft_recipes",
 		"falling",
-		// "bucket",
+		"bucket",
 		// "lava_cooling",
 		// "command_overrides"
 	]);
