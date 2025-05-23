@@ -126,7 +126,8 @@ for (const [ore, tool_required] of pairs(ores)) {
 		description: string.gsub(ore as string, "^%l", string.upper) + " Block",
 		tiles: [ore + "block.png"],
 		groups: { stone: level, pathable: 1 },
-		sounds: main.stoneSound(),
+        //todo: fix this, finish the rest.
+		// sounds: main.stoneSound(),
 		// light_source = 14,--debugging ore spawn
 		drop: {
 			max_items: 1,
@@ -139,6 +140,8 @@ for (const [ore, tool_required] of pairs(ores)) {
 			],
 		},
 	});
+    
+    
 
 	// 	minetest.register_node("main:"..ore.."ore", {
 	// 		description = ore:gsub("^%l", string.upper).." Ore",
