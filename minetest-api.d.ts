@@ -937,6 +937,7 @@ declare global {
 	interface MapNode {
 		name: string;
 		prob: number;
+		param2: number;
 		force_place: boolean;
 	}
 
