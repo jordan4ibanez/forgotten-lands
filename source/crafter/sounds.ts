@@ -30,19 +30,16 @@ namespace main {
 		return table;
 	}
 
-	// function main.grassSound(table)
-	// 	table = table or {}
-	// 	table.dig = table.dig or
-	// 			{name = "leaves",gain=0.2}
-	// 	table.footstep = table.footstep or
-	// 			{name = "leaves", gain = 0.2}
-	// 	table.dug = table.dug or
-	// 			{name = "leaves", gain = 0.5}
-	// 	table.placing = table.placing or
-	// 			{name = "leaves", gain = 0.2}
-	// 	--default.node_sound_defaults(table)
-	// 	return table
-	// end
+	export function grassSound(table?: NodeSoundSpec): NodeSoundSpec {
+		table = table || {};
+		table.dig = table.dig || { name: "leaves", gain: 0.2 };
+		table.footstep = table.footstep || { name: "leaves", gain: 0.2 };
+		table.dug = table.dug || { name: "leaves", gain: 0.5 };
+		table.placing = table.placing || { name: "leaves", gain: 0.2 };
+		// default.node_sound_defaults(table)
+		return table;
+	}
+
 	// function main.dirtSound(table)
 	// 	table = table or {}
 	// 	table.dig = table.dig or
