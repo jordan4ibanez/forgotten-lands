@@ -383,7 +383,7 @@ core.register_node("main:tree", {
 		meta.set_string("placed", "true")
 		return itemstack
     },
-	--treecapitator - move treecapitator into own file using override
+	// todo: treecapitator - move treecapitator into own file using override.
 	on_dig = function(pos, node, digger)
 		--bvav_create_vessel(pos,core.facedir_to_dir(core.dir_to_facedir(core.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
 		--check if wielding axe?
