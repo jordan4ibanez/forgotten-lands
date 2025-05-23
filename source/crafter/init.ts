@@ -5,7 +5,7 @@ namespace main {
 	}
 
 	utility.loadFiles([
-		// "sounds",
+		"sounds",
 		"nodes",
 		// "grass_spread",
 		// "saplings",
