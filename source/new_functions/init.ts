@@ -318,7 +318,7 @@ namespace newFunctions {
 
         if (real_nodes.length > 0) {
             // fixme: call into the fire namespace. Also why is this even in here?
-            start_fire(player);
+            // start_fire(player);
         }
     }
 
