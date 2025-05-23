@@ -1073,7 +1073,7 @@ declare global {
 		wield_scale?: Vec3;
 		color?: DynamicColorSpec;
 		light_source?: number;
-		use_texture_alpha?: TextureAlpha;
+		use_texture_alpha?: TextureAlpha | boolean;
 		palette?: string;
 		post_effect_color?: DynamicColorSpec;
 		post_effect_color_shaded?: boolean;
