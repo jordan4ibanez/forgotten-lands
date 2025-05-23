@@ -648,7 +648,7 @@ interface core {
 	translate(textDomain: string, ...string: string[]): string;
 
 	sound_play(
-		spec: SimpleSoundSpec,
+		spec: SimpleSoundSpec | string,
 		parameters: SoundParameterTable,
 		ephemeral?: boolean
 	): number;
@@ -920,7 +920,7 @@ declare global {
 		fall?: SimpleSoundSpec;
 		// break?: SimpleSoundSpec;
 		placed?: SimpleSoundSpec;
-        //* Crafter custom.
+		//* Crafter custom.
 		placing?: SimpleSoundSpec;
 	}
 
