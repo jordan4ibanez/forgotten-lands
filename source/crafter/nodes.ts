@@ -351,12 +351,12 @@ core.register_node("main:gravel", {
 	},
 });
 
-// local acceptable_soil = {
-// 	["main:dirt"] = true,
-// 	["main:grass"] = true,
-// 	["aether:dirt"] = true,
-// 	["aether:grass"] = true,
-// }
+const acceptable_soil: { [id: string]: boolean } = {
+	"main:dirt": true,
+	"main:grass": true,
+	"aether:dirt": true,
+	"aether:grass": true,
+};
 // core.register_node("main:tree", {
 //     description = "Tree",
 //     tiles = {"treeCore.png","treeCore.png","treeOut.png","treeOut.png","treeOut.png","treeOut.png"},
