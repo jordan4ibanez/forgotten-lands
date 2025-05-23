@@ -120,14 +120,11 @@ for (const [ore, tool_required] of pairs(ores)) {
 		experience = level;
 	}
 
-	print(ore);
-
 	core.register_node("main:" + ore + "block", {
 		description: string.gsub(ore as string, "^%l", string.upper) + " Block",
 		tiles: [ore + "block.png"],
 		groups: { stone: level, pathable: 1 },
-        //todo: fix this, finish the rest.
-		// sounds: main.stoneSound(),
+		sounds: main.stoneSound(),
 		// light_source = 14,--debugging ore spawn
 		drop: {
 			max_items: 1,
@@ -140,26 +137,25 @@ for (const [ore, tool_required] of pairs(ores)) {
 			],
 		},
 	});
-    
-    
 
-	// 	minetest.register_node("main:"..ore.."ore", {
-	// 		description = ore:gsub("^%l", string.upper).." Ore",
-	// 		tiles = {"stone.png^"..ore.."ore.png"},
-	// 		groups = {stone = level, pathable = 1,experience=experience},
-	// 		sounds = main.stoneSound(),
-	// 		--light_source = 14,--debugging ore spawn
-	// 		drop = {
-	// 			max_items = 1,
-	// 			items= {
-	// 				{
-	// 					rarity = 0,
-	// 					tools = tool_required,
-	// 					items = drops[ore],
-	// 				},
-	// 				},
-	// 			},
-	// 		})
+	core.register_node("main:" + ore + "ore", {
+		description: string.gsub(ore as string, "^%l", string.upper) + " Ore",
+		tiles: ["stone.png^" + ore + "ore.png"],
+		groups: { stone: level, pathable: 1, experience: experience },
+		sounds: main.stoneSound(),
+		// light_source = 14,--debugging ore spawn
+		drop: {
+			max_items: 1,
+			items: [
+				{
+					rarity: 0,
+					tools: tool_required,
+					items: drops[ore],
+				},
+			],
+		},
+	});
+
 	// 	minetest.register_node(":nether:"..ore.."ore", {
 	// 		description = "Nether "..ore:gsub("^%l", string.upper).." Ore",
 	// 		tiles = {"netherrack.png^"..ore.."ore.png"},
