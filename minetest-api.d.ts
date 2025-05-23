@@ -633,9 +633,9 @@ interface core {
 	): Vec3;
 	get_tool_wear_after_use(uses: number, initialWear: number): number;
 	get_dig_params(
-		groups: string[],
+		groups: {[id:string]: number},
 		toolCapabilities: ToolCapabilities,
-		wear: number
+		wear?: number
 	): DigParamsReturn;
 	get_hit_params(
 		groups: string[],
