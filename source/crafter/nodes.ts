@@ -194,7 +194,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 	});
 }
 
-minetest.register_node("main:stone", {
+core.register_node("main:stone", {
     description = "Stone",
     tiles = {"stone.png"},
     groups = {stone = 1, hand = 1,pathable = 1},
@@ -211,7 +211,7 @@ minetest.register_node("main:stone", {
 		},
 	})
 
-// minetest.register_node("main:cobble", {
+// core.register_node("main:cobble", {
 //     description = "Cobblestone",
 //     tiles = {"cobble.png"},
 //     groups = {stone = 1, pathable = 1},
@@ -228,7 +228,7 @@ minetest.register_node("main:stone", {
 // 		},
 // })
 
-// minetest.register_node("main:mossy_cobble", {
+// core.register_node("main:mossy_cobble", {
 //     description = "Mossy Cobblestone",
 //     tiles = {"mossy_cobble.png"},
 //     groups = {stone = 1, pathable = 1},
@@ -245,7 +245,7 @@ minetest.register_node("main:stone", {
 // 		},
 // })
 
-// minetest.register_node("main:glass", {
+// core.register_node("main:glass", {
 //     description = "Glass",
 //     tiles = {"glass.png"},
 //     drawtype = "glasslike",
@@ -260,7 +260,7 @@ minetest.register_node("main:stone", {
 //     drop = "",
 // })
 
-// minetest.register_node("main:ice", {
+// core.register_node("main:ice", {
 //     description = "Ice",
 //     tiles = {"ice.png"},
 //     drawtype = "normal",
@@ -277,10 +277,10 @@ minetest.register_node("main:stone", {
 // 	--alpha = 100,
 //     drop = "",
 //     after_destruct = function(pos, oldnode)
-//        minetest.set_node(pos, {name="main:water"})
+//        core.set_node(pos, {name="main:water"})
 //     end
 // })
-// minetest.register_node("main:ice_mapgen", {
+// core.register_node("main:ice_mapgen", {
 //     description = "Ice",
 //     tiles = {"ice.png"},
 //     drawtype = "normal",
@@ -296,7 +296,7 @@ minetest.register_node("main:stone", {
 //     drop = "",
 // })
 
-// minetest.register_node("main:dirt", {
+// core.register_node("main:dirt", {
 //     description = "Dirt",
 //     tiles = {"dirt.png"},
 //     groups = {dirt = 1, soil=1,pathable = 1, farm_tillable=1},
@@ -304,7 +304,7 @@ minetest.register_node("main:stone", {
 //     paramtype = "light",
 // })
 
-// minetest.register_node("main:grass", {
+// core.register_node("main:grass", {
 //     description = "Grass",
 //     tiles = {"grass.png"},
 //     groups = {grass = 1, soil=1,pathable = 1, farm_tillable=1},
@@ -312,14 +312,14 @@ minetest.register_node("main:stone", {
 //     drop="main:dirt",
 // })
 
-// minetest.register_node("main:sand", {
+// core.register_node("main:sand", {
 //     description = "Sand",
 //     tiles = {"sand.png"},
 //     groups = {sand = 1, falling_node = 1,pathable = 1,soil=1},
 //     sounds = main.sandSound(),
 // })
 
-// minetest.register_node("main:gravel", {
+// core.register_node("main:gravel", {
 //     description = "Gravel",
 //     tiles = {"gravel.png"},
 //     groups = {sand = 1, falling_node = 1,pathable = 1},
@@ -357,7 +357,7 @@ minetest.register_node("main:stone", {
 // 	["aether:dirt"] = true,
 // 	["aether:grass"] = true,
 // }
-// minetest.register_node("main:tree", {
+// core.register_node("main:tree", {
 //     description = "Tree",
 //     tiles = {"treeCore.png","treeCore.png","treeOut.png","treeOut.png","treeOut.png","treeOut.png"},
 //     groups = {wood = 1, tree = 1, pathable = 1, flammable=1},
@@ -369,41 +369,41 @@ minetest.register_node("main:stone", {
 // 		end
 
 // 		local sneak = placer:get_player_control().sneak
-// 		local noddef = minetest.registered_nodes[minetest.get_node(pointed_thing.under).name]
+// 		local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
 // 		if not sneak and noddef.on_rightclick then
-// 			minetest.item_place(itemstack, placer, pointed_thing)
+// 			core.item_place(itemstack, placer, pointed_thing)
 // 			return
 // 		end
 
 // 		local pos = pointed_thing.above
-// 		minetest.item_place_node(itemstack, placer, pointed_thing)
-// 		local meta = minetest.get_meta(pos)
+// 		core.item_place_node(itemstack, placer, pointed_thing)
+// 		local meta = core.get_meta(pos)
 // 		meta:set_string("placed", "true")
 // 		return(itemstack)
 // 	end,
 // 	--treecapitator - move treecapitator into own file using override
 // 	on_dig = function(pos, node, digger)
-// 		--bvav_create_vessel(pos,minetest.facedir_to_dir(minetest.dir_to_facedir(minetest.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
+// 		--bvav_create_vessel(pos,core.facedir_to_dir(core.dir_to_facedir(core.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
 // 		--check if wielding axe?
 // 		--turn treecapitator into an enchantment?
-// 		local meta = minetest.get_meta(pos)
+// 		local meta = core.get_meta(pos)
 // 		--local tool_meta = digger:get_wielded_item():get_meta()
 // 		--if tool_meta:get_int("treecapitator") > 0 then
 // 		if not meta:contains("placed") and string.match(digger:get_wielded_item():get_name(), "axe") then
 // 			local tool_capabilities = digger:get_wielded_item():get_tool_capabilities()
 
-// 			local wear = minetest.get_dig_params({wood=1}, tool_capabilities).wear
+// 			local wear = core.get_dig_params({wood=1}, tool_capabilities).wear
 
 // 			local wield_stack = digger:get_wielded_item()
 
 // 			--remove tree
 // 			for y = -6,6 do
-// 				local name = minetest.get_node(vector.new(pos.x,pos.y+y,pos.z)).name
+// 				local name = core.get_node(vector.new(pos.x,pos.y+y,pos.z)).name
 
 // 				if name == "main:tree" or name == "redstone:node_activated_tree" then
 // 					wield_stack:add_wear(wear)
-// 					minetest.node_dig(vector.new(pos.x,pos.y+y,pos.z), node, digger)
-// 					minetest.add_particlespawner({
+// 					core.node_dig(vector.new(pos.x,pos.y+y,pos.z), node, digger)
+// 					core.add_particlespawner({
 // 						amount = 30,
 // 						time = 0.0001,
 // 						minpos = {x=pos.x-0.5, y=pos.y-0.5+y, z=pos.z-0.5},
@@ -421,28 +421,28 @@ minetest.register_node("main:stone", {
 // 						node = {name= name},
 // 					})
 
-// 					local name2 = minetest.get_node(vector.new(pos.x,pos.y+y-1,pos.z)).name
+// 					local name2 = core.get_node(vector.new(pos.x,pos.y+y-1,pos.z)).name
 // 					if acceptable_soil[name2] then
-// 						minetest.add_node(vector.new(pos.x,pos.y+y,pos.z),{name="main:sapling"})
+// 						core.add_node(vector.new(pos.x,pos.y+y,pos.z),{name="main:sapling"})
 // 					end
 // 				end
 // 			end
 // 			digger:set_wielded_item(wield_stack)
 // 		else
-// 			minetest.node_dig(pos, node, digger)
+// 			core.node_dig(pos, node, digger)
 // 		end
 
 // 	end
 // })
 
-// minetest.register_node("main:wood", {
+// core.register_node("main:wood", {
 //     description = "Wood",
 //     tiles = {"wood.png"},
 //     groups = {wood = 1, pathable = 1,flammable=1},
 //     sounds = main.woodSound(),
 // })
 
-// minetest.register_node("main:leaves", {
+// core.register_node("main:leaves", {
 //     description = "Leaves",
 //     drawtype = "allfaces_optional",
 // 	waving = 1,
@@ -472,7 +472,7 @@ minetest.register_node("main:stone", {
 //     },
 // })
 
-// minetest.register_node("main:dropped_leaves", {
+// core.register_node("main:dropped_leaves", {
 //     description = "Leaves",
 //     drawtype = "allfaces_optional",
 // 	waving = 0,
@@ -494,7 +494,7 @@ minetest.register_node("main:stone", {
 //     },
 // })
 
-// minetest.register_node("main:water", {
+// core.register_node("main:water", {
 // 	description = "Water Source",
 // 	drawtype = "liquid",
 // 	waving = 3,
@@ -538,18 +538,18 @@ minetest.register_node("main:stone", {
 
 // 	--water explodes in the nether
 // 	on_construct = function(pos)
-// 		local under = minetest.get_node(vector.new(pos.x,pos.y-1,pos.z)).name
+// 		local under = core.get_node(vector.new(pos.x,pos.y-1,pos.z)).name
 // 		if under == "nether:glowstone" then
-// 			minetest.remove_node(pos)
+// 			core.remove_node(pos)
 // 			create_aether_portal(pos)
 // 		elseif pos.y <= -10033 then
-// 			minetest.remove_node(pos)
+// 			core.remove_node(pos)
 // 			tnt(pos,10)
 // 		end
 // 	end,
 // })
 
-// minetest.register_node("main:waterflow", {
+// core.register_node("main:waterflow", {
 // 	description = "Water Flow",
 // 	drawtype = "flowingliquid",
 // 	waving = 3,
@@ -600,7 +600,7 @@ minetest.register_node("main:stone", {
 // 	--sounds = default.node_sound_water_defaults(),
 // })
 
-// minetest.register_node("main:lava", {
+// core.register_node("main:lava", {
 // 	description = "Lava",
 // 	drawtype = "liquid",
 // 	tiles = {
@@ -643,7 +643,7 @@ minetest.register_node("main:stone", {
 // 	groups = {lava = 3, liquid = 2, igniter = 1, fire=1,hurt_inside=1},
 // })
 
-// minetest.register_node("main:lavaflow", {
+// core.register_node("main:lavaflow", {
 // 	description = "Flowing Lava",
 // 	drawtype = "flowingliquid",
 // 	tiles = {"lava_flow.png"},
@@ -695,7 +695,7 @@ minetest.register_node("main:stone", {
 // 	groups = {lava = 3, liquid = 2, igniter = 1, fire=1,hurt_inside=1},
 // })
 
-// minetest.register_node("main:ladder", {
+// core.register_node("main:ladder", {
 // 	description = "Ladder",
 // 	drawtype = "signlike",
 // 	tiles = {"ladder.png"},
@@ -722,7 +722,7 @@ minetest.register_node("main:stone", {
 // 			return itemstack
 // 		end
 
-// 		local wdir = minetest.dir_to_wallmounted(vector.subtract(pointed_thing.under,pointed_thing.above))
+// 		local wdir = core.dir_to_wallmounted(vector.subtract(pointed_thing.under,pointed_thing.above))
 
 // 		local fakestack = itemstack
 // 		local retval = false
@@ -736,10 +736,10 @@ minetest.register_node("main:stone", {
 // 			return itemstack
 // 		end
 
-// 		itemstack, retval = minetest.item_place(fakestack, placer, pointed_thing, wdir)
+// 		itemstack, retval = core.item_place(fakestack, placer, pointed_thing, wdir)
 
 // 		if retval then
-// 			minetest.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
+// 			core.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
 // 		end
 
 // 		print(itemstack, retval)
