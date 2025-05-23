@@ -295,13 +295,13 @@ core.register_node("main:ice_mapgen", {
 	drop: "",
 });
 
-// core.register_node("main:dirt", {
-//     description = "Dirt",
-//     tiles = {"dirt.png"},
-//     groups = {dirt = 1, soil=1,pathable = 1, farm_tillable=1},
-//     sounds = main.dirtSound(),
-//     paramtype = "light",
-// })
+core.register_node("main:dirt", {
+	description: "Dirt",
+	tiles: ["dirt.png"],
+	groups: { dirt: 1, soil: 1, pathable: 1, farm_tillable: 1 },
+	sounds: main.dirtSound(),
+	paramtype: ParamType1.light,
+});
 
 // core.register_node("main:grass", {
 //     description = "Grass",
