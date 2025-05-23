@@ -6,45 +6,45 @@ namespace main {
 
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:diamond",
-		recipe: "main:diamondore",
+		output: "crafter:diamond",
+		recipe: "crafter:diamondore",
 		cooktime: 12,
 	});
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:coal 4",
-		recipe: "main:coalore",
+		output: "crafter:coal 4",
+		recipe: "crafter:coalore",
 		cooktime: 3,
 	});
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:charcoal",
-		recipe: "main:tree",
+		output: "crafter:charcoal",
+		recipe: "crafter:tree",
 		cooktime: 2,
 	});
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:gold",
-		recipe: "main:goldore",
+		output: "crafter:gold",
+		recipe: "crafter:goldore",
 		cooktime: 9,
 	});
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:iron",
-		recipe: "main:ironore",
+		output: "crafter:iron",
+		recipe: "crafter:ironore",
 		cooktime: 6,
 	});
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:stone",
-		recipe: "main:cobble",
+		output: "crafter:stone",
+		recipe: "crafter:cobble",
 		cooktime: 2,
 	});
 
 	core.register_craft({
 		type: CraftRecipeType.cooking,
-		output: "main:glass",
-		recipe: "main:sand",
+		output: "crafter:glass",
+		recipe: "crafter:sand",
 		cooktime: 1,
 	});
 
@@ -52,42 +52,42 @@ namespace main {
 
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:stick",
+		recipe: "crafter:stick",
 		burntime: 1,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:sapling",
+		recipe: "crafter:sapling",
 		burntime: 1,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:paper",
+		recipe: "crafter:paper",
 		burntime: 1,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:tree",
+		recipe: "crafter:tree",
 		burntime: 24,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:wood",
+		recipe: "crafter:wood",
 		burntime: 12,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:leaves",
+		recipe: "crafter:leaves",
 		burntime: 3,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:coal",
+		recipe: "crafter:coal",
 		burntime: 20,
 	});
 	core.register_craft({
 		type: CraftRecipeType.fuel,
-		recipe: "main:charcoal",
+		recipe: "crafter:charcoal",
 		burntime: 7,
 	});
 
@@ -95,20 +95,20 @@ namespace main {
 
 	core.register_craft({
 		type: CraftRecipeType.shapeless,
-		output: "main:wood 4",
-		recipe: ["main:tree"],
+		output: "crafter:wood 4",
+		recipe: ["crafter:tree"],
 	});
 	core.register_craft({
 		type: CraftRecipeType.shapeless,
-		output: "main:sugar 3",
+		output: "crafter:sugar 3",
 		recipe: ["farming:sugarcane"],
 	});
 	core.register_craft({
-		output: "main:stick 4",
-		recipe: [["main:wood"], ["main:wood"]],
+		output: "crafter:stick 4",
+		recipe: [["crafter:wood"], ["crafter:wood"]],
 	});
 	core.register_craft({
-		output: "main:paper",
+		output: "crafter:paper",
 		recipe: [
 			["farming:sugarcane", "farming:sugarcane", "farming:sugarcane"],
 		],
@@ -143,73 +143,73 @@ namespace main {
 
 	for (const [id, tool] of __tools.entries()) {
 		core.register_craft({
-			output: "main:" + tool + "pick",
+			output: "crafter:" + tool + "pick",
 			recipe: [
 				[
-					"main:" + material[id],
-					"main:" + material[id],
-					"main:" + material[id],
+					"crafter:" + material[id],
+					"crafter:" + material[id],
+					"crafter:" + material[id],
 				],
-				["", "main:stick", ""],
-				["", "main:stick", ""],
+				["", "crafter:stick", ""],
+				["", "crafter:stick", ""],
 			],
 		});
 		core.register_craft({
-			output: "main:" + tool + "shovel",
+			output: "crafter:" + tool + "shovel",
 			recipe: [
-				["", "main:" + material[id], ""],
-				["", "main:stick", ""],
-				["", "main:stick", ""],
+				["", "crafter:" + material[id], ""],
+				["", "crafter:stick", ""],
+				["", "crafter:stick", ""],
 			],
 		});
 		core.register_craft({
-			output: "main:" + tool + "axe",
+			output: "crafter:" + tool + "axe",
 			recipe: [
-				["main:" + material[id], "main:" + material[id], ""],
-				["main:" + material[id], "main:stick", ""],
-				["", "main:stick", ""],
+				["crafter:" + material[id], "crafter:" + material[id], ""],
+				["crafter:" + material[id], "crafter:stick", ""],
+				["", "crafter:stick", ""],
 			],
 		});
 		core.register_craft({
-			output: "main:" + tool + "axe",
+			output: "crafter:" + tool + "axe",
 			recipe: [
-				["", "main:" + material[id], "main:" + material[id]],
-				["", "main:stick", "main:" + material[id]],
-				["", "main:stick", ""],
+				["", "crafter:" + material[id], "crafter:" + material[id]],
+				["", "crafter:stick", "crafter:" + material[id]],
+				["", "crafter:stick", ""],
 			],
 		});
 		core.register_craft({
-			output: "main:" + tool + "sword",
+			output: "crafter:" + tool + "sword",
 			recipe: [
-				["", "main:" + material[id], ""],
-				["", "main:" + material[id], ""],
-				["", "main:stick", ""],
+				["", "crafter:" + material[id], ""],
+				["", "crafter:" + material[id], ""],
+				["", "crafter:stick", ""],
 			],
 		});
 	}
 
 	core.register_craft({
-		output: "main:ladder 16",
+		output: "crafter:ladder 16",
 		recipe: [
-			["main:stick", "", "main:stick"],
-			["main:stick", "main:stick", "main:stick"],
-			["main:stick", "", "main:stick"],
+			["crafter:stick", "", "crafter:stick"],
+			["crafter:stick", "crafter:stick", "crafter:stick"],
+			["crafter:stick", "", "crafter:stick"],
 		],
 	});
 
 	core.register_craft({
-		output: "main:shears",
+		output: "crafter:shears",
 		recipe: [
-			["", "main:iron"],
-			["main:iron", ""],
+			["", "crafter:iron"],
+			["crafter:iron", ""],
 		],
 	});
 
 	core.register_craft({
-		output: "main:bucket",
+		output: "crafter:bucket",
 		recipe: [
-			["main:iron", "", "main:iron"],
-			["", "main:iron", ""],
+			["crafter:iron", "", "crafter:iron"],
+			["", "crafter:iron", ""],
 		],
 	});
 
@@ -232,17 +232,17 @@ namespace main {
 	];
 	for (const name of raw_material) {
 		core.register_craft({
-			output: "main:" + name + "block",
+			output: "crafter:" + name + "block",
 			recipe: [
-				["main:" + name, "main:" + name, "main:" + name],
-				["main:" + name, "main:" + name, "main:" + name],
-				["main:" + name, "main:" + name, "main:" + name],
+				["crafter:" + name, "crafter:" + name, "crafter:" + name],
+				["crafter:" + name, "crafter:" + name, "crafter:" + name],
+				["crafter:" + name, "crafter:" + name, "crafter:" + name],
 			],
 		});
 		core.register_craft({
 			type: CraftRecipeType.shapeless,
-			output: "main:" + name + " 9",
-			recipe: ["main:" + name + "block"],
+			output: "crafter:" + name + " 9",
+			recipe: ["crafter:" + name + "block"],
 		});
 	}
 }
