@@ -757,56 +757,69 @@ core.register_node("main:lavaflow", {
 	groups: { lava: 3, liquid: 2, igniter: 1, fire: 1, hurt_inside: 1 },
 });
 
-// core.register_node("main:ladder", {
-// 	description = "Ladder",
-// 	drawtype = "signlike",
-// 	tiles = {"ladder.png"},
-// 	inventory_image = "ladder.png",
-// 	wield_image = "ladder.png",
-// 	paramtype = "light",
-// 	paramtype2 = "wallmounted",
-// 	sunlight_propagates = true,
-// 	walkable = false,
-// 	climbable = true,
-// 	is_ground_content = false,
-// 	node_placement_prediction = "",
-// 	selection_box = {
-// 		type = "wallmounted",
-// 		--wall_top = = <default>
-// 		--wall_bottom = = <default>
-// 		--wall_side = = <default>
-// 	},
-// 	groups = {wood = 1, flammable = 1, attached_node=1},
-// 	sounds = main.woodSound(),
-// 	on_place = function(itemstack, placer, pointed_thing)
-// 		--copy from torch
-// 		if pointed_thing.type ~= "node" then
-// 			return itemstack
-// 		end
+core.register_node("main:ladder", {
+	description: "Ladder",
+	drawtype: Drawtype.signlike,
+	tiles: ["ladder.png"],
+	inventory_image: "ladder.png",
+	wield_image: "ladder.png",
+	paramtype: ParamType1.light,
+	paramtype2: ParamType2.wallmounted,
+	sunlight_propagates: true,
+	walkable: false,
+	climbable: true,
+	is_ground_content: false,
+	node_placement_prediction: "",
+	selection_box: {
+		type: Nodeboxtype.wallmounted,
+		//wall_top = = <default>
+		//wall_bottom = = <default>
+		//wall_side = = <default>
+	},
+	groups: { wood: 1, flammable: 1, attached_node: 1 },
+	sounds: main.woodSound(),
+	on_place: (
+		itemstack: ItemStackObject,
+		placer: ObjectRef,
+		pointed_thing: PointedThing
+	): ItemStackObject | null => {
+		// todo: find out which torch lol.
+		// Copy from torch.
+		if (pointed_thing.type != "node") {
+			return itemstack;
+		}
 
-// 		local wdir = core.dir_to_wallmounted(vector.subtract(pointed_thing.under,pointed_thing.above))
+		const wdir: number = core.dir_to_wallmounted(
+			vector.subtract(pointed_thing.under, pointed_thing.above)
+		);
 
-// 		local fakestack = itemstack
-// 		local retval = false
-// 		if wdir > 1 then
-// 			retval = fakestack:set_name("main:ladder")
-// 		else
-// 			return itemstack
-// 		end
+		const fakestack: ItemStackObject = itemstack;
+		let retval: boolean = false;
+		if (wdir > 1) {
+			retval = fakestack.set_name("main:ladder");
+		} else {
+			return itemstack;
+		}
 
-// 		if not retval then
-// 			return itemstack
-// 		end
+		if (retval != null) {
+			return itemstack;
+		}
 
-// 		itemstack, retval = core.item_place(fakestack, placer, pointed_thing, wdir)
+		let above: Vec3 | null = null;
+		[itemstack, above] = core.item_place(
+			fakestack,
+			placer,
+			pointed_thing,
+			wdir
+		);
 
-// 		if retval then
-// 			core.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
-// 		end
+		if (retval != null) {
+			core.sound_play("wood", { pos: pointed_thing.above, gain: 1.0 });
+		}
 
-// 		print(itemstack, retval)
-// 		itemstack:set_name("main:ladder")
+		print(itemstack, retval);
+		itemstack.set_name("main:ladder");
 
-// 		return itemstack
-// 	end,
-// })
+		return itemstack;
+	},
+});
