@@ -3,97 +3,97 @@
 // Ore def with required tool.
 
 const tool: string[] = [
-	"main:woodpick",
-	"main:coalpick",
-	"main:stonepick",
-	"main:ironpick",
-	"main:lapispick",
-	"main:goldpick",
-	"main:diamondpick",
-	"main:emeraldpick",
-	"main:sapphirepick",
-	"main:rubypick",
+	"crafter:woodpick",
+	"crafter:coalpick",
+	"crafter:stonepick",
+	"crafter:ironpick",
+	"crafter:lapispick",
+	"crafter:goldpick",
+	"crafter:diamondpick",
+	"crafter:emeraldpick",
+	"crafter:sapphirepick",
+	"crafter:rubypick",
 ];
 
 const ores: { [id: string]: string[] } = {
 	coal: [
-		"main:woodpick",
-		"main:coalpick",
-		"main:stonepick",
-		"main:ironpick",
-		"main:lapispick",
-		"main:goldpick",
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:woodpick",
+		"crafter:coalpick",
+		"crafter:stonepick",
+		"crafter:ironpick",
+		"crafter:lapispick",
+		"crafter:goldpick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	iron: [
-		"main:coalpick",
-		"main:stonepick",
-		"main:ironpick",
-		"main:lapispick",
-		"main:goldpick",
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:coalpick",
+		"crafter:stonepick",
+		"crafter:ironpick",
+		"crafter:lapispick",
+		"crafter:goldpick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	lapis: [
-		"main:ironpick",
-		"main:lapispick",
-		"main:goldpick",
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:ironpick",
+		"crafter:lapispick",
+		"crafter:goldpick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	gold: [
-		"main:ironpick",
-		"main:lapispick",
-		"main:goldpick",
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:ironpick",
+		"crafter:lapispick",
+		"crafter:goldpick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	diamond: [
-		"main:ironpick",
-		"main:lapispick",
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:ironpick",
+		"crafter:lapispick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	emerald: [
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	sapphire: [
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 	ruby: [
-		"main:diamondpick",
-		"main:emeraldpick",
-		"main:sapphirepick",
-		"main:rubypick",
+		"crafter:diamondpick",
+		"crafter:emeraldpick",
+		"crafter:sapphirepick",
+		"crafter:rubypick",
 	],
 };
 
 const drops: { [id: string]: string[] } = {
-	coal: ["main:coal"],
-	iron: ["main:ironore"],
-	lapis: ["main:lapis"],
-	gold: ["main:goldore"],
-	diamond: ["main:diamond"],
-	emerald: ["main:emerald"],
-	sapphire: ["main:sapphire"],
-	ruby: ["main:ruby"],
+	coal: ["crafter:coal"],
+	iron: ["crafter:ironore"],
+	lapis: ["crafter:lapis"],
+	gold: ["crafter:goldore"],
+	diamond: ["crafter:diamond"],
+	emerald: ["crafter:emerald"],
+	sapphire: ["crafter:sapphire"],
+	ruby: ["crafter:ruby"],
 };
 
 const levels: { [id: string]: number } = {
@@ -120,7 +120,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 		experience = level;
 	}
 
-	core.register_node("main:" + ore + "block", {
+	core.register_node("crafter:" + ore + "block", {
 		description: string.gsub(ore as string, "^%l", string.upper) + " Block",
 		tiles: [ore + "block.png"],
 		groups: { stone: level, pathable: 1 },
@@ -132,13 +132,13 @@ for (const [ore, tool_required] of pairs(ores)) {
 				{
 					rarity: 0,
 					tools: tool_required,
-					items: ["main:" + ore + "block"],
+					items: ["crafter:" + ore + "block"],
 				},
 			],
 		},
 	});
 
-	core.register_node("main:" + ore + "ore", {
+	core.register_node("crafter:" + ore + "ore", {
 		description: string.gsub(ore as string, "^%l", string.upper) + " Ore",
 		tiles: ["stone.png^" + ore + "ore.png"],
 		groups: { stone: level, pathable: 1, experience: experience },
@@ -194,7 +194,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 	});
 }
 
-core.register_node("main:stone", {
+core.register_node("crafter:stone", {
 	description: "Stone",
 	tiles: ["stone.png"],
 	groups: { stone: 1, hand: 1, pathable: 1 },
@@ -205,13 +205,13 @@ core.register_node("main:stone", {
 			{
 				rarity: 0,
 				tools: tool,
-				items: ["main:cobble"],
+				items: ["crafter:cobble"],
 			},
 		],
 	},
 });
 
-core.register_node("main:cobble", {
+core.register_node("crafter:cobble", {
 	description: "Cobblestone",
 	tiles: ["cobble.png"],
 	groups: { stone: 1, pathable: 1 },
@@ -222,13 +222,13 @@ core.register_node("main:cobble", {
 			{
 				rarity: 0,
 				tools: tool,
-				items: ["main:cobble"],
+				items: ["crafter:cobble"],
 			},
 		],
 	},
 });
 
-core.register_node("main:mossy_cobble", {
+core.register_node("crafter:mossy_cobble", {
 	description: "Mossy Cobblestone",
 	tiles: ["mossy_cobble.png"],
 	groups: { stone: 1, pathable: 1 },
@@ -239,13 +239,13 @@ core.register_node("main:mossy_cobble", {
 			{
 				rarity: 0,
 				tools: tool,
-				items: ["main:mossy_cobble"],
+				items: ["crafter:mossy_cobble"],
 			},
 		],
 	},
 });
 
-core.register_node("main:glass", {
+core.register_node("crafter:glass", {
 	description: "Glass",
 	tiles: ["glass.png"],
 	drawtype: Drawtype.glasslike,
@@ -260,7 +260,7 @@ core.register_node("main:glass", {
 	drop: "",
 });
 
-core.register_node("main:ice", {
+core.register_node("crafter:ice", {
 	description: "Ice",
 	tiles: ["ice.png"],
 	drawtype: Drawtype.normal,
@@ -276,11 +276,11 @@ core.register_node("main:ice", {
 	// alpha = 100,
 	drop: "",
 	after_destruct: (pos: Vec3) => {
-		core.set_node(pos, { name: "main:water" });
+		core.set_node(pos, { name: "crafter:water" });
 	},
 });
 
-core.register_node("main:ice_mapgen", {
+core.register_node("crafter:ice_mapgen", {
 	description: "Ice",
 	tiles: ["ice.png"],
 	drawtype: Drawtype.normal,
@@ -295,7 +295,7 @@ core.register_node("main:ice_mapgen", {
 	drop: "",
 });
 
-core.register_node("main:dirt", {
+core.register_node("crafter:dirt", {
 	description: "Dirt",
 	tiles: ["dirt.png"],
 	groups: { dirt: 1, soil: 1, pathable: 1, farm_tillable: 1 },
@@ -303,22 +303,22 @@ core.register_node("main:dirt", {
 	paramtype: ParamType1.light,
 });
 
-core.register_node("main:grass", {
+core.register_node("crafter:grass", {
 	description: "Grass",
 	tiles: ["grass.png"],
 	groups: { grass: 1, soil: 1, pathable: 1, farm_tillable: 1 },
 	sounds: main.dirtSound(),
-	drop: "main:dirt",
+	drop: "crafter:dirt",
 });
 
-core.register_node("main:sand", {
+core.register_node("crafter:sand", {
 	description: "Sand",
 	tiles: ["sand.png"],
 	groups: { sand: 1, falling_node: 1, pathable: 1, soil: 1 },
 	sounds: main.sandSound(),
 });
 
-core.register_node("main:gravel", {
+core.register_node("crafter:gravel", {
 	description: "Gravel",
 	tiles: ["gravel.png"],
 	groups: { sand: 1, falling_node: 1, pathable: 1 },
@@ -330,7 +330,7 @@ core.register_node("main:gravel", {
 				// Only drop if using a tool whose name is identical to one
 				// of these.
 				rarity: 10,
-				items: ["main:flint"],
+				items: ["crafter:flint"],
 				// Whether all items in the dropped item list inherit the
 				// hardware coloring palette color from the dug node.
 				// Default is 'false'.
@@ -339,9 +339,9 @@ core.register_node("main:gravel", {
 			{
 				// Only drop if using a tool whose name is identical to one
 				// of these.
-				//tools = {"main:shears"},
+				//tools = {"crafter:shears"},
 				rarity: 0,
-				items: ["main:gravel"],
+				items: ["crafter:gravel"],
 				// Whether all items in the dropped item list inherit the
 				// hardware coloring palette color from the dug node.
 				// Default is 'false'.
@@ -352,13 +352,13 @@ core.register_node("main:gravel", {
 });
 
 const acceptable_soil: { [id: string]: boolean } = {
-	"main:dirt": true,
-	"main:grass": true,
+	"crafter:dirt": true,
+	"crafter:grass": true,
 	"aether:dirt": true,
 	"aether:grass": true,
 };
 
-core.register_node("main:tree", {
+core.register_node("crafter:tree", {
 	description: "Tree",
 	tiles: [
 		"treeCore.png",
@@ -425,7 +425,7 @@ core.register_node("main:tree", {
 				).name;
 
 				if (
-					name == "main:tree" ||
+					name == "crafter:tree" ||
 					name == "redstone:node_activated_tree"
 				) {
 					wield_stack.add_wear(wear);
@@ -466,7 +466,7 @@ core.register_node("main:tree", {
 					if (acceptable_soil[name2]) {
 						core.add_node(
 							vector.create3d(pos.x, pos.y + y, pos.z),
-							{ name: "main:sapling" }
+							{ name: "crafter:sapling" }
 						);
 					}
 				}
@@ -478,14 +478,14 @@ core.register_node("main:tree", {
 	},
 });
 
-core.register_node("main:wood", {
+core.register_node("crafter:wood", {
 	description: "Wood",
 	tiles: ["wood.png"],
 	groups: { wood: 1, pathable: 1, flammable: 1 },
 	sounds: main.woodSound(),
 });
 
-core.register_node("main:leaves", {
+core.register_node("crafter:leaves", {
 	description: "Leaves",
 	drawtype: Drawtype.allfaces_optional,
 	waving: 1,
@@ -500,22 +500,22 @@ core.register_node("main:leaves", {
 		max_items: 1,
 		items: [
 			{
-				tools: ["main:shears"],
-				items: ["main:dropped_leaves"],
+				tools: ["crafter:shears"],
+				items: ["crafter:dropped_leaves"],
 			},
 			{
 				rarity: 25,
-				items: ["main:apple"],
+				items: ["crafter:apple"],
 			},
 			{
 				rarity: 20,
-				items: ["main:sapling"],
+				items: ["crafter:sapling"],
 			},
 		],
 	},
 });
 
-core.register_node("main:dropped_leaves", {
+core.register_node("crafter:dropped_leaves", {
 	description: "Leaves",
 	drawtype: Drawtype.allfaces_optional,
 	waving: 0,
@@ -530,14 +530,14 @@ core.register_node("main:dropped_leaves", {
 		max_items: 1,
 		items: [
 			{
-				tools: ["main:shears"],
-				items: ["main:dropped_leaves"],
+				tools: ["crafter:shears"],
+				items: ["crafter:dropped_leaves"],
 			},
 		],
 	},
 });
 
-core.register_node("main:water", {
+core.register_node("crafter:water", {
 	description: "Water Source",
 	drawtype: Drawtype.liquid,
 	waving: 3,
@@ -572,8 +572,8 @@ core.register_node("main:water", {
 	is_ground_content: false,
 	drop: "",
 	liquidtype: LiquidType.source,
-	liquid_alternative_flowing: "main:waterflow",
-	liquid_alternative_source: "main:water",
+	liquid_alternative_flowing: "crafter:waterflow",
+	liquid_alternative_source: "crafter:water",
 	liquid_viscosity: 0,
 	post_effect_color: { a: 103, r: 30, g: 60, b: 90 },
 	groups: {
@@ -606,7 +606,7 @@ core.register_node("main:water", {
 	},
 });
 
-core.register_node("main:waterflow", {
+core.register_node("crafter:waterflow", {
 	description: "Water Flow",
 	drawtype: Drawtype.flowingliquid,
 	waving: 3,
@@ -647,8 +647,8 @@ core.register_node("main:waterflow", {
 	is_ground_content: false,
 	drop: "",
 	liquidtype: LiquidType.flowing,
-	liquid_alternative_flowing: "main:waterflow",
-	liquid_alternative_source: "main:water",
+	liquid_alternative_flowing: "crafter:waterflow",
+	liquid_alternative_source: "crafter:water",
 	liquid_viscosity: 0,
 	post_effect_color: { a: 103, r: 30, g: 60, b: 90 },
 	groups: {
@@ -664,7 +664,7 @@ core.register_node("main:waterflow", {
 	// sounds = default.node_sound_water_defaults(),
 });
 
-core.register_node("main:lava", {
+core.register_node("crafter:lava", {
 	description: "Lava",
 	drawtype: Drawtype.liquid,
 	tiles: [
@@ -699,15 +699,15 @@ core.register_node("main:lava", {
 	drop: "",
 	drowning: 1,
 	liquidtype: LiquidType.source,
-	liquid_alternative_flowing: "main:lavaflow",
-	liquid_alternative_source: "main:lava",
+	liquid_alternative_flowing: "crafter:lavaflow",
+	liquid_alternative_source: "crafter:lava",
 	liquid_viscosity: 7,
 	liquid_renewable: false,
 	post_effect_color: { a: 191, r: 255, g: 64, b: 0 },
 	groups: { lava: 3, liquid: 2, igniter: 1, fire: 1, hurt_inside: 1 },
 });
 
-core.register_node("main:lavaflow", {
+core.register_node("crafter:lavaflow", {
 	description: "Flowing Lava",
 	drawtype: Drawtype.flowingliquid,
 	tiles: ["lava_flow.png"],
@@ -748,8 +748,8 @@ core.register_node("main:lavaflow", {
 	drop: "",
 	drowning: 1,
 	liquidtype: LiquidType.flowing,
-	liquid_alternative_flowing: "main:lavaflow",
-	liquid_alternative_source: "main:lava",
+	liquid_alternative_flowing: "crafter:lavaflow",
+	liquid_alternative_source: "crafter:lava",
 	liquid_viscosity: 7,
 	liquid_renewable: false,
 	liquid_range: 3,
@@ -757,7 +757,7 @@ core.register_node("main:lavaflow", {
 	groups: { lava: 3, liquid: 2, igniter: 1, fire: 1, hurt_inside: 1 },
 });
 
-core.register_node("main:ladder", {
+core.register_node("crafter:ladder", {
 	description: "Ladder",
 	drawtype: Drawtype.signlike,
 	tiles: ["ladder.png"],
@@ -796,7 +796,7 @@ core.register_node("main:ladder", {
 		const fakestack: ItemStackObject = itemstack;
 		let retval: boolean = false;
 		if (wdir > 1) {
-			retval = fakestack.set_name("main:ladder");
+			retval = fakestack.set_name("crafter:ladder");
 		} else {
 			return itemstack;
 		}
@@ -818,7 +818,7 @@ core.register_node("main:ladder", {
 		}
 
 		print(itemstack, retval);
-		itemstack.set_name("main:ladder");
+		itemstack.set_name("crafter:ladder");
 
 		return itemstack;
 	},
