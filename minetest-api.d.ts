@@ -633,7 +633,7 @@ interface core {
 	): Vec3;
 	get_tool_wear_after_use(uses: number, initialWear: number): number;
 	get_dig_params(
-		groups: {[id:string]: number},
+		groups: { [id: string]: number },
 		toolCapabilities: ToolCapabilities,
 		wear?: number
 	): DigParamsReturn;
@@ -1559,7 +1559,11 @@ declare global {
 		function dir_to_rotation(vec: Vec3, up: Vec3): Vec3;
 
 		// This is created in the utility module because new is a reserved keyword in TS.
-		function create3d(x?: number, y?: number, z?: number): Vec3;
+		function create3d(
+			x?: number | { x: number; y: number; z: number },
+			y?: number,
+			z?: number
+		): Vec3;
 		// Everything else is a bolt on created in the utility module.
 		function create2d(x?: number, y?: number): Vec2;
 		function random(
