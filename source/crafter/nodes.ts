@@ -478,12 +478,12 @@ core.register_node("main:tree", {
 	},
 });
 
-// core.register_node("main:wood", {
-//     description = "Wood",
-//     tiles = {"wood.png"},
-//     groups = {wood = 1, pathable = 1,flammable=1},
-//     sounds = main.woodSound(),
-// })
+core.register_node("main:wood", {
+	description: "Wood",
+	tiles: ["wood.png"],
+	groups: { wood: 1, pathable: 1, flammable: 1 },
+	sounds: main.woodSound(),
+});
 
 // core.register_node("main:leaves", {
 //     description = "Leaves",
