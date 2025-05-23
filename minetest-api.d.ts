@@ -254,7 +254,7 @@ interface core {
 	remove_node(position: Vec3): void;
 	get_node(position: Vec3): NodeTable;
 	get_node_or_nil(position: Vec3): NodeTable | null;
-	get_node_light(position: Vec3, timeOfDay: number): number | null;
+	get_node_light(position: Vec3, timeOfDay: number | null): number | null;
 	get_natural_light(position: Vec3, timeOfDay: number): number;
 	get_artificial_light(param1: number): number;
 	place_node(position: Vec3, nodeTable: NodeTable): void;
@@ -1245,9 +1245,9 @@ declare global {
 		neighbors: string[];
 		interval: number;
 		chance: number;
-		min_y: number;
-		max_y: number;
-		catch_up: number;
+		min_y?: number;
+		max_y?: number;
+		catch_up?: number;
 		action(
 			pos: Vec3,
 			node: NodeTable,
