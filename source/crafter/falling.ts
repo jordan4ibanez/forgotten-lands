@@ -61,7 +61,7 @@ namespace main {
 		floats: boolean = false;
 		liquidtype?: LiquidType;
 
-		set_node(node: MapNode, metadata?: MetaRef | MetaData): void {
+		set_node(node: NodeTable, metadata?: MetaRef | MetaData): void {
 			node.param2 = node.param2 || 0;
 
 			this.node = node;
