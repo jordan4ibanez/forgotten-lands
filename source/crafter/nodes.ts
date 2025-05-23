@@ -359,29 +359,30 @@ const acceptable_soil: { [id: string]: boolean } = {
 };
 
 core.register_node("main:tree", {
-    description = "Tree",
-    tiles = {"treeCore.png","treeCore.png","treeOut.png","treeOut.png","treeOut.png","treeOut.png"},
-    groups = {wood = 1, tree = 1, pathable = 1, flammable=1},
-    sounds = main.woodSound(),
-    --set metadata so treecapitator doesn't destroy houses
-    on_place = function(itemstack, placer, pointed_thing)
-		if not pointed_thing.type == "node" then
-			return
-		end
+    description : "Tree",
+    tiles : ["treeCore.png","treeCore.png","treeOut.png","treeOut.png","treeOut.png","treeOut.png"],
+    groups : {wood : 1, tree : 1, pathable : 1, flammable:1},
+    sounds : main.woodSound(),
+    // Set metadata so treecapitator doesn't destroy houses
+    on_place : (itemstack: ItemStackObject, placer: ObjectRef, pointed_thing: PointedThing): ItemStackObject | null => {
+		if ( pointed_thing.type != "node") {
+			return null
+        }
 
-		local sneak = placer:get_player_control().sneak
-		local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
-		if not sneak and noddef.on_rightclick then
+		const sneak:boolean = placer.get_player_control().sneak
+		const noddef: NodeDefinition = core.registered_nodes[core.get_node(pointed_thing.under).name]
+
+		if (! sneak && noddef.on_rightclick) {
 			core.item_place(itemstack, placer, pointed_thing)
-			return
-		end
+			return null
+        }
 
-		local pos = pointed_thing.above
+		const pos: Vec3 = pointed_thing.above
 		core.item_place_node(itemstack, placer, pointed_thing)
-		local meta = core.get_meta(pos)
-		meta:set_string("placed", "true")
-		return(itemstack)
-	end,
+		const meta: MetaRef = core.get_meta(pos)
+		meta.set_string("placed", "true")
+		return itemstack
+    },
 	--treecapitator - move treecapitator into own file using override
 	on_dig = function(pos, node, digger)
 		--bvav_create_vessel(pos,core.facedir_to_dir(core.dir_to_facedir(core.yaw_to_dir(digger:get_look_horizontal()+(math.pi/2)))))
