@@ -1385,7 +1385,7 @@ declare global {
 	interface DecorationDefinition {
 		name: string;
 		deco_type?: DecorationType;
-		place_on?: string;
+		place_on?: string | string[];
 		sidelen?: number;
 		fill_ratio?: number;
 		noise_params?: NoiseParams;
@@ -1395,7 +1395,7 @@ declare global {
 		spawn_by?: string;
 		check_offset?: number;
 		num_spawn_by?: number;
-		flags?: DecorationFlags | { DecorationFlags: boolean };
+		flags?: DecorationFlags | { DecorationFlags: boolean } | string;
 		decoration?: string | string[];
 		height?: number;
 		height_max?: number;
