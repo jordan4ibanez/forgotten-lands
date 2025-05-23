@@ -227,8 +227,7 @@ namespace main {
 			return core.serialize(ds);
 		}
 
-		on_activate(staticdata: string) {
-			print("hi");
+		on_activate(staticdata: string): void {
 			this.object.set_armor_groups({ immortal: 1 });
 
 			// Lua unsafety just kinda unravels here.
