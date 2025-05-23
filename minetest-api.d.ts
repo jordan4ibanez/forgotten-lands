@@ -1068,6 +1068,9 @@ declare global {
 		drawtype?: Drawtype;
 		visual_scale?: number;
 		tiles?: string[] | TileDefinition[];
+		inventory_image?: string;
+		wield_image?: string;
+		node_placement_prediction?: string;
 		on_place?(
 			itemStack: ItemStackObject,
 			placer: ObjectRef,
