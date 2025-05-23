@@ -169,7 +169,8 @@ core.register_decoration({
 	biomes : ["grassland"],
 	y_max : 31000,
 	y_min : 0,
-	schematic : tree_big,
+    // FIXME: put this in the main namespace
+	// schematic : tree_big,
 	flags : "place_center_x, place_center_z",
 	rotation : "random",
 	place_offset_y : 1,
@@ -177,14 +178,15 @@ core.register_decoration({
 
 core.register_decoration({
 	name : "main:tree_small",
-	deco_type : "schematic",
-	place_on : {"main:grass"},
+	deco_type : DecorationType.schematic,
+	place_on : ["main:grass"],
 	sidelen : 16,
 	fill_ratio : 0.0025,
-	biomes : {"grassland"},
+	biomes : ["grassland"],
 	y_max : 31000,
 	y_min : 0,
-	schematic : tree_small,
+    // FIXME: put this in the main namespace
+	// schematic : tree_small,
 	flags : "place_center_x, place_center_z",
 	rotation : "random",
 	place_offset_y : 1,
