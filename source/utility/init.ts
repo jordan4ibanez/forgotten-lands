@@ -99,8 +99,11 @@ namespace utility {
 		if (instance.name == null) {
 			throw new Error("Unable to register entity: Name is null");
 		}
+		if (core.registered_entities[instance.name]) {
+			print("Overriding entity: " + instance.name);
+		}
 		instance.__index = instance;
-		core.registered_entities[instance.name] = instance;
+		core.register_entity(instance.name, instance);
 	}
 
 	/**
