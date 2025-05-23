@@ -238,7 +238,7 @@ namespace main {
 				this.set_node(ds.node, ds.meta);
 			} else if (ds) {
 				this.set_node(ds);
-			} else if (staticdata !== "") {
+			} else if (staticdata != "") {
 				this.set_node({ name: staticdata } as MapNode);
 			}
 		}
