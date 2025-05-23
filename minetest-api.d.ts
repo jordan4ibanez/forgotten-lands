@@ -2271,20 +2271,31 @@ declare global {
 	interface ParticleSpawnerDefinition {
 		amount?: number;
 		time?: number;
-		maxpos: Vec3;
-		minpos: Vec3;
-		pos: number | ParticleSpawnerRangeDefinition;
-		vel: Vec3RangeBias;
-		acc: Vec3RangeBias;
-		jitter: Vec3RangeBias;
-		drag: Vec3RangeBias;
-		bounce: Vec3RangeBias;
-		exptime: Vec2;
-		attract: ParticleSpawnerAttractionDefinition;
-		radius: Vec3RangeBias;
-		pos_tween: ParticleSpawnerTweenDefinition;
-		texture: string | ParticleSpawnerTextureDefinition;
-		texpool: ParticleSpawnerTexturePoolDefinition;
+		maxpos?: Vec3;
+		minpos?: Vec3;
+		minvel?: Vec3;
+		maxvel?: Vec3;
+		minacc?: Vec3;
+		maxacc?: Vec3;
+		minexptime?: number;
+		maxexptime?: number;
+		minsize?: number;
+		maxsize?: number;
+		collisiondetection?: boolean;
+		vertical?: boolean;
+		node?: { name: string; param2?: number };
+		pos?: number | ParticleSpawnerRangeDefinition;
+		vel?: Vec3RangeBias;
+		acc?: Vec3RangeBias;
+		jitter?: Vec3RangeBias;
+		drag?: Vec3RangeBias;
+		bounce?: Vec3RangeBias;
+		exptime?: Vec2;
+		attract?: ParticleSpawnerAttractionDefinition;
+		radius?: Vec3RangeBias;
+		pos_tween?: ParticleSpawnerTweenDefinition;
+		texture?: string | ParticleSpawnerTextureDefinition;
+		texpool?: ParticleSpawnerTexturePoolDefinition;
 	}
 
 	interface AreaStoreArea {
