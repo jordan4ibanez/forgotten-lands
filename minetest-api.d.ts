@@ -447,7 +447,7 @@ interface core {
 		itemStack: ItemStackObject,
 		placer: ObjectRef,
 		pointedThing: PointedThing,
-		param2: number
+		param2?: number
 	): [ItemStackObject, Vec3 | void];
 	item_pickup(
 		itemStack: ItemStackObject,
