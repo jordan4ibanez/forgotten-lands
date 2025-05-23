@@ -707,57 +707,55 @@ core.register_node("main:lava", {
 	groups: { lava: 3, liquid: 2, igniter: 1, fire: 1, hurt_inside: 1 },
 });
 
-// core.register_node("main:lavaflow", {
-// 	description = "Flowing Lava",
-// 	drawtype = "flowingliquid",
-// 	tiles = {"lava_flow.png"},
-// 	special_tiles = {
-// 		{
-// 			name = "lava_flow.png",
-// 			backface_culling = false,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 3.3,
-// 			},
-// 		},
-// 		{
-// 			name = "lava_flow.png",
-// 			backface_culling = true,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 3.3,
-// 			},
-// 		},
-// 	},
-// 	selection_box = {
-//             type = "fixed",
-//             fixed = {
-//                 {0, 0, 0, 0, 0, 0},
-//             },
-//         },
-// 	paramtype = "light",
-// 	paramtype2 = "flowingliquid",
-// 	light_source = 13,
-// 	walkable = false,
-// 	pointable = false,
-// 	diggable = false,
-// 	buildable_to = true,
-// 	is_ground_content = false,
-// 	drop = "",
-// 	drowning = 1,
-// 	liquidtype = "flowing",
-// 	liquid_alternative_flowing = "main:lavaflow",
-// 	liquid_alternative_source = "main:lava",
-// 	liquid_viscosity = 7,
-// 	liquid_renewable = false,
-// 	liquid_range = 3,
-// 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
-// 	groups = {lava = 3, liquid = 2, igniter = 1, fire=1,hurt_inside=1},
-// })
+core.register_node("main:lavaflow", {
+	description: "Flowing Lava",
+	drawtype: Drawtype.flowingliquid,
+	tiles: ["lava_flow.png"],
+	special_tiles: [
+		{
+			name: "lava_flow.png",
+			backface_culling: false,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 3.3,
+			},
+		},
+		{
+			name: "lava_flow.png",
+			backface_culling: true,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 3.3,
+			},
+		},
+	],
+	selection_box: {
+		type: Nodeboxtype.fixed,
+		fixed: [[0, 0, 0, 0, 0, 0]],
+	},
+	paramtype: ParamType1.light,
+	paramtype2: ParamType2.flowingliquid,
+	light_source: 13,
+	walkable: false,
+	pointable: false,
+	diggable: false,
+	buildable_to: true,
+	is_ground_content: false,
+	drop: "",
+	drowning: 1,
+	liquidtype: LiquidType.flowing,
+	liquid_alternative_flowing: "main:lavaflow",
+	liquid_alternative_source: "main:lava",
+	liquid_viscosity: 7,
+	liquid_renewable: false,
+	liquid_range: 3,
+	post_effect_color: { a: 191, r: 255, g: 64, b: 0 },
+	groups: { lava: 3, liquid: 2, igniter: 1, fire: 1, hurt_inside: 1 },
+});
 
 // core.register_node("main:ladder", {
 // 	description = "Ladder",
