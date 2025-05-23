@@ -303,13 +303,13 @@ core.register_node("main:dirt", {
 	paramtype: ParamType1.light,
 });
 
-// core.register_node("main:grass", {
-//     description = "Grass",
-//     tiles = {"grass.png"},
-//     groups = {grass = 1, soil=1,pathable = 1, farm_tillable=1},
-//     sounds = main.dirtSound(),
-//     drop="main:dirt",
-// })
+core.register_node("main:grass", {
+	description: "Grass",
+	tiles: ["grass.png"],
+	groups: { grass: 1, soil: 1, pathable: 1, farm_tillable: 1 },
+	sounds: main.dirtSound(),
+	drop: "main:dirt",
+});
 
 // core.register_node("main:sand", {
 //     description = "Sand",
