@@ -125,7 +125,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 		tiles: [ore + "block.png"],
 		groups: { stone: level, pathable: 1 },
 		sounds: main.stoneSound(),
-		// light_source = 14,--debugging ore spawn
+		// light_source = 14,//debugging ore spawn
 		drop: {
 			max_items: 1,
 			items: [
@@ -143,7 +143,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 		tiles: ["stone.png^" + ore + "ore.png"],
 		groups: { stone: level, pathable: 1, experience: experience },
 		sounds: main.stoneSound(),
-		// light_source = 14,--debugging ore spawn
+		// light_source = 14,//debugging ore spawn
 		drop: {
 			max_items: 1,
 			items: [
