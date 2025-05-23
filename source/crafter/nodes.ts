@@ -485,35 +485,35 @@ core.register_node("main:wood", {
 	sounds: main.woodSound(),
 });
 
-// core.register_node("main:leaves", {
-//     description = "Leaves",
-//     drawtype = "allfaces_optional",
-// 	waving = 1,
-// 	walkable = false,
-// 	climbable = true,
-// 	paramtype = "light",
-// 	is_ground_content = false,
-//     tiles = {"leaves.png"},
-//     groups = {leaves = 1, leafdecay = 1,flammable=1},
-//     sounds = main.grassSound(),
-//     drop = {
-// 		max_items = 1,
-// 		items= {
-// 		{
-// 			tools = {"main:shears"},
-// 			items = {"main:dropped_leaves"},
-// 		},
-// 		{
-// 			rarity = 25,
-// 			items = {"main:apple"},
-// 		},
-// 		{
-// 			rarity = 20,
-// 			items = {"main:sapling"},
-// 		},
-// 		},
-//     },
-// })
+core.register_node("main:leaves", {
+	description: "Leaves",
+	drawtype: Drawtype.allfaces_optional,
+	waving: 1,
+	walkable: false,
+	climbable: true,
+	paramtype: ParamType1.light,
+	is_ground_content: false,
+	tiles: ["leaves.png"],
+	groups: { leaves: 1, leafdecay: 1, flammable: 1 },
+	sounds: main.grassSound(),
+	drop: {
+		max_items: 1,
+		items: [
+			{
+				tools: ["main:shears"],
+				items: ["main:dropped_leaves"],
+			},
+			{
+				rarity: 25,
+				items: ["main:apple"],
+			},
+			{
+				rarity: 20,
+				items: ["main:sapling"],
+			},
+		],
+	},
+});
 
 // core.register_node("main:dropped_leaves", {
 //     description = "Leaves",
