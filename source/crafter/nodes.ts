@@ -537,60 +537,74 @@ core.register_node("main:dropped_leaves", {
 	},
 });
 
-// core.register_node("main:water", {
-// 	description = "Water Source",
-// 	drawtype = "liquid",
-// 	waving = 3,
-// 	tiles = {
-// 		{
-// 			name = "water_source.png",
-// 			backface_culling = false,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 1,
-// 			},
-// 		},
-// 		{
-// 			name = "water_source.png",
-// 			backface_culling = true,
-// 			animation = {
-// 				type = "vertical_frames",
-// 				aspect_w = 16,
-// 				aspect_h = 16,
-// 				length = 1,
-// 			},
-// 		},
-// 	},
-// 	alpha = 191,
-// 	paramtype = "light",
-// 	walkable = false,
-// 	pointable = false,
-// 	diggable = false,
-// 	buildable_to = true,
-// 	is_ground_content = false,
-// 	drop = "",
-// 	liquidtype = "source",
-// 	liquid_alternative_flowing = "main:waterflow",
-// 	liquid_alternative_source = "main:water",
-// 	liquid_viscosity = 0,
-// 	post_effect_color = {a = 103, r = 30, g = 60, b = 90},
-// 	groups = {water = 1, liquid = 1, cools_lava = 1, bucket = 1, source = 1,pathable = 1,drowning=1,disable_fall_damage=1,extinguish=1},
-// 	--sounds = default.node_sound_water_defaults(),
+core.register_node("main:water", {
+	description: "Water Source",
+	drawtype: Drawtype.liquid,
+	waving: 3,
+	tiles: [
+		{
+			name: "water_source.png",
+			backface_culling: false,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 1,
+			},
+		},
+		{
+			name: "water_source.png",
+			backface_culling: true,
+			animation: {
+				type: TileAnimationType.vertical_frames,
+				aspect_w: 16,
+				aspect_h: 16,
+				length: 1,
+			},
+		},
+	],
+	alpha: 191,
+	paramtype: ParamType1.light,
+	walkable: false,
+	pointable: false,
+	diggable: false,
+	buildable_to: true,
+	is_ground_content: false,
+	drop: "",
+	liquidtype: LiquidType.source,
+	liquid_alternative_flowing: "main:waterflow",
+	liquid_alternative_source: "main:water",
+	liquid_viscosity: 0,
+	post_effect_color: { a: 103, r: 30, g: 60, b: 90 },
+	groups: {
+		water: 1,
+		liquid: 1,
+		cools_lava: 1,
+		bucket: 1,
+		source: 1,
+		pathable: 1,
+		drowning: 1,
+		disable_fall_damage: 1,
+		extinguish: 1,
+	},
+	// sounds = default.node_sound_water_defaults(),
 
-// 	--water explodes in the nether
-// 	on_construct = function(pos)
-// 		local under = core.get_node(vector.new(pos.x,pos.y-1,pos.z)).name
-// 		if under == "nether:glowstone" then
-// 			core.remove_node(pos)
-// 			create_aether_portal(pos)
-// 		elseif pos.y <= -10033 then
-// 			core.remove_node(pos)
-// 			tnt(pos,10)
-// 		end
-// 	end,
-// })
+	// Water explodes in the nether.
+	on_construct: (pos: Vec3) => {
+		const under: string = core.get_node(
+			vector.create3d(pos.x, pos.y - 1, pos.z)
+		).name;
+		if (under == "nether:glowstone") {
+			core.remove_node(pos);
+			// todo: depends on the aether mod.
+			// create_aether_portal(pos)
+		} else if (pos.y <= -10033) {
+			core.remove_node(pos);
+			// todo: depends on the tnt mod.
+			// tnt(pos,10)
+		}
+	},
+});
 
 // core.register_node("main:waterflow", {
 // 	description = "Water Flow",
