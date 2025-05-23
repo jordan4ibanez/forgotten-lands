@@ -515,27 +515,27 @@ core.register_node("main:leaves", {
 	},
 });
 
-// core.register_node("main:dropped_leaves", {
-//     description = "Leaves",
-//     drawtype = "allfaces_optional",
-// 	waving = 0,
-// 	walkable = false,
-// 	climbable = false,
-// 	paramtype = "light",
-// 	is_ground_content = false,
-//     tiles = {"leaves.png"},
-//     groups = {leaves = 1, flammable=1},
-//     sounds = main.grassSound(),
-//     drop = {
-// 		max_items = 1,
-// 		items= {
-// 		{
-// 			tools = {"main:shears"},
-// 			items = {"main:dropped_leaves"},
-// 		},
-//     },
-//     },
-// })
+core.register_node("main:dropped_leaves", {
+	description: "Leaves",
+	drawtype: Drawtype.allfaces_optional,
+	waving: 0,
+	walkable: false,
+	climbable: false,
+	paramtype: ParamType1.light,
+	is_ground_content: false,
+	tiles: ["leaves.png"],
+	groups: { leaves: 1, flammable: 1 },
+	sounds: main.grassSound(),
+	drop: {
+		max_items: 1,
+		items: [
+			{
+				tools: ["main:shears"],
+				items: ["main:dropped_leaves"],
+			},
+		],
+	},
+});
 
 // core.register_node("main:water", {
 // 	description = "Water Source",
