@@ -54,12 +54,8 @@ namespace main {
 			collisionbox: [-0.5, -0.5, -0.5, 0.5, 0.5, 0.5],
 		};
 
-		node: MapNode = {
+		node: NodeTable = {
 			name: "",
-			prob: 3,
-			param2: 0,
-			force_place: false,
-			level: 0,
 		};
 		meta?: MetaData;
 		floats: boolean = false;
