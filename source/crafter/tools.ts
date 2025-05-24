@@ -1513,20 +1513,20 @@ namespace crafter {
 			wear = 25;
 		}
 
-		// 	//add swords
-		// 	core.register_tool("main:"..material.."sword", {
-		// 		description = material:gsub("^%l", string.upper).." Sword",
-		// 		inventory_image = material.."sword.png",
-		// 		tool_capabilities = {
-		// 			full_punch_interval = 0,
-		// 			//max_drop_level=0,
-		// 			groupcaps={leaves = {times={[4]=0.7,[3]=0.7,[2]=0.7,[1]=0.7}, uses=sword_durability[level_id], maxlevel=1},},
-		// 			damage_groups = {damage = damage},
-		// 		},
-		// 		mob_hit_wear = wear,
-		// 		sound = {breaks = {name="tool_break",gain=0.4}}, // change this //todo: figure out what to change this to lol
-		// 		groups = {damage=damage }
-		// 	})
+			// Add swords.
+			core.register_tool("main:"+material+"sword", {
+				description : string.gsub(material, "^%l", string.upper)+" Sword",
+				inventory_image : material+"sword.png",
+				tool_capabilities : {
+					full_punch_interval : 0,
+					//max_drop_level=0,
+					groupcaps:{leaves : {times:{[4]:0.7,[3]:0.7,[2]:0.7,[1]:0.7}, uses:sword_durability[level_id], maxlevel:1},},
+					damage_groups : {damage : damage},
+				},
+				mob_hit_wear = wear,
+				sound = {breaks = {name="tool_break",gain=0.4}}, // change this //todo: figure out what to change this to lol
+				groups = {damage=damage }
+			})
 	}
 
 	// //shears
