@@ -1335,7 +1335,7 @@ declare global {
 		ore_type: OreType;
 		ore: string;
 		ore_param2?: number;
-		wherein: string;
+		wherein: string | string[];
 		clust_scarcity: number;
 		clust_num_ores: number;
 		clust_size: number;
