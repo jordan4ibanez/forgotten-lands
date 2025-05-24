@@ -1,14 +1,15 @@
 // The hand
 
-//Create an initial hand tool
+// Create an initial hand tool.
 core.register_craftitem(":", {
 	type : "none",
 	wield_image : "nothing.png",
 	wield_scale : vector.create3d({x:1,y:1,z:2.5}),
 })
 
-// This is a fake node that should never be placed in the world
-local def = core.registered_items[""]
+// This is a fake node that should never be placed in the world.
+const def: ItemDefinition = core.registered_items[""]
+
 core.register_node("hand:player", {
 	description = "",
 	tiles = {"player.png"},
