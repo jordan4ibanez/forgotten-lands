@@ -1024,7 +1024,7 @@ declare global {
 			punch_use?: SimpleSoundSpec | string;
 			punch_use_air?: SimpleSoundSpec | string;
 		};
-        // todo: Not sure if these are actually void
+		// todo: Not sure if these are actually void
 		on_place?(
 			itemStack: ItemStackObject,
 			placer: ObjectRef,
