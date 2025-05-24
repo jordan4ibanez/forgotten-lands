@@ -3,8 +3,8 @@
 // Dirt
 core.register_ore({
 	ore_type: OreType.blob,
-	ore: "main:dirt",
-	wherein: ["main:stone"],
+	ore: "crafter:dirt",
+	wherein: ["crafter:stone"],
 	clust_scarcity: 16 * 16 * 16,
 	clust_size: 5,
 	y_max: 31000,
@@ -23,8 +23,8 @@ core.register_ore({
 // Gravel
 core.register_ore({
 	ore_type: OreType.blob,
-	ore: "main:gravel",
-	wherein: ["main:stone"],
+	ore: "crafter:gravel",
+	wherein: ["crafter:stone"],
 	clust_scarcity: 16 * 16 * 16,
 	clust_size: 5,
 	y_max: 31000,
@@ -42,8 +42,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.blob,
-	ore: "main:lava",
-	wherein: ["main:stone"],
+	ore: "crafter:lava",
+	wherein: ["crafter:stone"],
 	clust_scarcity: 48 * 48 * 48,
 	clust_size: 15,
 	y_max: -128,
@@ -64,8 +64,8 @@ core.register_ore({
 // Coal
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:coalore",
-	wherein: "main:stone",
+	ore: "crafter:coalore",
+	wherein: "crafter:stone",
 	clust_scarcity: 8 * 8 * 8,
 	clust_num_ores: 9,
 	clust_size: 3,
@@ -75,8 +75,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:coalore",
-	wherein: "main:stone",
+	ore: "crafter:coalore",
+	wherein: "crafter:stone",
 	clust_scarcity: 8 * 8 * 8,
 	clust_num_ores: 8,
 	clust_size: 3,
@@ -86,8 +86,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:coalore",
-	wherein: "main:stone",
+	ore: "crafter:coalore",
+	wherein: "crafter:stone",
 	clust_scarcity: 12 * 12 * 12,
 	clust_num_ores: 30,
 	clust_size: 5,
@@ -99,8 +99,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:ironore",
-	wherein: "main:stone",
+	ore: "crafter:ironore",
+	wherein: "crafter:stone",
 	clust_scarcity: 9 * 9 * 9,
 	clust_num_ores: 12,
 	clust_size: 3,
@@ -110,8 +110,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:ironore",
-	wherein: "main:stone",
+	ore: "crafter:ironore",
+	wherein: "crafter:stone",
 	clust_scarcity: 7 * 7 * 7,
 	clust_num_ores: 5,
 	clust_size: 3,
@@ -121,8 +121,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:ironore",
-	wherein: "main:stone",
+	ore: "crafter:ironore",
+	wherein: "crafter:stone",
 	clust_scarcity: 7 * 7 * 7,
 	clust_num_ores: 5,
 	clust_size: 3,
@@ -132,8 +132,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:lapisore",
-	wherein: "main:stone",
+	ore: "crafter:lapisore",
+	wherein: "crafter:stone",
 	clust_scarcity: 15 * 15 * 15,
 	clust_num_ores: 3,
 	clust_size: 2,
@@ -143,8 +143,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:ironore",
-	wherein: "main:stone",
+	ore: "crafter:ironore",
+	wherein: "crafter:stone",
 	clust_scarcity: 12 * 12 * 12,
 	clust_num_ores: 29,
 	clust_size: 5,
@@ -156,8 +156,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:goldore",
-	wherein: "main:stone",
+	ore: "crafter:goldore",
+	wherein: "crafter:stone",
 	clust_scarcity: 13 * 13 * 13,
 	clust_num_ores: 5,
 	clust_size: 3,
@@ -167,8 +167,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:goldore",
-	wherein: "main:stone",
+	ore: "crafter:goldore",
+	wherein: "crafter:stone",
 	clust_scarcity: 15 * 15 * 15,
 	clust_num_ores: 3,
 	clust_size: 2,
@@ -178,8 +178,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:goldore",
-	wherein: "main:stone",
+	ore: "crafter:goldore",
+	wherein: "crafter:stone",
 	clust_scarcity: 13 * 13 * 13,
 	clust_num_ores: 5,
 	clust_size: 3,
@@ -191,8 +191,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:diamondore",
-	wherein: "main:stone",
+	ore: "crafter:diamondore",
+	wherein: "crafter:stone",
 	clust_scarcity: 14 * 14 * 14,
 	clust_num_ores: 5,
 	clust_size: 3,
@@ -202,8 +202,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:diamondore",
-	wherein: "main:stone",
+	ore: "crafter:diamondore",
+	wherein: "crafter:stone",
 	clust_scarcity: 18 * 18 * 18,
 	clust_num_ores: 3,
 	clust_size: 2,
@@ -213,8 +213,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:diamondore",
-	wherein: "main:stone",
+	ore: "crafter:diamondore",
+	wherein: "crafter:stone",
 	clust_scarcity: 14 * 14 * 14,
 	clust_num_ores: 5,
 	clust_size: 3,
@@ -226,8 +226,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:diamondore",
-	wherein: "main:stone",
+	ore: "crafter:diamondore",
+	wherein: "crafter:stone",
 	clust_scarcity: 15 * 15 * 15,
 	clust_num_ores: 4,
 	clust_size: 3,
@@ -237,8 +237,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:diamondore",
-	wherein: "main:stone",
+	ore: "crafter:diamondore",
+	wherein: "crafter:stone",
 	clust_scarcity: 17 * 17 * 17,
 	clust_num_ores: 4,
 	clust_size: 3,
@@ -248,8 +248,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:diamondore",
-	wherein: "main:stone",
+	ore: "crafter:diamondore",
+	wherein: "crafter:stone",
 	clust_scarcity: 15 * 15 * 15,
 	clust_num_ores: 4,
 	clust_size: 3,
@@ -259,8 +259,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:emeraldore",
-	wherein: "main:stone",
+	ore: "crafter:emeraldore",
+	wherein: "crafter:stone",
 	clust_scarcity: 17 * 17 * 17,
 	clust_num_ores: 4,
 	clust_size: 3,
@@ -270,8 +270,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:sapphireore",
-	wherein: "main:stone",
+	ore: "crafter:sapphireore",
+	wherein: "crafter:stone",
 	clust_scarcity: 17 * 17 * 17,
 	clust_num_ores: 4,
 	clust_size: 3,
@@ -281,8 +281,8 @@ core.register_ore({
 
 core.register_ore({
 	ore_type: OreType.scatter,
-	ore: "main:rubyore",
-	wherein: "main:stone",
+	ore: "crafter:rubyore",
+	wherein: "crafter:stone",
 	clust_scarcity: 17 * 17 * 17,
 	clust_num_ores: 4,
 	clust_size: 3,
