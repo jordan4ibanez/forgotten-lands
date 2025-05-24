@@ -1517,6 +1517,12 @@ namespace crafter {
             throw new Error("Material is not a string.");
         }
 
+        const suse: number | null  =  sword_durability[level_id];
+        if (!suse) {
+            throw new Error("Sword out of range");
+        }
+
+
 			// Add swords.
 			core.register_tool("main:"+material+"sword", {
 				description : string.gsub(material, "^%l", string.upper)+" Sword",
@@ -1524,7 +1530,7 @@ namespace crafter {
 				tool_capabilities : {
 					full_punch_interval : 0,
 					//max_drop_level=0,
-					groupcaps:{leaves : {times:{[4]:0.7,[3]:0.7,[2]:0.7,[1]:0.7}, uses:sword_durability[level_id], maxlevel:1},},
+					groupcaps:{leaves : {times:{[4]:0.7,[3]:0.7,[2]:0.7,[1]:0.7}, uses:suse, maxlevel:1},},
 					damage_groups : {damage : damage},
 				},
 				mob_hit_wear : wear,
