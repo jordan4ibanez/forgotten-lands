@@ -1517,7 +1517,8 @@ namespace crafter {
 			throw new Error("Material is not a string.");
 		}
 
-		const suse: number | null = sword_durability[level_id];
+		const suse: number | null = sword_durability[level_id - 1];
+
 		if (!suse) {
 			throw new Error("Sword out of range");
 		}
