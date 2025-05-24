@@ -712,101 +712,701 @@ namespace crafter {
 			// ██║     ██║╚██████╗██║  ██╗██║  ██║██╔╝ ██╗███████╗
 			// ╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 
-			 		if (tool == "pick") {
-						if (material == "wood") {
-							groupcaps2={
-								//ore hardness
-								//1 stone, 1 coal, 2 iron, 3 gold, 4 diamond, 5 obsidian
-								stone :     {times:{ [1]:1.15   ,[2]:ub ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:59 ,maxlevel:1},
-								glass :     {times:{ [1]:0.575  ,[2]:ub ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:59 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.2875 ,[2]:ub ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:59 ,maxlevel:1},
-								obsidian:   {times:{ [1]:ub     ,[2]:ub ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:59 ,maxlevel:1},
-							}
-							damage = 3
-							wear = 500
-						} else if (material == "stone") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.6  ,[2]:0.6  ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:131 ,maxlevel:1},
-								glass :     {times:{ [1]:0.3  ,[2]:0.3  ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:131 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.15 ,[2]:0.15 ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:131 ,maxlevel:1},
-								obsidian:   {times:{ [1]:ub   ,[2]:ub   ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:131 ,maxlevel:1},
-							}
-							damage=4
-							wear = 400
-						} else if (material == "coal") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.3  ,[2]:0.3  ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:10 ,maxlevel:1},
-								glass :     {times:{ [1]:0.2  ,[2]:0.2  ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:10 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.15 ,[2]:0.15 ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:10 ,maxlevel:1},
-								obsidian:   {times:{ [1]:ub   ,[2]:ub   ,[3]:ub ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:10 ,maxlevel:1},
-							}
-							damage=2
-							wear = 2000
-						} else if (material == "lapis") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.5   ,[2]:0.5   ,[3]:0.5   ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:200 ,maxlevel:1},
-								glass :     {times:{ [1]:0.25  ,[2]:0.25  ,[3]:0.25  ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:200 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.125 ,[2]:0.125 ,[3]:0.125 ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:200 ,maxlevel:1},
-								obsidian:   {times:{ [1]:ub    ,[2]:ub    ,[3]:ub    ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:200 ,maxlevel:1},
-							}
-							damage=4
-							wear = 400
-						} else if (material == "iron") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.4 ,[2]:0.4 ,[3]:0.4 ,[4]:0.4 ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:250 ,maxlevel:1},
-								glass :     {times:{ [1]:0.2 ,[2]:0.2 ,[3]:0.2 ,[4]:0.2 ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:250 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.1 ,[2]:0.1 ,[3]:0.1 ,[4]:0.1 ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:250 ,maxlevel:1},
-								obsidian:   {times:{ [1]:ub  ,[2]:ub  ,[3]:ub  ,[4]:ub  ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:250 ,maxlevel:1},
-							}
-							damage = 5
-							wear = 300
-						} else if (material == "gold") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.2  ,[2]:0.2  ,[3]:0.2  ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:32 ,maxlevel:1},
-								glass :     {times:{ [1]:0.1  ,[2]:0.1  ,[3]:0.1  ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:32 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.05 ,[2]:0.05 ,[3]:0.05 ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:32 ,maxlevel:1},
-								obsidian:   {times:{ [1]:ub   ,[2]:ub   ,[3]:ub   ,[4]:ub ,[5]:ub ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:32 ,maxlevel:1},
-							}
-							damage = 3
-							wear = 1000
-						} else if (material == "diamond") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.3  ,[2]:0.3  ,[3]:0.3  ,[4]:0.3  ,[5]:0.3  ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:1561 ,maxlevel:1},
-								glass :     {times:{ [1]:0.15 ,[2]:0.15 ,[3]:0.15 ,[4]:0.15 ,[5]:0.15 ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:1561 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.8  ,[2]:0.8  ,[3]:0.8  ,[4]:0.8  ,[5]:0.8  ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:1561 ,maxlevel:1},
-								obsidian:   {times:{ [1]:10   ,[2]:ub   ,[3]:ub   ,[4]:ub   ,[5]:ub   ,[6]:ub ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:1561 ,maxlevel:1},
-							}
-							damage = 6
-							wear = 100
-						} else if (material == "emerald") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.15 ,[2]:0.15 ,[3]:0.15 ,[4]:0.15 ,[5]:0.15 ,[6]:0.15 ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:2300 ,maxlevel:1},
-								glass :     {times:{ [1]:0.05 ,[2]:0.05 ,[3]:0.05 ,[4]:0.05 ,[5]:0.05 ,[6]:0.05 ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:2300 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.05 ,[2]:0.05 ,[3]:0.05 ,[4]:0.05 ,[5]:0.05 ,[6]:0.05 ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:2300 ,maxlevel:1},
-								obsidian:   {times:{ [1]:5    ,[2]:5    ,[3]:ub   ,[4]:ub   ,[5]:ub   ,[6]:ub   ,[7]:ub ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:2300 ,maxlevel:1},
-							}
-							damage = 8
-							wear = 50
-						} else if (material == "sapphire") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.05  ,[2]:0.05  ,[3]:0.05  ,[4]:0.05  ,[5]:0.05  ,[6]:0.05  ,[7]:0.05  ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:3000 ,maxlevel:1},
-								glass :     {times:{ [1]:0.025 ,[2]:0.025 ,[3]:0.025 ,[4]:0.025 ,[5]:0.025 ,[6]:0.025 ,[7]:0.025 ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:3000 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.025 ,[2]:0.025 ,[3]:0.025 ,[4]:0.025 ,[5]:0.025 ,[6]:0.025 ,[7]:0.025 ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:3000 ,maxlevel:1},
-								obsidian:   {times:{ [1]:2     ,[2]:2     ,[3]:2     ,[4]:ub    ,[5]:ub    ,[6]:ub    ,[7]:ub    ,[8]:ub ,[9]:ub ,[10]:ub} ,uses:3000 ,maxlevel:1},
-							}
-							damage = 10
-							wear = 25
-						} else if (material == "ruby") {
-							groupcaps2={
-								stone :     {times:{ [1]:0.03 ,[2]:0.03 ,[3]:0.03 ,[4]:0.03 ,[5]:0.03 ,[6]:0.03 ,[7]:0.03 ,[8]:0.03 ,[9]:ub ,[10]:ub} ,uses:5000 ,maxlevel:1},
-								glass :     {times:{ [1]:0.02 ,[2]:0.02 ,[3]:0.02 ,[4]:0.02 ,[5]:0.02 ,[6]:0.02 ,[7]:0.02 ,[8]:0.02 ,[9]:ub ,[10]:ub} ,uses:5000 ,maxlevel:1},
-								netherrack: {times:{ [1]:0.02 ,[2]:0.02 ,[3]:0.02 ,[4]:0.02 ,[5]:0.02 ,[6]:0.02 ,[7]:0.02 ,[8]:0.02 ,[9]:ub ,[10]:ub} ,uses:5000 ,maxlevel:1},
-								obsidian:   {times:{ [1]:1    ,[2]:1    ,[3]:1    ,[4]:1    ,[5]:ub   ,[6]:ub   ,[7]:ub   ,[8]:ub   ,[9]:ub ,[10]:ub} ,uses:5000 ,maxlevel:1},
-							}
-							damage = 16
-							wear = 10
-                        }
-                }
+			if (tool == "pick") {
+				if (material == "wood") {
+					groupcaps2 = {
+						//ore hardness
+						//1 stone, 1 coal, 2 iron, 3 gold, 4 diamond, 5 obsidian
+						stone: {
+							times: {
+								[1]: 1.15,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 59,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.575,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 59,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.2875,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 59,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: ub,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 59,
+							maxlevel: 1,
+						},
+					};
+					damage = 3;
+					wear = 500;
+				} else if (material == "stone") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.6,
+								[2]: 0.6,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 131,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.3,
+								[2]: 0.3,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 131,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.15,
+								[2]: 0.15,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 131,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: ub,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 131,
+							maxlevel: 1,
+						},
+					};
+					damage = 4;
+					wear = 400;
+				} else if (material == "coal") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.3,
+								[2]: 0.3,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 10,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.2,
+								[2]: 0.2,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 10,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.15,
+								[2]: 0.15,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 10,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: ub,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 10,
+							maxlevel: 1,
+						},
+					};
+					damage = 2;
+					wear = 2000;
+				} else if (material == "lapis") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.5,
+								[2]: 0.5,
+								[3]: 0.5,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 200,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.25,
+								[2]: 0.25,
+								[3]: 0.25,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 200,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.125,
+								[2]: 0.125,
+								[3]: 0.125,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 200,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: ub,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 200,
+							maxlevel: 1,
+						},
+					};
+					damage = 4;
+					wear = 400;
+				} else if (material == "iron") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.4,
+								[2]: 0.4,
+								[3]: 0.4,
+								[4]: 0.4,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 250,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.2,
+								[2]: 0.2,
+								[3]: 0.2,
+								[4]: 0.2,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 250,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.1,
+								[2]: 0.1,
+								[3]: 0.1,
+								[4]: 0.1,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 250,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: ub,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 250,
+							maxlevel: 1,
+						},
+					};
+					damage = 5;
+					wear = 300;
+				} else if (material == "gold") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.2,
+								[2]: 0.2,
+								[3]: 0.2,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 32,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.1,
+								[2]: 0.1,
+								[3]: 0.1,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 32,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.05,
+								[2]: 0.05,
+								[3]: 0.05,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 32,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: ub,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 32,
+							maxlevel: 1,
+						},
+					};
+					damage = 3;
+					wear = 1000;
+				} else if (material == "diamond") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.3,
+								[2]: 0.3,
+								[3]: 0.3,
+								[4]: 0.3,
+								[5]: 0.3,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 1561,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.15,
+								[2]: 0.15,
+								[3]: 0.15,
+								[4]: 0.15,
+								[5]: 0.15,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 1561,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.8,
+								[2]: 0.8,
+								[3]: 0.8,
+								[4]: 0.8,
+								[5]: 0.8,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 1561,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: 10,
+								[2]: ub,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 1561,
+							maxlevel: 1,
+						},
+					};
+					damage = 6;
+					wear = 100;
+				} else if (material == "emerald") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.15,
+								[2]: 0.15,
+								[3]: 0.15,
+								[4]: 0.15,
+								[5]: 0.15,
+								[6]: 0.15,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 2300,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.05,
+								[2]: 0.05,
+								[3]: 0.05,
+								[4]: 0.05,
+								[5]: 0.05,
+								[6]: 0.05,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 2300,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.05,
+								[2]: 0.05,
+								[3]: 0.05,
+								[4]: 0.05,
+								[5]: 0.05,
+								[6]: 0.05,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 2300,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: 5,
+								[2]: 5,
+								[3]: ub,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 2300,
+							maxlevel: 1,
+						},
+					};
+					damage = 8;
+					wear = 50;
+				} else if (material == "sapphire") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.05,
+								[2]: 0.05,
+								[3]: 0.05,
+								[4]: 0.05,
+								[5]: 0.05,
+								[6]: 0.05,
+								[7]: 0.05,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 3000,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.025,
+								[2]: 0.025,
+								[3]: 0.025,
+								[4]: 0.025,
+								[5]: 0.025,
+								[6]: 0.025,
+								[7]: 0.025,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 3000,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.025,
+								[2]: 0.025,
+								[3]: 0.025,
+								[4]: 0.025,
+								[5]: 0.025,
+								[6]: 0.025,
+								[7]: 0.025,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 3000,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: 2,
+								[2]: 2,
+								[3]: 2,
+								[4]: ub,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 3000,
+							maxlevel: 1,
+						},
+					};
+					damage = 10;
+					wear = 25;
+				} else if (material == "ruby") {
+					groupcaps2 = {
+						stone: {
+							times: {
+								[1]: 0.03,
+								[2]: 0.03,
+								[3]: 0.03,
+								[4]: 0.03,
+								[5]: 0.03,
+								[6]: 0.03,
+								[7]: 0.03,
+								[8]: 0.03,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 5000,
+							maxlevel: 1,
+						},
+						glass: {
+							times: {
+								[1]: 0.02,
+								[2]: 0.02,
+								[3]: 0.02,
+								[4]: 0.02,
+								[5]: 0.02,
+								[6]: 0.02,
+								[7]: 0.02,
+								[8]: 0.02,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 5000,
+							maxlevel: 1,
+						},
+						netherrack: {
+							times: {
+								[1]: 0.02,
+								[2]: 0.02,
+								[3]: 0.02,
+								[4]: 0.02,
+								[5]: 0.02,
+								[6]: 0.02,
+								[7]: 0.02,
+								[8]: 0.02,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 5000,
+							maxlevel: 1,
+						},
+						obsidian: {
+							times: {
+								[1]: 1,
+								[2]: 1,
+								[3]: 1,
+								[4]: 1,
+								[5]: ub,
+								[6]: ub,
+								[7]: ub,
+								[8]: ub,
+								[9]: ub,
+								[10]: ub,
+							},
+							uses: 5000,
+							maxlevel: 1,
+						},
+					};
+					damage = 16;
+					wear = 10;
+				}
+			}
 
 			// 		minetest.register_tool("main:"..material..tool, {
 			// 			description = material:gsub("^%l", string.upper).." "..tool:gsub("^%l", string.upper),
