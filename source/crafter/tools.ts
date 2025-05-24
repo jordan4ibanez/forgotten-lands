@@ -27,7 +27,7 @@ namespace crafter {
 	const ub: number = 2147483647; // unbreakable
 
 	for (const [level_id, material] of pairs(__materials)) {
-        let damage: number = 0;
+		let damage: number = 0;
 		for (const [id, tool] of pairs(__tools)) {
 			// print(id,tool,level,material)
 			let groupcaps2: { [id: string]: GroupCap } | null = null;
@@ -1482,36 +1482,36 @@ namespace crafter {
 			}
 		}
 
-			let wear: number = 0
+		let wear: number = 0;
 
-			if (material == "wood") {
-				damage = 4
-				wear = 500
-			} else if (material == "stone") {
-				damage = 5
-				wear = 400
-			} else if (material == "coal") {
-				damage = 2
-				wear = 2000
-			} else if (material == "lapis") {
-				damage = 5
-				wear = 350
-			} else if (material == "iron") {
-				damage = 6
-				wear = 300
-			} else if (material == "gold") {
-				damage = 4
-				wear = 1000
-			} else if (material == "diamond") {
-				damage = 7
-				wear = 100
-			} else if (material == "emerald") {
-				damage = 9
-				wear = 50
-			} else if (material == "sapphire") {
-				damage = 11
-				wear = 25
-            }
+		if (material == "wood") {
+			damage = 4;
+			wear = 500;
+		} else if (material == "stone") {
+			damage = 5;
+			wear = 400;
+		} else if (material == "coal") {
+			damage = 2;
+			wear = 2000;
+		} else if (material == "lapis") {
+			damage = 5;
+			wear = 350;
+		} else if (material == "iron") {
+			damage = 6;
+			wear = 300;
+		} else if (material == "gold") {
+			damage = 4;
+			wear = 1000;
+		} else if (material == "diamond") {
+			damage = 7;
+			wear = 100;
+		} else if (material == "emerald") {
+			damage = 9;
+			wear = 50;
+		} else if (material == "sapphire") {
+			damage = 11;
+			wear = 25;
+		}
 
 		// 	//add swords
 		// 	core.register_tool("main:"..material.."sword", {
