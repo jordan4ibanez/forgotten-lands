@@ -8,17 +8,17 @@ namespace main {
 		"sounds",
 		"nodes",
 		"grass_spread",
-		// "saplings",
-		// "ore",
+		"saplings",
+		"ore",
 		"items",
-		// "schematics",
+		"schematics",
 		"mapgen",
-		// "tools",
+		"tools",
 		"settings",
 		"craft_recipes",
 		"falling",
 		"bucket",
-		// "lava_cooling",
-		// "command_overrides"
+		"lava_cooling",
+		"command_overrides"
 	]);
 }
