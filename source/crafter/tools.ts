@@ -1406,56 +1406,59 @@ namespace crafter {
 					damage = 16;
 					wear = 10;
 				}
-			}
 
-					core.register_tool("main:"..material..tool, {
-						description = string.gsub(material, "^%l", string.upper).." "..tool:gsub("^%l", string.upper),
-						inventory_image = material..tool..".png",
-						tool_capabilities = {
-							full_punch_interval = 0,
                 if (typeof material != "string") {
                     throw new Error("material is not a string.");
                 }
                 if (groupcaps2 == null) {
                     throw new Error("groupcaps is null");
                 }
+                
+
+					core.register_tool("main:"+material+tool, {
+						description : string.gsub(material , "^%l", string.upper)+" "+string.gsub(tool,"^%l", string.upper),
+						inventory_image : material+tool+".png",
+						tool_capabilities : {
+							full_punch_interval : 0,
 							//max_drop_level=0,
-							groupcaps=groupcaps2,
-							damage_groups = {damage=damage},
+							groupcaps:groupcaps2,
+							damage_groups : {damage:damage},
 						},
-						sound = {breaks = {name="tool_break",gain=0.4}}, // change this //todo: figure out what to change this to lol
-						groups = {flammable = 2, tool=1 },
-						mob_hit_wear = wear,
+						sound : {breaks : {name:"tool_break",gain:0.4}}, // change this //todo: figure out what to change this to lol
+						groups : {flammable : 2, tool:1 },
+						mob_hit_wear : wear,
 						//torch rightclick - hacked in since api doesn't call on_place correctly
-						on_place = function(itemstack, placer, pointed_thing)
-							local inv = placer:get_inventory()
-							local torch = inv:contains_item("main", "torch:torch")
-							local is_air = core.get_node(pointed_thing.above).name == "air"
-							local dir = vector.subtract(pointed_thing.under, pointed_thing.above)
-							local diff = dir.y
-							local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
-							local walkable = noddef.walkable
-							local sneak = placer:get_player_control().sneak
-							if not sneak and noddef.on_rightclick then
-								core.item_place(itemstack, placer, pointed_thing)
-								return
-							end
-							if torch and is_air and walkable then
-								if diff == 0 then
-									local param2 = core.dir_to_wallmounted(dir)
-									core.set_node(pointed_thing.above, {name="torch:wall",param2=param2})
-									core.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
-								elseif diff == -1 then
-									core.place_node(pointed_thing.above,{name="torch:floor"})
-								end
-								//take item
-								if diff == 0 or diff == -1 then
-									inv:remove_item("main", "torch:torch")
-								end
-							end
-						end,
+						// on_place = function(itemstack, placer, pointed_thing)
+						// 	local inv = placer:get_inventory()
+						// 	local torch = inv:contains_item("main", "torch:torch")
+						// 	local is_air = core.get_node(pointed_thing.above).name == "air"
+						// 	local dir = vector.subtract(pointed_thing.under, pointed_thing.above)
+						// 	local diff = dir.y
+						// 	local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
+						// 	local walkable = noddef.walkable
+						// 	local sneak = placer:get_player_control().sneak
+						// 	if not sneak and noddef.on_rightclick then
+						// 		core.item_place(itemstack, placer, pointed_thing)
+						// 		return
+						// 	end
+						// 	if torch and is_air and walkable then
+						// 		if diff == 0 then
+						// 			local param2 = core.dir_to_wallmounted(dir)
+						// 			core.set_node(pointed_thing.above, {name="torch:wall",param2=param2})
+						// 			core.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
+						// 		elseif diff == -1 then
+						// 			core.place_node(pointed_thing.above,{name="torch:floor"})
+						// 		end
+						// 		//take item
+						// 		if diff == 0 or diff == -1 then
+						// 			inv:remove_item("main", "torch:torch")
+						// 		end
+						// 	end
+						// end,
 					})
-		}
+		
+        }
+        }
 
 		// 	local wear
 
