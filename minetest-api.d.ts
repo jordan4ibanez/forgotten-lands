@@ -1002,6 +1002,8 @@ declare global {
 		description?: string;
 		short_description?: string;
 		groups?: { [id: string]: number };
+		//! Note: crafter custom.
+		mob_hit_wear?: number;
 		inventory_image?: string;
 		inventory_overlay?: string;
 		wield_image?: string;
