@@ -1,9 +1,7 @@
---[[
-left - > right
-bottom - > top
-front -> back
 
-]]--
+// left - > right
+// bottom - > top
+// front -> back
 
 tree_big = {
 	size = {x = 5, y = 6, z = 5},
