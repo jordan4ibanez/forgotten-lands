@@ -1413,6 +1413,12 @@ namespace crafter {
 						inventory_image = material..tool..".png",
 						tool_capabilities = {
 							full_punch_interval = 0,
+                if (typeof material != "string") {
+                    throw new Error("material is not a string.");
+                }
+                if (groupcaps2 == null) {
+                    throw new Error("groupcaps is null");
+                }
 							//max_drop_level=0,
 							groupcaps=groupcaps2,
 							damage_groups = {damage=damage},
