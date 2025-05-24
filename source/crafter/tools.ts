@@ -715,8 +715,8 @@ namespace crafter {
 			 		if (tool == "pick") {
 						if (material == "wood") then
 							groupcaps2={
-								--ore hardness
-								--1 stone, 1 coal, 2 iron, 3 gold, 4 diamond, 5 obsidian
+								//ore hardness
+								//1 stone, 1 coal, 2 iron, 3 gold, 4 diamond, 5 obsidian
 								stone =     {times={ [1]=1.15   ,[2]=ub ,[3]=ub ,[4]=ub ,[5]=ub ,[6]=ub ,[7]=ub ,[8]=ub ,[9]=ub ,[10]=ub} ,uses=59 ,maxlevel=1},
 								glass =     {times={ [1]=0.575  ,[2]=ub ,[3]=ub ,[4]=ub ,[5]=ub ,[6]=ub ,[7]=ub ,[8]=ub ,[9]=ub ,[10]=ub} ,uses=59 ,maxlevel=1},
 								netherrack= {times={ [1]=0.2875 ,[2]=ub ,[3]=ub ,[4]=ub ,[5]=ub ,[6]=ub ,[7]=ub ,[8]=ub ,[9]=ub ,[10]=ub} ,uses=59 ,maxlevel=1},
@@ -813,14 +813,14 @@ namespace crafter {
 			// 			inventory_image = material..tool..".png",
 			// 			tool_capabilities = {
 			// 				full_punch_interval = 0,
-			// 				--max_drop_level=0,
+			// 				//max_drop_level=0,
 			// 				groupcaps=groupcaps2,
 			// 				damage_groups = {damage=damage},
 			// 			},
-			// 			sound = {breaks = {name="tool_break",gain=0.4}}, -- change this
+			// 			sound = {breaks = {name="tool_break",gain=0.4}}, // change this //todo: figure out what to change this to lol
 			// 			groups = {flammable = 2, tool=1 },
 			// 			mob_hit_wear = wear,
-			// 			--torch rightclick - hacked in since api doesn't call on_place correctly
+			// 			//torch rightclick - hacked in since api doesn't call on_place correctly
 			// 			on_place = function(itemstack, placer, pointed_thing)
 			// 				local inv = placer:get_inventory()
 			// 				local torch = inv:contains_item("main", "torch:torch")
@@ -842,7 +842,7 @@ namespace crafter {
 			// 					elseif diff == -1 then
 			// 						minetest.place_node(pointed_thing.above,{name="torch:floor"})
 			// 					end
-			// 					--take item
+			// 					//take item
 			// 					if diff == 0 or diff == -1 then
 			// 						inv:remove_item("main", "torch:torch")
 			// 					end
@@ -882,23 +882,23 @@ namespace crafter {
 		// 		wear = 25
 		// 	end
 
-		// 	--add swords
+		// 	//add swords
 		// 	minetest.register_tool("main:"..material.."sword", {
 		// 		description = material:gsub("^%l", string.upper).." Sword",
 		// 		inventory_image = material.."sword.png",
 		// 		tool_capabilities = {
 		// 			full_punch_interval = 0,
-		// 			--max_drop_level=0,
+		// 			//max_drop_level=0,
 		// 			groupcaps={leaves = {times={[4]=0.7,[3]=0.7,[2]=0.7,[1]=0.7}, uses=sword_durability[level_id], maxlevel=1},},
 		// 			damage_groups = {damage = damage},
 		// 		},
 		// 		mob_hit_wear = wear,
-		// 		sound = {breaks = {name="tool_break",gain=0.4}}, -- change this
+		// 		sound = {breaks = {name="tool_break",gain=0.4}}, // change this //todo: figure out what to change this to lol
 		// 		groups = {damage=damage }
 		// 	})
 	}
 
-	// --shears
+	// //shears
 	// minetest.register_tool("main:shears", {
 	// 	description = "Shears",
 	// 	inventory_image = "shears.png",
@@ -907,7 +907,7 @@ namespace crafter {
 	// 		leaves = {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=500, maxlevel=1},
 	// 		}
 	// 	},
-	// 	sound = {breaks = "default_tool_breaks"}, -- change this
+	// 	sound = {breaks = "default_tool_breaks"}, // change this //todo: figure out what to change this to lol
 	// 	groups = {shears = 1}
 	// })
 }
