@@ -26,9 +26,9 @@ namespace crafter {
 	// after you've continuously held down the button.
 	const ub: number = 2147483647; // unbreakable
 
-	for (const [level_id, material] of pairs(__materials)) {
+	for (const [level_id, material] of ipairs(__materials)) {
 		let damage: number = 0;
-		for (const [id, tool] of pairs(__tools)) {
+		for (const [id, tool] of ipairs(__tools)) {
 			// print(id,tool,level,material)
 			let groupcaps2: { [id: string]: GroupCap } | null = null;
 			let wear: number = 0;
