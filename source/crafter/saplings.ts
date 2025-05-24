@@ -37,9 +37,23 @@ function sapling_grow(pos: Vec3): void {
 			const schemmy: number = math.random(1, 2);
 
 			if (schemmy == 1) {
-				core.place_schematic(pos, crafter.tree_big,SchematicRotation.zero,null,false,"place_center_x, place_center_z")
-			}else if (schemmy == 2) {
-				core.place_schematic(pos, crafter.tree_small,SchematicRotation.zero,null,false,"place_center_x, place_center_z")
+				core.place_schematic(
+					pos,
+					crafter.tree_big,
+					SchematicRotation.zero,
+					null,
+					false,
+					"place_center_x, place_center_z"
+				);
+			} else if (schemmy == 2) {
+				core.place_schematic(
+					pos,
+					crafter.tree_small,
+					SchematicRotation.zero,
+					null,
+					false,
+					"place_center_x, place_center_z"
+				);
 			}
 
 			//override leaves
