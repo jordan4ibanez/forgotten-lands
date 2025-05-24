@@ -1247,7 +1247,7 @@ declare global {
 		chance: number;
 		min_y?: number;
 		max_y?: number;
-		catch_up?: number;
+		catch_up?: boolean;
 		action(
 			pos: Vec3,
 			node: NodeTable,
