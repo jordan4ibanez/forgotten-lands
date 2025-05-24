@@ -1428,33 +1428,34 @@ namespace crafter {
 						groups : {flammable : 2, tool:1 },
 						mob_hit_wear : wear,
 						// torch rightclick - hacked in since api doesn't call on_place correctly // todo: is this true?!
-						// on_place = function(itemstack, placer, pointed_thing)
-						// 	local inv = placer:get_inventory()
-						// 	local torch = inv:contains_item("main", "torch:torch")
-						// 	local is_air = core.get_node(pointed_thing.above).name == "air"
-						// 	local dir = vector.subtract(pointed_thing.under, pointed_thing.above)
-						// 	local diff = dir.y
-						// 	local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
-						// 	local walkable = noddef.walkable
-						// 	local sneak = placer:get_player_control().sneak
-						// 	if not sneak and noddef.on_rightclick then
-						// 		core.item_place(itemstack, placer, pointed_thing)
-						// 		return
-						// 	end
-						// 	if torch and is_air and walkable then
-						// 		if diff == 0 then
-						// 			local param2 = core.dir_to_wallmounted(dir)
-						// 			core.set_node(pointed_thing.above, {name="torch:wall",param2=param2})
-						// 			core.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
-						// 		elseif diff == -1 then
-						// 			core.place_node(pointed_thing.above,{name="torch:floor"})
-						// 		end
-						// 		//take item
-						// 		if diff == 0 or diff == -1 then
-						// 			inv:remove_item("main", "torch:torch")
-						// 		end
-						// 	end
-						// end,
+						on_place : (itemstack: ItemStackObject, placer: ObjectRef, pointed_thing: PointedThing) => {
+							const inv: InvRef = placer.get_inventory()
+							const torch = inv.contains_item("main", "torch:torch")
+							const is_air: boolean = core.get_node(pointed_thing.above).name == "air"
+							const dir: Vec3 = vector.subtract(pointed_thing.under, pointed_thing.above)
+							const diff: number = dir.y
+							const noddef: NodeDefinition = core.registered_nodes[core.get_node(pointed_thing.under).name]
+							const walkable: boolean = noddef.walkable || false
+							const sneak: boolean = placer.get_player_control().sneak
+							if (! sneak && noddef.on_rightclick) {
+								core.item_place(itemstack, placer, pointed_thing)
+								return
+                            }
+                            // todo: invert this logic
+							if (torch && is_air && walkable) {
+								if (diff == 0) {
+									const param2: number = core.dir_to_wallmounted(dir)
+									core.set_node(pointed_thing.above, {name:"torch:wall",param2:param2})
+									core.sound_play("wood", {pos:pointed_thing.above, gain : 1.0})
+                                } else if (diff == -1) {
+									core.place_node(pointed_thing.above,{name:"torch:floor"})
+                                }
+								//take item
+								if (diff == 0 || diff == -1) {
+									inv.remove_item("main", "torch:torch")
+                                }
+                            }
+                        }
 					})
 		
         }
