@@ -1427,7 +1427,7 @@ namespace crafter {
 						sound : {breaks : {name:"tool_break",gain:0.4}}, // change this //todo: figure out what to change this to lol
 						groups : {flammable : 2, tool:1 },
 						mob_hit_wear : wear,
-						//torch rightclick - hacked in since api doesn't call on_place correctly
+						// torch rightclick - hacked in since api doesn't call on_place correctly // todo: is this true?!
 						// on_place = function(itemstack, placer, pointed_thing)
 						// 	local inv = placer:get_inventory()
 						// 	local torch = inv:contains_item("main", "torch:torch")
