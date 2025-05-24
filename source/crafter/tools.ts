@@ -1487,31 +1487,31 @@ namespace crafter {
 			if (material == "wood") {
 				damage = 4
 				wear = 500
-			elseif (material == "stone") {
+			} else if (material == "stone") {
 				damage = 5
 				wear = 400
-			elseif (material == "coal") {
+			} else if (material == "coal") {
 				damage = 2
 				wear = 2000
-			elseif (material == "lapis") {
+			} else if (material == "lapis") {
 				damage = 5
 				wear = 350
-			elseif (material == "iron") {
+			} else if (material == "iron") {
 				damage = 6
 				wear = 300
-			elseif (material == "gold") {
+			} else if (material == "gold") {
 				damage = 4
 				wear = 1000
-			elseif (material == "diamond") {
+			} else if (material == "diamond") {
 				damage = 7
 				wear = 100
-			elseif (material == "emerald") {
+			} else if (material == "emerald") {
 				damage = 9
 				wear = 50
-			elseif (material == "sapphire") {
+			} else if (material == "sapphire") {
 				damage = 11
 				wear = 25
-			end
+            }
 
 		// 	//add swords
 		// 	core.register_tool("main:"..material.."sword", {
