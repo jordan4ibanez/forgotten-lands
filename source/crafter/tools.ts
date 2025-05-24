@@ -1414,7 +1414,7 @@ namespace crafter {
 					throw new Error("groupcaps is null");
 				}
 
-				core.register_tool("main:" + material + tool, {
+				core.register_tool("crafter:" + material + tool, {
 					description:
 						string.gsub(material, "^%l", string.upper) +
 						" " +
@@ -1523,7 +1523,7 @@ namespace crafter {
 		}
 
 		// Add swords.
-		core.register_tool("main:" + material + "sword", {
+		core.register_tool("crafter:" + material + "sword", {
 			description: string.gsub(material, "^%l", string.upper) + " Sword",
 			inventory_image: material + "sword.png",
 			tool_capabilities: {
@@ -1545,7 +1545,7 @@ namespace crafter {
 	}
 
 	// Shears.
-	core.register_tool("main:shears", {
+	core.register_tool("crafter:shears", {
 		description: "Shears",
 		inventory_image: "shears.png",
 		tool_capabilities: {
