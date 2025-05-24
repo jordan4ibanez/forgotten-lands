@@ -1270,10 +1270,10 @@ declare global {
 
 	interface SchematicData {
 		name: string;
-		prob: number;
-		param1: number;
-		param2: number;
-		force_place: boolean;
+		prob?: number;
+		param1?: number;
+		param2?: number;
+		force_place?: boolean;
 	}
 
 	interface SchematicProbability {
