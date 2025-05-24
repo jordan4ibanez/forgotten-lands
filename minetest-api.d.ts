@@ -1326,7 +1326,7 @@ declare global {
 		spread?: Vec3;
 		seed?: number;
 		octaves?: number;
-        // These two have the same effect.
+		// These two have the same effect.
 		persistence?: number;
 		persist?: number;
 		lacunarity?: number;
