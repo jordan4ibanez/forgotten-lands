@@ -1289,7 +1289,7 @@ declare global {
 	interface SchematicDefinition {
 		size: Vec3;
 		data: SchematicData[];
-		yslice_prob: number[][];
+		yslice_prob?: number[][];
 	}
 
 	interface HTTPrequestDefinition {
