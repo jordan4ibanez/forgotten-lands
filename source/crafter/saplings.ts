@@ -19,53 +19,54 @@ function sapling_grow(pos: Vec3): void {
 		core.get_item_group(
 			core.get_node(vector.create3d(pos.x, pos.y - 1, pos.z)).name,
 			"soil"
-		) > 0
+		) <= 0
 	) {
-		let good_to_grow: boolean = true;
-		//check if room to grow (leaves or air)
-		for (let i = 1; i <= 4; i++) {
-			const node_name: string = core.get_node(
-				vector.create3d(pos.x, pos.y + i, pos.z)
-			).name;
-			if (node_name != "air" && node_name != "crafter:leaves") {
-				good_to_grow = false;
-			}
+		return;
+	}
+	let good_to_grow: boolean = true;
+	//check if room to grow (leaves or air)
+	for (let i = 1; i <= 4; i++) {
+		const node_name: string = core.get_node(
+			vector.create3d(pos.x, pos.y + i, pos.z)
+		).name;
+		if (node_name != "air" && node_name != "crafter:leaves") {
+			good_to_grow = false;
 		}
-		if (good_to_grow) {
-			core.set_node(pos, { name: "crafter:tree" });
+	}
+	if (good_to_grow) {
+		core.set_node(pos, { name: "crafter:tree" });
 
-			const schemmy: number = math.random(1, 2);
+		const schemmy: number = math.random(1, 2);
 
-			if (schemmy == 1) {
-				core.place_schematic(
-					pos,
-					crafter.tree_big,
-					SchematicRotation.zero,
-					null,
-					false,
-					"place_center_x, place_center_z"
-				);
-			} else if (schemmy == 2) {
-				core.place_schematic(
-					pos,
-					crafter.tree_small,
-					SchematicRotation.zero,
-					null,
-					false,
-					"place_center_x, place_center_z"
-				);
-			}
+		if (schemmy == 1) {
+			core.place_schematic(
+				pos,
+				crafter.tree_big,
+				SchematicRotation.zero,
+				null,
+				false,
+				"place_center_x, place_center_z"
+			);
+		} else if (schemmy == 2) {
+			core.place_schematic(
+				pos,
+				crafter.tree_small,
+				SchematicRotation.zero,
+				null,
+				false,
+				"place_center_x, place_center_z"
+			);
+		}
 
-			//override leaves
-			let max: number = 3;
-			if (schemmy == 2) {
-				max = 1;
-			}
-			for (let i = 1; i <= max; i++) {
-				core.set_node(vector.create3d(pos.x, pos.y + i, pos.z), {
-					name: "crafter:tree",
-				});
-			}
+		//override leaves
+		let max: number = 3;
+		if (schemmy == 2) {
+			max = 1;
+		}
+		for (let i = 1; i <= max; i++) {
+			core.set_node(vector.create3d(pos.x, pos.y + i, pos.z), {
+				name: "crafter:tree",
+			});
 		}
 	}
 }
