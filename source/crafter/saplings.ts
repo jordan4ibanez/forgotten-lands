@@ -16,31 +16,35 @@ function sapling_grow(pos: Vec3): void {
 	//print("growing at "..dump(pos))
     // todo: invert this logic
 	if (core.get_item_group(core.get_node(vector.create3d(pos.x,pos.y-1,pos.z)).name, "soil") > 0) {
-		local good_to_grow = true
+		let good_to_grow: boolean = true
 		//check if room to grow (leaves or air)
-		for i = 1,4 do
-			local node_name = core.get_node(vector.new(pos.x,pos.y+i,pos.z)).name
-			if node_name ~= "air" and node_name ~= "main:leaves" then
+		for (let i = 1; i <= 4; i++) {
+			const node_name: string = core.get_node(vector.create3d(pos.x,pos.y+i,pos.z)).name
+			if (node_name != "air" && node_name != "main:leaves") {
 				good_to_grow = false
-			end
-		end
-		if good_to_grow == true then
-			core.set_node(pos,{name="main:tree"})
-			local schemmy = math.random(1,2)
-			if schemmy == 1 then
-				core.place_schematic(pos, tree_big,"0",nil,false,"place_center_x, place_center_z")
-			elseif schemmy == 2 then
-				core.place_schematic(pos, tree_small,"0",nil,false,"place_center_x, place_center_z")
-			end
+            }
+        }
+		if (good_to_grow) {
+			core.set_node(pos,{name:"main:tree"})
+
+			const schemmy: number = math.random(1,2)
+
+            // todo: this was using a schematic in the global namespace.
+			// if (schemmy == 1) {
+			// 	core.place_schematic(pos, tree_big,"0",null,false,"place_center_x, place_center_z")
+            // }else if (schemmy == 2) {
+			// 	core.place_schematic(pos, tree_small,"0",null,false,"place_center_x, place_center_z")
+            // }
+
 			//override leaves
-			local max = 3
-			if schemmy == 2 then
+			let max: number = 3
+			if (schemmy == 2) {
 				max = 1
-			end
-			for i = 1,max do
-				core.set_node(vector.new(pos.x,pos.y+i,pos.z),{name="main:tree"})
-			end
-		end
+            }
+			for (let i = 1; i <= max; i++) {
+				core.set_node(vector.create3d(pos.x,pos.y+i,pos.z),{name:"main:tree"})
+            }
+        }
     }
 }
 
