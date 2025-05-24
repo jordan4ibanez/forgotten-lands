@@ -1408,7 +1408,7 @@ namespace crafter {
 				}
 			}
 
-					minetest.register_tool("main:"..material..tool, {
+					core.register_tool("main:"..material..tool, {
 						description = material:gsub("^%l", string.upper).." "..tool:gsub("^%l", string.upper),
 						inventory_image = material..tool..".png",
 						tool_capabilities = {
@@ -1424,23 +1424,23 @@ namespace crafter {
 						on_place = function(itemstack, placer, pointed_thing)
 							local inv = placer:get_inventory()
 							local torch = inv:contains_item("main", "torch:torch")
-							local is_air = minetest.get_node(pointed_thing.above).name == "air"
+							local is_air = core.get_node(pointed_thing.above).name == "air"
 							local dir = vector.subtract(pointed_thing.under, pointed_thing.above)
 							local diff = dir.y
-							local noddef = minetest.registered_nodes[minetest.get_node(pointed_thing.under).name]
+							local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
 							local walkable = noddef.walkable
 							local sneak = placer:get_player_control().sneak
 							if not sneak and noddef.on_rightclick then
-								minetest.item_place(itemstack, placer, pointed_thing)
+								core.item_place(itemstack, placer, pointed_thing)
 								return
 							end
 							if torch and is_air and walkable then
 								if diff == 0 then
-									local param2 = minetest.dir_to_wallmounted(dir)
-									minetest.set_node(pointed_thing.above, {name="torch:wall",param2=param2})
-									minetest.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
+									local param2 = core.dir_to_wallmounted(dir)
+									core.set_node(pointed_thing.above, {name="torch:wall",param2=param2})
+									core.sound_play("wood", {pos=pointed_thing.above, gain = 1.0})
 								elseif diff == -1 then
-									minetest.place_node(pointed_thing.above,{name="torch:floor"})
+									core.place_node(pointed_thing.above,{name="torch:floor"})
 								end
 								//take item
 								if diff == 0 or diff == -1 then
@@ -1483,7 +1483,7 @@ namespace crafter {
 		// 	end
 
 		// 	//add swords
-		// 	minetest.register_tool("main:"..material.."sword", {
+		// 	core.register_tool("main:"..material.."sword", {
 		// 		description = material:gsub("^%l", string.upper).." Sword",
 		// 		inventory_image = material.."sword.png",
 		// 		tool_capabilities = {
@@ -1499,7 +1499,7 @@ namespace crafter {
 	}
 
 	// //shears
-	// minetest.register_tool("main:shears", {
+	// core.register_tool("main:shears", {
 	// 	description = "Shears",
 	// 	inventory_image = "shears.png",
 	// 	tool_capabilities = {
