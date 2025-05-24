@@ -15,12 +15,12 @@ const creative_mode: boolean = core.settings.get_bool("creative_mode") || false
 if not creative_mode then
 	function core.handle_node_drops(pos, drops, digger)
 		meta = digger:get_wielded_item():get_meta()
-		--careful = meta:get_int("careful")
-		fortune = 1--meta:get_int("fortune") + 1
+		//careful = meta:get_int("careful")
+		fortune = 1//meta:get_int("fortune") + 1
 		autorepair = meta:get_int("autorepair")
-		--if careful > 0 then
-		--	drops = {core.get_node(pos).name}
-		--end
+		//if careful > 0 then
+		//	drops = {core.get_node(pos).name}
+		//end
 		for i = 1,fortune do
 			for _,item in ipairs(drops) do
 
@@ -47,25 +47,25 @@ if not creative_mode then
 	            core.throw_experience(pos, experience_amount)
 	        end
 		end
-		--auto repair the item
+		//auto repair the item
 		if autorepair > 0 and math.random(0,1000) < autorepair then
 			local itemstack = digger:get_wielded_item()
 			itemstack:add_wear(autorepair*-100)
 			digger:set_wielded_item(itemstack)
 		end
 	end
---creative
+//creative
 else
 	function core.handle_node_drops(pos, drops, digger)
 	end
 	core.register_on_dignode(function(pos, oldnode, digger)
 		
-		--if digger and digger:is_player() then
-		--	local inv = digger:get_inventory()
-		--	if inv and not inv:contains_item("main", oldnode) and inv:room_for_item("main", oldnode) then
-		--		inv:add_item("main", oldnode)
-		--	end
-		--end
+		//if digger and digger:is_player() then
+		//	local inv = digger:get_inventory()
+		//	if inv and not inv:contains_item("main", oldnode) and inv:room_for_item("main", oldnode) then
+		//		inv:add_item("main", oldnode)
+		//	end
+		//end
 	end)
 	core.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
 		return(itemstack:get_name())
@@ -75,7 +75,7 @@ end
 // local stack
 // local object
 // function core.throw_item(pos, item)
-// 	-- Take item in any format
+// 	// Take item in any format
 // 	stack = item
 // 	object = core.add_entity(pos, "__builtin:item")	
 // 	if object then
@@ -101,10 +101,10 @@ end
 // 			})
 //         end
 //     end
-// 	--return obj
+// 	//return obj
 // end
 
-// --override drops
+// //override drops
 // local dropper_is_player
 // local c_pos
 // local count
@@ -152,7 +152,7 @@ end
 // 	stack = ItemStack(item or self.itemstring)
 // 	self.itemstring = stack:to_string()
 // 	if self.itemstring == "" then
-// 		-- item not yet known
+// 		// item not yet known
 // 		return
 // 	end
 
@@ -265,7 +265,7 @@ end
 // 		return
 // 	end
 
-// 	--if item set to be collected then only execute go to player
+// 	//if item set to be collected then only execute go to player
 // 	if self.collected == true then
 // 		if not self.collector then
 // 			self.object:remove()
@@ -278,7 +278,7 @@ end
 
 // 			disable_physics(self)
 
-// 			--get the variables
+// 			//get the variables
 // 			pos2 = collector:get_pos()
 // 			player_velocity = collector:get_player_velocity()
 // 			pos2.y = pos2.y + 0.5
@@ -292,7 +292,7 @@ end
 
 // 			direction = vector.normalize(vector.subtract(pos2,pos))
 
-// 			multiplier = 10 - distance -- changed
+// 			multiplier = 10 - distance // changed
 
 // 			velocity = vector.add(player_velocity,vector.multiply(direction,multiplier))
 						
@@ -302,13 +302,13 @@ end
 
 // 			return
 // 		else
-// 			-- the collector doesn't exist
+// 			// the collector doesn't exist
 // 			self.object:remove()
 // 			return
 // 		end
 // 	end
 	
-// 	--allow entity to be collected after timer
+// 	//allow entity to be collected after timer
 // 	if self.collectable == false and self.collection_timer >= 2.5 then
 // 		self.collectable = true
 // 	elseif self.collectable == false then
@@ -320,7 +320,7 @@ end
 // 		self.object:remove()
 // 		return
 // 	end
-// 	-- polling eases the server load
+// 	// polling eases the server load
 // 	if self.poll_timer > 0 then
 // 		self.poll_timer = self.poll_timer - dtime
 // 		if self.poll_timer <= 0 then
@@ -338,7 +338,7 @@ end
 
 // 	i_node = core.get_node_or_nil(pos)
 
-// 	-- Remove nodes in 'ignore' and burns items
+// 	// Remove nodes in 'ignore' and burns items
 // 	if i_node then
 // 		if i_node.name == "ignore" then
 // 			self.object:remove()
@@ -377,10 +377,10 @@ end
 // 			and (snode.node_box == nil or snode.node_box.type == "regular")
 // 	end
 
-// 	-- Push item out when stuck inside solid node
+// 	// Push item out when stuck inside solid node
 // 	if is_stuck then
 // 		shootdir = nil
-// 		-- Check which one of the 4 sides is free
+// 		// Check which one of the 4 sides is free
 // 		for o = 1, #order do
 // 			cnode = core.get_node(vector.add(pos, order[o])).name
 // 			cdef = core.registered_nodes[cnode] or {}
@@ -390,17 +390,17 @@ end
 // 			end
 // 		end
 
-// 		-- If none of the 4 sides is free, check upwards
+// 		// If none of the 4 sides is free, check upwards
 // 		if not shootdir then
 // 			shootdir = {x=0, y=1, z=0}
 // 			cnode = core.get_node(vector.add(pos, shootdir)).name
 // 			if cnode == "ignore" then
-// 				shootdir = nil -- Do not push into ignore
+// 				shootdir = nil // Do not push into ignore
 // 			end
 // 		end
 
 // 		if shootdir then
-// 			-- shove that thing outta there
+// 			// shove that thing outta there
 // 			fpos = vector.round(pos)
 // 			if shootdir.x ~= 0 then
 // 				shootdir = vector.multiply(shootdir,0.74)
@@ -429,14 +429,14 @@ end
 // 	end
 
 // 	change = false
-// 	-- Slide on slippery nodes
+// 	// Slide on slippery nodes
 // 	def = node and core.registered_nodes[node.name]
 // 	vel = self.object:get_velocity()
 // 	if def and def.walkable then
 // 		slippery = core.get_item_group(node.name, "slippery")
 // 		if slippery ~= 0 then
 // 			if math.abs(vel.x) > 0.2 or math.abs(vel.z) > 0.2 then
-// 				-- Horizontal deceleration
+// 				// Horizontal deceleration
 // 				slip_factor = 4.0 / (slippery + 4)
 // 				self.object:set_acceleration({
 // 					x = -vel.x * slip_factor,
@@ -490,18 +490,18 @@ end
 // 	moving_state = true,
 // 	slippery_state = false,
 // 	physical_state = true,
-// 	-- Item expiry
+// 	// Item expiry
 // 	age = 0,
-// 	-- Pushing item out of solid nodes
+// 	// Pushing item out of solid nodes
 // 	force_out       = nil,
 // 	force_out_start = nil,
-// 	-- Collection Variables
+// 	// Collection Variables
 // 	collection_timer = 2,
 // 	collectable      = false,
 // 	try_timer        = 0,
 // 	collected        = false,
 // 	delete_timer     = 0,
-// 	-- Used for server delay
+// 	// Used for server delay
 // 	magnet_timer = 0,
 // 	poll_timer = 0,
 
