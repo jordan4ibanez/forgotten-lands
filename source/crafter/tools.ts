@@ -27,10 +27,10 @@ namespace crafter {
 	const ub: number = 2147483647; // unbreakable
 
 	for (const [level_id, material] of pairs(__materials)) {
+        let damage: number = 0;
 		for (const [id, tool] of pairs(__tools)) {
 			// print(id,tool,level,material)
 			let groupcaps2: { [id: string]: GroupCap } | null = null;
-			let damage: number = 0;
 			let wear: number = 0;
 
 			// ███████╗██╗  ██╗ ██████╗ ██╗   ██╗███████╗██╗
