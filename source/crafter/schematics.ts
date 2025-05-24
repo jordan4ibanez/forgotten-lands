@@ -3,8 +3,8 @@
 // front -> back
 
 namespace crafter {
-	export const tree_big = {
-		size: { x: 5, y: 6, z: 5 },
+	export const tree_big: SchematicDefinition = {
+		size: vector.create3d({ x: 5, y: 6, z: 5 }),
 		data: [
 			// The side of the bush, with the ignore on top
 			{ name: "ignore" },
@@ -167,8 +167,8 @@ namespace crafter {
 		],
 	};
 
-	export const tree_small = {
-		size: { x: 3, y: 5, z: 3 },
+	export const tree_small: SchematicDefinition = {
+		size: vector.create3d({ x: 3, y: 5, z: 3 }),
 		data: [
 			// The side of the bush, with the air on top
 			{ name: "air" },
