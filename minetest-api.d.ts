@@ -1321,15 +1321,16 @@ declare global {
 	}
 
 	interface NoiseParams {
-		offset: number;
-		scale: number;
-		spread: Vec3;
-		seed: number;
-		octaves: number;
+		offset?: number;
+		scale?: number;
+		spread?: Vec3;
+		seed?: number;
+		octaves?: number;
+        // These two have the same effect.
 		persistence?: number;
 		persist?: number;
-		lacunarity: number;
-		flags: NoiseFlags;
+		lacunarity?: number;
+		flags?: NoiseFlags;
 	}
 
 	interface OreDefinition {
