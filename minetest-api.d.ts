@@ -750,7 +750,7 @@ declare global {
 		contains_item(
 			listName: string,
 			stack: ItemStackObject | string,
-			matchMeta: boolean
+			matchMeta?: boolean
 		): boolean;
 		remove_item(
 			listName: string,
