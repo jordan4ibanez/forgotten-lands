@@ -712,7 +712,7 @@ namespace crafter {
 			// ██║     ██║╚██████╗██║  ██╗██║  ██║██╔╝ ██╗███████╗
 			// ╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 
-			// 		if tool == "pick" then
+			 		if (tool == "pick") {
 			// 			if material == "wood" then
 			// 				groupcaps2={
 			// 					--ore hardness
@@ -806,7 +806,7 @@ namespace crafter {
 			// 				damage = 16
 			// 				wear = 10
 			// 			end
-			// 		end
+                }
 
 			// 		minetest.register_tool("main:"..material..tool, {
 			// 			description = material:gsub("^%l", string.upper).." "..tool:gsub("^%l", string.upper),
