@@ -563,7 +563,7 @@ core.register_node("crafter:water", {
 			},
 		},
 	],
-	alpha: 191,
+	use_texture_alpha: TextureAlpha.blend,
 	paramtype: ParamType1.light,
 	walkable: false,
 	pointable: false,
