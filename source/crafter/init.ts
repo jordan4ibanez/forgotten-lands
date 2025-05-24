@@ -19,6 +19,6 @@ namespace main {
 		"falling",
 		"bucket",
 		"lava_cooling",
-		"command_overrides"
+		"command_overrides",
 	]);
 }
