@@ -637,7 +637,7 @@ core.register_node("crafter:waterflow", {
 		type: Nodeboxtype.fixed,
 		fixed: [[0, 0, 0, 0, 0, 0]],
 	},
-	alpha: 191,
+	use_texture_alpha: TextureAlpha.blend,
 	paramtype: ParamType1.light,
 	paramtype2: ParamType2.flowingliquid,
 	walkable: false,
