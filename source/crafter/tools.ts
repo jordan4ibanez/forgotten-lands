@@ -29,7 +29,7 @@ namespace crafter {
 	for (const [level_id, material] of pairs(__materials)) {
 		for (const [id, tool] of pairs(__tools)) {
 			// print(id,tool,level,material)
-			let groupcaps2: { [id: string]: GroupCap };
+			let groupcaps2: { [id: string]: GroupCap } | null = null;
 			let damage: number = 0;
 			let wear: number = 0;
 
