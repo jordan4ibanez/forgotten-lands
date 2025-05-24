@@ -1,4 +1,4 @@
-namespace main {
+namespace crafter {
 	// local
 	// minetest,vector,table,pairs,type,math
 	// =

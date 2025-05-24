@@ -77,7 +77,7 @@ core.register_node("main:sapling", {
 		attached_node: 1,
 		flammable: 1,
 	},
-	sounds: main.dirtSound(),
+	sounds: crafter.dirtSound(),
 	drop: "main:sapling",
 	node_placement_prediction: "",
 	selection_box: {

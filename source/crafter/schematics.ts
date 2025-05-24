@@ -2,7 +2,7 @@
 // bottom - > top
 // front -> back
 
-namespace main {
+namespace crafter {
 	export const tree_big = {
 		size: { x: 5, y: 6, z: 5 },
 		data: [

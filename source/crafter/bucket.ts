@@ -5,7 +5,7 @@ It works better and doesn't block digging with a bucket through water.
 
 https://youtu.be/j0cq27qqnE8
 */
-namespace main {
+namespace crafter {
 	function bucket_raycast(player: ObjectRef): PointedThing | null {
 		const pos: Vec3 = player.get_pos();
 		const eyeHeight = player.get_properties().eye_height;

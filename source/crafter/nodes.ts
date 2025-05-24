@@ -124,7 +124,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 		description: string.gsub(ore as string, "^%l", string.upper) + " Block",
 		tiles: [ore + "block.png"],
 		groups: { stone: level, pathable: 1 },
-		sounds: main.stoneSound(),
+		sounds: crafter.stoneSound(),
 		// light_source = 14,//debugging ore spawn
 		drop: {
 			max_items: 1,
@@ -142,7 +142,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 		description: string.gsub(ore as string, "^%l", string.upper) + " Ore",
 		tiles: ["stone.png^" + ore + "ore.png"],
 		groups: { stone: level, pathable: 1, experience: experience },
-		sounds: main.stoneSound(),
+		sounds: crafter.stoneSound(),
 		// light_source = 14,//debugging ore spawn
 		drop: {
 			max_items: 1,
@@ -163,7 +163,7 @@ for (const [ore, tool_required] of pairs(ores)) {
 			" Ore",
 		tiles: ["netherrack.png^" + ore + "ore.png"],
 		groups: { netherrack: level, pathable: 1, experience: experience },
-		sounds: main.stoneSound(),
+		sounds: crafter.stoneSound(),
 		light_source: 7,
 		drop: {
 			max_items: 1,
@@ -198,7 +198,7 @@ core.register_node("crafter:stone", {
 	description: "Stone",
 	tiles: ["stone.png"],
 	groups: { stone: 1, hand: 1, pathable: 1 },
-	sounds: main.stoneSound(),
+	sounds: crafter.stoneSound(),
 	drop: {
 		max_items: 1,
 		items: [
@@ -215,7 +215,7 @@ core.register_node("crafter:cobble", {
 	description: "Cobblestone",
 	tiles: ["cobble.png"],
 	groups: { stone: 1, pathable: 1 },
-	sounds: main.stoneSound(),
+	sounds: crafter.stoneSound(),
 	drop: {
 		max_items: 1,
 		items: [
@@ -232,7 +232,7 @@ core.register_node("crafter:mossy_cobble", {
 	description: "Mossy Cobblestone",
 	tiles: ["mossy_cobble.png"],
 	groups: { stone: 1, pathable: 1 },
-	sounds: main.stoneSound(),
+	sounds: crafter.stoneSound(),
 	drop: {
 		max_items: 1,
 		items: [
@@ -253,7 +253,7 @@ core.register_node("crafter:glass", {
 	sunlight_propagates: true,
 	is_ground_content: false,
 	groups: { glass: 1, pathable: 1 },
-	sounds: main.stoneSound({
+	sounds: crafter.stoneSound({
 		footstep: { name: "glass_footstep", gain: 0.4 },
 		dug: { name: "break_glass", gain: 0.4 },
 	}),
@@ -268,7 +268,7 @@ core.register_node("crafter:ice", {
 	sunlight_propagates: true,
 	is_ground_content: false,
 	groups: { glass: 1, pathable: 1, slippery: 3 },
-	sounds: main.stoneSound({
+	sounds: crafter.stoneSound({
 		footstep: { name: "glass_footstep", gain: 0.4 },
 		dug: { name: "break_glass", gain: 0.4 },
 	}),
@@ -287,7 +287,7 @@ core.register_node("crafter:ice_mapgen", {
 	sunlight_propagates: true,
 	is_ground_content: false,
 	groups: { glass: 1, pathable: 1, slippery: 3 },
-	sounds: main.stoneSound({
+	sounds: crafter.stoneSound({
 		footstep: { name: "glass_footstep", gain: 0.4 },
 		dug: { name: "break_glass", gain: 0.4 },
 	}),
@@ -299,7 +299,7 @@ core.register_node("crafter:dirt", {
 	description: "Dirt",
 	tiles: ["dirt.png"],
 	groups: { dirt: 1, soil: 1, pathable: 1, farm_tillable: 1 },
-	sounds: main.dirtSound(),
+	sounds: crafter.dirtSound(),
 	paramtype: ParamType1.light,
 });
 
@@ -307,7 +307,7 @@ core.register_node("crafter:grass", {
 	description: "Grass",
 	tiles: ["grass.png"],
 	groups: { grass: 1, soil: 1, pathable: 1, farm_tillable: 1 },
-	sounds: main.dirtSound(),
+	sounds: crafter.dirtSound(),
 	drop: "crafter:dirt",
 });
 
@@ -315,14 +315,14 @@ core.register_node("crafter:sand", {
 	description: "Sand",
 	tiles: ["sand.png"],
 	groups: { sand: 1, falling_node: 1, pathable: 1, soil: 1 },
-	sounds: main.sandSound(),
+	sounds: crafter.sandSound(),
 });
 
 core.register_node("crafter:gravel", {
 	description: "Gravel",
 	tiles: ["gravel.png"],
 	groups: { sand: 1, falling_node: 1, pathable: 1 },
-	sounds: main.dirtSound(),
+	sounds: crafter.dirtSound(),
 	drop: {
 		max_items: 1,
 		items: [
@@ -369,7 +369,7 @@ core.register_node("crafter:tree", {
 		"treeOut.png",
 	],
 	groups: { wood: 1, tree: 1, pathable: 1, flammable: 1 },
-	sounds: main.woodSound(),
+	sounds: crafter.woodSound(),
 	// Set metadata so treecapitator doesn't destroy houses
 	on_place: (
 		itemstack: ItemStackObject,
@@ -482,7 +482,7 @@ core.register_node("crafter:wood", {
 	description: "Wood",
 	tiles: ["wood.png"],
 	groups: { wood: 1, pathable: 1, flammable: 1 },
-	sounds: main.woodSound(),
+	sounds: crafter.woodSound(),
 });
 
 core.register_node("crafter:leaves", {
@@ -495,7 +495,7 @@ core.register_node("crafter:leaves", {
 	is_ground_content: false,
 	tiles: ["leaves.png"],
 	groups: { leaves: 1, leafdecay: 1, flammable: 1 },
-	sounds: main.grassSound(),
+	sounds: crafter.grassSound(),
 	drop: {
 		max_items: 1,
 		items: [
@@ -525,7 +525,7 @@ core.register_node("crafter:dropped_leaves", {
 	is_ground_content: false,
 	tiles: ["leaves.png"],
 	groups: { leaves: 1, flammable: 1 },
-	sounds: main.grassSound(),
+	sounds: crafter.grassSound(),
 	drop: {
 		max_items: 1,
 		items: [
@@ -777,7 +777,7 @@ core.register_node("crafter:ladder", {
 		//wall_side = = <default>
 	},
 	groups: { wood: 1, flammable: 1, attached_node: 1 },
-	sounds: main.woodSound(),
+	sounds: crafter.woodSound(),
 	on_place: (
 		itemstack: ItemStackObject,
 		placer: ObjectRef,

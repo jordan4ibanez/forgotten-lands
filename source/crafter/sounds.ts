@@ -1,4 +1,4 @@
-namespace main {
+namespace crafter {
 	export function stoneSound(table?: NodeSoundSpec): NodeSoundSpec {
 		table = table || {};
 		table.dig = table.dig || { name: "stone", gain: 0.2 };

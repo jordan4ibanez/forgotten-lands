@@ -1,4 +1,4 @@
-namespace main {
+namespace crafter {
 	const path: string | null = core.get_modpath("crafter");
 	if (!path) {
 		throw new Error("crafter doesn't exist!?");
