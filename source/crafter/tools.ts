@@ -1,7 +1,7 @@
---Quick definition of tools
-local tool = {"shovel","axe","pick"}
-local material =        {"coal","wood","stone","lapis","iron","gold","diamond","emerald","sapphire","ruby"}
-local sword_durability ={10    ,52    ,131    ,200    ,250    ,32    ,1561    ,2300     ,3000      ,5000  }
+// Quick definition of tools.
+const tool: string[] = ["shovel","axe","pick"]
+const material: string[] =        ["coal","wood","stone","lapis","iron","gold","diamond","emerald","sapphire","ruby"]
+const sword_durability: number[] =[10    ,52    ,131    ,200    ,250    ,32    ,1561    ,2300     ,3000      ,5000  ]
 
 --unbreakable time definition
 --this is used so ores still have sounds
