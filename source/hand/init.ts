@@ -1,13 +1,13 @@
--- The hand
+// The hand
 
---Create an initial hand tool
+//Create an initial hand tool
 minetest.register_item(":", {
 	type = "none",
 	wield_image = "nothing.png",
 	wield_scale = {x=1,y=1,z=2.5},
 })
 
--- This is a fake node that should never be placed in the world
+// This is a fake node that should never be placed in the world
 local def = minetest.registered_items[""]
 minetest.register_node("hand:player", {
 	description = "",
@@ -17,20 +17,20 @@ minetest.register_node("hand:player", {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
 		groupcaps = {		
-			stone = {times={[1]=7.5,[2]=16,[3]=32,[4]=64,[5]=128},  uses=0, maxlevel=1}, --
-			dirt =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
-			snow =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
-			grass = {times={[1]=0.9,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=0, maxlevel=1}, --
-			sand =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
-			wood =  {times={[1]=3,[2]=6,[3]=9,[4]=12,[5]=15},       uses=0, maxlevel=1}, --
-			leaves ={times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
-			wool =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
-			glass = {times={[1]=0.5,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
-			netherrack = {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, --
+			stone = {times={[1]=7.5,[2]=16,[3]=32,[4]=64,[5]=128},  uses=0, maxlevel=1}, //
+			dirt =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
+			snow =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
+			grass = {times={[1]=0.9,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=0, maxlevel=1}, //
+			sand =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
+			wood =  {times={[1]=3,[2]=6,[3]=9,[4]=12,[5]=15},       uses=0, maxlevel=1}, //
+			leaves ={times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
+			wool =  {times={[1]=0.75,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
+			glass = {times={[1]=0.5,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
+			netherrack = {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=0, maxlevel=1}, //
 			
-			unbreakable = {times={[1]=63072000000000},   uses=0, maxlevel=1}, -- 2 million years
+			unbreakable = {times={[1]=63072000000000},   uses=0, maxlevel=1}, // 2 million years
 			
-			--instant = {times={[1]=0.1,},uses=0,maxlevel=1},
+			//instant = {times={[1]=0.1,},uses=0,maxlevel=1},
 			dig_immediate = {times={[2]=0,[3]=0,[1]=0,},uses=0,maxlevel=1},
 		},
 		damage_groups = {damage=1},
@@ -39,7 +39,7 @@ minetest.register_node("hand:player", {
 	paramtype = "light",
 	drawtype = "mesh",
 	mesh = "hand.b3d",
-	-- Prevent construction
+	// Prevent construction
 	node_placement_prediction = "",
 	on_construct = function(pos)
 		minetest.log("error", "Tried to place hand at "..minetest.pos_to_string(pos))
@@ -80,7 +80,7 @@ minetest.register_node("hand:creative", {
 	paramtype = "light",
 	drawtype = "mesh",
 	mesh = "hand.b3d",
-	-- Prevent construction
+	// Prevent construction
 	node_placement_prediction = "",
 	on_construct = function(pos)
 		minetest.log("error", "Tried to place hand at "..minetest.pos_to_string(pos))
@@ -95,7 +95,7 @@ minetest.register_node("hand:creative", {
 })
 
 
---Create a hand list and then enable the hand node
+//Create a hand list and then enable the hand node
 minetest.register_on_joinplayer(function(player)
 	player:get_inventory():set_size("hand", 1)
 	player:get_inventory():set_stack("hand", 1, "hand:player")
