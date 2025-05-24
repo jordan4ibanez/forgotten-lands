@@ -1018,7 +1018,12 @@ declare global {
 		tool_capabilities?: ToolCapabilities;
 		node_placement_prediction?: string;
 		node_dig_prediction?: string;
-		sound?: SimpleSoundSpec;
+		sound?: {
+			breaks?: SimpleSoundSpec;
+			eat?: SimpleSoundSpec;
+			punch_use?: SimpleSoundSpec;
+			punch_use_air?: SimpleSoundSpec;
+		};
 		on_place?(
 			itemStack: ItemStackObject,
 			placer: ObjectRef,
