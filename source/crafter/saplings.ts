@@ -14,7 +14,6 @@ function sapling_grow(pos: Vec3): void {
 		}
 	}
 	//print("growing at "..dump(pos))
-	// todo: invert this logic
 	if (
 		core.get_item_group(
 			core.get_node(vector.create3d(pos.x, pos.y - 1, pos.z)).name,
