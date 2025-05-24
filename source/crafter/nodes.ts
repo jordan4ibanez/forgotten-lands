@@ -291,7 +291,7 @@ core.register_node("crafter:ice_mapgen", {
 		footstep: { name: "glass_footstep", gain: 0.4 },
 		dug: { name: "break_glass", gain: 0.4 },
 	}),
-	use_texture_alpha: false,
+	use_texture_alpha: TextureAlpha.opaque,
 	drop: "",
 });
 
