@@ -10,7 +10,7 @@ core.register_craftitem(":", {
 // This is a fake node that should never be placed in the world.
 const def: ItemDefinition = core.registered_items[""];
 
-core.register_node("hand:player", {
+core.register_node("crafter_hand:player", {
 	description: "",
 	tiles: ["player.png"],
 	visual_scale: 1,
@@ -98,8 +98,8 @@ core.register_node("hand:player", {
 // 	range = def.range,
 // })
 
-// //Create a hand list and then enable the hand node
-// core.register_on_joinplayer(function(player)
-// 	player:get_inventory():set_size("hand", 1)
-// 	player:get_inventory():set_stack("hand", 1, "hand:player")
-// end)
+//Create a hand list and then enable the hand node
+core.register_on_joinplayer((player: ObjectRef) => {
+	player.get_inventory().set_size("hand", 1);
+	player.get_inventory().set_stack("hand", 1, "crafter_hand:player");
+});
