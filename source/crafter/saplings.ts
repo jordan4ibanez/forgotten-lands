@@ -5,7 +5,7 @@
 //local sapling_max = 720
 //make sapling grow
 
-local function sapling_grow(pos)
+function sapling_grow(pos: Vec3): void {
 	if minetest.get_node_light(pos, nil) < 10 then
 		//print("failed to grow at "..dump(pos))
 		return
@@ -38,7 +38,7 @@ local function sapling_grow(pos)
 			end
 		end
 	end
-end
+}
 
 minetest.register_node("main:sapling", {
 	description = "Sapling",
