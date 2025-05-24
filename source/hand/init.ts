@@ -1,15 +1,15 @@
 // The hand
 
 //Create an initial hand tool
-minetest.register_item(":", {
+core.register_item(":", {
 	type = "none",
 	wield_image = "nothing.png",
 	wield_scale = {x=1,y=1,z=2.5},
 })
 
 // This is a fake node that should never be placed in the world
-local def = minetest.registered_items[""]
-minetest.register_node("hand:player", {
+local def = core.registered_items[""]
+core.register_node("hand:player", {
 	description = "",
 	tiles = {"player.png"},
 	visual_scale = 1,
@@ -42,8 +42,8 @@ minetest.register_node("hand:player", {
 	// Prevent construction
 	node_placement_prediction = "",
 	on_construct = function(pos)
-		minetest.log("error", "Tried to place hand at "..minetest.pos_to_string(pos))
-		minetest.remove_node(pos)
+		core.log("error", "Tried to place hand at "..core.pos_to_string(pos))
+		core.remove_node(pos)
 	end,
 	drop = "",
 	on_drop = function()
@@ -53,7 +53,7 @@ minetest.register_node("hand:player", {
 	range = def.range,
 })
 
-minetest.register_node("hand:creative", {
+core.register_node("hand:creative", {
 	description = "",
 	tiles = {"player.png"},
 	visual_scale = 1,
@@ -83,8 +83,8 @@ minetest.register_node("hand:creative", {
 	// Prevent construction
 	node_placement_prediction = "",
 	on_construct = function(pos)
-		minetest.log("error", "Tried to place hand at "..minetest.pos_to_string(pos))
-		minetest.remove_node(pos)
+		core.log("error", "Tried to place hand at "..core.pos_to_string(pos))
+		core.remove_node(pos)
 	end,
 	drop = "",
 	on_drop = function()
@@ -96,7 +96,7 @@ minetest.register_node("hand:creative", {
 
 
 //Create a hand list and then enable the hand node
-minetest.register_on_joinplayer(function(player)
+core.register_on_joinplayer(function(player)
 	player:get_inventory():set_size("hand", 1)
 	player:get_inventory():set_stack("hand", 1, "hand:player")
 end)
