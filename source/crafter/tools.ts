@@ -17,14 +17,14 @@ namespace crafter {
 		10, 52, 131, 200, 250, 32, 1561, 2300, 3000, 5000,
 	];
 
-	// --unbreakable time definition
-	// --this is used so ores still have sounds
-	// --and particles but don't drop anything or
-	// --finish mining, 32 bit integer limit
-	// --32 bit integer limit so that the initial
-	// --mining texture does not show up until a week
-	// --after you've continuously held down the button
-	// local ub = 2147483647 -- unbreakable
+	// Unbreakable time definition.
+	// This is used so ores still have sounds
+	// and particles but don't drop anything or
+	// finish mining, 32 bit integer limit.
+	// 32 bit integer limit so that the initial
+	// mining texture does not show up until a week
+	// after you've continuously held down the button.
+	const ub: number = 2147483647 // unbreakable
 
 	// for level_id,material in pairs(material) do
 	// 	for id,tool in pairs(tool) do
