@@ -1546,14 +1546,24 @@ namespace crafter {
 
 	// Shears.
 	core.register_tool("main:shears", {
-		description : "Shears",
-		inventory_image : "shears.png",
-		tool_capabilities : {
-			groupcaps : {
-			leaves : {times:{[1]: 0.05,[2]:0.05,[3]:0.05,[4]:0.05,[5]:0.05}, uses:500, maxlevel:1},
-			}
+		description: "Shears",
+		inventory_image: "shears.png",
+		tool_capabilities: {
+			groupcaps: {
+				leaves: {
+					times: {
+						[1]: 0.05,
+						[2]: 0.05,
+						[3]: 0.05,
+						[4]: 0.05,
+						[5]: 0.05,
+					},
+					uses: 500,
+					maxlevel: 1,
+				},
+			},
 		},
-		sound : {breaks : "default_tool_breaks"}, // change this //todo: figure out what to change this to lol
-		groups : {shears : 1}
-	})
+		sound: { breaks: "default_tool_breaks" }, // change this //todo: figure out what to change this to lol
+		groups: { shears: 1 },
+	});
 }
