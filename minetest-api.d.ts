@@ -1326,7 +1326,8 @@ declare global {
 		spread: Vec3;
 		seed: number;
 		octaves: number;
-		persistence: number;
+		persistence?: number;
+		persist?: number;
 		lacunarity: number;
 		flags: NoiseFlags;
 	}
