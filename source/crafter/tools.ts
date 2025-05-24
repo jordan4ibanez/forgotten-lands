@@ -1455,7 +1455,6 @@ namespace crafter {
 							core.item_place(itemstack, placer, pointed_thing);
 							return;
 						}
-						// todo: invert this logic
 						if (!torch || !is_air || !walkable) {
 							return;
 						}
