@@ -599,7 +599,7 @@ namespace crafter {
 							wear = 25
 						}else if (material == "ruby") {
 							groupcaps2={
-								wood = {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.5}, uses=5000, maxlevel=1}
+								wood : {times:{[1]: 0.05,[2]:0.05,[3]:0.05,[4]:0.05,[5]:0.5}, uses:5000, maxlevel:1}
 							}
 							damage = 18
 							wear = 10
