@@ -1,7 +1,7 @@
 // Quick definition of tools.
 namespace crafter {
 	const tool: string[] = ["shovel", "axe", "pick"];
-	const material: string[] = [
+	const __materials: string[] = [
 		"coal",
 		"wood",
 		"stone",
@@ -26,7 +26,7 @@ namespace crafter {
 	// after you've continuously held down the button.
 	const ub: number = 2147483647 // unbreakable
 
-	// for level_id,material in pairs(material) do
+	for (const [level_id,material] of pairs(__materials)) {
 	// 	for id,tool in pairs(tool) do
 
 	// 		--print(id,tool,level,material)
@@ -352,7 +352,7 @@ namespace crafter {
 	// 				end
 	// 			end,
 	// 		})
-	// 	end
+}
 
 	// 	local wear
 
