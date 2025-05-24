@@ -27,12 +27,12 @@ function sapling_grow(pos: Vec3): void {
 			const node_name: string = core.get_node(
 				vector.create3d(pos.x, pos.y + i, pos.z)
 			).name;
-			if (node_name != "air" && node_name != "main:leaves") {
+			if (node_name != "air" && node_name != "crafter:leaves") {
 				good_to_grow = false;
 			}
 		}
 		if (good_to_grow) {
-			core.set_node(pos, { name: "main:tree" });
+			core.set_node(pos, { name: "crafter:tree" });
 
 			const schemmy: number = math.random(1, 2);
 
@@ -50,14 +50,14 @@ function sapling_grow(pos: Vec3): void {
 			}
 			for (let i = 1; i <= max; i++) {
 				core.set_node(vector.create3d(pos.x, pos.y + i, pos.z), {
-					name: "main:tree",
+					name: "crafter:tree",
 				});
 			}
 		}
 	}
 }
 
-core.register_node("main:sapling", {
+core.register_node("crafter:sapling", {
 	description: "Sapling",
 	drawtype: Drawtype.plantlike,
 	inventory_image: "sapling.png",
@@ -78,7 +78,7 @@ core.register_node("main:sapling", {
 		flammable: 1,
 	},
 	sounds: crafter.dirtSound(),
-	drop: "main:sapling",
+	drop: "crafter:sapling",
 	node_placement_prediction: "",
 	selection_box: {
 		type: Nodeboxtype.fixed,
@@ -152,7 +152,7 @@ core.register_node("main:sapling", {
 			) > 0 &&
 			core.get_node(pointed_thing.above).name == "air"
 		) {
-			core.set_node(pointed_thing.above, { name: "main:sapling" });
+			core.set_node(pointed_thing.above, { name: "crafter:sapling" });
 			core.sound_play("dirt", { pos: pointed_thing.above });
 			itemstack.take_item(1);
 			return itemstack;
