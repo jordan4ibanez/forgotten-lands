@@ -169,8 +169,7 @@ core.register_decoration({
 	biomes : ["grassland"],
 	y_max : 31000,
 	y_min : 0,
-    // FIXME: put this in the main namespace
-	// schematic : tree_big,
+	schematic : crafter.tree_big,
 	flags : "place_center_x, place_center_z",
 	rotation : "random",
 	place_offset_y : 1,
@@ -185,8 +184,7 @@ core.register_decoration({
 	biomes : ["grassland"],
 	y_max : 31000,
 	y_min : 0,
-    // FIXME: put this in the main namespace
-	// schematic : tree_small,
+	schematic : crafter.tree_small,
 	flags : "place_center_x, place_center_z",
 	rotation : "random",
 	place_offset_y : 1,
