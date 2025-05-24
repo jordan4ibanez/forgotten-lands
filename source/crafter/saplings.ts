@@ -6,10 +6,13 @@
 //make sapling grow
 
 function sapling_grow(pos: Vec3): void {
-	if core.get_node_light(pos, nil) < 10 then
+    {
+    const light: number | null = core.get_node_light(pos, null);
+	if (light && light < 10) {
 		//print("failed to grow at "..dump(pos))
 		return
-	end
+    }
+    }
 	//print("growing at "..dump(pos))
 	if core.get_item_group(core.get_node(vector.new(pos.x,pos.y-1,pos.z)).name, "soil") > 0 then
 		local good_to_grow = true
