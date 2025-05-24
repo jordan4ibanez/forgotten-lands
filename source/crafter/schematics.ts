@@ -17,16 +17,16 @@ namespace crafter {
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
@@ -49,20 +49,20 @@ namespace crafter {
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
 			{ name: "ignore" }, // middle layer
 			{ name: "ignore" },
 			{ name: "ignore" },
@@ -73,32 +73,32 @@ namespace crafter {
 			// The side of the bush, with the ignore on top
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:tree" },
+			{ name: "crafter:tree" },
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:tree" },
+			{ name: "crafter:tree" },
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:tree" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:tree" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:tree" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:tree" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
 			{ name: "ignore" }, // middle layer
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:leaves" },
+			{ name: "crafter:leaves" },
 			{ name: "ignore" },
 			{ name: "ignore" }, // top layer
 
@@ -113,20 +113,20 @@ namespace crafter {
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
 			{ name: "ignore" }, // middle layer
 			{ name: "ignore" },
 			{ name: "ignore" },
@@ -144,16 +144,16 @@ namespace crafter {
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
 			{ name: "ignore" },
 			{ name: "ignore" },
 			{ name: "ignore" },
@@ -177,30 +177,30 @@ namespace crafter {
 			{ name: "air" },
 			{ name: "air" },
 			{ name: "air" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // middle layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // middle layer
 			{ name: "air" },
 			{ name: "air" },
 			{ name: "air" }, // top layer
 			// The center of the bush, with stem at the base and a pointy leave 2 nodes above
 			{ name: "air" },
-			{ name: "main:tree" },
+			{ name: "crafter:tree" },
 			{ name: "air" },
 			{ name: "air" },
-			{ name: "main:tree" },
+			{ name: "crafter:tree" },
 			{ name: "air" },
-			{ name: "main:leaves" },
-			{ name: "main:tree" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // middle layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:tree" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // middle layer
 			{ name: "air" },
-			{ name: "main:leaves" },
+			{ name: "crafter:leaves" },
 			{ name: "air" }, // top layer
 			// The other side of the bush, same as first side
 			{ name: "air" },
@@ -209,12 +209,12 @@ namespace crafter {
 			{ name: "air" },
 			{ name: "air" },
 			{ name: "air" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // lower layer
-			{ name: "main:leaves" },
-			{ name: "main:leaves" },
-			{ name: "main:leaves" }, // middle layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // lower layer
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" },
+			{ name: "crafter:leaves" }, // middle layer
 			{ name: "air" },
 			{ name: "air" },
 			{ name: "air" }, // top layer
