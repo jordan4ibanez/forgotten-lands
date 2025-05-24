@@ -160,15 +160,15 @@ core.register_node("main:sapling", {
 	},
 });
 
-//growing abm for sapling
-// core.register_abm({
-// 	label = "Tree Grow",
-// 	nodenames = {"group:sapling"},
-// 	neighbors = {"group:soil"},
-// 	interval = 6,
-// 	chance = 250,
-// 	catch_up = true,
-// 	action = function(pos)
-// 		sapling_grow(pos)
-// 	end,
-// })
+// Growing abm for sapling.
+core.register_abm({
+	label: "Tree Grow",
+	nodenames: ["group:sapling"],
+	neighbors: ["group:soil"],
+	interval: 6,
+	chance: 250,
+	catch_up: true,
+	action: (pos: Vec3) => {
+		sapling_grow(pos);
+	},
+});
