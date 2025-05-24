@@ -1338,9 +1338,9 @@ declare global {
 		ore: string;
 		ore_param2?: number;
 		wherein: string | string[];
-		clust_scarcity: number;
-		clust_num_ores: number;
-		clust_size: number;
+		clust_scarcity?: number;
+		clust_num_ores?: number;
+		clust_size?: number;
 		y_min: number;
 		y_max: number;
 		flags?: OreFlags;
