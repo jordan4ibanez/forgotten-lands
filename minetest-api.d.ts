@@ -1010,7 +1010,7 @@ declare global {
 		wield_overlay?: string;
 		wield_scale?: Vec3;
 		palette?: string;
-		color?: string;
+		color?: DynamicColorSpec;
 		stack_max?: number;
 		range?: number;
 		liquids_pointable?: boolean;
@@ -1068,7 +1068,8 @@ declare global {
 	}
 
 	/** @noSelf **/
-	interface NodeDefinition {
+	interface NodeDefinition extends ItemDefinition {
+		// -- <all fields allowed in item definitions>
 		description?: string;
 		drawtype?: Drawtype;
 		visual_scale?: number;
