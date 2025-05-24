@@ -1484,31 +1484,31 @@ namespace crafter {
 
 			let wear: number = 0
 
-			if (material == "wood") then
+			if (material == "wood") {
 				damage = 4
 				wear = 500
-			elseif (material == "stone") then
+			elseif (material == "stone") {
 				damage = 5
 				wear = 400
-			elseif (material == "coal") then
+			elseif (material == "coal") {
 				damage = 2
 				wear = 2000
-			elseif (material == "lapis") then
+			elseif (material == "lapis") {
 				damage = 5
 				wear = 350
-			elseif (material == "iron") then
+			elseif (material == "iron") {
 				damage = 6
 				wear = 300
-			elseif (material == "gold") then
+			elseif (material == "gold") {
 				damage = 4
 				wear = 1000
-			elseif (material == "diamond") then
+			elseif (material == "diamond") {
 				damage = 7
 				wear = 100
-			elseif (material == "emerald") then
+			elseif (material == "emerald") {
 				damage = 9
 				wear = 50
-			elseif (material == "sapphire") then
+			elseif (material == "sapphire") {
 				damage = 11
 				wear = 25
 			end
