@@ -543,67 +543,67 @@ namespace crafter {
 			// ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 			
 					if (tool == "axe") {
-						if (material == "wood") then
+						if (material == "wood") {
 							groupcaps2={
 								wood = {times={[1]=1.5,[2]=3,[3]=6,[4]=9,[5]=12}, uses=59, maxlevel=1}
 							}
 							damage = 4
 							wear = 500
-						elseif (material == "stone") then
+						} else if (material == "stone") {
 							groupcaps2={
 								wood = {times={[1]=0.75,[2]=0.75,[3]=3,[4]=6,[5]=9}, uses=131, maxlevel=1}
 							}
 							damage=6
 							wear = 400
-						elseif (material == "coal") then
+						}else if (material == "coal") {
 							groupcaps2={
 								wood = {times={[1]=0.075,[2]=0.075,[3]=3,[4]=6,[5]=9}, uses=10, maxlevel=1}
 							}
 							damage=3
 							wear = 2000
-						elseif (material == "lapis") then
+						}else if (material == "lapis") {
 							groupcaps2={
 								wood = {times={[1]=0.6,[2]=0.6,[3]=1,[4]=4,[5]=7}, uses=200, maxlevel=1}
 							}
 							damage=7
 							wear = 350
-						elseif (material == "iron") then
+						}else if (material == "iron") {
 							groupcaps2={
 								wood = {times={[1]=0.5,[2]=0.5,[3]=0.5,[4]=3,[5]=6}, uses=250, maxlevel=1}
 							}
 							damage = 8
 							wear = 300
-						elseif (material == "gold") then
+						}else if (material == "gold") {
 							groupcaps2={
 								wood = {times={[1]=0.25,[2]=0.25,[3]=0.25,[4]=0.25,[5]=3}, uses=32, maxlevel=1}
 							}
 							damage = 7
 							wear = 1000
-						elseif (material == "diamond") then
+						}else if (material == "diamond") {
 							groupcaps2={
 								wood = {times={[1]= 0.4,[2]=0.4,[3]=0.4,[4]=0.4,[5]=3}, uses=1561, maxlevel=1}
 							}
 							damage = 9
 							wear = 100
-						elseif (material == "emerald") then
+						}else if (material == "emerald") {
 							groupcaps2={
 								wood = {times={[1]= 0.2,[2]=0.2,[3]=0.2,[4]=0.2,[5]=1.5}, uses=2300, maxlevel=1}
 							}
 							damage = 12
 							wear = 50
-						elseif (material == "sapphire") then
+						}else if (material == "sapphire") {
 							groupcaps2={
 								wood = {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1}, uses=3000, maxlevel=1}
 							}
 							damage = 14
 							wear = 25
-						elseif (material == "ruby") then
+						}else if (material == "ruby") {
 							groupcaps2={
 								wood = {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=05}, uses=5000, maxlevel=1}
 							}
 							damage = 18
 							wear = 10
-						end
+                        }
                     }
 
 			// --[[
