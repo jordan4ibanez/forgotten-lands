@@ -1,5 +1,6 @@
 // local minetest,math,vector,pairs,ItemStack,ipairs = minetest,math,vector,pairs,ItemStack,ipairs
 
+namespace item_handling {
 
 utility.loadFiles(["magnet"])
 
@@ -537,3 +538,5 @@ end
 // 		end
 // 	end,
 // })
+
+}
