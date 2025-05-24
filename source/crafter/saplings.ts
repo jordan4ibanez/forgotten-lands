@@ -84,37 +84,80 @@ core.register_node("main:sapling", {
 		type: Nodeboxtype.fixed,
 		fixed: [-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16],
 	},
-	// on_place =  function(itemstack, placer, pointed_thing)
-	// 	if not pointed_thing.type == "node" then
-	// 		return
-	// 	end
+	on_place: (
+		itemstack: ItemStackObject,
+		placer: ObjectRef,
+		pointed_thing: PointedThing
+	) => {
+		if (pointed_thing.type != "node") {
+			return;
+		}
 
-	// 	local sneak = placer:get_player_control().sneak
-	// 	local noddef = core.registered_nodes[core.get_node(pointed_thing.under).name]
+		const sneak: boolean = placer.get_player_control().sneak;
+		const noddef: NodeDefinition | null =
+			core.registered_nodes[core.get_node(pointed_thing.under).name];
+		if (noddef == null) {
+			throw new Error("Sapling error");
+		}
 
-	// 	if not sneak and noddef.on_rightclick then
-	// 		core.item_place(itemstack, placer, pointed_thing)
-	// 		return
-	// 	end
+		if (!sneak && noddef.on_rightclick) {
+			core.item_place(itemstack, placer, pointed_thing);
+			return;
+		}
 
-	// 	local buildable = core.registered_nodes[core.get_node(pointed_thing.under).name].buildable_to
-	// 	//replace buildable
-	// 	if buildable and core.get_item_group(core.get_node(vector.new(pointed_thing.under.x,pointed_thing.under.y-1,pointed_thing.under.z)).name, "soil") > 0 then
-	// 		return(core.item_place(itemstack, placer, pointed_thing))
-	// 	end
-	// 	local buildable = core.registered_nodes[core.get_node(pointed_thing.above).name].buildable_to
-	// 	if buildable and core.get_item_group(core.get_node(vector.new(pointed_thing.above.x,pointed_thing.above.y-1,pointed_thing.above.z)).name, "soil") > 0 then
-	// 		return(core.item_place(itemstack, placer, pointed_thing))
-	// 	end
-	// 	//place sapling
-	// 	local pos = pointed_thing.above
-	// 	if core.get_item_group(core.get_node(vector.new(pos.x,pos.y-1,pos.z)).name, "soil") > 0 and core.get_node(pointed_thing.above).name == "air" then
-	// 		core.set_node(pointed_thing.above, {name="main:sapling"})
-	// 		core.sound_play("dirt",{pos=pointed_thing.above})
-	// 		itemstack:take_item(1)
-	// 		return(itemstack)
-	// 	end
-	// end,
+		let buildable: boolean =
+			core.registered_nodes[core.get_node(pointed_thing.under).name]
+				.buildable_to || false;
+
+		//replace buildable
+		if (
+			buildable &&
+			core.get_item_group(
+				core.get_node(
+					vector.create3d(
+						pointed_thing.under.x,
+						pointed_thing.under.y - 1,
+						pointed_thing.under.z
+					)
+				).name,
+				"soil"
+			) > 0
+		) {
+			return core.item_place(itemstack, placer, pointed_thing);
+		}
+		buildable =
+			core.registered_nodes[core.get_node(pointed_thing.above).name]
+				.buildable_to || false;
+		if (
+			buildable &&
+			core.get_item_group(
+				core.get_node(
+					vector.create3d(
+						pointed_thing.above.x,
+						pointed_thing.above.y - 1,
+						pointed_thing.above.z
+					)
+				).name,
+				"soil"
+			) > 0
+		) {
+			return core.item_place(itemstack, placer, pointed_thing);
+		}
+		//place sapling
+		const pos: Vec3 = pointed_thing.above;
+		if (
+			core.get_item_group(
+				core.get_node(vector.create3d(pos.x, pos.y - 1, pos.z)).name,
+				"soil"
+			) > 0 &&
+			core.get_node(pointed_thing.above).name == "air"
+		) {
+			core.set_node(pointed_thing.above, { name: "main:sapling" });
+			core.sound_play("dirt", { pos: pointed_thing.above });
+			itemstack.take_item(1);
+			return itemstack;
+		}
+	},
 });
 
 //growing abm for sapling
