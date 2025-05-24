@@ -1513,6 +1513,10 @@ namespace crafter {
 			wear = 25;
 		}
 
+        if (typeof material != "string") {
+            throw new Error("Material is not a string.");
+        }
+
 			// Add swords.
 			core.register_tool("main:"+material+"sword", {
 				description : string.gsub(material, "^%l", string.upper)+" Sword",
@@ -1523,9 +1527,9 @@ namespace crafter {
 					groupcaps:{leaves : {times:{[4]:0.7,[3]:0.7,[2]:0.7,[1]:0.7}, uses:sword_durability[level_id], maxlevel:1},},
 					damage_groups : {damage : damage},
 				},
-				mob_hit_wear = wear,
-				sound = {breaks = {name="tool_break",gain=0.4}}, // change this //todo: figure out what to change this to lol
-				groups = {damage=damage }
+				mob_hit_wear : wear,
+				sound : {breaks : {name:"tool_break",gain:0.4}}, // change this //todo: figure out what to change this to lol
+				groups : {damage:damage }
 			})
 	}
 
