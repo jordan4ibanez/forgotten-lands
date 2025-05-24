@@ -14,7 +14,8 @@ function sapling_grow(pos: Vec3): void {
     }
     }
 	//print("growing at "..dump(pos))
-	if core.get_item_group(core.get_node(vector.new(pos.x,pos.y-1,pos.z)).name, "soil") > 0 then
+    // todo: invert this logic
+	if (core.get_item_group(core.get_node(vector.create3d(pos.x,pos.y-1,pos.z)).name, "soil") > 0) {
 		local good_to_grow = true
 		//check if room to grow (leaves or air)
 		for i = 1,4 do
@@ -40,7 +41,7 @@ function sapling_grow(pos: Vec3): void {
 				core.set_node(vector.new(pos.x,pos.y+i,pos.z),{name="main:tree"})
 			end
 		end
-	end
+    }
 }
 
 core.register_node("main:sapling", {
