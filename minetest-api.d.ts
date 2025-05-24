@@ -507,9 +507,9 @@ interface core {
 		position: Vec3,
 		schematic: SchematicDefinition | string,
 		rotation: SchematicRotation,
-		replacements: Map<string, string>,
+		replacements: Map<string, string> | null,
 		forcePlacement: boolean,
-		flags: SchematicPlacementFlag[]
+		flags: SchematicPlacementFlag | string
 	): void;
 	place_schematic_on_vmanip(
 		voxelManip: VoxelManipObject,
