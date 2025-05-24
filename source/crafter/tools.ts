@@ -1409,7 +1409,7 @@ namespace crafter {
 			}
 
 					core.register_tool("main:"..material..tool, {
-						description = material:gsub("^%l", string.upper).." "..tool:gsub("^%l", string.upper),
+						description = string.gsub(material, "^%l", string.upper).." "..tool:gsub("^%l", string.upper),
 						inventory_image = material..tool..".png",
 						tool_capabilities = {
 							full_punch_interval = 0,
