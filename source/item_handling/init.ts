@@ -1,7 +1,7 @@
-local minetest,math,vector,pairs,ItemStack,ipairs = minetest,math,vector,pairs,ItemStack,ipairs
+// local minetest,math,vector,pairs,ItemStack,ipairs = minetest,math,vector,pairs,ItemStack,ipairs
 
-local path = minetest.get_modpath("itemhandling")
-dofile(path.."/magnet.lua")
+
+utility.loadFiles(["magnet"])
 
 
 local creative_mode = minetest.settings:get_bool("creative_mode")
