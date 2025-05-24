@@ -13,13 +13,13 @@ const creative_mode: boolean = core.settings.get_bool("creative_mode") || false
 
 
 if not creative_mode then
-	function minetest.handle_node_drops(pos, drops, digger)
+	function core.handle_node_drops(pos, drops, digger)
 		meta = digger:get_wielded_item():get_meta()
 		--careful = meta:get_int("careful")
 		fortune = 1--meta:get_int("fortune") + 1
 		autorepair = meta:get_int("autorepair")
 		--if careful > 0 then
-		--	drops = {minetest.get_node(pos).name}
+		--	drops = {core.get_node(pos).name}
 		--end
 		for i = 1,fortune do
 			for _,item in ipairs(drops) do
@@ -32,7 +32,7 @@ if not creative_mode then
 					name = item:get_name()
 				end
 				for i=1,count do
-					object = minetest.add_item(pos, name)
+					object = core.add_item(pos, name)
 					if object ~= nil then
 						object:set_velocity({
 							x=math.random(-2,2)*math.random(), 
@@ -42,9 +42,9 @@ if not creative_mode then
 					end
 				end
 			end
-	        local experience_amount = minetest.get_item_group(minetest.get_node(pos).name,"experience")
+	        local experience_amount = core.get_item_group(core.get_node(pos).name,"experience")
 	        if experience_amount > 0 then
-	            minetest.throw_experience(pos, experience_amount)
+	            core.throw_experience(pos, experience_amount)
 	        end
 		end
 		--auto repair the item
@@ -56,9 +56,9 @@ if not creative_mode then
 	end
 --creative
 else
-	function minetest.handle_node_drops(pos, drops, digger)
+	function core.handle_node_drops(pos, drops, digger)
 	end
-	minetest.register_on_dignode(function(pos, oldnode, digger)
+	core.register_on_dignode(function(pos, oldnode, digger)
 		
 		--if digger and digger:is_player() then
 		--	local inv = digger:get_inventory()
@@ -67,17 +67,17 @@ else
 		--	end
 		--end
 	end)
-	minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
+	core.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
 		return(itemstack:get_name())
 	end)
 end
 
 // local stack
 // local object
-// function minetest.throw_item(pos, item)
+// function core.throw_item(pos, item)
 // 	-- Take item in any format
 // 	stack = item
-// 	object = minetest.add_entity(pos, "__builtin:item")	
+// 	object = core.add_entity(pos, "__builtin:item")	
 // 	if object then
 // 		object:get_luaentity():set_item(stack)
 // 		object:set_velocity({
@@ -90,9 +90,9 @@ end
 // end
 
 // local object
-// function minetest.throw_experience(pos, amount)
+// function core.throw_experience(pos, amount)
 //     for i = 1,amount do
-//         object = minetest.add_entity(pos, "experience:orb")
+//         object = core.add_entity(pos, "experience:orb")
 //         if object then
 //             object:set_velocity({
 // 				x=math.random(-2,2)*math.random(), 
@@ -112,7 +112,7 @@ end
 // local item
 // local object
 // local dir
-// function minetest.item_drop(itemstack, dropper, pos)
+// function core.item_drop(itemstack, dropper, pos)
 // 	dropper_is_player = dropper and dropper:is_player()
 // 	c_pos = table.copy(pos)
 // 	if dropper_is_player then
@@ -128,7 +128,7 @@ end
 // 	end
 
 // 	item = itemstack:take_item(count)
-// 	object = minetest.add_item(c_pos, item)
+// 	object = core.add_item(c_pos, item)
 // 	if object then
 // 		if dropper_is_player then
 // 			dir = dropper:get_look_dir()
@@ -158,7 +158,7 @@ end
 
 // 	itemname = stack:is_known() and stack:get_name() or "unknown"
 
-// 	def = minetest.registered_nodes[itemname]
+// 	def = core.registered_nodes[itemname]
 
 // 	self.object:set_properties({
 // 		textures = {itemname},
@@ -169,7 +169,7 @@ end
 
 
 // local get_staticdata = function(self)
-// 	return minetest.serialize({
+// 	return core.serialize({
 // 		itemstring = self.itemstring,
 // 		age = self.age,
 // 		dropped_by = self.dropped_by,
@@ -186,7 +186,7 @@ end
 // local data
 // local on_activate = function(self, staticdata, dtime_s)
 // 	if string.sub(staticdata, 1, string.len("return")) == "return" then
-// 		data = minetest.deserialize(staticdata)
+// 		data = core.deserialize(staticdata)
 // 		if data and type(data) == "table" then
 // 			self.itemstring = data.itemstring
 // 			self.age = (data.age or 0) + dtime_s
@@ -272,7 +272,7 @@ end
 // 			return
 // 		end
 
-// 		collector = minetest.get_player_by_name(self.collector)
+// 		collector = core.get_player_by_name(self.collector)
 // 		if collector then
 // 			self.magnet_timer = self.magnet_timer + dtime	
 
@@ -330,13 +330,13 @@ end
 // 	end
 
 // 	if moveresult and moveresult.touching_ground and table.getn(moveresult.collisions) > 0 then
-// 		node = minetest.get_node_or_nil(moveresult.collisions[1].node_pos)
+// 		node = core.get_node_or_nil(moveresult.collisions[1].node_pos)
 // 	else
 // 		node = nil
 // 	end
 	
 
-// 	i_node = minetest.get_node_or_nil(pos)
+// 	i_node = core.get_node_or_nil(pos)
 
 // 	-- Remove nodes in 'ignore' and burns items
 // 	if i_node then
@@ -344,7 +344,7 @@ end
 // 			self.object:remove()
 // 			return
 // 		elseif i_node and burn_nodes[i_node.name] then
-// 			minetest.add_particlespawner({
+// 			core.add_particlespawner({
 // 				amount = 6,
 // 				time = 0.001,
 // 				minpos = pos,
@@ -361,7 +361,7 @@ end
 // 				vertical = false,
 // 				texture = "smoke.png",
 // 			})
-// 			minetest.sound_play("fire_extinguish", {pos=pos,gain=0.3,pitch=math.random(80,100)/100})
+// 			core.sound_play("fire_extinguish", {pos=pos,gain=0.3,pitch=math.random(80,100)/100})
 // 			self.object:remove()
 // 			return
 // 		end
@@ -369,9 +369,9 @@ end
 
 
 // 	is_stuck = false
-// 	snode = minetest.get_node_or_nil(pos)
+// 	snode = core.get_node_or_nil(pos)
 // 	if snode and snode ~= "air" then
-// 		snode = minetest.registered_nodes[snode.name] or {}
+// 		snode = core.registered_nodes[snode.name] or {}
 // 		is_stuck = (snode.walkable == nil or snode.walkable == true)
 // 			and (snode.collision_box == nil or snode.collision_box.type == "regular")
 // 			and (snode.node_box == nil or snode.node_box.type == "regular")
@@ -382,8 +382,8 @@ end
 // 		shootdir = nil
 // 		-- Check which one of the 4 sides is free
 // 		for o = 1, #order do
-// 			cnode = minetest.get_node(vector.add(pos, order[o])).name
-// 			cdef = minetest.registered_nodes[cnode] or {}
+// 			cnode = core.get_node(vector.add(pos, order[o])).name
+// 			cdef = core.registered_nodes[cnode] or {}
 // 			if cnode ~= "ignore" and cdef.walkable == false then
 // 				shootdir = order[o]
 // 				break
@@ -393,7 +393,7 @@ end
 // 		-- If none of the 4 sides is free, check upwards
 // 		if not shootdir then
 // 			shootdir = {x=0, y=1, z=0}
-// 			cnode = minetest.get_node(vector.add(pos, shootdir)).name
+// 			cnode = core.get_node(vector.add(pos, shootdir)).name
 // 			if cnode == "ignore" then
 // 				shootdir = nil -- Do not push into ignore
 // 			end
@@ -430,10 +430,10 @@ end
 
 // 	change = false
 // 	-- Slide on slippery nodes
-// 	def = node and minetest.registered_nodes[node.name]
+// 	def = node and core.registered_nodes[node.name]
 // 	vel = self.object:get_velocity()
 // 	if def and def.walkable then
-// 		slippery = minetest.get_item_group(node.name, "slippery")
+// 		slippery = core.get_item_group(node.name, "slippery")
 // 		if slippery ~= 0 then
 // 			if math.abs(vel.x) > 0.2 or math.abs(vel.z) > 0.2 then
 // 				-- Horizontal deceleration
@@ -471,7 +471,7 @@ end
 // end
 
 
-// minetest.register_entity(":__builtin:item", {
+// core.register_entity(":__builtin:item", {
 // 	initial_properties = {
 // 		hp_max           = 1,
 // 		visual           = "wielditem",
@@ -520,17 +520,17 @@ end
 // })
 
 
-// minetest.register_chatcommand("gimme", {
+// core.register_chatcommand("gimme", {
 // 	params = "nil",
 // 	description = "Spawn x amount of a mob, used as /spawn 'mob' 10 or /spawn 'mob' for one",
 // 	privs = {server=true},
 // 	func = function(name)
-// 		local player = minetest.get_player_by_name(name)
+// 		local player = core.get_player_by_name(name)
 // 		local pos = player:get_pos()
 // 		pos.y = pos.y + 5
 // 		pos.x = pos.x + 8
 // 		for i = 1,1000 do
-// 			minetest.throw_item(pos, "main:dirt")
+// 			core.throw_item(pos, "main:dirt")
 // 		end
 // 	end,
 // })
