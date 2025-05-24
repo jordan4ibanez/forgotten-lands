@@ -29,7 +29,7 @@ namespace crafter {
 	for (const [level_id, material] of pairs(__materials)) {
 		for (const [id, tool] of pairs(__tools)) {
 			// print(id,tool,level,material)
-			let groupcaps: number = 0;
+			let groupcaps2: { [id: string]: GroupCap } ;
 			let damage: number = 0;
 			let wear: number = 0;
 
@@ -43,95 +43,95 @@ namespace crafter {
 					if (tool == "shovel") {
 						if (material == "wood") {
 							groupcaps2={
-								dirt =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
-								snow =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
-								grass = {times={[1]=0.45,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=59, maxlevel=1},
-								sand =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
+								dirt :  {times:{[1]:0.4,[2]:1.5,[3]:3,[4]:6,[5]:12},    uses:59, maxlevel:1},
+								snow :  {times:{[1]:0.4,[2]:1.5,[3]:3,[4]:6,[5]:12},    uses:59, maxlevel:1},
+								grass : {times:{[1]:0.45,[2]:1.5,[3]:3,[4]:6,[5]:12},   uses:59, maxlevel:1},
+								sand :  {times:{[1]:0.4,[2]:1.5,[3]:3,[4]:6,[5]:12},    uses:59, maxlevel:1},
 							}
-							damage = 2.5
-							wear = 500
-						elseif material == "stone" then
+							damage : 2.5
+							wear : 500
+                        } else if (material == "stone") {
 							groupcaps2={
-								dirt =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
-								snow =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
-								grass = {times={[1]=0.25,[2]=0.25,[3]=1.5,[4]=3,[5]=6}, uses=131, maxlevel=1},
-								sand =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
+								dirt :  {times:{[1]:0.2,[2]:0.2,[3]:1.5,[4]:3,[5]:6},   uses:131, maxlevel:1},
+								snow :  {times:{[1]:0.2,[2]:0.2,[3]:1.5,[4]:3,[5]:6},   uses:131, maxlevel:1},
+								grass : {times:{[1]:0.25,[2]:0.25,[3]:1.5,[4]:3,[5]:6}, uses:131, maxlevel:1},
+								sand :  {times:{[1]:0.2,[2]:0.2,[3]:1.5,[4]:3,[5]:6},   uses:131, maxlevel:1},
 							}
 							damage = 3.5
 							wear = 400
-						elseif material == "coal" then
+                        } else if (material == "coal") {
 							groupcaps2={
-								dirt =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
-								snow =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
-								grass = {times={[1]=0.025,[2]=0.025,[3]=1.5,[4]=3,[5]=6}, uses=10, maxlevel=1},
-								sand =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
+								dirt :  {times:{[1]:0.02,[2]:0.02,[3]:1.5,[4]:3,[5]:6},   uses:10, maxlevel:1},
+								snow :  {times:{[1]:0.02,[2]:0.02,[3]:1.5,[4]:3,[5]:6},   uses:10, maxlevel:1},
+								grass : {times:{[1]:0.025,[2]:0.025,[3]:1.5,[4]:3,[5]:6}, uses:10, maxlevel:1},
+								sand :  {times:{[1]:0.02,[2]:0.02,[3]:1.5,[4]:3,[5]:6},   uses:10, maxlevel:1},
 							}
 							damage = 3.5
 							wear = 2000
-						elseif material == "lapis" then
+                        }else if (material == "lapis") {
 								groupcaps2={
-									dirt =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-									snow =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-									grass = {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-									sand =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
+									dirt :  {times:{[1]:0.17,[2]:0.17,[3]:0.17,[4]:1.5,[5]:4.5}, uses:190, maxlevel:1},
+									snow :  {times:{[1]:0.17,[2]:0.17,[3]:0.17,[4]:1.5,[5]:4.5}, uses:190, maxlevel:1},
+									grass : {times:{[1]:0.17,[2]:0.17,[3]:0.17,[4]:1.5,[5]:4.5}, uses:190, maxlevel:1},
+									sand :  {times:{[1]:0.17,[2]:0.17,[3]:0.17,[4]:1.5,[5]:4.5}, uses:190, maxlevel:1},
 								}
 								damage = 4
 								wear = 350
-						elseif material == "iron" then
+                            } else if (material == "iron") {
 							groupcaps2={
-								dirt =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-								snow =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-								grass = {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-								sand =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
+								dirt :  {times:{[1]:0.15,[2]:0.15,[3]:0.15,[4]:1.5,[5]:3}, uses:250, maxlevel:1},
+								snow :  {times:{[1]:0.15,[2]:0.15,[3]:0.15,[4]:1.5,[5]:3}, uses:250, maxlevel:1},
+								grass : {times:{[1]:0.15,[2]:0.15,[3]:0.15,[4]:1.5,[5]:3}, uses:250, maxlevel:1},
+								sand :  {times:{[1]:0.15,[2]:0.15,[3]:0.15,[4]:1.5,[5]:3}, uses:250, maxlevel:1},
 							}
 							damage = 4.5
 							wear = 300
-						elseif material == "gold" then
+                            } else if (material == "gold") {
 							groupcaps2={
-								dirt =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-								snow =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-								grass = {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-								sand =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
+								dirt :  {times:{[1]:0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5}, uses:32, maxlevel:1},
+								snow :  {times:{[1]:0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5}, uses:32, maxlevel:1},
+								grass : {times:{[1]:0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5}, uses:32, maxlevel:1},
+								sand :  {times:{[1]:0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5}, uses:32, maxlevel:1},
 							}
 							damage = 2.5
 							wear = 1000
-						elseif material == "diamond" then
+                            } else if (material == "diamond") {
 							groupcaps2={
-								dirt =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
-								snow =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
-								grass = {times={[1]= 0.15,[2]=0.15,[3]=0.15,[4]=0.15,[5]=1.5}, uses=1561, maxlevel=1},
-								sand =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
+								dirt :  {times:{[1]: 0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5},     uses:1561, maxlevel:1},
+								snow :  {times:{[1]: 0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5},     uses:1561, maxlevel:1},
+								grass : {times:{[1]: 0.15,[2]:0.15,[3]:0.15,[4]:0.15,[5]:1.5}, uses:1561, maxlevel:1},
+								sand :  {times:{[1]: 0.1,[2]:0.1,[3]:0.1,[4]:0.1,[5]:1.5},     uses:1561, maxlevel:1},
 							}
 							damage = 5.5
 							wear = 100
-						elseif material == "emerald" then
+                            } else if (material == "emerald") {
 							groupcaps2={
-								dirt =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-								snow =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-								grass = {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-								sand =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
+								dirt :  {times:{[1]: 0.05,[2]:0.05,[3]:0.05,[4]:0.05,[5]:0.05}, uses:2300, maxlevel:1},
+								snow :  {times:{[1]: 0.05,[2]:0.05,[3]:0.05,[4]:0.05,[5]:0.05}, uses:2300, maxlevel:1},
+								grass : {times:{[1]: 0.05,[2]:0.05,[3]:0.05,[4]:0.05,[5]:0.05}, uses:2300, maxlevel:1},
+								sand :  {times:{[1]: 0.05,[2]:0.05,[3]:0.05,[4]:0.05,[5]:0.05}, uses:2300, maxlevel:1},
 							}
 							damage = 7
 							wear = 50
-						elseif material == "sapphire" then
+                            } else if (material == "sapphire") {
 							groupcaps2={
-								dirt =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-								snow =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-								grass = {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-								sand =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
+								dirt :  {times:{[1]: 0.025,[2]:0.025,[3]:0.025,[4]:0.025,[5]:0.025}, uses:3000, maxlevel:1},
+								snow :  {times:{[1]: 0.025,[2]:0.025,[3]:0.025,[4]:0.025,[5]:0.025}, uses:3000, maxlevel:1},
+								grass : {times:{[1]: 0.025,[2]:0.025,[3]:0.025,[4]:0.025,[5]:0.025}, uses:3000, maxlevel:1},
+								sand :  {times:{[1]: 0.025,[2]:0.025,[3]:0.025,[4]:0.025,[5]:0.025}, uses:3000, maxlevel:1},
 							}
 							damage = 9
 							wear = 25
-						elseif material == "ruby" then
+                            } else if (material == "ruby") {
 							groupcaps2={
-								dirt =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-								snow =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-								grass = {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-								sand =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
+								dirt :  {times:{[1]: 0.01,[2]:0.01,[3]:0.01,[4]:0.01,[5]:0.01}, uses:5000, maxlevel:1},
+								snow :  {times:{[1]: 0.01,[2]:0.01,[3]:0.01,[4]:0.01,[5]:0.01}, uses:5000, maxlevel:1},
+								grass : {times:{[1]: 0.01,[2]:0.01,[3]:0.01,[4]:0.01,[5]:0.01}, uses:5000, maxlevel:1},
+								sand :  {times:{[1]: 0.01,[2]:0.01,[3]:0.01,[4]:0.01,[5]:0.01}, uses:5000, maxlevel:1},
 							}
 							damage = 12
 							wear = 10
-						end
+                            }
                         }
 
 			// --[[
