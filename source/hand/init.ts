@@ -1,10 +1,10 @@
 // The hand
 
 //Create an initial hand tool
-core.register_item(":", {
-	type = "none",
-	wield_image = "nothing.png",
-	wield_scale = {x=1,y=1,z=2.5},
+core.register_craftitem(":", {
+	type : "none",
+	wield_image : "nothing.png",
+	wield_scale : vector.create3d({x:1,y:1,z:2.5}),
 })
 
 // This is a fake node that should never be placed in the world
