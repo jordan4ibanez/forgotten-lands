@@ -1,9 +1,9 @@
---[[
-depth = initial level found
-]]--
+
+// depth = initial level found
+
 
 	
--- Dirt
+// Dirt
 core.register_ore({
 	ore_type	  = "blob",
 	ore		 = "main:dirt",
@@ -23,7 +23,7 @@ core.register_ore({
 	},
 })
 
--- Gravel
+// Gravel
 core.register_ore({
 	ore_type	  = "blob",
 	ore		 = "main:gravel",
@@ -63,9 +63,9 @@ core.register_ore({
 	},
 })
 
--- Scatter ores
+// Scatter ores
 
--- Coal
+// Coal
 core.register_ore({
 	ore_type	 = "scatter",
 	ore		= "main:coalore",
@@ -99,7 +99,7 @@ core.register_ore({
 	y_min	    = -10032,
 })
 
--- Iron
+// Iron
 
 core.register_ore({
 	ore_type	 = "scatter",
@@ -156,7 +156,7 @@ core.register_ore({
 	y_min	    = -10032,
 })
 
--- Gold
+// Gold
 
 core.register_ore({
 	ore_type	 = "scatter",
@@ -191,7 +191,7 @@ core.register_ore({
 	y_min	    = -10032,
 })
 
--- Diamond
+// Diamond
 
 core.register_ore({
 	ore_type	 = "scatter",
@@ -226,7 +226,7 @@ core.register_ore({
 	y_min	    = -10032,
 })
 
--- Diamond
+// Diamond
 
 core.register_ore({
 	ore_type	 = "scatter",
