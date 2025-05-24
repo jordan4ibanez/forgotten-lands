@@ -1456,27 +1456,27 @@ namespace crafter {
 							return;
 						}
 						// todo: invert this logic
-						if (torch && is_air && walkable) {
-							if (diff == 0) {
-								const param2: number =
-									core.dir_to_wallmounted(dir);
-								core.set_node(pointed_thing.above, {
-									name: "torch:wall",
-									param2: param2,
-								});
-								core.sound_play("wood", {
-									pos: pointed_thing.above,
-									gain: 1.0,
-								});
-							} else if (diff == -1) {
-								core.place_node(pointed_thing.above, {
-									name: "torch:floor",
-								});
-							}
-							//take item
-							if (diff == 0 || diff == -1) {
-								inv.remove_item("main", "torch:torch");
-							}
+						if (!torch || !is_air || !walkable) {
+							return;
+						}
+						if (diff == 0) {
+							const param2: number = core.dir_to_wallmounted(dir);
+							core.set_node(pointed_thing.above, {
+								name: "torch:wall",
+								param2: param2,
+							});
+							core.sound_play("wood", {
+								pos: pointed_thing.above,
+								gain: 1.0,
+							});
+						} else if (diff == -1) {
+							core.place_node(pointed_thing.above, {
+								name: "torch:floor",
+							});
+						}
+						//take item
+						if (diff == 0 || diff == -1) {
+							inv.remove_item("main", "torch:torch");
 						}
 					},
 				});
