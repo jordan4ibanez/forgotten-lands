@@ -5,17 +5,19 @@ namespace item_handling {
 utility.loadFiles(["magnet"])
 
 
-local creative_mode = minetest.settings:get_bool("creative_mode")
+const creative_mode: boolean = core.settings.get_bool("creative_mode") || false
 
---handle node drops
---survival
-local meta
-local careful
-local fortune
-local autorepair
-local count
-local name
-local object
+// Handle node drops.
+
+//? Survival.
+// local meta
+// local careful
+// local fortune
+// local autorepair
+// local count
+// local name
+// local object
+
 if not creative_mode then
 	function minetest.handle_node_drops(pos, drops, digger)
 		meta = digger:get_wielded_item():get_meta()
