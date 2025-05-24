@@ -36,12 +36,11 @@ function sapling_grow(pos: Vec3): void {
 
 			const schemmy: number = math.random(1, 2);
 
-			// todo: this was using a schematic in the global namespace.
-			// if (schemmy == 1) {
-			// 	core.place_schematic(pos, tree_big,"0",null,false,"place_center_x, place_center_z")
-			// }else if (schemmy == 2) {
-			// 	core.place_schematic(pos, tree_small,"0",null,false,"place_center_x, place_center_z")
-			// }
+			if (schemmy == 1) {
+				core.place_schematic(pos, crafter.tree_big,SchematicRotation.zero,null,false,"place_center_x, place_center_z")
+			}else if (schemmy == 2) {
+				core.place_schematic(pos, crafter.tree_small,SchematicRotation.zero,null,false,"place_center_x, place_center_z")
+			}
 
 			//override leaves
 			let max: number = 3;
