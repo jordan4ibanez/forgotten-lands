@@ -88,8 +88,8 @@ namespace crafter {
 							maxlevel: 1,
 						},
 					};
-					damage: 2.5;
-					wear: 500;
+					damage = 2.5;
+					wear = 500;
 				} else if (material == "stone") {
 					groupcaps2 = {
 						dirt: {
