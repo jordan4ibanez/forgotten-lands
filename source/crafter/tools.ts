@@ -40,99 +40,100 @@ namespace crafter {
 			// ███████║██║  ██║╚██████╔╝ ╚████╔╝ ███████╗███████╗
 			// ╚══════╝╚═╝  ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝╚══════╝
 
-			// 		if tool == "shovel" then
-			// 			if material == "wood" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
-			// 					snow =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
-			// 					grass = {times={[1]=0.45,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=59, maxlevel=1},
-			// 					sand =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
-			// 				}
-			// 				damage = 2.5
-			// 				wear = 500
-			// 			elseif material == "stone" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
-			// 					snow =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
-			// 					grass = {times={[1]=0.25,[2]=0.25,[3]=1.5,[4]=3,[5]=6}, uses=131, maxlevel=1},
-			// 					sand =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
-			// 				}
-			// 				damage = 3.5
-			// 				wear = 400
-			// 			elseif material == "coal" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
-			// 					snow =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
-			// 					grass = {times={[1]=0.025,[2]=0.025,[3]=1.5,[4]=3,[5]=6}, uses=10, maxlevel=1},
-			// 					sand =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
-			// 				}
-			// 				damage = 3.5
-			// 				wear = 2000
-			// 			elseif material == "lapis" then
-			// 					groupcaps2={
-			// 						dirt =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-			// 						snow =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-			// 						grass = {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-			// 						sand =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
-			// 					}
-			// 					damage = 4
-			// 					wear = 350
-			// 			elseif material == "iron" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-			// 					snow =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-			// 					grass = {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-			// 					sand =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
-			// 				}
-			// 				damage = 4.5
-			// 				wear = 300
-			// 			elseif material == "gold" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-			// 					snow =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-			// 					grass = {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-			// 					sand =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
-			// 				}
-			// 				damage = 2.5
-			// 				wear = 1000
-			// 			elseif material == "diamond" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
-			// 					snow =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
-			// 					grass = {times={[1]= 0.15,[2]=0.15,[3]=0.15,[4]=0.15,[5]=1.5}, uses=1561, maxlevel=1},
-			// 					sand =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
-			// 				}
-			// 				damage = 5.5
-			// 				wear = 100
-			// 			elseif material == "emerald" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-			// 					snow =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-			// 					grass = {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-			// 					sand =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
-			// 				}
-			// 				damage = 7
-			// 				wear = 50
-			// 			elseif material == "sapphire" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-			// 					snow =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-			// 					grass = {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-			// 					sand =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
-			// 				}
-			// 				damage = 9
-			// 				wear = 25
-			// 			elseif material == "ruby" then
-			// 				groupcaps2={
-			// 					dirt =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-			// 					snow =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-			// 					grass = {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-			// 					sand =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
-			// 				}
-			// 				damage = 12
-			// 				wear = 10
-			// 			end
-			// 		end
+					if (tool == "shovel") {
+						if (material == "wood") {
+							groupcaps2={
+								dirt =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
+								snow =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
+								grass = {times={[1]=0.45,[2]=1.5,[3]=3,[4]=6,[5]=12},   uses=59, maxlevel=1},
+								sand =  {times={[1]=0.4,[2]=1.5,[3]=3,[4]=6,[5]=12},    uses=59, maxlevel=1},
+							}
+							damage = 2.5
+							wear = 500
+						elseif material == "stone" then
+							groupcaps2={
+								dirt =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
+								snow =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
+								grass = {times={[1]=0.25,[2]=0.25,[3]=1.5,[4]=3,[5]=6}, uses=131, maxlevel=1},
+								sand =  {times={[1]=0.2,[2]=0.2,[3]=1.5,[4]=3,[5]=6},   uses=131, maxlevel=1},
+							}
+							damage = 3.5
+							wear = 400
+						elseif material == "coal" then
+							groupcaps2={
+								dirt =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
+								snow =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
+								grass = {times={[1]=0.025,[2]=0.025,[3]=1.5,[4]=3,[5]=6}, uses=10, maxlevel=1},
+								sand =  {times={[1]=0.02,[2]=0.02,[3]=1.5,[4]=3,[5]=6},   uses=10, maxlevel=1},
+							}
+							damage = 3.5
+							wear = 2000
+						elseif material == "lapis" then
+								groupcaps2={
+									dirt =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
+									snow =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
+									grass = {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
+									sand =  {times={[1]=0.17,[2]=0.17,[3]=0.17,[4]=1.5,[5]=4.5}, uses=190, maxlevel=1},
+								}
+								damage = 4
+								wear = 350
+						elseif material == "iron" then
+							groupcaps2={
+								dirt =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
+								snow =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
+								grass = {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
+								sand =  {times={[1]=0.15,[2]=0.15,[3]=0.15,[4]=1.5,[5]=3}, uses=250, maxlevel=1},
+							}
+							damage = 4.5
+							wear = 300
+						elseif material == "gold" then
+							groupcaps2={
+								dirt =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
+								snow =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
+								grass = {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
+								sand =  {times={[1]=0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5}, uses=32, maxlevel=1},
+							}
+							damage = 2.5
+							wear = 1000
+						elseif material == "diamond" then
+							groupcaps2={
+								dirt =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
+								snow =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
+								grass = {times={[1]= 0.15,[2]=0.15,[3]=0.15,[4]=0.15,[5]=1.5}, uses=1561, maxlevel=1},
+								sand =  {times={[1]= 0.1,[2]=0.1,[3]=0.1,[4]=0.1,[5]=1.5},     uses=1561, maxlevel=1},
+							}
+							damage = 5.5
+							wear = 100
+						elseif material == "emerald" then
+							groupcaps2={
+								dirt =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
+								snow =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
+								grass = {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
+								sand =  {times={[1]= 0.05,[2]=0.05,[3]=0.05,[4]=0.05,[5]=0.05}, uses=2300, maxlevel=1},
+							}
+							damage = 7
+							wear = 50
+						elseif material == "sapphire" then
+							groupcaps2={
+								dirt =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
+								snow =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
+								grass = {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
+								sand =  {times={[1]= 0.025,[2]=0.025,[3]=0.025,[4]=0.025,[5]=0.025}, uses=3000, maxlevel=1},
+							}
+							damage = 9
+							wear = 25
+						elseif material == "ruby" then
+							groupcaps2={
+								dirt =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
+								snow =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
+								grass = {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
+								sand =  {times={[1]= 0.01,[2]=0.01,[3]=0.01,[4]=0.01,[5]=0.01}, uses=5000, maxlevel=1},
+							}
+							damage = 12
+							wear = 10
+						end
+                        }
+
 			// --[[
 			//  █████╗ ██╗  ██╗███████╗
 			// ██╔══██╗╚██╗██╔╝██╔════╝
