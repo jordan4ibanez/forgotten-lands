@@ -909,16 +909,16 @@ declare global {
 	}
 
 	interface NodeSoundSpec {
-		footstep?: SimpleSoundSpec;
+		footstep?: SimpleSoundSpec | string;
 		dig?: SimpleSoundSpec | string;
-		dug?: SimpleSoundSpec;
-		// place?: SimpleSoundSpec;
-		place_failed?: SimpleSoundSpec;
-		fall?: SimpleSoundSpec;
-		// break?: SimpleSoundSpec;
-		placed?: SimpleSoundSpec;
+		dug?: SimpleSoundSpec | string;
+		// place?: SimpleSoundSpec | string;
+		place_failed?: SimpleSoundSpec | string;
+		fall?: SimpleSoundSpec | string;
+		// break?: SimpleSoundSpec | string;
+		placed?: SimpleSoundSpec | string;
 		//* Crafter custom.
-		placing?: SimpleSoundSpec;
+		placing?: SimpleSoundSpec | string;
 	}
 
 	interface ItemDropSpec {
@@ -973,10 +973,10 @@ declare global {
 	}
 
 	interface ItemSounds {
-		breaks: SimpleSoundSpec;
-		eat: SimpleSoundSpec;
-		punch_use: SimpleSoundSpec;
-		punch_use_air: SimpleSoundSpec;
+		breaks: SimpleSoundSpec | string;
+		eat: SimpleSoundSpec | string;
+		punch_use: SimpleSoundSpec | string;
+		punch_use_air: SimpleSoundSpec | string;
 	}
 
 	interface Collision {
@@ -1019,10 +1019,10 @@ declare global {
 		node_placement_prediction?: string;
 		node_dig_prediction?: string;
 		sound?: {
-			breaks?: SimpleSoundSpec;
-			eat?: SimpleSoundSpec;
-			punch_use?: SimpleSoundSpec;
-			punch_use_air?: SimpleSoundSpec;
+			breaks?: SimpleSoundSpec | string;
+			eat?: SimpleSoundSpec | string;
+			punch_use?: SimpleSoundSpec | string;
+			punch_use_air?: SimpleSoundSpec | string;
 		};
         // todo: Not sure if these are actually void
 		on_place?(
