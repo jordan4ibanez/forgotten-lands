@@ -705,14 +705,13 @@ namespace crafter {
 				}
 			}
 
-			// --[[
 			// ██████╗ ██╗ ██████╗██╗  ██╗ █████╗ ██╗  ██╗███████╗
 			// ██╔══██╗██║██╔════╝██║ ██╔╝██╔══██╗╚██╗██╔╝██╔════╝
 			// ██████╔╝██║██║     █████╔╝ ███████║ ╚███╔╝ █████╗
 			// ██╔═══╝ ██║██║     ██╔═██╗ ██╔══██║ ██╔██╗ ██╔══╝
 			// ██║     ██║╚██████╗██║  ██╗██║  ██║██╔╝ ██╗███████╗
 			// ╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
-			// ]]--
+
 			// 		if tool == "pick" then
 			// 			if material == "wood" then
 			// 				groupcaps2={
@@ -808,6 +807,7 @@ namespace crafter {
 			// 				wear = 10
 			// 			end
 			// 		end
+
 			// 		minetest.register_tool("main:"..material..tool, {
 			// 			description = material:gsub("^%l", string.upper).." "..tool:gsub("^%l", string.upper),
 			// 			inventory_image = material..tool..".png",
