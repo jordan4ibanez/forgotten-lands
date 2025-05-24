@@ -6,239 +6,275 @@ It works better and doesn't block digging with a bucket through water.
 https://youtu.be/j0cq27qqnE8
 */
 namespace main {
+	function bucket_raycast(player: ObjectRef): PointedThing | null {
+		const pos: Vec3 = player.get_pos();
+		const eyeHeight = player.get_properties().eye_height;
+		if (!eyeHeight) {
+			throw new Error("How did a player's eye height become null?");
+		}
+		pos.y = pos.y + eyeHeight;
+		let lookDir: Vec3 = player.get_look_dir();
+		lookDir = vector.multiply(lookDir, 4);
+		const pos2: Vec3 = vector.add(pos, lookDir);
 
-    function bucket_raycast(player: ObjectRef): PointedThing | null {
-        const pos: Vec3 = player.get_pos();
-        const eyeHeight = player.get_properties().eye_height;
-        if (!eyeHeight) {
-            throw new Error("How did a player's eye height become null?");
-        }
-        pos.y = pos.y + eyeHeight;
-        let lookDir: Vec3 = player.get_look_dir();
-        lookDir = vector.multiply(lookDir, 4);
-        const pos2: Vec3 = vector.add(pos, lookDir);
+		const ray: RaycastObject = core.raycast(pos, pos2, false, true);
 
-        const ray: RaycastObject = core.raycast(pos, pos2, false, true);
+		for (const pointedThing of ray) {
+			if (pointedThing !== null) {
+				return pointedThing;
+			}
+		}
+		return null;
+	}
 
-        for (const pointedThing of ray) {
+	// Item definitions.
+	// fixme: Why aren't we using functions?!
 
-            if (pointedThing !== null) {
-                return pointedThing;
-            }
-        }
-        return null;
-    }
+	core.register_craftitem("crafter:bucket", {
+		description: "Bucket",
+		inventory_image: "bucket.png",
+		stack_max: 1,
+		// wield_image = "bucket.png",
+		// liquids_pointable = true,
+		on_place: (
+			itemstack: ItemStackObject,
+			placer: ObjectRef,
+			_: PointedThing
+		) => {
+			const pointedThing: PointedThing | null = bucket_raycast(placer);
 
-    // Item definitions.
-    // fixme: Why aren't we using functions?!
+			if (!pointedThing) {
+				return;
+			}
 
-    core.register_craftitem("crafter:bucket", {
-        description: "Bucket",
-        inventory_image: "bucket.png",
-        stack_max: 1,
-        // wield_image = "bucket.png",
-        // liquids_pointable = true,
-        on_place: (itemstack: ItemStackObject, placer: ObjectRef, _: PointedThing) => {
-            const pointedThing: PointedThing | null = bucket_raycast(placer);
+			const posUnder: Vec3 = pointedThing.under;
 
-            if (!pointedThing) {
-                return;
-            }
+			const nodeName: string = core.get_node(posUnder).name;
 
-            const posUnder: Vec3 = pointedThing.under;
+			if (nodeName === "crafter:water") {
+				itemstack.replace(ItemStack("crafter:bucket_water"));
+				core.remove_node(posUnder);
+				return itemstack;
+			} else if (
+				nodeName === "crafter:lava" ||
+				nodeName === "nether:lava"
+			) {
+				itemstack.replace(ItemStack("crafter:bucket_lava"));
+				core.remove_node(posUnder);
+				return itemstack;
+			}
+		},
 
-            const nodeName: string = core.get_node(posUnder).name;
+		on_secondary_use: (
+			itemstack: ItemStackObject,
+			user: ObjectRef,
+			_: PointedThing
+		) => {
+			const pointedThing: PointedThing | null = bucket_raycast(user);
+			if (!pointedThing) {
+				return;
+			}
+			const posUnder: Vec3 = pointedThing.under;
 
-            if (nodeName === "crafter:water") {
-                itemstack.replace(ItemStack("crafter:bucket_water"));
-                core.remove_node(posUnder);
-                return (itemstack);
-            } else if (nodeName === "crafter:lava" || nodeName === "nether:lava") {
-                itemstack.replace(ItemStack("crafter:bucket_lava"));
-                core.remove_node(posUnder);
-                return (itemstack);
-            }
-        },
+			const nodeName: string = core.get_node(posUnder).name;
 
-        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, _: PointedThing) => {
-            const pointedThing: PointedThing | null = bucket_raycast(user);
-            if (!pointedThing) {
-                return;
-            }
-            const posUnder: Vec3 = pointedThing.under;
+			if (nodeName === "crafter:water") {
+				itemstack.replace(ItemStack("crafter:bucket_water"));
+				core.remove_node(posUnder);
+				return itemstack;
+			} else if (
+				nodeName === "crafter:lava" ||
+				nodeName === "nether:lava"
+			) {
+				itemstack.replace(ItemStack("crafter:bucket_lava"));
+				core.remove_node(posUnder);
+				return itemstack;
+			}
+		},
+	});
 
-            const nodeName: string = core.get_node(posUnder).name;
+	core.register_craftitem("crafter:bucket_water", {
+		description: "Bucket of Water",
+		inventory_image: "bucket_water.png",
+		stack_max: 1,
+		// liquids_pointable = false,
+		on_place: (
+			itemstack: ItemStackObject,
+			placer: ObjectRef,
+			_: PointedThing
+		) => {
+			const pos: PointedThing | null = bucket_raycast(placer);
 
-            if (nodeName === "crafter:water") {
-                itemstack.replace(ItemStack("crafter:bucket_water"));
-                core.remove_node(posUnder);
-                return itemstack;
-            } else if (nodeName === "crafter:lava" || nodeName === "nether:lava") {
-                itemstack.replace(ItemStack("crafter:bucket_lava"));
-                core.remove_node(posUnder);
-                return itemstack;
-            }
-        },
-    });
+			if (!pos) {
+				return;
+			}
 
+			const posUnder: Vec3 = pos.under;
+			const posAbove: Vec3 = pos.above;
 
-    core.register_craftitem("crafter:bucket_water", {
-        description: "Bucket of Water",
-        inventory_image: "bucket_water.png",
-        stack_max: 1,
-        // liquids_pointable = false,
-        on_place: (itemstack: ItemStackObject, placer: ObjectRef, _: PointedThing) => {
-            const pos: PointedThing | null = bucket_raycast(placer);
+			const nodeUnder: string = core.get_node(posUnder).name;
+			const nodeAbove: string = core.get_node(posAbove).name;
 
-            if (!pos) {
-                return;
-            }
+			const buildableUnder: boolean =
+				core.registered_nodes[nodeUnder].buildable_to === true;
+			const buildableAbove: boolean =
+				core.registered_nodes[nodeAbove].buildable_to === true;
 
-            const posUnder: Vec3 = pos.under;
-            const posAbove: Vec3 = pos.above;
+			// Set it to water.
+			if (buildableUnder === true) {
+				core.set_node(posUnder, { name: "crafter:water" });
+				itemstack.replace(ItemStack("crafter:bucket"));
+				return itemstack;
+			} else if (buildableAbove) {
+				core.set_node(posAbove, { name: "crafter:water" });
+				itemstack.replace(ItemStack("crafter:bucket"));
+				return itemstack;
+			}
+		},
+		on_secondary_use: (
+			itemstack: ItemStackObject,
+			user: ObjectRef,
+			_: PointedThing
+		) => {
+			const pos: PointedThing | null = bucket_raycast(user);
 
-            const nodeUnder: string = core.get_node(posUnder).name;
-            const nodeAbove: string = core.get_node(posAbove).name;
+			if (!pos) {
+				return;
+			}
 
-            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
-            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
+			const posUnder: Vec3 = pos.under;
+			const posAbove: Vec3 = pos.above;
 
-            // Set it to water.
-            if (buildableUnder === true) {
-                core.set_node(posUnder, { name: "crafter:water" });
-                itemstack.replace(ItemStack("crafter:bucket"));
-                return itemstack;
-            } else if (buildableAbove) {
-                core.set_node(posAbove, { name: "crafter:water" });
-                itemstack.replace(ItemStack("crafter:bucket"));
-                return itemstack;
-            }
-        },
-        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, _: PointedThing) => {
-            const pos: PointedThing | null = bucket_raycast(user);
+			const nodeUnder: string = core.get_node(posUnder).name;
+			const nodeAbove: string = core.get_node(posAbove).name;
 
-            if (!pos) {
-                return;
-            }
+			const buildableUnder: boolean =
+				core.registered_nodes[nodeUnder].buildable_to === true;
+			const buildableAbove: boolean =
+				core.registered_nodes[nodeAbove].buildable_to === true;
 
-            const posUnder: Vec3 = pos.under;
-            const posAbove: Vec3 = pos.above;
+			// Set it to water.
+			if (buildableUnder === true) {
+				core.add_node(posUnder, { name: "crafter:water" });
+				itemstack.replace(ItemStack("crafter:bucket"));
+				return itemstack;
+			} else if (buildableAbove) {
+				core.add_node(posAbove, { name: "crafter:water" });
+				itemstack.replace(ItemStack("crafter:bucket"));
+				return itemstack;
+			}
+		},
+	});
 
-            const nodeUnder: string = core.get_node(posUnder).name;
-            const nodeAbove: string = core.get_node(posAbove).name;
+	// fixme: there are hardcodes for the NETHER IN HERE! Use a module!
 
-            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
-            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
+	core.register_craftitem("crafter:bucket_lava", {
+		description: "Bucket of Lava",
+		inventory_image: "bucket_lava.png",
+		stack_max: 1,
+		// liquids_pointable = false,
+		on_place: (
+			itemstack: ItemStackObject,
+			placer: ObjectRef,
+			pointed_thing: PointedThing
+		) => {
+			// fixme: WHY ARE THERE 2 POINTED THINGS?!
 
-            // Set it to water.
-            if (buildableUnder === true) {
-                core.add_node(posUnder, { name: "crafter:water" });
-                itemstack.replace(ItemStack("crafter:bucket"));
-                return itemstack;
-            } else if (buildableAbove) {
-                core.add_node(posAbove, { name: "crafter:water" });
-                itemstack.replace(ItemStack("crafter:bucket"));
-                return itemstack;
-            }
-        },
-    });
+			if (
+				pointed_thing.under &&
+				core.get_node(pointed_thing.under).name === "tnt:tnt"
+			) {
+				core.remove_node(pointed_thing.under);
+				// fixme: this was calling the TNT mod.
+				// tnt(pointed_thing.under,7)
+				itemstack.replace(ItemStack("crafter:bucket"));
+				return itemstack;
+			}
 
-    // fixme: there are hardcodes for the NETHER IN HERE! Use a module!
+			const pos: PointedThing | null = bucket_raycast(placer);
 
+			if (!pos) {
+				return;
+			}
 
-    core.register_craftitem("crafter:bucket_lava", {
-        description: "Bucket of Lava",
-        inventory_image: "bucket_lava.png",
-        stack_max: 1,
-        // liquids_pointable = false,
-        on_place: (itemstack: ItemStackObject, placer: ObjectRef, pointed_thing: PointedThing) => {
+			const posUnder: Vec3 = pos.under;
+			const posAbove: Vec3 = pos.above;
 
-            // fixme: WHY ARE THERE 2 POINTED THINGS?!
+			const nodeUnder: string = core.get_node(posUnder).name;
+			const nodeAbove: string = core.get_node(posAbove).name;
 
-            if (pointed_thing.under && core.get_node(pointed_thing.under).name === "tnt:tnt") {
-                core.remove_node(pointed_thing.under);
-                // fixme: this was calling the TNT mod.
-                // tnt(pointed_thing.under,7)
-                itemstack.replace(ItemStack("crafter:bucket"));
-                return itemstack;
-            }
+			const buildableUnder: boolean =
+				core.registered_nodes[nodeUnder].buildable_to === true;
+			const buildableAbove: boolean =
+				core.registered_nodes[nodeAbove].buildable_to === true;
 
-            const pos: PointedThing | null = bucket_raycast(placer);
+			// Set it to lava.
+			if (buildableUnder === true) {
+				if (posUnder.y < 20_000) {
+					if (posUnder.y > -10_033) {
+						core.add_node(posUnder, { name: "crafter:lava" });
+					} else {
+						core.add_node(posUnder, { name: "nether:lava" });
+					}
+					itemstack.replace(ItemStack("crafter:bucket"));
+					return itemstack;
+				}
+			} else if (buildableAbove) {
+				if (posAbove.y < 20_000) {
+					if (posAbove.y > -10_033) {
+						core.add_node(posAbove, { name: "crafter:lava" });
+					} else {
+						core.add_node(posAbove, { name: "nether:lava" });
+					}
+					itemstack.replace(ItemStack("crafter:bucket"));
+					return itemstack;
+				}
+			}
+		},
+		on_secondary_use: (
+			itemstack: ItemStackObject,
+			user: ObjectRef,
+			_: PointedThing
+		) => {
+			const pointedThing: PointedThing | null = bucket_raycast(user);
 
-            if (!pos) {
-                return;
-            }
+			if (!pointedThing) {
+				return;
+			}
 
-            const posUnder: Vec3 = pos.under;
-            const posAbove: Vec3 = pos.above;
+			const posUnder: Vec3 = pointedThing.under;
+			const posAbove: Vec3 = pointedThing.above;
 
-            const nodeUnder: string = core.get_node(posUnder).name;
-            const nodeAbove: string = core.get_node(posAbove).name;
+			const nodeUnder: string = core.get_node(posUnder).name;
+			const nodeAbove: string = core.get_node(posAbove).name;
 
-            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
-            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
+			const buildableUnder: boolean =
+				core.registered_nodes[nodeUnder].buildable_to === true;
+			const buildableAbove: boolean =
+				core.registered_nodes[nodeAbove].buildable_to === true;
 
-            // Set it to lava.
-            if (buildableUnder === true) {
-                if (posUnder.y < 20_000) {
-                    if (posUnder.y > -10_033) {
-                        core.add_node(posUnder, { name: "crafter:lava" });
-                    } else {
-                        core.add_node(posUnder, { name: "nether:lava" });
-                    }
-                    itemstack.replace(ItemStack("crafter:bucket"));
-                    return itemstack;
-                }
-            } else if (buildableAbove) {
-                if (posAbove.y < 20_000) {
-                    if (posAbove.y > -10_033) {
-                        core.add_node(posAbove, { name: "crafter:lava" });
-                    } else {
-                        core.add_node(posAbove, { name: "nether:lava" });
-                    }
-                    itemstack.replace(ItemStack("crafter:bucket"));
-                    return itemstack;
-                }
-            }
-        },
-        on_secondary_use: (itemstack: ItemStackObject, user: ObjectRef, _: PointedThing) => {
-            const pointedThing: PointedThing | null = bucket_raycast(user);
-
-            if (!pointedThing) {
-                return;
-            }
-
-            const posUnder: Vec3 = pointedThing.under;
-            const posAbove: Vec3 = pointedThing.above;
-
-            const nodeUnder: string = core.get_node(posUnder).name;
-            const nodeAbove: string = core.get_node(posAbove).name;
-
-            const buildableUnder: boolean = (core.registered_nodes[nodeUnder].buildable_to === true);
-            const buildableAbove: boolean = (core.registered_nodes[nodeAbove].buildable_to === true);
-
-            // Set it to lava.
-            if (buildableUnder === true) {
-                if (posUnder.y < 20_000) {
-                    if (posUnder.y > -10_033) {
-                        core.add_node(posUnder, { name: "crafter:lava" });
-                    } else {
-                        core.add_node(posUnder, { name: "nether:lava" });
-                    }
-                    itemstack.replace(ItemStack("crafter:bucket"));
-                    return itemstack;
-                }
-            } else if (buildableAbove) {
-                if (posAbove.y < 20_000) {
-                    if (posAbove.y > -10_033) {
-                        core.add_node(posAbove, { name: "crafter:lava" });
-                    } else {
-                        core.add_node(posAbove, { name: "nether:lava" });
-                    }
-                    itemstack.replace(ItemStack("crafter:bucket"));
-                    return itemstack;
-                }
-            }
-        },
-    });
+			// Set it to lava.
+			if (buildableUnder === true) {
+				if (posUnder.y < 20_000) {
+					if (posUnder.y > -10_033) {
+						core.add_node(posUnder, { name: "crafter:lava" });
+					} else {
+						core.add_node(posUnder, { name: "nether:lava" });
+					}
+					itemstack.replace(ItemStack("crafter:bucket"));
+					return itemstack;
+				}
+			} else if (buildableAbove) {
+				if (posAbove.y < 20_000) {
+					if (posAbove.y > -10_033) {
+						core.add_node(posAbove, { name: "crafter:lava" });
+					} else {
+						core.add_node(posAbove, { name: "nether:lava" });
+					}
+					itemstack.replace(ItemStack("crafter:bucket"));
+					return itemstack;
+				}
+			}
+		},
+	});
 }
